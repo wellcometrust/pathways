@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html lang="en"> 
+<head>
+    <meta charset="utf-8"> 
+    <title>Pathways: The Mind</title>
+
+    <style type="text/css">
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-size: 100%;
+            font-family: 'helvetica neue', arial, sans-serif;
+            color: #333;
+        }
+
+        .empty {
+            padding: 320px 0;
+            text-align: center;
+        }
+
+        .popup-section {
+            background-color: #efefef;
+
+            -webkit-perspective: 800;
+            -webkit-perspective-origin: 50% 50%;
+        }
+
+        .image {
+            position: relative;
+            background-image: url('/_assets/img/mesmer-med.jpg');
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition: all 0.3s ease;
+        }
+
+        .depress {
+            -webkit-transform: translate3d(0,0,-80px);
+        }
+
+        .tap-target {
+            position: absolute;
+            bottom: 150px;
+            left: 10%;
+            width: 250px;
+            height: 300px;
+            box-shadow: 0 0 10px 3px red;
+        }
+
+        .popup {
+            display: none;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            background-color: rgba(0,0,0,0.8);
+            width: 100%;
+            z-index: 5;
+            -webkit-transform-style: preserve-3d;
+        }
+
+        .image-crop {
+            opacity: 0;
+            position: absolute;
+            z-index: 15;
+        }
+        .image-crop.animate {
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+        }
+
+        .text {
+            position: absolute;
+            color: #fff;
+            width: 25%;
+            padding: 0 15px;
+            opacity: 0;
+            line-height: 1.4;
+            z-index: 15;
+            -webkit-transform: translate3d(0, 100px, 0);
+            -webkit-transition: all 0.5s ease;
+        }
+        .text.show {
+            opacity: 1;
+            -webkit-transform: translate3d(0, 0, 0);
+        }
+    </style>
+</head>
+<body>
+
+    <main role="main">
+
+        <section class="empty">
+            <p>Some empty content!</p>
+        </section>
+
+        <section class="popup-section">
+            
+            <div class="image">
+                
+                <div class="tap-target"></div>
+
+            </div>
+
+        </section>
+
+        <section class="empty">
+            <p>More empty content!</p>
+        </section>
+
+        <div class="popup">
+            <img class="image-crop" src="/_assets/img/mesmer-crop.jpg">
+
+            <div class="text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
+        </div>
+
+    </main>
+
+    <script src="/_assets/js/lib/jquery-2.1.0.min.js"></script>
+    <script src="/_assets/js/lib/hammer.min.js"></script>
+
+    <script>
+        var $image = $('.image');
+        $image.css({ width: $(window).width(), height: $(window).height() });
+
+        window.addEventListener('resize', function() {
+            $image.css({ width: $(window).width(), height: $(window).height() });
+        }, false);
+
+        function init() {
+            var $target = $('.tap-target');
+
+            // Set up the tap on the target.
+            Hammer( $target.get(0) ).on('tap', function(e) {
+                e.gesture.preventDefault();
+
+                var $popup,
+                    $image_crop,
+                    $text,
+                    $overlay;
+
+                // create popup in memory
+                $popup      = $('.popup').clone();
+                $image_crop = $popup.find('.image-crop');
+                $text       = $popup.find('.text');
+                $overlay    = $('<div/>').addClass('overlay').css('height', $(window).height() );
+
+                $('body').append( $overlay );
+                $('body').append( $popup );
+
+                $popup.show();
+
+                // depress the main image into the page a bit.
+                $image.addClass('depress');
+
+                $image_crop.css( { top: $target.offset().top + 10, left: $target.offset().left + 10, height: $target.height() } );
+
+                $image_crop.animate({
+                    top: ($image.offset().top + 15),
+                    height: ($(window).height() - 60),
+                    opacity: 1
+                }, 500, 'swing', function() {
+                    $overlay.fadeIn(400, function() {
+                        $text.css( { top: $image.offset().top + 10, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show');
+                    })
+                })
+
+            });
+        }
+        
+        window.addEventListener('load', init, false);
+    </script>
+
+</body>
+</html>
+    
