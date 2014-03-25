@@ -46,21 +46,29 @@
             left: 10%;
             width: 250px;
             height: 300px;
-            box-shadow: 0 0 10px 3px red;
         }
 
-        .popup {
-            display: none;
+        .tap-target.animate {
+            -webkit-animation-name: pulse;
+            -webkit-animation-duration: 3s;
+        }
+
+        @-webkit-keyframes pulse {
+            0%  { box-shadow: 0 0 1px 3px rgba(255,0,0,0); }
+            30% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
+            70% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
+            90% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.0); }
         }
 
         .overlay {
             display: none;
             position: fixed;
             top: 0;
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(0,0,0,0);
             width: 100%;
             z-index: 5;
-            -webkit-transform-style: preserve-3d;
+
+            -webkit-transition: all 0.5s ease;
         }
 
         .image-crop {
@@ -102,7 +110,7 @@
             
             <div class="image">
                 
-                <div class="tap-target"></div>
+                <div class="tap-target" data-crop="mesmer"></div>
 
             </div>
 
@@ -116,12 +124,7 @@
             <img class="image-crop" src="/_assets/img/mesmer-crop.jpg">
 
             <div class="text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                
             </div>
         </div>
 
@@ -131,55 +134,119 @@
     <script src="/_assets/js/lib/hammer.min.js"></script>
 
     <script>
-        var $image = $('.image');
-        $image.css({ width: $(window).width(), height: $(window).height() });
+        var $image          = $('.image'),
+            image_top       = $image.offset().top,
+            image_height    = $image.height();
 
-        window.addEventListener('resize', function() {
+
+        $(document).ready(function() {
+
             $image.css({ width: $(window).width(), height: $(window).height() });
-        }, false);
 
-        function init() {
-            var $target = $('.tap-target');
+            // Events
+            window.addEventListener('resize', function() {
+                $image.css({ width: $(window).width(), height: $(window).height() });
+            }, false);
 
-            // Set up the tap on the target.
-            Hammer( $target.get(0) ).on('tap', function(e) {
-                e.gesture.preventDefault();
+            window.addEventListener('scroll', onScroll, false);
 
-                var $popup,
-                    $image_crop,
-                    $text,
-                    $overlay;
+            function onScroll(e) {
+                // slight buffer in case user does not scroll far enough
+                if( window.scrollY > (image_top - image_height - 30) ) {
+                    // console.log('true');
+                    if( !$('.tap-target').hasClass('animate') )
+                        $('.tap-target').addClass('animate');
+                }
+            }
 
-                // create popup in memory
-                $popup      = $('.popup').clone();
-                $image_crop = $popup.find('.image-crop');
-                $text       = $popup.find('.text');
-                $overlay    = $('<div/>').addClass('overlay').css('height', $(window).height() );
 
-                $('body').append( $overlay );
-                $('body').append( $popup );
+            // Tap targets
+            $('.tap-target').each(function() {
+                var $target = $(this),
+                    key     = $target.data('crop'),
+                    image   = '/_assets/img/'+ db[key]['image'],
+                    text    = db[key]['text'],
+                    img     = new Image();
 
-                $popup.show();
+                img.src = image;
 
-                // depress the main image into the page a bit.
-                $image.addClass('depress');
+                var ratio = img.width / img.height;
 
-                $image_crop.css( { top: $target.offset().top + 10, left: $target.offset().left + 10, height: $target.height() } );
+                // Set up the tap on the target.
+                Hammer( $target.get(0) ).on('tap', function(e) {
+                    e.gesture.preventDefault();
 
-                $image_crop.animate({
-                    top: ($image.offset().top + 15),
-                    height: ($(window).height() - 60),
-                    opacity: 1
-                }, 500, 'swing', function() {
-                    $overlay.fadeIn(400, function() {
-                        $text.css( { top: $image.offset().top + 10, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show');
-                    })
-                })
+                    var $popup,
+                        $image_crop,
+                        $text,
+                        $overlay;
 
+                    // create popup in memory
+                    $popup      = $('<div/>').addClass('popup');
+                    $image_crop = $(img).addClass('image-crop');
+                    $text       = $('<div/>').addClass('text').html(text);
+
+                    $popup.append( $image_crop );
+                    $popup.append( $text );
+
+                    $overlay = $('<div/>').addClass('overlay').css('height', $(window).height() );
+
+                    $overlay.append($popup);
+                    $('body').append( $overlay );
+
+                    // depress the main image into the page a bit.
+                    $image.addClass('depress');
+
+                    $image_crop.css( { top: ($target.offset().top - window.scrollY) + 10, left: $target.offset().left + 10, height: $target.height() - 10 } );
+
+                    $overlay.show();
+
+                    var width   = 'auto',
+                        height  = 'auto';
+
+                    if( window.innerWidth < 900 ) {
+                        width = '40%';
+                    }
+                    else {
+                        height = $(window).height() - 60;
+                    }
+
+                    $image_crop.animate({
+                        top:    15,
+                        width: width,
+                        height: height,
+                        opacity: 1
+                    }, 500, 'swing', function() {
+                        $text.css( { top: 15, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show');
+                        $overlay.css('background-color', 'rgba(0,0,0,0.8)');
+                    });
+
+                    window.addEventListener('resize', function() {
+                        $overlay.css('height', $(window).height() );
+                        
+                        if( window.innerWidth < 900 ) {
+                            $image_crop.css('height', 'auto');
+                            $image_crop.css('width',  '40%');
+                        }
+                        else {
+                            $image_crop.css('width', 'auto');
+                            $image_crop.css('height', $(window).height() - 60 );
+                        }
+
+                        $text.css( { left: ($image_crop.offset().left + $image_crop.width() + 40) } );
+                    }, false);
+
+                });
             });
-        }
         
-        window.addEventListener('load', init, false);
+        });
+
+        var db = {
+            'mesmer': {
+                'image': 'mesmer-crop.jpg',
+                'text': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+            }
+        }
     </script>
 
 </body>
