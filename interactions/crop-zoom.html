@@ -23,6 +23,9 @@
 
             -webkit-perspective: 800;
             -webkit-perspective-origin: 50% 50%;
+
+            -moz-perspective: 800;
+            -moz-perspective-origin: 50% 50%;
         }
 
         .image {
@@ -34,10 +37,14 @@
 
             -webkit-transform-style: preserve-3d;
             -webkit-transition: all 0.3s ease;
+
+            -moz-transform-style: preserve-3d;
+            -moz-transition: all 0.3s ease;
         }
 
         .depress {
             -webkit-transform: translate3d(0,0,-80px);
+            -moz-transform: translate3d(0,0,-80px);
         }
 
         .tap-target {
@@ -51,9 +58,19 @@
         .tap-target.animate {
             -webkit-animation-name: pulse;
             -webkit-animation-duration: 3s;
+
+            -moz-animation-name: pulse;
+            -moz-animation-duration: 3s;
         }
 
         @-webkit-keyframes pulse {
+            0%  { box-shadow: 0 0 1px 3px rgba(255,0,0,0); }
+            30% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
+            70% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
+            90% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.0); }
+        }
+
+        @-moz-keyframes pulse {
             0%  { box-shadow: 0 0 1px 3px rgba(255,0,0,0); }
             30% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
             70% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
@@ -69,6 +86,7 @@
             z-index: 5;
 
             -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
         }
 
         .image-crop {
@@ -91,10 +109,14 @@
             z-index: 15;
             -webkit-transform: translate3d(0, 100px, 0);
             -webkit-transition: all 0.5s ease;
+
+            -moz-transform: translate3d(0, 100px, 0);
+            -moz-transition: all 0.5s ease;
         }
         .text.show {
             opacity: 1;
             -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
         }
     </style>
 </head>
@@ -119,14 +141,6 @@
         <section class="empty">
             <p>More empty content!</p>
         </section>
-
-        <div class="popup">
-            <img class="image-crop" src="/_assets/img/mesmer-crop.jpg">
-
-            <div class="text">
-                
-            </div>
-        </div>
 
     </main>
 
