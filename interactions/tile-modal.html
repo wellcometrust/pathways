@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html lang="en"> 
+<head>
+    <meta charset="utf-8"> 
+    <title>Pathways: The Mind</title>
+
+    <style type="text/css">
+        /* generic */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-size: 100%;
+            font-family: 'helvetica neue', arial, sans-serif;
+            color: #333;
+        }
+
+        .clearfix:before, .row:before,
+        .clearfix:after, .row:after {
+            content:" ";
+            display:table;
+        }
+
+        .clearfix:after, .row:after {
+            clear:both;
+        }
+
+        .empty {
+            clear: both;
+            padding: 250px 0;
+            text-align: center;
+        }
+
+        /* specific */
+        .popup-section {
+            background-color: #efefef;
+        }
+
+        .cell {
+            float: left;
+            width: 50%;
+            height: 400px;
+
+            -webkit-perspective: 800;
+            -webkit-perspective-origin: 50% 50%;
+        }
+
+
+        .depress {
+            -webkit-transform: translate3d(0,0,-80px);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            background-color: rgba(0,0,0,0);
+            width: 100%;
+            z-index: 5;
+
+            -webkit-transition: all 0.2s ease;
+        }
+
+        .image-crop {
+            opacity: 0;
+            position: absolute;
+            z-index: 15;
+        }
+        .image-crop.animate {
+            -webkit-transition: all 0.3s ease;
+        }
+
+        .pane {
+            height: 400px;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition: all 0.1s ease;
+        }
+        .pane1 { background-image: url('/_assets/img/1.jpg'); }
+        .pane2 { background-image: url('/_assets/img/2.jpg'); }
+        .pane3 { background-image: url('/_assets/img/3.jpg'); }
+        .pane4 { background-image: url('/_assets/img/4.jpg'); }
+    </style>
+</head>
+<body>
+
+    <main role="main">
+
+        <section class="empty">
+            <p>Some empty content!</p>
+            <p>scroll down</p>
+        </section>
+
+        <section class="popup-section">
+            
+            <div class="cell"><div class="pane pane1" data-crop="img1"></div></div>
+            <div class="cell"><div class="pane pane2" data-crop="img2"></div></div>
+            <div class="cell"><div class="pane pane3" data-crop="img3"></div></div>
+            <div class="cell"><div class="pane pane4" data-crop="img4"></div></div>
+
+        </section>
+
+        <section class="empty">
+            <p>More empty content!</p>
+        </section>
+    </main>
+
+    <script src="/_assets/js/lib/jquery-2.1.0.min.js"></script>
+    <script src="/_assets/js/lib/hammer.min.js"></script>
+    
+    <script>
+
+        $(document).ready(function() {
+
+            // Tap targets
+            $('.pane').each(function() {
+                var $target = $(this),
+                    key     = $target.data('crop'),
+                    image   = '/_assets/img/'+ db[key]['image'],
+                    img     = new Image(),
+                    target_height  = $target.height();
+
+                img.src = image;
+
+                var ratio = img.width / img.height;
+
+                // Set up the tap on the target.
+                Hammer( $target.get(0) ).on('tap', function(e) {
+                    e.gesture.preventDefault();
+
+                    var $popup,
+                        $image_crop,
+                        $overlay;
+
+                    // create popup in memory
+                    $popup      = $('<div/>').addClass('popup');
+                    $image_crop = $(img).addClass('image-crop');
+
+                    $popup.append( $image_crop );
+
+                    $overlay = $('<div/>').addClass('overlay').css('height', $(window).height() );
+
+                    $overlay.append($popup);
+                    $('body').append( $overlay );
+
+                    // depress the main image into the page a bit.
+                    $target.addClass('depress');
+
+                    // place the image in the center of the target.
+                    var small_width = (target_height - 10) * ratio;
+                    console.log(small_width)
+                    $image_crop.css( { top: ($target.offset().top - window.scrollY) + 10, left: ($target.offset().left + ($target.width() / 2) - (small_width / 2)), height: target_height - 10 } );
+
+                    $overlay.show();
+
+                    var width   = 'auto',
+                        height  = 'auto';
+
+                    if( window.innerWidth < 900 ) {
+                        width = '40%';
+                    }
+                    else {
+                        height = $(window).height() - 60;
+                    }
+
+                    var c_width = parseInt( height * ratio );
+
+                    $image_crop.animate({
+                        top:    15,
+                        left:   ($(window).width() / 2) - (c_width / 2),
+                        width:  width,
+                        height: height,
+                        opacity: 1
+                    }, 500, 'swing', function() {
+                        $overlay.css('background-color', 'rgba(0,0,0,0.8)');
+                    });
+
+                    $overlay.on('click', function() {
+                        $overlay.get(0).addEventListener('transitionend', function() {
+                           $(this).remove();
+                       }, false);
+                        $overlay.css('opacity', 0);
+                        $target.removeClass('depress');
+                    });
+
+                    window.addEventListener('resize', function() {
+                        $overlay.css('height', $(window).height() );
+                        
+                        if( window.innerWidth < 900 ) {
+                            $image_crop.css('height', 'auto');
+                            $image_crop.css('width',  '40%');
+                        }
+                        else {
+                            $image_crop.css('width', 'auto');
+                            $image_crop.css('height', $(window).height() - 60 );
+                        }
+                    }, false);
+
+                });
+            });
+        
+        });
+
+        var db = {
+            'img1': {
+                'image': '1.jpg',
+            },
+            'img2': {
+                'image': '2.jpg',
+            },
+            'img3': {
+                'image': '3.jpg',
+            },
+            'img4': {
+                'image': '4.jpg',
+            },
+        }
+    </script>
+
+</body>
+</html>
+    
