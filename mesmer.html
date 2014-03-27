@@ -3,328 +3,8 @@
 <head>
     <meta charset="utf-8"> 
     <title>Pathways: The Mind</title>
-
-    <style type="text/css">
-        /* generic */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-size: 100%;
-            font-family: 'helvetica neue', arial, sans-serif;
-            color: #333;
-        }
-
-        .clearfix:before, .row:before,
-        .clearfix:after, .row:after {
-            content:" ";
-            display:table;
-        }
-
-        .clearfix:after, .row:after {
-            clear:both;
-        }
-
-        .empty {
-            clear: both;
-            padding: 250px 0;
-            text-align: center;
-        }
-
-        /* specific */
-
-        [role="main"] {
-            background: url('/_assets/img/mesmer-med.jpg');
-            background-attachment: fixed;
-            background-size: 100%;
-        }
-
-        .start {
-            position: relative;
-            background-color: #ccc;
-            z-index: 10;
-        }
-        .start .text {
-            position: absolute;
-            top: 40%;
-            left: 5%;
-            color: #fff;
-        }
-
-        .title-screen {
-            position: relative;
-            background: linear-gradient(black 0%, black 30%, transparent 50%, transparent 100%);
-            height: 3000px;
-        }
-        .title-screen p {
-            position: absolute;
-            top: 100px;
-            width: 100%;
-            color: #fff;
-            text-align: center;
-            font-size: 3rem;
-            font-family: Georgia;
-        }
-
-        .another {
-            background-color: blue;
-            height: 1400px;
-        }
-
-
-        /**
-            Audio
-        **/
-        .audio-icon {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            width: 36px;
-            height: 36px;
-            background: #ccc url('/_assets/img/audio_high.png') 50% 50% no-repeat;
-            background-size: 60%;
-            border-radius: 4px;
-            opacity: 0.3;
-            -webkit-transition: opacity 0.3s ease;
-        }
-        .audio-icon:hover, .audio-icon.active {
-            opacity: 1;
-        }
-
-
-        /**
-            Crop zoom
-        **/
-        .popup-section {
-            background-color: #efefef;
-
-            -webkit-perspective: 800;
-            -webkit-perspective-origin: 50% 50%;
-
-            -moz-perspective: 800;
-            -moz-perspective-origin: 50% 50%;
-        }
-
-        .crop-zoom {
-            position: absolute;
-            top: 1500px;
-            border: 2px solid orange;
-
-            -webkit-transform-style: preserve-3d;
-            -webkit-transition: all 0.3s ease;
-
-            -moz-transform-style: preserve-3d;
-            -moz-transition: all 0.3s ease;
-        }
-
-        .depress {
-            -webkit-transform: translate3d(0,0,-80px);
-            -moz-transform: translate3d(0,0,-80px);
-        }
-
-        .tap-target {
-            position: absolute;
-            bottom: 150px;
-            left: 10%;
-            width: 250px;
-            height: 300px;
-        }
-
-        .tap-target.animate {
-            -webkit-animation-name: pulse;
-            -webkit-animation-duration: 3s;
-
-            -moz-animation-name: pulse;
-            -moz-animation-duration: 3s;
-        }
-
-        @-webkit-keyframes pulse {
-            0%  { box-shadow: 0 0 1px 3px rgba(255,0,0,0); }
-            30% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-            70% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-            90% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.0); }
-        }
-
-        @-moz-keyframes pulse {
-            0%  { box-shadow: 0 0 1px 3px rgba(255,0,0,0); }
-            30% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-            70% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-            90% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.0); }
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            background-color: rgba(0,0,0,0);
-            width: 100%;
-            z-index: 5;
-
-            -webkit-transition: all 0.5s ease;
-            -moz-transition: all 0.5s ease;
-        }
-
-        .overlay .image-crop {
-            opacity: 0;
-            position: absolute;
-            z-index: 15;
-        }
-        .overlay .image-crop.animate {
-            -webkit-transition: all 0.5s ease;
-            -moz-transition: all 0.5s ease;
-        }
-
-        .overlay .text {
-            position: absolute;
-            color: #fff;
-            width: 25%;
-            padding: 0 15px;
-            opacity: 0;
-            line-height: 1.4;
-            z-index: 15;
-            -webkit-transform: translate3d(0, 100px, 0);
-            -webkit-transition: all 0.5s ease;
-
-            -moz-transform: translate3d(0, 100px, 0);
-            -moz-transition: all 0.5s ease;
-        }
-        .overlay .text.show {
-            opacity: 1;
-            -webkit-transform: translate3d(0, 0, 0);
-            -moz-transform: translate3d(0, 0, 0);
-        }
-
-
-        /**
-            Scrolly Nonsense
-        **/
-        .scrolly-nonsense {
-            padding: 40px 0;
-            background-color: violet;
-        }
-
-        .scrolly-nonsense .inner {
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        .scrolly-nonsense header {
-            text-align: center;
-            padding: 50px 0;
-        }
-
-        .scrolly-nonsense .image-block {
-            position: relative;
-            text-align: center;
-            padding: 15px 0;
-        }
-
-        .scrolly-nonsense .image-block p {
-            position: absolute;
-            color: #fff;
-        }
-
-        .weird-man {
-            position: absolute;
-        }
-
-
-        /**
-            Tile modal
-        **/
-        .tile-modal {
-            background-color: green;
-            padding: 300px 0;
-        }
-        .cell {
-            float: left;
-            width: 25%;
-            height: 400px;
-
-            -webkit-perspective: 800;
-            -webkit-perspective-origin: 50% 50%;
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            background-color: rgba(0,0,0,0);
-            width: 100%;
-            z-index: 5;
-
-            -webkit-transition: all 0.2s ease;
-        }
-
-        .image-crop {
-            opacity: 0;
-            position: absolute;
-            z-index: 15;
-        }
-        .image-crop.animate {
-            -webkit-transition: all 0.3s ease;
-        }
-
-        .pane {
-            height: 400px;
-            background-position: 50% 50%;
-            background-repeat: no-repeat;
-            background-size: cover;
-
-            -webkit-transform-style: preserve-3d;
-            -webkit-transition: all 0.1s ease;
-        }
-        .pane1 { background-image: url('/_assets/img/1.jpg'); }
-        .pane2 { background-image: url('/_assets/img/2.jpg'); }
-        .pane3 { background-image: url('/_assets/img/3.jpg'); }
-        .pane4 { background-image: url('/_assets/img/4.jpg'); }
-
-
-        /**
-            Library Layer
-        **/
-        .orange {
-            position: relative;
-            background-color: orange;
-            height: 1200px;
-        }
-
-        .orange .button {
-            position: absolute;
-            top:    605px;
-            right:  80px;
-            background-color: green;
-            height:         70px;
-            width:          70px;
-            border-radius:  70px;
-            z-index: 15;
-        }
-
-        .orange .gap {
-            position: absolute;
-            top: 640px;
-            background: #515965;
-            box-shadow: inset 0 4px 8px 2px rgba(0,0,0,0.6);
-            height: 0;
-            width:  100%;
-            overflow: hidden;
-            -webkit-transition: height 0.4s ease;
-        }
-
-        .orange .gap .inner {
-            max-width: 960px;
-            margin: 0 auto;
-            padding-top: 30px;
-        }
-
-        .orange .gap ul {
-            float: left;
-            width: 50%;
-        }
-
-        .orange .gap a {
-            color: #fff;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="_assets/css/styles.css">
+    
 </head>
 <body>
 
@@ -332,11 +12,9 @@
 
         <div class="start">
             <div class="text">
-                <h2>Headline</h2>
-                <p>
-                    Paragraph of text here<br>
-                    Second line
-                </p>
+                <h1><b>Mesmer:</b> Can the mind heal the body?</h1>
+                <p>Mesmer arrives in Paris in 1778 and his ‘magnetic’ therapy is a sensation.</p>
+                <p>In his salons, or séances, a mysterious ‘magnetic fluid’, directed by magnetised rods, flows around the participants. They twitch, writhe, speak in tongues, collapse in violent convulsions. Patients are cured in their hundreds - of paralysis, epilepsy, toothache, stomach cramps, even lifelong blindness.  He can treat thirty people at a time in his baquets: tubs filled with iron filings and magnetised water in which patients sit and hold hands while the fluid circulates.</p>
             </div>
         </div>
 
@@ -365,19 +43,19 @@
                 </header>
                 
                 <div class="weird-man">
-                    <img src="http://placekitten.com/220/340">
+                    <img src="/_assets/img/mesmer-dude.png">
                 </div>
 
                 <div class="image-block image1">
-                    <img src="http://placekitten.com/200/300">
+                    <img src="/_assets/img/am-1.jpg">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 </div>
                 <div class="image-block image2">
-                    <img src="http://placekitten.com/200/300">
+                    <img src="/_assets/img/am-2.jpg">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 </div>
                 <div class="image-block image3">
-                    <img src="http://placekitten.com/200/300">
+                    <img src="/_assets/img/am-3.jpg">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 </div>
             </div>
