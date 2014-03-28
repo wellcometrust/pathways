@@ -253,6 +253,7 @@ font-family: 'Open Sans', sans-serif;*/
 
         .weird-man {
             position: absolute;
+
         }
 
 
@@ -265,9 +266,9 @@ font-family: 'Open Sans', sans-serif;*/
         }
         .cell {
             float: left;
-            width: 25%;
-            height: 400px;
-
+            width: 250px;
+            height: 250px;
+            margin: 20px;
             -webkit-perspective: 800;
             -webkit-perspective-origin: 50% 50%;
         }
@@ -301,10 +302,10 @@ font-family: 'Open Sans', sans-serif;*/
             -webkit-transform-style: preserve-3d;
             -webkit-transition: all 0.1s ease;
         }
-        .pane1 { background-image: url('/_assets/img/1.jpg'); }
-        .pane2 { background-image: url('/_assets/img/2.jpg'); }
-        .pane3 { background-image: url('/_assets/img/3.jpg'); }
-        .pane4 { background-image: url('/_assets/img/4.jpg'); }
+        .pane1 { background-image: url('/_assets/img/debunk1.jpg'); }
+        .pane2 { background-image: url('/_assets/img/debunk2.jpg'); }
+        .pane3 { background-image: url('/_assets/img/debunk3.jpg'); }
+        .pane4 { background-image: url('/_assets/img/debunk4.jpg'); }
 
 
         /**
