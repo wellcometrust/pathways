@@ -5,6 +5,19 @@
     <title>Pathways: The Mind</title>
     <link rel="stylesheet" type="text/css" href="_assets/css/styles.css">
     
+    <script type="text/javascript">
+    WebFontConfig = { fontdeck: { id: '44200' } };
+
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+    </script>
 </head>
 <body>
 
@@ -20,9 +33,7 @@
         </div>
 
         <div class="title-screen">
-            <audio class="audio-player" src="/_assets/audio/crystal.mp3">
-                Your browser does not support the <code>audio</code> element.
-            </audio>
+            <audio class="audio-player" src="/_assets/audio/crystal.mp3"></audio>
             <div class="audio-icon"></div>
 
             <p class="title">Mesmer’s Salon</p>
@@ -64,11 +75,15 @@
         </div>
 
         <!-- Modal -->
-        <div class="tile-modal clearfix">
-            <div class="cell"><div class="pane pane1" data-crop="img1"></div></div>
-            <div class="cell"><div class="pane pane2" data-crop="img2"></div></div>
-            <div class="cell"><div class="pane pane3" data-crop="img3"></div></div>
-            <div class="cell"><div class="pane pane4" data-crop="img4"></div></div>
+        <div class="tile-modal">
+
+            <div class="row">
+                <div class="cell"><div class="pane pane1" data-crop="img1"></div></div>
+                <div class="cell"><div class="pane pane2" data-crop="img2"></div></div>
+                <div class="cell"><div class="pane pane3" data-crop="img3"></div></div>
+                <div class="cell"><div class="pane pane4" data-crop="img4"></div></div>
+            </div>
+
         </div>
 
         <div class="conclusion">
@@ -170,13 +185,9 @@
 
             $image.css({ width: $(window).width(), height: $(window).height() });
 
-            // Events
-            window.addEventListener('resize', function() {
+            function onResize(e) {
                 $image.css({ width: $(window).width(), height: $(window).height() });
-            }, false);
-
-            window.addEventListener('scroll', onScroll, false);
-
+            }
             
             function onScroll(e) {
 
@@ -252,13 +263,14 @@
                         width: width,
                         height: height,
                         opacity: 1
-                    }, 500, 'swing', function() {
-                        $text.css( { top: 15, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show');
-                        $overlay.css('background-color', 'rgba(0,0,0,0.8)');
-                    });
+                    }, 500, 'swing', function() { $text.css( { top: 15, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show'); });
+
+                    $overlay.css('background-color', 'rgba(0,0,0,0.8)');
 
                     $overlay.on('click', function() {
-                        $(this).fadeOut(400, function() { $(this).remove() });
+                        this.addEventListener('transitionend', function() { $(this).remove() }, false);
+                        $(this).css('opacity', 0);
+                        $image.removeClass('depress');
                     });
 
                     window.addEventListener('resize', function() {
@@ -278,6 +290,10 @@
 
                 });
             });
+
+            // Events
+            window.addEventListener('resize', onResize, false);
+            window.addEventListener('scroll', onScroll, false);
         
         });
 
@@ -289,8 +305,9 @@
             var scenes = [],
                 scene;
 
-            scene = new ScrollScene({triggerElement: ".weird-man", duration: 600})
+            scene = new ScrollScene({triggerElement: ".weird-man", duration: 1200})
                         .setPin(".weird-man")
+                        .offset(200)
                         .addTo(controller);
 
             scenes.push(scene);
@@ -329,15 +346,18 @@
 
             // Tap targets
             $('.pane').each(function() {
-                var $target = $(this),
-                    key     = $target.data('crop'),
-                    image   = '/_assets/img/'+ db[key]['image'],
-                    img     = new Image(),
-                    target_height  = $target.height();
+                var $target         = $(this),
+                    key             = $target.data('crop'),
+                    image           = '/_assets/img/'+ db[key]['image'],
+                    img             = new Image,
+                    target_height   = $target.height(),
+                    ratio;
 
                 img.src = image;
 
-                var ratio = img.width / img.height;
+                img.onload = function() {
+                    ratio = img.width / img.height;
+                }
 
                 // Set up the tap on the target.
                 Hammer( $target.get(0) ).on('tap', function(e) {
@@ -363,7 +383,6 @@
 
                     // place the image in the center of the target.
                     var small_width = (target_height - 10) * ratio;
-                    console.log(small_width)
                     $image_crop.css( { top: ($target.offset().top - window.scrollY) + 10, left: ($target.offset().left + ($target.width() / 2) - (small_width / 2)), height: target_height - 10 } );
 
                     $overlay.show();

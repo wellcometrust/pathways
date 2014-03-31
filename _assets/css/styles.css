@@ -135,6 +135,7 @@ font-family: 'Open Sans', sans-serif;*/
             background-size: 100%;
             border-radius: 4px;
             opacity: 0.3;
+            z-index: 5;
             -webkit-transition: opacity 0.3s ease;
         }
         .audio-icon:hover, .audio-icon.active {
@@ -293,27 +294,18 @@ font-family: 'Open Sans', sans-serif;*/
             background-color: #94897a;
             padding: 300px 12%;
         }
-        .cell {
+        .tile-modal .row {
+            margin: 0 -33px;
+        }
+        .tile-modal .cell {
             float: left;
             width: 250px;
             height: 250px;
             margin: 20px;
             -webkit-perspective: 800;
             -webkit-perspective-origin: 50% 50%;
-            -webkit-box-shadow: 0 0 5px 1px rgba(0,0,0,0.4);
-            box-shadow: 0 0 5px 1px rgba(0,0,0,0.4);
         }
 
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            background-color: rgba(0,0,0,0);
-            width: 100%;
-            z-index: 5;
-
-            -webkit-transition: all 0.2s ease;
-        }
 
         .image-crop {
             opacity: 0;
@@ -329,6 +321,7 @@ font-family: 'Open Sans', sans-serif;*/
             /*background-position: 50% 50%;*/
             background-repeat: no-repeat;
             /*background-size: cover;*/
+            box-shadow: 0 0 5px 1px rgba(0,0,0,0.4);
 
             -webkit-transform-style: preserve-3d;
             -webkit-transition: all 0.1s ease;
@@ -389,9 +382,8 @@ font-family: 'Open Sans', sans-serif;*/
         .conclusion .gap a {
             color: #fff;
         }
-        .new-module {
+        
+        .new-module img {
+            display: block;
             width: 100%;
-        }
-        .new-module img{
-            min-width: 100%;
         }
