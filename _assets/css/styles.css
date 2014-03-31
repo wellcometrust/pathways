@@ -1,391 +1,414 @@
- /* fonts */
- @import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic|Open+Sans:400,700);
+/* fonts */
+@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic|Open+Sans:400,700);
 
 /*font-family: 'Libre Baskerville', serif;
 font-family: 'Open Sans', sans-serif;*/
 
- /* generic */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* generic */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-size: 16px;
-            font-family: 'Open Sans', 'Segoe UI', 'helvetica neue', arial, sans-serif;
-            font-weight: 400;
-            color: #333;
-            line-height:1.618rem;
-        }
-
-
-        h1{
-            font-family: 'Open Sans', 'Segoe UI', 'helvetica neue', arial, sans-serif;
-            font-size: 6.854rem;
-            font-weight: 700;
-            margin-bottom: 4.236rem;
-            line-height:6.854rem;
-        }
-
-        h1 b{
-            font-family: 'Libre Baskerville', serif;
-            font-size: 4.236rem;
-            display: block;
-            color: #cdc7bf;
-        }
-
-        h2, h3, h4, h5, h6 {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 4.236rem;
-            margin-bottom: 4.236rem;
-        }
-
-        .scene-set{
-            font-family: 'Libre Baskerville', serif;
-            font-style: italic;
-            font-size: 1.618rem; 
-            color: rgba(255,255,255,0.7);
-            position: relative;
-        }
-        .scene-set:before {
-            content: '';
-            position: absolute;
-            background:url('/_assets/img/icon-module.svg')no-repeat;
-            height: 24px;
-            width: 21px;
-            left:-32px;
-        }
-
-        .clearfix:before, .row:before,
-        .clearfix:after, .row:after {
-            content:" ";
-            display:table;
-        }
-
-        .clearfix:after, .row:after {
-            clear:both;
-        }
-
-        .empty {
-            clear: both;
-            padding: 250px 0;
-            text-align: center;
-        }
-
-        /* specific */
-
-        [role="main"] {
-            background: url('/_assets/img/mesmer-med.jpg')no-repeat;
-            background-attachment: fixed;
-            background-size: 100%;
-        }
-
-        .start {
-            background: url('/_assets/img/mesmer-bkg.jpg') 50% 50% no-repeat;
-            background-size: cover;
-            position: relative;
-            background-color: #ccc;
-            z-index: 10;
-        }
-        .start .text {
-            position: absolute;
-            top: 45%;
-            left: 5%;
-            color: #fff;
-            width: 85%;
-        }
-        .start .text .intro-text{
-            width: 60%;
-            margin-bottom: 1.618rem;
-        }
-
-        .title-screen {
-            position: relative;
-            background: linear-gradient(black 0%, black 30%, transparent 50%, transparent 100%);
-            height: 6000px;
-        }
-        .title-screen p {
-            position: absolute;
-            top: 100px;
-            width: 100%;
-            color: #fff;
-            text-align: center;
-            font-size: 4.236rem;
-            font-family: 'Libre Baskerville', serif;
-        }
-
-        .tile-modal{
-            background: url('/_assets/img/debunk-bkg.jpg') 50% 50% no-repeat;
-            background-size: cover;
-            -webkit-box-shadow:inset 0 -4px 6px 1px rgba(0,0,0,.5);
-            box-shadow:inset 0 -4px 6px 1px rgba(0,0,0,.5);
-        }
-
-        .another {
-            background-color: blue;
-            height: 1400px;
-        }
+body {
+    font-size: 16px;
+    font-family: 'Open Sans', 'Segoe UI', 'helvetica neue', arial, sans-serif;
+    font-weight: 400;
+    color: #333;
+    line-height:1.618rem;
+}
 
 
-        /**
-            Audio
-        **/
-        .audio-icon {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            width: 36px;
-            height: 36px;
-            background: url('/_assets/img/play-sound.svg') 50% 50% no-repeat;
-            background-size: 100%;
-            border-radius: 4px;
-            opacity: 0.3;
-            z-index: 5;
-            -webkit-transition: opacity 0.3s ease;
-        }
-        .audio-icon:hover, .audio-icon.active {
-            opacity: 1;
-        }
+h1 {
+    font-family: 'Open Sans', 'Segoe UI', 'helvetica neue', arial, sans-serif;
+    font-size: 4.854rem;
+    font-weight: 700;
+    margin: 2rem 0;
+    line-height:3.854rem;
+}
+
+h1 b {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 4.236rem;
+    display: block;
+    color: #cdc7bf;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 4.236rem;
+    margin-bottom: 4.236rem;
+}
+
+iframe {
+    border: none;
+}
 
 
-        /**
-            Crop zoom
-        **/
-        .popup-section {
-            background-color: #efefef;
+.clearfix:before, .row:before,
+.clearfix:after, .row:after {
+    content:" ";
+    display:table;
+}
 
-            -webkit-perspective: 800;
-            -webkit-perspective-origin: 50% 50%;
+.clearfix:after, .row:after {
+    clear:both;
+}
 
-            -moz-perspective: 800;
-            -moz-perspective-origin: 50% 50%;
-        }
+/* specific */
 
-        .crop-zoom {
-            position: absolute;
-            top: 1500px;
-            /*border: 2px solid conclusion;*/
-
-            -webkit-transform-style: preserve-3d;
-            -webkit-transition: all 0.3s ease;
-
-            -moz-transform-style: preserve-3d;
-            -moz-transition: all 0.3s ease;
-        }
-
-        .depress {
-            -webkit-transform: translate3d(0,0,-80px);
-            -moz-transform: translate3d(0,0,-80px);
-        }
-
-        .tap-target {
-            position: absolute;
-            bottom: 150px;
-            left: 10%;
-            width: 250px;
-            height: 300px;
-        }
-
-        .tap-target.animate {
-            -webkit-animation-name: pulse;
-            -webkit-animation-duration: 3s;
-
-            -moz-animation-name: pulse;
-            -moz-animation-duration: 3s;
-        }
-
-        @-webkit-keyframes pulse {
-            0%  { box-shadow: 0 0 1px 3px rgba(255,0,0,0); }
-            30% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-            70% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-            90% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.0); }
-        }
-
-        @-moz-keyframes pulse {
-            0%  { box-shadow: 0 0 1px 3px rgba(255,0,0,0); }
-            30% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-            70% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-            90% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.0); }
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            background-color: rgba(0,0,0,0);
-            width: 100%;
-            z-index: 5;
-
-            -webkit-transition: all 0.5s ease;
-            -moz-transition: all 0.5s ease;
-        }
-
-        .overlay .image-crop {
-            opacity: 0;
-            position: absolute;
-            z-index: 15;
-        }
-        .overlay .image-crop.animate {
-            -webkit-transition: all 0.5s ease;
-            -moz-transition: all 0.5s ease;
-        }
-
-        .overlay .text {
-            position: absolute;
-            color: #fff;
-            width: 25%;
-            padding: 0 15px;
-            opacity: 0;
-            line-height: 1.4;
-            z-index: 15;
-            -webkit-transform: translate3d(0, 100px, 0);
-            -webkit-transition: all 0.5s ease;
-
-            -moz-transform: translate3d(0, 100px, 0);
-            -moz-transition: all 0.5s ease;
-        }
-        .overlay .text.show {
-            opacity: 1;
-            -webkit-transform: translate3d(0, 0, 0);
-            -moz-transform: translate3d(0, 0, 0);
-        }
+[role="main"] {
+    background: url('/_assets/img/mesmer-med.jpg')no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+}
 
 
-        /**
-            Scrolly Nonsense
-        **/
-        .scrolly-nonsense {
-            /*background: #0d0d13 url('/_assets/img/animal-magnetism-bkg.jpg') 50% 50% no-repeat;*/
-            background: rgba(0,0,0,0.8);
-            background-size: cover;
-            padding: 40px 0;
-            color: #fff;
-        }
+.start {
+    background: url('/_assets/img/mesmer-bkg.jpg') 50% 50% no-repeat;
+    background-size: cover;
+    position: relative;
+    background-color: #ccc;
+    z-index: 10;
+}
 
-        .scrolly-nonsense .inner {
-            max-width: 1260px;
-            margin: 0 auto;
-            position: relative;
-        }
+.start .text {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    color: #fff;
+    width: 85%;
+}
 
-        .scrolly-nonsense header, .conclusion header {
-            text-align: center;
-            
-            padding: 4.236rem;
-        }
+.scene-set {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 1.2rem; 
+    color: rgba(255,255,255,0.7);
+    position: relative;
+}
+.scene-set:before {
+    content: '';
+    position: absolute;
+    background:url('/_assets/img/icon-module.svg')no-repeat;
+    height: 24px;
+    width: 21px;
+    left:-32px;
+}
+.scene-set b {
+    display: block;
+    font-family: "Museo Sans 100", 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight:100;
+    font-style:normal; 
+    font-size: 1.618rem;
+    color: #fff;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
 
-        .scrolly-nonsense .image-block {
-            position: relative;
-            text-align: center;
-            padding: 15px 0;
-            margin-bottom: 60px;
-        }
-
-        .scrolly-nonsense .image-block p {
-            position: absolute;
-            color: #fff;
-        }
-
-        .weird-man {
-            position: absolute;
-            left:0px;
-        }
-
-
-        /**
-            Tile modal
-        **/
-        .tile-modal {
-            background-color: #94897a;
-            padding: 300px 12%;
-        }
-        .tile-modal .row {
-            margin: 0 -33px;
-        }
-        .tile-modal .cell {
-            float: left;
-            width: 250px;
-            height: 250px;
-            margin: 20px;
-            -webkit-perspective: 800;
-            -webkit-perspective-origin: 50% 50%;
-        }
+.start .text .intro-text{ 
+    width: 60%;
+    margin-bottom: 1.618rem;
+}
 
 
-        .image-crop {
-            opacity: 0;
-            position: absolute;
-            z-index: 15;
-        }
-        .image-crop.animate {
-            -webkit-transition: all 0.3s ease;
-        }
-
-        .pane {
-            height: 250px;
-            /*background-position: 50% 50%;*/
-            background-repeat: no-repeat;
-            /*background-size: cover;*/
-            box-shadow: 0 0 5px 1px rgba(0,0,0,0.4);
-
-            -webkit-transform-style: preserve-3d;
-            -webkit-transition: all 0.1s ease;
-        }
-        .pane:hover {
-            opacity: 0.7;
-        }
-        .pane1 { background-image: url('/_assets/img/debunk1.jpg'); }
-        .pane2 { background-image: url('/_assets/img/debunk2.jpg'); }
-        .pane3 { background-image: url('/_assets/img/debunk3.jpg'); }
-        .pane4 { background-image: url('/_assets/img/debunk4.jpg'); }
 
 
-        /**
-            Library Layer
-        **/
-        .conclusion {
-            background: #fff url('/_assets/img/mesmer-conclusion-bkg.jpg') top right no-repeat; 
-            position: relative;
-            height: 1200px;
-        }
-        .conclusion header{
-            padding:10rem 30rem;
-        }
-        .conclusion .button {
-            position: absolute;
-            top:    605px;
-            right:  80px;
-            background: #fff url('/_assets/img/icon-library.svg') 0 0 no-repeat; 
-            height:         70px;
-            width:          70px;
-            border-radius:  70px;
-            z-index: 15;
-        }
+.title-screen {
+    position: relative;
+    background: linear-gradient(black 0%, black 30%, transparent 50%, transparent 100%);
+    height: 6000px;
+}
+.title-screen p {
+    position: fixed;
+    top: 340px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    font-size: 4.236rem;
+    font-family: 'Libre Baskerville', serif;
+}
 
-        .conclusion .gap {
-            position: absolute;
-            top: 640px;
-            background: #515965;
-            box-shadow: inset 0 4px 8px 2px rgba(0,0,0,0.6);
-            height: 0;
-            width:  100%;
-            overflow: hidden;
-            -webkit-transition: height 0.4s ease;
-        }
+.tile-modal{
+    background: url('/_assets/img/debunk-bkg.jpg') 50% 50% no-repeat;
+    background-size: cover;
+    box-shadow:inset 0 -4px 6px 1px rgba(0,0,0,.5);
+}
 
-        .conclusion .gap .inner {
-            max-width: 960px;
-            margin: 0 auto;
-            padding-top: 30px;
-        }
+.another {
+    background-color: blue;
+    height: 1400px;
+}
 
-        .conclusion .gap ul {
-            float: left;
-            width: 50%;
-        }
 
-        .conclusion .gap a {
-            color: #fff;
-        }
-        
-        .new-module img {
-            display: block;
-            width: 100%;
-        }
+/**
+    Audio
+**/
+.audio-icon {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    background: url('/_assets/img/play-sound.svg') 50% 50% no-repeat;
+    background-size: 100%;
+    border-radius: 4px;
+    opacity: 0.3;
+    z-index: 5;
+    -webkit-transition: opacity 0.3s ease;
+}
+.audio-icon:hover, .audio-icon.active {
+    opacity: 1;
+}
+
+
+/**
+    Crop zoom
+**/
+.popup-section {
+    background-color: #efefef;
+
+    -webkit-perspective: 800;
+    -webkit-perspective-origin: 50% 50%;
+
+    -moz-perspective: 800;
+    -moz-perspective-origin: 50% 50%;
+}
+
+.crop-zoom {
+    position: absolute;
+    top: 1500px;
+    /*border: 2px solid conclusion;*/
+
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: all 0.3s ease;
+
+    -moz-transform-style: preserve-3d;
+    -moz-transition: all 0.3s ease;
+}
+
+.depress {
+    -webkit-transform: translate3d(0,0,-80px);
+    -moz-transform: translate3d(0,0,-80px);
+}
+
+.tap-target {
+    position: absolute;
+    bottom: 150px;
+    left: 10%;
+    width: 250px;
+    height: 300px;
+}
+
+.tap-target.animate {
+    -webkit-animation-name: pulse;
+    -webkit-animation-duration: 3s;
+
+    -moz-animation-name: pulse;
+    -moz-animation-duration: 3s;
+}
+
+@-webkit-keyframes pulse {
+    0%  { box-shadow: 0 0 1px 3px rgba(255,0,0,0); }
+    30% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
+    70% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
+    90% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.0); }
+}
+
+@-moz-keyframes pulse {
+    0%  { box-shadow: 0 0 1px 3px rgba(255,0,0,0); }
+    30% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
+    70% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
+    90% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.0); }
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    z-index: 20;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+}
+
+.overlay .image-crop {
+    opacity: 0;
+    position: absolute;
+    z-index: 15;
+}
+.overlay .image-crop.animate {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+}
+
+.overlay .text {
+    position: absolute;
+    color: #fff;
+    width: 25%;
+    padding: 0 15px;
+    opacity: 0;
+    line-height: 1.4;
+    z-index: 15;
+    -webkit-transform: translate3d(0, 100px, 0);
+    -webkit-transition: all 0.5s ease;
+
+    -moz-transform: translate3d(0, 100px, 0);
+    -moz-transition: all 0.5s ease;
+}
+.overlay .text.show {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+}
+
+
+/**
+    Scrolly Nonsense
+**/
+.scrolly-nonsense {
+    /*background: #0d0d13 url('/_assets/img/animal-magnetism-bkg.jpg') 50% 50% no-repeat;*/
+    background: rgba(0,0,0,0.8);
+    background-size: cover;
+    padding: 40px 0;
+    color: #fff;
+}
+
+.scrolly-nonsense .inner {
+    max-width: 1260px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.scrolly-nonsense header, .conclusion header {
+    text-align: center;
+    
+    padding: 4.236rem;
+}
+
+.scrolly-nonsense .image-block {
+    position: relative;
+    text-align: center;
+    padding: 15px 0;
+    margin-bottom: 60px;
+}
+
+.scrolly-nonsense .image-block p {
+    position: absolute;
+    color: #fff;
+}
+
+.weird-man {
+    position: absolute;
+    left:0px;
+}
+
+
+/**
+    Tile modal
+**/
+.tile-modal {
+    background-color: #94897a;
+    padding: 300px 12%;
+}
+.tile-modal .row {
+    margin: 0 -33px;
+}
+.tile-modal .cell {
+    float: left;
+    width: 250px;
+    height: 250px;
+    margin: 20px;
+    -webkit-perspective: 800;
+    -webkit-perspective-origin: 50% 50%;
+}
+
+
+.image-crop {
+    opacity: 0;
+    position: absolute;
+    z-index: 15;
+}
+.image-crop.animate {
+    -webkit-transition: all 0.3s ease;
+}
+
+.pane {
+    height: 250px;
+    /*background-position: 50% 50%;*/
+    background-repeat: no-repeat;
+    /*background-size: cover;*/
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.4);
+
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: all 0.1s ease;
+}
+.pane:hover {
+    opacity: 0.7;
+}
+.pane1 { background-image: url('/_assets/img/debunk1.jpg'); }
+.pane2 { background-image: url('/_assets/img/debunk2.jpg'); }
+.pane3 { background-image: url('/_assets/img/debunk3.jpg'); }
+.pane4 { background-image: url('/_assets/img/debunk4.jpg'); }
+
+
+/**
+    Library Layer
+**/
+.conclusion {
+    background: #fff url('/_assets/img/mesmer-conclusion-bkg.jpg') top right no-repeat; 
+    position: relative;
+    height: 1200px;
+}
+
+.conclusion header {
+    padding:10rem 30rem;
+}
+
+.conclusion .video-popup {
+    text-align: center;
+}
+.conclusion .video-popup a {
+    display: block;
+}
+
+.conclusion .button {
+    position: absolute;
+    top:    605px;
+    right:  80px;
+    background: #fff url('/_assets/img/icon-library.svg') 0 0 no-repeat; 
+    height:         70px;
+    width:          70px;
+    border-radius:  70px;
+    z-index: 15;
+}
+
+.conclusion .gap {
+    position: absolute;
+    top: 640px;
+    background: #515965;
+    box-shadow: inset 0 4px 8px 2px rgba(0,0,0,0.6);
+    height: 0;
+    width:  100%;
+    overflow: hidden;
+    -webkit-transition: height 0.4s ease;
+}
+
+.conclusion .gap .inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+.conclusion .gap ul {
+    float: left;
+    width: 50%;
+}
+
+.conclusion .gap a {
+    color: #fff;
+}
+
+.new-module img {
+    display: block;
+    width: 100%;
+}

@@ -25,13 +25,17 @@
 
         <div class="start">
             <div class="text">
-                <p class="scene-set">Paris 1778</p>
-                <h1><b>Mesmer:</b> Can the mind heal the body?</h1>
+                <p class="scene-set">
+                    <span>Paris 1778</span>
+                    <b>The Story of Mesmer</b> 
+                </p>
+                <h1>Can the mind heal the body?</h1>
                 <p class="intro-text">Mesmer arrives in Paris in 1778 and his ‘magnetic’ therapy is a sensation.</p>
                 <p class="intro-text">In his salons, or séances, a mysterious ‘magnetic fluid’, directed by magnetised rods, flows around the participants. They twitch, writhe, speak in tongues, collapse in violent convulsions. Patients are cured in their hundreds - of paralysis, epilepsy, toothache, stomach cramps, even lifelong blindness.  He can treat thirty people at a time in his baquets: tubs filled with iron filings and magnetised water in which patients sit and hold hands while the fluid circulates.</p>
             </div>
         </div>
 
+        <!-- Title Screen -->
         <div class="title-screen">
             <audio class="audio-player" src="/_assets/audio/crystal.mp3"></audio>
             <div class="audio-icon"></div>
@@ -93,9 +97,16 @@
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo aliquip ex ea dolor sit amet, consectetur adipisicing elit,Lorem ipsum laboris nisi ut sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco  commodo</p>
+                quis nostrud exercitation ullamco commodo</p>
             </header>
+
+            <div class="video-popup">
+                <img src="http://placekitten.com/90/90">
+                <a class="play-video" data-width="640" data-height="360" title="" href="//www.youtube.com/embed/Zl6xwuBJVIY">Play Video</a>
+            </div>
+
             <div class="button"></div>
+
             <div class="gap">
                 <div class="inner clearfix">
                     <ul>
@@ -109,7 +120,10 @@
                 </div>
             </div><!-- end Gap -->
         </div>
-        <div class="new-module"><img src="/_assets/img/sigmund-innit.jpg"/></div>
+
+        <div class="new-module">
+            <img src="/_assets/img/sigmund-innit.jpg"/>
+        </div>
         
     </main>
 
@@ -128,12 +142,13 @@
             controller = new ScrollMagic();
 
             // build scene
-            var scene = new ScrollScene({triggerElement: ".title", duration: 600})
-                            .setPin(".title")
-                            .addTo(controller);
+            // var scene = new ScrollScene({triggerElement: ".title", duration: 600})
+            //                 .setPin(".title")
+            //                 .addTo(controller);
 
             var $window = $(window),
                 $start  = $('.start'),
+                $title  = $('.title'),
                 $text   = $start.find('.text').first(),
                 scrollY = 0;
 
@@ -143,9 +158,15 @@
             function parallaxAllTheThings() {
                 scrollY = window.scrollY;
 
-                if( scrollY > 0 ) {
+                if( scrollY > 0 && scrollY < (window.outerHeight + 30) ) {
                     $text.css('-webkit-transform', 'translate3d(0,'+ -(scrollY / 2) +'px,0)');
                 }
+
+                if( scrollY > 2000 ) {
+                    $title.fadeOut(400);
+                }
+                else
+                    $title.fadeIn(400);
             }
 
             function resizeAllTheThings() {
@@ -193,7 +214,6 @@
 
                 // slight buffer in case user does not scroll far enough
                 if( window.scrollY > (image_top - 60) ) {
-                    // console.log('true');
                     if( !$('.tap-target').hasClass('animate') )
                         $('.tap-target').addClass('animate');
                 }
@@ -302,15 +322,11 @@
     <!-- Scrolly Nonsense -->
     <script>
         function nonsense() {
-            var scenes = [],
-                scene;
 
-            scene = new ScrollScene({triggerElement: ".weird-man", duration: 1200})
+            new ScrollScene({triggerElement: ".weird-man", duration: 1200})
                         .setPin(".weird-man")
                         .offset(200)
                         .addTo(controller);
-
-            scenes.push(scene);
 
             $('.image-block').each(function() {
                 var $this   = $(this),
@@ -328,11 +344,10 @@
                 var tween = TweenMax.to($p, 0.5, {"opacity": "1", "-webkit-transform": "translate3d(0,0,0)"});
 
                 // build scene
-                scene = new ScrollScene({triggerElement: $this, duration: 200})
+                new ScrollScene({triggerElement: $this, duration: 200})
                             .setTween(tween)
+                            .offset(-50)
                             .addTo(controller);
-
-                scenes.push(scene);
             });
         }
 
@@ -443,7 +458,50 @@
     <script>
         var state = 'closed';
 
+        function positionCenter($elm) {
+            var width   = $elm.width(),
+                height  = $elm.height(),
+                $window = $(window);
+
+            $elm.css({ position: 'absolute', top: ($window.height() / 2) - (height / 2), left: ($window.width() / 2) - (width / 2) });
+        }
+
         $(document).ready(function() {
+
+            $('.conclusion').on('click', '.play-video', function() {
+
+                var $this       = $(this),
+                    $window     = $(window),
+                    $overlay    = $('<div/>').addClass('overlay').css('height', $window.height() ),
+                    $iframe     = $('<iframe/>').attr('src', $this.attr('href'));
+
+                if( $this.data('width') )
+                    $iframe.attr('width', $this.data('width') );
+
+                if( $this.data('height') )
+                    $iframe.attr('height', $this.data('height') );
+
+                $overlay.append($iframe);
+                $('body').append($overlay);
+
+                $overlay.show().css('background-color', 'rgba(0,0,0,0.8)');
+                
+                positionCenter($iframe);
+
+                setTimeout(function() {
+                    $iframe.addClass('animate');
+                }, 400);
+
+                $overlay.on('click', function() {
+                    this.addEventListener('transitionend', function() { $(this).remove() }, false);
+                    $overlay.css('opacity', 0);
+                })
+
+                window.addEventListener('resize', function() { $overlay.css('height', $window.height() )}, false)
+
+                return false;
+            });
+
             $('.conclusion').on('click', '.button', function() {
                 if( state == 'closed' ) {
                     $('.conclusion .gap').css('height', 250);
@@ -481,4 +539,3 @@
 
 </body>
 </html>
-    
