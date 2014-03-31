@@ -38,7 +38,7 @@
         <!-- Title Screen -->
         <div class="title-screen">
             <audio class="audio-player" src="/_assets/audio/crystal.mp3"></audio>
-            <div class="audio-icon"></div>
+            <div class="audio-icon"><div class="circles"></div></div>
 
             <p class="title">Mesmer’s Salon</p>
 
@@ -142,26 +142,22 @@
 
             controller = new ScrollMagic();
 
-            // build scene
-            // var scene = new ScrollScene({triggerElement: ".title", duration: 600})
-            //                 .setPin(".title")
-            //                 .addTo(controller);
-
             var $window = $(window),
                 $start  = $('.start'),
                 $title  = $('.title'),
                 $text   = $start.find('.text').first(),
                 scrollY = 0;
 
-            window.addEventListener('scroll', parallaxAllTheThings, false);
-            window.addEventListener('resize', resizeAllTheThings, false);
-
             function parallaxAllTheThings() {
                 scrollY = window.scrollY;
+
+                if( scrollY <= 0 )
+                    scrollY = 0;
 
                 if( scrollY > 0 && scrollY < (window.outerHeight + 30) ) {
                     $text.css('-webkit-transform', 'translate3d(0,'+ -(scrollY / 2) +'px,0)');
                 }
+
 
                 if( scrollY > 2000 ) {
                     $title.fadeOut(400);
@@ -176,6 +172,9 @@
         
 
             resizeAllTheThings();
+
+            window.addEventListener('scroll', parallaxAllTheThings, false);
+            window.addEventListener('resize', resizeAllTheThings, false);
 
             /** Audio **/
             var $player     = document.querySelector('.audio-player'),
@@ -205,13 +204,11 @@
                 image_top       = $image.offset().top,
                 image_height    = $(window).height();
 
-            $image.css({ width: $(window).width(), height: $(window).height() });
-
-            function onResize(e) {
-                $image.css({ width: $(window).width(), height: $(window).height() });
+            function onResize() {
+                $image.css({ width: window.outerWidth, height: window.outerHeight });
             }
             
-            function onScroll(e) {
+            function onScroll() {
 
                 // slight buffer in case user does not scroll far enough
                 if( window.scrollY > (image_top - 60) ) {
@@ -226,6 +223,8 @@
                     $image.css( { position: 'static', top: 'auto' } );
                 }
             }
+
+            onResize();
 
 
             // Tap targets

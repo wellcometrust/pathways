@@ -157,12 +157,39 @@ iframe {
     background: url('/_assets/img/play-sound.svg') 50% 50% no-repeat;
     background-size: 100%;
     border-radius: 4px;
-    opacity: 0.6;
+    /*opacity: 0.3;*/
     z-index: 5;
     -webkit-transition: opacity 0.3s ease;
 }
 .audio-icon:hover, .audio-icon.active {
     opacity: 1;
+}
+
+.audio-icon .circles {
+    -webkit-animation-name: circle;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+}
+
+.audio-icon .circles {
+    position: absolute;
+    top:    0px;
+    left:   0px;
+    width:  36px;
+    height: 36px;
+    border: 2px solid #fff;
+    border-radius: 40px;
+}
+
+@-webkit-keyframes circle {
+    from {
+        opacity: 1;
+        -webkit-transform: scale(0);
+    }
+    to {
+        opacity: 0;
+        -webkit-transform: scale(2);
+    }
 }
 
 
@@ -202,6 +229,10 @@ iframe {
     left: 10%;
     width: 250px;
     height: 300px;
+}
+
+.tap-target:hover {
+    box-shadow: 0 0 1px 3px rgba(255,0,0,0.6);
 }
 
 .tap-target.animate {
