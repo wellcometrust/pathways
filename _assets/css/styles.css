@@ -18,15 +18,15 @@ font-family: 'Open Sans', sans-serif;*/
 
         h1{
             font-family: 'Open Sans', 'Segoe UI', 'helvetica neue', arial, sans-serif;
-            font-size: 4.236rem;
+            font-size: 6.854rem;
             font-weight: 700;
             margin-bottom: 4.236rem;
-            line-height:4.236rem;
+            line-height:6.854rem;
         }
 
         h1 b{
             font-family: 'Libre Baskerville', serif;
-            font-size: 2.618rem;
+            font-size: 4.236rem;
             display: block;
             color: #cdc7bf;
         }
@@ -35,6 +35,22 @@ font-family: 'Open Sans', sans-serif;*/
             font-family: 'Libre Baskerville', serif;
             font-size: 4.236rem;
             margin-bottom: 4.236rem;
+        }
+
+        .scene-set{
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: 1.618rem; 
+            color: rgba(255,255,255,0.7);
+            position: relative;
+        }
+        .scene-set:before {
+            content: '';
+            position: absolute;
+            background:url('/_assets/img/icon-module.svg')no-repeat;
+            height: 24px;
+            width: 21px;
+            left:-32px;
         }
 
         .clearfix:before, .row:before,
@@ -56,7 +72,7 @@ font-family: 'Open Sans', sans-serif;*/
         /* specific */
 
         [role="main"] {
-            background: url('/_assets/img/mesmer-med.jpg');
+            background: url('/_assets/img/mesmer-med.jpg')no-repeat;
             background-attachment: fixed;
             background-size: 100%;
         }
@@ -70,16 +86,20 @@ font-family: 'Open Sans', sans-serif;*/
         }
         .start .text {
             position: absolute;
-            top: 40%;
+            top: 45%;
             left: 5%;
             color: #fff;
-            width: 55%;
+            width: 85%;
+        }
+        .start .text .intro-text{
+            width: 60%;
+            margin-bottom: 1.618rem;
         }
 
         .title-screen {
             position: relative;
             background: linear-gradient(black 0%, black 30%, transparent 50%, transparent 100%);
-            height: 3000px;
+            height: 6000px;
         }
         .title-screen p {
             position: absolute;
@@ -89,6 +109,11 @@ font-family: 'Open Sans', sans-serif;*/
             text-align: center;
             font-size: 4.236rem;
             font-family: 'Libre Baskerville', serif;
+        }
+
+        .tile-modal{
+            background: url('/_assets/img/debunk-bkg.jpg') 50% 50% no-repeat;
+            background-size: cover;
         }
 
         .another {
@@ -106,8 +131,8 @@ font-family: 'Open Sans', sans-serif;*/
             right: 15px;
             width: 36px;
             height: 36px;
-            background: #ccc url('/_assets/img/audio_high.png') 50% 50% no-repeat;
-            background-size: 60%;
+            background: url('/_assets/img/play-sound.svg') 50% 50% no-repeat;
+            background-size: 100%;
             border-radius: 4px;
             opacity: 0.3;
             -webkit-transition: opacity 0.3s ease;
@@ -133,7 +158,7 @@ font-family: 'Open Sans', sans-serif;*/
         .crop-zoom {
             position: absolute;
             top: 1500px;
-            /*border: 2px solid orange;*/
+            /*border: 2px solid conclusion;*/
 
             -webkit-transform-style: preserve-3d;
             -webkit-transition: all 0.3s ease;
@@ -224,26 +249,30 @@ font-family: 'Open Sans', sans-serif;*/
             Scrolly Nonsense
         **/
         .scrolly-nonsense {
-            background: #0d0d13 url('/_assets/img/animal-magnetism-bkg.jpg') 50% 50% no-repeat;
+            /*background: #0d0d13 url('/_assets/img/animal-magnetism-bkg.jpg') 50% 50% no-repeat;*/
+            background: rgba(0,0,0,0.8);
             background-size: cover;
             padding: 40px 0;
             color: #fff;
         }
 
         .scrolly-nonsense .inner {
-            max-width: 960px;
+            max-width: 1260px;
             margin: 0 auto;
+            position: relative;
         }
 
-        .scrolly-nonsense header {
+        .scrolly-nonsense header, .conclusion header {
             text-align: center;
-            padding: 50px 0;
+            
+            padding: 4.236rem;
         }
 
         .scrolly-nonsense .image-block {
             position: relative;
             text-align: center;
             padding: 15px 0;
+            margin-bottom: 60px;
         }
 
         .scrolly-nonsense .image-block p {
@@ -253,7 +282,7 @@ font-family: 'Open Sans', sans-serif;*/
 
         .weird-man {
             position: absolute;
-
+            left:0px;
         }
 
 
@@ -262,7 +291,7 @@ font-family: 'Open Sans', sans-serif;*/
         **/
         .tile-modal {
             background-color: #94897a;
-            padding: 300px 0;
+            padding: 300px 12%;
         }
         .cell {
             float: left;
@@ -271,6 +300,8 @@ font-family: 'Open Sans', sans-serif;*/
             margin: 20px;
             -webkit-perspective: 800;
             -webkit-perspective-origin: 50% 50%;
+            -webkit-box-shadow: 0 0 5px 1px rgba(0,0,0,0.4);
+            box-shadow: 0 0 5px 1px rgba(0,0,0,0.4);
         }
 
         .overlay {
@@ -294,13 +325,16 @@ font-family: 'Open Sans', sans-serif;*/
         }
 
         .pane {
-            height: 400px;
-            background-position: 50% 50%;
+            height: 250px;
+            /*background-position: 50% 50%;*/
             background-repeat: no-repeat;
-            background-size: cover;
+            /*background-size: cover;*/
 
             -webkit-transform-style: preserve-3d;
             -webkit-transition: all 0.1s ease;
+        }
+        .pane:hover {
+            opacity: 0.7;
         }
         .pane1 { background-image: url('/_assets/img/debunk1.jpg'); }
         .pane2 { background-image: url('/_assets/img/debunk2.jpg'); }
@@ -311,24 +345,26 @@ font-family: 'Open Sans', sans-serif;*/
         /**
             Library Layer
         **/
-        .orange {
+        .conclusion {
+            background: #fff url('/_assets/img/mesmer-conclusion-bkg.jpg') top right no-repeat; 
             position: relative;
-            background-color: white;
             height: 1200px;
         }
-
-        .orange .button {
+        .conclusion header{
+            padding:10rem 30rem;
+        }
+        .conclusion .button {
             position: absolute;
             top:    605px;
             right:  80px;
-            background-color: green;
+            background: #fff url('/_assets/img/icon-library.svg') 0 0 no-repeat; 
             height:         70px;
             width:          70px;
             border-radius:  70px;
             z-index: 15;
         }
 
-        .orange .gap {
+        .conclusion .gap {
             position: absolute;
             top: 640px;
             background: #515965;
@@ -339,17 +375,23 @@ font-family: 'Open Sans', sans-serif;*/
             -webkit-transition: height 0.4s ease;
         }
 
-        .orange .gap .inner {
+        .conclusion .gap .inner {
             max-width: 960px;
             margin: 0 auto;
             padding-top: 30px;
         }
 
-        .orange .gap ul {
+        .conclusion .gap ul {
             float: left;
             width: 50%;
         }
 
-        .orange .gap a {
+        .conclusion .gap a {
             color: #fff;
+        }
+        .new-module {
+            width: 100%;
+        }
+        .new-module img{
+            min-width: 100%;
         }

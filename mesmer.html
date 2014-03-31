@@ -12,14 +12,15 @@
 
         <div class="start">
             <div class="text">
+                <p class="scene-set">Paris 1778</p>
                 <h1><b>Mesmer:</b> Can the mind heal the body?</h1>
-                <p>Mesmer arrives in Paris in 1778 and his ‘magnetic’ therapy is a sensation.</p>
-                <p>In his salons, or séances, a mysterious ‘magnetic fluid’, directed by magnetised rods, flows around the participants. They twitch, writhe, speak in tongues, collapse in violent convulsions. Patients are cured in their hundreds - of paralysis, epilepsy, toothache, stomach cramps, even lifelong blindness.  He can treat thirty people at a time in his baquets: tubs filled with iron filings and magnetised water in which patients sit and hold hands while the fluid circulates.</p>
+                <p class="intro-text">Mesmer arrives in Paris in 1778 and his ‘magnetic’ therapy is a sensation.</p>
+                <p class="intro-text">In his salons, or séances, a mysterious ‘magnetic fluid’, directed by magnetised rods, flows around the participants. They twitch, writhe, speak in tongues, collapse in violent convulsions. Patients are cured in their hundreds - of paralysis, epilepsy, toothache, stomach cramps, even lifelong blindness.  He can treat thirty people at a time in his baquets: tubs filled with iron filings and magnetised water in which patients sit and hold hands while the fluid circulates.</p>
             </div>
         </div>
 
         <div class="title-screen">
-            <audio class="audio-player" src="/_assets/audio/Riding.mp3">
+            <audio class="audio-player" src="/_assets/audio/crystal.mp3">
                 Your browser does not support the <code>audio</code> element.
             </audio>
             <div class="audio-icon"></div>
@@ -70,7 +71,15 @@
             <div class="cell"><div class="pane pane4" data-crop="img4"></div></div>
         </div>
 
-        <div class="orange">
+        <div class="conclusion">
+            <header>
+                <h2>Conclusion</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo aliquip ex ea dolor sit amet, consectetur adipisicing elit,Lorem ipsum laboris nisi ut sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco  commodo</p>
+            </header>
             <div class="button"></div>
             <div class="gap">
                 <div class="inner clearfix">
@@ -83,8 +92,9 @@
                         <li><a href="#">Make it stop!</a></li>
                     </ul>
                 </div>
-            </div>
+            </div><!-- end Gap -->
         </div>
+        <div class="new-module"><img src="/_assets/img/sigmund-innit.jpg"/></div>
         
     </main>
 
@@ -295,7 +305,7 @@
                     left: ( $img.offset().left - $img.offsetParent().offset().left + $img.width() + 40 ),
                     'text-align': 'left',
                     opacity: 0,
-                    '-webkit-transform': 'translate3d(80px,0,0)'
+                    '-webkit-transform': 'translate3d(180px,280px,0)'
                 });
 
                 var tween = TweenMax.to($p, 0.5, {"opacity": "1", "-webkit-transform": "translate3d(0,0,0)"});
@@ -415,13 +425,13 @@
         var state = 'closed';
 
         $(document).ready(function() {
-            $('.orange').on('click', '.button', function() {
+            $('.conclusion').on('click', '.button', function() {
                 if( state == 'closed' ) {
-                    $('.orange .gap').css('height', 250);
+                    $('.conclusion .gap').css('height', 250);
                     state = 'open';
                 }
                 else {
-                    $('.orange .gap').css('height', 0);
+                    $('.conclusion .gap').css('height', 0);
                     state = 'closed';
                 }
             });
