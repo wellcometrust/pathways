@@ -410,18 +410,10 @@ iframe {
 }
 
 .talkinghead {
-    position: relative;
-    width: 100%;
+    background: url('/_assets/img/icon-talkinghead.svg') 50% 0 no-repeat;
+    background-size: 70px;
     text-align: center;
-}
-.talkinghead:before {
-    content: '';
-    position: absolute;
-    left: 1rem;
-    
-    background: url('/_assets/img/icon-talkinghead.svg') 0 0 no-repeat;
-    height: 62px;
-    width: 62px;
+    padding-top: 80px;
 }
 
 .conclusion .button {
