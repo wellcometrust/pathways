@@ -45,7 +45,9 @@
 
             <div class="crop-zoom">
                 <p class="title">Mesmer’s Salon</p>
-                <div class="tap-target" data-crop="mesmer"></div>
+                <div class="tap-target rod"     data-crop="rod"></div>
+                <div class="tap-target woman"   data-crop="woman"></div>
+                <div class="tap-target mesmer"  data-crop="mesmer"></div>
             </div>
 
         </div>
@@ -146,7 +148,8 @@
     
     <script>
 
-        var controller;
+        var supports_touch = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch),
+            controller;
 
         $(document).ready(function() {
 
@@ -154,7 +157,6 @@
 
             var $window = $(window),
                 $start  = $('.start'),
-                // $title  = $('.title'),
                 $black  = $('.black'),
                 $text   = $start.find('.text').first(),
                 scrollY = 0,
@@ -167,27 +169,28 @@
                     scrollY = 0;
 
 
-                if( scrollY > 0 && scrollY < (window.outerHeight + 30) ) {
+                if( scrollY < (window.outerHeight + 30) )
                     $text.css('-webkit-transform', 'translate3d(0,'+ -(scrollY / 2) +'px,0)');
+                else
+                    $text.css('-webkit-transform', 'translate3d(0,0,0)');
+
+                if( scrollY > 0 ) {
                     $black.css('opacity', 1 - (scrollY * unit));
                 }
-
-
-                // if( scrollY > 2000 ) {
-                //     $title.fadeOut(400);
-                // }
-                // else
-                //     $title.fadeIn(400);
             }
 
             function resizeAllTheThings() {
                 $('.start').css('height', $window.height());
+                $black.css('opacity', 1);
             }
         
 
             resizeAllTheThings();
 
-            window.addEventListener('scroll', parallaxAllTheThings, false);
+            if( !supports_touch ) {
+                window.addEventListener('scroll', parallaxAllTheThings, false);
+            }
+
             window.addEventListener('resize', resizeAllTheThings, false);
 
             /** Audio **/
@@ -229,13 +232,6 @@
                     if( !$('.tap-target').hasClass('animate') )
                         $('.tap-target').addClass('animate');
                 }
-
-                // if( window.scrollY >= image_top && window.scrollY <= ($image.parent().next().offset().top - image_height) ) {
-                //     $image.css( { position: 'fixed', top: 0 } );
-                // }
-                // else {
-                //     $image.css( { position: 'static', top: 'auto' } );
-                // }
             }
 
             onResize();
@@ -289,17 +285,32 @@
                         width = '40%';
                     }
                     else {
-                        height = $(window).height() - 60;
+                        height = $(window).height() - 120;
                     }
 
-                    $image_crop.animate({
-                        top:    15,
+                    $image_crop.get(0).addEventListener('transitionend', function() {
+                        $text.css( { top: 40, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show');
+                    });
+
+                    $image_crop.addClass('animate');
+
+                    $image_crop.css({
+                        top:    40,
+                        left:   120,
                         width: width,
                         height: height,
                         opacity: 1
-                    }, 500, 'swing', function() {
-                        $text.css( { top: 15, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show');
-                    });
+                    })
+
+                    // $image_crop.animate({
+                    //     top:    15,
+                    //     left:
+                    //     width: width,
+                    //     height: height,
+                    //     opacity: 1
+                    // }, 500, 'swing', function() {
+                    //     $text.css( { top: 15, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show');
+                    // });
 
                     $overlay.css('background-color', 'rgba(0,0,0,0.8)');
 
@@ -536,6 +547,14 @@
 
     <script>
         var db = {
+            'rod': {
+                'image': 'rod-crop.jpg',
+                'text': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+            },
+            'woman': {
+                'image': 'woman-crop.jpg',
+                'text': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+            },
             'mesmer': {
                 'image': 'mesmer-crop.jpg',
                 'text': 'Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’'

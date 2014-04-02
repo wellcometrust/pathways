@@ -59,6 +59,7 @@ iframe {
     /*background: url('/_assets/img/mesmer-med.jpg')no-repeat;
     background-attachment: fixed;
     background-size: 100%;*/
+    overflow: hidden;
 }
 
 
@@ -110,6 +111,7 @@ iframe {
 
 .start .text h1 {
     margin: 7rem 0 0 0;
+    line-height: 1;
 }
 
 
@@ -124,7 +126,6 @@ iframe {
     position: relative;
     background: url('/_assets/img/mesmer-med.jpg')no-repeat;
     background-size: 100%;
-
     height: 800px;
 }
 .title-screen .black {
@@ -133,6 +134,7 @@ iframe {
     background-color: rgb(0,0,0);
     width: 100%;
     height: 100%;
+    opacity: 0;
 }
 .title-screen p {
     position: absolute;
@@ -236,10 +238,27 @@ iframe {
 
 .tap-target {
     position: absolute;
+}
+
+.tap-target.rod {
     bottom: 250px;
     left: 10%;
     width: 250px;
     height: 350px;
+}
+
+.tap-target.woman {
+    bottom: 250px;
+    left: 35%;
+    width: 300px;
+    height: 170px;
+}
+
+.tap-target.mesmer {
+    top: 100px;
+    right: 17%;
+    width: 150px;
+    height: 220px;
 }
 
 .tap-target:hover {
@@ -320,6 +339,7 @@ iframe {
     background-size: cover;
     padding: 40px 0;
     color: #fff;
+    overflow: hidden;
 }
 
 .scrolly-nonsense .inner {
