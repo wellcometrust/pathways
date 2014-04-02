@@ -37,14 +37,17 @@
 
         <!-- Title Screen -->
         <div class="title-screen">
+            <div class="black"></div>
+
             <audio class="audio-player" src="/_assets/audio/crystal.mp3"></audio>
+            
             <div class="audio-icon"><div class="circles"></div></div>
 
-            <p class="title">Mesmer’s Salon</p>
-
             <div class="crop-zoom">
+                <p class="title">Mesmer’s Salon</p>
                 <div class="tap-target" data-crop="mesmer"></div>
             </div>
+
         </div>
 
         <!-- Nonsense -->
@@ -79,6 +82,10 @@
         <!-- Modal -->
         <div class="tile-modal">
 
+            <header>
+                <h2>The Skeptics Respond</h2>
+            </header>
+
             <div class="row">
                 <div class="cell"><div class="pane pane1" data-crop="img1"></div></div>
                 <!-- <div class="cell"><div class="pane pane2" data-crop="img2"></div></div> -->
@@ -88,16 +95,21 @@
 
         </div>
 
+        <!-- Conclusion -->
         <div class="conclusion">
             <header>
                 <h2>The Committee investigates</h2>
+            </header>
+
+            <div class="body">
                 <p>In 1784 an Academy of Sciences committee is convened, led by Benjamin Franklin. They begin by trying magnetic cures on themselves. Some of them feel mild twinges, but nothing like the mass frenzy generated at Mesmer’s salons.</p>
                 <p>They proceed to blind testing of patients, and discover that Mesmer’s subjects can’t tell when magnetised objects have been swapped with non-magnetised ones.</p>
                 <p><strong>They conclude:</strong>‘There is no proof of the existence of the Animal Magnetic fluid…the imagination without the aid of Magnetism can produce convulsions, but Magnetism without the imagination can produce nothing.’</p>
-            </header>
+            </div>
 
             <div class="video-popup">
                 <a class="play-video talkinghead" data-width="640" data-height="360" title="" href="//www.youtube.com/embed/Zl6xwuBJVIY">Play Video</a>
+                <p>Author Mike Jay interviewed about Mesmer’s legacy.</p>
             </div>
 
             <div class="button"></div>
@@ -107,16 +119,14 @@
                     <ul>
                         <li><a href="#">Stuff!</a></li>
                         <li><a href="#">Help me!</a></li>
-                        CHRONOLOGY
-
-                        
+                        CHRONOLOGY 
                     </ul>
 
                     <ul>
-                        <li><a>1700   A Guide to Magnetic Cures</a></li>
-                        <li><a>1780   Mesmer’s First Manual</a></li>
-                        <li><a>1792   Mesmer’s Second Manual</a></li>
-                        <li><a>1980   History of Animal Magnetism</a></li>
+                        <li><a href="#" data-something="something">1700 A Guide to Magnetic Cures</a></li>
+                        <li><a href="#" data-something="something">1780 Mesmer’s First Manual</a></li>
+                        <li><a href="#" data-something="something">1792 Mesmer’s Second Manual</a></li>
+                        <li><a href="#" data-something="something">1980 History of Animal Magnetism</a></li>
                     </ul>
                 </div>
             </div><!-- end Gap -->
@@ -144,9 +154,11 @@
 
             var $window = $(window),
                 $start  = $('.start'),
-                $title  = $('.title'),
+                // $title  = $('.title'),
+                $black  = $('.black'),
                 $text   = $start.find('.text').first(),
-                scrollY = 0;
+                scrollY = 0,
+                unit    = 1 / window.outerHeight;
 
             function parallaxAllTheThings() {
                 scrollY = window.scrollY;
@@ -154,16 +166,18 @@
                 if( scrollY <= 0 )
                     scrollY = 0;
 
+
                 if( scrollY > 0 && scrollY < (window.outerHeight + 30) ) {
                     $text.css('-webkit-transform', 'translate3d(0,'+ -(scrollY / 2) +'px,0)');
+                    $black.css('opacity', 1 - (scrollY * unit));
                 }
 
 
-                if( scrollY > 2000 ) {
-                    $title.fadeOut(400);
-                }
-                else
-                    $title.fadeIn(400);
+                // if( scrollY > 2000 ) {
+                //     $title.fadeOut(400);
+                // }
+                // else
+                //     $title.fadeIn(400);
             }
 
             function resizeAllTheThings() {
@@ -216,12 +230,12 @@
                         $('.tap-target').addClass('animate');
                 }
 
-                if( window.scrollY >= image_top && window.scrollY <= ($image.parent().next().offset().top - image_height) ) {
-                    $image.css( { position: 'fixed', top: 0 } );
-                }
-                else {
-                    $image.css( { position: 'static', top: 'auto' } );
-                }
+                // if( window.scrollY >= image_top && window.scrollY <= ($image.parent().next().offset().top - image_height) ) {
+                //     $image.css( { position: 'fixed', top: 0 } );
+                // }
+                // else {
+                //     $image.css( { position: 'static', top: 'auto' } );
+                // }
             }
 
             onResize();
@@ -283,7 +297,9 @@
                         width: width,
                         height: height,
                         opacity: 1
-                    }, 500, 'swing', function() { $text.css( { top: 15, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show'); });
+                    }, 500, 'swing', function() {
+                        $text.css( { top: 15, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show');
+                    });
 
                     $overlay.css('background-color', 'rgba(0,0,0,0.8)');
 
@@ -504,10 +520,12 @@
 
             $('.conclusion').on('click', '.button', function() {
                 if( state == 'closed' ) {
+                    $(this).addClass('animate');
                     $('.conclusion .gap').css('height', 250);
                     state = 'open';
                 }
                 else {
+                    $(this).removeClass('animate');
                     $('.conclusion .gap').css('height', 0);
                     state = 'closed';
                 }
