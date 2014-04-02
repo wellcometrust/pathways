@@ -125,7 +125,7 @@ iframe {
 .title-screen {
     position: relative;
     background: url('/_assets/img/mesmer-med.jpg')no-repeat;
-    background-size: 100%;
+    background-size: cover;
     height: 800px;
 }
 .title-screen .black {
@@ -238,53 +238,41 @@ iframe {
 
 .tap-target {
     position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 36px;
+    background-color: rgba(255,255,255,0.6);
 }
 
 .tap-target.rod {
-    bottom: 250px;
-    left: 10%;
-    width: 250px;
-    height: 350px;
+    top: 370px;
+    left: 15%;
 }
 
 .tap-target.woman {
-    bottom: 250px;
-    left: 35%;
-    width: 300px;
-    height: 170px;
+    top: 570px;
+    left: 45%;
 }
 
 .tap-target.mesmer {
-    top: 100px;
-    right: 17%;
-    width: 150px;
-    height: 220px;
+    top: 200px;
+    right: 22%;
 }
 
-.tap-target:hover {
-    box-shadow: 0 0 1px 3px rgba(255,0,0,0.6);
+.tap-target div {
+    position: absolute;
+    top:    0px;
+    left:   0px;
+    width:  36px;
+    height: 36px;
+    border: 2px solid #fff;
+    border-radius: 40px;
 }
 
-.tap-target.animate {
-    -webkit-animation-name: pulse;
+.tap-target.animate div {
+    -webkit-animation-name: circle;
     -webkit-animation-duration: 3s;
-
-    -moz-animation-name: pulse;
-    -moz-animation-duration: 3s;
-}
-
-@-webkit-keyframes pulse {
-    0%  { box-shadow: 0 0 1px 3px rgba(255,0,0,0); }
-    30% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-    70% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-    90% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.0); }
-}
-
-@-moz-keyframes pulse {
-    0%  { box-shadow: 0 0 1px 3px rgba(255,0,0,0); }
-    30% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-    70% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.6); }
-    90% { box-shadow: 0 0 1px 3px rgba(255,0,0,0.0); }
+    -webkit-animation-iteration-count: infinite;
 }
 
 .overlay {

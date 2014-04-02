@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8"> 
     <title>Pathways: The Mind</title>
+
+    <!-- <meta name="viewport" content="width=device-width"> -->
+    
     <link rel="stylesheet" type="text/css" href="_assets/css/styles.css">
     
     <script type="text/javascript">
@@ -45,9 +48,9 @@
 
             <div class="crop-zoom">
                 <p class="title">Mesmer’s Salon</p>
-                <div class="tap-target rod"     data-crop="rod"></div>
-                <div class="tap-target woman"   data-crop="woman"></div>
-                <div class="tap-target mesmer"  data-crop="mesmer"></div>
+                <div class="tap-target rod"     data-crop="rod"><div></div></div>
+                <div class="tap-target woman"   data-crop="woman"><div></div></div>
+                <div class="tap-target mesmer"  data-crop="mesmer"><div></div></div>
             </div>
 
         </div>
@@ -125,10 +128,10 @@
                     </ul>
 
                     <ul>
-                        <li><a href="#" data-something="something">1700 A Guide to Magnetic Cures</a></li>
-                        <li><a href="#" data-something="something">1780 Mesmer’s First Manual</a></li>
-                        <li><a href="#" data-something="something">1792 Mesmer’s Second Manual</a></li>
-                        <li><a href="#" data-something="something">1980 History of Animal Magnetism</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1700 A Guide to Magnetic Cures</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1780 Mesmer’s First Manual</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1792 Mesmer’s Second Manual</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1980 History of Animal Magnetism</a></li>
                     </ul>
                 </div>
             </div><!-- end Gap -->
@@ -181,7 +184,6 @@
 
             function resizeAllTheThings() {
                 $('.start').css('height', $window.height());
-                $black.css('opacity', 1);
             }
         
 
@@ -189,6 +191,7 @@
 
             if( !supports_touch ) {
                 window.addEventListener('scroll', parallaxAllTheThings, false);
+                $black.css('opacity', 1);
             }
 
             window.addEventListener('resize', resizeAllTheThings, false);
@@ -302,16 +305,6 @@
                         opacity: 1
                     })
 
-                    // $image_crop.animate({
-                    //     top:    15,
-                    //     left:
-                    //     width: width,
-                    //     height: height,
-                    //     opacity: 1
-                    // }, 500, 'swing', function() {
-                    //     $text.css( { top: 15, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show');
-                    // });
-
                     $overlay.css('background-color', 'rgba(0,0,0,0.8)');
 
                     $overlay.on('click', function() {
@@ -340,8 +333,12 @@
 
             // Events
             window.addEventListener('resize', onResize, false);
-            window.addEventListener('scroll', onScroll, false);
-        
+
+            if( supports_touch )
+                $('.tap-target').addClass('animate');
+            else
+                window.addEventListener('scroll', onScroll, false);
+
         });
 
     </script>
@@ -539,6 +536,43 @@
                     $(this).removeClass('animate');
                     $('.conclusion .gap').css('height', 0);
                     state = 'closed';
+                }
+            });
+
+            $('.gap').find('a').on('click', function() {
+                var $this = $(this);
+
+                if( $this.data('embed') ) {
+                    var embed_str   = '<div class="wellcomePlayer" data-uri="'+ $this.data('embed') +'" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:800px; height:600px; background-color: #000"></div>',
+                        $embed      = $(embed_str),
+                        $window     = $(window),
+                        $overlay    = $('<div/>').addClass('overlay').css('height', $window.height() ),
+                        $iframe     = $('<iframe/>').attr('src', $this.attr('href'));
+
+                    if( $this.data('width') )
+                        $iframe.attr('width', $this.data('width') );
+
+                    if( $this.data('height') )
+                        $iframe.attr('height', $this.data('height') );
+
+                    $overlay.append($embed);
+                    $('body').append($overlay);
+
+                    $overlay.show().css('background-color', 'rgba(0,0,0,0.8)');
+                    
+                    positionCenter($embed);
+
+                    $overlay.append( $('<script id="embedWellcomePlayer" src="http://wellcomelibrary.org/spas/player/build/wellcomeplayer/js/embed.js"><\/script>') );
+
+                    $overlay.on('click', function() {
+                        this.addEventListener('transitionend', function() { $(this).remove() }, false);
+                        $overlay.css('opacity', 0);
+                        window.embedScriptIncluded = false;
+                    })
+
+                    window.addEventListener('resize', function() { $overlay.css('height', $window.height() )}, false)
+
+                    return false;  
                 }
             });
         });
