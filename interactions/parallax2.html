@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html lang="en"> 
+<head>
+    <meta charset="utf-8"> 
+    <title>Pathways: The Mind</title>
+
+    <style type="text/css">
+        /* generic */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-size: 100%;
+            font-family: 'helvetica neue', arial, sans-serif;
+            color: #333;
+        }
+
+        .clearfix:before, .row:before,
+        .clearfix:after, .row:after {
+            content:" ";
+            display:table;
+        }
+
+        .clearfix:after, .row:after {
+            clear:both;
+        }
+
+        /* specific */
+        .start {
+            background: url('/_assets/img/mesmer-med.jpg');
+            background-attachment: fixed;
+            background-size: 100%;
+        }
+
+        .end {
+            background-color: #ccc;
+        }
+
+        .start, .end {
+            min-height: 600px;
+        }
+
+        .sequence:after {
+            content: "";
+            clear: left;
+            display: block;
+        }
+
+        .panel {
+            position: relative;
+            min-height: 600px;
+            color: #333;
+        }
+
+        .bg-container {
+            height: 100%;
+        }
+
+        .bg {
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: green;
+            height: 100%;
+            overflow: hidden;
+        }
+        .bg img {
+            width: 100%;
+        }
+
+        .scroll-content {
+            position: absolute;
+            top: 50%;
+            left: 15%;
+            background-color: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <main role="main">
+
+        <div class="start">
+            
+        </div>
+
+        <div class="sequence">
+            
+            <div class="panel">
+                <div class="bg-container">
+                    <div class="bg">
+                        <img src="/_assets/img/interactions/a.jpg">
+                    </div>
+                </div>
+
+                <div class="scroll-content text">
+                    <p>Paragraph of text here</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="bg-container">
+                    <div class="bg">
+                        <img src="/_assets/img/interactions/b.jpg">
+                    </div>
+                </div>
+
+                <div class="scroll-content text">
+                    <p>Paragraph of text here</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="bg-container">
+                    <div class="bg">
+                        <img src="/_assets/img/interactions/c.jpg">
+                    </div>
+                </div>
+
+                <div class="scroll-content img">
+                    <p>Paragraph of text here</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="bg-container">
+                    <div class="bg">
+                        <img src="/_assets/img/interactions/d.jpg">
+                    </div>
+                </div>
+
+                <div class="scroll-content img">
+                    <p>Paragraph of text here</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="sequence2">
+            
+            <div class="panel">
+                
+                <div class="scroll-content img">
+                    <img src="/_assets/img/interactions/e.jpg">
+                </div>
+            </div>
+        </div>
+
+        <div class="end">
+            
+        </div>
+
+    </main>
+
+    <script src="/_assets/js/lib/jquery-2.1.0.min.js"></script>
+    <script src="/_assets/js/lib/hammer.min.js"></script>
+    
+    <script>
+
+        var $window             = $(window),
+            $sequence           = $('.sequence'),
+            $sequence2          = $('.sequence2'),
+            sequence_top        = 0,
+            sequence_height     = 0,
+            sequence_triggered  = false,
+            sequence_passed     = false,
+            panel_height        = window.outerHeight < 800 ? 800 : window.outerHeight,
+            panels              = [],
+            panel_tops          = [],
+            panel_idx           = 0;
+
+        function parallaxAllTheThings(e) {
+
+            // Scroll into the sequence
+            if( window.scrollY > sequence_top && !sequence_triggered ) {
+                $sequence.find('.bg').css({ position: 'fixed', display: 'none' } );
+                $sequence.find('.panel').first().find('.bg').css('display', 'block');
+
+                sequence_triggered = true;
+            }
+
+            // Scroll back before the sequence
+            if( sequence_triggered && window.scrollY < sequence_top ) {
+                $sequence.find('.bg').css({ position: 'static', display: 'block' } );
+
+                sequence_triggered = false;
+            }
+
+            if( sequence_triggered && window.scrollY > (panel_tops[panel_idx] + (panel_height / 4)) ) {
+                if( panels[panel_idx+1] ) {
+                    panels[++panel_idx].find('.bg').fadeIn(500);
+                }
+            }
+
+            if( panel_idx > 0 ) {
+                if( window.scrollY < (panel_tops[panel_idx - 1] + (panel_height / 4)) ) {
+                    console.log( window.scrollY );
+                    panels[panel_idx].find('.bg').fadeOut(500);
+                    panel_idx--;
+                }
+            }
+
+
+            // Reaches the end
+            if( sequence_triggered && !sequence_passed && window.scrollY > (sequence_top + sequence_height - panel_height) ) {
+                $sequence.find('.bg').css({ position: 'absolute' } );
+
+                sequence_passed = true;
+            }
+
+            if( sequence_passed && window.scrollY < (sequence_top + sequence_height - panel_height) ) {
+                $sequence.find('.bg').css({ position: 'fixed' } );
+
+                sequence_passed = false;
+            }
+        }
+
+        function resizeAllTheThings() {
+            $('.start').css('height', panel_height);
+            $('.panel').css('height', panel_height);
+        }
+
+        function init() {
+            resizeAllTheThings();
+
+            $('.panel', $sequence).each(function() {
+                var $this = $(this);
+
+                panels.push( $this );
+                panel_tops.push( $this.offset().top )
+
+                sequence_height += $this.height();
+            })
+
+            $sequence.css('height', sequence_height);
+            sequence_top = $('.sequence').offset().top;
+        }
+
+        window.addEventListener('scroll', parallaxAllTheThings);
+        window.addEventListener('resize', resizeAllTheThings);
+        window.addEventListener('load', init);
+    </script>
+
+</body>
+</html>
+    

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pathways: Modal Carousel</title>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'helvetica neue', arial, sans-serif;
+            font-weight: 200;
+        }
+
+        .clearfix:before, .row:before,
+        .clearfix:after, .row:after {
+            content:" ";
+            display:table;
+        }
+
+        .clearfix:after, .row:after {
+            clear:both;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 10;
+        }
+
+        .empty {
+            padding: 250px 0;
+            text-align: center;
+        }
+
+        .inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* specific */
+
+        .carousel {
+            background: #efefef;
+            padding: 50px 0;
+        }
+
+        .pane {
+            background-color: green;
+            width:  960px;
+            height: 550px;
+            text-align: center;
+        }
+
+        .pane:nth-child(even) {
+            background-color: orange;
+        }
+
+        .pane img {
+            height: 100%;
+        }
+
+        .para {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            max-width: 300px;
+            padding: 10px;
+            color: #efefef;
+            background-color: rgba(0,0,0,0.5);
+            opacity: 0;
+            -webkit-transform: translate3d(0, 60px, 0);
+
+            -webkit-transition: all 0.5s ease;
+        }
+        .para.show {
+            opacity: 1;
+            -webkit-transform: translate3d(0, 0, 0);
+        }
+
+        .target {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            background-color: red;
+            padding: 10px 15px;
+            border-radius: 4px;
+            z-index: 5;
+            cursor: pointer;
+        }
+    </style>
+
+    <!-- Important Owl stylesheet -->
+    <link rel="stylesheet" href="/_assets/css/owl.carousel.css">
+     
+    <!-- Default Theme -->
+    <link rel="stylesheet" href="/_assets/css/owl.theme.css">
+</head>
+
+<body>
+
+    <main role="main" class="main">
+
+        <div class="target">x</div>
+
+        <div class="empty">
+            <p>empty!</p>
+            <p>scroll down</p>
+        </div>
+
+        <div class="carousel">
+    
+            <div class="inner">
+
+                <div class="carousel1">
+                    <div class="pane">
+                        <img src="/_assets/img/interactions/a.jpg">
+                    </div>
+                    <div class="pane" data-info="Paragraph for second slide">
+                        <img src="/_assets/img/interactions/b.jpg">
+                    </div>
+                    <div class="pane" data-info="Paragraph for third slide. Maybe some more text.">
+                        <img src="/_assets/img/interactions/c.jpg">
+                    </div>
+                    <div class="pane">
+                        <img src="/_assets/img/interactions/d.jpg">
+                    </div>
+                    <div class="pane">
+                        <img src="/_assets/img/interactions/e.jpg">
+                    </div>
+                    <div class="pane">
+                        <img src="/_assets/img/interactions/f.jpg">
+                    </div>
+                </div>
+
+            </div>
+    
+        </div>
+
+        <div class="empty">
+            <p>empty!</p>
+            <p>scroll up</p>
+        </div>
+        
+        
+    </main>
+
+    <script src="/_assets/js/lib/jquery-2.1.0.min.js"></script>
+    <script src="/_assets/js/lib/hammer.min.js"></script>
+
+    <script src="/_assets/js/lib/owl.carousel.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            var $window     = $(window),
+                $owl1       = $('.carousel1'),
+                $owl2       = $owl1.clone().removeClass('carousel1').addClass('carousel2'),
+                slideSpeed  = 1000,
+                slideIdx    = 0,
+                timeoutID;
+
+            $('.pane', $owl1).each(function() {
+                var $this = $(this);
+
+                if( $this.data('info') && $this.data('info') != '' ) {
+                    var $p = $('<div/>').addClass('para').html( $this.data('info') );
+                    $this.append($p);
+                }
+            })
+         
+            $owl1.owlCarousel({
+                navigation :        true, // Show next and prev buttons
+                slideSpeed :        slideSpeed,
+                paginationSpeed :   400,
+                singleItem:         true,
+                rewindNav:          false,
+                addClassActive:     true,
+
+                // Callbacks
+                afterMove: function() {
+                    clearTimeout(timeoutID);
+
+                    timeoutID = setTimeout(function() {
+                        $('.para', $owl1).removeClass('show');
+                        $('.owl-item.active .para', $owl1).addClass('show');
+                    }, slideSpeed);
+                },
+            });
+
+
+            $('.target').on('click', function() {
+                var $this       = $(this),
+                    $overlay    = $('<div/>').addClass('overlay').css('height', $window.height() ),
+                    $container  = $('<div/>').addClass('inner'),
+                    $carousel   = $owl2.clone();
+
+                $overlay.append($container);
+                $container.append($carousel);
+                $('body').append($overlay);
+
+                $carousel.owlCarousel({
+                    navigation :        true, // Show next and prev buttons
+                    slideSpeed :        slideSpeed,
+                    paginationSpeed :   400,
+                    singleItem:         true,
+                    rewindNav:          false,
+                    addClassActive:     true,
+
+                    // Callbacks
+                    afterMove: function() {
+                        clearTimeout(timeoutID);
+
+                        timeoutID = setTimeout(function() {
+                            $('.para', $carousel).removeClass('show');
+                            $('.owl-item.active .para', $carousel).addClass('show');
+                        }, slideSpeed);
+                    },
+                });
+
+                $('.pane', $carousel).each(function() {
+                    var $this = $(this);
+
+                    if( $this.data('info') && $this.data('info') != '' ) {
+                        var $p = $('<div/>').addClass('para').html( $this.data('info') );
+                        $this.append($p);
+                    }
+                })
+
+                $overlay.fadeIn(400, function() {
+                    $container.css({ position: 'absolute', top: ($window.height() / 2) - ($carousel.height() / 2), left: ($window.width() / 2) - (960 / 2) });
+                    $carousel.addClass('animate');
+                });
+
+                $overlay.on('click', function(e) {
+                    if( $(e.target).hasClass('overlay') ) {
+                        $overlay.fadeOut(250, function() { $(this).remove() })
+                    }
+                })
+
+                window.addEventListener('resize', function() { $overlay.css('height', $window.height() )}, false)
+
+                return false;
+            });
+        });
+    </script>
+
+</body>
+</html>
