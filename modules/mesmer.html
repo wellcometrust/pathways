@@ -6,7 +6,7 @@
 
     <!-- <meta name="viewport" content="width=device-width"> -->
 
-    <link rel="stylesheet" type="text/css" href="_assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/_assets/css/styles.css">
     
     <script type="text/javascript">
     WebFontConfig = { fontdeck: { id: '44200' } };
@@ -27,27 +27,46 @@
     <main role="main">
 
         <div class="start">
+            
             <div class="text">
                 <p class="scene-set">
-                    <span>Paris 1778</span>
-                    <b>The Story of Mesmer</b> 
+                    <span>1778</span>
+                    <span>Paris</span>
                 </p>
-                <h1>Can the mind heal the body?</h1>
-                <p class="intro-text">Mesmer arrives in Paris in 1778 and his ‘magnetic’ therapy is a sensation.</p>
-                <p class="intro-text">In his salons, or séances, a mysterious ‘magnetic fluid’, directed by magnetised rods, flows around the participants. They twitch, writhe, speak in tongues, collapse in violent convulsions. Patients are cured in their hundreds - of paralysis, epilepsy, toothache, stomach cramps, even lifelong blindness.  He can treat thirty people at a time in his baquets: tubs filled with iron filings and magnetised water in which patients sit and hold hands while the fluid circulates.</p>
+
+                <header>
+                    <b>The Story of Mesmer</b>
+                    <h1>Can the mind heal the body?</h1>
+                </header>
+
+                <p class="intro-text">Mesmer arrives in Paris in 1778 and his ‘magnetic’ therapy is a sensation.</p>                
+
             </div>
+
+        </div>
+
+        <div class="panel mesmers-salon">
+            
+            <div class="inner">
+                
+                <header>
+                    <h1>In Mesmer’s Salon</h1>
+                </header>
+
+                <p class="intro-text">In his salons, or séances, a mysterious ‘magnetic fluid’, directed by magnetised rods, flows around the participants. They twitch, writhe, speak in tongues, collapse in violent convulsions. Patients are cured in their hundreds - of paralysis, epilepsy, toothache, stomach cramps, even lifelong blindness.  He can treat thirty people at a time in his baquets: tubs filled with iron filings and magnetised water in which patients sit and hold hands while the fluid circulates.</p>
+
+            </div>
+
         </div>
 
         <!-- Title Screen -->
         <div class="title-screen">
-            <div class="black"></div>
 
             <audio class="audio-player" src="/_assets/audio/crystal.mp3"></audio>
             
             <div class="audio-icon"><div class="circles"></div></div>
 
             <div class="crop-zoom">
-                <p class="title">Mesmer’s Salon</p>
                 <div class="tap-target rod"     data-crop="rod"><div></div></div>
                 <div class="tap-target woman"   data-crop="woman"><div></div></div>
                 <div class="tap-target mesmer"  data-crop="mesmer"><div></div></div>
@@ -58,65 +77,101 @@
         <!-- Nonsense -->
         <div class="scrolly-nonsense">
 
-            <div class="inner">
-                <header>
-                    <h2>Animal Magnetism</h2>
-                    <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’</p>
-                </header>
+            <div class="panel">
                 
-                <div class="weird-man">
-                    <img src="/_assets/img/mesmer-dude.png">
+                <div class="inner clearfix">
+
+                    <div class="content">
+                        <img src="/_assets/img/mesmer/am-1.jpg">
+                    </div>
+
+                    <div class="fixed">
+                        <header>
+                            <h2>Animal Magnetism</h2>
+                        </header>
+                        
+                        <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’</p>
+
+                        <p>Animal magnetism was the energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
+                    </div>                    
+
                 </div>
 
-                <div class="image-block image1">
-                    <img src="/_assets/img/am-1.jpg">
-                    <p>Animal magnetism was the energy that permeated all living things. Mesmer  manipulated it by the power of his mind. He had learned to do this by passing his hands  over the bodies of his patients, to remove the blockages in  the magnetic fluid that were causing their illnesses.</p>
-                </div>
-                <div class="image-block image2">
-                    <img src="/_assets/img/am-2.jpg">
-                    <p>Then he had discovered that the fluid could be powerfully directed by magnets and metal rods, which attracted the fluid around the body.  He experimented with shaped magnets and found that each  had different effects.</p>
-                </div>
-                <div class="image-block image3">
-                    <img src="/_assets/img/am-3.jpg">
-                    <p>As his salons became more crowded, he invented the baquet:  a tub filled with iron filings and magnetised water, in which up to thirty patients could sit and hold hands while the fluid circulated through them.</p>
-                </div>
             </div>
 
-        </div>
+            <div class="panel">
+                
+                <div class="inner clearfix">
 
-        <!-- Modal -->
-        <div class="tile-modal">
+                    <div class="content">
+                        <img src="/_assets/img/mesmer/am-2.jpg">
+                    </div>
 
-            <header>
-                <h2>The Skeptics Respond</h2>
-            </header>
+                    <div class="fixed">
+                        <header>
+                            <h2>Then he discovered</h2>
+                        </header>
 
-            <div class="row">
-                <div class="cell"><div class="pane pane1" data-crop="img1"></div></div>
-                <!-- <div class="cell"><div class="pane pane2" data-crop="img2"></div></div> -->
-                <div class="cell"><div class="pane pane3" data-crop="img3"></div></div>
-                <div class="cell"><div class="pane pane4" data-crop="img4"></div></div>
+                        <p>that the fluid could be powerfully directed by magnets and metal rods, which attracted the fluid around the body. He experimented with shaped magnets and found that each had different effects.</p>
+                    </div>
+                
+                </div>
+
+            </div>
+
+            <div class="panel">
+
+                <div class="inner clearfix">
+
+                    <div class="content">
+                        <img src="/_assets/img/mesmer/am-3.jpg">
+                    </div>
+
+                    <div class="fixed">
+                        <header>
+                            <h2>As his salons</h2>
+                        </header>
+                        
+                        <p>became more crowded, he invented the baquet: a tub filled with iron filings and magnetised water, in which up to thirty patients could sit and hold hands while the fluid circulated through them.</p>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+            <div class="panel investigates">
+                
+                <div class="inner clearfix">
+                    <header>
+                        <h2>The Committee investigates</h2>
+                    </header>
+
+                    <div class="body">
+                        <p>In 1784 an Academy of Sciences committee is convened, led by Benjamin Franklin. They begin by trying magnetic cures on themselves. Some of them feel mild twinges, but nothing like the mass frenzy generated at Mesmer’s salons.</p>
+                        <p>They proceed to blind testing of patients, and discover that Mesmer’s subjects can’t tell when magnetised objects have been swapped with non-magnetised ones.</p>                        
+                    </div>
+
+                    <div class="body">
+                        <strong>They conclude:</strong>
+                    </div>
+
+                    <blockquote>
+                        <p>‘There is no proof of the existence of the Animal Magnetic fluid…the imagination without the aid of Magnetism can produce convulsions, but Magnetism without the imagination can produce nothing.’</p>
+                    </blockquote>
+
+                    <div class="video-popup">
+                        <a class="play-video talkinghead" data-width="640" data-height="360" title="" href="//www.youtube.com/embed/Zl6xwuBJVIY">Play Video</a>
+                        <p>Author Mike Jay interviewed about Mesmer’s legacy.</p>
+                    </div>
+                </div>
+
             </div>
 
         </div>
 
         <!-- Conclusion -->
         <div class="conclusion">
-            <header>
-                <h2>The Committee investigates</h2>
-            </header>
-
-            <div class="body">
-                <p>In 1784 an Academy of Sciences committee is convened, led by Benjamin Franklin. They begin by trying magnetic cures on themselves. Some of them feel mild twinges, but nothing like the mass frenzy generated at Mesmer’s salons.</p>
-                <p>They proceed to blind testing of patients, and discover that Mesmer’s subjects can’t tell when magnetised objects have been swapped with non-magnetised ones.</p>
-                <p><strong>They conclude:</strong>‘There is no proof of the existence of the Animal Magnetic fluid…the imagination without the aid of Magnetism can produce convulsions, but Magnetism without the imagination can produce nothing.’</p>
-            </div>
-
-            <div class="video-popup">
-                <a class="play-video talkinghead" data-width="640" data-height="360" title="" href="//www.youtube.com/embed/Zl6xwuBJVIY">Play Video</a>
-                <p>Author Mike Jay interviewed about Mesmer’s legacy.</p>
-            </div>
-
+            
             <div class="button"></div>
 
             <div class="gap">
@@ -135,10 +190,6 @@
                     </ul>
                 </div>
             </div><!-- end Gap -->
-        </div>
-
-        <div class="new-module">
-            <img src="/_assets/img/sigmund-innit.jpg"/>
         </div>
         
     </main>
@@ -160,7 +211,6 @@
 
             var $window = $(window),
                 $start  = $('.start'),
-                $black  = $('.black'),
                 $text   = $start.find('.text').first(),
                 scrollY = 0,
                 unit    = 1 / window.outerHeight;
@@ -176,14 +226,11 @@
                     $text.css('-webkit-transform', 'translate3d(0,'+ -(scrollY / 2) +'px,0)');
                 else
                     $text.css('-webkit-transform', 'translate3d(0,0,0)');
-
-                if( scrollY > 0 ) {
-                    $black.css('opacity', 1 - (scrollY * unit));
-                }
             }
 
             function resizeAllTheThings() {
                 $('.start').css('height', $window.height());
+                $('.mesmers-salon').css('height', $window.height());
             }
         
 
@@ -191,7 +238,6 @@
 
             if( !supports_touch ) {
                 window.addEventListener('scroll', parallaxAllTheThings, false);
-                $black.css('opacity', 1);
             }
 
             window.addEventListener('resize', resizeAllTheThings, false);
@@ -244,7 +290,7 @@
             $('.tap-target').each(function() {
                 var $target = $(this),
                     key     = $target.data('crop'),
-                    image   = '/_assets/img/'+ db[key]['image'],
+                    image   = '/_assets/img/mesmer/'+ db[key]['image'],
                     text    = db[key]['text'],
                     img     = new Image();
 
@@ -343,141 +389,6 @@
 
     </script>
 
-    <!-- Scrolly Nonsense -->
-    <script>
-        function nonsense() {
-
-            new ScrollScene({triggerElement: ".weird-man", duration: 1200})
-                        .setPin(".weird-man")
-                        .offset(200)
-                        .addTo(controller);
-
-            $('.image-block').each(function() {
-                var $this   = $(this),
-                    $img    = $this.find('img').first(),
-                    $p      = $this.find('p').first();
-
-                $p.css({
-                    top: 10,
-                    left: ( $img.offset().left - $img.offsetParent().offset().left + $img.width() + 40 ),
-                    'text-align': 'left',
-                    opacity: 0,
-                    '-webkit-transform': 'translate3d(180px,280px,0)'
-                });
-
-                var tween = TweenMax.to($p, 0.5, {"opacity": "1", "-webkit-transform": "translate3d(0,0,0)"});
-
-                // build scene
-                new ScrollScene({triggerElement: $this, duration: 200})
-                            .setTween(tween)
-                            .offset(-50)
-                            .addTo(controller);
-            });
-        }
-
-        window.addEventListener('load', nonsense, false);
-    </script>
-
-    <!-- Tile Modal -->
-    <script>
-
-        function panes() {
-
-            // Tap targets
-            $('.pane').each(function() {
-                var $target         = $(this),
-                    key             = $target.data('crop'),
-                    image           = '/_assets/img/'+ db[key]['image'],
-                    img             = new Image,
-                    target_height   = $target.height(),
-                    ratio;
-
-                img.src = image;
-
-                img.onload = function() {
-                    ratio = img.width / img.height;
-                }
-
-                // Set up the tap on the target.
-                Hammer( $target.get(0) ).on('tap', function(e) {
-                    e.gesture.preventDefault();
-
-                    var $popup,
-                        $image_crop,
-                        $overlay;
-
-                    // create popup in memory
-                    $popup      = $('<div/>').addClass('popup');
-                    $image_crop = $(img).addClass('image-crop');
-
-                    $popup.append( $image_crop );
-
-                    $overlay = $('<div/>').addClass('overlay').css('height', $(window).height() );
-
-                    $overlay.append($popup);
-                    $('body').append( $overlay );
-
-                    // depress the main image into the page a bit.
-                    $target.addClass('depress');
-
-                    // place the image in the center of the target.
-                    var small_width = (target_height - 10) * ratio;
-                    $image_crop.css( { top: ($target.offset().top - window.scrollY) + 10, left: ($target.offset().left + ($target.width() / 2) - (small_width / 2)), height: target_height - 10 } );
-
-                    $overlay.show();
-
-                    var width   = 'auto',
-                        height  = 'auto';
-
-                    if( window.innerWidth < 900 ) {
-                        width = '40%';
-                    }
-                    else {
-                        height = $(window).height() - 60;
-                    }
-
-                    var c_width = parseInt( height * ratio );
-
-                    $image_crop.animate({
-                        top:    15,
-                        left:   ($(window).width() / 2) - (c_width / 2),
-                        width:  width,
-                        height: height,
-                        opacity: 1
-                    }, 500, 'swing', function() {
-                        $overlay.css('background-color', 'rgba(0,0,0,0.8)');
-                    });
-
-                    $overlay.on('click', function() {
-                        $overlay.get(0).addEventListener('transitionend', function() {
-                           $(this).remove();
-                       }, false);
-                        $overlay.css('opacity', 0);
-                        $target.removeClass('depress');
-                    });
-
-                    window.addEventListener('resize', function() {
-                        $overlay.css('height', $(window).height() );
-                        
-                        if( window.innerWidth < 900 ) {
-                            $image_crop.css('height', 'auto');
-                            $image_crop.css('width',  '40%');
-                        }
-                        else {
-                            $image_crop.css('width', 'auto');
-                            $image_crop.css('height', $(window).height() - 60 );
-                        }
-                    }, false);
-
-                });
-            });
-        
-        }
-
-        window.addEventListener('load', panes, false);
-
-    </script>
-
     <!-- Library layer -->
     <script>
         var state = 'closed';
@@ -492,7 +403,7 @@
 
         $(document).ready(function() {
 
-            $('.conclusion').on('click', '.play-video', function() {
+            $('.investigates').on('click', '.play-video', function() {
 
                 var $this       = $(this),
                     $window     = $(window),

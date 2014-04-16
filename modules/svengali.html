@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="en"> 
+<head>
+    <meta charset="utf-8"> 
+    <title>Pathways: The Mind</title>
+
+    <style type="text/css">
+        /* generic */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-size: 100%;
+            font-family: 'helvetica neue', arial, sans-serif;
+            color: #333;
+        }
+
+        .clearfix:before, .row:before,
+        .clearfix:after, .row:after {
+            content:" ";
+            display:table;
+        }
+
+        .clearfix:after, .row:after {
+            clear:both;
+        }
+
+        /* specific */
+        .start {
+            background: url('/_assets/img/mesmer-med.jpg');
+            background-attachment: fixed;
+            background-size: 100%;
+        }
+
+        .end {
+            background-color: #ccc;
+        }
+
+        .start, .end {
+            min-height: 600px;
+        }
+
+        .sequence:after, .sequence2:after {
+            content: "";
+            clear: left;
+            display: block;
+        }
+
+        .panel {
+            position: relative;
+            min-height: 600px;
+            color: #333;
+        }
+
+        .bg-container {
+            height: 100%;
+        }
+
+        .bg {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .bg img {
+            width: 100%;
+        }
+
+        .sequence .scroll-content {
+            position: absolute;
+            top: 50%;
+            left: 15%;
+            background-color: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        /* Second style of sequence */
+        .sequence2 {
+            position: relative;
+        }
+
+        .sequence2 .scroll-content {
+            position: absolute;
+            top: 50%;
+            right: 5%;
+        }
+
+        .sequence2 .content {
+            width: 35%;
+            padding-left: 5%;
+        }
+
+        .sequence2 .panel-content {
+            top: 10%;
+            left: 5%;
+            color: #fff;
+            text-shadow: 1px 1px 0 #333;
+            width: 35%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <main role="main">
+
+        <div class="start">
+            
+        </div>
+
+        <div class="sequence">
+            
+            <div class="panel">
+                <div class="bg-container">
+                    <div class="bg">
+                        <img src="/_assets/img/interactions/a.jpg">
+                    </div>
+                </div>
+
+                <div class="scroll-content text">
+                    <p>Paragraph of text here</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="bg-container">
+                    <div class="bg">
+                        <img src="/_assets/img/interactions/b.jpg">
+                    </div>
+                </div>
+
+                <div class="scroll-content text">
+                    <p>Paragraph of text here</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="bg-container">
+                    <div class="bg">
+                        <img src="/_assets/img/interactions/c.jpg">
+                    </div>
+                </div>
+
+                <div class="scroll-content img">
+                    <p>Paragraph of text here</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="bg-container">
+                    <div class="bg">
+                        <img src="/_assets/img/interactions/d.jpg">
+                    </div>
+                </div>
+
+                <div class="scroll-content img">
+                    <p>Paragraph of text here</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="sequence2">
+
+            <div class="bg-container">
+                <div class="bg placekitten"></div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-container">
+                    <div class="panel-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+                
+                <div class="scroll-content img">
+                    <img src="/_assets/img/interactions/e.jpg">
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-container">
+                    <div class="panel-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+
+                <div class="scroll-content img">
+                    <img src="/_assets/img/interactions/f.jpg">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="end">
+            
+        </div>
+
+    </main>
+
+    <script src="/_assets/js/lib/jquery-2.1.0.min.js"></script>
+    <script src="/_assets/js/lib/hammer.min.js"></script>
+    
+    <script>
+
+        var $window             = $(window),
+            panel_height        = window.outerHeight < 800 ? 800 : window.outerHeight,
+            
+            $sequence           = $('.sequence'),
+            sequence_top        = 0,
+            sequence_height     = 0,
+            sequence_triggered  = false,
+            sequence_passed     = false,
+            panels              = [],
+            panel_tops          = [],
+            panel_idx           = 0,
+
+            $sequence2          = $('.sequence2'),
+            sequence_top2       = 0,
+            sequence_height2    = 0,
+            sequence_triggered2 = false,
+            sequence_passed2    = false,
+            panels2             = [],
+            panel_tops2         = [],
+            panel_idx2          = 0,
+
+            lastScrollY         = 0,
+            ticking             = false;
+
+        /**
+         * Callback for our scroll event - just
+         * keeps track of the last scroll value
+         */
+        function onScroll() {
+            lastScrollY = window.scrollY;
+            requestTick();
+        }
+
+        /**
+         * Calls rAF if it's not already
+         * been done already
+         */
+        function requestTick() {
+            if(!ticking) {
+                requestAnimationFrame(parallaxAllTheThings);
+                ticking = true;
+            }
+        }
+
+
+        function parallaxAllTheThings(e) {
+
+            // Scroll into the sequence
+            if( lastScrollY > sequence_top && !sequence_triggered ) {
+                $sequence.find('.bg').css({ position: 'fixed', opacity: 0 } );
+                $sequence.find('.panel').first().find('.bg').css('opacity', 1);
+
+                sequence_triggered = true;
+            }
+
+            // Scroll back before the sequence
+            if( sequence_triggered && lastScrollY < sequence_top ) {
+                $sequence.find('.bg').css({ position: 'static', display: 'block' } );
+
+                sequence_triggered = false;
+            }
+
+            // Keep track of which panel we’re in
+            if( sequence_triggered && lastScrollY > (panel_tops[panel_idx] + (panel_height / 4)) ) {
+                if( panels[panel_idx+1] ) {
+                    // fade in the next panel based on scroll distance of the previous panel to the top.
+                    var unit    = 1 / (panel_height / 4),
+                        delta   = lastScrollY - (panel_tops[panel_idx] + (panel_height / 4)),
+                        opacity = unit * delta;
+
+                    panels[panel_idx+1].find('.bg').css( 'opacity', opacity );
+
+                    if( opacity >= 1 ) {
+                        opacity = 1;
+                        panel_idx++;
+                    }
+
+                }
+            }
+
+            // A little simpler going backward. Just check that the scroll is below the previous threshold and if so, drop the panel index back one
+            // so it triggers the previous opacity calculations.
+            if( panel_idx > 0 ) {
+                if( lastScrollY < (panel_tops[panel_idx] + (panel_height / 4)) ) {
+                    panel_idx--;
+                }
+            }
+
+
+            // Reaches the end
+            if( sequence_triggered && !sequence_passed && lastScrollY > (sequence_top + sequence_height - panel_height) ) {
+                $sequence.find('.bg').css({ position: 'absolute' } );
+
+                sequence_passed = true;
+            }
+
+            if( sequence_passed && lastScrollY < (sequence_top + sequence_height - panel_height) ) {
+                $sequence.find('.bg').css({ position: 'fixed' } );
+
+                sequence_passed = false;
+            }
+
+
+            /*
+                Sequence 2
+            */
+
+            if( lastScrollY > sequence_top2 ) {
+                $sequence2.find('.bg').css({ position: 'fixed' } );
+
+                sequence_triggered2 = true;
+            }
+
+            // Scroll back before the sequence
+            if( lastScrollY < sequence_top2 ) {
+                $sequence2.find('.bg').css({ position: 'absolute' } );
+            }
+
+            // Keep track of which panel we’re in
+            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] + (panel_height / 4)) ) {
+                panels2[panel_idx2].find('.panel-content').fadeIn(500);
+            }
+
+            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] + (panel_height / 4) + 400) ) {
+                panels2[panel_idx2++].find('.panel-content').fadeOut(500);
+            }
+
+            // allow further rAFs to be called
+            ticking = false;
+        }
+
+        function resizeAllTheThings() {
+            $('.start').css('height', panel_height);
+            $('.panel').css('height', panel_height);
+        }
+
+        function init() {
+            resizeAllTheThings();
+
+            $('.panel', $sequence).each(function() {
+                var $this = $(this);
+
+                panels.push( $this );
+                panel_tops.push( $this.offset().top )
+
+                sequence_height += $this.height();
+            });
+
+            $('.panel', $sequence2).each(function() {
+                var $this = $(this);
+
+                panels2.push( $this );
+                panel_tops2.push( $this.offset().top )
+
+                sequence_height2 += $this.height();
+            });
+
+            $sequence.css('height', sequence_height);
+            sequence_top    = $('.sequence').offset().top;
+            sequence_top2   = $('.sequence2').offset().top;
+
+            $sequence2.find('.panel-content').css({ position: 'fixed', display: 'none' } );
+
+            $('.placekitten').each(function() {
+                var $img = $('<img/>').attr('src', 'http://placekitten.com/960/800');
+                $(this).html($img);
+            })
+        }
+
+        window.addEventListener('scroll', onScroll);
+        window.addEventListener('resize', resizeAllTheThings);
+        window.addEventListener('load', init);
+    </script>
+
+</body>
+</html>
+    

@@ -1,5 +1,3 @@
-/* fonts */
-@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic|Open+Sans:400,700);
 
 /*font-family: 'Garamond', Times, serif;
 font-family: 'Open Sans', sans-serif;*/
@@ -8,34 +6,23 @@ font-family: 'Open Sans', sans-serif;*/
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-size: 16px;
-    font-family: 'Open Sans', 'Segoe UI', 'helvetica neue', arial, sans-serif;
-    font-weight: 400;
-    color: #333;
-    line-height:1.618rem;
+    font-family:    'Museo sans', 'helvetica neue', arial, sans-serif;
+    font-size:      100%;
+    font-weight:    400;
+    color:          #333;
+    line-height:    1.4;
 }
 
 
 h1 {
     font-family: 'Garamond', Times, serif;
-    font-size: 5.89rem;
     font-weight: 100;
-    margin: 2rem 0;
-    line-height:3.854rem;
-}
-
-h1 b {
-    font-family: 'Garamond', Times, serif;
-    font-size: 4.236rem;
-    display: block;
-    color: #cdc7bf;
 }
 
 h2, h3, h4, h5, h6 {
     font-family: 'Garamond', Times, serif;
-    font-size: 4.236rem;
     font-weight: 100;
-    margin-bottom: 4.236rem;
+    margin-bottom: 1em;
 }
 
 iframe {
@@ -56,16 +43,12 @@ iframe {
 /* specific */
 
 [role="main"] {
-    /*background: url('/_assets/img/mesmer-med.jpg')no-repeat;
-    background-attachment: fixed;
-    background-size: 100%;*/
     overflow: hidden;
 }
 
 
-
 .start {
-    background: url('/_assets/img/mesmer-bkg.jpg') 50% 50% no-repeat;
+    background: url('/_assets/img/mesmer/mesmer-1.jpg') 50% 50% no-repeat;
     background-size: cover;
     position: relative;
     background-color: #ccc;
@@ -78,8 +61,7 @@ iframe {
     font-size: 1.2rem; 
     color: rgba(255,255,255,0.7);
     position: relative;
-    padding-bottom: 4rem;
-    border-bottom: 1px solid rgba(255,255,255, 0.4);
+    padding-bottom: 5em;
 }
 .start .scene-set:before {
     content: '';
@@ -103,17 +85,23 @@ iframe {
 
 .start .text {
     position: absolute;
-    top: 4rem;
+    top: 2rem;
     left: 5%;
     color: #fff;
     width: 85%;
 }
 
 .start .text h1 {
-    margin: 7rem 0 0 0;
+    margin: 0.3em 0 0 0;
     line-height: 1;
 }
 
+.start h1 b {
+    font-family: 'Garamond', Times, serif;
+    font-size: 4.236rem;
+    display: block;
+    color: #cdc7bf;
+}
 
 .start .text .intro-text { 
     width: 60%;
@@ -121,10 +109,21 @@ iframe {
 }
 
 
+.mesmers-salon {
+    background: url('/_assets/img/mesmer/mesmer-2.jpg')no-repeat;
+    color: #efefef;
+}
+
+.mesmers-salon .inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 20%;
+}
+
 
 .title-screen {
     position: relative;
-    background: url('/_assets/img/mesmer-med.jpg')no-repeat;
+    background: url('/_assets/img/mesmer/mesmer-med.jpg')no-repeat;
     background-size: cover;
     height: 800px;
 }
@@ -142,12 +141,12 @@ iframe {
     width: 100%;
     color: #fff;
     text-align: center;
-    font-size: 4.236rem;
+    font-size: 2.236rem;
     font-family: 'Garamond', Times, serif;
 }
 
 .tile-modal{
-    background: url('/_assets/img/debunk-bkg.jpg') 50% 50% no-repeat;
+    background: url('/_assets/img/mesmer/debunk-bkg.jpg') 50% 50% no-repeat;
     background-size: cover;
     box-shadow:inset 0 -4px 6px 1px rgba(0,0,0,.5);
 }
@@ -322,8 +321,7 @@ iframe {
     Scrolly Nonsense
 **/
 .scrolly-nonsense {
-    /*background: #0d0d13 url('/_assets/img/animal-magnetism-bkg.jpg') 50% 50% no-repeat;*/
-    background: rgba(0,0,0,0.8);
+    background: #0d0d13 url('/_assets/img/mesmer/mesmer-4.jpg') fixed 50% 50% no-repeat;
     background-size: cover;
     padding: 40px 0;
     color: #fff;
@@ -331,133 +329,94 @@ iframe {
 }
 
 .scrolly-nonsense .inner {
+    position: relative;
     max-width: 1260px;
     margin: 0 auto;
-    position: relative;
 }
 
-.scrolly-nonsense header {
-    text-align: center;
-    padding: 4.236rem;
+.scrolly-nonsense .fixed {
+    width: 40%;
 }
 
-.scrolly-nonsense .image-block {
-    position: relative;
-    text-align: center;
-    padding: 15px 0;
-    margin-bottom: 60px;
+.scrolly-nonsense .content {
+    float: right;
+    width: 50%;
 }
-
-.scrolly-nonsense .image-block p {
-    position: absolute;
-    color: #fff;
-}
-
-.weird-man {
-    position: absolute;
-    left:0px;
-}
-
-
-/**
-    Tile modal
-**/
-.tile-modal {
-    background-color: #94897a;
-    padding: 200px 12%;
-}
-.tile-modal h2 {
-    color: #fff;
-    text-align: center;
-}
-.tile-modal .cell {
-    float: left;
-    width: 33%;
-    height: 250px;
-    text-align: center;
-    
-    -webkit-perspective: 800;
-    -webkit-perspective-origin: 50% 50%;
-}
-
-.tile-modal .pane {
-    display: inline-block;
-    width: 250px;
-}
-
-
-.image-crop {
-    opacity: 0;
-    position: absolute;
-    z-index: 15;
-}
-.image-crop.animate {
-    -webkit-transition: all 0.3s ease;
-}
-
-.pane {
-    height: 250px;
-    /*background-position: 50% 50%;*/
-    background-repeat: no-repeat;
-    /*background-size: cover;*/
-    box-shadow: 0 0 5px 1px rgba(0,0,0,0.4);
-
-    -webkit-transform-style: preserve-3d;
-    -webkit-transition: all 0.1s ease;
-}
-.pane:hover {
-    opacity: 0.7;
-}
-.pane1 { background-image: url('/_assets/img/debunk1.jpg'); }
-.pane2 { background-image: url('/_assets/img/debunk2.jpg'); }
-.pane3 { background-image: url('/_assets/img/debunk3.jpg'); }
-.pane4 { background-image: url('/_assets/img/debunk4.jpg'); }
 
 
 /**
     Library Layer
 **/
-.conclusion {
-    background: #fff url('/_assets/img/mesmer-conclusion-bkg.jpg') top right no-repeat; 
-    position: relative;
-    height: 1200px;
+.investigates {
+    position: relative;    
+    height: 800px;
 }
 
-.conclusion header {
-    padding: 1.5rem;
+.investigates .inner {
+    border-top: 1px solid #ccc;
+    max-width:  1024px;
+    margin:     2em auto;
+    padding:    1.5em;
 }
-.conclusion h2 {
+
+.investigates header {
+    text-align: center;
+    margin:     1em 0;
+    padding:    1.5em;
+}
+.investigates h2 {
     line-height: 1;
     margin: 2rem 0;
 }
 
-.conclusion .body {
-    margin-left: 1.5rem;
+.investigates .body {
+    margin: 0 auto;
     width: 50%;
 }
 
-.conclusion .video-popup {
+.investigates blockquote {
+    border-top:     1px solid #ccc;
+    border-bottom:  1px solid #ccc;
+    width:      50%;
+    padding:    1em 0;
+    margin:     1em auto;
+}
+
+.investigates blockquote p {
+    width:  80%;
+    margin: 0 auto;
+}
+
+.investigates .video-popup {
     margin-top: 8rem;
     text-align: center;
 }
-.conclusion .video-popup a {
+.investigates .video-popup a {
     display: block;
+    color: #fff;
 }
 
-.talkinghead {
+.investigates .talkinghead {
     background: url('/_assets/img/icon-talkinghead.svg') 50% 0 no-repeat;
     background-size: 70px;
     text-align: center;
     padding-top: 80px;
 }
 
+/** Conclusion/Library layer */
+
+.conclusion {
+    background-color: #515965;
+    padding: 1em 0 2.5em 0;
+}
+
 .conclusion .button {
-    position: relative;
+    position:   relative;
     background: url('/_assets/img/plus.png') 50% 50% no-repeat; 
-    width:          50px;
-    height:         49px;
-    margin:         4rem 0 0 1.5rem;
-    z-index: 15;
+    width:      50px;
+    height:     49px;
+    margin:     0 0 0 1.5rem;
+    z-index:    15;
 
     -webkit-transition: -webkit-transform 1s ease;
 }
@@ -491,7 +450,3 @@ iframe {
     color: #fff;
 }
 
-.new-module img {
-    display: block;
-    width: 100%;
-}

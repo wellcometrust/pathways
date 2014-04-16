@@ -1,0 +1,63 @@
+
+.start {
+    background: url('/_assets/img/mesmer/mesmer-1.jpg') 50% 50% no-repeat;
+    background-size: cover;
+    position: relative;
+    background-color: #ccc;
+    z-index: 10;
+
+    .scene-set {
+        font-family: 'Garamond', Times, serif;
+        font-style: italic;
+        font-size: 1.2rem; 
+        color: rgba(255,255,255,0.7);
+        position: relative;
+        padding-bottom: 5em;
+    }
+
+    .scene-set:before {
+        content: '';
+        position: absolute;
+        background:url('/_assets/img/icon-module.svg')no-repeat;
+        height: 24px;
+        width: 21px;
+        left:-32px;
+    }
+
+    .scene-set b {
+        display: block;
+        font-family: "Museo Sans 300", 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-weight:300;
+        font-style:normal; 
+        font-size: 2rem;
+        color: #fff;
+        line-height: 1.3;
+        letter-spacing: .1rem;
+        text-transform: uppercase;
+    }
+
+    .text {
+        position: absolute;
+        top: 2rem;
+        left: 5%;
+        color: #fff;
+        width: 85%;
+    }
+    
+    h1 {
+        margin: 0.3em 0 0 0;
+        line-height: 1;
+    }
+
+    h1 b {
+        font-family: 'Garamond', Times, serif;
+        font-size: 4.236rem;
+        display: block;
+        color: #cdc7bf;
+    }
+    
+    .intro-text { 
+        width: 60%;
+        margin: 1.618rem 0;
+    }
+}
