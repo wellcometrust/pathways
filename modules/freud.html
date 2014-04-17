@@ -4,35 +4,20 @@
     <meta charset="utf-8"> 
     <title>Pathways: The Mind</title>
 
+    <link rel="stylesheet" type="text/css" href="/_assets/build/css/main.css">
+
     <style type="text/css">
-        /* generic */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-size: 100%;
-            font-family: 'helvetica neue', arial, sans-serif;
-            color: #333;
-        }
-
-        .clearfix:before, .row:before,
-        .clearfix:after, .row:after {
-            content:" ";
-            display:table;
-        }
-
-        .clearfix:after, .row:after {
-            clear:both;
+        
+        .inner {
+            max-width: 1024px;
+            margin: 0 auto;
         }
 
         /* specific */
         .start {
-            background: url('/_assets/img/mesmer-med.jpg');
+            background: url('/_assets/img/freud/freud-1.jpg');
             background-attachment: fixed;
             background-size: 100%;
-        }
-
-        .end {
-            background-color: #ccc;
         }
 
         .start, .end {
@@ -61,9 +46,17 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
+            z-index: 30;
         }
         .bg img {
             width: 100%;
+        }
+
+        .subconcious .bg {
+            position: relative;
+            top: -352px;
+            overflow: visible;
+            z-index: 20;
         }
 
         .sequence .scroll-content {
@@ -74,6 +67,7 @@
             color: #fff;
             padding: 15px;
             border-radius: 4px;
+            z-index: 40;
         }
 
         /* Second style of sequence */
@@ -83,8 +77,9 @@
 
         .sequence2 .scroll-content {
             position: absolute;
-            top: 50%;
+            top: 10%;
             right: 5%;
+            z-index: 40;
         }
 
         .sequence2 .content {
@@ -98,6 +93,11 @@
             color: #fff;
             text-shadow: 1px 1px 0 #333;
             width: 35%;
+            z-index: 40;
+        }
+
+        .end {
+            color: #fff;
         }
 
     </style>
@@ -108,55 +108,77 @@
 
         <div class="start">
             
+            <div class="text">
+                <p class="scene-set">
+                    <span>Chapter 6</span>
+                    <span>Freud, Breuer & Anna O</span>
+                </p>
+
+                <header>
+                    <h1>Can the mind really cure the body?</h1>
+                </header>
+
+                <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>  
+
+            </div>
+
         </div>
 
         <div class="sequence">
             
-            <div class="panel">
+            <div class="panel subconcious">
                 <div class="bg-container">
                     <div class="bg">
-                        <img src="/_assets/img/interactions/a.jpg">
+                        <img src="/_assets/img/freud/freud-2.png">
                     </div>
                 </div>
 
                 <div class="scroll-content text">
-                    <p>Paragraph of text here</p>
+                    <header>
+                        <h1>What lies in the subconcious?</h1>
+                    </header>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="bg-container">
                     <div class="bg">
-                        <img src="/_assets/img/interactions/b.jpg">
+                        <img src="/_assets/img/freud/freud-6.jpg">
                     </div>
                 </div>
 
                 <div class="scroll-content text">
-                    <p>Paragraph of text here</p>
+                    <header>
+                        <h1>The curious case of Anna O</h1>
+                    </header>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="bg-container">
                     <div class="bg">
-                        <img src="/_assets/img/interactions/c.jpg">
+                        <img src="/_assets/img/freud/freud-3.jpg">
                     </div>
                 </div>
 
-                <div class="scroll-content img">
-                    <p>Paragraph of text here</p>
-                </div>
-            </div>
+                <div class="scroll-content text">
+                    <header>
+                        <h1>Split Personality</h1>
+                    </header>
 
-            <div class="panel">
-                <div class="bg-container">
-                    <div class="bg">
-                        <img src="/_assets/img/interactions/d.jpg">
-                    </div>
-                </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
 
-                <div class="scroll-content img">
-                    <p>Paragraph of text here</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
                 </div>
             </div>
 
@@ -165,35 +187,28 @@
         <div class="sequence2">
 
             <div class="bg-container">
-                <div class="bg placekitten"></div>
+                <div class="bg">
+                    <img src="/_assets/img/freud/freud-4.png">
+                </div>
             </div>
             
-            <div class="panel">
+            <div class="panel clearfix">
                 <div class="panel-container">
-                    <div class="panel-content">
+                    <div class="scroll-content">
+                        <header>
+                            <h1>Freud and Breuer</h1>
+                        </header>
+
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        tempor incididunt ut labore et dolore magna aliqua.</p>
                     </div>
-                </div>
-                
-                <div class="scroll-content img">
-                    <img src="/_assets/img/interactions/e.jpg">
                 </div>
             </div>
 
-            <div class="panel">
+            <div class="panel clearfix">
                 <div class="panel-container">
                     <div class="panel-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
                     </div>
                 </div>
 
@@ -202,10 +217,45 @@
                 </div>
             </div>
 
+            <div class="panel end">
+                
+                <div class="inner clearfix">
+
+                    <div class="body">
+                        <p>Braid announces that there is no longer any need to believe in animal magnetism, occult powers or vital energies.</p>
+                    </div>
+
+                    <div class="video-popup">
+                        <a class="play-video talkinghead" data-width="640" data-height="360" title="" href="//www.youtube.com/embed/Zl6xwuBJVIY">Play Video</a>
+                        <p>Author Mike Jay interviewed about Mesmer’s legacy.</p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="end">
+        <!-- Library Layer -->
+        <div class="library-layer">
             
+            <div class="button"></div>
+
+            <div class="gap">
+                <div class="inner clearfix">
+                    <ul>
+                        <li><a href="#">Stuff!</a></li>
+                        <li><a href="#">Help me!</a></li>
+                        CHRONOLOGY 
+                    </ul>
+
+                    <ul>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1700 A Guide to Magnetic Cures</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1780 Mesmer’s First Manual</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1792 Mesmer’s Second Manual</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1980 History of Animal Magnetism</a></li>
+                    </ul>
+                </div>
+            </div><!-- end Gap -->
         </div>
 
     </main>
@@ -272,7 +322,7 @@
 
             // Scroll back before the sequence
             if( sequence_triggered && lastScrollY < sequence_top ) {
-                $sequence.find('.bg').css({ position: 'static', display: 'block' } );
+                $sequence.find('.bg').css({ position: 'relative', display: 'block' } );
 
                 sequence_triggered = false;
             }
@@ -334,11 +384,11 @@
             }
 
             // Keep track of which panel we’re in
-            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] + (panel_height / 4)) ) {
+            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] - panel_height) ) {
                 panels2[panel_idx2].find('.panel-content').fadeIn(500);
             }
 
-            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] + (panel_height / 4) + 400) ) {
+            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] - panel_height + 400) ) {
                 panels2[panel_idx2++].find('.panel-content').fadeOut(500);
             }
 
@@ -377,11 +427,6 @@
             sequence_top2   = $('.sequence2').offset().top;
 
             $sequence2.find('.panel-content').css({ position: 'fixed', display: 'none' } );
-
-            $('.placekitten').each(function() {
-                var $img = $('<img/>').attr('src', 'http://placekitten.com/960/800');
-                $(this).html($img);
-            })
         }
 
         window.addEventListener('scroll', onScroll);
@@ -391,4 +436,3 @@
 
 </body>
 </html>
-    

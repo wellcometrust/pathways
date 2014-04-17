@@ -4,35 +4,20 @@
     <meta charset="utf-8"> 
     <title>Pathways: The Mind</title>
 
+    <link rel="stylesheet" type="text/css" href="/_assets/build/css/main.css">
+
     <style type="text/css">
-        /* generic */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-size: 100%;
-            font-family: 'helvetica neue', arial, sans-serif;
-            color: #333;
-        }
-
-        .clearfix:before, .row:before,
-        .clearfix:after, .row:after {
-            content:" ";
-            display:table;
-        }
-
-        .clearfix:after, .row:after {
-            clear:both;
+        
+        .inner {
+            max-width: 1024px;
+            margin: 0 auto;
         }
 
         /* specific */
         .start {
-            background: url('/_assets/img/mesmer-med.jpg');
+            background: url('/_assets/img/svengali/svengali-1.jpg');
             background-attachment: fixed;
             background-size: 100%;
-        }
-
-        .end {
-            background-color: #ccc;
         }
 
         .start, .end {
@@ -83,7 +68,7 @@
 
         .sequence2 .scroll-content {
             position: absolute;
-            top: 50%;
+            top: 10%;
             right: 5%;
         }
 
@@ -100,6 +85,10 @@
             width: 35%;
         }
 
+        .end {
+            color: #fff;
+        }
+
     </style>
 </head>
 <body>
@@ -108,6 +97,23 @@
 
         <div class="start">
             
+            <div class="text">
+                <p class="scene-set">
+                    <span>1894</span>
+                    <span>Paris</span>
+                </p>
+
+                <header>
+                    <b>Svengali</b>
+                    <h1>Can you control the minds of others?</h1>
+                </header>
+
+                <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>  
+
+            </div>
+
         </div>
 
         <div class="sequence">
@@ -115,48 +121,18 @@
             <div class="panel">
                 <div class="bg-container">
                     <div class="bg">
-                        <img src="/_assets/img/interactions/a.jpg">
+                        <img src="/_assets/img/svengali/svengali-2.jpg">
                     </div>
                 </div>
 
                 <div class="scroll-content text">
-                    <p>Paragraph of text here</p>
-                </div>
-            </div>
+                    <header>
+                        <h1>These questions</h1>
+                    </header>
 
-            <div class="panel">
-                <div class="bg-container">
-                    <div class="bg">
-                        <img src="/_assets/img/interactions/b.jpg">
-                    </div>
-                </div>
-
-                <div class="scroll-content text">
-                    <p>Paragraph of text here</p>
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="bg-container">
-                    <div class="bg">
-                        <img src="/_assets/img/interactions/c.jpg">
-                    </div>
-                </div>
-
-                <div class="scroll-content img">
-                    <p>Paragraph of text here</p>
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="bg-container">
-                    <div class="bg">
-                        <img src="/_assets/img/interactions/d.jpg">
-                    </div>
-                </div>
-
-                <div class="scroll-content img">
-                    <p>Paragraph of text here</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
                 </div>
             </div>
 
@@ -165,18 +141,22 @@
         <div class="sequence2">
 
             <div class="bg-container">
-                <div class="bg placekitten"></div>
+                <div class="bg">
+                    <img src="/_assets/img/svengali/svengali-3.jpg">
+                </div>
             </div>
             
-            <div class="panel">
+            <div class="panel clearfix">
                 <div class="panel-container">
                     <div class="panel-content">
+                        <header>
+                            <h1>Trilby</h1>
+                        </header>
+
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        consequat.</p>
                     </div>
                 </div>
                 
@@ -185,27 +165,114 @@
                 </div>
             </div>
 
-            <div class="panel">
+            <div class="panel clearfix">
                 <div class="panel-container">
                     <div class="panel-content">
+                        <header>
+                            <h1>Trilby</h1>
+                        </header>
+
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        consequat.</p>
                     </div>
                 </div>
-
+                
                 <div class="scroll-content img">
                     <img src="/_assets/img/interactions/f.jpg">
                 </div>
             </div>
 
+            <div class="panel clearfix">
+                <div class="panel-container">
+                    <div class="panel-content">
+                        <header>
+                            <h1>She becomes a huge star</h1>
+                        </header>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.</p>
+                    </div>
+                </div>
+                
+                <div class="scroll-content img">
+                    <img src="/_assets/img/interactions/b.jpg">
+                </div>
+            </div>
+
+            <div class="panel clearfix">
+                <div class="panel-container">
+                    <div class="panel-content">
+                        <header>
+                            <h1>The novel reflects</h1>
+                        </header>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.</p>
+                    </div>
+                </div>
+                
+                <div class="scroll-content img">
+                    <img src="/_assets/img/interactions/a.jpg">
+                </div>
+            </div>
+
+            <div class="panel clearfix">
+                <div class="panel-container">
+                    <div class="panel-content">
+                        <p>At her trial, expert witnesses present different opinions about the power of hypnosis: can it be used to make someone commit murder against their will or without their knowledge?</p>
+                    </div>
+                </div>
+                
+                <div class="scroll-content img">
+                    <img src="/_assets/img/interactions/e.jpg">
+                </div>
+            </div>
+
+            <div class="panel end">
+                
+                <div class="inner clearfix">
+
+                    <div class="body">
+                        <p>Braid announces that there is no longer any need to believe in animal magnetism, occult powers or vital energies.</p>
+                    </div>
+
+                    <div class="video-popup">
+                        <a class="play-video talkinghead" data-width="640" data-height="360" title="" href="//www.youtube.com/embed/Zl6xwuBJVIY">Play Video</a>
+                        <p>Author Mike Jay interviewed about Mesmer’s legacy.</p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="end">
+        <!-- Library Layer -->
+        <div class="library-layer">
             
+            <div class="button"></div>
+
+            <div class="gap">
+                <div class="inner clearfix">
+                    <ul>
+                        <li><a href="#">Stuff!</a></li>
+                        <li><a href="#">Help me!</a></li>
+                        CHRONOLOGY 
+                    </ul>
+
+                    <ul>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1700 A Guide to Magnetic Cures</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1780 Mesmer’s First Manual</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1792 Mesmer’s Second Manual</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1980 History of Animal Magnetism</a></li>
+                    </ul>
+                </div>
+            </div><!-- end Gap -->
         </div>
 
     </main>
@@ -334,11 +401,11 @@
             }
 
             // Keep track of which panel we’re in
-            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] + (panel_height / 4)) ) {
+            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] - panel_height) ) {
                 panels2[panel_idx2].find('.panel-content').fadeIn(500);
             }
 
-            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] + (panel_height / 4) + 400) ) {
+            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] - panel_height + 400) ) {
                 panels2[panel_idx2++].find('.panel-content').fadeOut(500);
             }
 
@@ -377,11 +444,6 @@
             sequence_top2   = $('.sequence2').offset().top;
 
             $sequence2.find('.panel-content').css({ position: 'fixed', display: 'none' } );
-
-            $('.placekitten').each(function() {
-                var $img = $('<img/>').attr('src', 'http://placekitten.com/960/800');
-                $(this).html($img);
-            })
         }
 
         window.addEventListener('scroll', onScroll);
@@ -391,4 +453,3 @@
 
 </body>
 </html>
-    

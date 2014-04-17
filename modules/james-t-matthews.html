@@ -4,35 +4,28 @@
     <meta charset="utf-8"> 
     <title>Pathways: The Mind</title>
 
+    <link rel="stylesheet" type="text/css" href="/_assets/build/css/main.css">
+
     <style type="text/css">
-        /* generic */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-size: 100%;
-            font-family: 'helvetica neue', arial, sans-serif;
-            color: #333;
-        }
-
-        .clearfix:before, .row:before,
-        .clearfix:after, .row:after {
-            content:" ";
-            display:table;
-        }
-
-        .clearfix:after, .row:after {
-            clear:both;
+        
+        .inner {
+            max-width: 1024px;
+            margin: 0 auto;
         }
 
         /* specific */
         .start {
-            background: url('/_assets/img/james-t-matthews/jtm-1.jpg');
-            background-attachment: fixed;
-            background-size: 100%;
+            /*background: url('/_assets/img/james-t-matthews/jtm-1.jpg');*/
+            /*background-attachment: fixed;*/
+            /*background-size: 100%;*/
+            z-index: -2;
         }
 
-        .end {
-            background-color: #ccc;
+        .start .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -5;
         }
 
         .start, .end {
@@ -63,6 +56,7 @@
             overflow: hidden;
         }
         .bg img {
+            display: block;
             width: 100%;
         }
 
@@ -83,7 +77,7 @@
 
         .sequence2 .scroll-content {
             position: absolute;
-            top: 50%;
+            top: 10%;
             right: 5%;
         }
 
@@ -100,6 +94,10 @@
             width: 35%;
         }
 
+        .end {
+            color: #fff;
+        }
+
     </style>
 </head>
 <body>
@@ -109,6 +107,10 @@
         <div class="start">
             
             <div class="text">
+                <div class="bg">
+                    <img src="/_assets/img/james-t-matthews/jtm-1.jpg">
+                </div>
+
                 <p class="scene-set">
                     <span>1810</span>
                     <span>London</span>
@@ -132,43 +134,21 @@
             <div class="panel">
                 <div class="bg-container">
                     <div class="bg">
-                        <img src="/_assets/img/interactions/a.jpg">
+                        <img src="/_assets/img/james-t-matthews/jtm-2.jpg">
                     </div>
                 </div>
 
                 <div class="scroll-content text">
-                    <p>Paragraph of text here</p>
+                    <header>
+                        <h1>The Air Loom</h1>
+                    </header>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="bg-container">
                     <div class="bg">
-                        <img src="/_assets/img/interactions/b.jpg">
-                    </div>
-                </div>
-
-                <div class="scroll-content text">
-                    <p>Paragraph of text here</p>
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="bg-container">
-                    <div class="bg">
-                        <img src="/_assets/img/interactions/c.jpg">
-                    </div>
-                </div>
-
-                <div class="scroll-content img">
-                    <p>Paragraph of text here</p>
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="bg-container">
-                    <div class="bg">
-                        <img src="/_assets/img/interactions/d.jpg">
+                        <img src="/_assets/img/james-t-matthews/jtm-3.jpg">
                     </div>
                 </div>
 
@@ -182,10 +162,12 @@
         <div class="sequence2">
 
             <div class="bg-container">
-                <div class="bg placekitten"></div>
+                <div class="bg">
+                    <img src="/_assets/img/james-t-matthews/jtm-4.jpg">
+                </div>
             </div>
             
-            <div class="panel">
+            <div class="panel clearfix">
                 <div class="panel-container">
                     <div class="panel-content">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -202,7 +184,7 @@
                 </div>
             </div>
 
-            <div class="panel">
+            <div class="panel clearfix">
                 <div class="panel-container">
                     <div class="panel-content">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -219,10 +201,48 @@
                 </div>
             </div>
 
+            <div class="panel end">
+                
+                <div class="inner clearfix">
+                    <header>
+                        <h2>The notion of the machine is firmly planted in our culture</h2>
+                    </header>
+
+                    <div class="body">
+                        <p>Braid announces that there is no longer any need to believe in animal magnetism, occult powers or vital energies.</p>
+                    </div>
+
+                    <div class="video-popup">
+                        <a class="play-video talkinghead" data-width="640" data-height="360" title="" href="//www.youtube.com/embed/Zl6xwuBJVIY">Play Video</a>
+                        <p>Author Mike Jay interviewed about Mesmer’s legacy.</p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="end">
+        <!-- Library Layer -->
+        <div class="library-layer">
             
+            <div class="button"></div>
+
+            <div class="gap">
+                <div class="inner clearfix">
+                    <ul>
+                        <li><a href="#">Stuff!</a></li>
+                        <li><a href="#">Help me!</a></li>
+                        CHRONOLOGY 
+                    </ul>
+
+                    <ul>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1700 A Guide to Magnetic Cures</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1780 Mesmer’s First Manual</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1792 Mesmer’s Second Manual</a></li>
+                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1980 History of Animal Magnetism</a></li>
+                    </ul>
+                </div>
+            </div><!-- end Gap -->
         </div>
 
     </main>
@@ -281,6 +301,7 @@
 
             // Scroll into the sequence
             if( lastScrollY > sequence_top && !sequence_triggered ) {
+                // $('.start').find('.bg').css('display', 'none');
                 $sequence.find('.bg').css({ position: 'fixed', opacity: 0 } );
                 $sequence.find('.panel').first().find('.bg').css('opacity', 1);
 
@@ -289,6 +310,7 @@
 
             // Scroll back before the sequence
             if( sequence_triggered && lastScrollY < sequence_top ) {
+                // $('.start').find('.bg').css('display', 'block');
                 $sequence.find('.bg').css({ position: 'static', display: 'block' } );
 
                 sequence_triggered = false;
@@ -339,24 +361,40 @@
                 Sequence 2
             */
 
-            if( lastScrollY > sequence_top2 ) {
-                $sequence2.find('.bg').css({ position: 'fixed' } );
+            if( lastScrollY > sequence_top2 && !sequence_triggered2 ) {
+                $sequence2.find('.bg').css({ position: 'fixed', top: 0, bottom: 'auto' } );
 
                 sequence_triggered2 = true;
             }
 
             // Scroll back before the sequence
-            if( lastScrollY < sequence_top2 ) {
+            if( sequence_triggered2 && lastScrollY < sequence_top2 ) {
                 $sequence2.find('.bg').css({ position: 'absolute' } );
+
+                sequence_triggered2 = false;
             }
 
             // Keep track of which panel we’re in
-            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] + (panel_height / 4)) ) {
+            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] - panel_height) ) {
                 panels2[panel_idx2].find('.panel-content').fadeIn(500);
             }
 
-            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] + (panel_height / 4) + 400) ) {
+            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] - panel_height + 400) ) {
                 panels2[panel_idx2++].find('.panel-content').fadeOut(500);
+            }
+
+
+            // Reaches the end
+            if( sequence_triggered2 && !sequence_passed2 && lastScrollY > (sequence_top2 + sequence_height2 - panel_height) ) {
+                $sequence2.find('.bg').css({ position: 'absolute', top: 'auto', bottom: 0, height: 'auto' } );
+
+                sequence_passed2 = true;
+            }
+
+            if( sequence_passed2 && lastScrollY < (sequence_top2 + sequence_height2 - panel_height) ) {
+                $sequence2.find('.bg').css({ position: 'fixed', top: 0, bottom: 'auto' } );
+
+                sequence_passed2 = false;
             }
 
             // allow further rAFs to be called
@@ -394,11 +432,6 @@
             sequence_top2   = $('.sequence2').offset().top;
 
             $sequence2.find('.panel-content').css({ position: 'fixed', display: 'none' } );
-
-            $('.placekitten').each(function() {
-                var $img = $('<img/>').attr('src', 'http://placekitten.com/960/800');
-                $(this).html($img);
-            })
         }
 
         window.addEventListener('scroll', onScroll);

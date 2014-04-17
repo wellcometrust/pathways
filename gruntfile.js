@@ -7,16 +7,16 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 src: [
-                    'assets/js/*.js', // All JS in the libs folder
+                    '_assets/js/*.js', // All JS in the libs folder
                 ],
-                dest: 'assets/build/js/production.js',
+                dest: '_assets/build/js/production.js',
             }
         },
 
         uglify: {
             build: {
-                src: 'assets/build/js/production.js',
-                dest: 'assets/build/js/production.min.js'
+                src: '_assets/build/js/production.js',
+                dest: '_assets/build/js/production.min.js'
             }
         },
 
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
-                    'assets/build/css/main.css': 'assets/css/main.scss'
+                    '_assets/build/css/main.css': '_assets/scss/main.scss'
                 }
             } 
         },
@@ -36,11 +36,11 @@ module.exports = function(grunt) {
                 livereload: true,
             },
             css: {
-                files: ['assets/css/*.scss'],
+                files: ['_assets/scss/**/*.scss'],
                 tasks: ['css']
             },
             js: {
-                files: ['assets/js/*.js'],
+                files: ['_assets/js/*.js'],
                 tasks: ['js'],
                 options: {
                     spawn: false,

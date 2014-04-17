@@ -1,0 +1,47 @@
+
+/** Library layer */
+
+.library-layer {
+    background-color: #515965;
+    padding: 1em 0 2.5em 0;
+}
+
+.library-layer .button {
+    position:   relative;
+    background: url('/_assets/img/plus.png') 50% 50% no-repeat; 
+    width:      50px;
+    height:     49px;
+    margin:     0 0 0 1.5rem;
+    z-index:    15;
+
+    -webkit-transition: -webkit-transform 1s ease;
+}
+
+.library-layer .button.animate {
+    -webkit-transform: rotate(405deg);
+}
+
+.library-layer .gap {
+    background: #515965;
+    box-shadow: inset 0 4px 8px 2px rgba(0,0,0,0.6);
+    height: 0;
+    width:  100%;
+    overflow: hidden;
+    margin-top: -25px;
+    -webkit-transition: height 0.4s ease;
+}
+
+.library-layer .gap .inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+.library-layer .gap ul {
+    float: left;
+    width: 50%;
+}
+
+.library-layer .gap a {
+    color: #fff;
+}
