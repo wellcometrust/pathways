@@ -1,0 +1,71 @@
+
+.start, .end {
+    min-height: 600px;
+}
+
+.sequence:after, .sequence2:after {
+    content: "";
+    clear: left;
+    display: block;
+}
+
+.panel {
+    position: relative;
+    min-height: 600px;
+}
+
+.bg-container {
+    height: 100%;
+}
+
+.bg {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    img {
+        display: block;
+        width: 100%;
+    }
+}
+
+.sequence .scroll-content {
+    position: absolute;
+    top: 40%;
+    color: #fff;
+    width: 100%;
+    padding: 15px;
+    border-radius: 4px;
+
+    .content {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+/* Second style of sequence */
+.sequence2 {
+    position: relative;
+
+    .scroll-content {
+        position: absolute;
+        top: 10%;
+        right: 5%;
+    }
+
+    .content {
+        width: 35%;
+        padding-left: 5%;
+    }
+
+    .panel-content {
+        top: 10%;
+        left: 5%;
+        color: #fff;
+        text-shadow: 1px 1px 0 #333;
+        width: 35%;
+    }
+}
+
