@@ -6,14 +6,85 @@
 
     <!-- <meta name="viewport" content="width=device-width"> -->
 
+    <link rel="stylesheet" type="text/css" href="/_assets/build/css/main.css">
     <link rel="stylesheet" type="text/css" href="/_assets/css/styles.css">
 
     <style type="text/css">
         .start {
-            background:         url('/_assets/img/mesmer/mesmer-1.jpg') 50% 50% no-repeat;
-            background-size:    cover;
-            background-color:   #ccc;
+            background: url('/_assets/img/mesmer/mesmer-1.jpg');
+            background-attachment: fixed;
+            background-size: 100%;
         }
+
+        .sequence:after, .sequence2:after {
+            content: "";
+            clear: left;
+            display: block;
+        }
+
+        .panel {
+            position: relative;
+            min-height: 600px;
+        }
+
+        .bg-container {
+            height: 100%;
+        }
+
+        .bg {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .bg img {
+            width: 100%;
+        }
+
+        .sequence .scroll-content {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            color: #fff;
+            padding: 15px;
+            margin: 0 auto;
+            border-radius: 4px;
+        }
+
+        .sequence .scroll-content .content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Second style of sequence */
+        .sequence2 {
+            position: relative;
+        }
+
+        .sequence2 .scroll-content {
+            position: absolute;
+            top: 10%;
+            right: 5%;
+        }
+
+        .sequence2 .content {
+            width: 35%;
+            padding-left: 5%;
+        }
+
+        .sequence2 .panel-content {
+            top: 10%;
+            left: 5%;
+            color: #fff;
+            text-shadow: 1px 1px 0 #333;
+            width: 35%;
+        }
+
+        .end {
+            color: #fff;
+        }
+
     </style>
     
     <script type="text/javascript">
@@ -53,69 +124,87 @@
 
         </div>
 
-        <div class="panel mesmers-salon">
+        <div class="sequence">
             
-            <div class="inner">
-                
-                <header>
-                    <h1>In Mesmer’s Salon</h1>
-                </header>
+            <div class="panel mesmers-salon">
 
-                <p class="intro-text">In his salons, or séances, a mysterious ‘magnetic fluid’, directed by magnetised rods, flows around the participants. They twitch, writhe, speak in tongues, collapse in violent convulsions. Patients are cured in their hundreds - of paralysis, epilepsy, toothache, stomach cramps, even lifelong blindness.  He can treat thirty people at a time in his baquets: tubs filled with iron filings and magnetised water in which patients sit and hold hands while the fluid circulates.</p>
-
-            </div>
-
-        </div>
-
-        <!-- Title Screen -->
-        <div class="title-screen">
-
-            <audio class="audio-player" src="/_assets/audio/crystal.mp3"></audio>
-            
-            <div class="audio-icon"><div class="circles"></div></div>
-
-            <div class="crop-zoom">
-                <div class="tap-target rod"     data-crop="rod"><div></div></div>
-                <div class="tap-target woman"   data-crop="woman"><div></div></div>
-                <div class="tap-target mesmer"  data-crop="mesmer"><div></div></div>
-            </div>
-
-        </div>
-
-        <!-- Nonsense -->
-        <div class="scrolly-nonsense">
-
-            <div class="panel">
-                
-                <div class="inner clearfix">
-
-                    <div class="content">
-                        <img src="/_assets/img/mesmer/am-1.jpg">
+                <div class="bg-container">
+                    <div class="bg">
+                        <img src="/_assets/img/mesmer/mesmer-2.jpg">
                     </div>
-
-                    <div class="fixed">
+                </div>
+                
+                <div class="scroll-content text">
+                    
+                    <div class="content">
                         <header>
-                            <h2>Animal Magnetism</h2>
+                            <h1>In Mesmer’s Salon</h1>
                         </header>
-                        
-                        <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’</p>
 
-                        <p>Animal magnetism was the energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
-                    </div>                    
+                        <p class="intro-text">In his salons, or séances, a mysterious ‘magnetic fluid’, directed by magnetised rods, flows around the participants. They twitch, writhe, speak in tongues, collapse in violent convulsions. Patients are cured in their hundreds - of paralysis, epilepsy, toothache, stomach cramps, even lifelong blindness.  He can treat thirty people at a time in his baquets: tubs filled with iron filings and magnetised water in which patients sit and hold hands while the fluid circulates.</p>
+                    </div>
 
                 </div>
 
             </div>
 
-            <div class="panel">
-                
-                <div class="inner clearfix">
+            <div class="panel title-screen">
 
-                    <div class="content">
-                        <img src="/_assets/img/mesmer/am-2.jpg">
+                <div class="bg-container">
+                    <div class="bg">
+                        <img src="/_assets/img/mesmer/mesmer-3.jpg">
                     </div>
+                </div>
 
-                    <div class="fixed">
+                <audio class="audio-player" src="/_assets/audio/crystal.mp3"></audio>
+                
+                <div class="audio-icon"><div class="circles"></div></div>
+
+                <div class="crop-zoom">
+                    <div class="tap-target rod"     data-crop="rod"><div></div></div>
+                    <div class="tap-target woman"   data-crop="woman"><div></div></div>
+                    <div class="tap-target mesmer"  data-crop="mesmer"><div></div></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Nonsense -->
+        <div class="sequence2">
+
+            <div class="bg-container">
+                <div class="bg">
+                    <img src="/_assets/img/mesmer/mesmer-4.jpg">
+                </div>
+            </div>
+
+            <div class="panel tween clearfix">
+                
+                <div class="panel-container">
+
+                    <div class="panel-content">
+                        <header>
+                            <h2>Animal Magnetism</h2>
+                        </header>
+                        
+                        <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’</p>
+                        <p>Animal magnetism was the energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
+                    </div>                    
+
+                </div>
+
+                <div class="scroll-content">
+                    <img src="/_assets/img/mesmer/am-1.jpg">
+                </div>
+
+            </div>
+
+            <div class="panel tween clearfix">
+                
+                <div class="panel-container">
+
+                    <div class="panel-content">
                         <header>
                             <h2>Then he discovered</h2>
                         </header>
@@ -125,17 +214,17 @@
                 
                 </div>
 
+                <div class="scroll-content">
+                    <img src="/_assets/img/mesmer/am-2.jpg">
+                </div>
+
             </div>
 
-            <div class="panel">
+            <div class="panel tween clearfix">
 
-                <div class="inner clearfix">
+                <div class="panel-container">
 
-                    <div class="content">
-                        <img src="/_assets/img/mesmer/am-3.jpg">
-                    </div>
-
-                    <div class="fixed">
+                    <div class="panel-content">
                         <header>
                             <h2>As his salons</h2>
                         </header>
@@ -143,6 +232,10 @@
                         <p>became more crowded, he invented the baquet: a tub filled with iron filings and magnetised water, in which up to thirty patients could sit and hold hands while the fluid circulated through them.</p>
                     </div>
                     
+                </div>
+
+                <div class="scroll-content">
+                    <img src="/_assets/img/mesmer/am-3.jpg">
                 </div>
 
             </div>
@@ -210,8 +303,184 @@
     
     <script>
 
+        var $window             = $(window),
+            panel_height        = window.outerHeight < 800 ? 800 : window.outerHeight,
+            
+            $sequence           = $('.sequence'),
+            sequence_top        = 0,
+            sequence_height     = 0,
+            sequence_triggered  = false,
+            sequence_passed     = false,
+            panels              = [],
+            panel_tops          = [],
+            panel_idx           = 0,
+
+            $sequence2          = $('.sequence2'),
+            sequence_top2       = 0,
+            sequence_height2    = 0,
+            sequence_triggered2 = false,
+            sequence_passed2    = false,
+            panels2             = [],
+            panel_tops2         = [],
+            panel_idx2          = 0,
+
+            lastScrollY         = 0,
+            ticking             = false;
+
+
         var supports_touch = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch),
             controller;
+
+
+        /**
+         * Callback for our scroll event - just
+         * keeps track of the last scroll value
+         */
+        function onScroll() {
+            lastScrollY = window.scrollY;
+            requestTick();
+        }
+
+        /**
+         * Calls rAF if it's not already
+         * been done already
+         */
+        function requestTick() {
+            if(!ticking) {
+                requestAnimationFrame(parallax2);
+                ticking = true;
+            }
+        }
+
+
+        function parallax2(e) {
+
+            // Scroll into the sequence
+            if( lastScrollY > sequence_top && !sequence_triggered ) {
+                $sequence.find('.bg').css({ position: 'fixed', opacity: 0 } );
+                $sequence.find('.panel').first().find('.bg').css('opacity', 1);
+
+                sequence_triggered = true;
+            }
+
+            // Scroll back before the sequence
+            if( sequence_triggered && lastScrollY < sequence_top ) {
+                $sequence.find('.bg').css({ position: 'static', display: 'block' } );
+
+                sequence_triggered = false;
+            }
+
+            // Keep track of which panel we’re in
+            if( sequence_triggered && lastScrollY > (panel_tops[panel_idx] + (panel_height / 4)) ) {
+                if( panels[panel_idx+1] ) {
+                    // fade in the next panel based on scroll distance of the previous panel to the top.
+                    var unit    = 1 / (panel_height / 4),
+                        delta   = lastScrollY - (panel_tops[panel_idx] + (panel_height / 4)),
+                        opacity = unit * delta;
+
+                    panels[panel_idx+1].find('.bg').css( 'opacity', opacity );
+
+                    if( opacity >= 1 ) {
+                        opacity = 1;
+                        panel_idx++;
+                    }
+
+                }
+            }
+
+            // A little simpler going backward. Just check that the scroll is below the previous threshold and if so, drop the panel index back one
+            // so it triggers the previous opacity calculations.
+            if( panel_idx > 0 ) {
+                if( lastScrollY < (panel_tops[panel_idx] + (panel_height / 4)) ) {
+                    panel_idx--;
+                }
+            }
+
+
+            // Reaches the end
+            if( sequence_triggered && !sequence_passed && lastScrollY > (sequence_top + sequence_height - panel_height) ) {
+                $sequence.find('.bg').css({ position: 'absolute' } );
+
+                sequence_passed = true;
+            }
+
+            if( sequence_passed && lastScrollY < (sequence_top + sequence_height - panel_height) ) {
+                $sequence.find('.bg').css({ position: 'fixed' } );
+
+                sequence_passed = false;
+            }
+
+
+            /*
+                Sequence 2
+            */
+
+            if( lastScrollY > sequence_top2 ) {
+                $sequence2.find('.bg').css({ position: 'fixed' } );
+
+                sequence_triggered2 = true;
+            }
+
+            // Scroll back before the sequence
+            if( lastScrollY < sequence_top2 ) {
+                $sequence2.find('.bg').css({ position: 'absolute' } );
+            }
+
+            // Keep track of which panel we’re in
+            // if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] - panel_height) ) {
+            //     panels2[panel_idx2].find('.panel-content').fadeIn(500);
+            // }
+
+            // if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] - panel_height + 400) ) {
+            //     panels2[panel_idx2++].find('.panel-content').fadeOut(500);
+            // }
+
+            // allow further rAFs to be called
+            ticking = false;
+        }
+
+
+        function resizeAllTheThings() {
+            $('.start').css('height', panel_height);
+            $('.panel').css('height', panel_height);
+        }
+
+
+        function init() {
+            resizeAllTheThings();
+
+            $('.panel', $sequence).each(function() {
+                var $this = $(this);
+
+                panels.push( $this );
+                panel_tops.push( $this.offset().top )
+
+                sequence_height += $this.height();
+            });
+
+            $('.panel', $sequence2).each(function() {
+                var $this = $(this);
+
+                panels2.push( $this );
+                panel_tops2.push( $this.offset().top )
+
+                sequence_height2 += $this.height();
+            });
+
+            $sequence.css('height', sequence_height);
+            sequence_top    = $('.sequence').offset().top;
+            sequence_top2   = $('.sequence2').offset().top;
+
+            $sequence2.find('.panel-content').css({ position: 'fixed', opacity: 0 } );
+        }
+
+        window.addEventListener('scroll', onScroll);
+        window.addEventListener('resize', resizeAllTheThings);
+        window.addEventListener('load', init);
+
+
+
+
 
         $(document).ready(function() {
 
@@ -222,6 +491,20 @@
                 $text   = $start.find('.text').first(),
                 scrollY = 0,
                 unit    = 1 / window.outerHeight;
+
+            $('.sequence2 .tween').each(function() {
+                // console.log( $(this).find('.scroll-content').get(0) );
+                var tween   = TweenMax.to($(this).find('.panel-content').get(0), 0.5, {opacity: 1});
+                var tween2  = TweenMax.to($(this).find('.panel-content').get(0), 0.5, {opacity: 0});
+
+                new ScrollScene({ triggerElement: $(this).find('.scroll-content').get(0), offset: 250 })
+                        .setTween(tween)
+                        .addTo(controller);
+
+                new ScrollScene({ triggerElement: $(this).find('.scroll-content').get(0), offset: 550 })
+                        .setTween(tween2)
+                        .addTo(controller);
+            })
 
             function parallaxAllTheThings() {
                 scrollY = window.scrollY;
@@ -267,11 +550,9 @@
                 }
             });
         });
-    </script>
-
-    <!-- Crop zoom -->
-    <script>
+    
         
+        // Crop zoom
         $(document).ready(function() {
 
             var $image          = $('.crop-zoom'),
@@ -328,9 +609,6 @@
                     $overlay.append($popup);
                     $('body').append( $overlay );
 
-                    // depress the main image into the page a bit.
-                    $image.addClass('depress');
-
                     $image_crop.css( { top: ($target.offset().top - window.scrollY) + 10, left: $target.offset().left + 10, height: $target.height() - 10 } );
 
                     $overlay.show();
@@ -364,7 +642,6 @@
                     $overlay.on('click', function() {
                         this.addEventListener('transitionend', function() { $(this).remove() }, false);
                         $(this).css('opacity', 0);
-                        $image.removeClass('depress');
                     });
 
                     window.addEventListener('resize', function() {
@@ -395,10 +672,8 @@
 
         });
 
-    </script>
 
-    <!-- Library layer -->
-    <script>
+        // Library layer
         var state = 'closed';
 
         function positionCenter($elm) {
@@ -496,9 +771,7 @@
             });
         });
 
-    </script>
-
-    <script>
+    
         var db = {
             'rod': {
                 'image': 'rod-crop.jpg',

@@ -2,116 +2,11 @@
 /*font-family: 'Garamond', Times, serif;
 font-family: 'Open Sans', sans-serif;*/
 
-/* generic */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    font-family:    'Museo sans', 'helvetica neue', arial, sans-serif;
-    font-size:      100%;
-    font-weight:    400;
-    color:          #333;
-    line-height:    1.4;
-}
-
-
-h1 {
-    font-family: 'Garamond', Times, serif;
-    font-weight: 100;
-}
-
-h2, h3, h4, h5, h6 {
-    font-family: 'Garamond', Times, serif;
-    font-weight: 100;
-    margin-bottom: 1em;
-}
-
-iframe {
-    border: none;
-}
-
-
-.clearfix:before, .row:before,
-.clearfix:after, .row:after {
-    content:" ";
-    display:table;
-}
-
-.clearfix:after, .row:after {
-    clear:both;
-}
-
 /* specific */
 
-[role="main"] {
-    overflow: hidden;
-}
-
-
-.start {
-    background: url('/_assets/img/mesmer/mesmer-1.jpg') 50% 50% no-repeat;
-    background-size: cover;
-    position: relative;
-    background-color: #ccc;
-    z-index: 10;
-}
-
-.start .scene-set {
-    font-family: 'Garamond', Times, serif;
-    font-style: italic;
-    font-size: 1.2rem; 
-    color: rgba(255,255,255,0.7);
-    position: relative;
-    padding-bottom: 5em;
-}
-.start .scene-set:before {
-    content: '';
-    position: absolute;
-    background:url('/_assets/img/icon-module.svg')no-repeat;
-    height: 24px;
-    width: 21px;
-    left:-32px;
-}
-.start .scene-set b {
-    display: block;
-    font-family: "Museo Sans 300", 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    font-weight:300;
-    font-style:normal; 
-    font-size: 2rem;
-    color: #fff;
-    line-height: 1.3;
-    letter-spacing: .1rem;
-    text-transform: uppercase;
-}
-
-.start .text {
-    position: absolute;
-    top: 2rem;
-    left: 5%;
-    color: #fff;
-    width: 85%;
-}
-
-.start .text h1 {
-    margin: 0.3em 0 0 0;
-    line-height: 1;
-}
-
-.start h1 b {
-    font-family: 'Garamond', Times, serif;
-    font-size: 4.236rem;
-    display: block;
-    color: #cdc7bf;
-}
-
-.start .text .intro-text { 
-    width: 60%;
-    margin: 1.618rem 0;
-}
-
-
 .mesmers-salon {
-    background: url('/_assets/img/mesmer/mesmer-2.jpg')no-repeat;
-    color: #efefef;
+    /*background: url('/_assets/img/mesmer/mesmer-2.jpg') no-repeat;
+    color: #efefef;*/
 }
 
 .mesmers-salon .inner {
@@ -120,21 +15,6 @@ iframe {
     padding-top: 20%;
 }
 
-
-.title-screen {
-    position: relative;
-    background: url('/_assets/img/mesmer/mesmer-med.jpg')no-repeat;
-    background-size: cover;
-    height: 800px;
-}
-.title-screen .black {
-    position: absolute;
-    top: 0;
-    background-color: rgb(0,0,0);
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-}
 .title-screen p {
     position: absolute;
     top: 80px;
@@ -160,8 +40,8 @@ iframe {
 /**
     Audio
 **/
-.audio-icon {
-    position: fixed;
+/*.audio-icon {
+    position: absolute;
     top: 15px;
     right: 15px;
     width: 36px;
@@ -169,7 +49,6 @@ iframe {
     background: url('/_assets/img/play-sound.svg') 50% 50% no-repeat;
     background-size: 100%;
     border-radius: 4px;
-    /*opacity: 0.3;*/
     z-index: 5;
     -webkit-transition: opacity 0.3s ease;
 }
@@ -202,7 +81,7 @@ iframe {
         opacity: 0;
         -webkit-transform: scale(2);
     }
-}
+}*/
 
 
 /**
@@ -316,40 +195,13 @@ iframe {
     -moz-transform: translate3d(0, 0, 0);
 }
 
-
-/**
-    Scrolly Nonsense
-**/
-.scrolly-nonsense {
-    background: #0d0d13 url('/_assets/img/mesmer/mesmer-4.jpg') fixed 50% 50% no-repeat;
-    background-size: cover;
-    padding: 40px 0;
-    color: #fff;
-    overflow: hidden;
-}
-
-.scrolly-nonsense .inner {
-    position: relative;
-    max-width: 1260px;
-    margin: 0 auto;
-}
-
-.scrolly-nonsense .fixed {
-    width: 40%;
-}
-
-.scrolly-nonsense .content {
-    float: right;
-    width: 50%;
-}
-
-
 /**
     Library Layer
 **/
 .investigates {
     position: relative;    
     height: 800px;
+    color: #fff;
 }
 
 .investigates .inner {
