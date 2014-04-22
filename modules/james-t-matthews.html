@@ -4,7 +4,7 @@
     <meta charset="utf-8"> 
     <title>Pathways: The Mind</title>
 
-    <link rel="stylesheet" type="text/css" href="/_assets/build/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../_assets/build/css/main.css">
 
     <style type="text/css">
         
@@ -15,87 +15,61 @@
 
         /* specific */
         .start {
-            /*background: url('/_assets/img/james-t-matthews/jtm-1.jpg');*/
-            /*background-attachment: fixed;*/
-            /*background-size: 100%;*/
-            z-index: -2;
-        }
-
-        .start .bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -5;
-        }
-
-        .start, .end {
-            min-height: 600px;
-        }
-
-        .sequence:after, .sequence2:after {
-            content: "";
-            clear: left;
-            display: block;
-        }
-
-        .panel {
-            position: relative;
-            min-height: 600px;
-            color: #333;
-        }
-
-        .bg-container {
-            height: 100%;
-        }
-
-        .bg {
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        .bg img {
-            display: block;
-            width: 100%;
-        }
-
-        .sequence .scroll-content {
-            position: absolute;
-            top: 50%;
-            left: 15%;
-            background-color: rgba(0,0,0,0.8);
-            color: #fff;
-            padding: 15px;
-            border-radius: 4px;
-        }
-
-        /* Second style of sequence */
-        .sequence2 {
-            position: relative;
-        }
-
-        .sequence2 .scroll-content {
-            position: absolute;
-            top: 10%;
-            right: 5%;
-        }
-
-        .sequence2 .content {
-            width: 35%;
-            padding-left: 5%;
-        }
-
-        .sequence2 .panel-content {
-            top: 10%;
-            left: 5%;
-            color: #fff;
-            text-shadow: 1px 1px 0 #333;
-            width: 35%;
+            background: url('../_assets/img/james-t-matthews/jtm-1.jpg');
+            background-attachment: fixed;
+            background-size: 100%;
         }
 
         .end {
             color: #fff;
+        }
+
+        .end header {
+            text-align: center;
+            margin:     0 0 1em 0;
+            padding:    0.8em;
+        }
+        .end h2 {
+            font-size: 3rem;
+            line-height: 1;
+            margin: 0;
+        }
+
+
+        .end .body {
+            font-size: 0.9rem;
+            font-family: 'Garamond', Times, serif;
+            margin: 0 auto;
+            width: 50%;
+        }
+
+        .end .body p {
+            margin-bottom: 0.5em;
+        }
+
+        .end .video-popup {
+            margin-top: 8rem;
+            text-align: center;
+        }
+        .end .video-popup a {
+            display: block;
+            color: #fff;
+        }
+
+        .end .talkinghead {
+            background: url('../_assets/img/icon-talkinghead.svg') 50% 0 no-repeat;
+            background-size: 70px;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .air-loom .scroll-content {
+            left: 0;
+            width: 100%;
+        }
+
+        .air-loom h1 {
+            text-align: center;
         }
 
     </style>
@@ -107,23 +81,19 @@
         <div class="start">
             
             <div class="text">
-                <div class="bg">
-                    <img src="/_assets/img/james-t-matthews/jtm-1.jpg">
-                </div>
-
                 <p class="scene-set">
-                    <span>1810</span>
-                    <span>London</span>
+                    <span class="date">1810</span>
+                    <span class="location">London</span>
                 </p>
 
-                <header>
-                    <b>The Air Loom</b>
-                    <h1>Can a machine control the mind?</h1>
-                </header>
+                <div class="content">
+                    <header>
+                        <b>The Air Loom</b>
+                        <h1>Can a machine control the mind?</h1>
+                    </header>
 
-                <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>  
+                    <p class="intro-text">James Tilly Matthews reveals that his mind is being controlled by a gang of ‘magnetic spies’ and their secret machine, the Air Loom.</p>
+                </div>
 
             </div>
 
@@ -131,10 +101,11 @@
 
         <div class="sequence">
             
-            <div class="panel">
+            <div class="panel air-loom">
+
                 <div class="bg-container">
                     <div class="bg">
-                        <img src="/_assets/img/james-t-matthews/jtm-2.jpg">
+                        <img src="../_assets/img/james-t-matthews/jtm-2.jpg">
                     </div>
                 </div>
 
@@ -148,56 +119,50 @@
             <div class="panel">
                 <div class="bg-container">
                     <div class="bg">
-                        <img src="/_assets/img/james-t-matthews/jtm-3.jpg">
+                        <img src="../_assets/img/james-t-matthews/jtm-3.jpg">
                     </div>
                 </div>
 
-                <div class="scroll-content img">
-                    <p>Paragraph of text here</p>
+                <div class="scroll-content text">
+
+                    <div class="content">
+                        <header>
+                            <h1>The culture of a paranoid schizophrenic</h1>
+                        </header>
+
+                        <p>Inducing trance-like states, and presented himself as a fellow initiate into yogic powers of mind. He privately believed they were mumbo-jumbo, and had learned mesmerism from an English pamphlet.</p>
+                    </div>
+                    
                 </div>
             </div>
 
         </div>
 
+
+
         <div class="sequence2">
 
             <div class="bg-container">
                 <div class="bg">
-                    <img src="/_assets/img/james-t-matthews/jtm-4.jpg">
+                    <img src="../_assets/img/james-t-matthews/jtm-4.jpg">
                 </div>
             </div>
             
-            <div class="panel clearfix">
+            <div class="panel tween clearfix">
+
                 <div class="panel-container">
+
                     <div class="panel-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <header>
+                            <h1>The culture of a paranoid schizophrenic</h1>
+                        </header>
+
+                        <p>Inducing trance-like states, and presented himself as a fellow initiate into yogic powers of mind. He privately believed they were mumbo-jumbo, and had learned mesmerism from an English pamphlet.</p>
                     </div>
                 </div>
                 
                 <div class="scroll-content img">
-                    <img src="/_assets/img/interactions/e.jpg">
-                </div>
-            </div>
-
-            <div class="panel clearfix">
-                <div class="panel-container">
-                    <div class="panel-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                </div>
-
-                <div class="scroll-content img">
-                    <img src="/_assets/img/interactions/f.jpg">
+                    <img src="../_assets/img/interactions/e.jpg">
                 </div>
             </div>
 
@@ -209,7 +174,7 @@
                     </header>
 
                     <div class="body">
-                        <p>Braid announces that there is no longer any need to believe in animal magnetism, occult powers or vital energies.</p>
+                        <p>Braid announces that there is no longer any need to believe in animal magnetism, occult powers or vital energies. Trance states, and all the mysterious phenomena they generate, can be produced by the mind alone. He coins a new term for the process: hypnotism.</p>
                     </div>
 
                     <div class="video-popup">
@@ -247,196 +212,13 @@
 
     </main>
 
-    <script src="/_assets/js/lib/jquery-2.1.0.min.js"></script>
-    <script src="/_assets/js/lib/hammer.min.js"></script>
+    <script src="../_assets/js/lib/jquery-2.1.0.min.js"></script>
+    <script src="../_assets/js/lib/hammer.min.js"></script>
     
-    <script>
-
-        var $window             = $(window),
-            panel_height        = window.outerHeight < 800 ? 800 : window.outerHeight,
-            
-            $sequence           = $('.sequence'),
-            sequence_top        = 0,
-            sequence_height     = 0,
-            sequence_triggered  = false,
-            sequence_passed     = false,
-            panels              = [],
-            panel_tops          = [],
-            panel_idx           = 0,
-
-            $sequence2          = $('.sequence2'),
-            sequence_top2       = 0,
-            sequence_height2    = 0,
-            sequence_triggered2 = false,
-            sequence_passed2    = false,
-            panels2             = [],
-            panel_tops2         = [],
-            panel_idx2          = 0,
-
-            lastScrollY         = 0,
-            ticking             = false;
-
-        /**
-         * Callback for our scroll event - just
-         * keeps track of the last scroll value
-         */
-        function onScroll() {
-            lastScrollY = window.scrollY;
-            requestTick();
-        }
-
-        /**
-         * Calls rAF if it's not already
-         * been done already
-         */
-        function requestTick() {
-            if(!ticking) {
-                requestAnimationFrame(parallaxAllTheThings);
-                ticking = true;
-            }
-        }
-
-
-        function parallaxAllTheThings(e) {
-
-            // Scroll into the sequence
-            if( lastScrollY > sequence_top && !sequence_triggered ) {
-                // $('.start').find('.bg').css('display', 'none');
-                $sequence.find('.bg').css({ position: 'fixed', opacity: 0 } );
-                $sequence.find('.panel').first().find('.bg').css('opacity', 1);
-
-                sequence_triggered = true;
-            }
-
-            // Scroll back before the sequence
-            if( sequence_triggered && lastScrollY < sequence_top ) {
-                $sequence.find('.bg').css({ position: 'static', display: 'block' } );
-
-                sequence_triggered = false;
-            }
-
-            // Keep track of which panel we’re in
-            if( sequence_triggered && lastScrollY > (panel_tops[panel_idx] + (panel_height / 4)) ) {
-                if( panels[panel_idx+1] ) {
-                    // fade in the next panel based on scroll distance of the previous panel to the top.
-                    var unit    = 1 / (panel_height / 4),
-                        delta   = lastScrollY - (panel_tops[panel_idx] + (panel_height / 4)),
-                        opacity = unit * delta;
-
-                    panels[panel_idx+1].find('.bg').css( 'opacity', opacity );
-
-                    if( opacity >= 1 ) {
-                        opacity = 1;
-                        panel_idx++;
-                    }
-
-                }
-            }
-
-            // A little simpler going backward. Just check that the scroll is below the previous threshold and if so, drop the panel index back one
-            // so it triggers the previous opacity calculations.
-            if( panel_idx > 0 ) {
-                if( lastScrollY < (panel_tops[panel_idx] + (panel_height / 4)) ) {
-                    panel_idx--;
-                }
-            }
-
-
-            // Reaches the end
-            if( sequence_triggered && !sequence_passed && lastScrollY > (sequence_top + sequence_height - panel_height) ) {
-                $sequence.find('.bg').css({ position: 'absolute' } );
-
-                sequence_passed = true;
-            }
-
-            if( sequence_passed && lastScrollY < (sequence_top + sequence_height - panel_height) ) {
-                $sequence.find('.bg').css({ position: 'fixed' } );
-
-                sequence_passed = false;
-            }
-
-
-            /*
-                Sequence 2
-            */
-
-            if( lastScrollY > sequence_top2 && !sequence_triggered2 ) {
-                $sequence2.find('.bg').css({ position: 'fixed', top: 0, bottom: 'auto' } );
-
-                sequence_triggered2 = true;
-            }
-
-            // Scroll back before the sequence
-            if( sequence_triggered2 && lastScrollY < sequence_top2 ) {
-                $sequence2.find('.bg').css({ position: 'absolute' } );
-
-                sequence_triggered2 = false;
-            }
-
-            // Keep track of which panel we’re in
-            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] - panel_height) ) {
-                panels2[panel_idx2].find('.panel-content').fadeIn(500);
-            }
-
-            if( sequence_triggered2 && lastScrollY > (panel_tops2[panel_idx2] - panel_height + 400) ) {
-                panels2[panel_idx2++].find('.panel-content').fadeOut(500);
-            }
-
-
-            // Reaches the end
-            if( sequence_triggered2 && !sequence_passed2 && lastScrollY > (sequence_top2 + sequence_height2 - panel_height) ) {
-                $sequence2.find('.bg').css({ position: 'absolute', top: 'auto', bottom: 0, height: 'auto' } );
-
-                sequence_passed2 = true;
-            }
-
-            if( sequence_passed2 && lastScrollY < (sequence_top2 + sequence_height2 - panel_height) ) {
-                $sequence2.find('.bg').css({ position: 'fixed', top: 0, bottom: 'auto' } );
-
-                sequence_passed2 = false;
-            }
-
-            // allow further rAFs to be called
-            ticking = false;
-        }
-
-        function resizeAllTheThings() {
-            $('.start').css('height', panel_height);
-            $('.panel').css('height', panel_height);
-        }
-
-        function init() {
-            resizeAllTheThings();
-
-            $('.panel', $sequence).each(function() {
-                var $this = $(this);
-
-                panels.push( $this );
-                panel_tops.push( $this.offset().top )
-
-                sequence_height += $this.height();
-            });
-
-            $('.panel', $sequence2).each(function() {
-                var $this = $(this);
-
-                panels2.push( $this );
-                panel_tops2.push( $this.offset().top )
-
-                sequence_height2 += $this.height();
-            });
-
-            $sequence.css('height', sequence_height);
-            sequence_top    = $('.sequence').offset().top;
-            sequence_top2   = $('.sequence2').offset().top;
-
-            $sequence2.find('.panel-content').css({ position: 'fixed', display: 'none' } );
-        }
-
-        window.addEventListener('scroll', onScroll);
-        window.addEventListener('resize', resizeAllTheThings);
-        window.addEventListener('load', init);
-    </script>
+    <script src="../_assets/js/lib/greensock/TweenMax.min.js"></script>
+    <script src="../_assets/js/lib/jquery.scrollmagic.js"></script>
+    
+    <script src="../_assets/js/main.js"></script>
 
 </body>
 </html>
