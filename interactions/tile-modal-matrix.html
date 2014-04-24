@@ -70,10 +70,10 @@
             -webkit-transform-style: preserve-3d;
             -webkit-transition: all 0.1s ease;
         }
-        .pane1 { background-image: url('/_assets/img/1.jpg'); }
-        .pane2 { background-image: url('/_assets/img/2.jpg'); }
-        .pane3 { background-image: url('/_assets/img/3.jpg'); }
-        .pane4 { background-image: url('/_assets/img/4.jpg'); }
+        .pane1 { background-image: url('../_assets/img/mesmer/1.jpg'); }
+        .pane2 { background-image: url('../_assets/img/mesmer/2.jpg'); }
+        .pane3 { background-image: url('../_assets/img/mesmer/3.jpg'); }
+        .pane4 { background-image: url('../_assets/img/mesmer/4.jpg'); }
     </style>
 </head>
 <body>
@@ -99,10 +99,10 @@
         </section>
     </main>
 
-    <script src="/_assets/js/lib/jquery-2.1.0.min.js"></script>
-    <script src="/_assets/js/lib/hammer.min.js"></script>
+    <script src="../_assets/js/lib/jquery-2.1.0.min.js"></script>
+    <script src="../_assets/js/lib/hammer.min.js"></script>
 
-    <script src="/_assets/js/lib/gl-matrix-min.js"></script>
+    <script src="../_assets/js/lib/gl-matrix-min.js"></script>
     
     <script>
 
@@ -158,7 +158,7 @@
                 var $window         = $(window),
                     $target         = $(this),
                     key             = $target.data('crop'),
-                    image           = '/_assets/img/'+ db[key]['image'],
+                    image           = '../_assets/img/mesmer/'+ db[key]['image'],
                     img             = new Image(),
                     target_height   = $target.height(),
                     ratio           = 0,

@@ -30,7 +30,7 @@
 
         .image {
             position: relative;
-            background-image: url('/_assets/img/mesmer-med.jpg');
+            background-image: url('../_assets/img/mesmer/mesmer-med.jpg');
             background-position: 50% 50%;
             background-repeat: no-repeat;
             background-size: cover;
@@ -178,7 +178,7 @@
             $('.tap-target').each(function() {
                 var $target = $(this),
                     key     = $target.data('crop'),
-                    image   = '/_assets/img/'+ db[key]['image'],
+                    image   = '../_assets/img/mesmer/'+ db[key]['image'],
                     text    = db[key]['text'],
                     img     = new Image();
 
