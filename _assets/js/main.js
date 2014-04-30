@@ -1,8 +1,18 @@
 
+var Pathways = function() {
 
-var $window             = $(window),
-    panel_height        = window.outerHeight < 750 ? 750 : window.outerHeight,
+}
+
+
+var panel_height        = window.outerHeight < 750 ? 750 : window.outerHeight,
+    after_start         = false,
     
+    // Start
+    $start              = $('.start'),
+    $text               = $start.find('.content').first(),
+    unit                = 1 / panel_height,
+
+    // Sequences
     $sequence           = $('.sequence'),
     sequence_top        = 0,
     sequence_height     = 0,
@@ -24,14 +34,19 @@ var $window             = $(window),
     lastScrollY         = 0,
     ticking             = false,
 
-    $start  = $('.start'),
-    $text   = $start.find('.content').first(),
-    unit    = 1 / panel_height;
+    // Library layer
+    state               = 'closed',
+
+    // Event queues
+    scrollQueue         = new Array(),
+    resizeQueue         = new Array();
 
 
 var supports_touch = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch),
     controller;
 
+
+$start.css('height', panel_height);
 
 /**
  * Callback for our scroll event - just
@@ -142,17 +157,22 @@ function parallaxAllTheThings(e) {
     }
 
     // Reaches the end
-    if( sequence_triggered2 && !sequence_passed2 && lastScrollY > (sequence_top2 + sequence_height2 - panel_height) ) {
+    if( sequence_triggered2 && !sequence_passed2 && lastScrollY > (sequence_top2 + sequence_height2 - (panel_height - 30)) ) {
         $sequence2.find('.bg').css({ position: 'absolute', top: 'auto', bottom: 0, height: 'auto' } );
 
         sequence_passed2 = true;
     }
 
-    if( sequence_passed2 && lastScrollY < (sequence_top2 + sequence_height2 - panel_height) ) {
+    if( sequence_passed2 && lastScrollY < (sequence_top2 + sequence_height2 - (panel_height - 30)) ) {
         $sequence2.find('.bg').css({ position: 'fixed', top: 0, bottom: 'auto' } );
 
         sequence_passed2 = false;
     }
+
+    // Complete the scroll queue
+    scrollQueue.forEach(function(func) {
+        func();
+    });
 
     // allow further rAFs to be called
     ticking = false;
@@ -160,14 +180,28 @@ function parallaxAllTheThings(e) {
 
 
 function resizeAllTheThings() {
-    $start.css('height', panel_height);
+    panel_height = window.outerHeight < 750 ? 750 : window.outerHeight,
+
     $('.mesmers-salon').css('height', panel_height);
     $('.panel').css('height', panel_height);
 
+    $sequence.css('height', 'auto');
+}
+
+function positionCenter($elm) {
+    var width   = $elm.width(),
+        height  = $elm.height();
+
+    $elm.css({ position: 'absolute', top: (panel_height / 2) - (height / 2), left: (window.outerWidth / 2) - (width / 2) });
 }
 
 
 function init() {
+
+    // here be dragons.
+    if(supports_touch)
+        return;
+
     resizeAllTheThings();
 
     $('.panel', $sequence).each(function() {
@@ -195,9 +229,8 @@ function init() {
     $sequence2.find('.panel-content').css({ position: 'fixed', opacity: 0 } );
 }
 
-window.addEventListener('scroll', onScroll);
-window.addEventListener('resize', resizeAllTheThings);
-window.addEventListener('load', init);
+
+resizeQueue.push(resizeAllTheThings);
 
 
 
@@ -206,22 +239,29 @@ $(document).ready(function() {
     controller = new ScrollMagic();
 
     $('.sequence2 .tween').each(function() {
-        // console.log( $(this).find('.scroll-content').get(0) );
         var tween   = TweenMax.to($(this).find('.panel-content').get(0), 0.5, {opacity: 1});
         var tween2  = TweenMax.to($(this).find('.panel-content').get(0), 0.5, {opacity: 0});
 
-        new ScrollScene({ triggerElement: $(this).find('.scroll-content').get(0), offset: 250 })
+        new ScrollScene({
+                    triggerElement: $(this).find('.scroll-content').get(0),
+                    duration: 100,
+                    offset: 250
+                })
                 .setTween(tween)
                 .addTo(controller);
 
-        new ScrollScene({ triggerElement: $(this).find('.scroll-content').get(0), offset: 550 })
+        new ScrollScene({
+                    triggerElement: $(this).find('.scroll-content').get(0),
+                    duration: 100,
+                    offset: 550
+                })
                 .setTween(tween2)
                 .addTo(controller);
     })
 
-    window.addEventListener('resize', resizeAllTheThings, false);
-
-    /** Audio **/
+    /**
+        Audio
+    **/
     var $player     = document.querySelector('.audio-player'),
         playing     = false;
 
@@ -237,36 +277,54 @@ $(document).ready(function() {
             playing = true;
         }
     });
-});
 
 
-// Crop zoom
-$(document).ready(function() {
 
+    /*
+        Crop zoom
+    */
     if( $('.crop-zoom').length ) {
 
-        var $image          = $('.crop-zoom'),
-            image_top       = $image.offset().top,
-            image_height    = $(window).height();
+        $('.crop-zoom').css({'position': 'fixed', 'opacity': 0, 'z-index': 20});
+
+        var $elm            = $('.crop-zoom'),
+            image_top       = $elm.offset().top,
+            block_start     = $('.tap-block').offset().top - 200,
+            offset          = panel_height / 4,
+            image_height    = panel_height,
+            inview          = false,
+            hidden          = true;
 
         function onResize() {
-            $image.css({ width: window.outerWidth, height: window.outerHeight });
+            $elm.css({ width: window.outerWidth, height: window.outerHeight });
         }
         
         function onScroll() {
 
-            // slight buffer in case user does not scroll far enough
-            if( window.scrollY > (image_top - 60) ) {
-                if( !$('.tap-target').hasClass('animate') )
-                    $('.tap-target').addClass('animate');
+            // Is the area in view?
+
+            if( window.scrollY > block_start && window.scrollY < (block_start + offset) )
+                inview = true;
+            else
+                inview = false;
+
+
+            // Do things when in view
+
+            if(inview && hidden) {
+                $elm.animate({'opacity': 1}, 200);
+                $('.tap-target').addClass('animate');
+                hidden = false;
+            }
+            else if( !inview && !hidden ) {
+                $('.tap-target').removeClass('animate');
+                $elm.animate({'opacity': 0}, 200);
+                hidden = true;
             }
         }
 
-        onResize();
-
-
         // Tap targets
-        $('.tap-target').each(function() {
+        $elm.find('.tap-target').each(function() {
             var $target = $(this),
                 key     = $target.data('crop'),
                 image   = '../_assets/img/mesmer/'+ db[key]['image'],
@@ -294,7 +352,7 @@ $(document).ready(function() {
                 $popup.append( $image_crop );
                 $popup.append( $text );
 
-                $overlay = $('<div/>').addClass('overlay').css('height', $(window).height() );
+                $overlay = $('<div/>').addClass('overlay').css('height', window.outerHeight );
 
                 $overlay.append($popup);
                 $('body').append( $overlay );
@@ -310,7 +368,7 @@ $(document).ready(function() {
                     width = '40%';
                 }
                 else {
-                    height = $(window).height() - 120;
+                    height = window.outerHeight - 120;
                 }
 
                 $image_crop.get(0).addEventListener('transitionend', function() {
@@ -322,7 +380,7 @@ $(document).ready(function() {
                 $image_crop.css({
                     top:    40,
                     left:   120,
-                    width: width,
+                    width:  width,
                     height: height,
                     opacity: 1
                 })
@@ -334,8 +392,8 @@ $(document).ready(function() {
                     $(this).css('opacity', 0);
                 });
 
-                window.addEventListener('resize', function() {
-                    $overlay.css('height', $(window).height() );
+                resizeQueue.push(function() {
+                    $overlay.css('height', window.outerHeight );
                     
                     if( window.innerWidth < 900 ) {
                         $image_crop.css('height', 'auto');
@@ -343,45 +401,29 @@ $(document).ready(function() {
                     }
                     else {
                         $image_crop.css('width', 'auto');
-                        $image_crop.css('height', $(window).height() - 60 );
+                        $image_crop.css('height', window.outerHeight - 60 );
                     }
 
                     $text.css( { left: ($image_crop.offset().left + $image_crop.width() + 40) } );
-                }, false);
-
+                })
             });
         });
 
-        // Events
-        window.addEventListener('resize', onResize, false);
 
-        if( supports_touch )
-            $('.tap-target').addClass('animate');
-        else
-            window.addEventListener('scroll', onScroll, false);
-        
+        onResize();
+
+        // Events
+        scrollQueue.push(onScroll);
+        resizeQueue.push(onResize);        
     }
 
-});
-
-
-// Library layer
-var state = 'closed';
-
-function positionCenter($elm) {
-    var width   = $elm.width(),
-        height  = $elm.height(),
-        $window = $(window);
-
-    $elm.css({ position: 'absolute', top: ($window.height() / 2) - (height / 2), left: ($window.width() / 2) - (width / 2) });
-}
-
-$(document).ready(function() {
-
+    /*
+        Investigates
+    */
     $('.investigates').on('click', '.play-video', function() {
 
         var $this       = $(this),
-            $overlay    = $('<div/>').addClass('overlay').css('height', $window.height() ),
+            $overlay    = $('<div/>').addClass('overlay').css('height', panel_height ),
             $iframe     = $('<iframe/>').attr('src', $this.attr('href'));
 
         if( $this.data('width') )
@@ -406,11 +448,14 @@ $(document).ready(function() {
             $overlay.css('opacity', 0);
         })
 
-        window.addEventListener('resize', function() { $overlay.css('height', $window.height() )}, false)
+        resizeQueue.push( function() { $overlay.css('height', panel_height )} );
 
         return false;
     });
 
+    /*
+        Library
+    */
     $('.library-layer').on('click', '.button', function() {
         if( state == 'closed' ) {
             $(this).addClass('animate');
@@ -430,8 +475,7 @@ $(document).ready(function() {
         if( $this.data('embed') ) {
             var embed_str   = '<div class="wellcomePlayer" data-uri="'+ $this.data('embed') +'" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:800px; height:600px; background-color: #000"></div>',
                 $embed      = $(embed_str),
-                $window     = $(window),
-                $overlay    = $('<div/>').addClass('overlay').css('height', $window.height() ),
+                $overlay    = $('<div/>').addClass('overlay').css('height', panel_height ),
                 $iframe     = $('<iframe/>').attr('src', $this.attr('href'));
 
             if( $this.data('width') )
@@ -455,7 +499,7 @@ $(document).ready(function() {
                 window.embedScriptIncluded = false;
             })
 
-            window.addEventListener('resize', function() { $overlay.css('height', $window.height() )}, false)
+            resizeQueue.push( function() { $overlay.css('height', panel_height ); } );
 
             e.preventDefault();
             return false; 
@@ -463,6 +507,20 @@ $(document).ready(function() {
     });
 });
 
+var tID;
+
+
+window.addEventListener('scroll', onScroll);
+window.addEventListener('load', init);
+
+window.addEventListener('resize', function() {
+    clearTimeout(tID);
+
+    tID = setTimeout(function() {
+        resizeQueue.forEach(function(func) { func(); });
+    }, 300);
+
+});
 
 var db = {
     'rod': {

@@ -39,13 +39,13 @@ module.exports = function(grunt) {
                 files: ['_assets/scss/**/*.scss'],
                 tasks: ['css']
             },
-            js: {
-                files: ['_assets/js/*.js'],
-                tasks: ['js'],
-                options: {
-                    spawn: false,
-                },
-            },
+            // js: {
+            //     files: ['_assets/js/*.js'],
+            //     tasks: ['js'],
+            //     options: {
+            //         spawn: false,
+            //     },
+            // },
             grunt: {
                 files: ['gruntfile.js'],
                 tasks: ['default']

@@ -4,36 +4,36 @@
     <meta charset="utf-8"> 
     <title>Pathways: The Mind</title>
 
-    <!-- <meta name="viewport" content="width=device-width"> -->
+    <meta name="viewport" content="initial-scale=1,width=device-width,height=device-height,user-scalable=no">
 
     <link rel="stylesheet" type="text/css" href="../_assets/build/css/main.css">
     <link rel="stylesheet" type="text/css" href="../_assets/css/styles.css">
 
     <style type="text/css">
-        .start {
-            background-image: url('../_assets/img/mesmer/mesmer-1.jpg');
-            background-attachment: fixed;
-            background-size: 100%;
+        body {
+            background-color: #000;
         }
-
-        .end {
-            color: #fff;
+        
+        .holder {
+            /*position: fixed;*/
+            top: 0;
+            left: 0;
         }
 
     </style>
     
     <script type="text/javascript">
-    WebFontConfig = { fontdeck: { id: '44200' } };
+    // WebFontConfig = { fontdeck: { id: '44200' } };
 
-    (function() {
-      var wf = document.createElement('script');
-      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-      wf.type = 'text/javascript';
-      wf.async = 'true';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(wf, s);
-    })();
+    // (function() {
+    //   var wf = document.createElement('script');
+    //   wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+    //   '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    //   wf.type = 'text/javascript';
+    //   wf.async = 'true';
+    //   var s = document.getElementsByTagName('script')[0];
+    //   s.parentNode.insertBefore(wf, s);
+    // })();
     </script>
 </head>
 <body>
@@ -41,6 +41,10 @@
     <main role="main">
 
         <div class="start">
+
+            <div class="holder">
+                <img src="../_assets/img/mesmer/mesmer-1.jpg">
+            </div>
             
             <div class="text">
                 <p class="scene-set">
@@ -85,7 +89,7 @@
 
             </div>
 
-            <div class="panel title-screen">
+            <div class="panel tap-block">
 
                 <div class="bg-container">
                     <div class="bg">
@@ -235,10 +239,28 @@
     <script src="../_assets/js/lib/jquery-2.1.0.min.js"></script>
     <script src="../_assets/js/lib/hammer.min.js"></script>
 
+    <script>
+        var holder      = document.querySelector('.holder'),
+            holder_img  = document.querySelector('.holder img');
+
+        function resizeStart() {
+            holder.style.width     = window.outerWidth + 'px';
+            holder.style.height    = window.outerHeight + 'px';
+
+            holder_img.style.width     = window.outerWidth + 'px';
+            holder_img.style.height    = window.outerHeight + 'px';
+        }
+
+        resizeStart();
+
+        window.addEventListener('resize', resizeStart);
+
+    </script>
+
     <script src="../_assets/js/lib/greensock/TweenMax.min.js"></script>
     <script src="../_assets/js/lib/jquery.scrollmagic.js"></script>
     
-    <script src="../_assets/js/main.js"></script>
+    <!-- <script src="../_assets/js/main.js"></script> -->
 
 </body>
 </html>
