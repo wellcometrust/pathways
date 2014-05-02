@@ -244,11 +244,14 @@
             holder_img  = document.querySelector('.holder img');
 
         function resizeStart() {
-            holder.style.width     = window.outerWidth + 'px';
-            holder.style.height    = window.outerHeight + 'px';
+            var windowWidth     = window.outerWidth,
+                windowHeight    = window.outerHeight;
 
-            holder_img.style.width     = window.outerWidth + 'px';
-            holder_img.style.height    = window.outerHeight + 'px';
+            holder.style.width          = windowWidth + 'px';
+            holder.style.height         = windowHeight + 'px';
+
+            holder_img.style.width      = windowWidth + 'px';
+            holder_img.style.height     = windowHeight + 'px';
         }
 
         resizeStart();
@@ -260,7 +263,7 @@
     <script src="../_assets/js/lib/greensock/TweenMax.min.js"></script>
     <script src="../_assets/js/lib/jquery.scrollmagic.js"></script>
     
-    <!-- <script src="../_assets/js/main.js"></script> -->
+    <script src="../_assets/js/main.js"></script>
 
 </body>
 </html>
