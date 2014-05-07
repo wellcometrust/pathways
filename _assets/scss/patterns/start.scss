@@ -1,38 +1,19 @@
 
 .start {
-    // position:           relative;
-    // z-index:            10;
 
-    .text {
-        position:   absolute;
-        top:        2rem;
-        left:       5%;
-        color:      #fff;
-        width:      85%;
+    .content {
+        position:   relative;
+        width:      80%;
+        max-width:  1200px;
+        margin:     10% auto 0 auto;
     }
 
     .scene-set {
-        position:       relative;
-        font-family:    'Garamond', Times, serif;
-        font-size:      1.2rem; 
-        color:          #fff;
-        padding-bottom: 7em;
-        line-height:    1;
+        margin: 3em 0 4em 0;
     }
 
-    .scene-set:before {
-        content:    '';
-        position:   absolute;
-        background: url('../../img/icon-module.svg')no-repeat;
-        height:     24px;
-        width:      21px;
-        left:       -32px;
-    }
-
-    .scene-set .date {
-        display:        block;
-        font-family:    'Garamond', Times, serif;
-        font-size:      2rem;
+    .scene-set {
+        color: #fff;
     }
 
     .scene-set .location {
@@ -42,30 +23,31 @@
         font-size:      0.8rem;
         text-transform: uppercase;
         letter-spacing: .1em;
+        text-align:     center;
     }
 
-    .content {
-        max-width: 60%;
-        margin: 0 auto;
+    .scene-set .date {
+        display:        block;
+        font-family:    'Garamond', Times, serif;
+        font-size:      5rem;
+        text-align:     center;
     }
     
     header h1 {
-        font-size:      2.6rem;
-        margin:         0.3em 0 0 0;
+        color:          #fff;
+        font-size:      5rem;
         line-height:    1;
-    }
-
-    header b {
-        display:        block;
-        font-family:    "Museo Sans 300", 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        font-weight:    300;
-        font-size:      0.8em;
-        text-transform: uppercase;
+        text-align:     center;
+        margin:         0.3em 0 0 0;
     }
 
     .intro-text {
+        color:          #fff;
         font-family:    'Garamond', Times, serif;
+        font-size:      1.5rem;
+        line-height:    1.5;
         text-align:     center;
-        margin:         1.618em 0;
+        width:          75%;
+        margin:         2.2em auto 0 auto;
     }
 }

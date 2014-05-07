@@ -1,10 +1,51 @@
 
-var Pathways = function() {
+// Testing
+(function() {
 
-}
+    'use strict';
+
+    var Pathways = function(options) {
+        var Pathways    = this,
+            renderQueue = [],
+            scrollQueue = [];
+
+        /************************
+            Private functions
+        *************************/
+
+        var init = function() {
+            
+        }
+
+        /************************
+            Public functions
+        *************************/
+
+        this.addRender = function(func) {
+            this.renderQueue.push(func);
+        }
+
+        this.addScroll = function(func) {
+            this.scrollQueue.push(func);
+        }
+
+        render = function() {
+
+        }
+
+        init();
+        return Pathways;
+    }
+
+    window.Pathways = Pathways;
+})();
+
+var p = new Pathways();
+
+// Testing
 
 
-var panel_height        = window.outerHeight < 750 ? 750 : window.outerHeight,
+var panel_height        = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15),
     after_start         = false,
     
     // Start
@@ -14,6 +55,7 @@ var panel_height        = window.outerHeight < 750 ? 750 : window.outerHeight,
 
     // Sequences
     $sequence           = $('.sequence'),
+    $sequence_bg        = $('.sequence').find('.bg-container'),
     sequence_top        = 0,
     sequence_height     = 0,
     sequence_triggered  = false,
@@ -23,6 +65,7 @@ var panel_height        = window.outerHeight < 750 ? 750 : window.outerHeight,
     panel_idx           = 0,
 
     $sequence2          = $('.sequence2'),
+    $sequence2_bg       = $('.sequence2').find('.bg-container'),
     sequence_top2       = 0,
     sequence_height2    = 0,
     sequence_triggered2 = false,
@@ -63,111 +106,16 @@ function onScroll() {
  */
 function requestTick() {
     if(!ticking) {
-        requestAnimationFrame(parallaxAllTheThings);
+        requestAnimationFrame(render);
         ticking = true;
     }
 }
 
 
-function parallaxAllTheThings(e) {
-
-    /** Start **/
+function render() {
 
     if( lastScrollY <= 0 )
         lastScrollY = 0;
-
-    if( lastScrollY < (panel_height + 30) )
-        $text.css( {'-webkit-transform': 'translate3d(0,'+ (lastScrollY / 2) +'px,0)', opacity: 1 - (lastScrollY * (1 / panel_height)) });
-    else
-        $text.css('-webkit-transform', 'translate3d(0,0,0)');
-
-    /** Sequences **/
-
-    // Scroll into the sequence
-    if( lastScrollY > sequence_top && !sequence_triggered ) {
-        $sequence.find('.bg').css({ position: 'fixed', opacity: 0 } );
-        $sequence.find('.panel').first().find('.bg').css('opacity', 1);
-
-        sequence_triggered = true;
-    }
-
-    // Scroll back before the sequence
-    if( sequence_triggered && lastScrollY < sequence_top ) {
-        $sequence.find('.bg').css({ position: 'static', display: 'block' } );
-
-        sequence_triggered = false;
-    }
-
-    // Keep track of which panel we’re in
-    if( sequence_triggered && lastScrollY > (panel_tops[panel_idx] + (panel_height / 4)) ) {
-        if( panels[panel_idx+1] ) {
-            // fade in the next panel based on scroll distance of the previous panel to the top.
-            var unit    = 1 / (panel_height / 4),
-                delta   = lastScrollY - (panel_tops[panel_idx] + (panel_height / 4)),
-                opacity = unit * delta;
-
-            panels[panel_idx+1].find('.bg').css( 'opacity', opacity );
-
-            if( opacity >= 1 ) {
-                opacity = 1;
-                panel_idx++;
-            }
-
-        }
-    }
-
-    // A little simpler going backward. Just check that the scroll is below the previous threshold and if so, drop the panel index back one
-    // so it triggers the previous opacity calculations.
-    if( panel_idx > 0 ) {
-        if( lastScrollY < (panel_tops[panel_idx] + (panel_height / 4)) ) {
-            panel_idx--;
-        }
-    }
-
-
-    // Reaches the end
-    if( sequence_triggered && !sequence_passed && lastScrollY > (sequence_top + sequence_height - panel_height) ) {
-        $sequence.find('.bg').css({ position: 'absolute' } );
-
-        sequence_passed = true;
-    }
-
-    if( sequence_passed && lastScrollY < (sequence_top + sequence_height - panel_height) ) {
-        $sequence.find('.bg').css({ position: 'fixed' } );
-
-        sequence_passed = false;
-    }
-
-
-    /*
-        Sequence 2
-    */
-
-    if( !sequence_triggered2 && lastScrollY > sequence_top2 ) {
-        $sequence2.find('.bg').css({ position: 'fixed', top: 0, bottom: 'auto' } );
-
-        sequence_triggered2 = true;
-    }
-
-    // Scroll back before the sequence
-    if( sequence_triggered2 && lastScrollY < sequence_top2 ) {
-        $sequence2.find('.bg').css({ position: 'absolute' } );
-
-        sequence_triggered2 = false;
-    }
-
-    // Reaches the end
-    if( sequence_triggered2 && !sequence_passed2 && lastScrollY > (sequence_top2 + sequence_height2 - (panel_height - 30)) ) {
-        $sequence2.find('.bg').css({ position: 'absolute', top: 'auto', bottom: 0, height: 'auto' } );
-
-        sequence_passed2 = true;
-    }
-
-    if( sequence_passed2 && lastScrollY < (sequence_top2 + sequence_height2 - (panel_height - 30)) ) {
-        $sequence2.find('.bg').css({ position: 'fixed', top: 0, bottom: 'auto' } );
-
-        sequence_passed2 = false;
-    }
 
     // Complete the scroll queue
     scrollQueue.forEach(function(func) {
@@ -180,19 +128,123 @@ function parallaxAllTheThings(e) {
 
 
 function resizeAllTheThings() {
-    panel_height = window.outerHeight < 750 ? 750 : window.outerHeight,
+    panel_height = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15),
 
-    $('.mesmers-salon').css('height', panel_height);
     $('.panel').css('height', panel_height);
 
     $sequence.css('height', 'auto');
 }
 
+function start() {
+    if( lastScrollY < (panel_height + 30) )
+        $text.css( {'-webkit-transform': 'translate3d(0,'+ (lastScrollY / 2) +'px,0)', opacity: 1 - (lastScrollY * (1 / panel_height)) });
+    else
+        $text.css('-webkit-transform', 'translate3d(0,0,0)');
+}
+
+scrollQueue.push(start);
+
+function sequence1() {
+    var fraction = (panel_height / 100) * 70;
+
+    // Scroll into the sequence
+    if( lastScrollY > sequence_top && !sequence_triggered ) {
+        $sequence_bg.css({ position: 'fixed', opacity: 0 } );
+
+        $sequence.find('.panel').first().addClass('active');
+        $sequence.find('.panel').first().find('.bg-container').css('opacity', 1);
+
+        sequence_triggered = true;
+    }
+
+    // Scroll back before the sequence
+    if( sequence_triggered && lastScrollY < sequence_top ) {
+        $sequence_bg.css({ position: 'static', display: 'block' } );
+
+        sequence_triggered = false;
+    }
+
+    // Keep track of which panel we’re in
+    if( sequence_triggered && lastScrollY > (panel_tops[panel_idx] + fraction) ) {
+        if( panels[panel_idx+1] ) {
+            // fade in the next panel based on scroll distance of the previous panel to the top.
+            var unit    = 1 / (panel_height - fraction),
+                delta   = lastScrollY - (panel_tops[panel_idx] + fraction),
+                opacity = unit * delta;
+
+            panels[panel_idx+1].find('.bg-container').css( 'opacity', opacity );
+
+            if( opacity >= 1 ) {
+                opacity = 1;
+                panel_idx++;
+            }
+
+        }
+    }
+
+    // A little simpler going backward. Just check that the scroll is below the previous threshold and if so, drop the panel index back one
+    // so it triggers the previous opacity calculations.
+    if( panel_idx > 0 ) {
+        if( lastScrollY < (panel_tops[panel_idx] + fraction) ) {
+            panel_idx--;
+        }
+    }
+
+
+    // Reaches the end
+    if( sequence_triggered && !sequence_passed && lastScrollY > (sequence_top + sequence_height - panel_height) ) {
+        $sequence_bg.css({ position: 'absolute' } );
+
+        sequence_passed = true;
+    }
+
+    if( sequence_passed && lastScrollY < (sequence_top + sequence_height - panel_height) ) {
+        $sequence_bg.css({ position: 'fixed' } );
+
+        sequence_passed = false;
+    }
+}
+
+scrollQueue.push(sequence1);
+
+function sequence2() {
+
+    if( !sequence_triggered2 && lastScrollY > sequence_top2 ) {
+        $sequence2_bg.css({ position: 'fixed', top: 0, bottom: 'auto' } );
+
+        sequence_triggered2 = true;
+    }
+
+    // Scroll back before the sequence
+    if( sequence_triggered2 && lastScrollY < sequence_top2 ) {
+        $sequence2_bg.css({ position: 'absolute' } );
+
+        sequence_triggered2 = false;
+    }
+
+    // Reaches the end
+    if( sequence_triggered2 && !sequence_passed2 && lastScrollY > (sequence_top2 + sequence_height2 - (panel_height - 30)) ) {
+        $sequence2_bg.css({ position: 'absolute', top: 'auto', bottom: 0, height: 'auto' } );
+
+        sequence_passed2 = true;
+    }
+
+    if( sequence_passed2 && lastScrollY < (sequence_top2 + sequence_height2 - (panel_height - 30)) ) {
+        $sequence2_bg.css({ position: 'fixed', top: 0, bottom: 'auto' } );
+
+        sequence_passed2 = false;
+    }
+}
+
+if( $('.sequence2').length )
+    scrollQueue.push(sequence2);
+
+
 function positionCenter($elm) {
     var width   = $elm.width(),
         height  = $elm.height();
 
-    $elm.css({ position: 'absolute', top: (panel_height / 2) - (height / 2), left: (window.outerWidth / 2) - (width / 2) });
+    $elm.css({ position: 'absolute', top: (panel_height / 2) - (height / 2), left: (window.innerHeight / 2) - (width / 2) });
 }
 
 
@@ -213,20 +265,24 @@ function init() {
         sequence_height += $this.height();
     });
 
-    $('.panel', $sequence2).each(function() {
-        var $this = $(this);
-
-        panels2.push( $this );
-        panel_tops2.push( $this.offset().top )
-
-        sequence_height2 += $this.height();
-    });
-
     $sequence.css('height', sequence_height);
-    sequence_top    = $('.sequence').offset().top;
-    sequence_top2   = $('.sequence2').offset().top;
+    sequence_top = $('.sequence').offset().top;
 
-    $sequence2.find('.panel-content').css({ position: 'fixed', opacity: 0 } );
+    if( $('.sequence2').length ) {
+
+        $('.panel', $sequence2).each(function() {
+            var $this = $(this);
+
+            panels2.push( $this );
+            panel_tops2.push( $this.offset().top )
+
+            sequence_height2 += $this.height();
+        });
+
+        sequence_top2 = $('.sequence2').offset().top;
+        $sequence2.find('.panel-content').css({ position: 'fixed', opacity: 0 } );
+    }
+
 }
 
 
@@ -505,10 +561,59 @@ $(document).ready(function() {
             return false; 
         }
     });
+
 });
 
-var tID;
 
+function Quiz() {
+    var $elm    = $('.quiz'),
+        level   = 0,
+        answers = [0,1,4,0,3];
+
+    this.init = function() {
+        var self = this;
+
+        // set up the click events
+        $elm.on('click', 'li', function(e) {
+            self.validate(e);
+        });
+    }
+
+    this.validate = function(e) {
+        var correct = false;
+
+        console.log( $elm.find('li').index($(e.currentTarget)) );
+
+        if( $elm.find('li').index($(e.currentTarget)) == answers[level] )
+            correct = true;
+
+        if( correct )
+            this.nextQuestion($(e.currentTarget));
+        else
+            this.showError($(e.currentTarget));
+    }
+
+    this.nextQuestion = function(elm) {
+        elm.css('border', '1px solid green');
+    }
+
+    this.showError = function(elm) {
+        elm.css('border', '1px solid red');
+    }
+
+    this.update = function() {
+        // 
+    }
+}
+
+
+var quiz = new Quiz();
+
+quiz.init();
+
+
+
+var tID;
 
 window.addEventListener('scroll', onScroll);
 window.addEventListener('load', init);
@@ -518,9 +623,14 @@ window.addEventListener('resize', function() {
 
     tID = setTimeout(function() {
         resizeQueue.forEach(function(func) { func(); });
-    }, 300);
+    }, 200);
 
 });
+
+
+
+
+
 
 var db = {
     'rod': {

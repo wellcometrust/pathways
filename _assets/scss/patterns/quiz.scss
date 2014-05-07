@@ -1,0 +1,28 @@
+
+.quiz {
+
+    margin-top: 20%;
+
+    .content {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    .image {
+        float: left;
+        width: 300px;
+    }
+
+    .answers {
+        float: left;
+
+        li {
+            color: #fff;
+            background-color: #444;
+            margin-bottom: 1em;
+            padding: 0.5em;
+            list-style: none;
+            cursor: default;
+        }
+    }
+}

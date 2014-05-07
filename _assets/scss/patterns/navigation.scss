@@ -1,0 +1,50 @@
+
+.global-navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+
+    .container {
+        height: 36px;
+        -webkit-transform: translate(-961px, 0);
+        -webkit-transition: -webkit-transform 0.4s ease;
+
+        &.active {
+            -webkit-transform: translate(0, 0);
+        }
+    }
+
+
+    nav {
+        float: left;
+        background-color: rgba(0,0,0,0.7);
+        width: 960px;
+        height: 60px;
+
+        li {
+            float: left;
+            list-style: none;
+        }
+
+        a {
+            display:        block;
+            color:          #fff;
+            font-family:    "Museo Sans 300", 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            font-size:      0.7rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            padding:        2em 1em;
+            text-decoration: none;
+        }
+    }
+
+    .handle {
+        float: left;
+        background-color: rgba(0,0,0,0.7);
+        width:  65px;
+        height: 60px;
+        border-left: 1px solid #666;
+    }
+}
