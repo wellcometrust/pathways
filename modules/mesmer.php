@@ -1,44 +1,5 @@
-<!DOCTYPE HTML>
-<html lang="en"> 
-<head>
-    <meta charset="utf-8"> 
-    <title>Pathways: The Mind</title>
 
-    <meta name="viewport" content="initial-scale=1,width=device-width,height=device-height,user-scalable=no">
-
-    <link rel="stylesheet" type="text/css" href="../_assets/build/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../_assets/css/styles.css">
-
-    <style type="text/css">
-
-        body {
-            background-color: #000;
-        }
-
-        .bg-container.fixed {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }
-
-    </style>
-    
-    <script type="text/javascript">
-    // WebFontConfig = { fontdeck: { id: '44200' } };
-
-    // (function() {
-    //   var wf = document.createElement('script');
-    //   wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-    //   '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    //   wf.type = 'text/javascript';
-    //   wf.async = 'true';
-    //   var s = document.getElementsByTagName('script')[0];
-    //   s.parentNode.insertBefore(wf, s);
-    // })();
-    </script>
-</head>
-<body>
+<?php include('../_includes/header.php') ?>
 
     <main role="main">
 
@@ -50,8 +11,8 @@
             
             <div class="content">
                 <p class="scene-set">
-                    <span class="date">1778</span>
                     <span class="location">Paris</span>
+                    <span class="date">1778</span>
                 </p>
 
                 <header>
@@ -212,39 +173,9 @@
         </div>
 
         
-        <?php include('../includes/library_layer.php') ?>
-        <?php include('../includes/global_navigation.php') ?>
+        <?php include('../patterns/library_layer.php') ?>
+        <?php include('../patterns/global_navigation.php') ?>
         
     </main>
 
-    <script src="../_assets/js/lib/jquery-2.1.0.min.js"></script>
-    <script src="../_assets/js/lib/hammer.min.js"></script>
-
-    <script>
-        var holder      = document.querySelector('.holder'),
-            holder_img  = document.querySelector('.holder img');
-
-        function resizeStart() {
-            var windowWidth     = window.outerWidth,
-                windowHeight    = window.outerHeight;
-
-            holder.style.width          = windowWidth + 'px';
-            holder.style.height         = windowHeight + 'px';
-
-            holder_img.style.width      = windowWidth + 'px';
-            holder_img.style.height     = windowHeight + 'px';
-        }
-
-        resizeStart();
-
-        window.addEventListener('resize', resizeStart);
-
-    </script>
-
-    <script src="../_assets/js/lib/greensock/TweenMax.min.js"></script>
-    <script src="../_assets/js/lib/jquery.scrollmagic.js"></script>
-    
-    <script src="../_assets/js/main.js"></script>
-
-</body>
-</html>
+<?php include('../_includes/footer.php') ?>

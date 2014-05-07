@@ -1,8 +1,5 @@
 
-/*font-family: 'Garamond', Times, serif;
-font-family: 'Open Sans', sans-serif;*/
-
-/* specific */
+/* Mesmer */
 
 .mesmers-salon .inner {
     max-width: 800px;
@@ -39,11 +36,11 @@ font-family: 'Open Sans', sans-serif;*/
     opacity: 1;
 }
 
-/*.audio-icon .circles {
+.audio-icon .circles {
     -webkit-animation-name: circle;
     -webkit-animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
-}*/
+}
 
 .audio-icon .circles {
     position: absolute;
@@ -234,4 +231,20 @@ font-family: 'Open Sans', sans-serif;*/
     background-size: 70px;
     text-align: center;
     padding-top: 80px;
+}
+
+
+/* Esdaile */
+
+.gonads img {
+    -webkit-transform: scale(2.3, 2.3);
+    -webkit-transform-origin: 100% 0%;
+    -webkit-transition: -webkit-transform 4s ease;
+}
+.gonads.active img {
+    -webkit-transform: scale(1, 1);
+}
+
+.india .scroll-content {
+    color: #333;
 }

@@ -30,7 +30,8 @@
 
         <ul>
             <li><a href="modules/mesmer.php">Mesmer</a></li>
-            <li><a href="modules/james-t-matthews.php">James T. Matthews</a></li>
+            <li><a href="modules/airloom.php">Airloom</a></li>
+            <li><a href="modules/elliotson.php">Elliotson</a></li>
             <li><a href="modules/esdaile.php">Esdaile</a></li>
             <li><a href="modules/svengali.php">Svengali</a></li>
             <li><a href="modules/freud.php">Sigmund Freud</a></li>

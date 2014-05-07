@@ -1,27 +1,5 @@
-<!DOCTYPE HTML>
-<html lang="en"> 
-<head>
-    <meta charset="utf-8"> 
-    <title>Pathways: The Mind</title>
 
-    <link rel="stylesheet" type="text/css" href="/_assets/build/css/main.css">
-
-    <style type="text/css">
-
-        body {
-            background-color: #000;
-        }
-
-        .bg-container.fixed {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }
-
-    </style>
-</head>
-<body>
+<?php include('../_includes/header.php') ?>
 
     <main role="main">
 
@@ -33,18 +11,16 @@
             
             <div class="content">
 
-                <p class="scene-set">
-                    <span>Chapter 6</span>
-                    <span>Freud, Breuer & Anna O</span>
-                </p>
+                <div class="scene-set">
+                    <span class="location"></span>
+                    <span class="date"></span>
+                </div>
 
                 <header>
                     <h1>Can the mind really cure the body?</h1>
                 </header>
 
-                <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
+                <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
 
             </div>
 
@@ -165,18 +141,9 @@
         </div>
 
         
-        <?php include('../includes/library_layer.php') ?>
-        <?php include('../includes/global_navigation.php') ?>
+        <?php include('../patterns/library_layer.php') ?>
+        <?php include('../patterns/global_navigation.php') ?>
 
     </main>
 
-    <script src="../_assets/js/lib/jquery-2.1.0.min.js"></script>
-    <script src="../_assets/js/lib/hammer.min.js"></script>
-    
-    <script src="../_assets/js/lib/greensock/TweenMax.min.js"></script>
-    <script src="../_assets/js/lib/jquery.scrollmagic.js"></script>
-    
-    <script src="../_assets/js/main.js"></script>
-
-</body>
-</html>
+<?php include('../_includes/footer.php') ?>

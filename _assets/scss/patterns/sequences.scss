@@ -29,6 +29,13 @@
     }
 }
 
+.bg-container.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
 .sequence .scroll-content {
     position:       absolute;
     left:           3%;
