@@ -14,7 +14,7 @@
         *************************/
 
         var init = function() {
-            
+
         }
 
         /************************
@@ -29,7 +29,7 @@
             this.scrollQueue.push(func);
         }
 
-        render = function() {
+        this.render = function() {
 
         }
 
@@ -40,7 +40,7 @@
     window.Pathways = Pathways;
 })();
 
-var p = new Pathways();
+var pw = new Pathways();
 
 // Testing
 

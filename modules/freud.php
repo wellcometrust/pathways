@@ -7,66 +7,16 @@
     <link rel="stylesheet" type="text/css" href="/_assets/build/css/main.css">
 
     <style type="text/css">
-        
-        .inner {
-            max-width: 1024px;
-            margin: 0 auto;
+
+        body {
+            background-color: #000;
         }
 
-        /* specific */
-        .start {
-            background: url('/_assets/img/freud/freud-1.jpg');
-            background-attachment: fixed;
-            background-size: 100%;
-        }
-
-        .bg {
+        .bg-container.fixed {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 30;
-        }
-        .bg img {
-            width: 100%;
-        }
-
-        .subconcious .bg {
-            position: relative;
-            top: -352px;
-            overflow: visible;
-            z-index: 20;
-        }
-
-        .sequence .scroll-content {
-            z-index: 40;
-        }
-
-        /* Second style of sequence */
-        .sequence2 .scroll-content {
-            position: absolute;
-            top: 10%;
-            right: 5%;
-            z-index: 40;
-        }
-
-        .sequence2 .content {
-            width: 35%;
-            padding-left: 5%;
-        }
-
-        .sequence2 .panel-content {
-            top: 10%;
-            left: 5%;
-            color: #fff;
-            text-shadow: 1px 1px 0 #333;
-            width: 35%;
-            z-index: 40;
-        }
-
-        .end {
-            color: #fff;
         }
 
     </style>
@@ -76,22 +26,25 @@
     <main role="main">
 
         <div class="start">
+
+            <div class="bg-container fixed">
+                <img src="../_assets/img/freud/freud-1.jpg">
+            </div>
             
-            <div class="text">
+            <div class="content">
+
                 <p class="scene-set">
                     <span>Chapter 6</span>
                     <span>Freud, Breuer & Anna O</span>
                 </p>
 
-                <div class="content">
-                    <header>
-                        <h1>Can the mind really cure the body?</h1>
-                    </header>
+                <header>
+                    <h1>Can the mind really cure the body?</h1>
+                </header>
 
-                    <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
-                </div>
+                <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
 
             </div>
 
@@ -101,9 +54,7 @@
             
             <div class="panel subconcious">
                 <div class="bg-container">
-                    <div class="bg">
-                        <img src="../_assets/img/freud/freud-2.png">
-                    </div>
+                    <img src="../_assets/img/freud/freud-2.png">
                 </div>
 
                 <div class="scroll-content text">
@@ -117,9 +68,7 @@
 
             <div class="panel">
                 <div class="bg-container">
-                    <div class="bg">
-                        <img src="../_assets/img/freud/freud-6.jpg">
-                    </div>
+                    <img src="../_assets/img/freud/freud-6.jpg">
                 </div>
 
                 <div class="scroll-content text">
@@ -139,9 +88,7 @@
 
             <div class="panel">
                 <div class="bg-container">
-                    <div class="bg">
-                        <img src="../_assets/img/freud/freud-3.jpg">
-                    </div>
+                    <img src="../_assets/img/freud/freud-3.jpg">
                 </div>
 
                 <div class="scroll-content text">
@@ -164,9 +111,7 @@
         <div class="sequence2">
 
             <div class="bg-container">
-                <div class="bg">
-                    <img src="../_assets/img/freud/freud-4.png">
-                </div>
+                <img src="../_assets/img/freud/freud-4.png">
             </div>
             
             <div class="panel tween clearfix">
@@ -219,28 +164,9 @@
 
         </div>
 
-        <!-- Library Layer -->
-        <div class="library-layer">
-            
-            <div class="button"></div>
-
-            <div class="gap">
-                <div class="inner clearfix">
-                    <ul>
-                        <li><a href="#">Stuff!</a></li>
-                        <li><a href="#">Help me!</a></li>
-                        CHRONOLOGY 
-                    </ul>
-
-                    <ul>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1700 A Guide to Magnetic Cures</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1780 Mesmer’s First Manual</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1792 Mesmer’s Second Manual</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1980 History of Animal Magnetism</a></li>
-                    </ul>
-                </div>
-            </div><!-- end Gap -->
-        </div>
+        
+        <?php include('../includes/library_layer.php') ?>
+        <?php include('../includes/global_navigation.php') ?>
 
     </main>
 

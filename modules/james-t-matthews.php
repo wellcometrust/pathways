@@ -7,69 +7,16 @@
     <link rel="stylesheet" type="text/css" href="../_assets/build/css/main.css">
 
     <style type="text/css">
-        
-        .inner {
-            max-width: 1024px;
-            margin: 0 auto;
+
+        body {
+            background-color: #000;
         }
 
-        /* specific */
-        .start {
-            background: url('../_assets/img/james-t-matthews/jtm-1.jpg');
-            background-attachment: fixed;
-            background-size: 100%;
-        }
-
-        .end {
-            color: #fff;
-        }
-
-        .end header {
-            text-align: center;
-            margin:     0 0 1em 0;
-            padding:    0.8em;
-        }
-        .end h2 {
-            font-size: 3rem;
-            line-height: 1;
-            margin: 0;
-        }
-
-
-        .end .body {
-            font-size: 0.9rem;
-            font-family: 'Garamond', Times, serif;
-            margin: 0 auto;
-            width: 50%;
-        }
-
-        .end .body p {
-            margin-bottom: 0.5em;
-        }
-
-        .end .video-popup {
-            margin-top: 8rem;
-            text-align: center;
-        }
-        .end .video-popup a {
-            display: block;
-            color: #fff;
-        }
-
-        .end .talkinghead {
-            background: url('../_assets/img/icon-talkinghead.svg') 50% 0 no-repeat;
-            background-size: 70px;
-            text-align: center;
-            padding-top: 80px;
-        }
-
-        .air-loom .scroll-content {
+        .bg-container.fixed {
+            position: fixed;
+            top: 0;
             left: 0;
             width: 100%;
-        }
-
-        .air-loom h1 {
-            text-align: center;
         }
 
     </style>
@@ -187,28 +134,9 @@
 
         </div>
 
-        <!-- Library Layer -->
-        <div class="library-layer">
-            
-            <div class="button"></div>
 
-            <div class="gap">
-                <div class="inner clearfix">
-                    <ul>
-                        <li><a href="#">Stuff!</a></li>
-                        <li><a href="#">Help me!</a></li>
-                        CHRONOLOGY 
-                    </ul>
-
-                    <ul>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1700 A Guide to Magnetic Cures</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1780 Mesmer’s First Manual</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1792 Mesmer’s Second Manual</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1980 History of Animal Magnetism</a></li>
-                    </ul>
-                </div>
-            </div><!-- end Gap -->
-        </div>
+        <?php include('../includes/library_layer.php') ?>
+        <?php include('../includes/global_navigation.php') ?>
 
     </main>
 

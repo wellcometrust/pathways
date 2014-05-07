@@ -10,14 +10,16 @@
     <link rel="stylesheet" type="text/css" href="../_assets/css/styles.css">
 
     <style type="text/css">
+
         body {
             background-color: #000;
         }
-        
-        .holder {
-            /*position: fixed;*/
+
+        .bg-container.fixed {
+            position: fixed;
             top: 0;
             left: 0;
+            width: 100%;
         }
 
     </style>
@@ -42,24 +44,22 @@
 
         <div class="start">
 
-            <div class="holder">
+            <div class="bg-container fixed">
                 <img src="../_assets/img/mesmer/mesmer-1.jpg">
             </div>
             
-            <div class="text">
+            <div class="content">
                 <p class="scene-set">
                     <span class="date">1778</span>
                     <span class="location">Paris</span>
                 </p>
 
-                <div class="content">
-                    <header>
-                        <b>The Story of Mesmer</b>
-                        <h1>Can science harness the life-force?</h1>
-                    </header>
+                <header>
+                    <b>The Story of Mesmer</b>
+                    <h1>Can science harness the life-force?</h1>
+                </header>
 
-                    <p class="intro-text">Mesmer arrives in Paris in 1778 and his ‘magnetic’ therapy is a sensation. Patients are cured in their hundreds - of paralysis, epilepsy, toothache, stomach cramps, even lifelong blindness.</p>
-                </div>
+                <p class="intro-text">Mesmer arrives in Paris in 1778 and his ‘magnetic’ therapy is a sensation. Patients are cured in their hundreds - of paralysis, epilepsy, toothache, stomach cramps, even lifelong blindness.</p>
 
             </div>
 
@@ -211,28 +211,9 @@
 
         </div>
 
-        <!-- Conclusion -->
-        <div class="library-layer">
-            
-            <div class="button"></div>
-
-            <div class="gap">
-                <div class="inner clearfix">
-                    <ul>
-                        <li><a href="#">Stuff!</a></li>
-                        <li><a href="#">Help me!</a></li>
-                        CHRONOLOGY 
-                    </ul>
-
-                    <ul>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1700 A Guide to Magnetic Cures</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1780 Mesmer’s First Manual</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1792 Mesmer’s Second Manual</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1980 History of Animal Magnetism</a></li>
-                    </ul>
-                </div>
-            </div><!-- end Gap -->
-        </div>
+        
+        <?php include('../includes/library_layer.php') ?>
+        <?php include('../includes/global_navigation.php') ?>
         
     </main>
 

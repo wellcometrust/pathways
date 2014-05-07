@@ -29,11 +29,11 @@
         </header>
 
         <ul>
-            <li><a href="modules/mesmer.html">Mesmer</a></li>
-            <li><a href="modules/james-t-matthews.html">James T. Matthews</a></li>
-            <li><a href="modules/esdaile.html">Esdaile</a></li>
-            <li><a href="modules/svengali.html">Svengali</a></li>
-            <li><a href="modules/freud.html">Sigmund Freud</a></li>
+            <li><a href="modules/mesmer.php">Mesmer</a></li>
+            <li><a href="modules/james-t-matthews.php">James T. Matthews</a></li>
+            <li><a href="modules/esdaile.php">Esdaile</a></li>
+            <li><a href="modules/svengali.php">Svengali</a></li>
+            <li><a href="modules/freud.php">Sigmund Freud</a></li>
         </ul>
 
         <header>

@@ -167,44 +167,9 @@
 
         </div>
 
-        <!-- Library Layer -->
-        <div class="library-layer">
-            
-            <div class="button"></div>
-
-            <div class="gap">
-                <div class="inner clearfix">
-                    <ul>
-                        <li><a href="#">Stuff!</a></li>
-                        <li><a href="#">Help me!</a></li>
-                        CHRONOLOGY 
-                    </ul>
-
-                    <ul>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1700 A Guide to Magnetic Cures</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1780 Mesmer’s First Manual</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1792 Mesmer’s Second Manual</a></li>
-                        <li><a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">1980 History of Animal Magnetism</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="global-navigation">
-            <div class="container clearfix">
-                <nav>
-                    <ul class="clearfix">
-                        <li><a href="mesmer.html" data-description="Some text here">Mesmer</a></li>
-                        <li><a href="james-t-matthews.html" data-description="Some text here">James T. Matthews</a></li>
-                        <li><a href="esdaile.html" data-description="Some text here">Esdaile</a></li>
-                        <li><a href="svengali.html" data-description="Some text here">Svengali</a></li>
-                        <li><a href="freud.html" data-description="Some text here">Freud</a></li>
-                    </ul>
-                </nav>
-                <div class="handle closed"></div>
-            </div>
-        </div>
+        
+        <?php include('../includes/library_layer.php') ?>
+        <?php include('../includes/global_navigation.php') ?>
 
     </main>
 
