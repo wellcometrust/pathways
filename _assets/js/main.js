@@ -1,48 +1,12 @@
 
-// Testing
-(function() {
 
-    'use strict';
+var debug = true;
 
-    var Pathways = function(options) {
-        var Pathways    = this,
-            renderQueue = [],
-            scrollQueue = [];
 
-        /************************
-            Private functions
-        *************************/
-
-        var init = function() {
-
-        }
-
-        /************************
-            Public functions
-        *************************/
-
-        this.addRender = function(func) {
-            this.renderQueue.push(func);
-        }
-
-        this.addScroll = function(func) {
-            this.scrollQueue.push(func);
-        }
-
-        this.render = function() {
-
-        }
-
-        init();
-        return Pathways;
-    }
-
-    window.Pathways = Pathways;
-})();
-
-var pw = new Pathways();
+function _(str) { return document.querySelector(str); }
 
 // Testing
+// var pw = new Pathways();
 
 
 var panel_height        = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15),
@@ -50,7 +14,7 @@ var panel_height        = window.innerHeight < 750 ? (750 + 15) : (window.innerH
     
     // Start
     $start              = $('.start'),
-    $text               = $start.find('.content').first(),
+    _text               = _('.start .content'),
     unit                = 1 / panel_height,
 
     // Sequences
@@ -136,10 +100,13 @@ function resizeAllTheThings() {
 }
 
 function start() {
-    if( lastScrollY < (panel_height + 30) )
-        $text.css( {'-webkit-transform': 'translate3d(0,'+ (lastScrollY / 2) +'px,0)', opacity: 1 - (lastScrollY * (1 / panel_height)) });
-    else
-        $text.css('-webkit-transform', 'translate3d(0,0,0)');
+    if( lastScrollY < (panel_height + 30) ) {
+        _text.style['opacity']              = 1 - (lastScrollY * (1 / panel_height));
+        _text.style['-webkit-transform']    = 'translate3d(0,'+ (lastScrollY / 2) +'px,0)';
+    }
+    else {
+        _text.style['-webkit-transform']    = 'translate3d(0,0,0)';
+    }
 }
 
 scrollQueue.push(start);
@@ -290,7 +257,7 @@ resizeQueue.push(resizeAllTheThings);
 
 
 
-$(document).ready(function() {
+function init2() {
 
     controller = new ScrollMagic();
 
@@ -318,17 +285,17 @@ $(document).ready(function() {
     /**
         Audio
     **/
-    var $player     = document.querySelector('.audio-player'),
+    var _player     = _('.audio-player'),
         playing     = false;
 
     $('.audio-icon').on('click', function() {
         if( playing ) {
-            $player.pause();
+            _player.pause();
             $('.audio-icon').removeClass('active');
             playing = false;
         }
         else {
-            $player.play();
+            _player.play();
             $('.audio-icon').addClass('active');
             playing = true;
         }
@@ -341,12 +308,12 @@ $(document).ready(function() {
     */
     if( $('.crop-zoom').length ) {
 
-        $('.crop-zoom').css({'position': 'fixed', 'opacity': 0, 'z-index': 20});
+        $('.crop-zoom').css({'position': 'absolute', 'opacity': 0, 'z-index': 20});
 
         var $elm            = $('.crop-zoom'),
             image_top       = $elm.offset().top,
-            block_start     = $('.tap-block').offset().top - 200,
-            offset          = panel_height / 4,
+            trigger         = $('.tap-block').offset().top,
+            duration        = panel_height / 2,
             image_height    = panel_height,
             inview          = false,
             hidden          = true;
@@ -357,9 +324,9 @@ $(document).ready(function() {
         
         function onScroll() {
 
-            // Is the area in view?
+            // Is trigger point in view?
 
-            if( window.scrollY > block_start && window.scrollY < (block_start + offset) )
+            if( window.scrollY > trigger && window.scrollY < (trigger + duration) )
                 inview = true;
             else
                 inview = false;
@@ -368,13 +335,20 @@ $(document).ready(function() {
             // Do things when in view
 
             if(inview && hidden) {
-                $elm.animate({'opacity': 1}, 200);
-                $('.tap-target').addClass('animate');
+                _('.crop-zoom').style['position'] = 'fixed';
+
+                $elm.animate({'opacity': 1}, 200, function() {
+                    $('.tap-target').addClass('animate');
+                });
+
                 hidden = false;
             }
             else if( !inview && !hidden ) {
-                $('.tap-target').removeClass('animate');
-                $elm.animate({'opacity': 0}, 200);
+                $elm.animate({'opacity': 0}, 200, function() {
+                    $('.tap-target').removeClass('animate');
+                    _('.crop-zoom').style['position'] = 'absolute';
+                });
+
                 hidden = true;
             }
         }
@@ -470,7 +444,7 @@ $(document).ready(function() {
 
         // Events
         scrollQueue.push(onScroll);
-        resizeQueue.push(onResize);        
+        resizeQueue.push(onResize);
     }
 
     /*
@@ -562,11 +536,12 @@ $(document).ready(function() {
         }
     });
 
-});
+}
 
 
 function Quiz() {
     var $elm    = $('.quiz'),
+        _elm    = _('.quiz'),
         level   = 0,
         answers = [0,1,4,0,3];
 
@@ -581,8 +556,6 @@ function Quiz() {
 
     this.validate = function(e) {
         var correct = false;
-
-        console.log( $elm.find('li').index($(e.currentTarget)) );
 
         if( $elm.find('li').index($(e.currentTarget)) == answers[level] )
             correct = true;
@@ -617,6 +590,7 @@ var tID;
 
 window.addEventListener('scroll', onScroll);
 window.addEventListener('load', init);
+window.addEventListener('load', init2);
 
 window.addEventListener('resize', function() {
     clearTimeout(tID);
@@ -629,7 +603,13 @@ window.addEventListener('resize', function() {
 
 
 
-
+// Debug mode. Highlight various elements with borders, etc...
+if( debug ) {
+    var elms = document.querySelectorAll('.panel');
+    for (var i = 0; i < elms.length; i++) {
+        elms[i].style['border'] = '1px solid red';
+    }
+}
 
 
 var db = {

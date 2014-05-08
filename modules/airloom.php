@@ -19,7 +19,8 @@
                     <h1>Can a machine control the mind?</h1>
                 </header>
 
-                <p class="intro-text">James Tilly Matthews reveals that his mind is being controlled by a gang of ‘magnetic spies’ and their secret machine, the Air Loom.</p>
+                <p class="intro-text">A man named James Tilly Matthews reveals that his mind is being controlled by a gang of “magnetic spies” and their secret machine, the Air Loom.</p>
+                <p class="intro-text">The Air Loom uses the magnetic fluids Mesmer had described as permeating all living things, and it takes control of people’s minds in malevolent ways. Matthews identified many victims whose minds were being controlled by machines. These included members of the Houses of Parliament, as well as himself&hellip;</p>
 
             </div>
 
@@ -30,10 +31,10 @@
             <div class="panel air-loom">
 
                 <div class="bg-container">
-                    <img src="../_assets/img/airloom/airloom-2.jpg">
+                    <!-- <img src="../_assets/img/airloom/airloom-2.jpg"> -->
                 </div>
 
-                <div class="scroll-content text">
+                <div class="scroll-content position-center align-center">
                     <header>
                         <h1>The Air Loom</h1>
                     </header>
@@ -42,17 +43,18 @@
 
             <div class="panel">
                 <div class="bg-container">
-                    <img src="../_assets/img/airloom/airloom-3.jpg">
+                    <img src="../_assets/img/airloom/airloom-2.jpg">
                 </div>
 
-                <div class="scroll-content text">
+                <div class="scroll-content position-center align-left">
 
                     <div class="content">
                         <header>
-                            <h1>The culture of a paranoid schizophrenic</h1>
+                            <h1>Where will this technology lead?</h1>
                         </header>
 
-                        <p>Inducing trance-like states, and presented himself as a fellow initiate into yogic powers of mind. He privately believed they were mumbo-jumbo, and had learned mesmerism from an English pamphlet.</p>
+                        <p>Although the Air Loom was a creation of Matthews’ mind, it was formed out of newly discovered powers that were bringing the forces of nature under the control of science.</p>
+                        <p>Recent experiments on animals and humans had shown that electric current could animate living tissues. Matthews’ Air Loom posed the question: will these new technologies one day be able to control the mind as well as the body?</p>
                     </div>
                     
                 </div>

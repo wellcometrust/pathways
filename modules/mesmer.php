@@ -16,35 +16,30 @@
                 </p>
 
                 <header>
-                    <b>The Story of Mesmer</b>
-                    <h1>Can science harness the life-force?</h1>
+                    <h1>Can the mind heal the body?</h1>
                 </header>
 
-                <p class="intro-text">Mesmer arrives in Paris in 1778 and his ‘magnetic’ therapy is a sensation. Patients are cured in their hundreds - of paralysis, epilepsy, toothache, stomach cramps, even lifelong blindness.</p>
+                <p class="intro-text">Franz Anton Mesmer arrives in Paris in 1778. He has a dramatic new theory: he believes that he can cure people by using the power of his mind to control the forces of the physical universe. He starts practising this ‘magnetic therapy’ on patients and it is a sensation.</p>
 
             </div>
 
         </div>
 
-        <div class="sequence">
+        <div class="sequence" data-sequence="cross-fade">
             
             <div class="panel mesmers-salon">
 
                 <div class="bg-container">
-                    <div class="bg">
-                        <img src="../_assets/img/mesmer/mesmer-2.jpg">
-                    </div>
+                    <img src="../_assets/img/mesmer/mesmer-2.jpg">
                 </div>
                 
-                <div class="scroll-content text">
+                <div class="scroll-content position-center text-left">
                     
-                    <div class="content">
-                        <header>
-                            <h1>In Mesmer’s Salon</h1>
-                        </header>
+                    <header>
+                        <h1>In Mesmer’s Salon</h1>
+                    </header>
 
-                        <p>He can treat thirty people at a time in his baquets: tubs filled with iron filings and magnetised water in which patients sit and hold hands while the fluid circulates. In his salons, or séances, a mysterious ‘magnetic fluid’, directed by magnetised rods, flows around the participants. They twitch, writhe, speak in tongues, collapse in violent convulsions.</p>
-                    </div>
+                    <p>Hundreds of patients came to be treated for all sorts of afflictions. Patients would twitch, writhe, speak in tongues, and collapse in violent convulsions. When they revived, they were cured of all manners of illness: toothaches, cramps, paralysis and even blindness.</p>
 
                 </div>
 
@@ -53,14 +48,8 @@
             <div class="panel tap-block">
 
                 <div class="bg-container">
-                    <div class="bg">
-                        <img src="../_assets/img/mesmer/mesmer-3.jpg">
-                    </div>
+                    <img src="../_assets/img/mesmer/mesmer-2.jpg">
                 </div>
-
-                <audio class="audio-player" src="../_assets/audio/crystal.mp3"></audio>
-                
-                <div class="audio-icon"><div class="circles"></div></div>
 
                 <div class="crop-zoom">
                     <div class="tap-target rod"     data-crop="rod"><div></div></div>
@@ -70,103 +59,66 @@
 
             </div>
 
-        </div>
+            <div class="panel animal-magnetism">
 
-        <!-- Nonsense -->
-        <div class="sequence2">
-
-            <div class="bg-container">
-                <div class="bg">
-                    <img src="../_assets/img/mesmer/mesmer-4.jpg">
+                <div class="bg-container">
+                    <img src="../_assets/img/mesmer/mesmer-3.jpg">
                 </div>
-            </div>
-
-            <div class="panel tween clearfix">
                 
-                <div class="panel-container">
-
-                    <div class="panel-content">
-                        <header>
-                            <h2>Animal Magnetism</h2>
-                        </header>
-                        
-                        <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’</p>
-                        <p>Animal magnetism was the energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
-                    </div>                    
-
-                </div>
-
-                <div class="scroll-content">
-                    <img src="../_assets/img/mesmer/am-1.jpg">
-                </div>
-
-            </div>
-
-            <div class="panel tween clearfix">
-                
-                <div class="panel-container">
-
-                    <div class="panel-content">
-                        <header>
-                            <h2>Then he discovered</h2>
-                        </header>
-
-                        <p>that the fluid could be powerfully directed by magnets and metal rods, which attracted the fluid around the body. He experimented with shaped magnets and found that each had different effects.</p>
-                    </div>
-                
-                </div>
-
-                <div class="scroll-content">
-                    <img src="../_assets/img/mesmer/am-2.jpg">
-                </div>
-
-            </div>
-
-            <div class="panel tween clearfix">
-
-                <div class="panel-container">
-
-                    <div class="panel-content">
-                        <header>
-                            <h2>As his salons</h2>
-                        </header>
-                        
-                        <p>became more crowded, he invented the baquet: a tub filled with iron filings and magnetised water, in which up to thirty patients could sit and hold hands while the fluid circulated through them.</p>
-                    </div>
+                <div class="scroll-content position-center text-left">
                     
-                </div>
-
-                <div class="scroll-content">
-                    <img src="../_assets/img/mesmer/am-3.jpg">
-                </div>
-
-            </div>
-
-            <div class="panel investigates">
-                
-                <div class="inner clearfix">
                     <header>
-                        <h2>The Committee investigates</h2>
+                        <h1>Animal Magnetism</h1>
                     </header>
 
-                    <div class="body">
-                        <p>In 1784 an Academy of Sciences committee is convened, led by Benjamin Franklin. They begin by trying magnetic cures on themselves. Some of them feel mild twinges, but nothing like the mass frenzy generated at Mesmer’s salons.</p>
-                        <p>They proceed to blind testing of patients, and discover that Mesmer’s subjects can’t tell when magnetised objects have been swapped with non-magnetised ones.</p>                        
-                    </div>
+                    <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’.  Animal magnetism was the superfine fluids and energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
 
-                    <div class="body">
-                        <strong>They conclude:</strong>
-                    </div>
-
-                    <blockquote>
-                        <p>‘There is no proof of the existence of the Animal Magnetic fluid…the imagination without the aid of Magnetism can produce convulsions, but Magnetism without the imagination can produce nothing.’</p>
-                    </blockquote>
-
-                    <div class="video-popup">
-                        <a class="play-video talkinghead" data-width="640" data-height="360" title="" href="//www.youtube.com/embed/Zl6xwuBJVIY">Play Video</a>
-                        <p>Author Mike Jay interviewed about Mesmer’s legacy.</p>
-                    </div>
                 </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="bg-container">
+                    <img src="../_assets/img/mesmer/mesmer-4.jpg">
+                </div>
+                
+                <div class="scroll-content--strip">                    
+                    <p>Mesmer’s reputation spread, and his salons became overwhelmed with patients. To accommodate the masses, he came up with novel ways and locations to treat them. </p>
+                    <p>In one famous example, Mesmer magnetised trees and connected his patients to the trees with rods.</p>
+                </div>                    
+
+            </div>
+
+            <div class="panel">
+
+                <div class="bg-container">
+                    <img src="../_assets/img/mesmer/mesmer-5.jpg">
+                </div>
+                
+                <div class="scroll-content--strip">
+                    <p>Mesmer’s treatment was incredibly popular, and seemed to work.</p>
+                    <p>However mesmerism, as it became known, provoked much scepticism and was widely satirised.</p>
+                    <p>In this febrile atmosphere, the question of the whether Mesmer’s animal magnetism was real science - as he hoped to prove - had to be answered…</p>
+                </div>
+                
+            </div>
+
+            <div class="panel audio sciences-committee">
+
+                <div class="bg-container">
+                    <img src="../_assets/img/mesmer/mesmer-6.jpg">
+                </div>
+
+                <div class="scroll-content">
+                    <header>
+                        <h1>A French Royal Academy of Sciences Committee was convened.</h1>
+                    </header>                        
+                </div>
+
+                <!-- <audio class="audio-player" src="../_assets/audio/crystal.mp3"></audio>
+                <div class="audio-icon"><div class="circles"></div></div> -->
 
             </div>
 

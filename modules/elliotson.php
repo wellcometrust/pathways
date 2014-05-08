@@ -6,21 +6,21 @@
         <div class="start">
 
             <div class="bg-container fixed">
-                <!-- <img src="../_assets/img/"> -->
+                <img src="../_assets/img/elliotson/elliotson-1.jpg">
             </div>
             
             <div class="content">
 
                 <div class="scene-set">
-                    <span class="location"></span>
-                    <span class="date"></span>
+                    <span class="location">London</span>
+                    <span class="date">1838</span>
                 </div>
 
                 <header>
-                    <h1>Lorem</h1>
+                    <h1>Mesmerism on trial</h1>
                 </header>
 
-                <p class="intro-text">  Lorem</p>
+                <p class="intro-text">60 years after Mesmer in Paris, mesmerism has hit Victorian Britain. Dr John Elliotson, based at University College Hospital London, is holding dramatic demonstrations of his supposed mesmeric powers that draw the likes of Dickens, Faraday, &c.In 1838 he demonstrates his mesmeric control over Elizabeth and Jane Okey, two young servant girls who he has been treating for epileptic seizures. They are shortly to become celebrities.</p>
             </div>
 
         </div>
@@ -30,13 +30,15 @@
             <div class="panel">
 
                 <div class="bg-container">
-                    <!-- <img src="../_assets/img/"> -->
+                    <img src="../_assets/img/elliotson/elliotson-2.jpg">
                 </div>
 
                 <div class="scroll-content">
 
                     <div class="content">
-                        Lorem
+                        <p>Elliotson’s demonstrations on the Okey Sisters: What’s really going on? The Okey sisters are extraordinarily susceptible, slipping rapidly into trance states where they manifest quite different personalities. Elliotson can make them fall into stupor merely by waving a finger.</p>
+                        <p>Touching magnetised metals or even water sends them into a trance in which they spontaneously mirror each other’s actions.</p>
+                        <p>Elliotson’s demonstrations are crowded with doctors, dignitaries and luminaries. The Okey sisters seem to enjoy the attention, especially in their disinhibited trance states, when they tease the gentlemen and sit in their laps. However, even in the very first demonstration something seems awry. Elliotson can’t get **xxx Okey** to come out of her mesmerised state – and it is only when her demand that Dr Wood, Elliotson’s assistant, rubs her neck is met, that she surfaces.Some people become suspicious…</p>
                     </div>
 
                 </div>
@@ -44,13 +46,33 @@
 
             <div class="panel">
                 <div class="bg-container">
-                    <img src="../_assets/img/esdaile/esdaile-3.jpg">
+                    <img src="../_assets/img/elliotson/elliotson-3.jpg">
                 </div>
 
                 <div class="scroll-content right">
                     
                     <div class="content">
-                        <p>Esdaile had set himself up as a follower of Indian healers called yogis and fakirs. In reality, he didn’t really believe in their methods, and instead practised mesmerism – which he had learnt from an English pamphlet </p>
+                        <header>
+                            <h1>Thomas Wakley, of the Lancet medical journal, challenged Elliot and his demonstrations</h1>
+                        </header>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="bg-container">
+                    <img src="../_assets/img/elliotson/elliotson-4.jpg">
+                </div>
+
+                <div class="scroll-content right">
+                    
+                    <div class="content">
+                        <blockquote>
+                            <p>“The ‘science’ of mesmerism, like the ‘science’ of fortune-telling, will always carry on a precarious existence wherever there are clever girls, philosophic bohemians, weak women and weaker men, but it can no longer affront the common sense of the medical profession.”</p>
+                        </blockquote>
+
+                        <p>Mesmerism is banished to the margins.</p>
                     </div>
 
                 </div>
