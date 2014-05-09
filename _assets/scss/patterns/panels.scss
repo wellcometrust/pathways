@@ -1,10 +1,30 @@
 
+.scroll-content--strip {
+    position: absolute;
+    left: 3%;
+    font-size: 0.9rem;
+    color: #fff;
+    background-color: rgba(0,0,0,0.7);
+    width: 250px;
+    padding: 35px 25px 200px 25px;
+    line-height: 1.6;
+
+    p {
+        margin-bottom: 1rem;
+    }
+
+    &.top {
+        top: 0;
+    }
+
+    &.bottom {
+        bottom: -1px;
+    }
+}
+
+
 /* Mesmer */
 
-.mesmers-salon .inner {
-    max-width: 800px;
-    margin: 0 auto;
-}
 
 .tap-block p {
     position: absolute;
@@ -14,6 +34,22 @@
     text-align: center;
     font-size: 2.236rem;
     font-family: 'Garamond', Times, serif;
+}
+
+.sciences-committee {
+    .scroll-content {
+        width: 100%;
+
+        h1 {
+            color: #fff;
+            text-align: center;
+        }
+    }
+
+    .inner {
+        max-width: 640px;
+        margin: 0 auto;
+    }
 }
 
 

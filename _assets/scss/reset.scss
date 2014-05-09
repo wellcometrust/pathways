@@ -3,23 +3,36 @@
 
 body {
     background-color:   #000;
-    font-family:        'Museo sans', 'helvetica neue', arial, sans-serif;
+    font-family:        "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-size-adjust:   0.5;
+    font-weight:        normal;
+    font-style:         normal;
     font-size:          100%;
-    font-weight:        400;
     color:              #333;
     line-height:        1.4;
 }
 
 
 h1 {
-    font-family: 'Garamond', Times, serif;
-    font-weight: 100;
+    font-family:        "Abril Display Regular", Didot, 'Times New Roman', Times, serif;
+    font-size-adjust:   0.48;
+    font-weight:        normal;
+    font-style:         normal;
 }
 
 h2, h3, h4, h5, h6 {
-    font-family: 'Garamond', Times, serif;
-    font-weight: 100;
-    margin-bottom: 1em;
+    font-family:        "Abril Display Regular", Didot, 'Times New Roman', Times, serif;
+    font-size-adjust:   0.48;
+    font-weight:        normal;
+    font-style:         normal;
+    margin-bottom:      1em;
+}
+
+em, i {
+    font-family:        "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
+    font-size-adjust:   0.51;
+    font-weight:        normal;
+    font-style:         italic;
 }
 
 iframe {

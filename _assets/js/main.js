@@ -1,6 +1,6 @@
 
 
-var debug = true;
+var debug = false;
 
 
 function _(str) { return document.querySelector(str); }

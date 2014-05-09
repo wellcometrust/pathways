@@ -5,11 +5,11 @@
         position:   relative;
         width:      80%;
         max-width:  1200px;
-        margin:     10% auto 0 auto;
+        margin:     20vh auto 0 auto;
     }
 
     .scene-set {
-        margin: 3em 0 4em 0;
+        margin-bottom: 4em;
     }
 
     .scene-set {
@@ -18,8 +18,7 @@
 
     .scene-set .location {
         display:        block;
-        font-family:    "Museo Sans 300", 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        font-weight:    300;
+        @include        tablet-gothic;
         font-size:      0.8rem;
         text-transform: uppercase;
         letter-spacing: .1em;
@@ -28,14 +27,14 @@
 
     .scene-set .date {
         display:        block;
-        font-family:    'Garamond', Times, serif;
-        font-size:      5rem;
+        @include        abril-display;
+        font-size:      4.2rem;
         text-align:     center;
     }
     
     header h1 {
         color:          #fff;
-        font-size:      5rem;
+        font-size:      4rem;
         line-height:    1;
         text-align:     center;
         margin:         0.3em 0 0 0;
@@ -43,8 +42,8 @@
 
     .intro-text {
         color:          #fff;
-        font-family:    'Garamond', Times, serif;
-        font-size:      1.5rem;
+        @include        abril-regular;
+        font-size:      1.1rem;
         line-height:    1.5;
         text-align:     center;
         width:          75%;

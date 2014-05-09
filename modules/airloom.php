@@ -35,9 +35,11 @@
                 </div>
 
                 <div class="scroll-content position-center align-center">
-                    <header>
-                        <h1>The Air Loom</h1>
-                    </header>
+                    <div class="inner">
+                        <header>
+                            <h1>The Air Loom</h1>
+                        </header>    
+                    </div>
                 </div>
             </div>
 
@@ -46,9 +48,9 @@
                     <img src="../_assets/img/airloom/airloom-2.jpg">
                 </div>
 
-                <div class="scroll-content position-center align-left">
+                <div class="scroll-content position-center align-left light">
 
-                    <div class="content">
+                    <div class="inner">
                         <header>
                             <h1>Where will this technology lead?</h1>
                         </header>

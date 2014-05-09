@@ -30,16 +30,18 @@
             <div class="panel mesmers-salon">
 
                 <div class="bg-container">
-                    <img src="../_assets/img/mesmer/mesmer-2.jpg">
+                    <img src="../_assets/img/mesmer/mesmer-2-black.jpg">
                 </div>
                 
                 <div class="scroll-content position-center text-left">
-                    
-                    <header>
-                        <h1>In Mesmer’s Salon</h1>
-                    </header>
 
-                    <p>Hundreds of patients came to be treated for all sorts of afflictions. Patients would twitch, writhe, speak in tongues, and collapse in violent convulsions. When they revived, they were cured of all manners of illness: toothaches, cramps, paralysis and even blindness.</p>
+                    <div class="inner">
+                        <header>
+                            <h1>In Mesmer’s Salon</h1>
+                        </header>
+
+                        <p>Hundreds of patients came to be treated for all sorts of afflictions. Patients would twitch, writhe, speak in tongues, and collapse in violent convulsions. When they revived, they were cured of all manners of illness: toothaches, cramps, paralysis and even blindness.</p>
+                    </div>                    
 
                 </div>
 
@@ -67,11 +69,13 @@
                 
                 <div class="scroll-content position-center text-left">
                     
-                    <header>
-                        <h1>Animal Magnetism</h1>
-                    </header>
+                    <div class="inner">
+                        <header>
+                            <h1>Animal Magnetism</h1>
+                        </header>
 
-                    <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’.  Animal magnetism was the superfine fluids and energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
+                        <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’.  Animal magnetism was the superfine fluids and energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
+                    </div>
 
                 </div>
 
@@ -84,7 +88,7 @@
                     <img src="../_assets/img/mesmer/mesmer-4.jpg">
                 </div>
                 
-                <div class="scroll-content--strip">                    
+                <div class="scroll-content--strip bottom">                    
                     <p>Mesmer’s reputation spread, and his salons became overwhelmed with patients. To accommodate the masses, he came up with novel ways and locations to treat them. </p>
                     <p>In one famous example, Mesmer magnetised trees and connected his patients to the trees with rods.</p>
                 </div>                    
@@ -97,7 +101,7 @@
                     <img src="../_assets/img/mesmer/mesmer-5.jpg">
                 </div>
                 
-                <div class="scroll-content--strip">
+                <div class="scroll-content--strip top">
                     <p>Mesmer’s treatment was incredibly popular, and seemed to work.</p>
                     <p>However mesmerism, as it became known, provoked much scepticism and was widely satirised.</p>
                     <p>In this febrile atmosphere, the question of the whether Mesmer’s animal magnetism was real science - as he hoped to prove - had to be answered…</p>
@@ -111,10 +115,12 @@
                     <img src="../_assets/img/mesmer/mesmer-6.jpg">
                 </div>
 
-                <div class="scroll-content">
-                    <header>
-                        <h1>A French Royal Academy of Sciences Committee was convened.</h1>
-                    </header>                        
+                <div class="scroll-content position-center">
+                    <div class="inner">
+                        <header>
+                            <h1>A French Royal Academy of Sciences Committee was convened.</h1>
+                        </header>
+                    </div>
                 </div>
 
                 <!-- <audio class="audio-player" src="../_assets/audio/crystal.mp3"></audio>

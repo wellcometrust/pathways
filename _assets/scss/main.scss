@@ -1,9 +1,12 @@
 
+@import 'mixins';
+
 @import 'reset';
 
 @import 'patterns/navigation';
 @import 'patterns/start';
-@import 'patterns/library-layer';
 @import 'patterns/sequences';
 @import 'patterns/panels';
+@import 'patterns/mesmers-salon';
+@import 'patterns/library-layer';
 @import 'patterns/quiz';
