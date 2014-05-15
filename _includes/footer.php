@@ -5,20 +5,21 @@
     <script src="../_assets/js/lib/greensock/TweenMax.min.js"></script>
     <script src="../_assets/js/lib/jquery.scrollmagic.js"></script>
 
-    <script>
-        // global nav
-        var $nav_container  = document.querySelector('.global-navigation .container'),
-            $nav_handle     = document.querySelector('.global-navigation .handle');
+    <!-- Pathways Core -->
+    <script src="../_assets/js/pathways.js"></script>    
 
-        $nav_handle.addEventListener('click', function() {
-            if( $nav_container.classList.contains('active') )
-                $nav_container.classList.remove('active');
-            else
-                $nav_container.classList.add('active');
-        });
-    </script>
-    
+    <script src="../_assets/js/patterns/crop-zoom.js"></script> 
+    <script src="../_assets/js/patterns/global-navigation.js"></script> 
+    <script src="../_assets/js/patterns/library-panel.js"></script> 
+    <script src="../_assets/js/patterns/library-layer.js"></script> 
+
     <script src="../_assets/js/main.js"></script>
+
+    <script>
+        (function() {
+            var pw = new Pathways();
+        })();
+    </script>
 
 </body>
 </html>

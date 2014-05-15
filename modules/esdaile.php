@@ -61,6 +61,7 @@
 
                 <div class="bg-container">
                     <img src="../_assets/img/esdaile/esdaile-4.jpg">
+                    <div class="boats" style="position: absolute; bottom: 25px; width: 100%; height: 161px; -webkit-transform: translate(0, 0); -webkit-transition: all 25s linear; background: url('../_assets/img/esdaile/esdaile-4-boat.png') 0 0 no-repeat; background-size: 100%; z-index: 5;"></div>
                 </div>
 
                 <div class="scroll-content">

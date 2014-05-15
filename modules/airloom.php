@@ -30,9 +30,7 @@
             
             <div class="panel air-loom">
 
-                <div class="bg-container">
-                    <!-- <img src="../_assets/img/airloom/airloom-2.jpg"> -->
-                </div>
+                <div class="bg-container"></div>
 
                 <div class="scroll-content position-center align-center">
                     <div class="inner">
@@ -41,6 +39,15 @@
                         </header>    
                     </div>
                 </div>
+            </div>
+
+            <div class="panel air-loom-content">
+
+                <div class="bg-container">
+                    <video class="air-loom-video" src="../_assets/video/Airloom.mov" loop></video>
+                </div>
+
+                <div class="scroll-content position-center align-center"></div>
             </div>
 
             <div class="panel">

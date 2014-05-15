@@ -525,7 +525,7 @@ Greensock License info at http://www.greensock.com/licensing/
 		 */
 
 		var
-			TRIGGER_HOOK_STRINGS = ["onCenter", "onEnter", "onLeave"],
+			TRIGGER_HOOK_STRINGS = ["onCenter", "onEnter", "onLeave", "top", "bottom"],
 			NAMESPACE = "ScrollScene",
 			DEFAULT_OPTIONS = {
 				duration: 0,
@@ -982,9 +982,11 @@ Greensock License info at http://www.greensock.com/licensing/
 							triggerPoint = 0.5;
 							break;
 						case "onLeave":
+						case "top":
 							triggerPoint = 0;
 							break;
 						case "onEnter":
+						case 'bottom':
 						default:
 							triggerPoint = 1;
 							break;

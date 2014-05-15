@@ -1,0 +1,78 @@
+
+.past-twitter {
+
+    .tweet {
+        position:           relative;
+        color:              #fff;
+        background-color:   rgba(0,0,0,0.8);
+        border-radius:      5px;
+        width:              400px;
+        padding:            0.6em 1em;
+        margin:             1em 0;
+
+        .avatar {
+            position:           absolute;
+            top:                -10px;
+            background-color:   #fff;
+            width:              90px;
+            height:             90px;
+            border-radius:      10px;
+        }
+
+        .header {
+            border-bottom:  1px solid #777;
+            padding-bottom: 0.5em;
+
+            .time {
+                color:      #999;
+                @include    tablet-gothic;
+                font-size:  0.8rem;
+            }
+
+            .username {
+                @include    tablet-gothic;
+                font-size:  0.9rem;
+
+                span {
+                    color: #999;
+                }
+            }
+        }
+
+        .body {
+            padding: 0.6em 0;
+        }
+
+        &.wakley {
+            float: left;
+
+            .avatar {
+                left:   -10px;
+            }
+
+            .header {
+                padding-left: 80px;
+            }
+
+            .body {
+                padding-left: 80px;
+            }
+        }
+
+        &.elliotson {
+            float: right;
+
+            .avatar {
+                right:  -10px;
+            }
+
+            .header {
+                padding-right: 80px;
+            }
+
+            .body {
+                padding-right: 80px;
+            }
+        }
+    }
+}

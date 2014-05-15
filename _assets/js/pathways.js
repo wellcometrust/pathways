@@ -3,51 +3,44 @@
     'use strict';
 
     var Pathways = function(options) {
-        var Pathways    = this,
-            lastScrollY = 0,
-            ticking     = false,
+        var Pathways = this,
 
-            supports_touch = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch),
-
-            renderQueue = [],
-            scrollQueue = [];
+            supports_touch = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch);
 
         /************************
             Private functions
         *************************/
 
         var init = function() {
-            window.addEventListener('scroll', onScroll);
+            loadComponents();
+
+            if( !supports_touch )
+                window.Pathways.LoadScenes();
         }
 
-        var onScroll = function() {
-            lastScrollY = window.scrollY;
-            requestTick();
+        var loadComponents = function() {
+            $('[data-component]').each(function(){
+                var handler = $(this).attr('data-component');
+
+                if ( handler ) {
+                    var handlerClass = toTitleCase(handler);
+
+                    if ( window.Pathways[handlerClass] != null ) {
+                        window.Pathways[handlerClass]();
+                    }
+                }
+            });
         }
 
-        var requestTick = function() {
-            if(!ticking) {
-                requestAnimationFrame(Pathways.render);
-                ticking = true;
-            }
+        var toTitleCase = function(str){
+            str = str.replace('-',' ').replace('_',' ');
+            str = str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);});
+            return str.replace(/\W/g,'');
         }
 
         /************************
             Public functions
         *************************/
-
-        this.addRender = function(func) {
-            this.renderQueue.push(func);
-        }
-
-        this.addScroll = function(func) {
-            this.scrollQueue.push(func);
-        }
-
-        this.render = function() {
-
-            ticking = false;
-        }
 
         init();
         return Pathways;
@@ -55,3 +48,4 @@
 
     window.Pathways = Pathways;
 })(window);
+
