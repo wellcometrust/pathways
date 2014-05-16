@@ -107,8 +107,8 @@
             <div class="panel news">
 
                 <div class="bg-container">
-                    <!-- <img src="../_assets/img/mesmer/mesmer-5.jpg"> -->
-                    <video class="news-video" src="../_assets/video/Pathways.mp4" loop></video>
+                    <img src="../_assets/img/mesmer/mesmer-5.jpg">
+                    <!-- <video class="news-video" src="../_assets/video/Pathways.mp4" loop></video> -->
                 </div>
                 
                 <div class="scroll-content left">

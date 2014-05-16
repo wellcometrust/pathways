@@ -17,7 +17,7 @@
 
     <script>
         (function() {
-            var pw = new Pathways();
+            // var pw = new Pathways();
         })();
     </script>
 

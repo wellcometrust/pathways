@@ -1,5 +1,6 @@
 
 .library-panel {
+    display:    none;
     position:   absolute;
     bottom:     0;
     right:      0;
@@ -30,4 +31,8 @@
     &.active {
         -webkit-transform:  translate(0, 0);
     }
+}
+
+.js .library-panel {
+    display: block;
 }

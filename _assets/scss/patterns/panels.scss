@@ -116,11 +116,18 @@
 }
 
 .crop-zoom {
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
+    display:    none;
+    position:   absolute;
+    top:        0px;
+    width:      100%;
+    height:     100%;
+    z-index:    10;
+}
+
+@media screen and (min-width: 48em) {
+    .js .crop-zoom {
+        display: block;
+    }
 }
 
 .tap-target {
@@ -132,78 +139,53 @@
 }
 
 .tap-target.rod {
-    top: 370px;
-    left: 15%;
+    top:    370px;
+    left:   15%;
 }
 
 .tap-target.woman {
-    top: 570px;
-    left: 45%;
+    top:    570px;
+    left:   45%;
 }
 
 .tap-target.mesmer {
-    top: 200px;
-    right: 22%;
+    top:    200px;
+    right:  22%;
 }
 
 .tap-target div {
-    position: absolute;
-    top:    0px;
-    left:   0px;
-    width:  36px;
-    height: 36px;
-    border: 2px solid #fff;
-    border-radius: 40px;
+    position:       absolute;
+    top:            0px;
+    left:           0px;
+    width:          36px;
+    height:         36px;
+    border:         2px solid #fff;
+    border-radius:  40px;
 }
 
 .tap-target.animate div {
-    -webkit-animation-name: circle;
-    -webkit-animation-duration: 3s;
-    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name:             circle;
+    -webkit-animation-duration:         3s;
+    -webkit-animation-iteration-count:  infinite;
 }
 
 .overlay {
-    display: none;
-    position: fixed;
-    top: 0;
+    display:    none;
+    position:   fixed;
+    top:        0;
     background-color: rgba(0,0,0,0);
-    width: 100%;
-    z-index: 20;
+    width:      100%;
+    z-index:    20;
 
     -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
+    -moz-transition:    all 0.5s ease;
 }
 
 .overlay .image-crop {
-    opacity: 0;
     position: absolute;
+    opacity: 0;
     z-index: 15;
 }
-.overlay .image-crop.animate {
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-}
-
-.overlay .text {
-    position: absolute;
-    color: #fff;
-    width: 25%;
-    padding: 0 15px;
-    opacity: 0;
-    line-height: 1.4;
-    z-index: 15;
-    -webkit-transform: translate3d(0, 100px, 0);
-    -webkit-transition: -webkit-transform 0.5s ease;
-
-    -moz-transform: translate3d(0, 100px, 0);
-    -moz-transition: transform 0.5s ease;
-}
-.overlay .text.show {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-}
-
 
 /* Esdaile */
 

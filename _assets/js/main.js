@@ -11,14 +11,9 @@ var panel_height        = window.innerHeight < 750 ? (750 + 15) : (window.innerH
     $sequence           = $('.sequence'),
 
     // Event queues
-    resizeQueue         = new Array();
+    resizeQueue         = new Array(),
 
-
-var supports_touch = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch),
     controller;
-
-
-$start.css('height', panel_height);
 
 
 function resizeAllTheThings() {
@@ -50,6 +45,8 @@ window.addEventListener('resize', function() {
 });
 
 Pathways.LoadScenes = function() {
+
+    $start.css('height', panel_height);
 
     resizeAllTheThings();
 
@@ -223,26 +220,6 @@ Pathways.LoadScenes = function() {
     scenes.forEach(function(s) {
         s.addTo(controller);
     })
-
-    /**
-        Audio
-    **/
-    var _player     = _('.audio-player'),
-        playing     = false;
-
-    $('.audio-icon').on('click', function() {
-        if( playing ) {
-            _player.pause();
-            $('.audio-icon').removeClass('active');
-            playing = false;
-        }
-        else {
-            _player.play();
-            $('.audio-icon').addClass('active');
-            playing = true;
-        }
-    });
-
 }
 
 
@@ -259,18 +236,5 @@ var db = {
     'mesmer': {
         'image': 'mesmer-crop.jpg',
         'text': 'Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’'
-    }
-}
-
-/*
-    Sources: library
-    types: player, video, audio
-*/
-
-var library_layer = {
-    '1700 A Guide to Magnetic Cures': {
-        source: 'library',
-        url:    'http://search.wellcomelibrary.org/iii/encore/record/C__Rb1758773?lang=eng',
-        type:   'player'
     }
 }
