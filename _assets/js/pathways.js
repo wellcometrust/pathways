@@ -3,19 +3,26 @@
     'use strict';
 
     var Pathways = function(options) {
-        var Pathways = this,
+        var Pathways        = this,
+            panel_height    = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15),
 
-            supports_touch = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch);
+            supports_touch  = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch);
 
         /************************
             Private functions
         *************************/
 
         var init = function() {
+
             loadComponents();
+            resizeAllTheThings();
 
             if( !supports_touch )
                 window.Pathways.LoadScenes();
+
+            window.addEventListener('resize', function() {
+                resizeAllTheThings();
+            });
         }
 
         var loadComponents = function() {
@@ -26,12 +33,29 @@
                     var handlerClass = toTitleCase(handler);
 
                     if ( window.Pathways[handlerClass] != null ) {
-                        window.Pathways[handlerClass]();
+                        window.Pathways[handlerClass](panel_height);
                     }
+                    else
+                        console.warn('Could not load the necessary component: ' + handlerClass);
                 }
             });
         }
 
+        var resizeAllTheThings = function() {
+            panel_height = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15);
+
+            // Set the heights of the panels to a minimum of the window height, or the height of the content.
+            // Use any offsets set on the panel to increase height where necessary.
+            $('.panel').each(function() {
+                var $this   = $(this),
+                    height  = $this.height();
+
+                if( height < panel_height )
+                    $this.css('height', panel_height + ( $this.data('offset-height') ? $this.data('offset-height') : 0 ) );
+            });
+        }
+
+        // Utils
         var toTitleCase = function(str){
             str = str.replace('-',' ').replace('_',' ');
             str = str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);});

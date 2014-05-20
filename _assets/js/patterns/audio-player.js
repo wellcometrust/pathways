@@ -1,18 +1,41 @@
 
 Pathways.AudioPlayer = function() {
-    var _player     = _('.audio-player'),
-        playing     = false;
+    var self            = this,
+        $player         = $('.audio-player'),
+        $progress_bar   = $player.find('.progressed'),
+        $time_left      = $player.find('.time-left span'),
+        playing         = false;
 
-    $('.audio-icon').on('click', function() {
+    var src     = $player.data('src'),
+        track   = new Audio(src);
+
+    $player.on('click', '.controls', function() {
         if( playing ) {
-            _player.pause();
-            $('.audio-icon').removeClass('active');
+            track.pause();
+            $(this).removeClass('active');
             playing = false;
         }
         else {
-            _player.play();
-            $('.audio-icon').addClass('active');
+            track.play();
+            $(this).addClass('active');
             playing = true;
         }
     });
+
+    track.addEventListener('timeupdate', function () {
+        var remaining = parseInt(track.duration - track.currentTime);
+        
+        $progress_bar.css('width', (track.currentTime * (100 / track.duration) + '%' ));
+        $time_left.html( self.secondsToMinutes(remaining) );
+    });
+
+    this.secondsToMinutes = function(seconds) {
+        var mins        = Math.floor( seconds / 60 ),
+            remainder   = seconds % 60;
+
+        if( remainder < 10 )
+            remainder = '0' + remainder;
+
+        return mins + '.' + remainder;
+    }
 }

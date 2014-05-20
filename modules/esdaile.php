@@ -61,7 +61,7 @@
 
                 <div class="bg-container">
                     <img src="../_assets/img/esdaile/esdaile-4.jpg">
-                    <div class="boats" style="position: absolute; bottom: 25px; width: 100%; height: 161px; -webkit-transform: translate(0, 0); -webkit-transition: all 25s linear; background: url('../_assets/img/esdaile/esdaile-4-boat.png') 0 0 no-repeat; background-size: 100%; z-index: 5;"></div>
+                    <div class="boats"></div>
                 </div>
 
                 <div class="scroll-content">
@@ -113,20 +113,34 @@
         <!-- Quiz -->
         <div class="panel quiz">
 
-            <div class="content clearfix">
+            <div class="content">
 
-                <div class="image">
-                    <img src="http://placekitten.com/250/250">
+                <div class="quiz-container clearfix" data-component="quiz">
+
+                    <div class="start">
+                        <span class="button">Start</span>
+                    </div>
+
+                    <div class="playground">
+                        <div class="image">
+                            <img src="http://placekitten.com/250/250">
+                        </div>
+
+                        <div class="answers">
+                            <div class="question"></div>
+                            <ul></ul>
+                        </div>
+
+                        <div class="remaining"></div>
+                        <div class="score"></div>
+                    </div>
+
+                    <div class="finish">
+                        
+                    </div>
+
                 </div>
 
-                <div class="answers">
-                    <ul>
-                        <li>First</li>
-                        <li>Second</li>
-                        <li>Third</li>
-                        <li>Fourth</li>
-                    </ul>
-                </div>
                 
             </div>
 

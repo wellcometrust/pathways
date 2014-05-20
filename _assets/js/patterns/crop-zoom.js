@@ -1,5 +1,5 @@
 
-Pathways.CropZoom = function() {
+Pathways.CropZoom = function(panel_height) {
 
     $('.crop-zoom').css({'position': 'absolute', 'opacity': 0, 'z-index': 20});
 

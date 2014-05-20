@@ -38,9 +38,13 @@
 
 .sciences-committee {
     .scroll-content {
-        top: 40%;
+        top: 35%;
         bottom: auto;
         width: 100%;
+
+        header {
+            margin-bottom: 3em;
+        }
 
         h1 {
             color: #fff;
@@ -201,3 +205,17 @@
 .india .scroll-content {
     color: #333;
 }
+
+.boats {
+    position:           absolute;
+    bottom:             25px;
+    width:              100%;
+    height:             161px;
+    background:         url('/_assets/img/esdaile/esdaile-4-boat.png') 0 0 no-repeat;
+    background-size:    100%;
+    z-index:            5;
+
+    -webkit-transform: translate(0, 0);
+    -webkit-transition: all 20s linear;
+}
+

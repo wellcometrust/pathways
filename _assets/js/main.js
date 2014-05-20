@@ -2,34 +2,6 @@
 function _(str) { return document.querySelector(str); }
 
 
-var panel_height        = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15),
-    
-    // Start
-    $start              = $('.start'),
-
-    // Sequences
-    $sequence           = $('.sequence'),
-
-    // Event queues
-    resizeQueue         = new Array(),
-
-    controller;
-
-
-function resizeAllTheThings() {
-    panel_height = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15);
-
-    // Set the heights of the panels to a minimum of the window height, or the height of the content.
-    // Use any offsets set on the panel to increase height where necessary.
-    $('.panel').each(function() {
-        var $this   = $(this),
-            height  = $this.height();
-
-        if( height < panel_height )
-            $this.css('height', panel_height + ( $this.data('offset-height') ? $this.data('offset-height') : 0 ) );
-    });
-}
-
 function positionCenter($elm) {
     var width   = $elm.width(),
         height  = $elm.height();
@@ -38,23 +10,20 @@ function positionCenter($elm) {
 }
 
 
-resizeQueue.push(resizeAllTheThings);
-
-window.addEventListener('resize', function() {
-    resizeQueue.forEach(function(func) { func(); });
-});
-
 Pathways.LoadScenes = function() {
 
-    $start.css('height', panel_height);
+    var panel_height    = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15),        
+        $start          = $('.start'),
+        $sequence       = $('.sequence'),
+        controller      = new ScrollMagic();
 
-    resizeAllTheThings();
+
+    // Begin!
+    $start.css('height', panel_height);
 
     /**************
         Scenes
     **************/
-
-    controller = new ScrollMagic();
 
     var scenes  = new Array(),
         idx     = 0;
@@ -173,7 +142,7 @@ Pathways.LoadScenes = function() {
     }
 
     // Video
-    if( $('.news').length ) {
+    if( $('.news').length && _('.news-video') ) {
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.news',
                 duration:       panel_height

@@ -119,7 +119,7 @@
                 
             </div>
 
-            <div class="panel audio sciences-committee" data-offset-height="300">
+            <div class="panel audio sciences-committee">
 
                 <div class="bg-container">
                     <img src="../_assets/img/mesmer/mesmer-6.jpg">
@@ -130,6 +130,14 @@
                         <header>
                             <h1>A French Royal Academy of Sciences Committee was convened.</h1>
                         </header>
+
+                        <div class="audio-player" data-src="../_assets/audio/Riding.mp3" data-component="audio-player">
+                            <div class="time-left">Time left: <span>0.00</span></div>
+                            <div class="progress-bar">
+                                <div class="progressed"></div>
+                            </div>
+                            <div class="controls play"></div>
+                        </div>
                     </div>
                 </div>
 
