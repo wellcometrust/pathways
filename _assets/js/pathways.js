@@ -17,8 +17,10 @@
             loadComponents();
             resizeAllTheThings();
 
-            if( !supports_touch )
+            if( !supports_touch ) {
                 window.Pathways.LoadScenes();
+                loadVideo();
+            }
 
             window.addEventListener('resize', function() {
                 resizeAllTheThings();
@@ -37,6 +39,22 @@
                     }
                     else
                         console.warn('Could not load the necessary component: ' + handlerClass);
+                }
+            });
+        }
+
+        var loadVideo = function() {
+            $('.bg-container.video').each(function() {
+                var $this   = $(this),
+                    src     = $this.data('src');
+
+                if( src ) {
+                    var video = document.createElement('video');
+                    
+                    video.src   = src;
+                    video.loop  = true;
+
+                    $this.html(video);
                 }
             });
         }

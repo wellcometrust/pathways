@@ -18,9 +18,9 @@
     <script src="../_assets/js/main.js"></script>
 
     <script>
-        (function() {
+        window.addEventListener('load', function() {
             var pw = new Pathways();
-        })();
+        })
     </script>
 
 </body>

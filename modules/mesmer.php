@@ -106,7 +106,7 @@
 
             <div class="panel news">
 
-                <div class="bg-container">
+                <div class="bg-container video" data-src="../_assets/video/Pathways.mp4">
                     <img src="../_assets/img/mesmer/mesmer-5.jpg">
                     <!-- <video class="news-video" src="../_assets/video/Pathways.mp4" loop></video> -->
                 </div>

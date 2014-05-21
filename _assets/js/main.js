@@ -40,6 +40,18 @@ Pathways.LoadScenes = function() {
         .setTween(start_tween)
 
 
+    // Svengali
+    if( _('.falling-lady') ) {
+        var lady_tween = TweenMax.to( _('.falling-lady'), 5, { y: (panel_height * 2) } );
+
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '.start',
+                duration:       (panel_height * 2),
+                offset:         (panel_height / 4)
+            })
+            .setTween(lady_tween);
+    }
+
     /**************
         Sequence
      **************/
@@ -142,17 +154,20 @@ Pathways.LoadScenes = function() {
     }
 
     // Video
-    if( $('.news').length && _('.news-video') ) {
+    if( $('.news').length ) {
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.news',
                 duration:       panel_height
             })
             .on('enter', function(e) {
-                _('.news-video').play();
+                if( _('.news video') )
+                    _('.news video').play();
             })
             .on('leave', function(e) {
-                _('.news-video').pause();
-                _('.news-video').currentTime = 0;
+                if( _('.news video') ) {
+                    _('.news video').pause();
+                    _('.news video').currentTime = 0;
+                }
             })
     }
 
@@ -177,12 +192,30 @@ Pathways.LoadScenes = function() {
                 duration:       panel_height
             })
             .on('enter', function(e) {
-                _('.air-loom-video').play();
+                if( _('.air-loom-content video') )
+                    _('.air-loom-content video').play();
             })
             .on('leave', function(e) {
-                _('.air-loom-video').pause();
-                _('.air-loom-video').currentTime = 0;
+                if( _('.air-loom-content video') ) {
+                    _('.air-loom-content video').pause();
+                    _('.air-loom-content video').currentTime = 0;
+                }
             })
+    }
+
+    // Svengali
+    if( _('.trilby') ) {
+        $('.comic-panel').css('opacity', 0);
+
+        $('.comic-panel').each(function() {
+            var tween = TweenMax.to( $(this), 1, { opacity: 1 } );
+
+            scenes[idx++] = new ScrollScene({
+                    triggerElement:     $(this),
+                    duration:           $(this).height(),
+                })
+                .setTween(tween);
+        })
     }
 
 
