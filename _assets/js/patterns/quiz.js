@@ -10,8 +10,11 @@ Pathways.Quiz = function() {
         totalQuestions  = questions.length,
         score           = 0,
 
+        timerWait       = 5, // in seconds
+        timerLength     = 5, // in seconds
+
         $remaining  = $quiz.find('.remaining'),
-        $score      = $quiz.find('.score'),
+        $score      = $quiz.find('.score span'),
 
         $timer      = $('<div/>').addClass('timer').css('display', 'none'),
         timerID;
@@ -19,7 +22,7 @@ Pathways.Quiz = function() {
     this.init = function() {
         var self = this;
 
-        $quiz.find('.start .button').on('click', function() {
+        $quiz.find('.quiz-start .button').on('click', function() {
             self.start();
         });
     }
@@ -27,8 +30,8 @@ Pathways.Quiz = function() {
     this.start = function() {
         var self = this;
 
-        $quiz.find('.start').hide();
-        $quiz.find('.playground').show();
+        $quiz.find('.quiz-start').hide();
+        $quiz.find('.quiz-playground').show();
 
         // Add the timer
         $quiz.append($timer);
@@ -49,7 +52,8 @@ Pathways.Quiz = function() {
 
     this.loadLevel = function(l) {
         // image
-        var question    = this.getCurrentQuestion(),
+        var self        = this,
+            question    = this.getCurrentQuestion(),
             $image      = $('<img/>').attr('src', question['image']),
             str         = '';
 
@@ -68,7 +72,10 @@ Pathways.Quiz = function() {
         this.updateScore();
         this.updateQuestionsRemaining();
 
-        this.startTimer();
+        // Wait for timerWait seconds then start a timerLength countdown
+        setTimeout(function() {
+            self.startTimer();
+        }, (timerWait * 1000));
     }
 
     this.validate = function(e) {
@@ -92,7 +99,7 @@ Pathways.Quiz = function() {
 
         setTimeout(function() {
             paused = false;
-            // self.stopTimer();
+            self.stopTimer();
             self.nextQuestion($(e.currentTarget));
         }, 2000)
     }
@@ -134,21 +141,22 @@ Pathways.Quiz = function() {
     }
 
     this.updateQuestionsRemaining = function() {
-        $remaining.html(level + '/' + totalQuestions);
+        $remaining.html(level + ' of ' + totalQuestions);
     }
 
     this.startTimer = function() {
         var self    = this,
-            counter = 10;
+            counter = timerLength;
 
         clearInterval(timerID);
 
         $timer.css({
-            display:    'block',
             top:        ($quiz.find('.quiz-container').height() / 2) - ($timer.height() / 2),
             left:       ($quiz.find('.quiz-container').width() / 2) - ($timer.width() / 2)
         })
         .html(counter);
+
+        $timer.fadeIn(100);
 
         timerID = setInterval(function() {
             if(counter > 1) {
@@ -163,6 +171,7 @@ Pathways.Quiz = function() {
 
                 setTimeout(function() {
                     paused = false;
+                    $timer.fadeOut(100);
                     self.nextQuestion();
                 }, 2000);
             }
@@ -175,9 +184,15 @@ Pathways.Quiz = function() {
 
 
     this.finishGame = function() {
+        var $quiz_finish = $quiz.find('.quiz-finish');
+
         this.stopTimer();
         $timer.css('display', 'none');
-        alert('You’re finished');
+
+        $quiz_finish.find('.quiz-finish--score span').html(score + '/' + totalQuestions);
+        
+        $quiz.find('.quiz-playground').hide();
+        $quiz_finish.show();
     }
 
     this.init();
@@ -187,7 +202,7 @@ Pathways.Quiz = function() {
 var quiz_db = {
     'questions' : [
          {
-            'image':    'http://placekitten.com/300/250',
+            'image':    'http://placekitten.com/500/500',
             'title':    'Estimate the weight of the tumour',
             'answers':  ['0.5kg', '1kg', '2kg', '3kg'],
             'correct':  1

@@ -115,28 +115,51 @@
 
             <div class="content">
 
-                <div class="quiz-container clearfix" data-component="quiz">
+                <div class="quiz-container" data-component="quiz">
 
-                    <div class="start">
+                    <div class="quiz-start">
+                        <header class="quiz-start--header">
+                            <h1>The Esdaile Game</h1>
+                        </header>
+
+                        <div class="quiz-start--text">
+                            <p>The surgeon performed dozens of operations, many of which were documented.</p>
+                        </div>
+
                         <span class="button">Start</span>
                     </div>
 
-                    <div class="playground">
+                    <div class="quiz-playground clearfix">
                         <div class="image">
-                            <img src="http://placekitten.com/250/250">
+                            <div class="remaining"></div>
                         </div>
 
                         <div class="answers">
                             <div class="question"></div>
                             <ul></ul>
-                        </div>
 
-                        <div class="remaining"></div>
-                        <div class="score"></div>
+                            <div class="score">
+                                Your Score
+                                <span></span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="finish">
-                        
+                    <div class="quiz-finish">
+                        <header class="quiz-finish--header">
+                            <h1>Congratulations!</h1>
+                        </header>
+
+                        <div class="quiz-finish--body">
+                            <div class="quiz-finish--score">
+                                You scored
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <footer class="quiz-finish--footer">
+                            
+                        </footer>
                     </div>
 
                 </div>

@@ -8,25 +8,37 @@
     }
 
     .quiz-container {
-        position: relative;
+        position:           relative;
+        background-color:   #fff;
+        min-height:         500px;
+        border-radius:      4px;
+        overflow:           hidden;
     }
 
-    .start {
+    .quiz-start {
+        position:           relative;
+        min-height:         500px;
+        padding:            1em;
+
         .button {
-            background-color:   #fff;
-            padding:            1em 2em;
-            border-radius:      5px;
+            position:           absolute;
+            bottom:             20px;
+            left:               40%;
+            @include            tablet-gothic;
+            background-color:   #70B5C9;
+            padding:            1px 3.2em 0 3.2em;
+            line-height:        50px;
+            border-radius:      25px;
             cursor:             default;
         }
     }
 
-    .playground {
+    .quiz-playground {
         display: none;
     }
 
     .image {
         float:  left;
-        width:  300px;
 
         img {
             width: 100%;
@@ -34,34 +46,44 @@
     }
 
     .answers {
-        float:          left;
+        float:          right;
         width:          300px;
-        margin-left:    2em;
+        padding:        0 2em;
 
         li {
-            color:              #fff;
-            background-color:   #444;
+            color:              #333;
+            @include            tablet-gothic;
+            font-size:          0.9rem;
+            background-color:   #fff;
+            border:             1px solid #999;
             width:              100%;
             margin-bottom:      1em;
-            padding:            0.5em;
+            padding:            1px 0 0 0.8em;
+            line-height:        32px;
+            border-radius:      18px;
             list-style:         none;
             cursor:             default;
         }
     }
 
     .question {
-        color:          #fff;
-        font-size:      1.4rem;
-        margin-bottom:  0.5em;
+        color:          #333;
+        font-size:      1.5rem;
+        margin:         1em 0 1.2em 0;
+        line-height:    1.2;
     }
 
     .timer {
         position:           absolute;
-        background-color:   #fff;
-        font-size:          1.6rem;
+        color:              #fff;
+        @include            tablet-gothic;
+        font-size:          3.6rem;
+        background-color:   rgba(0,0,0,0.7);
         text-align:         center;
-        line-height:        50px;
-        width:              50px;
+        line-height:        90px;
+        width:              100px;
+        border-radius:      50px;
+        padding-top:        10px;
     }
 
     .remaining {
@@ -73,14 +95,44 @@
     }
 
     .score {
-        position:   absolute;
-        bottom:     0;
-        right:      0;
-        background-color: rgba(255,255,255,0.7);
-        padding:    0.4em;
+        font-size:      1.6rem;
+        border:         1px solid #ccc;
+        text-align:     center;
+        padding-top:    0.6em;
+        border-radius:  10px;
+
+        span {
+            display:    block;
+            @include    tablet-gothic;
+            font-size:  6rem;
+        }
     }
 
-    .finish {
-        display:    none;
+    .quiz-finish {
+        display: none;
+
+        header {
+            text-align: center;
+            padding-top: 2em;
+
+            h1 {
+                display:        inline;
+                font-size:      2.6rem;
+                border-bottom:  1px solid #999;
+                padding-bottom: 0.5em;
+            }
+        }
+    }
+
+    .quiz-finish--score {
+        @include    tablet-gothic;
+        font-size:  0.9rem;
+        text-align: center;
+        margin-top: 6em;
+
+        span {
+            display:    block;
+            font-size:  5rem;
+        }
     }
 }
