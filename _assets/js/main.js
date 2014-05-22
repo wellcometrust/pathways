@@ -56,25 +56,27 @@ Pathways.LoadScenes = function() {
         Sequence
      **************/
 
-    scenes[idx++] = new ScrollScene({
-            triggerElement: $sequence,
-            triggerHook:    'top',
-            duration:       ($sequence.height() - panel_height)
-        })
-        .on('enter', function(e) {
-            if( e.scrollDirection == 'FORWARD') {
-                $sequence.find('.bg-container').css({ position: 'fixed', display: 'none', opacity: 0 } );
-                $sequence.find('.panel').first().addClass('active');
-                $sequence.find('.panel').first().find('.bg-container').css({ display: 'block', opacity: 1 });
-            }
-            if( e.scrollDirection == 'REVERSE') {
-                $sequence.find('.bg-container').css({ position: 'fixed' } );
-                $sequence.find('.panel').last().addClass('active');
-            }
-        })
-        .on('leave', function(e) {
-            $sequence.find('.bg-container').css({ position: 'absolute', display: 'block' } );
-        })
+     if( _('.sequence') ) {
+        scenes[idx++] = new ScrollScene({
+                triggerElement: $sequence,
+                triggerHook:    'top',
+                duration:       ($sequence.height() - panel_height)
+            })
+            .on('enter', function(e) {
+                if( e.scrollDirection == 'FORWARD') {
+                    $sequence.find('.bg-container').css({ position: 'fixed', display: 'none', opacity: 0 } );
+                    $sequence.find('.panel').first().addClass('active');
+                    $sequence.find('.panel').first().find('.bg-container').css({ display: 'block', opacity: 1 });
+                }
+                if( e.scrollDirection == 'REVERSE') {
+                    $sequence.find('.bg-container').css({ position: 'fixed' } );
+                    $sequence.find('.panel').last().addClass('active');
+                }
+            })
+            .on('leave', function(e) {
+                $sequence.find('.bg-container').css({ position: 'absolute', display: 'block' } );
+            })
+     }
 
     // Panels
 
@@ -113,7 +115,7 @@ Pathways.LoadScenes = function() {
     // Mesmer specific
 
     // Crop zoom
-    if( $('.tap-block').length ) {
+    if( _('.tap-block') ) {
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.tap-block',
                 duration:       panel_height
@@ -135,7 +137,7 @@ Pathways.LoadScenes = function() {
     }
 
     // Tree
-    if( $('.tree').length ) {
+    if( _('.tree') ) {
         $('.black-strip').css({'height': panel_height, '-webkit-transform': 'translate(0,'+panel_height+'px)'});
 
         scenes[idx++] = new ScrollScene({
@@ -154,7 +156,7 @@ Pathways.LoadScenes = function() {
     }
 
     // Video
-    if( $('.news').length ) {
+    if( _('.news') ) {
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.news',
                 duration:       panel_height
@@ -172,7 +174,7 @@ Pathways.LoadScenes = function() {
     }
 
     // India/boats
-    if( $('.india').length ) {
+    if( _('.india') ) {
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.india',
                 duration:       panel_height
@@ -186,7 +188,7 @@ Pathways.LoadScenes = function() {
     // Airloom specific
 
     // Video
-    if( $('.air-loom-content').length ) {
+    if( _('.air-loom-content') ) {
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.air-loom-content',
                 duration:       panel_height

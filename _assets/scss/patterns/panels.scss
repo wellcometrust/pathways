@@ -191,6 +191,34 @@
     z-index: 15;
 }
 
+
+.tree {
+    .animation {
+        position:   absolute;
+        top:        0;
+        left:       0;
+        background: url('/_assets/img/mesmer/tree-animation.png') 0 0 no-repeat;
+        background-size: 100%;
+        width:      100%;
+        height:     100%;
+    }
+
+    .animation.active {
+        -webkit-animation: tree-animation 3s steps(13) infinite;
+    }
+
+}
+
+@-webkit-keyframes tree-animation {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 -9180px;
+    }
+}
+
+
 /* Esdaile */
 
 .gonads img {

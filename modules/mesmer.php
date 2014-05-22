@@ -93,6 +93,7 @@
 
                 <div class="bg-container">
                     <img src="../_assets/img/mesmer/mesmer-4.jpg">
+                    <div class="animation active"></div>
                 </div>
 
                 <div class="black-strip" style="position: fixed; top: 0; left: 45px; width: 350px; background-color: rgba(0,0,0,0.8)"></div>
@@ -108,7 +109,6 @@
 
                 <div class="bg-container video" data-src="../_assets/video/Pathways.mp4">
                     <img src="../_assets/img/mesmer/mesmer-5.jpg">
-                    <!-- <video class="news-video" src="../_assets/video/Pathways.mp4" loop></video> -->
                 </div>
                 
                 <div class="scroll-content left">
