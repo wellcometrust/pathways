@@ -25,5 +25,11 @@
 @mixin tablet-gothic {
     font-family:    "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight:    normal;
-    font-style:     normal; 
+    font-style:     normal;
+}
+
+@mixin comic-neue {
+    font-family:    "Comic Neue", 'Comic Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight:    normal;
+    font-style:     normal;
 }

@@ -73,6 +73,17 @@
                         stuff
                     </div>
                 </div>
+
+                <svg class="info-box" version="1.1" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top: 300px; left: 100px; width: 80px; height: 80px;">
+                    <circle cx="50%" cy="50%" r="50%" fill="rgba(4, 119, 173, 0.6)"/>
+                    <circle cx="50%" cy="50%" r="30%" fill="#fff"/>
+                    <g stroke="none" stroke-width="1" fill-rule="evenodd" fill="#231F20" transform="translate(29, 32) scale(0.2, 0.2)">
+                        <path d="M104.2,7.8 L104.2,72 L8,72 L8,7.8 L104.2,7.8 L104.2,7.8 Z M112.3,-0.3 L-0.1,-0.3 L-0.1,80 L112.2,80 L112.2,-0.3 L112.3,-0.3 L112.3,-0.3 Z" id="Shape"></path>
+                        <path d="M40,23.8 C40,28.2 36.4,31.8 32,31.8 C27.6,31.8 24,28.2 24,23.8 C24,19.4 27.6,15.8 32,15.8 C36.4,15.8 40,19.4 40,23.8 L40,23.8 Z" id="Shape"></path>
+                        <path d="M32,47.9 L16,63.9 L48.1,63.9 L32,47.9 Z" id="Shape"></path>
+                        <path d="M53.7,63.9 L96.2,63.9 L64.1,23.8 L42.9,53.1 L50.9,61.1 L53.7,63.9 Z" id="Shape"></path>
+                    </g>
+                </svg>
                 
                 <div class="scroll-content position-center text-left">
                     
@@ -81,7 +92,7 @@
                             <h1>Animal Magnetism</h1>
                         </header>
 
-                        <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’.  Animal magnetism was the superfine fluids and energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
+                        <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’. Animal magnetism was the superfine fluids and energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
                     </div>
 
                 </div>
@@ -93,7 +104,7 @@
 
                 <div class="bg-container">
                     <img src="../_assets/img/mesmer/mesmer-4.jpg">
-                    <div class="animation active"></div>
+                    <div class="animation"></div>
                 </div>
 
                 <div class="black-strip" style="position: fixed; top: 0; left: 45px; width: 350px; background-color: rgba(0,0,0,0.8)"></div>
@@ -140,9 +151,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <audio class="audio-player" src="../_assets/audio/crystal.mp3"></audio>
-                <div class="audio-icon"><div class="circles"></div></div> -->
 
             </div>
 

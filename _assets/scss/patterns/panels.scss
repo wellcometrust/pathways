@@ -1,4 +1,57 @@
 
+.intro {
+
+    .bg-container {
+        z-index: -1;
+    }
+
+    .inner {
+        max-width:  960px;
+        margin:     0 auto;
+        text-align: center;
+    }
+
+    &-header {
+        color:      #fff;
+        margin:     16vh 0 5vh 0;
+
+        h1 {
+            font-size: 4rem;
+
+            span {
+                color: #DD178C;
+            }
+        }
+    }
+
+    &-body {
+        color:      #fff;
+        max-width:  40%;
+        margin:     0 auto 4em auto;
+
+        span {
+            color: #DD178C;
+        }
+    }
+
+    &-button {
+        display:            block;
+        max-width:          40%;
+        color:              #fefefe;
+        @include            tablet-gothic;
+        font-size:          0.7rem;
+        background-color:   rgba(0,0,0,0.2);
+        border:             1px solid rgba(255,255,255, 0.6);
+        border-radius:      5px;
+        text-align:         center;
+        margin:             0 auto 10vh auto;
+        padding:            1em 0;
+        text-decoration:    none;
+        text-transform:     uppercase;
+    }
+}
+
+
 .scroll-content--strip {
     position: absolute;
     left: 3%;
@@ -261,16 +314,35 @@
     }
 
     .comic-panel {
-        float: left;
+        position:   relative;
+        float:      left;
 
         img {
             display: block;
             width: 100%;
         }
+
+        p {
+            position:           absolute;
+            right:              10px;
+            bottom:             10px;
+            color:              #111;
+            @include            comic-neue;
+            font-size:          0.9rem;
+            font-weight:        600;
+            text-transform:     uppercase;
+            background-color:   #fff;
+            padding:            0.3em;
+            border:             1px solid #666;
+        }
     }
 
     .comic-panel:nth-child(1) {
         width: 45%;
+
+        p {
+            width: 40%;
+        }
     }
 
     .comic-panel:nth-child(2) {
