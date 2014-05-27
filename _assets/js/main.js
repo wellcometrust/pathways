@@ -156,6 +156,23 @@ Pathways.LoadScenes = function() {
     }
 
     // Video
+    if( _('.tree') ) {
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '.tree',
+                duration:       panel_height
+            })
+            .on('enter', function(e) {
+                if( _('.tree video') )
+                    _('.tree video').play();
+            })
+            .on('leave', function(e) {
+                if( _('.tree video') ) {
+                    _('.tree video').pause();
+                    _('.tree video').currentTime = 0;
+                }
+            })
+    }
+
     if( _('.news') ) {
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.news',
@@ -218,6 +235,43 @@ Pathways.LoadScenes = function() {
                 })
                 .setTween(tween);
         })
+    }
+
+    // Freud
+    if( _('.anna-o') ) {
+
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '.anna-o',
+                triggerHook:    'top'
+            })
+            .on('enter', function(e) {
+                if( e.scrollDirection == 'REVERSE' )
+                    return;
+
+                $('.anna-o .fragmented').each(function() {
+                    var $this       = $(this),
+                        angle       = Math.random() * (Math.PI * 2),
+                        distance    = Math.max(Math.random() * (window.outerWidth / 5), 50);
+
+                    var x = Math.cos(angle) * distance,
+                        y = Math.sin(angle) * distance;
+
+                    $this.css( { 'transition': 'all 0.2s ease-out' } );
+                    $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
+                })
+            })
+
+        $('.anna-o .fragmented').each(function() {
+            var tween = TweenMax.to( $(this), 1, { x: 0, y: 0 } );
+
+            scenes[idx++] = new ScrollScene({
+                    triggerElement: '.anna-o',
+                    triggerHook:    'top',
+                    duration:       450,
+                    offset:         100,
+                })
+                .setTween(tween);
+        });
     }
 
 

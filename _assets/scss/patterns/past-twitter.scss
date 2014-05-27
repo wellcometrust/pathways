@@ -13,7 +13,6 @@
         .avatar {
             position:           absolute;
             top:                -10px;
-            background-color:   #fff;
             width:              90px;
             height:             90px;
             border-radius:      10px;
@@ -48,6 +47,8 @@
 
             .avatar {
                 left:   -10px;
+                background: url(/_assets/img/elliotson/twitter-wakley.png) 0 0 no-repeat;
+                background-size: 100%;
             }
 
             .header {
@@ -63,6 +64,8 @@
             float: right;
 
             .avatar {
+                background: url(/_assets/img/elliotson/twitter-elliotson.png) 0 0 no-repeat;
+                background-size: 100%;
                 right:  -10px;
             }
 

@@ -50,8 +50,10 @@ Pathways.CropZoom = function(panel_height) {
             $('body').append( $overlay );
 
             $image_crop.css( { top: ($target.offset().top - window.scrollY) + 10, left: $target.offset().left + 10, height: $target.height() - 10 } );
+            $image_crop.addClass('animate');
 
             $overlay.show();
+            $overlay.css('background-color', 'rgba(0,0,0,0.8)');
 
             var width   = 'auto',
                 height  = 'auto';
@@ -62,12 +64,12 @@ Pathways.CropZoom = function(panel_height) {
             else {
                 height = window.outerHeight - 120;
             }
+            
 
             $image_crop.get(0).addEventListener('transitionend', function() {
                 $text.css( { top: 40, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show');
             });
 
-            $image_crop.addClass('animate');
 
             $image_crop.css({
                 top:    40,
@@ -77,14 +79,13 @@ Pathways.CropZoom = function(panel_height) {
                 opacity: 1
             })
 
-            $overlay.css('background-color', 'rgba(0,0,0,0.8)');
 
             $overlay.on('click', function() {
                 this.addEventListener('transitionend', function() { $(this).remove() }, false);
                 $(this).css('opacity', 0);
             });
 
-            resizeQueue.push(function() {
+            window.addEventListener('resize', function() {
                 $overlay.css('height', window.outerHeight );
                 
                 if( window.innerWidth < 900 ) {

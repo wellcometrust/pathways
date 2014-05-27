@@ -28,21 +28,30 @@
 
         <div class="sequence">
             
-            <div class="panel">
+            <div class="panel anna-o">
                 <div class="bg-container">
-                    <img src="../_assets/img/freud/freud-2.png">
+                    <img src="../_assets/img/freud/freud-2.jpg">
+
+                    <img class="fragmented" src="../_assets/img/freud/anna-fragmented.png">
+                    <img class="fragmented" src="../_assets/img/freud/anna-fragmented.png">
+                    <img class="fragmented" src="../_assets/img/freud/anna-fragmented.png">
+                    <img class="fragmented" src="../_assets/img/freud/anna-fragmented.png">
                 </div>
 
-                <div class="scroll-content text">
+                <div class="scroll-content fixed">
                     <div class="content">
                         <header>
                             <h1>Fred Breuer and the curious case of Anna O</h1>
                         </header>
+
+                        <p>Joseph Breuer and Sigmund Freud publish the sensational case of Anna O - the pseudonym of a brilliant and fragile young woman with baffling physical and mental symptoms. She suffered from chronic coughing, hallucinations, paralysis, loss of vision, and even forgot how to speak her native German.</p>
+
+                        <p>Anna appeared to have a separate personality, only accessible under trance. When hypnotised, she began to reveal traumatic incidents that were beyond the reach of her normal memory.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="panel">
+            <div class="panel fred-breuer">
                 <div class="bg-container">
                     <img src="../_assets/img/freud/freud-3.jpg">
                 </div>
@@ -52,20 +61,35 @@
                         <header>
                             <h1>Fred and Breuer</h1>
                         </header>
+
+                        <p>concluded that physical illnesses could be created entirely by the mind – and also healed by it.</p>
                     </div>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="bg-container">
-                    <img src="../_assets/img/freud/freud-4.jpg">
+                    <img src="../_assets/img/freud/freud-6.jpg">
                 </div>
 
                 <div class="scroll-content text">
                     <div class="content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                        <p>Freud installed a couch in his consulting room to hypnotise his patients.</p>
+
+                        <p>He soon abandoned the technique, finding that it imposed too much control over the patient, who would unconsciously mirror the doctor’s beliefs. To minimise this ‘transference’, he developed the technique of ‘free association’.</p>
                     </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="bg-container">
+                    <img src="../_assets/img/freud/freud-5.jpg">
+                </div>
+
+                <div class="scroll-content">
+                    <header>
+                        <h1>The couch became the popular symbol for his ‘talking cure’ – and for the modern understanding of the mind and its power to heal. </h1>
+                    </header>
                 </div>
             </div>
 

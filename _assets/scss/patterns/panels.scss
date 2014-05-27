@@ -162,15 +162,6 @@
 /**
     Crop zoom
 **/
-.popup-section {
-    background-color: #efefef;
-
-    -webkit-perspective: 800;
-    -webkit-perspective-origin: 50% 50%;
-
-    -moz-perspective: 800;
-    -moz-perspective-origin: 50% 50%;
-}
 
 .crop-zoom {
     display:    none;
@@ -191,8 +182,6 @@
     position: absolute;
     width: 36px;
     height: 36px;
-    border-radius: 36px;
-    background-color: rgba(255,255,255,0.6);
 }
 
 .tap-target.rod {
@@ -210,24 +199,23 @@
     right:  22%;
 }
 
-.tap-target div {
-    position:       absolute;
-    top:            0px;
-    left:           0px;
-    width:          36px;
-    height:         36px;
-    border:         2px solid #fff;
-    border-radius:  40px;
-}
+// .tap-target div {
+//     position:       absolute;
+//     top:            0px;
+//     left:           0px;
+//     width:          36px;
+//     height:         36px;
+//     border:         2px solid #fff;
+//     border-radius:  40px;
+// }
 
-.tap-target.animate div {
-    -webkit-animation-name:             circle;
-    -webkit-animation-duration:         3s;
-    -webkit-animation-iteration-count:  infinite;
-}
+// .tap-target.animate div {
+//     -webkit-animation-name:             circle;
+//     -webkit-animation-duration:         3s;
+//     -webkit-animation-iteration-count:  infinite;
+// }
 
 .overlay {
-    display:    none;
     position:   fixed;
     top:        0;
     background-color: rgba(0,0,0,0);
@@ -236,41 +224,137 @@
 
     -webkit-transition: all 0.5s ease;
     -moz-transition:    all 0.5s ease;
-}
 
-.overlay .image-crop {
-    position: absolute;
-    opacity: 0;
-    z-index: 15;
-}
-
-
-.tree {
-    .animation {
-        position:   absolute;
-        top:        0;
-        left:       0;
-        background: url('/_assets/img/mesmer/tree-animation.png') 0 0 no-repeat;
-        background-size: 100%;
-        width:      100%;
-        height:     100%;
+    .image-crop {
+        opacity: 0;
+        position: absolute;
+        z-index: 15;
+    }
+    .image-crop.animate {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
     }
 
-    .animation.active {
-        -webkit-animation: tree-animation 3s steps(13) infinite;
-    }
+    .text {
+        position: absolute;
+        color: #fff;
+        width: 25%;
+        padding: 0 15px;
+        opacity: 0;
+        line-height: 1.4;
+        z-index: 15;
+        -webkit-transform: translate3d(0, 100px, 0);
+        -webkit-transition: all 0.5s ease;
 
-}
-
-@-webkit-keyframes tree-animation {
-    from {
-        background-position: 0 0;
+        -moz-transform: translate3d(0, 100px, 0);
+        -moz-transition: all 0.5s ease;
     }
-    to {
-        background-position: 0 -9180px;
+    .text.show {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
     }
 }
 
+
+.info-box {
+    .inner {
+        -webkit-filter: drop-shadow( 1px 1px 2px #333 );
+
+        -webkit-transform-origin: 50% 50%;
+        -webkit-animation: info-box-animation-inner 2s ease infinite;
+    }
+    .outer {
+        -webkit-transform-origin:   50% 50%;
+        -webkit-animation:          info-box-animation-outer 2s ease infinite;
+        -webkit-animation-delay:    0.2s;
+    }
+}
+
+@-webkit-keyframes info-box-animation-inner {
+    0% {
+        -webkit-transform: scale(0.9);
+    }
+    50% {
+        -webkit-transform: scale(1.1);
+    }
+    100% {
+        -webkit-transform: scale(0.9);
+    }
+}
+
+@-webkit-keyframes info-box-animation-outer {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(0.9);
+    }
+}
+
+
+/* Elliotson */
+
+.okey-sisters {    
+    header {
+        padding: 1em 0;
+
+        h1 {
+            color: #030303;
+        }
+    }
+
+    p {
+        color: #030303;
+        margin: 1em 0;
+    }
+
+    img {
+        width: 100%;
+    }
+}
+
+.thomas-wakley {
+    header {
+        padding: 3em 0;
+
+        h1 {
+            color: #030303;
+            text-align: center;
+            line-height: 1.3;
+        }
+    }
+}
+
+.verdict {
+    .inner {
+        float: right;
+        width: 60%;
+
+        .verdict-text {
+            font-size:      0.9rem;
+            margin-bottom:  2em;
+        }
+
+        blockquote p {
+            @include        abril-italic;
+            font-size:      1.3rem;
+            line-height:    1.5;
+        }
+
+        blockquote + p {
+            font-size:  2rem;
+            width:      50%;
+            margin-top: 2em;
+        }
+    }
+}
 
 /* Esdaile */
 
@@ -302,6 +386,20 @@
 
 /* Svengali */
 
+.panel-text {
+    position:           absolute;
+    right:              10px;
+    bottom:             10px;
+    color:              #111;
+    @include            comic-neue;
+    font-size:          0.9rem;
+    font-weight:        600;
+    text-transform:     uppercase;
+    background-color:   #fff;
+    padding:            0.3em;
+    border:             1px solid #666;
+}
+
 .trilby {
 
     .inner {
@@ -309,8 +407,41 @@
         margin:     0 auto;
     }
 
-    .scroll-content {
-        // bottom: auto !important;
+    .trilby-header {
+        width:  640px;
+        margin: 2em auto 0 auto;
+
+        img {
+            display:    block;
+            float:      left;
+            width:      200px;
+            margin-right: 1em;
+
+        }
+
+        header {
+            span {
+                display:    block;
+                @include    tablet-gothic;
+                font-size:  0.7rem;
+                text-transform: uppercase;
+                margin-bottom: 0.5em;
+            }
+
+            h1 {
+                margin-bottom: 1em;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    }
+
+    .comic-strip {
+        border-top:     1px solid rgba(255,255,255,0.8);
+        margin-top:     2em;
+        padding-top:    2em;
     }
 
     .comic-panel {
@@ -322,18 +453,8 @@
             width: 100%;
         }
 
-        p {
-            position:           absolute;
-            right:              10px;
-            bottom:             10px;
-            color:              #111;
-            @include            comic-neue;
-            font-size:          0.9rem;
-            font-weight:        600;
-            text-transform:     uppercase;
-            background-color:   #fff;
-            padding:            0.3em;
-            border:             1px solid #666;
+        blockquote {
+            display: none;
         }
     }
 
@@ -393,7 +514,7 @@
 
     .comic-panel:nth-child(10) {
         width: 45%;
-        margin-top: -140px;
+        margin-top: -110px;
     }
 
     .comic-panel:nth-child(11) {
@@ -405,6 +526,101 @@
     .comic-panel:nth-child(12) {
         width: 35%;
         margin-left: 10%;
+    }
+}
+
+.bonpard {
+    .comic-panel {
+        position:   relative;
+        float:      left;
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        blockquote {
+            display: none;
+        }
+    }
+
+    .comic-row {
+        position:   relative;
+        clear:      both;
+    }
+
+    .comic-row:nth-child(1) {
+        .comic-panel {
+            width: 35%;
+        }
+
+        .comic-panel + .comic-panel {
+            width: 56%;
+            margin-left: 3%;
+        }
+
+        p {
+            position: absolute;
+        }
+    }
+
+    .comic-row:nth-child(2) {
+        margin-top: 1.5em;
+
+        .comic-panel {
+            width: 58%;
+            margin-right: 2%;
+        }
+
+        .comic-panel + .comic-panel {
+            width: 30%;
+            margin-bottom: 2%;
+        }
+
+        .comic-panel + .comic-panel + .comic-panel {
+            margin-bottom: 0;
+        }
+    }
+
+    .comic-panel:nth-child(3) {
+        width: 33.5%;
+        margin-right: 2%;
+    }
+
+    .comic-panel:nth-child(4) {
+        width: 54%;
+    }
+}
+
+/* Freud */
+
+.fragmented {
+    position:   absolute;
+    top:        40px;
+    right:      16%;
+}
+
+.bg-container .fragmented {
+    width: 30%;
+}
+
+.anna-o {
+    h1 {
+        color: #030303;
+    }
+
+    p {
+        color: #030303;
+    }
+}
+
+.fred-breuer {
+    h1 {
+        color: #030303;
+    }
+
+    p {
+        color: #030303;
     }
 }
 
