@@ -28,8 +28,6 @@
             background: linear-gradient(#000, #ccc);
             overflow: hidden;
             width: 100%;
-            padding-top: 50px;
-            margin-top: 20px;
             -webkit-backface-visibility: hidden;
             -webkit-transform: translate3d(0,0,0) scale3d(1,1,1);
             -webkit-transform-style: preserve-3d;
@@ -75,37 +73,31 @@
         }
 
         .pane {
-            width: 640px;
             height: 360px;
-            margin-left: 20px;
         }
+
         .pane:first-child {
             margin-left: 0;
         }
 
-        #carousel .pane1 { background: url('../_assets/img/mesmer/1.jpg'); background-size: 100%; width: 260px; }
-        #carousel .pane2 { background: url('../_assets/img/mesmer/2.jpg'); background-size: 100%; width: 500px; }
-        #carousel .pane3 { background: url('../_assets/img/mesmer/3.jpg'); background-size: 100%; width: 258px; }
-        #carousel .pane4 { background: url('../_assets/img/mesmer/4.jpg'); background-size: 100%; width: 265px; }
+        #carousel .pane1 { background: url('../_assets/img/mesmer/carousel/L0018951.jpg') 0 0 no-repeat; background-size: 100%; width: 260px; }
+        #carousel .pane2 { background: url('../_assets/img/mesmer/carousel/L0019328.jpg') 0 0 no-repeat; background-size: 100%; width: 500px; }
+        #carousel .pane3 { background: url('../_assets/img/mesmer/carousel/L0019331.jpg') 0 0 no-repeat; background-size: 100%; width: 258px; }
+        #carousel .pane4 { background: url('../_assets/img/mesmer/carousel/L0027293.jpg') 0 0 no-repeat; background-size: 100%; width: 265px; }
 
     </style>
 </head>
 
 <body>
 
-    <div id="carousel">
-        <ul>
-            <li class="pane pane1"></li>
-            <li class="pane pane2"></li>
-            <li class="pane pane3"></li>
-            <li class="pane pane4"></li>
-        </ul>
-    </div>
+    <div id="carousel"></div>
+
 
     <script src="/_assets/js/lib/jquery-2.1.0.min.js"></script>
     <script src="/_assets/js/lib/hammer.min.js"></script>
 
     <script>
+    var imageArray = ['L0018951','L0019328','L0019331','L0027293','L0032335','L0041062'];
 
     /**
     * super simple carousel
@@ -113,29 +105,112 @@
     */
     function Carousel(element)
     {
-        var self 	= this,
-        	element = $(element);
+        var self        = this,
+            _element    = document.querySelector(element),
+            element     = $(element);
 
         var container 	= $(">ul", element),
         	panes 		= $(">ul>li", element);
 
-        var pane_width = 0;
-        var pane_count = panes.length;
-
-        var current_pane = 0;
+        var pane_width  = 0,
+            pane_count  = panes.length,
+            current_pane = 0;
 
 
         /**
          * initial
          */
         this.init = function() {
-            setPaneDimensions();
+            // Load the images, run the rest of the logic after all the images have loaded.
+            loadImages(function() {
+
+                // reset
+                container   = $(">ul", element);
+                panes       = $(">ul>li", element);
+                pane_count  = panes.length;
+
+                loadNavigation();
+                // setPaneDimensions();
+            });
 
             $(window).on("load resize orientationchange", function() {
                 setPaneDimensions();
             })
         };
 
+
+        var loadImages = function(callback) {
+            var ul              = document.createElement('ul'),
+                totalImages     = imageArray.length,
+                imagesLoaded    = 0;
+
+            ul.style['height'] = window.innerHeight + 'px';
+
+            imageArray.forEach(function(str) {
+                var li  = document.createElement('li'),
+                    img = new Image();
+
+                img.src = '../_assets/img/mesmer/carousel/' + str + '.jpg';
+                img.style['height'] = '100%';
+
+                li.style['height'] = window.innerHeight + 'px';
+
+                li.appendChild(img);
+                ul.appendChild(li);
+
+                img.onload = function() {
+                    imagesLoaded++;
+
+                    if( imagesLoaded == totalImages ) {
+                        // resize the panes/container
+                        var _panes      = document.querySelectorAll('#carousel li'),
+                            totalWidth  = 0;
+                        for(var i = _panes.length; i--;) {
+                            totalWidth += parseInt( window.getComputedStyle(_panes[i]).width );
+                        }
+                        ul.style['width'] = totalWidth + 'px';
+
+                        callback.call();
+                    }
+                }
+            });
+
+            _element.appendChild(ul);
+        }
+
+        var loadNavigation = function() {
+            var _left   = document.createElement('div'),
+                _right  = document.createElement('div');
+
+            _left.classList.add('left');
+            _right.classList.add('right');
+
+            _left.style['position'] = 'absolute';
+            _left.style['top']      = '0';
+            _left.style['left']     = '0';
+            _left.style['height']   = window.innerHeight + 'px';
+            _left.style['width']    = '36px';
+            _left.style['background-color'] = 'green';
+
+            _element.appendChild(_left);
+
+            _right.style['position'] = 'absolute';
+            _right.style['top']      = '0';
+            _right.style['right']    = '0';
+            _right.style['height']   = window.innerHeight + 'px';
+            _right.style['width']    = '36px';
+            _right.style['background-color'] = 'green';
+
+            _element.appendChild(_right);
+
+            _left.addEventListener('click', function() {
+                self.prev();
+            })
+
+            _right.addEventListener('click', function() {
+                self.next();
+            })
+        }
 
         /**
          * set the pane dimensions and scale the container

@@ -590,6 +590,26 @@
     .comic-panel:nth-child(4) {
         width: 54%;
     }
+
+    .comic-column {
+        float: left;
+    }
+
+    .comic-column .comic-panel {
+        float: none;
+    }
+
+    .comic-row:nth-child(6) {
+        margin-top: 1em;
+        
+        .comic-column:nth-child(1) {
+            width: 25%;
+            margin-right: 5%;
+        }
+        .comic-column:nth-child(2) {
+            width: 53%;
+        }
+    }
 }
 
 /* Freud */

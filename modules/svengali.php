@@ -102,7 +102,7 @@
                             </div>
                             <div class="comic-panel">
                                 <img src="../_assets/img/svengali/trilby/trilby-comic-10.jpg">
-                                <p>&hellip;and dies of a heart attack</p>
+                                <p class="panel-text">&hellip;and dies of a heart attack</p>
                             </div>
                             <div class="comic-panel">
                                 <img src="../_assets/img/svengali/trilby/trilby-comic-11.jpg">
@@ -184,7 +184,7 @@
                                 </div>
                             </div>
 
-                            <div class="comic-row">
+                            <div class="comic-row clearfix">
                                 <div class="comic-column">
                                     <div class="comic-panel">
                                         <img src="../_assets/img/svengali/bonpard/bonpard-comic-10.jpg">
