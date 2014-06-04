@@ -42,11 +42,11 @@ Pathways.LoadScenes = function() {
 
     // Svengali
     if( _('.falling-lady') ) {
-        var lady_tween = TweenMax.to( _('.falling-lady'), 5, { y: (panel_height * 2) } );
+        var lady_tween = TweenMax.to( _('.falling-lady'), 5, { y: (panel_height * 2.2) } );
 
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.start',
-                duration:       (panel_height * 2),
+                duration:       (panel_height * 3),
                 offset:         (panel_height / 4)
             })
             .setTween(lady_tween);
@@ -142,16 +142,16 @@ Pathways.LoadScenes = function() {
 
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.tree',
-                triggerHook:    'top',
+                // triggerHook:    'top',
                 duration:       panel_height
             })
             .on('enter', function(e) {
                 if( e.scrollDirection == 'FORWARD' )
-                    TweenMax.to('.black-strip', 1, { y: 0 }); // Scroll up
+                    TweenMax.to('.black-strip', 1.5, { y: 0 }); // Scroll up
             })
             .on('leave', function(e) {
                 if( e.scrollDirection == 'REVERSE' )
-                    TweenMax.to('.black-strip', 1, { y: panel_height }); // scroll down
+                    TweenMax.to('.black-strip', .5, { y: panel_height }); // scroll down
             })
     }
 
@@ -197,7 +197,7 @@ Pathways.LoadScenes = function() {
                 duration:       panel_height
             })
             .on('enter', function() {
-                $('.boats').css('-webkit-transform', 'translate(60px,0)');
+                $('.boats').css('-webkit-transform', 'translate(220px,0)');
             })
     }
 

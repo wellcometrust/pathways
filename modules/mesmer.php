@@ -16,7 +16,7 @@
                 </p>
 
                 <header>
-                    <h1>Can the mind heal the body?</h1>
+                    <h1>A new force in nature</h1>
                 </header>
 
                 <p class="intro-text">Franz Anton Mesmer arrives in Paris in 1778. He has a dramatic new theory: he believes that he can cure people by using the power of his mind to control the forces of the physical universe. He starts practising this ‘magnetic therapy’ on patients and it is a sensation.</p>
@@ -27,7 +27,7 @@
 
         <div class="sequence" data-sequence="cross-fade">
             
-            <div class="panel mesmers-salon">
+            <div class="panel mesmers-salon" data-offset-height="400">
 
                 <div class="bg-container">
                     <img src="../_assets/img/mesmer/mesmer-2-black.jpg">
@@ -107,7 +107,7 @@
                             <h1>Animal Magnetism</h1>
                         </header>
 
-                        <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’. Animal magnetism was the superfine fluids and energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
+                        <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’.  Animal magnetism was the superfine fluids and energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
                     </div>
 
                 </div>

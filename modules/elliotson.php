@@ -20,7 +20,7 @@
                     <h1>Mesmerism on trial</h1>
                 </header>
 
-                <p class="intro-text">60 years after Mesmer in Paris, mesmerism has hit Victorian Britain. Dr John Elliotson, based at University College Hospital London, is holding dramatic demonstrations of his supposed mesmeric powers that draw the likes of Dickens, Faraday, &c. In 1838 he demonstrates his mesmeric control over Elizabeth and Jane Okey, two young servant girls who he has been treating for epileptic seizures. They are shortly to become celebrities.</p>
+                <p class="intro-text">60 years after Mesmer in Paris, mesmerism has hit Victorian Britain. Dr John Elliotson, based at University College Hospital London, is holding dramatic demonstrations of his supposed mesmeric powers that draw the likes of Dickens, Faraday, &c.In 1838 he demonstrates his mesmeric control over Elizabeth and Jane Okey, two young servant girls who he has been treating for epileptic seizures. They are shortly to become celebrities. </p>
             </div>
 
         </div>

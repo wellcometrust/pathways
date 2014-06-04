@@ -16,11 +16,10 @@
                 </p>
 
                 <header>
-                    <h1>Can a machine control the mind?</h1>
+                    <h1>A machine to control the mind</h1>
                 </header>
 
                 <p class="intro-text">A man named James Tilly Matthews reveals that his mind is being controlled by a gang of “magnetic spies” and their secret machine, the Air Loom.</p>
-                <p class="intro-text">The Air Loom uses the magnetic fluids Mesmer had described as permeating all living things, and it takes control of people’s minds in malevolent ways. Matthews identified many victims whose minds were being controlled by machines. These included members of the Houses of Parliament, as well as himself&hellip;</p>
 
             </div>
 
@@ -34,9 +33,7 @@
 
                 <div class="scroll-content position-center align-center">
                     <div class="inner">
-                        <header>
-                            <h1>The Air Loom</h1>
-                        </header>    
+                        <p class="intro-text">The Air Loom uses the magnetic fluids Mesmer had described as permeating all living things, and it takes control of people’s minds in malevolent ways. Matthews identified many victims whose minds were being controlled by machines. These included members of the Houses of Parliament, as well as himself&hellip;</p> 
                     </div>
                 </div>
             </div>
