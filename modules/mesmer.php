@@ -27,7 +27,7 @@
 
         <div class="sequence" data-sequence="cross-fade">
             
-            <div class="panel mesmers-salon" data-offset-height="400">
+            <div class="panel mesmers-salon" data-offset-height="550">
 
                 <div class="bg-container">
                     <img src="../_assets/img/mesmer/mesmer-2-black.jpg">
@@ -47,7 +47,7 @@
 
             </div>
 
-            <div class="panel tap-block" data-component="crop-zoom">
+            <div class="panel tap-block" data-component="crop-zoom" >
 
                 <div class="bg-container">
                     <img src="../_assets/img/mesmer/mesmer-2.jpg">
@@ -76,7 +76,7 @@
 
             </div>
 
-            <div class="panel animal-magnetism">
+            <div class="panel animal-magnetism" data-offset-height="350">
 
                 <div class="bg-container">
                     <img src="../_assets/img/mesmer/mesmer-3.jpg">
@@ -115,13 +115,13 @@
             </div>
 
 
-            <div class="panel tree">
+            <div class="panel tree" data-offset-height="350">
 
                 <div class="bg-container video" data-src="../_assets/video/tree-animation.m4v">
                     <img src="../_assets/img/mesmer/mesmer-4.jpg">
                 </div>
 
-                <div class="black-strip" style="position: fixed; top: 0; left: 45px; width: 350px; background-color: rgba(0,0,0,0.8)"></div>
+                <div class="black-strip" ></div>
                 
                 <div class="scroll-content left">                    
                     <p>Mesmer’s reputation spread, and his salons became overwhelmed with patients. To accommodate the masses, he came up with novel ways and locations to treat them. </p>
@@ -130,7 +130,7 @@
 
             </div>
 
-            <div class="panel news">
+            <div class="panel news" data-offset-height="350">
 
                 <div class="bg-container video" data-src="../_assets/video/Pathways.mp4">
                     <img src="../_assets/img/mesmer/mesmer-5.jpg">

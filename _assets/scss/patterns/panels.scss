@@ -51,6 +51,14 @@
     }
 }
 
+.panel h1{
+    font-size: 4.236rem;
+}
+.panel p {
+    font-size:  1.618rem;
+    line-height: 1.618;
+    margin-top: 1.618rem;
+}
 
 .scroll-content--strip {
     position: absolute;
@@ -109,6 +117,14 @@
         max-width: 640px;
         margin: 0 auto;
     }
+}
+
+.black-strip {
+    position: fixed; 
+    top: 0; 
+    left: 45px; 
+    width: 465px; 
+    background-color: rgba(0,0,0,0.8);
 }
 
 
