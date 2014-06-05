@@ -28,7 +28,7 @@
 
         <div class="sequence">
             
-            <div class="panel okey-sisters" data-offset-height="350">
+            <div class="panel okey-sisters" data-offset-height="1000">
 
                 <div class="bg-container">
                     <img src="../_assets/img/elliotson/elliotson-2.jpg">
@@ -45,23 +45,23 @@
                     <p>Touching magnetised metals or even water sends them into a trance in which they spontaneously mirror each other’s actions.</p>
                    <!--  <img src="../_assets/img/elliotson/demonstration1.jpg"> -->
                     <p>Elliotson’s demonstrations are crowded with doctors, dignitaries and luminaries. The Okey sisters seem to enjoy the attention, especially in their disinhibited trance states, when they tease the gentlemen and sit in their laps.</p>
-                    <p>However, even in the very first demonstration something seems awry. Elliotson can’t get <del>xxx</del> Okey to come out of her mesmerised state – and it is only when her demand that Dr Wood, Elliotson’s assistant, rubs her neck is met, that she surfaces. Some people become suspicious&hellip;</p>
+                    <p>However, even in the very first demonstration something seems awry. Elliotson can’t get Elizabeth Okey to come out of her mesmerised state – and it is only when her demand that Dr Wood, Elliotson’s assistant, rubs her neck is met, that she surfaces. Some people become suspicious&hellip;</p>
                     <!-- <img src="../_assets/img/elliotson/demonstration2.jpg"> -->
                 </div>
-                
+
             </div>
 
-            <div class="panel thomas-wakley">
+            <div class="panel thomas-wakley" >
                 <div class="bg-container">
                     <img src="../_assets/img/elliotson/elliotson-3.jpg">
                 </div>
 
                 <div class="scroll-content fixed position-center">
-                    
-                    <div class="inner">
-                        <header>
+                    <header>
                             <h1>Thomas Wakley, of the Lancet medical journal, challenged Elliot and his demonstrations</h1>
                         </header>
+                    <div class="inner">
+                        
 
                         <div class="past-twitter clearfix">
                             
@@ -139,7 +139,7 @@
                             <p>“The ‘science’ of mesmerism, like the ‘science’ of fortune-telling, will always carry on a precarious existence wherever there are clever girls, philosophic bohemians, weak women and weaker men, but it can no longer affront the common sense of the medical profession.”</p>
                         </blockquote>
 
-                        <p>Mesmerism is banished to the margins.</p>
+                        <p class="outro">Mesmerism is banished to the margins.</p>
                     </div>
 
                 </div>

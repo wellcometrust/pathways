@@ -137,7 +137,7 @@ Pathways.LoadScenes = function() {
     }
 
     // Tree
-    if( _('.tree' ) || ('.okey-sisters') ) {
+    if( _('.tree' ) ) {
         $('.black-strip').css({'height': panel_height, '-webkit-transform': 'translate(0,'+panel_height+'px)'});
 
         scenes[idx++] = new ScrollScene({
@@ -147,13 +147,14 @@ Pathways.LoadScenes = function() {
             })
             .on('enter', function(e) {
                 if( e.scrollDirection == 'FORWARD' )
-                    TweenMax.to('.black-strip', 1, { y: 0 }); // Scroll up
+                    TweenMax.to('.black-strip', .4, { y: 0 }); // Scroll up
             })
             .on('leave', function(e) {
                 if( e.scrollDirection == 'REVERSE' )
-                    TweenMax.to('.black-strip', .5, { y: panel_height }); // scroll down
+                    TweenMax.to('.black-strip', .2, { y: panel_height }); // scroll down
             })
     }
+
 
     // Video
     if( _('.tree') ) {
@@ -219,6 +220,25 @@ Pathways.LoadScenes = function() {
                     _('.air-loom-content video').pause();
                     _('.air-loom-content video').currentTime = 0;
                 }
+            })
+    }
+
+    //Elliotson
+    if( _('.okey-sisters') ) {
+        $('.black-strip').css({'height': panel_height, '-webkit-transform': 'translate(0,'+panel_height+'px)'});
+
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '.okey-sisters',
+                 triggerHook:    'top',
+                duration:       panel_height
+            })
+            .on('enter', function(e) {
+                if( e.scrollDirection == 'FORWARD' )
+                    TweenMax.to('.black-strip', .5, { y: 0 }); // Scroll up
+            })
+            .on('leave', function(e) {
+                if( e.scrollDirection == 'REVERSE' )
+                    TweenMax.to('.black-strip', .2, { y: panel_height }); // scroll down
             })
     }
 
