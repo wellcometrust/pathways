@@ -177,8 +177,9 @@
             <div class="teaser-text-container">
                 <p class="teaser-text">Continue with your journey in the <span>Mind</span></p>
                 <h1>A machine to control the mind</h1>
+                <img class="teaser-icon" src="../_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
             </div>
-            <img class="teaser-icon" src="../_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
+            
         </div>
 
         <?php include('../patterns/global_navigation.php') ?>

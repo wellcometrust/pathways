@@ -180,6 +180,17 @@
 
         
         <?php include('../patterns/library_layer.php') ?>
+
+        <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;">
+            <img class="teaser-bkg" src="../_assets/img/teaser/teaser-svengali.jpg" alt="james tilly mathews and the air loom" />
+            <div class="teaser-text-container">
+                <p class="teaser-text">Continue with your journey in the <span>Mind</span></p>
+                <h1>Dark forces</h1>
+                <img class="teaser-icon" src="../_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
+            </div>
+            
+        </div>
+
         <?php include('../patterns/global_navigation.php') ?>
 
     </main>

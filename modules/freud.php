@@ -20,7 +20,7 @@
                     <h1>Can the mind really cure the body?</h1>
                 </header>
 
-                <p class="intro-text">Hypnosis, tarnished by scandal and abuse, has falled from medical favour. But two doctors still believe it holds the key to understanding the mind and its power to heal.</p>
+                <p class="intro-text">Hypnosis, tarnished by scandal and abuse, has fallen from medical favour. But two doctors still believe it holds the key to understanding the mind and its powers to heal.</p>
 
             </div>
 
@@ -41,12 +41,16 @@
                 <div class="scroll-content fixed">
                     <div class="content">
                         <header>
-                            <h1>Fred Breuer and the curious case of Anna O</h1>
+                            <h1>The curious case of Anna O</h1>
                         </header>
 
-                        <p>Joseph Breuer and Sigmund Freud publish the sensational case of Anna O - the pseudonym of a brilliant and fragile young woman with baffling physical and mental symptoms. She suffered from chronic coughing, hallucinations, paralysis, loss of vision, and even forgot how to speak her native German.</p>
+                        <p>1895, Vienna: Joseph Breuer and Sigmund Freud publish the case of Anna O - the pseudonym of a brilliant and fragile young woman with baffling physical and mental symptoms. She suffered from chronic coughing, hallucinations, paralysis, loss of vision, and even forgot how to speak her native German.</p>
 
-                        <p>Anna appeared to have a separate personality, only accessible under trance. When hypnotised, she began to reveal traumatic incidents that were beyond the reach of her normal memory.</p>
+                        <p>Like the Okey sisters, Trilby and Gabrielle Bompard, Anna appeared to have two separate personalities, one of which was only accessible under trance. When Breuer hypnotised her, she recalled traumatic incidents that were beyond the reach of her normal memory. </p>
+
+                        <p>Breuer claimed that as she recalled each buried event to consciousness and recognised it, the physical symptom associated with it disappeared.</p>
+
+                        <p>Freud and Breuer concluded that the mind had the power to create physical illnesses – and also to heal them. </p>
                     </div>
                 </div>
             </div>
@@ -59,10 +63,11 @@
                 <div class="scroll-content text">
                     <div class="content">
                         <header>
-                            <h1>Fred and Breuer</h1>
+                            <h1>The talking cure</h1>
                         </header>
+                        <p>Anna O christened Freud and Breuer’s method ‘the talking cure’. Her crippling afflictions had grown from a mental distress she had been unable to confront, or even consciously recognise.</p>
 
-                        <p>concluded that physical illnesses could be created entirely by the mind – and also healed by it.</p>
+                        <p>Under her real name, Bertha Pappenheim, she became a pioneering social worker, author and campaigner for education and women’s rights. Her identity as Anna O was only revealed after her death.</p>
                     </div>
                 </div>
             </div>
@@ -74,9 +79,7 @@
 
                 <div class="scroll-content text">
                     <div class="content">
-                        <p>Freud installed a couch in his consulting room to hypnotise his patients.</p>
-
-                        <p>He soon abandoned the technique, finding that it imposed too much control over the patient, who would unconsciously mirror the doctor’s beliefs. To minimise this ‘transference’, he developed the technique of ‘free association’.</p>
+                        
                     </div>
                 </div>
             </div>
@@ -87,8 +90,10 @@
                 </div>
 
                 <div class="scroll-content">
+                    <p>Freud installed a couch in his consulting room to hypnotise his patients. He soon abandoned the technique, finding that it imposed too much control. For the cure to work, patients had to find their own secrets for themselves.</p>
+                    <p>He replaced hypnosis with ‘free association’, but he kept the couch.</p>
                     <header>
-                        <h1>The couch became the popular symbol for his ‘talking cure’ – and for the modern understanding of the mind and its power to heal. </h1>
+                        <h1>The couch came to symbolise the modern view that the secrets of the mind are deeply hidden, yet each of us has them within our grasp.</h1>
                     </header>
                 </div>
             </div>

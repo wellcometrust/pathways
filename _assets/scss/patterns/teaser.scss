@@ -1,24 +1,44 @@
 .teaser {
-	position: relative;
-	color: #fff;
-	text-align: center;
+	position: 			relative;
+	color: 				#fff;
+	text-align: 		center;
+	background:  		#000;
 
 	img {
-		position: absolute;
-		top: 0; 
-		left: 0;
-		max-width: 100%;
+		&.teaser-bkg {
+			position: 		absolute;
+			z-index: 		-2;
+			top: 			0; 
+			left: 			0;
+			max-width: 		100%;
+		}
+
+		&.teaser-icon {
+			width: 			82px;
+			height: 		82px;
+			float: 			right;
+			margin: 		-90px 25px 0 0;
+		}	
 	}
 
-	img.teaser-bkg {
-		z-index: -2;
+
+	.teaser-text{
+        @include        tablet-gothic;
+        font-size:      0.766rem;
+        text-transform: uppercase;
+        letter-spacing: .2rem;
 	}
-	img.teaser-icon {
-		width: 82px;
-		height: 82px;
+
+	.teaser-text span {
+		color: 			$mind-pink;
 	}
+
 	.teaser-text-container{
-		text-align: left;
+		padding-top: 	9%;
+		h1 {
+			font-size: 	3.245rem;
+			margin-top: 1rem;
+		}
 	}
 }
 
