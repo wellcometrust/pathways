@@ -83,8 +83,21 @@
         .handle {
             float: left;
             background-color: rgba(0,0,0,0.8);
-            width:  42px;
+            width:  82px;
             height: 42px;
+            -webkit-border-radius: 0 38px 38px 0;
+            border-radius: 0 38px 38px 0;
+            .current-section{
+                color: #fff;
+                background-color: $mind-pink;
+                border-radius: 25%;
+                padding: 3px;
+                @include        tablet-gothic;
+            }
+            .open-nav-btn{
+                width: 10px;
+                height: 18px;
+            }
         }
 
         li:nth-child(1) span {

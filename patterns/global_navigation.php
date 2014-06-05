@@ -41,6 +41,9 @@
                 </li>
             </ul>
         </nav>
-        <div class="handle closed"></div>
+        <div class="handle closed">
+            <div class="current-section">2</div>
+            <div class="open-nav-btn"><img src="/_assets/img/icons/icon-btn-next.svg"></div>
+        </div>
     </div>
 </div>
