@@ -261,6 +261,23 @@ Pathways.LoadScenes = function() {
     }
 
     // Freud
+    if( _('.office') ) {
+        $('.black-strip').css({'height': panel_height, '-webkit-transform': 'translate(0,'+panel_height+'px)'});
+
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '.office',
+                duration:       panel_height
+            })
+            .on('enter', function(e) {
+                if( e.scrollDirection == 'FORWARD' )
+                    TweenMax.to('.black-strip', .5, { y: 0 }); // Scroll up
+            })
+            .on('leave', function(e) {
+                if( e.scrollDirection == 'REVERSE' )
+                    TweenMax.to('.black-strip', .2, { y: panel_height }); // scroll down
+            })
+    }
+
     if( _('.anna-o') ) {
 
         scenes[idx++] = new ScrollScene({

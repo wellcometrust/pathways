@@ -59,8 +59,7 @@
                             </div>
                             <div class="comic-panel">
                                 <img src="../_assets/img/svengali/trilby/trilby-comic-3.jpg">
-                                <p class="panel-text">She meets Svengali, a Jewish musical impresario</p>
-                                <p class="panel-text">He wants to make her a star</p>
+                                <p class="panel-text">She meets Svengali, a Jewish musical impresario. He wants to make her a star</p>
                             </div>
                             <div class="comic-panel">
                                 <img src="../_assets/img/svengali/trilby/trilby-comic-4.jpg">

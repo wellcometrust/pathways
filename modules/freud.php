@@ -72,31 +72,32 @@
                 </div>
             </div>
 
-            <div class="panel">
+            <div class="panel office">
                 <div class="bg-container">
                     <img src="../_assets/img/freud/freud-6.jpg">
                 </div>
 
-                <div class="scroll-content text">
-                    <div class="content">
-                        
-                    </div>
+                <div class="black-strip" ></div>
+
+                <div class="scroll-content left">  
+                    <p>Freud installed a couch in his consulting room to hypnotise his patients. He soon abandoned the technique, finding that it imposed too much control. For the cure to work, patients had to find their own secrets for themselves.</p>
+                    <p>He replaced hypnosis with ‘free association’, but he kept the couch.</p>
                 </div>
             </div>
 
-            <div class="panel">
+            <div class="panel ">
+
                 <div class="bg-container">
-                    <img src="../_assets/img/freud/freud-5.jpg">
+                    <img src="../_assets/img/freud/freud-6.jpg">
                 </div>
 
                 <div class="scroll-content">
-                    <p>Freud installed a couch in his consulting room to hypnotise his patients. He soon abandoned the technique, finding that it imposed too much control. For the cure to work, patients had to find their own secrets for themselves.</p>
-                    <p>He replaced hypnosis with ‘free association’, but he kept the couch.</p>
                     <header>
                         <h1>The couch came to symbolise the modern view that the secrets of the mind are deeply hidden, yet each of us has them within our grasp.</h1>
                     </header>
                 </div>
             </div>
+
 
         </div>
         
