@@ -147,8 +147,10 @@
             $('.modal').on('click', function(e) {
                 var $this       = $(this),
                     $window     = $(window),
-                    $overlay    = $('<div/>').addClass('overlay').css('height', $window.height() ),
+                    $overlay    = $('.overlay').length ? $('.overlay') : $('<div/>').addClass('overlay'),
                     $iframe     = $('<iframe/>').attr('src', $this.attr('href'));
+
+                $overlay.css('height', $window.height() );
 
                 if( $this.data('width') )
                     $iframe.attr('width', $this.data('width') );
@@ -166,7 +168,7 @@
                 });
 
                 $overlay.on('click', function() {
-                    $overlay.fadeOut(250, function() { $(this).remove() })
+                    $overlay.fadeOut(250);
                 })
 
                 window.addEventListener('resize', function() { $overlay.css('height', $window.height() )}, false)

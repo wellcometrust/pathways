@@ -1,0 +1,90 @@
+
+.carousel {
+    position:           fixed;
+    top:                0;
+    left:               0;
+    background-color:   #000;
+    overflow:           hidden;
+    width:              100%;
+
+    -webkit-transform:          translate3d(0,0,0) scale3d(1,1,1);
+       -moz-transform:          translate3d(0,0,0) scale3d(1,1,1);
+            transform:          translate3d(0,0,0) scale3d(1,1,1);
+
+    -webkit-transform-style:    preserve-3d;
+    -webkit-backface-visibility: hidden;
+
+    z-index: 50;
+
+    ul {
+        overflow: hidden;
+
+        -webkit-transform:      translate3d(0%,0,0) scale3d(1,1,1);
+           -moz-transform:      translate3d(0%,0,0) scale3d(1,1,1);
+                transform:      translate3d(0%,0,0) scale3d(1,1,1);
+
+        -webkit-transform-style: preserve-3d;
+        -webkit-backface-visibility: hidden;
+
+        &.animate {
+            -webkit-transition: all .3s;
+               -moz-transition: all .3s;
+                    transition: all .3s;
+        }
+    }
+
+    li {
+        position:   relative;
+        float:      left;
+        overflow:   hidden;
+
+        -webkit-transform: translate3d(0,0,0);
+           -moz-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
+
+        -webkit-transform-style: preserve-3d;
+
+        -webkit-transition: opacity .3s;
+           -moz-transition: opacity .3s;
+                transition: opacity .3s;
+    }
+
+    .prev {
+        position:           absolute;
+        top:                0;
+        width:              46px;
+        background:         url(/_assets/img/icons/icon-btn-prev.svg) 50% 50% no-repeat;
+        background-size:    50%;
+    }
+
+    .next {
+        position:           absolute;
+        top:                0;
+        width:              46px;
+        background:         url(/_assets/img/icons/icon-btn-next.svg) 50% 50% no-repeat;
+        background-size:    50%;
+    }
+
+    .text {
+        position:           absolute;
+        left:               0;
+        bottom:             0;
+        width:              100%;
+        color:              #fff;
+        font-size:          0.8rem;
+        border-left:        2px solid rgba(92,184,178,1);
+        background-color:   rgba(0,0,0,0.6);
+        padding:            0.8rem 0.6rem;
+    }
+}
+
+.close {
+    position:           absolute;
+    top:                40px;
+    right:              40px;
+    background:         url(/_assets/img/icons/icon-close.svg) 0 0 no-repeat;
+    background-size:    100%;
+    width:              40px;
+    height:             40px;
+    z-index:            100;
+}

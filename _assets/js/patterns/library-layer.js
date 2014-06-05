@@ -1,5 +1,5 @@
 
-Pathways.LibraryLayer = function() {
+Pathways.LibraryLayer = function(panel_height) {
 
     var $gap    = $('.library-layer .gap'),
         height  = $gap.height(),
@@ -58,7 +58,9 @@ Pathways.LibraryLayer = function() {
                 window.embedScriptIncluded = false;
             })
 
-            resizeQueue.push( function() { $overlay.css('height', panel_height ); } );
+            window.addEventListener('resize', function() {
+                $overlay.css('height', panel_height );
+            })
 
             e.preventDefault();
             return false; 
