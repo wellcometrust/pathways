@@ -137,7 +137,7 @@ Pathways.LoadScenes = function() {
     }
 
     // Tree
-    if( _('.tree') ) {
+    if( _('.tree' ) || ('.okey-sisters') ) {
         $('.black-strip').css({'height': panel_height, '-webkit-transform': 'translate(0,'+panel_height+'px)'});
 
         scenes[idx++] = new ScrollScene({
