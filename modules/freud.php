@@ -32,10 +32,10 @@
                 <div class="bg-container">
                     <img src="../_assets/img/freud/freud-2.jpg">
 
-                    <img class="fragmented" src="../_assets/img/freud/anna-fragmented.png">
-                    <img class="fragmented" src="../_assets/img/freud/anna-fragmented.png">
-                    <img class="fragmented" src="../_assets/img/freud/anna-fragmented.png">
-                    <img class="fragmented" src="../_assets/img/freud/anna-fragmented.png">
+                    <img class="fragmented" src="../_assets/img/freud/freud-2.png">
+                    <img class="fragmented" src="../_assets/img/freud/freud-2.png">
+                    <img class="fragmented" src="../_assets/img/freud/freud-2.png">
+                    <img class="fragmented" src="../_assets/img/freud/freud-2.png">
                 </div>
 
                 <div class="scroll-content fixed">

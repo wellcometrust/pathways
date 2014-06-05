@@ -663,12 +663,9 @@
 
 .fragmented {
     position:   absolute;
-    top:        40px;
-    right:      16%;
-}
-
-.bg-container .fragmented {
-    width: 30%;
+    top:        0;
+    left:       0;
+    width:      100%;
 }
 
 .anna-o {
@@ -680,6 +677,7 @@
         color: #030303;
     }
 }
+
 
 .fred-breuer {
     h1 {
