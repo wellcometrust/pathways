@@ -11,6 +11,15 @@
     img {
         display: none;
     }
+    li {
+        opacity: 0.5;
+        -webkit-transition: .3s ease;
+
+        &.active, &:hover {
+            opacity: 1;
+        }
+    }
+    
 }
 
 @media screen and (min-width: 48em) {
@@ -73,10 +82,9 @@
 
         .handle {
             float: left;
-            background-color: rgba(0,0,0,0.7);
-            width:  65px;
-            height: 60px;
-            border-left: 1px solid #666;
+            background-color: rgba(0,0,0,0.8);
+            width:  42px;
+            height: 42px;
         }
 
         li:nth-child(1) span {

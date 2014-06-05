@@ -20,12 +20,10 @@
                 </p>
 
                 <header>
-                    <h1>Are you safe from mind control?</h1>
+                    <h1>Dark forces</h1>
                 </header>
 
-                <p class="intro-text">Hypnotism has now been accepted by medical science. ‘Mind over matter’ is real – but what are its limits and its dangers? What if its powers are exploited for evil ends?</p>
-                <p class="intro-text">These questions cast a sinister spell over Victorian society: a world where strict public morals are shadowed by twilight fears over what lurks beneath.</p>
-                <p class="intro-text">These questions resound through everyday life&hellip;</p>
+                <p class="intro-text">Hypnotism has now been accepted by medical science. ‘Mind over matter’ is real – but what are its limits, and its dangers? What if its powers are exploited for evil ends?</p>
 
             </div>
 
@@ -45,11 +43,8 @@
                             <img src="../_assets/img/svengali/trilby/trilby-book-cover.jpg">
 
                             <header>
-                                <span>Fiction</span>
-                                <h1>Trilby</h1>
-
-                                <p>The question of how hypnosis can be used for evil is the basis of Trilby, by George du Maurier, 1894.</p>
-                                <p>Trilby is the second most popular book of the 19th Century, and it creates the archetype of evil hypnotist: Svengali.</p>
+                                <h1>Hypnotism in the imagination</h1>
+                                <p>In his book "Trilby" - a best seller of its time - George du Maurier created the archetype of the evil hypnotist: Svengali.</p>
                             </header>
                         </div>
                         
@@ -128,8 +123,10 @@
                     <div class="inner">
                         <div class="bonpard-header">
                             <header>
-                                <span>Fact</span>
-                                <h1>Murder under hypnosis</h1>
+                                <h1>Hypnotism in real life</h1>
+                                <p>Du Maurier's novel is inspired by sensational real-life stories. Among them is the case of Gabrielle Bompard in Paris in 1889. Gabrielle and her accomplice are tried for murder. In the first case of its kind, Gabrielle claimed that she had been hypnotised by her partner in crime, and had no memory of the event. </p>
+                                <p>At her trial, expert witnesses for both prosecution and defence present different opinions about the power of hypnosis: can it be used to make someone commit murder against their will, or without their knowledge?
+</p>
                             </header>
                         </div>
                         
@@ -205,6 +202,8 @@
                             </div>
                         </div>
                     </div>
+                    <p>Bompard was found guilty. She was imprisoned for 25 years, a with that hypnotism's reputation was once more tarnished.
+</p>
                     
                 </div>
             </div>

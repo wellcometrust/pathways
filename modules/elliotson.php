@@ -28,7 +28,7 @@
 
         <div class="sequence">
             
-            <div class="panel okey-sisters" data-offset-height="1000">
+            <div class="panel okey-sisters" data-offset-height="1600">
 
                 <div class="bg-container">
                     <img src="../_assets/img/elliotson/elliotson-2.jpg">

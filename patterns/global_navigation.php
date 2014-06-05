@@ -9,7 +9,7 @@
                         <img src="/_assets/img/navigation/mesmer.jpg">
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="airloom.php">
                         <span>Airloom</span>
                         <img src="/_assets/img/navigation/airloom.jpg">

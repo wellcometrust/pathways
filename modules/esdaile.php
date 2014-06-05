@@ -17,10 +17,10 @@
                 </div>
 
                 <header>
-                    <h1>What are the hidden powers of the mind?</h1>
+                    <h1>Mind over matter</h1>
                 </header>
 
-                <p class="intro-text">  The British surgeon James Esdaile is in India, and has conducted dozens of gruesome operations: removing tumours, cutting out parts of gums, and amputating limbs, amongst many others. However what is so remarkable is that Esdaile has made the surgery pain-free by mesmerising patients before operating.</p>
+                <p class="intro-text">  The British surgeon James Esdaile is in India, conducting dozens of gruesome operations. Remarkably Esdaile has made the surgery pain-free by mesmerising patients before operating.</p>
             </div>
 
         </div>
@@ -36,8 +36,11 @@
                 <div class="scroll-content">
 
                     <div class="content">
-                        <p>Esdaile’s first patient was a prisoner with a huge scrotal swelling. He removed it painlessly in xxx minutes, in front of an esteemed audience including doctors, magistrates and the local governor. </p>
-                        <p>Many similar operations followed (some indication towards list) and he was given a ward in a hospital in Calcutta.</p>
+                    <header>
+                        <h1>Esdaile's first patient</h1>
+                    </header>
+                        <p>was a prisoner with a huge scrotal swelling. In front of an esteemed audience including doctors, magistrates and the local governor, he removed it painlessly in minutes, .</p>
+                        <p>Many similar operations followed, including tooth extractions and amputation of limbs, and Esdaile was given a hospital ward in Calcutta.</p>
                     </div>
 
                 </div>
@@ -51,7 +54,7 @@
                 <div class="scroll-content right">
                     
                     <div class="content">
-                        <p>Esdaile had set himself up as a follower of Indian healers called yogis and fakirs. In reality, he didn’t really believe in their methods, and instead practised mesmerism – which he had learnt from an English pamphlet </p>
+                        <p>Esdaile set himself up as a follower of Indian healers called yogis and fakirs. In reality, he didn’t really believe in their methods, and instead practised mesmerism – which he had actually learnt from an English pamphlet.</p>
                     </div>
 
                 </div>
@@ -67,7 +70,8 @@
                 <div class="scroll-content">
 
                     <div class="content">
-                        <p>Reports of Esdaile’s success spread across India, and eventually to Britain.  It seemed that despite a debunking in the medical journal The Lancet just a few years earlier, mesmerism was real...</p>
+                        <p>Reports of Esdaile’s success spread across India, and eventually to Britain.</p>
+                        <p>It seemed that despite a debunking in the medical journal The Lancet just a few years earlier, mesmerism was real...</p>
                     </div>
                     
                 </div>
@@ -83,11 +87,13 @@
 
                     <div class="content">
                         <header>
-                            <h1>The Scottish surgeon James Braid</h1>
+                            <h1>The surgeon James Braid decided to investigate</h1>
                         </header>
 
-                        <p>has a radical new theory. He investigates the practices of Indian yogis and fakirs, particularly their trance states or mental ‘hibernation’, in which some can be buried alive for days.</p>
-                        <p>Experimenting on his friends, he discovers that he can induce deep trances by simple mental techniques: suggestion, controlled breathing and focused attention.</p>
+                        <p>Braid has a radical new theory. He investigates the practices of Indian yogis and fakirs, particularly their trance states or mental 'hibernation', in which some can be buried alive for days.</p>
+                        <p>Experimenting on his friends, Braid discovers that he can induce deep trances by simple mental techniques: suggestion, controlled breathing and focussed attention.</p>
+                        <p>Braid announces that there is no longer any need to believe in animal magnetism, occult powers or vital energies. Trance states, and all the mysterious phenomena they generate, can be produced by the mind alone. </p>
+                        <p>He coins a new term for the process: hypnotism.</p>
                     </div>
                 </div>
                 
@@ -102,7 +108,10 @@
                 <div class="scroll-content">
 
                     <div class="content">
-                        
+                        <header>
+                            <h1>These techniques still work today</h1>
+                        </header>
+                        <p>Dr Mike Gow is a dental hypnotist. He uses hypnosis to help people over their fear of dentistry, but also to perform surgery, including extractions, without anaesthetic.</p>
                     </div>
                 </div>
 
