@@ -28,7 +28,7 @@
 
         <div class="sequence">
             
-            <div class="panel okey-sisters" data-offset-height="1600">
+            <div class="panel okey-sisters" data-offset-height="1200">
 
                 <div class="bg-container">
                     <img src="../_assets/img/elliotson/elliotson-2.jpg">
@@ -43,10 +43,15 @@
 
                     <p>The Okey sisters are extraordinarily susceptible, slipping rapidly into trance states where they manifest quite different personalities. Elliotson can make them fall into stupor merely by waving a finger.</p>
                     <p>Touching magnetised metals or even water sends them into a trance in which they spontaneously mirror each other’s actions.</p>
-                   <!--  <img src="../_assets/img/elliotson/demonstration1.jpg"> -->
+                   
                     <p>Elliotson’s demonstrations are crowded with doctors, dignitaries and luminaries. The Okey sisters seem to enjoy the attention, especially in their disinhibited trance states, when they tease the gentlemen and sit in their laps.</p>
                     <p>However, even in the very first demonstration something seems awry. Elliotson can’t get Elizabeth Okey to come out of her mesmerised state – and it is only when her demand that Dr Wood, Elliotson’s assistant, rubs her neck is met, that she surfaces. Some people become suspicious&hellip;</p>
-                    <!-- <img src="../_assets/img/elliotson/demonstration2.jpg"> -->
+                </div>
+
+                <div class="scroll-content right" style="float: right; max-width: 40%; bottom: auto; top: 36%">
+                    <img src="../_assets/img/elliotson/demonstration1.jpg" style="display: block; margin-bottom: 40px; margin-left: -100px">
+                    <img src="../_assets/img/elliotson/demonstration2.jpg" style="display: block; margin-bottom: 40px">
+                    <img src="../_assets/img/elliotson/demonstration1.jpg" style="display: block; margin-bottom: 40px; margin-left: -100px">
                 </div>
 
             </div>
