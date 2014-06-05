@@ -172,7 +172,12 @@
 
         <?php include('../patterns/library_layer.php') ?>
 
-        <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;"><img src="../_assets/img/teaser/teaser-jtm.jpg" alt="james tilly mathews and the air loom"></div>
+        <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;">
+            <img class="teaser-bkg" src="../_assets/img/teaser/teaser-jtm.jpg" alt="james tilly mathews and the air loom" />
+            <p class="continue-text">Continue with your journey in the <span>Mind</span></p>
+            <h1>A machine to control the mind</h1>
+            <img class="teaser-icon" src="../_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
+        </div>
 
         <?php include('../patterns/global_navigation.php') ?>
         

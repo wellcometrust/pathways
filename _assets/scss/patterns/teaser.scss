@@ -1,10 +1,25 @@
 .teaser {
 	position: relative;
+	color: #fff;
+	text-align: center;
+
+	img {
+		position: absolute;
+		top: 0; 
+		left: 0;
+		max-width: 100%;
+	}
+
+	img.teaser-bkg {
+		z-index: -2;
+	}
+	img.teaser-icon {
+		width: 82px;
+		height: 82px;
+	}
+	.teaser-text-container{
+		text-align: left;
+	}
 }
 
-.teaser img {
-	position: absolute;
-	top: 0; 
-	left: 0;
-	max-width: 100%;
-}
+
