@@ -147,7 +147,7 @@ Pathways.LoadScenes = function() {
             })
             .on('enter', function(e) {
                 if( e.scrollDirection == 'FORWARD' )
-                    TweenMax.to('.black-strip', 1.5, { y: 0 }); // Scroll up
+                    TweenMax.to('.black-strip', 1, { y: 0 }); // Scroll up
             })
             .on('leave', function(e) {
                 if( e.scrollDirection == 'REVERSE' )
