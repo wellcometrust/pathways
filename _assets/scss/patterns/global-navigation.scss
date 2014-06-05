@@ -99,6 +99,11 @@
                 margin: 6px 0 0 5px;
                 padding: 6px 3px 0px 3px;
                 @include        tablet-gothic;
+                -webkit-transition: 0.2s ease;
+                &:hover {
+                    background-color: #fff;
+                    color: $mind-pink;
+                }
             }
             .open-nav-btn{
                 width: 10px;

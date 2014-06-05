@@ -293,12 +293,15 @@
         -webkit-filter: drop-shadow( 1px 1px 2px #333 );
 
         -webkit-transform-origin: 50% 50%;
-        -webkit-animation: info-box-animation-inner 2s ease infinite;
+        -webkit-animation: info-box-animation-inner 5s ease infinite;
     }
     .outer {
         -webkit-transform-origin:   50% 50%;
-        -webkit-animation:          info-box-animation-outer 2s ease infinite;
+        -webkit-animation:          info-box-animation-outer 5s ease infinite;
         -webkit-animation-delay:    0.2s;
+    }
+    &:hover {
+        opacity: 0.8;
     }
 }
 
