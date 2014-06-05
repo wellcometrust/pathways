@@ -10,6 +10,7 @@
     
     .handle {
         display:        block;
+        position:       relative;
         color:          #5cb8b2;
         @include        abril-italic;
         width:          46px;
@@ -20,18 +21,26 @@
         line-height:    40px;
         cursor:         default;
         background-color: rgba(0,0,0, .8);
+        z-index:        900;
     }
 
     .body {
         color:              #fff;
-        background-color:   rgba(0,0,0,0.8);
+        background-color:   rgba(92,184,178,0.9);
         width:              200px;
         height:             200px;
         padding:            15px;
+        -webkit-transition: all 0.3s ease;
     }
 
     &.active {
-        -webkit-transform:  translate(0, 0);
+        -webkit-transform:  translate(38px, 38px);
+        .handle {
+            background-color: rgba(0,0,0, 1);
+        }
+        .body {
+            -webkit-transform:  translate(-38px, -38px);
+        }
     }
 }
 
