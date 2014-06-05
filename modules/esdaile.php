@@ -27,7 +27,7 @@
 
         <div class="sequence">
             
-            <div class="panel gonads">
+            <div class="panel gonads" data-offset-height="550">
 
                 <div class="bg-container">
                     <img src="../_assets/img/esdaile/esdaile-2.jpg">
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <div class="panel">
+            <div class="panel" data-offset-height="350">
                 <div class="bg-container">
                     <img src="../_assets/img/esdaile/esdaile-3.jpg">
                 </div>
@@ -73,7 +73,7 @@
                 </div>
             </div>
             
-            <div class="panel">
+            <div class="panel" data-offset-height="450">
 
                 <div class="bg-container">
                     <img src="../_assets/img/esdaile/esdaile-5.jpg">
