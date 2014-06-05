@@ -1,7 +1,7 @@
 
 <?php include('../_includes/header.php') ?>
 
-    <main role="main">
+    <main role="main" class="mesmer-section">
 
         <div class="start">
 
@@ -172,7 +172,7 @@
 
         <?php include('../patterns/library_layer.php') ?>
 
-        <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;"></div>
+        <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;"><img src="../_assets/img/teaser/teaser-jtm.jpg" alt="james tilly mathews and the air loom"></div>
 
         <?php include('../patterns/global_navigation.php') ?>
         
