@@ -46,7 +46,7 @@ Pathways.LibraryLayer = function(panel_height) {
             $overlay.append($embed);
             $('body').append($overlay);
 
-            $overlay.show().css('background-color', 'rgba(0,0,0,0.8)');
+            $overlay.css('background-color', 'rgba(0,0,0,0.8)');
             
             positionCenter($embed);
 

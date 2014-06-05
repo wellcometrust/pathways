@@ -4,9 +4,12 @@ function _(str) { return document.querySelector(str); }
 
 function positionCenter($elm) {
     var width   = $elm.width(),
-        height  = $elm.height();
+        height  = $elm.height(),
 
-    $elm.css({ position: 'absolute', top: (window.innerHeight / 2) - (height / 2), left: (window.innerHeight / 2) - (width / 2) });
+        top     = (window.innerHeight / 2) - (height / 2),
+        left    = (window.innerWidth / 2) - (width / 2);
+
+    $elm.css({ position: 'absolute', top: top, left: left });
 }
 
 
