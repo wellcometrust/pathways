@@ -263,16 +263,6 @@ Pathways.LoadScenes = function() {
     // Freud
     if( _('.anna-o') ) {
 
-        var $f = $('.anna-o .bg-container img').first();
-        // $f.css('transform', 'translate(0, -700px)');
-
-        var positions = [
-            { x: -57,   y: -107 },
-            { x: 79,    y: 32 },
-            { x: 178,   y: 178 },
-            { x: -144,  y: 106 },
-        ];
-
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.anna-o',
                 triggerHook:    'top'
@@ -281,17 +271,16 @@ Pathways.LoadScenes = function() {
                 if( e.scrollDirection == 'REVERSE' )
                     return;
 
-                var counter = 0;
-
                 $('.anna-o .fragmented').each(function() {
-                    var $this = $(this);
+                    var $this       = $(this),
+                        angle       = Math.random() * (Math.PI * 2),
+                        distance    = Math.max(Math.random() * (window.outerWidth / 5), 50);
 
-                    var x = positions[counter].x;
-                        y = positions[counter].y;
+                    var x = Math.cos(angle) * distance,
+                        y = Math.sin(angle) * distance;
 
+                    $this.css( { 'transition': 'all 0.2s ease-out' } );
                     $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
-
-                    counter++;
                 })
             })
 
@@ -301,21 +290,11 @@ Pathways.LoadScenes = function() {
             scenes[idx++] = new ScrollScene({
                     triggerElement: '.anna-o',
                     triggerHook:    'top',
-                    duration:       $('.anna-o').height(),
+                    duration:       450,
                     offset:         100,
                 })
                 .setTween(tween);
         });
-
-        // var oceanTween = TweenMax.to( $f, 1, { y: 0 } );
-        var oceanTween = TweenMax.to( $f, 1, { y: -750 } );
-
-        scenes[idx++] = new ScrollScene({
-                triggerElement: '.anna-o',
-                triggerHook:    'top',
-                duration:       $('.anna-o').height()
-            })
-            .setTween(oceanTween);
     }
 
 
@@ -337,7 +316,6 @@ var db = {
     },
     'mesmer': {
         'image': 'mesmer-crop.jpg',
-        'text': 'Franz Anton Mesmer arrived in Paris in 1778. His healing powers created a sensation.
-In his salons, or séances, a mysterious ‘magnetic’ fluid flowed around the participants. They twitched, writhed, spoke in tongues, and collapses in violent convulsions. When they revived, they were cured of their illnesses: toothaches, cramps, even paralysis and blindness.'
+        'text': 'Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’'
     }
 }
