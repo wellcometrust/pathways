@@ -317,5 +317,6 @@ var db = {
     'mesmer': {
         'image': 'mesmer-crop.jpg',
         'text': 'Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’'
+        
     }
 }
