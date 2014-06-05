@@ -263,6 +263,16 @@ Pathways.LoadScenes = function() {
     // Freud
     if( _('.anna-o') ) {
 
+        var $f = $('.anna-o .bg-container img').first();
+        // $f.css('transform', 'translate(0, -700px)');
+
+        var positions = [
+            { x: -57,   y: -107 },
+            { x: 79,    y: 32 },
+            { x: 178,   y: 178 },
+            { x: -144,  y: 106 },
+        ];
+
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.anna-o',
                 triggerHook:    'top'
@@ -271,16 +281,17 @@ Pathways.LoadScenes = function() {
                 if( e.scrollDirection == 'REVERSE' )
                     return;
 
+                var counter = 0;
+
                 $('.anna-o .fragmented').each(function() {
-                    var $this       = $(this),
-                        angle       = Math.random() * (Math.PI * 2),
-                        distance    = Math.max(Math.random() * (window.outerWidth / 5), 50);
+                    var $this = $(this);
 
-                    var x = Math.cos(angle) * distance,
-                        y = Math.sin(angle) * distance;
+                    var x = positions[counter].x;
+                        y = positions[counter].y;
 
-                    $this.css( { 'transition': 'all 0.2s ease-out' } );
                     $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
+
+                    counter++;
                 })
             })
 
@@ -290,11 +301,21 @@ Pathways.LoadScenes = function() {
             scenes[idx++] = new ScrollScene({
                     triggerElement: '.anna-o',
                     triggerHook:    'top',
-                    duration:       450,
+                    duration:       $('.anna-o').height(),
                     offset:         100,
                 })
                 .setTween(tween);
         });
+
+        // var oceanTween = TweenMax.to( $f, 1, { y: 0 } );
+        var oceanTween = TweenMax.to( $f, 1, { y: -750 } );
+
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '.anna-o',
+                triggerHook:    'top',
+                duration:       $('.anna-o').height()
+            })
+            .setTween(oceanTween);
     }
 
 
