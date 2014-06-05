@@ -1,7 +1,49 @@
 
-
 Pathways.Quiz = function() {
-    var $quiz           = $('.quiz'),
+
+    $('body').on('click', '[data-component="quiz"]', function(e) {
+        // setup overlay
+        var $overlay    = $('<div class="overlay"></div>'),
+            $close      = $('<div class="close"></div>');
+
+        $overlay.css('height', window.innerHeight );
+
+        // append overlay
+        $('body').append( $overlay );
+
+        $overlay.show();
+        $overlay.css('background-color', 'rgba(0,0,0,0.8)');
+
+        // append and initialize quiz
+        setTimeout(function() {
+            var $code           = $( _('#template-quiz').innerHTML ),
+                $content        = $('<div class="content"></div>'),
+                $quizContainer  = $('<div class="quiz"></div>');
+
+            $content.append( $code );
+            $quizContainer.append( $content );
+            $overlay.append( $quizContainer );
+
+            positionCenter($quizContainer);
+
+            var quiz = new Quiz('.quiz');
+            quiz.init();
+
+            $overlay.append( $close );
+        }, 800);
+
+        $close.on('click', function() {
+            $overlay.css('opacity', 0);
+            setTimeout(function() {
+                $overlay.remove();
+            }, 800);
+        });
+
+    });
+}
+
+function Quiz(element) {
+    var $quiz           = $(element),
         started         = false,
         paused          = false,
         level           = 1,

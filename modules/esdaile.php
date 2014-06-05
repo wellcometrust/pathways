@@ -33,6 +33,18 @@
                     <img src="../_assets/img/esdaile/esdaile-2.jpg">
                 </div>
 
+                <svg class="info-box" data-component="quiz" version="1.1" xmlns="http://www.w3.org/2000/svg" >
+                    <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
+                    <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
+                    <g stroke="none" stroke-width="1" fill-rule="evenodd" fill="#231F20" transform="translate(34, 37) scale(0.2, 0.2)">
+                        <path d="M104.2,7.8 L104.2,72 L8,72 L8,7.8 L104.2,7.8 L104.2,7.8 Z M112.3,-0.3 L-0.1,-0.3 L-0.1,80 L112.2,80 L112.2,-0.3 L112.3,-0.3 L112.3,-0.3 Z" id="Shape"></path>
+                        <path d="M40,23.8 C40,28.2 36.4,31.8 32,31.8 C27.6,31.8 24,28.2 24,23.8 C24,19.4 27.6,15.8 32,15.8 C36.4,15.8 40,19.4 40,23.8 L40,23.8 Z" id="Shape"></path>
+                        <path d="M32,47.9 L16,63.9 L48.1,63.9 L32,47.9 Z" id="Shape"></path>
+                        <path d="M53.7,63.9 L96.2,63.9 L64.1,23.8 L42.9,53.1 L50.9,61.1 L53.7,63.9 Z" id="Shape"></path>
+                    </g>
+                </svg>
+
+                <!-- scroll content -->
                 <div class="scroll-content">
 
                     <div class="content">
@@ -119,64 +131,56 @@
 
         </div>
 
-        <!-- Quiz -->
-        <div class="panel quiz">
+        <script type="text/html" id="template-quiz">
+            <div class="quiz-container">
 
-            <div class="content">
+                <div class="quiz-start">
+                    <header class="quiz-start--header">
+                        <h1>The Esdaile Game</h1>
+                    </header>
 
-                <div class="quiz-container" data-component="quiz">
-
-                    <div class="quiz-start">
-                        <header class="quiz-start--header">
-                            <h1>The Esdaile Game</h1>
-                        </header>
-
-                        <div class="quiz-start--text">
-                            <p>The surgeon performed dozens of operations, many of which were documented.</p>
-                        </div>
-
-                        <span class="button">Start</span>
+                    <div class="quiz-start--text">
+                        <p>The surgeon performed dozens of operations, many of which were documented.</p>
                     </div>
 
-                    <div class="quiz-playground clearfix">
-                        <div class="image">
-                            <div class="remaining"></div>
-                        </div>
-
-                        <div class="answers">
-                            <div class="question"></div>
-                            <ul></ul>
-
-                            <div class="score">
-                                Your Score
-                                <span></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="quiz-finish">
-                        <header class="quiz-finish--header">
-                            <h1>Congratulations!</h1>
-                        </header>
-
-                        <div class="quiz-finish--body">
-                            <div class="quiz-finish--score">
-                                You scored
-                                <span></span>
-                            </div>
-                        </div>
-
-                        <footer class="quiz-finish--footer">
-                            
-                        </footer>
-                    </div>
-
+                    <span class="button">Start</span>
                 </div>
 
-                
-            </div>
+                <div class="quiz-playground clearfix">
+                    <div class="image">
+                        <div class="remaining"></div>
+                    </div>
 
-        </div>
+                    <div class="answers">
+                        <div class="question"></div>
+                        <ul></ul>
+
+                        <div class="score">
+                            Your Score
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-finish">
+                    <header class="quiz-finish--header">
+                        <h1>Congratulations!</h1>
+                    </header>
+
+                    <div class="quiz-finish--body">
+                        <div class="quiz-finish--score">
+                            You scored
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <footer class="quiz-finish--footer">
+                        
+                    </footer>
+                </div>
+
+            </div>
+        </script>
 
         
         <?php include('../patterns/library_layer.php') ?>
