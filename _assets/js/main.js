@@ -83,10 +83,15 @@ Pathways.LoadScenes = function() {
 
     // Panels
 
+    $('[data-component="gallery"]').hide();
+    $('[data-component="quiz"]').hide();
+
     $('.sequence .panel').each(function() {
         var $this           = $(this),
             $bg             = $this.find('.bg-container'),
             $library_panel  = $this.find('.library-panel'),
+            $gallery        = $this.find('[data-component="gallery"]'),
+            $quizes         = $this.find('[data-component="quiz"]'),
             tween           = TweenMax.to( $bg, 1, { opacity: 1 });
 
         // Panels
@@ -98,6 +103,34 @@ Pathways.LoadScenes = function() {
                 $bg.css('display', 'block');
             })
             .setTween(tween)
+
+        // Galleries
+        if( $gallery.length ) {
+            scenes[idx++] = new ScrollScene({
+                    triggerElement: $this,
+                    duration:       panel_height
+                })
+                .on('enter', function() {
+                    $gallery.css({ position: 'fixed', display: 'block' });
+                })
+                .on('leave', function() {
+                    $gallery.css({ position: 'absolute', display: 'none' });
+                })
+        }
+
+        // Quiz
+        if( $quizes.length ) {
+            scenes[idx++] = new ScrollScene({
+                    triggerElement: $this,
+                    duration:       panel_height
+                })
+                .on('enter', function() {
+                    $quizes.css({ position: 'fixed', display: 'block' });
+                })
+                .on('leave', function() {
+                    $quizes.css({ position: 'absolute', display: 'none' });
+                })
+        }
 
         // Library panels
         if( $library_panel.length ) {

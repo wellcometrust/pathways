@@ -66,10 +66,14 @@
             // Use any offsets set on the panel to increase height where necessary.
             $('.panel').each(function() {
                 var $this   = $(this),
+                    $bg     = $this.find('.bg-container'),
                     height  = $this.height();
 
-                if( height < panel_height )
+                if( height < panel_height ) {
                     $this.css('height', panel_height + ( $this.data('offset-height') ? $this.data('offset-height') : 0 ) );
+                }
+
+                $bg.css('height', panel_height);
             });
         }
 
