@@ -29,6 +29,7 @@
         </header>
 
         <ul>
+            <li><a href="modules/index.php">Intro</a></li>
             <li><a href="modules/mesmer.php">Mesmer</a></li>
             <li><a href="modules/airloom.php">Airloom</a></li>
             <li><a href="modules/elliotson.php">Elliotson</a></li>
