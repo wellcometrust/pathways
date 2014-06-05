@@ -329,14 +329,15 @@ Pathways.LoadScenes = function() {
 var db = {
     'rod': {
         'image': 'rod-crop.jpg',
-        'text': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        'text': 'Mesmer founded a private society where, for the large sum of 100 livres, he would undertake to teach his healing skills under a strict vow of secrecy. Many distinguished French aristocrats signed up.'
     },
     'woman': {
         'image': 'woman-crop.jpg',
-        'text': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        'text': 'Mesmer’s salons were highly charged scenes of mass hysteria and miracle cures (quote). He would often play music on a glass harmonica that sent shivers through the patients’ nerves.'
     },
     'mesmer': {
         'image': 'mesmer-crop.jpg',
-        'text': 'Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’'
+        'text': 'Franz Anton Mesmer arrived in Paris in 1778. His healing powers created a sensation.
+In his salons, or séances, a mysterious ‘magnetic’ fluid flowed around the participants. They twitched, writhed, spoke in tongues, and collapses in violent convulsions. When they revived, they were cured of their illnesses: toothaches, cramps, even paralysis and blindness.'
     }
 }
