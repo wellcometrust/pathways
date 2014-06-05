@@ -337,7 +337,6 @@ var db = {
     },
     'mesmer': {
         'image': 'mesmer-crop.jpg',
-        'text': 'Franz Anton Mesmer arrived in Paris in 1778. His healing powers created a sensation.
-In his salons, or séances, a mysterious ‘magnetic’ fluid flowed around the participants. They twitched, writhed, spoke in tongues, and collapses in violent convulsions. When they revived, they were cured of their illnesses: toothaches, cramps, even paralysis and blindness.'
+        'text': 'Franz Anton Mesmer arrived in Paris in 1778. His healing powers created a sensation. In his salons, or séances, a mysterious ‘magnetic’ fluid flowed around the participants. They twitched, writhed, spoke in tongues, and collapses in violent convulsions. When they revived, they were cured of their illnesses: toothaches, cramps, even paralysis and blindness.'
     }
 }
