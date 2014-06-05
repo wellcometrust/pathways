@@ -7,9 +7,7 @@ Pathways.CropZoom = function(panel_height) {
         image_top       = $elm.offset().top,
         trigger         = $('.tap-block').offset().top,
         duration        = panel_height / 2,
-        image_height    = panel_height,
-        inview          = false,
-        hidden          = true;
+        image_height    = panel_height;
 
     function onResize() {
         $elm.css({ width: window.outerWidth, height: window.outerHeight });

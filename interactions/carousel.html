@@ -20,12 +20,9 @@
             font-weight: 200;
         }
 
-        h1, h2, h3 {
-            font-weight: 200;
-        }
-
         #carousel {
-            background: linear-gradient(#000, #ccc);
+            /*background: linear-gradient(#000, #ccc);*/
+            background-color: #000;
             overflow: hidden;
             width: 100%;
             -webkit-backface-visibility: hidden;
@@ -48,17 +45,15 @@
             -webkit-transform-style: preserve-3d;
         }
 
-        #carousel ul {
-            -webkit-box-shadow: 0 0 20px rgba(0,0,0,.2);
-            box-shadow: 0 0 20px rgba(0,0,0,.2);
-            position: relative;
-        }
-
         #carousel li {
             float: left;
             overflow: hidden;
             -webkit-transform-style: preserve-3d;
             -webkit-transform: translate3d(0,0,0);
+
+            -webkit-transition: opacity .3s;
+            -moz-transition: opacity .3s;
+            transition: opacity .3s;
         }
 
         #carousel li h2 {
@@ -72,18 +67,33 @@
             text-shadow: -1px -1px 0 rgba(0,0,0,.2);
         }
 
-        .pane {
-            height: 360px;
+        #carousel .prev {
+            position: absolute;
+            top: 0;
+            width: 46px;
+            background: url(/_assets/img/icons/icon-btn-prev.svg) 50% 50% no-repeat;
+            background-size: 50%;
         }
 
-        .pane:first-child {
-            margin-left: 0;
+        #carousel .next {
+            position: absolute;
+            top: 0;
+            width: 46px;
+            background: url(/_assets/img/icons/icon-btn-next.svg) 50% 50% no-repeat;
+            background-size: 50%;
         }
 
-        #carousel .pane1 { background: url('../_assets/img/mesmer/carousel/L0018951.jpg') 0 0 no-repeat; background-size: 100%; width: 260px; }
-        #carousel .pane2 { background: url('../_assets/img/mesmer/carousel/L0019328.jpg') 0 0 no-repeat; background-size: 100%; width: 500px; }
-        #carousel .pane3 { background: url('../_assets/img/mesmer/carousel/L0019331.jpg') 0 0 no-repeat; background-size: 100%; width: 258px; }
-        #carousel .pane4 { background: url('../_assets/img/mesmer/carousel/L0027293.jpg') 0 0 no-repeat; background-size: 100%; width: 265px; }
+        #carousel li .text {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            color: #fff;
+            font-size: 0.8rem;
+            border-left: 2px solid rgba(92,184,178,1);
+            background-color: rgba(0,0,0,0.6);
+            padding: 0.8rem 0.6rem;
+        }
 
     </style>
 </head>
@@ -97,7 +107,32 @@
     <script src="/_assets/js/lib/hammer.min.js"></script>
 
     <script>
-    var imageArray = ['L0018951','L0019328','L0019331','L0027293','L0032335','L0041062'];
+    function _(elm) { return document.querySelector(elm); }
+
+    var imageDB = [
+        {
+            image: 'L0018951',
+            text: 'Here is some test text. Lorem ipsum is for suckers!'
+        },
+        {
+            image: 'L0019328',
+        },
+        {
+            image: 'L0019331',
+            text: 'Here is some test text. Lorem ipsum is for suckers!'
+        },
+        {
+            image: 'L0027293',
+            text: 'Here is some test text. Lorem ipsum is for suckers!'
+        },
+        {
+            image: 'L0032335',
+        },
+        {
+            image: 'L0041062',
+            text: 'Here is some test text. Lorem ipsum is for suckers!'
+        }
+    ]
 
     /**
     * super simple carousel
@@ -105,23 +140,28 @@
     */
     function Carousel(element)
     {
-        var self        = this,
-            _element    = document.querySelector(element),
-            element     = $(element);
+        var self            = this,
+            _element        = document.querySelector(element),
+            element         = $(element),
+            $prev           = null,
+            $next           = null,
 
-        var container 	= $(">ul", element),
-        	panes 		= $(">ul>li", element);
+            container       = null,
+            panes           = null,
 
-        var pane_width  = 0,
-            pane_count  = panes.length,
-            current_pane = 0;
+            widths          = [],
+
+            pane_width      = 0,
+            pane_count      = 0,
+            current_pane    = 0,
+            total_offset    = (window.innerWidth / 2);
 
 
         /**
          * initial
          */
         this.init = function() {
-            // Load the images, run the rest of the logic after all the images have loaded.
+            // Load the images, run the rest of the logic after all the images have loaded via anonymous callback function.
             loadImages(function() {
 
                 // reset
@@ -130,7 +170,12 @@
                 pane_count  = panes.length;
 
                 loadNavigation();
-                // setPaneDimensions();
+
+                _('#carousel ul').style['-webkit-transform'] = 'translate('+ (total_offset - (widths[0] / 2)) +'px,0)';
+                setPaneDimensions();
+
+                panes.css('opacity', 0.4);
+                panes.first().css('opacity', 1);
             });
 
             $(window).on("load resize orientationchange", function() {
@@ -141,21 +186,30 @@
 
         var loadImages = function(callback) {
             var ul              = document.createElement('ul'),
-                totalImages     = imageArray.length,
+                totalImages     = imageDB.length,
                 imagesLoaded    = 0;
 
             ul.style['height'] = window.innerHeight + 'px';
 
-            imageArray.forEach(function(str) {
+            imageDB.forEach(function(obj) {
                 var li  = document.createElement('li'),
                     img = new Image();
 
-                img.src = '../_assets/img/mesmer/carousel/' + str + '.jpg';
+                img.src = '../_assets/img/mesmer/carousel/' + obj.image + '.jpg';
                 img.style['height'] = '100%';
-
-                li.style['height'] = window.innerHeight + 'px';
+                li.style['height']  = '100%';
 
                 li.appendChild(img);
+
+                if( obj.text ) {
+                    var span = document.createElement('span'),
+                        txt = document.createTextNode(obj.text);
+
+                    span.classList.add('text');
+                    span.appendChild(txt);
+                    li.appendChild(span);
+                }
+
                 ul.appendChild(li);
 
                 img.onload = function() {
@@ -165,8 +219,11 @@
                         // resize the panes/container
                         var _panes      = document.querySelectorAll('#carousel li'),
                             totalWidth  = 0;
-                        for(var i = _panes.length; i--;) {
-                            totalWidth += parseInt( window.getComputedStyle(_panes[i]).width );
+
+                        for(var i = 0; i < _panes.length; i++) {
+                            var w = parseInt( window.getComputedStyle(_panes[i]).width );
+                            widths.push(w);
+                            totalWidth += w;
                         }
                         ul.style['width'] = totalWidth + 'px';
 
@@ -176,54 +233,64 @@
             });
 
             _element.appendChild(ul);
+
+            container = $(ul);
         }
 
         var loadNavigation = function() {
-            var _left   = document.createElement('div'),
-                _right  = document.createElement('div');
+            $prev   = $('<div/>'),
+            $next  = $('<div/>');
 
-            _left.classList.add('left');
-            _right.classList.add('right');
+            $prev.addClass('prev');
+            $next.addClass('next');
 
-            _left.style['position'] = 'absolute';
-            _left.style['top']      = '0';
-            _left.style['left']     = '0';
-            _left.style['height']   = window.innerHeight + 'px';
-            _left.style['width']    = '36px';
-            _left.style['background-color'] = 'green';
+            $prev.css({
+                'left':     0,
+                'height':   window.innerHeight + 'px',
+            });
 
-            _element.appendChild(_left);
+            $next.css({
+                'right':    0,
+                'height':   window.innerHeight + 'px',
+            });
 
-            _right.style['position'] = 'absolute';
-            _right.style['top']      = '0';
-            _right.style['right']    = '0';
-            _right.style['height']   = window.innerHeight + 'px';
-            _right.style['width']    = '36px';
-            _right.style['background-color'] = 'green';
+            element.append($prev);
+            element.append($next);
 
-            _element.appendChild(_right);
-
-            _left.addEventListener('click', function() {
+            $prev.on('click', function() {
                 self.prev();
-            })
+            });
 
-            _right.addEventListener('click', function() {
+            $next.on('click', function() {
                 self.next();
-            })
+            });
         }
 
         /**
          * set the pane dimensions and scale the container
          */
         function setPaneDimensions() {
-            var widths = 0;
+            var total_width = 0;
+
+            widths = [];
             
             panes.each(function() {
-                var $this = $(this);
-                widths += $this.width() + parseInt( $this.css('margin-left') ) + parseInt( $this.css('margin-right') );
+                var w = $(this).width()
+
+                widths.push(w);
+                total_width += w;
             });
             
-            container.width(widths);
+            container.width(total_width);
+            total_offset = (window.innerWidth / 2);
+
+            pane_width = parseInt(total_width / panes.length);
+
+            // Heights
+            container.css('height', window.innerHeight);
+
+            $prev.height( window.innerHeight );
+            $next.height( window.innerHeight );
         };
 
 
@@ -231,23 +298,24 @@
          * show pane by index
          */
         this.showPane = function(index, animate) {
+            var offset  = 0,
+                count   = 0;
+
             // between the bounds
-            index = Math.max(0, Math.min(index, pane_count-1));
-            current_pane = index;
+            index           = Math.max(0, Math.min(index, pane_count-1));
+            current_pane    = index;
 
-            // var offset = -((100/pane_count)*current_pane);
-            var offset = 0,
-                count = 0;
-            panes.each(function() {
-                if( count == current_pane )
-                    return;
+            for (var i = 0; i < index; i++) {
+                offset -= widths[i];
+            };
 
-                offset -= ($(this).width() + parseInt( $(this).css('margin-left') ) + parseInt( $(this).css('margin-right') ));
-                count++;
-            });
+            offset += (total_offset - (widths[index] / 2));
+
+            panes.css('opacity', 0.4);
+            panes.get(current_pane).style['opacity'] = 1;
+
             setContainerOffset(offset, animate);
         };
-
 
         function setContainerOffset(percent, animate) {
             container.removeClass("animate");
@@ -271,18 +339,15 @@
                 case 'dragright':
                 case 'dragleft':
                     // stick to the finger
-                    // var pane_offset = -(100/pane_count)*current_pane;
                     var pane_offset = 0,
-                        count = 0;
-                    panes.each(function() {
-                        if( count == current_pane )
-                            return;
+                        count       = 0;
 
-                        pane_offset -= ($(this).width() + parseInt( $(this).css('margin-left') ) + parseInt( $(this).css('margin-right') ));
-                        count++;
-                    });
+                    for (var i = 0; i < current_pane; i++) {
+                        pane_offset -= widths[i];
+                    };
 
-                    // var pane_offset = -(100/pane_count)*current_pane;
+                    pane_offset += (total_offset - (widths[current_pane] / 2));
+
                     var drag_offset = ((100/440)*ev.gesture.deltaX) / pane_count;
 
                     // slow down at the first and last pane
@@ -292,7 +357,6 @@
                     }
 
                     setContainerOffset(ev.gesture.deltaX + pane_offset);
-                    // setContainerOffset(drag_offset + pane_offset);
                     break;
 
                 case 'swipeleft':

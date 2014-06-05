@@ -14,6 +14,7 @@
     <script src="../_assets/js/patterns/library-layer.js"></script>
     <script src="../_assets/js/patterns/quiz.js"></script>
     <script src="../_assets/js/patterns/audio-player.js"></script>
+    <script src="../_assets/js/patterns/carousel.js"></script>
 
     <script src="../_assets/js/main.js"></script>
 
