@@ -1,5 +1,8 @@
+<?php
+    $module = 'airloom';
 
-<?php include('../_includes/header.php') ?>
+    include('../_includes/header.php');
+?>
 
     <main role="main">
 

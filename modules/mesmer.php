@@ -1,5 +1,8 @@
+<?php
+    $module = 'mesmer';
 
-<?php include('../_includes/header.php') ?>
+    include('../_includes/header.php');
+?>
 
     <main role="main" class="mesmer-section">
 
