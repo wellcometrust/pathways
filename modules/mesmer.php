@@ -151,6 +151,8 @@
                 <div class="bg-container video" data-src="../_assets/video/mesmer.mp4">
                     <img src="../_assets/img/mesmer/mesmer-5.jpg">
                 </div>
+
+                <!-- <div class="black-strip" ></div> -->
                 
                 <div class="scroll-content left">
                     <p>Mesmer’s treatment was incredibly popular, and seemed to work.</p>
