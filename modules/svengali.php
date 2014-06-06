@@ -153,6 +153,7 @@
                             <div class="comic-row clearfix">
                                 <div class="comic-panel">
                                     <img src="../_assets/img/svengali/bonpard/bonpard-comic-3.jpg">
+                                    <p class="panel-text">The victim was strangled by a sil dressing gown cord, his body packed into a trunk and dumped off a remote mountainside.</p>
                                 </div>
                                 <div class="comic-panel">
                                     <img src="../_assets/img/svengali/bonpard/bonpard-comic-4.jpg">
@@ -160,8 +161,6 @@
                                 <div class="comic-panel">
                                     <img src="../_assets/img/svengali/bonpard/bonpard-comic-5.jpg">
                                 </div>
-
-                                <p class="panel-text wide">The victim was strangled by a sil dressing gown cord, his body packed into a trunk and dumped off a remote mountainside.</p>
                             </div>
                             
                             <div class="comic-panel">
