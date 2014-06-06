@@ -140,7 +140,8 @@ Pathways.LoadScenes = function() {
         if( $library_panel.length ) {
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
-                    duration:       panel_height
+                    duration:       panel_height,
+                    offset:         100
                 })
                 .on('enter', function() {
                     $library_panel.css({ position: 'fixed', display: 'block' });
