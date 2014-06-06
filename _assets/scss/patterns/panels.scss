@@ -39,24 +39,18 @@
         max-width:          40%;
         color:              #fefefe;
         @include            tablet-gothic;
-        font-size:          0.7rem;
+        font-size:          0.8rem;
         background-color:   rgba(0,0,0,0.2);
         border:             1px solid rgba(255,255,255, 0.6);
         border-radius:      5px;
         text-align:         center;
         margin:             0 auto 10vh auto;
-        padding:            1em 0;
+        padding:            1.2rem 0 1rem 0;
         text-decoration:    none;
         text-transform:     uppercase;
     }
 }
 
-.panel {
-    // border: 2px solid #ff0;
-}
-.bg-container {
-    // border: 2px solid #f00;
-}
 .panel h1{
     font-size: 3.245rem;
 }

@@ -69,7 +69,7 @@
                     $bg     = $this.find('.bg-container'),
                     height  = $this.height();
 
-                if( height < panel_height ) {
+                if( height < panel_height || $this.data('offset-height') ) {
                     $this.css('height', panel_height + ( $this.data('offset-height') ? $this.data('offset-height') : 0 ) );
                 }
 

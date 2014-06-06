@@ -59,7 +59,7 @@
 
             </div>
 
-            <div class="panel thomas-wakley" >
+            <div class="panel thomas-wakley" data-offset-height="1300">
                 <div class="bg-container">
                     <img src="../_assets/img/elliotson/elliotson-3.jpg">
                 </div>

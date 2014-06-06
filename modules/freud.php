@@ -44,7 +44,7 @@
                 <div class="scroll-content fixed">
                     <div class="content">
                         <header>
-                            <h1>The curious case of Anna O</h1>
+                            <h1>The curious case of Anna&nbsp;O</h1>
                         </header>
 
                         <p>1895, Vienna: Joseph Breuer and Sigmund Freud publish the case of Anna O - the pseudonym of a brilliant and fragile young woman with baffling physical and mental symptoms. She suffered from chronic coughing, hallucinations, paralysis, loss of vision, and even forgot how to speak her native German.</p>

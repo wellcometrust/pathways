@@ -33,14 +33,16 @@ Pathways.LoadScenes = function() {
 
     // Start panel
 
-    var start_tween = TweenMax.to( _('.start .content'), 1, { opacity: 0, y: (panel_height / 3) });
+    if( _('.start') ) {
+        var start_tween = TweenMax.to( _('.start .content'), 1, { opacity: 0, y: (panel_height / 3) });
 
-    scenes[idx++] = new ScrollScene({
-            triggerElement: '.start',
-            duration:       600,
-            offset:         (panel_height / 4)
-        })
-        .setTween(start_tween)
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '.start',
+                duration:       600,
+                offset:         (panel_height / 4)
+            })
+            .setTween(start_tween)
+    }
 
 
     // Svengali
@@ -92,6 +94,7 @@ Pathways.LoadScenes = function() {
             $library_panel  = $this.find('.library-panel'),
             $gallery        = $this.find('[data-component="gallery"]'),
             $quizes         = $this.find('[data-component="quiz"]'),
+            
             tween           = TweenMax.to( $bg, 1, { opacity: 1 });
 
         // Panels
@@ -108,7 +111,8 @@ Pathways.LoadScenes = function() {
         if( $gallery.length ) {
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
-                    duration:       panel_height
+                    duration:       panel_height,
+                    offset:         100
                 })
                 .on('enter', function() {
                     $gallery.css({ position: 'fixed', display: 'block' });
@@ -154,17 +158,20 @@ Pathways.LoadScenes = function() {
     if( _('.tap-block') ) {
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.tap-block',
-                duration:       panel_height
+                duration:       (panel_height - 100),
+                offset:         100
             })
             .on('enter', function(e) {
                 _('.crop-zoom').style['position'] = 'fixed';
                 TweenMax.to('.crop-zoom', 0.2, { opacity: 1 }); // Fade in
+                
                 setTimeout(function() {
                     $('.tap-target').addClass('animate');
                 }, 200);
             })
             .on('leave', function(e) {
                 TweenMax.to('.crop-zoom', 0.2, { opacity: 0 }); // Fade out
+                
                 setTimeout(function() {
                     $('.tap-target').removeClass('animate');
                     _('.crop-zoom').style['position'] = 'absolute';
@@ -196,9 +203,11 @@ Pathways.LoadScenes = function() {
 
     // Video
     if( _('.tree') ) {
+        var tree_offset = $('.tree').data('offset-height') ? $('.tree').data('offset-height') : 0;
+
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.tree',
-                duration:       panel_height
+                duration:       panel_height + tree_offset + 100
             })
             .on('enter', function(e) {
                 if( _('.tree video') )
@@ -213,9 +222,11 @@ Pathways.LoadScenes = function() {
     }
 
     if( _('.news') ) {
+        var news_offset = $('.news').data('offset-height') ? $('.tree').data('offset-height') : 0;
+
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.news',
-                duration:       panel_height
+                duration:       panel_height + news_offset + 100
             })
             .on('enter', function(e) {
                 if( _('.news video') )
@@ -261,13 +272,19 @@ Pathways.LoadScenes = function() {
             })
     }
 
-    //Elliotson
+    // Elliotson specific
+
+    //
     if( _('.okey-sisters') ) {
+        
+        $('.okey-sisters .scroll-content').css({ 'bottom': 'auto', 'top': panel_height });
+        $('.thomas-wakley .scroll-content').css({ 'bottom': 'auto', 'top': (panel_height / 3) });
+
         $('.black-strip').css({'height': panel_height, '-webkit-transform': 'translate(0,'+panel_height+'px)'});
 
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.okey-sisters',
-                 triggerHook:    'top',
+                triggerHook:    'top',
                 duration:       panel_height
             })
             .on('enter', function(e) {
@@ -318,9 +335,6 @@ Pathways.LoadScenes = function() {
 
     if( _('.anna-o') ) {
 
-        // var $f = $('.anna-o .bg-container img').first();
-        // $f.css('transform', 'translate(0, -700px)');
-
         var positions = [
             { x: -57,   y: -107 },
             { x: 79,    y: 32 },
@@ -328,27 +342,18 @@ Pathways.LoadScenes = function() {
             { x: -144,  y: 106 },
         ];
 
-        scenes[idx++] = new ScrollScene({
-                triggerElement: '.anna-o',
-                triggerHook:    'top'
-            })
-            .on('enter', function(e) {
-                if( e.scrollDirection == 'REVERSE' )
-                    return;
+        var counter = 0;
 
-                var counter = 0;
+        $('.anna-o .fragmented').each(function() {
+            var $this = $(this);
 
-                $('.anna-o .fragmented').each(function() {
-                    var $this = $(this);
+            var x = positions[counter].x;
+                y = positions[counter].y;
 
-                    var x = positions[counter].x;
-                        y = positions[counter].y;
+            $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
 
-                    $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
-
-                    counter++;
-                })
-            })
+            counter++;
+        })
 
         $('.anna-o .fragmented').each(function() {
             var tween = TweenMax.to( $(this), 1, { x: 0, y: 0 } );
@@ -357,20 +362,11 @@ Pathways.LoadScenes = function() {
                     triggerElement: '.anna-o',
                     triggerHook:    'top',
                     duration:       $('.anna-o').height(),
-                    offset:         100,
+                    offset:         50,
                 })
                 .setTween(tween);
         });
 
-        // var oceanTween = TweenMax.to( $f, 1, { y: 0 } );
-        // var oceanTween = TweenMax.to( $f, 1, { y: -750 } );
-
-        // scenes[idx++] = new ScrollScene({
-        //         triggerElement: '.anna-o',
-        //         triggerHook:    'top',
-        //         duration:       $('.anna-o').height()
-        //     })
-        //     .setTween(oceanTween);
     }
 
     if( _('.office-2') ) {

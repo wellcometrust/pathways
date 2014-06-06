@@ -35,5 +35,10 @@
         background-size:    100%;
         width:              32px;
         height:             32px;
+
+        &.active {
+            background:         url('/_assets/img/icons/pause-white.svg') 0 0 no-repeat;
+            background-size:    100%;
+        }
     }
 }
