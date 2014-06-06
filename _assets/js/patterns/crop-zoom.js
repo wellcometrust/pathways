@@ -18,8 +18,10 @@ Pathways.CropZoom = function(panel_height) {
         var $target = $(this),
             key     = $target.data('crop'),
             image   = '../_assets/img/mesmer/'+ db[key]['image'],
-            text    = db[key]['text'],
-            img     = new Image();
+            title   = db[key]['title'] ? db[key]['title'] : '',
+            text    = db[key]['text'] ? db[key]['text'] : '',
+            img     = new Image(),
+            content;
 
         img.src = image;
 
@@ -34,10 +36,13 @@ Pathways.CropZoom = function(panel_height) {
                 $text,
                 $overlay;
 
+            content = title != '' ? '<h2>'+title+'</h2>' : '';
+            content += '<p>'+ text + '</p>';
+
             // create popup in memory
             $popup      = $('<div/>').addClass('popup');
             $image_crop = $(img).addClass('image-crop');
-            $text       = $('<div/>').addClass('text').html(text);
+            $text       = $('<div/>').addClass('text').html(content);
 
             $popup.append( $image_crop );
             $popup.append( $text );
