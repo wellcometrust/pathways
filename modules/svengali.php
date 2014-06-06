@@ -4,6 +4,12 @@
     include('../_includes/header.php');
 ?>
 
+    <style type="text/css">
+        .trilby .trilby-header {
+            width: auto;
+        }
+    </style>
+
     <main role="main">
 
         <div class="start">
@@ -126,9 +132,8 @@
                         <div class="bonpard-header">
                             <header>
                                 <h1>Hypnotism in real life</h1>
-                                <p>Du Maurier's novel is inspired by sensational real-life stories. Among them is the case of Gabrielle Bompard in Paris in 1889. Gabrielle and her accomplice are tried for murder. In the first case of its kind, Gabrielle claimed that she had been hypnotised by her partner in crime, and had no memory of the event. </p>
-                                <p>At her trial, expert witnesses for both prosecution and defence present different opinions about the power of hypnosis: can it be used to make someone commit murder against their will, or without their knowledge?
-</p>
+                                <p>Du Maurier’s novel is inspired by sensational real-life stories. Among them is the case of Gabrielle Bompard in Paris in 1889. Gabrielle and her accomplice are tried for murder. In the first case of its kind, Gabrielle claimed that she had been hypnotised by her partner in crime, and had no memory of the event.</p>
+                                <p>At her trial, expert witnesses for both prosecution and defence present different opinions about the power of hypnosis: can it be used to make someone commit murder against their will, or without their knowledge?</p>
                             </header>
                         </div>
                         
@@ -142,7 +147,7 @@
                                     <img src="../_assets/img/svengali/bonpard/bonpard-comic-2.jpg">
                                 </div>
                                 
-                                <p class="panel-text">In 1889 Paris was gripped by a sensational murder. A wealthy businessman was lured by a young woman named Gabrielle Bonpard to a rented apartment where her partner, a vicious con-man named Michel Eyraud, was lying in wait.</p>
+                                <p class="panel-text wide">In 1889 Paris was gripped by a sensational murder. A wealthy businessman was lured by a young woman named Gabrielle Bonpard to a rented apartment where her partner, a vicious con-man named Michel Eyraud, was lying in wait.</p>
                             </div>
 
                             <div class="comic-row clearfix">
@@ -156,7 +161,7 @@
                                     <img src="../_assets/img/svengali/bonpard/bonpard-comic-5.jpg">
                                 </div>
 
-                                <p class="panel-text">The victim was strangled by a sil dressing gown cord, his body packed into a trunk and dumped off a remote mountainside.</p>
+                                <p class="panel-text wide">The victim was strangled by a sil dressing gown cord, his body packed into a trunk and dumped off a remote mountainside.</p>
                             </div>
                             
                             <div class="comic-panel">
@@ -203,49 +208,17 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="outro">
+                            <p>Bompard was found guilty. She was imprisoned for 25 years, a with that hypnotism’s reputation was once more tarnished.</p>
+                        </div>
                     </div>
-                    <p>Bompard was found guilty. She was imprisoned for 25 years, a with that hypnotism's reputation was once more tarnished.
-</p>
                     
                 </div>
             </div>
 
         </div>
 
-        <!--
-            Probably not worth having 'sequence2'. Just make the panels longer.
-        -->
-
-
-        <!-- <div class="sequence2">
-
-            <div class="bg-container">
-                <img src="../_assets/img/svengali/svengali-3.jpg">
-            </div>
-        
-
-            <div class="panel tween clearfix">
-                <div class="panel-container">
-                    <div class="panel-content">
-                        <header>
-                            <h1>She becomes a huge star</h1>
-                        </header>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.</p>
-                    </div>
-                </div>
-                
-                <div class="scroll-content img">
-                    <img src="../_assets/img/interactions/b.jpg">
-                </div>
-            </div>
-
-        </div> -->
-
-        
         <?php include('../patterns/library_layer.php') ?>
 
         <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;">

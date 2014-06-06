@@ -27,5 +27,14 @@
           s.parentNode.insertBefore(wf, s);
         })();
     </script>
+
+    <style type="text/css">
+        .panel {
+            border: 1px solid blue;
+        }
+        .bg-container {
+            border: 1px solid green;
+        }
+    </style>
 </head>
 <body>

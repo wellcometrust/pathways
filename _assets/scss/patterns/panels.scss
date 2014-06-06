@@ -587,12 +587,26 @@
 
 .bonpard {
 
+    .inner {
+        max-width:  1024px;
+        margin:     0 auto;
+    }
+
     .bonpard-header{
         width: 55%;
         margin: 90px auto;
         border-top: 1px solid rgba(255,255,255,0.6);
         padding: 36px 0 0 0;
     }
+
+    .comic-row {
+        .panel-text.wide {
+            left:   0;
+            right:  auto;
+            width:  80%;
+        }
+    }
+
     .comic-panel {
         position:   relative;
         float:      left;
@@ -671,6 +685,14 @@
         }
         .comic-column:nth-child(2) {
             width: 53%;
+        }
+    }
+
+    .outro {
+        margin: 7rem 0;
+
+        p {
+            font-size: 2.005rem;
         }
     }
 }
