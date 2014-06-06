@@ -189,14 +189,14 @@
                                         <img src="../_assets/img/svengali/bonpard/bonpard-comic-10.jpg">
                                         <p class="panel-text">All conscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.</p>
                                     </div>
-                                    <div class="comic-panel">
+                                    <div class="comic-panel" data-offset="-200">
                                         <img src="../_assets/img/svengali/bonpard/bonpard-comic-11.jpg">
 
                                         <p class="panel-text">All connscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.</p>
                                     </div>
                                 </div>
                                 <div class="comic-column">
-                                    <div class="comic-panel">
+                                    <div class="comic-panel" data-offset="200">
                                         <img src="../_assets/img/svengali/bonpard/bonpard-comic-12.jpg">
                                         <p class="panel-text">Both defendants were found guilty, Eyraud was sentenced to death by guillotine. Gabrielle received a prison sentence of 21 years.</p>
                                     </div>

@@ -286,12 +286,12 @@ Pathways.LoadScenes = function() {
 
         $('.comic-panel').each(function() {
             var $this   = $(this),
-                tween   = TweenMax.to( $(this), 1, { opacity: 1 } ),
+                tween   = TweenMax.to( $this, 1, { opacity: 1 } ),
                 offset  = $this.data('offset') ? $this.data('offset') : 0;
 
             scenes[idx++] = new ScrollScene({
-                    triggerElement:     $(this),
-                    duration:           $(this).height(),
+                    triggerElement:     $this,
+                    duration:           200,
                     offset:             offset
                 })
                 .setTween(tween);
