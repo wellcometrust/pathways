@@ -14,7 +14,7 @@ Pathways.Gallery = function() {
         $('body').append( $overlay );
 
         $overlay.show();
-        $overlay.css('background-color', 'rgba(255,255,255,0.8)');
+        $overlay.css('background-color', 'rgba(0,0,0,0.8)');
 
         setTimeout(function() {
             // Load the carousel

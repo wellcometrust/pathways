@@ -56,7 +56,7 @@
                                 <img src="../_assets/img/svengali/trilby/trilby-comic-1.jpg">
                                 <p class="panel-text">Paris, the Latin Quarter, 1850s Trilbuy O’Ferrall is living the bohemian life as an artist’s model</p>
                             </div>
-                            <div class="comic-panel">
+                            <div class="comic-panel" data-offset="250">
                                 <img src="../_assets/img/svengali/trilby/trilby-comic-2.jpg">
                                 <p class="panel-text">All the men are in love with her</p>
                             </div>
