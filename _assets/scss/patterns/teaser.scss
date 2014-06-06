@@ -1,8 +1,12 @@
 .teaser {
 	position: 			relative;
-	color: 				#fff;
 	text-align: 		center;
 	background:  		#000;
+
+	a {
+		color: 				#fff;
+		text-decoration: 	none;
+	}
 
 	img {
 		&.teaser-bkg {
