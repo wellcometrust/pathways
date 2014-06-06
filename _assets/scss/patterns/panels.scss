@@ -727,3 +727,18 @@
     }
 }
 
+.office img {
+    -webkit-transform:          scale(2, 2);
+    -webkit-transform-origin:   0 0;
+    -webkit-transition:         -webkit-transform 14s ease;
+}
+
+.office-2 img {
+    -webkit-transform:          scale(2, 2);
+    -webkit-transform-origin:   0 0;
+    -webkit-transition:         -webkit-transform 14s ease;
+}
+
+.office-2.active img {
+    -webkit-transform: scale(1, 1);
+}

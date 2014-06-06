@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="panel ">
+            <div class="panel office-2">
 
                 <div class="bg-container">
                     <img src="../_assets/img/freud/freud-6.jpg">

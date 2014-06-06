@@ -318,60 +318,71 @@ Pathways.LoadScenes = function() {
 
     if( _('.anna-o') ) {
 
-            var $f = $('.anna-o .bg-container img').first();
-            // $f.css('transform', 'translate(0, -700px)');
+        // var $f = $('.anna-o .bg-container img').first();
+        // $f.css('transform', 'translate(0, -700px)');
 
-            var positions = [
-                { x: -57,   y: -107 },
-                { x: 79,    y: 32 },
-                { x: 178,   y: 178 },
-                { x: -144,  y: 106 },
-            ];
+        var positions = [
+            { x: -57,   y: -107 },
+            { x: 79,    y: 32 },
+            { x: 178,   y: 178 },
+            { x: -144,  y: 106 },
+        ];
 
-            scenes[idx++] = new ScrollScene({
-                    triggerElement: '.anna-o',
-                    triggerHook:    'top'
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '.anna-o',
+                triggerHook:    'top'
+            })
+            .on('enter', function(e) {
+                if( e.scrollDirection == 'REVERSE' )
+                    return;
+
+                var counter = 0;
+
+                $('.anna-o .fragmented').each(function() {
+                    var $this = $(this);
+
+                    var x = positions[counter].x;
+                        y = positions[counter].y;
+
+                    $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
+
+                    counter++;
                 })
-                .on('enter', function(e) {
-                    if( e.scrollDirection == 'REVERSE' )
-                        return;
+            })
 
-                    var counter = 0;
-
-                    $('.anna-o .fragmented').each(function() {
-                        var $this = $(this);
-
-                        var x = positions[counter].x;
-                            y = positions[counter].y;
-
-                        $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
-
-                        counter++;
-                    })
-                })
-
-            $('.anna-o .fragmented').each(function() {
-                var tween = TweenMax.to( $(this), 1, { x: 0, y: 0 } );
-
-                scenes[idx++] = new ScrollScene({
-                        triggerElement: '.anna-o',
-                        triggerHook:    'top',
-                        duration:       $('.anna-o').height(),
-                        offset:         100,
-                    })
-                    .setTween(tween);
-            });
-
-            // var oceanTween = TweenMax.to( $f, 1, { y: 0 } );
-            var oceanTween = TweenMax.to( $f, 1, { y: -750 } );
+        $('.anna-o .fragmented').each(function() {
+            var tween = TweenMax.to( $(this), 1, { x: 0, y: 0 } );
 
             scenes[idx++] = new ScrollScene({
                     triggerElement: '.anna-o',
                     triggerHook:    'top',
-                    duration:       $('.anna-o').height()
+                    duration:       $('.anna-o').height(),
+                    offset:         100,
                 })
-                .setTween(oceanTween);
-        }
+                .setTween(tween);
+        });
+
+        // var oceanTween = TweenMax.to( $f, 1, { y: 0 } );
+        // var oceanTween = TweenMax.to( $f, 1, { y: -750 } );
+
+        // scenes[idx++] = new ScrollScene({
+        //         triggerElement: '.anna-o',
+        //         triggerHook:    'top',
+        //         duration:       $('.anna-o').height()
+        //     })
+        //     .setTween(oceanTween);
+    }
+
+    if( _('.office-2') ) {
+
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '.office-2',
+                triggerHook:    'middle'
+            })
+            .on('enter', function() {
+                $('.office-2').addClass('active');
+            })
+    }
 
 
     scenes.forEach(function(s) {

@@ -29,12 +29,12 @@
     </script>
 
     <style type="text/css">
-        .panel {
+        /*.panel {
             border: 1px solid blue;
         }
         .bg-container {
             border: 1px solid green;
-        }
+        }*/
     </style>
 </head>
 <body>
