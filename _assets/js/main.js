@@ -285,11 +285,14 @@ Pathways.LoadScenes = function() {
         $('.comic-panel').css('opacity', 0);
 
         $('.comic-panel').each(function() {
-            var tween = TweenMax.to( $(this), 1, { opacity: 1 } );
+            var $this   = $(this),
+                tween   = TweenMax.to( $(this), 1, { opacity: 1 } ),
+                offset  = $this.data('offset') ? $this.data('offset') : 0;
 
             scenes[idx++] = new ScrollScene({
                     triggerElement:     $(this),
                     duration:           $(this).height(),
+                    offset:             offset
                 })
                 .setTween(tween);
         })
