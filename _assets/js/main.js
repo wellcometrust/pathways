@@ -377,7 +377,6 @@ Pathways.LoadScenes = function() {
 
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.office-2',
-                triggerHook:    'middle'
             })
             .on('enter', function() {
                 $('.office-2').addClass('active');
