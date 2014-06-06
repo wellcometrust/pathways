@@ -70,8 +70,8 @@ Pathways.CropZoom = function(panel_height) {
 
 
             $image_crop.css({
-                top:    40,
-                left:   120,
+                top:    0,
+                left:   0,
                 width:  width,
                 height: height,
                 opacity: 1
