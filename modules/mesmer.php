@@ -145,7 +145,7 @@
 
             <div class="panel news" data-offset-height="350">
 
-                <div class="bg-container video" data-src="../_assets/video/Pathways.mp4">
+                <div class="bg-container video" data-src="../_assets/video/mesmer.mp4">
                     <img src="../_assets/img/mesmer/mesmer-5.jpg">
                 </div>
                 
