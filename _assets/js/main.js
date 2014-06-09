@@ -182,7 +182,7 @@ Pathways.LoadScenes = function() {
 
     // Tree
     if( _('.tree' ) ) {
-        $('.black-strip').css({'height': panel_height, '-webkit-transform': 'translate(0,'+panel_height+'px)'});
+        $('.black-strip').css({'height': panel_height, 'transform': 'translate(0,'+panel_height+'px)'});
 
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.tree',
@@ -241,18 +241,6 @@ Pathways.LoadScenes = function() {
             })
     }
 
-    // India/boats
-    if( _('.india') ) {
-        scenes[idx++] = new ScrollScene({
-                triggerElement: '.india',
-                duration:       panel_height
-            })
-            .on('enter', function() {
-                $('.boats').css('-webkit-transform', 'translate(220px,0)');
-            })
-    }
-
-
     // Airloom specific
 
     // Video
@@ -281,7 +269,7 @@ Pathways.LoadScenes = function() {
         $('.okey-sisters .scroll-content').css({ 'bottom': 'auto', 'top': panel_height });
         $('.thomas-wakley .scroll-content').css({ 'bottom': 'auto', 'top': (panel_height / 3) });
 
-        $('.black-strip').css({'height': panel_height, '-webkit-transform': 'translate(0,'+panel_height+'px)'});
+        $('.black-strip').css({'height': panel_height, 'transform': 'translate(0,'+panel_height+'px)'});
 
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.okey-sisters',
@@ -298,7 +286,23 @@ Pathways.LoadScenes = function() {
             })
     }
 
+    // Esdaile
+
+    // India/boats
+    if( _('.india') ) {
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '.india',
+                duration:       panel_height
+            })
+            .on('enter', function() {
+                $('.boats').css('transform', 'translate(220px,0)');
+            })
+    }
+
+
     // Svengali
+
+    //
     if( _('.trilby') ) {
         $('.comic-panel').css('opacity', 0);
 
@@ -317,8 +321,10 @@ Pathways.LoadScenes = function() {
     }
 
     // Freud
+
+    //
     if( _('.office') ) {
-        $('.black-strip').css({'height': panel_height, '-webkit-transform': 'translate(0,'+panel_height+'px)'});
+        $('.black-strip').css({'height': panel_height, 'transform': 'translate(0,'+panel_height+'px)'});
 
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.office',

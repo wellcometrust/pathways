@@ -5,8 +5,12 @@
     bottom:     0;
     right:      0;
     z-index:    5;
+
     -webkit-transform:  translate(200px, 200px);
     -webkit-transition: all 0.5s ease;
+
+    -moz-transform:  translate(200px, 200px);
+    -moz-transition: all 0.5s ease;
     
     .handle {
         display:        block;
@@ -30,7 +34,10 @@
         width:              200px;
         height:             200px;
         padding:            15px;
+
         -webkit-transition: all 0.3s ease;
+           -moz-transition: all 0.3s ease;
+
         li {
             list-style: none; 
             a {
@@ -46,23 +53,26 @@
 
     &.active {
         -webkit-transform:  translate(38px, 38px);
+           -moz-transform:  translate(38px, 38px);
+
         .handle {
             background-color: rgba(0,0,0, 1);
         }
         .body {
-            -webkit-transform:  translate(-38px, -38px);      
+            -webkit-transform: translate(-38px, -38px);
+               -moz-transform: translate(-38px, -38px);
         }
     }
     .share-me {
         p {
             @include        tablet-gothic;
             font-size:      .8rem;  
-            color: #333;
+            color:          #333;
             text-decoration: none;
         }
         img {
             height: 32px;
-            width: 32px;
+            width:  32px;
             margin: 5px 5px 5px 0px;
         }
 

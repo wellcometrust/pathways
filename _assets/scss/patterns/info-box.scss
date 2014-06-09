@@ -11,15 +11,20 @@
 
 .info-box {
     .inner {
-        -webkit-filter: drop-shadow( 1px 1px 2px #333 );
-
         -webkit-transform-origin: 50% 50%;
         -webkit-animation: info-box-animation-inner 5s ease infinite;
+
+        -moz-transform-origin: 50% 50%;
+        -moz-animation: info-box-animation-inner 5s ease infinite;
     }
     .outer {
         -webkit-transform-origin:   50% 50%;
         -webkit-animation:          info-box-animation-outer 5s ease infinite;
         -webkit-animation-delay:    0.2s;
+
+        -moz-transform-origin:   50% 50%;
+        -moz-animation:          info-box-animation-outer 5s ease infinite;
+        -moz-animation-delay:    0.2s;
     }
     &:hover {
         opacity: 0.8;
@@ -50,5 +55,32 @@
     100% {
         opacity: 0;
         -webkit-transform: scale(0.9);
+    }
+}
+
+@-moz-keyframes info-box-animation-inner {
+    0% {
+        -moz-transform: scale(0.9);
+    }
+    50% {
+        -moz-transform: scale(1.1);
+    }
+    100% {
+        -moz-transform: scale(0.9);
+    }
+}
+
+@-moz-keyframes info-box-animation-outer {
+    0% {
+        opacity: 0;
+        -moz-transform: scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        -moz-transform: scale(1.1);
+    }
+    100% {
+        opacity: 0;
+        -moz-transform: scale(0.9);
     }
 }

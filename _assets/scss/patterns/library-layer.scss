@@ -2,8 +2,8 @@
 /** Library layer */
 
 .library-layer {
-    position:           relative;
-    @include            tablet-gothic;
+    position:   relative;
+    @include    tablet-gothic;
 
     h1 {
         @include tablet-gothic;

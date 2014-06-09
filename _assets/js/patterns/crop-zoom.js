@@ -49,8 +49,7 @@ Pathways.CropZoom = function(panel_height) {
 
             $overlay.css('height', window.outerHeight );
 
-            // $overlay.show();
-            $overlay.css('background-color', 'rgba(0,0,0,0.8)');
+            $overlay.css('background-color', 'rgba(0,0,0,0.1)');
 
             // Set an event so that after the image transitions in, show the text
             $image_crop.get(0).addEventListener('transitionend', function() {
@@ -64,7 +63,7 @@ Pathways.CropZoom = function(panel_height) {
                 $text.addClass('show');
             });
 
-            $image_crop.css( { top: 0, left: 0, 'transform': 'translate(0, '+(panel_height / 4)+'px)' } );
+            $image_crop.css( { top: 0, left: 0, 'transform': 'translate(0, '+(panel_height / 4)+'px)', opacity: 0 } );
 
             // Animate in the text
             setTimeout(function() {
