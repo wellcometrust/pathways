@@ -390,19 +390,21 @@ Pathways.LoadScenes = function() {
 
 var db = {
     'rod': {
-        'image': 'rod-crop.jpg',
-        'title':'Franz Antoine Mesmer',
-        'text': 'Mesmer founded a private society where, for the large sum of 100 livres, he would undertake to teach his healing skills under a strict vow of secrecy. Many distinguished French aristocrats signed up.'
+        'image':    'rod-crop.jpg',
+        'title':    'Franz Antoine Mesmer',
+        'text':     'Mesmer founded a private society where, for the large sum of 100 livres, he would undertake to teach his healing skills under a strict vow of secrecy. Many distinguished French aristocrats signed up.',
+        'position': 'right'
     },
     'woman': {
-        'image': 'woman-crop.jpg',
-        'title':'A new miracle cure',
-        'text': 'Mesmer’s salons were highly charged scenes of mass hysteria and miracle cures (quote). He would often play music on a glass harmonica that sent shivers through the patients’ nerves.'
+        'image':    'woman-crop.jpg',
+        'title':    'A new miracle cure',
+        'text':     'Mesmer’s salons were highly charged scenes of mass hysteria and miracle cures (quote). He would often play music on a glass harmonica that sent shivers through the patients’ nerves.',
+        'position': 'left'
     },
     'mesmer': {
-        'image': 'mesmer-crop.jpg',
-        'title':'Animal magnetism the new force in nature',
-        'text': 'Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’'
-        
+        'image':    'mesmer-crop.jpg',
+        'title':    'Animal magnetism the new force in nature',
+        'text':     'Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’: …a universally distributed fluid, so continuous as to admit of no vacuum, incomparably rarefied, and by its nature able to receive, propagate and communicate all motion’',
+        'position': 'left'    
     }
 }

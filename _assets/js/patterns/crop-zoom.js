@@ -1,110 +1,91 @@
 
 Pathways.CropZoom = function(panel_height) {
 
-    $('.crop-zoom').css({'position': 'absolute', 'opacity': 0, 'z-index': 20});
-
-    var $elm            = $('.crop-zoom'),
-        image_top       = $elm.offset().top,
-        trigger         = $('.tap-block').offset().top,
-        duration        = panel_height / 2,
-        image_height    = panel_height;
-
-    function onResize() {
-        $elm.css({ width: window.outerWidth, height: window.outerHeight });
-    }
+    var $elm = $('.crop-zoom');
+    
+    $elm.css({
+        position:   'absolute',
+        opacity:    0,
+        width:      window.outerWidth,
+        height:     window.outerHeight,
+        'z-index':  10
+    });
 
     // Tap targets
     $elm.find('.tap-target').each(function() {
-        var $target = $(this),
-            key     = $target.data('crop'),
-            image   = '../_assets/img/mesmer/'+ db[key]['image'],
-            title   = db[key]['title'] ? db[key]['title'] : '',
-            text    = db[key]['text'] ? db[key]['text'] : '',
-            img     = new Image(),
+        var $target     = $(this),
+            key         = $target.data('crop'),
+            image       = '../_assets/img/mesmer/'+ db[key]['image'],
+            title       = db[key]['title']      ? db[key]['title']      : '',
+            text        = db[key]['text']       ? db[key]['text']       : '',
+            position    = db[key]['position']   ? db[key]['position']   : '',
+            img         = new Image(),
             content;
 
         img.src = image;
 
-        var ratio = img.width / img.height;
+        // Create the text content
+        content = title != '' ? '<h2>'+title+'</h2>' : '';
+        content += '<p>'+ text + '</p>';
 
         // Set up the tap on the target.
         Hammer( $target.get(0) ).on('tap', function(e) {
             e.gesture.preventDefault();
 
-            var $popup,
-                $image_crop,
-                $text,
-                $overlay;
+            var $overlay    = $('<div class="overlay"></div>'),
+                $popup      = $('<div class="popup"></div>'),
+                $image_crop = $(img).addClass('image-crop'),
+                $text       = $('<div class="text"></div>'),
+                $close      = $('<div class="close"></div>');
 
-            content = title != '' ? '<h2>'+title+'</h2>' : '';
-            content += '<p>'+ text + '</p>';
-
-            // create popup in memory
-            $popup      = $('<div/>').addClass('popup');
-            $image_crop = $(img).addClass('image-crop');
-            $text       = $('<div/>').addClass('text').html(content);
-
+            // Add in the elements
+            $text.html(content);
             $popup.append( $image_crop );
             $popup.append( $text );
 
-            $overlay = $('<div/>').addClass('overlay').css('height', window.outerHeight );
-
             $overlay.append($popup);
-            $('body').append( $overlay );
+            $overlay.append( $close );
+            $('body').append($overlay);
 
-            $image_crop.css( { top: ($target.offset().top - window.scrollY) + 10, left: $target.offset().left + 10, height: $target.height() - 10 } );
-            $image_crop.addClass('animate');
+            $overlay.css('height', window.outerHeight );
 
-            $overlay.show();
+            // $overlay.show();
             $overlay.css('background-color', 'rgba(0,0,0,0.8)');
 
-            var width   = 'auto',
-                height  = 'auto';
-
-            if( window.innerWidth < 900 ) {
-                width = '40%';
-            }
-            else {
-                height = window.outerHeight - 120;
-            }
-            
-
+            // Set an event so that after the image transitions in, show the text
             $image_crop.get(0).addEventListener('transitionend', function() {
-                $text.css( { top: 40, left: ($image_crop.offset().left + $image_crop.width() + 40) } ).addClass('show');
+                $text.css( { top: (window.innerHeight - $text.outerHeight() - 15) } );
+
+                if( position == 'right' )
+                    $text.css('right', 40);
+                else
+                    $text.css('left', 40);
+
+                $text.addClass('show');
             });
 
+            $image_crop.css( { top: 0, left: 0, 'transform': 'translate(0, '+(panel_height / 4)+'px)' } );
 
-            $image_crop.css({
-                top:    0,
-                left:   0,
-                width:  width,
-                height: height,
-                opacity: 1
-            })
+            // Animate in the text
+            setTimeout(function() {
+                $image_crop.addClass('animate');
+                $image_crop.css({ 'transform': 'translate(0, 0)', opacity: 1 });
+            }, 50);
 
+            $image_crop.on('click', function() {
+                $overlay.get(0).addEventListener('transitionend', function() { $(this).remove() }, false);
+                $overlay.css('opacity', 0);
+            });
 
-            $overlay.on('click', function() {
-                this.addEventListener('transitionend', function() { $(this).remove() }, false);
-                $(this).css('opacity', 0);
+            $close.on('click', function() {
+                $overlay.get(0).addEventListener('transitionend', function() { $(this).remove() }, false);
+                $overlay.css('opacity', 0);
             });
 
             window.addEventListener('resize', function() {
                 $overlay.css('height', window.outerHeight );
-                
-                if( window.innerWidth < 900 ) {
-                    $image_crop.css('height', 'auto');
-                    $image_crop.css('width',  '40%');
-                }
-                else {
-                    $image_crop.css('width', 'auto');
-                    $image_crop.css('height', window.outerHeight - 60 );
-                }
-
-                $text.css( { left: ($image_crop.offset().left + $image_crop.width() + 40) } );
             })
         });
     });
 
-
-    onResize();
 }
