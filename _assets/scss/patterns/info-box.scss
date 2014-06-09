@@ -1,0 +1,54 @@
+.info-box {
+    position:   absolute; 
+    top:        120px; 
+    right:      100px; 
+    width:      90px; 
+    height:     90px;
+    cursor:     pointer;
+    z-index:    20;
+}
+
+
+.info-box {
+    .inner {
+        -webkit-filter: drop-shadow( 1px 1px 2px #333 );
+
+        -webkit-transform-origin: 50% 50%;
+        -webkit-animation: info-box-animation-inner 5s ease infinite;
+    }
+    .outer {
+        -webkit-transform-origin:   50% 50%;
+        -webkit-animation:          info-box-animation-outer 5s ease infinite;
+        -webkit-animation-delay:    0.2s;
+    }
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+@-webkit-keyframes info-box-animation-inner {
+    0% {
+        -webkit-transform: scale(0.9);
+    }
+    50% {
+        -webkit-transform: scale(1.1);
+    }
+    100% {
+        -webkit-transform: scale(0.9);
+    }
+}
+
+@-webkit-keyframes info-box-animation-outer {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(0.9);
+    }
+}

@@ -5,15 +5,26 @@
 
 @import 'reset';
 
+// Global Elements
 @import 'patterns/global-navigation';
 @import 'patterns/intro-navigation';
+@import 'patterns/library-layer';
+@import 'patterns/info-box';
+
 @import 'patterns/start';
 @import 'patterns/sequences';
+
+// Components
+@import 'patterns/library-panel';
+@import 'patterns/quiz';
+@import 'patterns/carousel';
+@import 'patterns/audio-player';
+
+// Panels
+
 @import 'patterns/panels';
 @import 'patterns/teaser';
 @import 'patterns/past-twitter';
-@import 'patterns/library-panel';
-@import 'patterns/library-layer';
-@import 'patterns/audio-player';
-@import 'patterns/quiz';
-@import 'patterns/carousel';
+
+// Modules
+@import 'patterns/intro';

@@ -31,7 +31,7 @@
         overflow: hidden;
         z-index: 20;
 
-        -webkit-transform: translate(-1211px, 0);
+        -webkit-transform: translate(-1160px, 0);
         -webkit-transition: -webkit-transform 0.4s ease;
 
         &.active {
@@ -41,7 +41,7 @@
         nav {
             float:              left;
             background-color:   rgba(0,0,0,0.8);
-            width:              1210px;
+            width:              1160px;
             height:             auto;
         }
 
@@ -62,7 +62,7 @@
             text-transform: uppercase;
             letter-spacing: .1em;
             width:          180px;
-            padding:        1em 1em 2em 1em;
+            padding:        1rem 0.5rem 1.5rem 0.5rem;
             text-decoration: none;
 
             &:first-child {
