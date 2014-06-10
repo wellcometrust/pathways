@@ -345,11 +345,11 @@
     background-size:    100%;
     z-index:            5;
 
-    -webkit-transform: translate(50px, 0);
-    -webkit-transition: all 24s linear;
+    -webkit-transform: translate(20px, 0);
+    -webkit-transition: -webkit-transform 30s linear;
 
-    -moz-transform: translate(50px, 0);
-    -moz-transition: all 24s linear;
+    -moz-transform: translate(20px, 0);
+    -moz-transition: -moz-transform 30s linear;
 }
 
 /* Svengali */

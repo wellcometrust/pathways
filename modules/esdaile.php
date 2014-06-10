@@ -138,7 +138,7 @@
 
         </div>
 
-        <div class="quiz">
+        <!-- <div class="quiz">
             <div class="quiz-container">
 
                 <div class="quiz-icon">
@@ -215,7 +215,7 @@
                 </div>
 
             </div>
-        </div>
+        </div> -->
 
         <script type="text/html" id="template-quiz">
             <div class="quiz-container">
