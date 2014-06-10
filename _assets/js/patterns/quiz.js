@@ -26,8 +26,7 @@ Pathways.Quiz = function() {
 
             positionCenter($quizContainer);
 
-            var quiz = new Quiz('.quiz');
-            quiz.init();
+            var quiz = new Quiz($quizContainer);
 
             $overlay.append( $close );
         }, 800);
@@ -37,6 +36,10 @@ Pathways.Quiz = function() {
             setTimeout(function() {
                 $overlay.remove();
             }, 800);
+        });
+
+        $(window).on('resize', function() {
+            $overlay.css('height', window.innerHeight);
         });
 
     });
@@ -61,18 +64,24 @@ function Quiz(element) {
         $timer      = $('<div/>').addClass('timer').css('display', 'none'),
         timerID;
 
+
     this.init = function() {
         var self = this;
 
-        $quiz.find('.quiz-start .button').on('click', function() {
+        console.log('init');
+
+        $quiz.on('click', '.quiz-start .button', function() {
             self.start();
         });
     }
 
     this.start = function() {
+        console.log('starting');
+
         var self = this;
 
         $quiz.find('.quiz-start').hide();
+        $quiz.find('.status-bar').show();
         $quiz.find('.quiz-playground').show();
 
         // Add the timer
@@ -97,7 +106,7 @@ function Quiz(element) {
         var self        = this,
             question    = this.getCurrentQuestion(),
             $image      = $('<img/>').attr('src', question['image']),
-            str         = '';
+            str         = '<ul>';
 
         $quiz.find('.image').html($image);
 
@@ -109,7 +118,9 @@ function Quiz(element) {
             str += '<li>' + question['answers'][i] + '</li>';
         }
 
-        $quiz.find('.answers ul').html(str);
+        str += '</ul>';
+
+        $quiz.find('.answers').html(str);
 
         this.updateScore();
         this.updateQuestionsRemaining();
@@ -156,11 +167,11 @@ function Quiz(element) {
     }
 
     this.showCorrect = function($elm) {
-        $elm.css('border', '1px solid green');
+        $elm.addClass('correct');
     }
 
     this.showError = function($elm) {
-        $elm.css('border', '1px solid red');
+        $elm.addClass('wrong');
     }
 
     this.revealAnswers = function() {
@@ -183,7 +194,7 @@ function Quiz(element) {
     }
 
     this.updateQuestionsRemaining = function() {
-        $remaining.html(level + ' of ' + totalQuestions);
+        $remaining.html('<em>'+level+'</em> of <span>'+totalQuestions+'</span>');
     }
 
     this.startTimer = function() {
@@ -192,9 +203,13 @@ function Quiz(element) {
 
         clearInterval(timerID);
 
+        var elm = $quiz.find('.quiz-playground .image');
+
+        var diff = $quiz.find('.quiz-playground .image').offset().top - $quiz.find('.quiz-playground').offset().top;
+
         $timer.css({
-            top:        ($quiz.find('.quiz-container').height() / 2) - ($timer.height() / 2),
-            left:       ($quiz.find('.quiz-container').width() / 2) - ($timer.width() / 2)
+            top:        (diff + elm.outerHeight() / 2) - ($timer.height() / 2),
+            left:       (elm.outerWidth() / 2) - ($timer.width() / 2)
         })
         .html(counter);
 
@@ -222,19 +237,32 @@ function Quiz(element) {
 
     this.stopTimer = function() {
         clearInterval(timerID);
+        $timer.fadeOut(100);
     }
 
 
     this.finishGame = function() {
-        var $quiz_finish = $quiz.find('.quiz-finish');
+        var self            = this,
+            $quiz_finish    = $quiz.find('.quiz-finish');
 
         this.stopTimer();
         $timer.css('display', 'none');
 
-        $quiz_finish.find('.quiz-finish--score span').html(score + '/' + totalQuestions);
+        $quiz_finish.find('.quiz-finish--score').html('<span>'+score+'</span> out of ' + totalQuestions);
         
         $quiz.find('.quiz-playground').hide();
         $quiz_finish.show();
+
+        $quiz_finish.on('click', '.play-again', function() {
+            self.restart();
+        });
+    }
+
+    this.restart = function() {
+        score = 0;
+        level = 1;
+
+        this.start();
     }
 
     this.init();
@@ -242,15 +270,16 @@ function Quiz(element) {
 
 
 var quiz_db = {
+    'title': 'The Esdaile Game',
     'questions' : [
          {
-            'image':    'http://placekitten.com/500/500',
+            'image':    'http://placekitten.com/500/295',
             'title':    'Estimate the weight of the tumour',
-            'answers':  ['0.5kg', '1kg', '2kg', '3kg'],
+            'answers':  ['0.5kg', '1kg', '2kg', '5kg'],
             'correct':  1
          },
          {
-            'image':    'http://placekitten.com/600/500',
+            'image':    'http://placekitten.com/600/300',
             'title':    'How long did it take to remove?',
             'answers':  ['5 minutes', '30 minutes', '2 hours', '4 hours'],
             'correct':  4

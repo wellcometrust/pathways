@@ -109,6 +109,15 @@
                 
             </div>
 
+            <div class="panel quiz">
+
+                <div class="bg-container">
+                    
+                </div>
+
+                
+            </div>
+
             <div class="panel talking-head">
                 
                 <div class="bg-container">
@@ -129,51 +138,146 @@
 
         </div>
 
-        <script type="text/html" id="template-quiz">
+        <div class="quiz">
             <div class="quiz-container">
 
+                <div class="quiz-icon">
+                    <i></i>
+                    <span>Quiz</span>
+                </div>
+
                 <div class="quiz-start">
+                    <div class="quiz-header-image">
+                        <img src="http://placekitten.com/250/250">
+                    </div>
+
                     <header class="quiz-start--header">
                         <h1>The Esdaile Game</h1>
                     </header>
 
                     <div class="quiz-start--text">
                         <p>The surgeon performed dozens of operations, many of which were documented.</p>
+                        <p>See if you can work out what went on in each picture - but be quick, you’ve only got 10 seconds each!</p>
                     </div>
 
                     <span class="button">Start</span>
                 </div>
 
-                <div class="quiz-playground clearfix">
+                <div class="status-bar clearfix">
+                    <div class="remaining">
+                        <em>1</em> of <span>10</span>
+                    </div>
+
+                    <div class="score">
+                        Your Score: <span>0</span>
+                    </div>
+                </div>
+
+                <div class="quiz-playground">
+
+                    <div class="question">
+                        Estimate the weight of the tumour
+                    </div>
+
                     <div class="image">
-                        <div class="remaining"></div>
+                        <img src="http://placekitten.com/500/295">
                     </div>
 
                     <div class="answers">
-                        <div class="question"></div>
-                        <ul></ul>
-
-                        <div class="score">
-                            Your Score
-                            <span></span>
-                        </div>
+                        <ul>
+                            <li>0.5kg</li>
+                            <li>1kg</li>
+                            <li>2kg</li>
+                            <li>5kg</li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="quiz-finish">
+
                     <header class="quiz-finish--header">
-                        <h1>Congratulations!</h1>
+                        <h1>Not bad muchacho, you got</h1>
                     </header>
 
-                    <div class="quiz-finish--body">
-                        <div class="quiz-finish--score">
-                            You scored
-                            <span></span>
-                        </div>
+                    <div class="quiz-finish--score">
+                        <span>10</span>
+                        out of 10
                     </div>
 
-                    <footer class="quiz-finish--footer">
-                        
+                    <footer class="quiz-finish--footer clearfix">
+                        <div class="button play-again">Play Again?</div>
+
+                        <div class="sm-links">
+                            <a href="#" class="facebook"></a>
+                            <a href="#" class="twitter"></a>
+                        </div>
+                    </footer>
+                </div>
+
+            </div>
+        </div>
+
+        <script type="text/html" id="template-quiz">
+            <div class="quiz-container">
+
+                <div class="quiz-icon">
+                    <i></i>
+                    <span>Quiz</span>
+                </div>
+
+                <div class="quiz-start">
+                    <div class="quiz-header-image">
+                        <img src="http://placekitten.com/250/250">
+                    </div>
+
+                    <header class="quiz-start--header">
+                        <h1>The Esdaile Game</h1>
+                    </header>
+
+                    <div class="quiz-start--text">
+                        <p>The surgeon performed dozens of operations, many of which were documented.</p>
+                        <p>See if you can work out what went on in each picture - but be quick, you’ve only got 10 seconds each!</p>
+                    </div>
+
+                    <span class="button">Start</span>
+                </div>
+
+                <div class="status-bar clearfix">
+                    <div class="remaining">
+                        <em>1</em> of <span>10</span>
+                    </div>
+
+                    <div class="score">
+                        Your Score: <span>0</span>
+                    </div>
+                </div>
+
+                <div class="quiz-playground">
+
+                    <div class="question"></div>
+
+                    <div class="image">
+                        <img src="http://placekitten.com/500/295">
+                    </div>
+
+                    <div class="answers"></div>
+                </div>
+
+                <div class="quiz-finish">
+
+                    <header class="quiz-finish--header">
+                        <h1>Not bad muchacho, you got</h1>
+                    </header>
+
+                    <div class="quiz-finish--score"></div>
+
+                    <footer class="quiz-finish--footer clearfix">
+                        <div class="button play-again">Play Again?</div>
+
+                        <div class="sm-links">
+                            <a href="#" class="facebook"></a>
+                            <a href="#" class="twitter"></a>
+                        </div>
                     </footer>
                 </div>
 
