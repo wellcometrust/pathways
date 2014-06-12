@@ -15,8 +15,8 @@
             <div class="content">
 
                 <div class="scene-set">
-                    <span class="location">Vienna</span>
-                    <span class="date">1895</span>
+                    <span class="location">Vienna 1895</span>
+                    <!-- <span class="date">1895</span> -->
                 </div>
 
                 <header>
