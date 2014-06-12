@@ -8,7 +8,7 @@
 
         <div class="start">
 
-            <div class="bg-container fixed">
+            <div class="bg-container">
                 <img src="../_assets/img/elliotson/elliotson-1.jpg">
             </div>
             
@@ -59,7 +59,7 @@
 
             </div>
 
-            <div class="panel thomas-wakley" data-offset-height="1300">
+            <div class="panel thomas-wakley" data-offset-height="2400">
                 <div class="bg-container">
                     <img src="../_assets/img/elliotson/elliotson-3.jpg">
                 </div>
@@ -80,7 +80,7 @@
                                     <div class="username">Thomas Wakley <span>@wako_lancet</span></div>
                                 </div>
                                 <div class="body">
-                                    “giggity gashmoigidy”
+                                    “Careful investigation and a consideration of all experiments have convinced us that the phenomena are not real, and that animal magnetism is a delusion”
                                 </div>
                             </div>
 
@@ -91,7 +91,7 @@
                                     <div class="username">John Elliotson <span>@im4mesmerism</span></div>
                                 </div>
                                 <div class="body">
-                                    “giggity gashmoigidy”
+                                    “Mr. Wakley fulminated forth what he called experiments on a subject of which he is as ignorant as of Latin, French or mathematics”
                                 </div>
                             </div>
 
@@ -102,7 +102,7 @@
                                     <div class="username">Thomas Wakley <span>@wako_lancet</span></div>
                                 </div>
                                 <div class="body">
-                                    “giggity gashmoigidy”
+                                    “Animal magnetism is one of the completest delusions the human mind ever entertained”
                                 </div>
                             </div>
 
@@ -113,7 +113,7 @@
                                     <div class="username">John Elliotson <span>@im4mesmerism</span></div>
                                 </div>
                                 <div class="body">
-                                    “giggity gashmoigidy”
+                                    “These phenomena, I know to be real, to be independent of imagination or any other cause to which other persons are pleased to ascribe them”
                                 </div>
                             </div>
 
@@ -124,7 +124,40 @@
                                     <div class="username">Thomas Wakley <span>@wako_lancet</span></div>
                                 </div>
                                 <div class="body">
-                                    “giggity gashmoigidy”
+                                    “The medical schools with which mesmerism is connected must be speedily and irreparably ruined, unless the moral quackery is at once put down by the governors”
+                                </div>
+                            </div>
+
+                            <div class="tweet elliotson">
+                                <div class="avatar"></div>
+                                <div class="header">
+                                    <span class="time">12 July 1838</span>
+                                    <div class="username">John Elliotson <span>@im4mesmerism</span></div>
+                                </div>
+                                <div class="body">
+                                    “As a gentleman in the first place, and a physician in the next, I feel myself compelled at once to resign my office of Professor of the Principles and Practice of Medicine”
+                                </div>
+                            </div>
+
+                            <div class="tweet dickens">
+                                <div class="avatar"></div>
+                                <div class="header">
+                                    <span class="time">12 July 1838</span>
+                                    <div class="username">Charles Dickens <span>@cdickens</span></div>
+                                </div>
+                                <div class="body">
+                                    “With regard to my opinion on the subject of mesmerism, I have no hesitation in saying that I have watched Dr Elliotson’s experiments from the first… and that after what I have seen with my own senses, I should be untrue both to him and to myself, if I should shrink for a moment from saying that I am a believer”
+                                </div>
+                            </div>
+
+                            <div class="tweet martineau">
+                                <div class="avatar"></div>
+                                <div class="header">
+                                    <span class="time">12 July 1838</span>
+                                    <div class="username">Harriet Martineau<span>@hmartineau</span></div>
+                                </div>
+                                <div class="body">
+                                    “Those who know mesmerism to be true from their own experience are now a very large number…the great majority who know nothing of the matter laugh at it as a nonsense or a cheat”
                                 </div>
                             </div>
                         </div>

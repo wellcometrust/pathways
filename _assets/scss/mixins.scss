@@ -1,7 +1,6 @@
 
 @mixin abril-regular {
     font-family:        "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
-    font-size-adjust:   0.5;
     font-weight:        normal;
     font-style:         normal;
 }
@@ -9,7 +8,6 @@
 
 @mixin abril-italic {
     font-family:        "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
-    font-size-adjust:   0.51;
     font-weight:        normal;
     font-style:         italic;
 }
@@ -17,7 +15,6 @@
 
 @mixin abril-display {
     font-family:        "Abril Display Regular", Didot, 'Times New Roman', Times, serif;
-    font-size-adjust:   0.48;
     font-weight:        normal;
     font-style:         normal;
 }

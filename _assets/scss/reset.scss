@@ -3,10 +3,7 @@
 
 body {
     background-color:   #000;
-    font-family:        "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
-    font-size-adjust:   0.5;
-    font-weight:        normal;
-    font-style:         normal;
+    @include            abril-regular;
     font-size:          100%;
     color:              #333;
     line-height:        1.4;
@@ -14,25 +11,16 @@ body {
 
 
 h1 {
-    font-family:        "Abril Display Regular", Didot, 'Times New Roman', Times, serif;
-    font-size-adjust:   0.48;
-    font-weight:        normal;
-    font-style:         normal;
+    @include        abril-display;
 }
 
 h2, h3, h4, h5, h6 {
-    font-family:        "Abril Display Regular", Didot, 'Times New Roman', Times, serif;
-    font-size-adjust:   0.48;
-    font-weight:        normal;
-    font-style:         normal;
-    margin-bottom:      1em;
+    @include        abril-display;
+    margin-bottom:  1em;
 }
 
 em, i {
-    font-family:        "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
-    font-size-adjust:   0.51;
-    font-weight:        normal;
-    font-style:         italic;
+    @include        abril-italic;
 }
 
 iframe {

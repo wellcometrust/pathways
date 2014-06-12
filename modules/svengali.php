@@ -14,7 +14,7 @@
 
         <div class="start">
 
-            <div class="bg-container fixed">
+            <div class="bg-container">
                 <img src="../_assets/img/svengali/svengali-1.jpg">
             </div>
 

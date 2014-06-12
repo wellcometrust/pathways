@@ -3,7 +3,6 @@
     
     <div class="bar">
         <span>Curious for more?</span>
-        <a href="#" class="button">Close</a>
     </div>
 
     <div class="gap">

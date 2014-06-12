@@ -1,49 +1,50 @@
 .teaser {
-	position: 			relative;
-	text-align: 		center;
-	background:  		#000;
 
-	a {
-		color: 				#fff;
-		text-decoration: 	none;
-	}
+    position:           relative;
+    text-align:         center;
+    background:         #000;
 
-	img {
-		&.teaser-bkg {
-			position: 	absolute;
-			z-index: 	-2;
-			top: 		0; 
-			left: 		0;
-			width: 		100%;
-		}
+    a {
+        color:              #fff;
+        text-decoration:    none;
+    }
 
-		&.teaser-icon {
-			width: 			82px;
-			height: 		82px;
-			float: 			right;
-			margin: 		-90px 25px 0 0;
-		}	
-	}
+    img {
+        &.teaser-bkg {
+            position:   absolute;
+            z-index:    0;
+            top:        0; 
+            left:       0;
+            width:      100%;
+        }
 
+        &.teaser-icon {
+            width:          82px;
+            height:         82px;
+            float:          right;
+            margin:         -90px 25px 0 0;
+        }   
+    }
 
-	.teaser-text{
+    .teaser-text-container{
+        position:       relative;
+        padding-top:    9%;
+        z-index:        1;
+        
+        h1 {
+            font-size:  3.245rem;
+            margin-top: 1rem;
+        }
+    }
+
+    .teaser-text {
         @include        tablet-gothic;
         font-size:      0.766rem;
         text-transform: uppercase;
         letter-spacing: .2rem;
-	}
+    }
 
-	.teaser-text span {
-		color: 			$mind-pink;
-	}
-
-	.teaser-text-container{
-		padding-top: 	9%;
-		h1 {
-			font-size: 	3.245rem;
-			margin-top: 1rem;
-		}
-	}
+    .teaser-text span {
+        color:          $mind-pink;
+    }
 }
-
-

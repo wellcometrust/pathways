@@ -14,17 +14,17 @@
         -webkit-transform-origin: 50% 50%;
         -webkit-animation: info-box-animation-inner 5s ease infinite;
 
-        -moz-transform-origin: 50% 50%;
-        -moz-animation: info-box-animation-inner 5s ease infinite;
+        -moz-transform-origin:      35px 35px;
+        -moz-animation:             info-box-animation-inner 5s ease infinite;
     }
     .outer {
         -webkit-transform-origin:   50% 50%;
         -webkit-animation:          info-box-animation-outer 5s ease infinite;
         -webkit-animation-delay:    0.2s;
 
-        -moz-transform-origin:   50% 50%;
-        -moz-animation:          info-box-animation-outer 5s ease infinite;
-        -moz-animation-delay:    0.2s;
+        -moz-transform-origin:      35px 35px;
+        -moz-animation:             info-box-animation-outer 5s ease infinite;
+        -moz-animation-delay:       0.2s;
     }
     &:hover {
         opacity: 0.8;

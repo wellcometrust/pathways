@@ -8,7 +8,7 @@
 
         <div class="start">
 
-            <div class="bg-container fixed">
+            <div class="bg-container">
                 <img src="../_assets/img/esdaile/esdaile-1.jpg">
             </div>
             

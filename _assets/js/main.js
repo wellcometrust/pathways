@@ -167,14 +167,14 @@ Pathways.LoadScenes = function() {
                 TweenMax.to('.crop-zoom', 0.2, { opacity: 1 }); // Fade in
                 
                 setTimeout(function() {
-                    $('.tap-target').addClass('animate');
+                    // $('.tap-target').addClass('animate');
                 }, 200);
             })
             .on('leave', function(e) {
                 TweenMax.to('.crop-zoom', 0.2, { opacity: 0 }); // Fade out
                 
                 setTimeout(function() {
-                    $('.tap-target').removeClass('animate');
+                    // $('.tap-target').removeClass('animate');
                     _('.crop-zoom').style['position'] = 'absolute';
                 }, 200);
             })
