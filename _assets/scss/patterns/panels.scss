@@ -289,13 +289,13 @@
         margin-right: 142px;
 
         .verdict-text {
-            font-size:      1rem;
-            margin-bottom:  2em;
+            font-size:      2.427rem;
+            margin-bottom:  0;
         }
 
         blockquote p {
             @include        abril-italic;
-            font-size:      1.618rem;
+            font-size:      2.427rem;
             line-height:    1.618;
         }
 
@@ -304,8 +304,8 @@
             margin-top: 2em;
         }
         .outro {
-            font-size: 3.245rem;
-            line-height: 1;
+            font-size: 3.927rem;
+            line-height: 1.219;
             width: 80%;
         }
     }
