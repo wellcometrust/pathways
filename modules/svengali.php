@@ -173,7 +173,7 @@
                                 <p class="panel-text">It was the first time that hypnosis had been used as a defence in a court of law.</p>
                             </div>
 
-                            <div class="comic-row">
+                            <div class="comic-row clearfix">
                                 <div class="comic-panel">
                                     <img src="../_assets/img/svengali/bonpard/bonpard-comic-8.jpg">
                                 </div>

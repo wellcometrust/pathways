@@ -48,6 +48,8 @@
                 </div>
 
                 <div class="scroll-content position-center align-center"></div>
+
+                <div class="mute"></div>
             </div>
 
             <div class="panel">

@@ -31,6 +31,19 @@
     }
 }
 
+.mute {
+    position:   absolute;
+    top:        40px;
+    right:      40px;
+    background: url('/_assets/img/icons/icon-btn-sound-on.svg') 0 0 no-repeat;
+    width:      40px;
+    height:     40px;
+
+    &.active {
+        background: url('/_assets/img/icons/icon-btn-sound-off.svg') 0 0 no-repeat;
+    }
+}
+
 
 /* Mesmer */
 
@@ -590,12 +603,16 @@
         width: 54%;
     }
 
-    .comic-column {
-        float: left;
-    }
+    .comic-row:nth-child(5) {
 
-    .comic-column .comic-panel {
-        float: none;
+        .comic-panel:nth-child(1) {
+            margin-top: 1em;
+            margin-right: 3%;
+        }
+        .comic-panel:nth-child(2) {
+            margin-top: 1em;
+            margin-right: 3%;
+        }
     }
 
     .comic-row:nth-child(6) {
@@ -604,10 +621,22 @@
         .comic-column:nth-child(1) {
             width: 25%;
             margin-right: 5%;
+
+            .comic-panel:first-child {
+                margin-bottom: 15px;
+            }
         }
         .comic-column:nth-child(2) {
-            width: 53%;
+            width: 54.5%;
         }
+    }
+
+    .comic-column {
+        float: left;
+    }
+
+    .comic-column .comic-panel {
+        float: none;
     }
 
     .outro {
@@ -629,12 +658,33 @@
 }
 
 .anna-o {
+
+    .scroll-content {
+        left: 5%;
+    }
+
+    header {
+        margin: 2rem 0 4rem 0;
+    }
+
     h1 {
         color: #030303;
     }
 
     p {
         color: #030303;
+    }
+
+    p:nth-child(3) {
+        margin-top: 12rem;
+    }
+
+    p:nth-child(4) {
+        margin-top: 12rem;
+    }
+
+    p:nth-child(5) {
+        margin-top: 12rem;
     }
 }
 

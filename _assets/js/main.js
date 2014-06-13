@@ -126,6 +126,7 @@ Pathways.LoadScenes = function() {
         if( $quizes.length ) {
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
+                    triggerHook:    'top',
                     duration:       panel_height
                 })
                 .on('enter', function() {
@@ -202,7 +203,7 @@ Pathways.LoadScenes = function() {
 
 
 
-    // Video
+    // Tree
     if( _('.tree') ) {
         var tree_offset = $('.tree').data('offset-height') ? $('.tree').data('offset-height') : 0;
 
@@ -222,6 +223,7 @@ Pathways.LoadScenes = function() {
             })
     }
 
+    // News
     if( _('.news') ) {
         var news_offset = $('.news').data('offset-height') ? $('.tree').data('offset-height') : 0;
 
@@ -245,6 +247,21 @@ Pathways.LoadScenes = function() {
 
     // Video
     if( _('.air-loom-content') ) {
+        $('.mute').on('click', function() {
+            var $this   = $(this),
+                $video  = $this.parents('.panel').find('video').first().get(0);
+
+            // active == muted
+            if( $this.hasClass('active') ) {
+                $video.volume = 1;
+                $this.removeClass('active');
+            }
+            else {
+                $video.volume = 0;
+                $this.addClass('active');
+            }
+        });
+
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.air-loom-content',
                 duration:       panel_height
