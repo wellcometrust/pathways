@@ -4,7 +4,7 @@
     $idx        = $indices[$module];
 ?>
 
-<div class="global-navigation" data-component="global-navigation">
+<div class="global-navigation active" data-component="global-navigation">
     <div class="container clearfix">
         <nav>
             <ul class="clearfix">
@@ -16,37 +16,37 @@
                 </li>
                 <li<?php echo $module == 'mesmer' ? ' class="active"' : '' ?>>
                     <a href="mesmer.php">
-                        <span>1. Mesmer</span>
+                        <span>1. A new force in nature</span>
                         <img src="/_assets/img/navigation/mesmer.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'airloom' ? ' class="active"' : '' ?>>
                     <a href="airloom.php">
-                        <span>2. Airloom</span>
+                        <span>2. A machine to control the mind</span>
                         <img src="/_assets/img/navigation/airloom.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'elliotson' ? ' class="active"' : '' ?>>
                     <a href="elliotson.php">
-                        <span>3. Elliotson</span>
+                        <span>3. Mesmerism on trial</span>
                         <img src="/_assets/img/navigation/elliotson.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'esdaile' ? ' class="active"' : '' ?>>
                     <a href="esdaile.php">
-                        <span>4. Esdaile</span>
+                        <span>4. Mind over matter</span>
                         <img src="/_assets/img/navigation/esdaile.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'svengali' ? ' class="active"' : '' ?>>
                     <a href="svengali.php">
-                        <span>5. Svengali</span>
+                        <span>5. Dark forces</span>
                         <img src="/_assets/img/navigation/svengali.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'freud' ? ' class="active"' : '' ?>>
                     <a href="freud.php">
-                        <span>6. Freud</span>
+                        <span>6. Can the mind cure the body?</span>
                         <img src="/_assets/img/navigation/freud.jpg">
                     </a>
                 </li>
