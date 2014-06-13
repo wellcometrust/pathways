@@ -6,29 +6,30 @@
 
     <main role="main" class="mesmer-section">
 
-        <div class="start">
-
-            <div class="bg-container">
-                <img src="../_assets/img/mesmer/mesmer-1.jpg">
-            </div>
-            
-            <div class="content">
-                <p class="scene-set">
-                    <span class="location">Paris 1778</span>
-                    <!-- <span class="date">Paris 1778</span> -->
-                </p>
-
-                <header>
-                    <h1>A new force in nature</h1>
-                </header>
-
-                <p class="intro-text">Franz Anton Mesmer arrives in Paris in 1778. He has a dramatic new theory: he believes that he can cure people by using the power of his mind to control the forces of the physical universe. He starts practising this ‘magnetic therapy’ on patients and it is a sensation.</p>
-
-            </div>
-
-        </div>
 
         <div class="sequence" data-sequence="cross-fade">
+
+            <div class="panel start">
+
+                <div class="bg-container fixed">
+                    <img src="../_assets/img/mesmer/mesmer-1.jpg">
+                </div>
+                
+                <div class="content">
+                    <p class="scene-set">
+                        <span class="location">Paris 1778</span>
+                        <!-- <span class="date">Paris 1778</span> -->
+                    </p>
+
+                    <header>
+                        <h1>A new force in nature</h1>
+                    </header>
+
+                    <p class="intro-text">Franz Anton Mesmer arrives in Paris in 1778. He has a dramatic new theory: he believes that he can cure people by using the power of his mind to control the forces of the physical universe. He starts practising this ‘magnetic therapy’ on patients and it is a sensation.</p>
+
+                </div>
+
+            </div>
             
             <div class="panel mesmers-salon" data-offset-height="550">
 

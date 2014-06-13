@@ -8,39 +8,45 @@
     <div class="container clearfix">
         <nav>
             <ul class="clearfix">
+                <li<?php echo $module == 'intro' ? ' class="active"' : '' ?>>
+                    <a href="index.php">
+                        <span>Intro</span>
+                        <img src="/_assets/img/navigation/mesmer.jpg">
+                    </a>
+                </li>
                 <li<?php echo $module == 'mesmer' ? ' class="active"' : '' ?>>
                     <a href="mesmer.php">
-                        <span>Mesmer</span>
+                        <span>1. Mesmer</span>
                         <img src="/_assets/img/navigation/mesmer.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'airloom' ? ' class="active"' : '' ?>>
                     <a href="airloom.php">
-                        <span>Airloom</span>
+                        <span>2. Airloom</span>
                         <img src="/_assets/img/navigation/airloom.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'elliotson' ? ' class="active"' : '' ?>>
                     <a href="elliotson.php">
-                        <span>Elliotson</span>
+                        <span>3. Elliotson</span>
                         <img src="/_assets/img/navigation/elliotson.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'esdaile' ? ' class="active"' : '' ?>>
                     <a href="esdaile.php">
-                        <span>Esdaile</span>
+                        <span>4. Esdaile</span>
                         <img src="/_assets/img/navigation/esdaile.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'svengali' ? ' class="active"' : '' ?>>
                     <a href="svengali.php">
-                        <span>Svengali</span>
+                        <span>5. Svengali</span>
                         <img src="/_assets/img/navigation/svengali.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'freud' ? ' class="active"' : '' ?>>
                     <a href="freud.php">
-                        <span>Freud</span>
+                        <span>6. Freud</span>
                         <img src="/_assets/img/navigation/freud.jpg">
                     </a>
                 </li>
