@@ -1,12 +1,27 @@
 
 Pathways.GlobalNavigation = function() {
-    var _nav        = _('.global-navigation'),
-        _nav_handle = _('.global-navigation .handle');
+    var $nav            = $('.global-navigation'),
+        $nav_handle     = $nav.find('.handle'),
+        state           = 'open',
+        navHeight       = $nav.outerHeight(),
+        handleHeight    = $nav_handle.outerHeight();
 
-    _nav_handle.addEventListener('click', function() {
-        if( _nav.classList.contains('active') )
-            _nav.classList.remove('active');
-        else
-            _nav.classList.add('active');
+    $nav.on('click', '.handle', function() {
+        if( state == 'open' ) {
+            $nav.css('transform', 'translate(0, '+ -(navHeight - handleHeight) +'px)');
+            state = 'closed';
+        }
+        else {
+            $nav.css('transform', 'translate(0, 0)');
+            state = 'open';
+        }
     });
+
+    window.addEventListener('resize', function() {
+        navHeight = $nav.outerHeight();
+    })
+
+    setTimeout(function() {
+        $nav_handle.trigger('click');
+    }, 1000);
 }

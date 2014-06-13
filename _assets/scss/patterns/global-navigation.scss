@@ -1,18 +1,25 @@
 
 .global-navigation {
+    position:   fixed;
+    top:        0;
+    left:       0;
+    width:      100%;
+    overflow:   hidden;
+    z-index:    20;
+
+    -webkit-transition: -webkit-transform 0.4s ease;
+       -moz-transition: -moz-transform 0.4s ease;
+
     nav {
-        background-color: #000;
+        float:              left;
+        background-color:   rgba(0,0,0,0.8);
+        width:              100%;
     }
 
-    a {
-        color: #fff;
-    }
-
-    img {
-        display: none;
-    }
     li {
-        opacity: 0.5;
+        list-style: none;
+        opacity:    0.5;
+
         -webkit-transition: .3s ease;
            -moz-transition: .3s ease;
 
@@ -20,63 +27,74 @@
             opacity: 1;
         }
     }
+
+    a {
+        display:            block;
+        color:              #fff;
+        @include            abril-regular;
+        font-size:          0.7rem;
+        text-transform:     uppercase;
+        letter-spacing:     .1em;
+        padding:            0.6rem;
+        text-decoration:    none;
+    }
+
+    img {
+        display: none;
+    }
+
+    .handle {
+        float:              left;
+        background-color:   rgba(0,0,0,0.8);
+        width:              42px;
+        height:             46px;
+        border-radius:      0 0 38px 38px;
+        box-shadow:         1px 1px 0 0 rgba(255,255,255,.3);
+        margin-left:        14px;
+        cursor:             pointer;
+
+        .current-section{
+            color:          #fff;
+            width:          30px;
+            height:         30px;
+            text-align:     center;
+            background-color: $mind-pink;
+            border-radius:  50%;
+            margin:         6px 0 0 6px;
+            padding:        6px 3px 0px 3px;
+            @include        tablet-gothic;
+
+            -webkit-transition: 0.2s ease;
+               -moz-transition: 0.2s ease;
+
+            &:hover {
+                background-color:   #fff;
+                color:              $mind-pink;
+            }
+        }
+        .open-nav-btn{
+            width:  10px;
+            height: 18px;
+        }
+    }
     
 }
 
 @media screen and (min-width: 48em) {
     .global-navigation {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        overflow: hidden;
-        z-index: 20;
-
-        -webkit-transform:  translate(-1160px, 0);
-        -webkit-transition: -webkit-transform 0.4s ease;
-
-        -moz-transform:     translate(-1160px, 0);
-        -moz-transition:    -moz-transform 0.4s ease;
-
-        &.active {
-            -webkit-transform: translate(0, 0);
-               -moz-transform: translate(0, 0);
-        }
-
-        nav {
-            float:              left;
-            background-color:   rgba(0,0,0,0.8);
-            width:              1160px;
-            height:             auto;
-        }
-
-        ul {
-            display: block;
-        }
 
         li {
-            float: left;
-            list-style: none;
+            float:  left;
+            width:  14.285%;
         }
 
         a {
-            display:        block;
-            color:          #fff;
-            @include        abril-regular;
-            font-size:      0.7rem;
-            text-transform: uppercase;
-            letter-spacing: .1em;
-            width:          180px;
-            padding:        1rem 0.5rem 1.5rem 0.5rem;
-            text-decoration: none;
-
-            &:first-child {
-                margin-left: 1em;
-            }
+            padding: 1rem;
 
             span {
                 display: block;
                 padding: 0.6em 0;
+                height:  48px;
             }
 
             img {
@@ -85,62 +103,27 @@
             }
         }
 
-        .handle {
-            float:              left;
-            background-color:   rgba(0,0,0,0.8);
-            width:              55px;
-            height:             42px;
-            border-radius:      0 38px 38px 0;
-            box-shadow:         1px 1px 0 0 rgba(255,255,255,.3);
-            margin-top:         10px;
-            cursor:             pointer;
-
-            .current-section{
-                color:          #fff;
-                width:          30px;
-                height:         30px;
-                text-align:     center;
-                background-color: $mind-pink;
-                border-radius:  50%;
-                margin:         6px 0 0 19px;
-                padding:        6px 3px 0px 3px;
-                @include        tablet-gothic;
-
-                -webkit-transition: 0.2s ease;
-                   -moz-transition: 0.2s ease;
-
-                &:hover {
-                    background-color:   #fff;
-                    color:              $mind-pink;
-                }
-            }
-            .open-nav-btn{
-                width:  10px;
-                height: 18px;
-            }
-        }
-
-        li:nth-child(1) span {
+        li:nth-child(2) span {
             border-top: 1px solid #D81793;
         }
 
-        li:nth-child(2) span {
+        li:nth-child(3) span {
             border-top: 1px solid #D5189A;
         }
 
-        li:nth-child(3) span {
+        li:nth-child(4) span {
             border-top: 1px solid #CB1AA8;
         }
 
-        li:nth-child(4) span {
+        li:nth-child(5) span {
             border-top: 1px solid #BB1DBD;
         }
 
-        li:nth-child(5) span {
+        li:nth-child(6) span {
             border-top: 1px solid #B01FCF;
         }
 
-        li:nth-child(6) span {
+        li:nth-child(7) span {
             border-top: 1px solid #A921D9;
         }
     }

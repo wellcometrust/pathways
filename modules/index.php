@@ -25,37 +25,37 @@
                         <ul class="clearfix">
                             <li>
                                 <a href="mesmer.php">
-                                    <span>Mesmer</span>
+                                    <span>A new force in nature</span>
                                     <img src="/_assets/img/navigation/mesmer.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a href="airloom.php">
-                                    <span>Airloom</span>
+                                    <span>A machine to control the mind</span>
                                     <img src="/_assets/img/navigation/airloom.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a href="elliotson.php">
-                                    <span>Elliotson</span>
+                                    <span>Mesmerism on trial</span>
                                     <img src="/_assets/img/navigation/elliotson.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a href="esdaile.php">
-                                    <span>Esdaile</span>
+                                    <span>Mind over matter</span>
                                     <img src="/_assets/img/navigation/esdaile.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a href="svengali.php">
-                                    <span>Svengali</span>
+                                    <span>Dark forces</span>
                                     <img src="/_assets/img/navigation/svengali.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a href="freud.php">
-                                    <span>Freud</span>
+                                    <span>Can the mind really cure the body?</span>
                                     <img src="/_assets/img/navigation/freud.jpg">
                                 </a>
                             </li>
