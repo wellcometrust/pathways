@@ -169,7 +169,8 @@ function Carousel(element)
      * set the pane dimensions and scale the container
      */
     function setPaneDimensions() {
-        var total_width = 0;
+        var $ul         = element.find('ul'),
+            total_width = 0;
 
         widths = [];
         
@@ -186,6 +187,7 @@ function Carousel(element)
         pane_width = parseInt(total_width / panes.length);
 
         // Heights
+        $ul.css('height', window.innerHeight);
         container.css('height', window.innerHeight);
 
         $prev.height( window.innerHeight );
@@ -289,25 +291,18 @@ function Carousel(element)
 
 var imageDB = [
     {
-        image: 'L0018951',
+        image: 'L0000475',
         text: 'Here is some test text. Lorem ipsum is for suckers!'
     },
     {
-        image: 'L0019328',
+        image: 'L0000477EA',
     },
     {
-        image: 'L0019331',
+        image: 'L0028102',
         text: 'Here is some test text. Lorem ipsum is for suckers!'
     },
     {
-        image: 'L0027293',
+        image: 'V0011934',
         text: 'Here is some test text. Lorem ipsum is for suckers!'
     },
-    {
-        image: 'L0032335',
-    },
-    {
-        image: 'L0041062',
-        text: 'Here is some test text. Lorem ipsum is for suckers!'
-    }
 ];
