@@ -1,6 +1,6 @@
 
 <?php
-echo $_SERVER['DOCUMENT_ROOT'];
+print_r($_SERVER);
 
 include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php');
 ?>
