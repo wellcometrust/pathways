@@ -63,7 +63,18 @@ Pathways.LibraryLayer = function(panel_height) {
             })
 
             window.addEventListener('resize', function() {
-                $overlay.css('height', panel_height );
+                playerWidth     = (window.innerWidth - 180),
+                playerHeight    = (window.innerHeight - 180);
+
+                $overlay.css('height', window.innerHeight );
+
+                console.log(playerWidth);
+
+                $iframe.css('width', playerWidth );
+                $iframe.css('height', playerHeight );
+
+                $embed.css('width', playerWidth );
+                $embed.css('height', playerHeight );
             });
 
             e.preventDefault();
