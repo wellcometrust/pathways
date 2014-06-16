@@ -28,16 +28,21 @@
         }
 
         var loadComponents = function() {
+            var loaded = [];
+
             $('[data-component]').each(function(){
                 var handler = $(this).attr('data-component');
 
                 if ( handler ) {
                     var handlerClass = toTitleCase(handler);
 
-                    if ( window.Pathways[handlerClass] != null ) {
+                    // Check the handler exists and it hasn't already been loaded
+                    if ( window.Pathways[handlerClass] != null && loaded.indexOf(handlerClass) == -1 ) {
                         window.Pathways[handlerClass](panel_height);
+                        loaded.push(handlerClass);
                     }
-                    else
+                    
+                    if( window.Pathways[handlerClass] == null )
                         console.warn('Could not load the necessary component: ' + handlerClass);
                 }
             });

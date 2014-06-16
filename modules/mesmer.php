@@ -153,7 +153,27 @@
                 <div class="scroll-content left">                    
                     <p>Mesmer’s reputation spread, and his salons became overwhelmed with patients. To accommodate the masses, he came up with novel ways and locations to treat them. </p>
                     <p>In one famous example, Mesmer magnetised trees and connected his patients to the trees with rods.</p>
-                </div>                    
+                </div>
+
+                <div class="library-panel" data-component="library-panel">
+                    <div class="handle">i</div>
+                    <div class="body">
+                        Sources
+                        <ul>
+                            <li><a href="#">I am a tree!</a></li>
+                            <li><a href="#">I am a tree!</a></li>
+                            <li><a href="#">I am a tree!</a></li>
+                        </ul>
+                        <div class="share-me">
+                            <p>Share</p>
+                            <a href="#"><img src="../_assets/img/icons/icon-twitter.svg"></a>
+                            <a href="#"><img src="../_assets/img/icons/icon-facebook.svg"></a>
+                            <a href="#"><img src="../_assets/img/icons/icon-pinterest.svg"></a>
+                            <a href="#"><img src="../_assets/img/icons/icon-google.svg"></a>
+                        </div>
+                    </div>
+                    
+                </div>
 
             </div>
 

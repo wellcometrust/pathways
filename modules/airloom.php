@@ -44,7 +44,7 @@
             <div class="panel air-loom-content">
 
                 <div class="bg-container video" data-src="../_assets/video/airloom.mp4">
-                    <!-- <video class="air-loom-video" src="../_assets/video/Airloom.mov" loop></video> -->
+                    
                 </div>
 
                 <div class="scroll-content position-center align-center"></div>

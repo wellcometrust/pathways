@@ -13,15 +13,6 @@
 
     &-header {
         color:      #fff;
-        margin:     16vh 0 5vh 0;
-
-        h1 {
-            font-size: 4rem;
-
-            span {
-                color: #DD178C;
-            }
-        }
     }
 
     &-body {
@@ -48,5 +39,22 @@
         padding:            1.2rem 0 1rem 0;
         text-decoration:    none;
         text-transform:     uppercase;
+    }
+}
+
+@media screen and (min-width: 48em) {
+    .intro {
+        &-header {
+            color:      #fff;
+            margin:     16vh 0 5vh 0;
+
+            h1 {
+                font-size: 4rem;
+
+                span {
+                    color: #DD178C;
+                }
+            }
+        }
     }
 }
