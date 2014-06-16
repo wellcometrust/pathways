@@ -1,4 +1,9 @@
 <?php
+    if( $_SERVER['SERVER_NAME'] == 'wellcome-pathways.clearleft.com' )
+        $docRoot = '/home/clearleft/subdomains/wellcome-pathways';
+    else
+        $docRoot = $_SERVER['DOCUMENT_ROOT'];
+        
     function asset($location) {
         return '/_assets' . ( strpos($location, '/') != 0 ? '/' . $location : $location);
     }

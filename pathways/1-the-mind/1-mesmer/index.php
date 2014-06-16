@@ -1,8 +1,6 @@
 <?php
     $module = 'mesmer';
 
-    $path = '';
-
     if( $_SERVER['SERVER_NAME'] == 'wellcome-pathways.clearleft.com' )
         $docRoot = '/home/clearleft/subdomains/wellcome-pathways';
     else
