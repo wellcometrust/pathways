@@ -1,4 +1,6 @@
 <?php
+    global $module;
+    
     $module     = isset($module) ? $module : 'mesmer';
     $indices    = ['mesmer' => 1,'airloom' => 2,'elliotson' => 3,'esdaile' => 4,'svengali' => 5,'freud' => 6];
     $idx        = $indices[$module];
