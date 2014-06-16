@@ -1,7 +1,7 @@
 <?php
     $module = 'mesmer';
 
-    include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php')
+    include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php');
 ?>
 
     <main role="main" class="mesmer-section">

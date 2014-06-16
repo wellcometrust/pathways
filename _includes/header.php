@@ -1,6 +1,6 @@
 <?php
     function asset($location) {
-        return '/_assets' . (strpos($location, '/') != 0 ? '/' . $location : $location);
+        return '/_assets' . ( strpos($location, '/') != 0 ? '/' . $location : $location);
     }
 
     function pattern($pattern, $library_content = '') {

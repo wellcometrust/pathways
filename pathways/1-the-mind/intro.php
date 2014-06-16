@@ -1,5 +1,9 @@
 
-<?php include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php') ?>
+<?php
+echo $_SERVER['DOCUMENT_ROOT'];
+
+include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php');
+?>
 
     <main role="main">
 
