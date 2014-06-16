@@ -1,8 +1,13 @@
 
 <?php
-print_r($_SERVER);
+$path = '';
 
-include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php');
+if( $_SERVER['SERVER_NAME'] == 'wellcome-pathways.clearleft.com' )
+    $docRoot = '/home/clearleft/subdomains/wellcome-pathways';
+else
+    $docRoot = $_SERVER['DOCUMENT_ROOT'];
+
+include($docRoot.'/_includes/header.php');
 ?>
 
     <main role="main">
@@ -72,4 +77,4 @@ include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php');
 
     </main>
 
-<?php include($_SERVER['DOCUMENT_ROOT'].'/_includes/footer.php') ?>
+<?php include($docRoot.'/_includes/footer.php') ?>

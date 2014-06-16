@@ -1,7 +1,14 @@
 <?php
     $module = 'freud';
 
-    include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php')
+    $path = '';
+
+    if( $_SERVER['SERVER_NAME'] == 'wellcome-pathways.clearleft.com' )
+        $docRoot = '/home/clearleft/subdomains/wellcome-pathways';
+    else
+        $docRoot = $_SERVER['DOCUMENT_ROOT'];
+
+    include($docRoot.'/_includes/header.php');
 ?>
 
     <main role="main">

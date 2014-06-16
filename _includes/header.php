@@ -4,7 +4,7 @@
     }
 
     function pattern($pattern, $library_content = '') {
-        include($_SERVER['DOCUMENT_ROOT'] . '/patterns/' . $pattern . '.php' );
+        include($docRoot . '/patterns/' . $pattern . '.php' );
     }
 ?>
 <!DOCTYPE HTML>
