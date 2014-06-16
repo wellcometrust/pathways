@@ -1,7 +1,7 @@
 <?php
     $module = 'elliotson';
 
-    include('../_includes/header.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php')
 ?>
 
     <main role="main">
@@ -9,7 +9,7 @@
         <div class="start">
 
             <div class="bg-container">
-                <img src="../_assets/img/elliotson/elliotson-1.jpg">
+                <img src="/_assets/img/elliotson/elliotson-1.jpg">
             </div>
             
             <div class="content">
@@ -34,7 +34,7 @@
             <div class="panel okey-sisters" data-offset-height="1200">
 
                 <div class="bg-container">
-                    <img src="../_assets/img/elliotson/elliotson-2.jpg">
+                    <img src="/_assets/img/elliotson/elliotson-2.jpg">
                 </div>
 
                 <div class="black-strip" ></div>
@@ -52,16 +52,16 @@
                 </div>
 
                 <div class="scroll-content right" style="float: right; max-width: 40%; bottom: auto; top: 36%">
-                    <img src="../_assets/img/elliotson/demonstration1.jpg" style="display: block; margin-bottom: 40px; margin-left: -100px">
-                    <img src="../_assets/img/elliotson/demonstration2.jpg" style="display: block; margin-bottom: 40px">
-                    <img src="../_assets/img/elliotson/demonstration1.jpg" style="display: block; margin-bottom: 40px; margin-left: -100px">
+                    <img src="/_assets/img/elliotson/demonstration1.jpg" style="display: block; margin-bottom: 40px; margin-left: -100px">
+                    <img src="/_assets/img/elliotson/demonstration2.jpg" style="display: block; margin-bottom: 40px">
+                    <img src="/_assets/img/elliotson/demonstration1.jpg" style="display: block; margin-bottom: 40px; margin-left: -100px">
                 </div>
 
             </div>
 
             <div class="panel thomas-wakley" data-offset-height="2400">
                 <div class="bg-container">
-                    <img src="../_assets/img/elliotson/elliotson-3.jpg">
+                    <img src="/_assets/img/elliotson/elliotson-3.jpg">
                 </div>
 
                 <div class="scroll-content fixed position-center">
@@ -168,7 +168,7 @@
 
             <div class="panel verdict">
                 <div class="bg-container">
-                    <img src="../_assets/img/elliotson/elliotson-4.jpg">
+                    <img src="/_assets/img/elliotson/elliotson-4.jpg">
                 </div>
 
                 <div class="scroll-content">
@@ -189,21 +189,22 @@
         </div>
 
         
-        <?php include('../patterns/library_layer.php') ?>
+        <?php pattern('library_layer') ?>
 
         <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;">
-            <a href="esdaile.php">
-                <img class="teaser-bkg" src="../_assets/img/teaser/teaser-esdaile.jpg" alt="james tilly mathews and the air loom" />
+            <a href="/pathways/1-the-mind/4-esdaile">
+                <img class="teaser-bkg" src="/_assets/img/teaser/teaser-esdaile.jpg" alt="james tilly mathews and the air loom" />
                 <div class="teaser-text-container">
                     <p class="teaser-text">Continue with your journey in the <span>Mind</span></p>
                     <h1>Mind over matter</h1>
-                    <img class="teaser-icon" src="../_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
+                    <img class="teaser-icon" src="/_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
                 </div>
             </a>
         </div>
         
-        <?php include('../patterns/global_navigation.php') ?>
+        <?php pattern('global_navigation') ?>
 
     </main>
 
-<?php include('../_includes/footer.php') ?>
+<?php include($_SERVER['DOCUMENT_ROOT'].'/_includes/footer.php') ?>
+

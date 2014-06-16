@@ -1,7 +1,7 @@
 <?php
     $module = 'freud';
 
-    include('../_includes/header.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php')
 ?>
 
     <main role="main">
@@ -9,7 +9,7 @@
         <div class="start">
 
             <div class="bg-container">
-                <img src="../_assets/img/freud/freud-1.jpg">
+                <img src="/_assets/img/freud/freud-1.jpg">
             </div>
             
             <div class="content">
@@ -33,12 +33,12 @@
             
             <div class="panel anna-o">
                 <div class="bg-container">
-                    <img src="../_assets/img/freud/freud-2.jpg">
+                    <img src="/_assets/img/freud/freud-2.jpg">
 
-                    <img class="fragmented" src="../_assets/img/freud/freud-2.png">
-                    <img class="fragmented" src="../_assets/img/freud/freud-2.png">
-                    <img class="fragmented" src="../_assets/img/freud/freud-2.png">
-                    <img class="fragmented" src="../_assets/img/freud/freud-2.png">
+                    <img class="fragmented" src="/_assets/img/freud/freud-2.png">
+                    <img class="fragmented" src="/_assets/img/freud/freud-2.png">
+                    <img class="fragmented" src="/_assets/img/freud/freud-2.png">
+                    <img class="fragmented" src="/_assets/img/freud/freud-2.png">
                 </div>
 
                 <div class="scroll-content fixed">
@@ -60,7 +60,7 @@
 
             <div class="panel fred-breuer">
                 <div class="bg-container">
-                    <img src="../_assets/img/freud/freud-3.jpg">
+                    <img src="/_assets/img/freud/freud-3.jpg">
                 </div>
 
                 <div class="scroll-content text">
@@ -77,7 +77,7 @@
 
             <div class="panel office">
                 <div class="bg-container">
-                    <img src="../_assets/img/freud/freud-6.jpg">
+                    <img src="/_assets/img/freud/freud-6.jpg">
                 </div>
 
                 <div class="black-strip" ></div>
@@ -91,7 +91,7 @@
             <div class="panel office-2">
 
                 <div class="bg-container">
-                    <img src="../_assets/img/freud/freud-6.jpg">
+                    <img src="/_assets/img/freud/freud-6.jpg">
                 </div>
 
                 <div class="scroll-content">
@@ -104,9 +104,10 @@
 
         </div>
         
-        <?php include('../patterns/library_layer.php') ?>
-        <?php include('../patterns/global_navigation.php') ?>
+        <?php pattern('library_layer') ?>
+        <?php pattern('global_navigation') ?>
 
     </main>
 
-<?php include('../_includes/footer.php') ?>
+<?php include($_SERVER['DOCUMENT_ROOT'].'/_includes/footer.php') ?>
+

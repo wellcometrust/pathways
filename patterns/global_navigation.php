@@ -9,43 +9,43 @@
         <nav>
             <ul class="clearfix">
                 <li<?php echo $module == 'intro' ? ' class="active"' : '' ?>>
-                    <a href="index.php">
+                    <a href="/pathways/1-the-mind/intro.php">
                         <span>Intro</span>
                         <img src="/_assets/img/navigation/mesmer.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'mesmer' ? ' class="active"' : '' ?>>
-                    <a href="mesmer.php">
+                    <a href="/pathways/1-the-mind/1-mesmer">
                         <span>1. A new force in nature</span>
                         <img src="/_assets/img/navigation/mesmer.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'airloom' ? ' class="active"' : '' ?>>
-                    <a href="airloom.php">
+                    <a href="/pathways/1-the-mind/2-airloom">
                         <span>2. A machine to control the mind</span>
                         <img src="/_assets/img/navigation/airloom.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'elliotson' ? ' class="active"' : '' ?>>
-                    <a href="elliotson.php">
+                    <a href="/pathways/1-the-mind/3-elliotson">
                         <span>3. Mesmerism on trial</span>
                         <img src="/_assets/img/navigation/elliotson.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'esdaile' ? ' class="active"' : '' ?>>
-                    <a href="esdaile.php">
+                    <a href="/pathways/1-the-mind/4-esdaile">
                         <span>4. Mind over matter</span>
                         <img src="/_assets/img/navigation/esdaile.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'svengali' ? ' class="active"' : '' ?>>
-                    <a href="svengali.php">
+                    <a href="/pathways/1-the-mind/5-svengali">
                         <span>5. Dark forces</span>
                         <img src="/_assets/img/navigation/svengali.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'freud' ? ' class="active"' : '' ?>>
-                    <a href="freud.php">
+                    <a href="/pathways/1-the-mind/6-freud">
                         <span>6. Can the mind cure the body?</span>
                         <img src="/_assets/img/navigation/freud.jpg">
                     </a>

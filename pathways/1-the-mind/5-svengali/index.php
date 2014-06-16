@@ -1,7 +1,7 @@
 <?php
     $module = 'svengali';
 
-    include('../_includes/header.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php')
 ?>
 
     <style type="text/css">
@@ -15,11 +15,11 @@
         <div class="start">
 
             <div class="bg-container">
-                <img src="../_assets/img/svengali/svengali-1.jpg">
+                <img src="/_assets/img/svengali/svengali-1.jpg">
             </div>
 
             <div class="falling-lady">
-                <img src="../_assets/img/svengali/falling-lady.png">
+                <img src="/_assets/img/svengali/falling-lady.png">
             </div>
             
             <div class="content">
@@ -42,14 +42,14 @@
             
             <div class="panel trilby">
                 <div class="bg-container">
-                    <img src="../_assets/img/svengali/svengali-2.jpg">
+                    <img src="/_assets/img/svengali/svengali-2.jpg">
                 </div>
 
                 <div class="scroll-content fixed">
                     
                     <div class="inner">
                         <div class="trilby-header clearfix">
-                            <img src="../_assets/img/svengali/trilby/trilby-book-cover.jpg">
+                            <img src="/_assets/img/svengali/trilby/trilby-book-cover.jpg">
 
                             <header>
                                 <h1>Hypnotism in the imagination</h1>
@@ -59,28 +59,28 @@
                         
                         <div class="comic-strip clearfix">
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/trilby/trilby-comic-1.jpg">
+                                <img src="/_assets/img/svengali/trilby/trilby-comic-1.jpg">
                                 <p class="panel-text">Paris, the Latin Quarter, 1850s Trilbuy O’Ferrall is living the bohemian life as an artist’s model</p>
                             </div>
                             <div class="comic-panel" data-offset="250">
-                                <img src="../_assets/img/svengali/trilby/trilby-comic-2.jpg">
+                                <img src="/_assets/img/svengali/trilby/trilby-comic-2.jpg">
                                 <p class="panel-text">All the men are in love with her</p>
                             </div>
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/trilby/trilby-comic-3.jpg">
+                                <img src="/_assets/img/svengali/trilby/trilby-comic-3.jpg">
                                 <p class="panel-text">She meets Svengali, a Jewish musical impresario. He wants to make her a star</p>
                             </div>
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/trilby/trilby-comic-4.jpg">
+                                <img src="/_assets/img/svengali/trilby/trilby-comic-4.jpg">
                                 <p class="panel-text">Trilby protests that she’s tone deaf</p>
                                 <p class="panel-text">But he transforms her into a sensational singer&hellip;</p>
                             </div>
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/trilby/trilby-comic-5.jpg">
+                                <img src="/_assets/img/svengali/trilby/trilby-comic-5.jpg">
                                 <p class="panel-text">&hellip;by using hypnosis</p>
                             </div>
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/trilby/trilby-comic-6.jpg">
+                                <img src="/_assets/img/svengali/trilby/trilby-comic-6.jpg">
                                 <p class="panel-text">She falls under the spell of Svengali</p>
 
                                 <blockquote class="comic-quote">
@@ -89,26 +89,26 @@
                             </div>
 
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/trilby/trilby-comic-7.jpg">
+                                <img src="/_assets/img/svengali/trilby/trilby-comic-7.jpg">
                                 <p class="panel-text">Under his tutelage Trilby becomes an international sensation</p>
                             </div>
                             <div class="comic-panel">
-                                <span>...but once Svengali releases her from hypnosis, she has no memory of her performance</span>
+                                <span>&hellip;but once Svengali releases her from hypnosis, she has no memory of her performance</span>
                             </div>
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/trilby/trilby-comic-8.jpg">
+                                <img src="/_assets/img/svengali/trilby/trilby-comic-8.jpg">
                                 <p class="panel-text">She travels to London for her biggest concert yet</p>
                             </div>
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/trilby/trilby-comic-9.jpg">
+                                <img src="/_assets/img/svengali/trilby/trilby-comic-9.jpg">
                                 <p class="panel-text">But as she takes to the stage, Svengali collapses&hellip;</p>
                             </div>
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/trilby/trilby-comic-10.jpg">
+                                <img src="/_assets/img/svengali/trilby/trilby-comic-10.jpg">
                                 <p class="panel-text">&hellip;and dies of a heart attack</p>
                             </div>
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/trilby/trilby-comic-11.jpg">
+                                <img src="/_assets/img/svengali/trilby/trilby-comic-11.jpg">
                                 <p class="panel-text">Trilby finds herself on stage, frozen in front of a heckling crowd, with no recollection that she had ever been a singer</p>
 
                                 <blockquote>
@@ -123,7 +123,7 @@
 
             <div class="panel bonpard">
                 <div class="bg-container">
-                    <img src="../_assets/img/svengali/svengali-2.jpg">
+                    <img src="/_assets/img/svengali/svengali-2.jpg">
                 </div>
 
                 <div class="scroll-content fixed">
@@ -141,10 +141,10 @@
 
                             <div class="comic-row clearfix">
                                 <div class="comic-panel">
-                                    <img src="../_assets/img/svengali/bonpard/bonpard-comic-1.jpg">
+                                    <img src="/_assets/img/svengali/bonpard/bonpard-comic-1.jpg">
                                 </div>
                                 <div class="comic-panel">
-                                    <img src="../_assets/img/svengali/bonpard/bonpard-comic-2.jpg">
+                                    <img src="/_assets/img/svengali/bonpard/bonpard-comic-2.jpg">
                                 </div>
                                 
                                 <p class="panel-text wide">In 1889 Paris was gripped by a sensational murder. A wealthy businessman was lured by a young woman named Gabrielle Bonpard to a rented apartment where her partner, a vicious con-man named Michel Eyraud, was lying in wait.</p>
@@ -152,33 +152,33 @@
 
                             <div class="comic-row clearfix">
                                 <div class="comic-panel">
-                                    <img src="../_assets/img/svengali/bonpard/bonpard-comic-3.jpg">
+                                    <img src="/_assets/img/svengali/bonpard/bonpard-comic-3.jpg">
                                     <p class="panel-text">The victim was strangled by a sil dressing gown cord, his body packed into a trunk and dumped off a remote mountainside.</p>
                                 </div>
                                 <div class="comic-panel">
-                                    <img src="../_assets/img/svengali/bonpard/bonpard-comic-4.jpg">
+                                    <img src="/_assets/img/svengali/bonpard/bonpard-comic-4.jpg">
                                 </div>
                                 <div class="comic-panel">
-                                    <img src="../_assets/img/svengali/bonpard/bonpard-comic-5.jpg">
+                                    <img src="/_assets/img/svengali/bonpard/bonpard-comic-5.jpg">
                                 </div>
                             </div>
                             
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/bonpard/bonpard-comic-6.jpg">
+                                <img src="/_assets/img/svengali/bonpard/bonpard-comic-6.jpg">
                                 <p class="panel-text">Gabrielle eventually confessed to being at the scene of the crime, but insisted that Eyraud had put her under hypnosis. She had no memory of the fateful moment.</p>
                             </div>
 
                             <div class="comic-panel">
-                                <img src="../_assets/img/svengali/bonpard/bonpard-comic-7.jpg">
+                                <img src="/_assets/img/svengali/bonpard/bonpard-comic-7.jpg">
                                 <p class="panel-text">It was the first time that hypnosis had been used as a defence in a court of law.</p>
                             </div>
 
                             <div class="comic-row clearfix">
                                 <div class="comic-panel">
-                                    <img src="../_assets/img/svengali/bonpard/bonpard-comic-8.jpg">
+                                    <img src="/_assets/img/svengali/bonpard/bonpard-comic-8.jpg">
                                 </div>
                                 <div class="comic-panel">
-                                    <img src="../_assets/img/svengali/bonpard/bonpard-comic-9.jpg">
+                                    <img src="/_assets/img/svengali/bonpard/bonpard-comic-9.jpg">
                                 </div>
 
                                 <div class="comic-panel">
@@ -190,18 +190,18 @@
                             <div class="comic-row clearfix">
                                 <div class="comic-column">
                                     <div class="comic-panel">
-                                        <img src="../_assets/img/svengali/bonpard/bonpard-comic-10.jpg">
+                                        <img src="/_assets/img/svengali/bonpard/bonpard-comic-10.jpg">
                                         <p class="panel-text">All conscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.</p>
                                     </div>
                                     <div class="comic-panel" data-offset="-200">
-                                        <img src="../_assets/img/svengali/bonpard/bonpard-comic-11.jpg">
+                                        <img src="/_assets/img/svengali/bonpard/bonpard-comic-11.jpg">
 
                                         <p class="panel-text">All connscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.</p>
                                     </div>
                                 </div>
                                 <div class="comic-column">
                                     <div class="comic-panel" data-offset="200">
-                                        <img src="../_assets/img/svengali/bonpard/bonpard-comic-12.jpg">
+                                        <img src="/_assets/img/svengali/bonpard/bonpard-comic-12.jpg">
                                         <p class="panel-text">Both defendants were found guilty, Eyraud was sentenced to death by guillotine. Gabrielle received a prison sentence of 21 years.</p>
                                     </div>
                                 </div>
@@ -218,21 +218,22 @@
 
         </div>
 
-        <?php include('../patterns/library_layer.php') ?>
+        <?php pattern('library_layer') ?>
 
         <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;">
-            <a href="freud.php">
-                <img class="teaser-bkg" src="../_assets/img/teaser/teaser-freud.jpg" alt="james tilly mathews and the air loom" />
+            <a href="/pathways/1-the-mind/6-freud">
+                <img class="teaser-bkg" src="/_assets/img/teaser/teaser-freud.jpg" alt="james tilly mathews and the air loom" />
                 <div class="teaser-text-container">
                     <p class="teaser-text">Continue with your journey in the <span>Mind</span></p>
                     <h1>Secrets of the mind revealed</h1>
-                    <img class="teaser-icon" src="../_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
+                    <img class="teaser-icon" src="/_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
                 </div>
             </a>
         </div>
 
-        <?php include('../patterns/global_navigation.php') ?>
+        <?php pattern('global_navigation') ?>
 
     </main>
 
-<?php include('../_includes/footer.php') ?>
+<?php include($_SERVER['DOCUMENT_ROOT'].'/_includes/footer.php') ?>
+

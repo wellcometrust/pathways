@@ -13,12 +13,12 @@
 
     &-header {
         color:      #fff;
+        margin-top: 1.618rem;
     }
 
     &-body {
         color:      #fff;
-        max-width:  40%;
-        margin:     0 auto 4em auto;
+        margin-top: 1.618rem;
 
         span {
             color: #DD178C;
@@ -27,7 +27,6 @@
 
     &-button {
         display:            block;
-        max-width:          40%;
         color:              #fefefe;
         @include            tablet-gothic;
         font-size:          0.8rem;
@@ -35,7 +34,7 @@
         border:             1px solid rgba(255,255,255, 0.6);
         border-radius:      5px;
         text-align:         center;
-        margin:             0 auto 10vh auto;
+        margin:             1.618rem 1rem 0 1rem;
         padding:            1.2rem 0 1rem 0;
         text-decoration:    none;
         text-transform:     uppercase;
@@ -55,6 +54,26 @@
                     color: #DD178C;
                 }
             }
+        }
+
+        &-body {
+            max-width:  40%;
+            margin:     0 auto 4em auto;
+        }
+
+        &-button {
+            max-width:          40%;
+            color:              #fefefe;
+            @include            tablet-gothic;
+            font-size:          0.8rem;
+            background-color:   rgba(0,0,0,0.2);
+            border:             1px solid rgba(255,255,255, 0.6);
+            border-radius:      5px;
+            text-align:         center;
+            margin:             0 auto 10vh auto;
+            padding:            1.2rem 0 1rem 0;
+            text-decoration:    none;
+            text-transform:     uppercase;
         }
     }
 }

@@ -1,12 +1,12 @@
 
-<?php include('../_includes/header.php') ?>
+<?php include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php') ?>
 
     <main role="main">
 
         <div class="intro">
 
             <div class="bg-container">
-                <img src="../_assets/img/esdaile/esdaile-3.jpg">
+                <img src="<?php echo asset('img/esdaile/esdaile-3.jpg') ?>">
             </div>
 
             <div class="inner">
@@ -24,37 +24,37 @@
                     <nav>
                         <ul class="clearfix">
                             <li>
-                                <a href="mesmer.php">
+                                <a href="1-mesmer">
                                     <span>A new force in nature</span>
                                     <img src="/_assets/img/navigation/mesmer.jpg">
                                 </a>
                             </li>
                             <li>
-                                <a href="airloom.php">
+                                <a href="2-airloom">
                                     <span>A machine to control the mind</span>
                                     <img src="/_assets/img/navigation/airloom.jpg">
                                 </a>
                             </li>
                             <li>
-                                <a href="elliotson.php">
+                                <a href="3-elliotson">
                                     <span>Mesmerism on trial</span>
                                     <img src="/_assets/img/navigation/elliotson.jpg">
                                 </a>
                             </li>
                             <li>
-                                <a href="esdaile.php">
+                                <a href="4-esdaile">
                                     <span>Mind over matter</span>
                                     <img src="/_assets/img/navigation/esdaile.jpg">
                                 </a>
                             </li>
                             <li>
-                                <a href="svengali.php">
+                                <a href="5-svengali">
                                     <span>Dark forces</span>
                                     <img src="/_assets/img/navigation/svengali.jpg">
                                 </a>
                             </li>
                             <li>
-                                <a href="freud.php">
+                                <a href="6-freud">
                                     <span>Can the mind really cure the body?</span>
                                     <img src="/_assets/img/navigation/freud.jpg">
                                 </a>
@@ -68,4 +68,4 @@
 
     </main>
 
-<?php include('../_includes/footer.php') ?>
+<?php include($_SERVER['DOCUMENT_ROOT'].'/_includes/footer.php') ?>

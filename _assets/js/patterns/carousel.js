@@ -94,7 +94,7 @@ function Carousel(element)
             var li  = document.createElement('li'),
                 img = new Image();
 
-            img.src = '../_assets/img/mesmer/carousel/' + obj.image + '.jpg';
+            img.src = '/_assets/img/mesmer/carousel/' + obj.image + '.jpg';
             img.style['height'] = '100%';
             li.style['height']  = '100%';
 

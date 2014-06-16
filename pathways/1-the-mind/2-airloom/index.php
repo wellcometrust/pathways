@@ -1,7 +1,7 @@
 <?php
     $module = 'airloom';
 
-    include('../_includes/header.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php')
 ?>
 
     <main role="main">
@@ -9,7 +9,7 @@
         <div class="start">
 
             <div class="bg-container">
-                <img src="../_assets/img/airloom/airloom-1.jpg">
+                <img src="/_assets/img/airloom/airloom-1.jpg">
             </div>
             
             <div class="content">
@@ -43,7 +43,7 @@
 
             <div class="panel air-loom-content">
 
-                <div class="bg-container video" data-src="../_assets/video/airloom.mp4">
+                <div class="bg-container video" data-src="/_assets/video/airloom.mp4">
                     
                 </div>
 
@@ -54,7 +54,7 @@
 
             <div class="panel">
                 <div class="bg-container">
-                    <img src="../_assets/img/airloom/airloom-2.jpg">
+                    <img src="/_assets/img/airloom/airloom-2.jpg">
                 </div>
 
                 <div class="scroll-content position-center align-left light">
@@ -74,21 +74,23 @@
         </div>
 
 
-        <?php include('../patterns/library_layer.php') ?>
+        <?php pattern('library_layer') ?>
 
         <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;">
-            <a href="elliotson.php">
-                <img class="teaser-bkg" src="../_assets/img/teaser/teaser-oakey.jpg" alt="james tilly mathews and the air loom" />
+            <a href="/pathways/1-the-mind/3-elliotson">
+                <img class="teaser-bkg" src="/_assets/img/teaser/teaser-oakey.jpg" alt="james tilly mathews and the air loom" />
                 <div class="teaser-text-container">
                     <p class="teaser-text">Continue with your journey in the <span>Mind</span></p>
                     <h1>Mesmerism on trial</h1>
-                    <img class="teaser-icon" src="../_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
+                    <img class="teaser-icon" src="/_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
                 </div>
             </a>            
         </div>
 
-        <?php include('../patterns/global_navigation.php') ?>
+        <?php pattern('global_navigation') ?>
 
     </main>
 
- <?php include('../_includes/footer.php') ?>
+
+<?php include($_SERVER['DOCUMENT_ROOT'].'/_includes/footer.php') ?>
+

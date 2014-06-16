@@ -68,8 +68,6 @@ Pathways.LibraryLayer = function(panel_height) {
 
                 $overlay.css('height', window.innerHeight );
 
-                console.log(playerWidth);
-
                 $iframe.css('width', playerWidth );
                 $iframe.css('height', playerHeight );
 

@@ -19,7 +19,7 @@ Pathways.CropZoom = function(panel_height) {
     $elm.find('.tap-target').each(function() {
         var $target     = $(this),
             key         = $target.data('crop'),
-            image       = '../_assets/img/mesmer/'+ db[key]['image'],
+            image       = '/_assets/img/mesmer/'+ db[key]['image'],
             title       = db[key]['title']      ? db[key]['title']      : '',
             text        = db[key]['text']       ? db[key]['text']       : '',
             position    = db[key]['position']   ? db[key]['position']   : '',

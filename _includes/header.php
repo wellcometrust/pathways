@@ -1,3 +1,12 @@
+<?php
+    function asset($location) {
+        return '/_assets' . (strpos($location, '/') != 0 ? '/' . $location : $location);
+    }
+
+    function pattern($pattern, $library_content = '') {
+        include($_SERVER['DOCUMENT_ROOT'] . '/patterns/' . $pattern . '.php' );
+    }
+?>
 <!DOCTYPE HTML>
 <html lang="en"> 
 <head>
@@ -6,7 +15,7 @@
 
     <meta name="viewport" content="initial-scale=1,width=device-width,height=device-height,user-scalable=no">
 
-    <link rel="stylesheet" type="text/css" href="../_assets/build/css/main.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo asset('build/css/main.css') ?>">
 
     <script>
         // Set JS class
@@ -27,14 +36,5 @@
           s.parentNode.insertBefore(wf, s);
         })();
     </script>
-
-    <style type="text/css">
-        /*.panel {
-            border: 1px solid blue;
-        }
-        .bg-container {
-            border: 1px solid green;
-       */ }
-    </style>
 </head>
 <body>

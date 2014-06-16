@@ -1,28 +1,17 @@
 <?php
     $module = 'mesmer';
 
-    include('../_includes/header.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/_includes/header.php')
 ?>
 
     <main role="main" class="mesmer-section">
-
-
-            <div class="bg-container">
-                <img src="../_assets/img/mesmer/mesmer-1.jpg">
-            </div>
-            
-            <div class="content">
-                <p class="scene-set">
-                    <span class="location">Paris 1778</span>
-                    <!-- <span class="date">PARIS 1778</span> -->
-                </p>
 
         <div class="sequence" data-sequence="cross-fade">
 
             <div class="panel start">
 
                 <div class="bg-container fixed">
-                    <img src="../_assets/img/mesmer/mesmer-1.jpg">
+                    <img src="/_assets/img/mesmer/mesmer-1.jpg">
                 </div>
                 
                 <div class="content">
@@ -41,10 +30,10 @@
 
             </div>
             
-            <div class="panel mesmers-salon" data-offset-height="550">
+            <div id="mesmers-salon-intro" class="panel mesmers-salon" data-offset-height="550">
 
                 <div class="bg-container">
-                    <img src="../_assets/img/mesmer/mesmer-2-black.jpg">
+                    <img src="/_assets/img/mesmer/mesmer-2-black.jpg">
                 </div>
                 
                 <div class="scroll-content position-center text-left">
@@ -61,10 +50,10 @@
 
             </div>
 
-            <div class="panel tap-block" data-component="crop-zoom" >
+            <div id="mesmers-salon" class="panel tap-block" data-component="crop-zoom" >
 
                 <div class="bg-container">
-                    <img src="../_assets/img/mesmer/mesmer-2.jpg">
+                    <img src="/_assets/img/mesmer/mesmer-2.jpg">
                 </div>
 
                 <div class="crop-zoom">
@@ -90,31 +79,13 @@
 
             </div>
 
-            <div class="panel animal-magnetism" data-offset-height="350">
+            <div id="animal-magnetism" class="panel animal-magnetism" data-offset-height="350">
 
                 <div class="bg-container">
-                    <img src="../_assets/img/mesmer/mesmer-3.jpg">
+                    <img src="/_assets/img/mesmer/mesmer-3.jpg">
                 </div>
 
-                <div class="library-panel" data-component="library-panel">
-                    <div class="handle">i</div>
-                    <div class="body">
-                        Sources
-                        <ul>
-                            <li><a href="#">I am a link YEAH!</a></li>
-                            <li><a href="#">I am a link YEAH!</a></li>
-                            <li><a href="#">I am a link YEAH!</a></li>
-                        </ul>
-                        <div class="share-me">
-                            <p>Share</p>
-                            <a href=""><img src="../_assets/img/icons/icon-twitter.svg"></a>
-                            <a href=""><img src="../_assets/img/icons/icon-facebook.svg"></a>
-                            <a href=""><img src="../_assets/img/icons/icon-pinterest.svg"></a>
-                            <a href=""><img src="../_assets/img/icons/icon-google.svg"></a>
-                        </div>
-                    </div>
-                    
-                </div>
+                <?php pattern('library_panel'); ?>
 
                 <svg class="info-box" data-component="gallery" version="1.1" xmlns="http://www.w3.org/2000/svg" >
                     <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
@@ -142,10 +113,10 @@
             </div>
 
 
-            <div class="panel tree" data-offset-height="350">
+            <div id="magnetised-trees" class="panel tree" data-offset-height="350">
 
-                <div class="bg-container video" data-src="../_assets/video/tree-animation.m4v">
-                    <img src="../_assets/img/mesmer/mesmer-4.jpg">
+                <div class="bg-container video" data-src="/_assets/video/tree-animation.m4v">
+                    <img src="/_assets/img/mesmer/mesmer-4.jpg">
                 </div>
 
                 <div class="black-strip" ></div>
@@ -155,35 +126,15 @@
                     <p>In one famous example, Mesmer magnetised trees and connected his patients to the trees with rods.</p>
                 </div>
 
-                <div class="library-panel" data-component="library-panel">
-                    <div class="handle">i</div>
-                    <div class="body">
-                        Sources
-                        <ul>
-                            <li><a href="#">I am a tree!</a></li>
-                            <li><a href="#">I am a tree!</a></li>
-                            <li><a href="#">I am a tree!</a></li>
-                        </ul>
-                        <div class="share-me">
-                            <p>Share</p>
-                            <a href="#"><img src="../_assets/img/icons/icon-twitter.svg"></a>
-                            <a href="#"><img src="../_assets/img/icons/icon-facebook.svg"></a>
-                            <a href="#"><img src="../_assets/img/icons/icon-pinterest.svg"></a>
-                            <a href="#"><img src="../_assets/img/icons/icon-google.svg"></a>
-                        </div>
-                    </div>
-                    
-                </div>
+                <?php pattern('library_panel'); ?>
 
             </div>
 
             <div class="panel news" data-offset-height="350">
 
-                <div class="bg-container video" data-src="../_assets/video/mesmer.mp4">
-                    <img src="../_assets/img/mesmer/mesmer-5.jpg">
+                <div class="bg-container video" data-src="/_assets/video/mesmer.mp4">
+                    <img src="/_assets/img/mesmer/mesmer-5.jpg">
                 </div>
-
-                <!-- <div class="black-strip" ></div> -->
                 
                 <div class="scroll-content left">
                     <p>Mesmer’s treatment was incredibly popular, and seemed to work.</p>
@@ -196,7 +147,7 @@
             <div class="panel audio sciences-committee">
 
                 <div class="bg-container">
-                    <img src="../_assets/img/mesmer/mesmer-6.jpg">
+                    <img src="/_assets/img/mesmer/mesmer-6.jpg">
                 </div>
 
                 <div class="scroll-content position-center">
@@ -205,7 +156,7 @@
                             <h1>A French Royal Academy of Sciences Committee was convened.</h1>
                         </header>
 
-                        <div class="audio-player" data-src="../_assets/audio/Riding.mp3" data-component="audio-player">
+                        <div class="audio-player" data-src="/_assets/audio/Riding.mp3" data-component="audio-player">
                             <div class="time-left">Time left: <span>0.00</span></div>
                             <div class="progress-bar">
                                 <div class="progressed"></div>
@@ -219,21 +170,69 @@
 
         </div>
 
-        <?php include('../patterns/library_layer.php') ?>
+        <?php
+            $library_content = array(
+                'in the player' => array(
+                    array(
+                        'title'     => 'The Commission’s report on Animal Magnetism',
+                        'author'    => 'Benjamin Franklin',
+                        'date'      => '1785',
+                        'link'      => 'http://wellcomelibrary.org/package/b20595244'
+                    ),
+                    array(
+                        'title'     => 'A guide to Mesmer',
+                        'author'    => 'M. Caullet de Veaumore',
+                        'date'      => '1785',
+                        'link'      => 'http://wellcomelibrary.org/package/b20595207'
+                    ),
+                    array(
+                        'title'     => 'Animal Magnetism explained by its professors',
+                        'author'    => 'George Toynbee',
+                        'date'      => '1839',
+                        'link'      => 'http://wellcomelibrary.org/package/b20458332'
+                    ),
+                    array(
+                        'title'     => 'Franz Anton Mesmer',
+                        'author'    => 'Mesmer’s deeds agreeing to teach animal magnetism',
+                        'date'      => '1783',
+                        'link'      => ''
+                    ),
+                ),
+
+                'related resources' => array(
+                    array(
+                        'title'     => 'Mesmer and animal magnetism : a chapter in the history of medicine',
+                        'author'    => 'Frank A. Pattie',
+                        'date'      => '1994',
+                        'link'      => ''
+                    ),
+                    array(
+                        'title'     => 'Mesmerism and the End of the Enlightenment in France',
+                        'author'    => 'Robert Darnton',
+                        'date'      => '2009',
+                        'link'      => ''
+                    ),
+                ),
+                
+            );
+
+            pattern('library_layer', $library_content);
+        ?>
 
         <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;">
-            <a href="airloom.php">
-                <img class="teaser-bkg" src="../_assets/img/teaser/teaser-jtm.jpg" alt="james tilly mathews and the air loom" />
+            <a href="/pathways/1-the-mind/2-airloom">
+                <img class="teaser-bkg" src="/_assets/img/teaser/teaser-jtm.jpg" alt="james tilly mathews and the air loom" />
                 <div class="teaser-text-container">
                     <p class="teaser-text">Continue with your journey in the <span>Mind</span></p>
                     <h1>A machine to control the mind</h1>
-                    <img class="teaser-icon" src="../_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
+                    <img class="teaser-icon" src="/_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
                 </div>
             </a>            
         </div>
 
-        <?php include('../patterns/global_navigation.php') ?>
+        <?php pattern('global_navigation'); ?>
         
     </main>
 
-<?php include('../_includes/footer.php') ?>
+<?php include($_SERVER['DOCUMENT_ROOT'].'/_includes/footer.php') ?>
+

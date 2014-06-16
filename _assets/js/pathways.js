@@ -14,17 +14,21 @@
 
         var init = function() {
 
-            loadComponents();
+            // Progressive loading. Some things need to happen before window load
             resizeAllTheThings();
-
-            if( !supports_touch ) {
-                window.Pathways.LoadScenes();
-                loadVideo();
-            }
-
+            
             window.addEventListener('resize', function() {
                 resizeAllTheThings();
             });
+
+            window.addEventListener('load', function() {
+                loadComponents();
+
+                if( !supports_touch ) {
+                    window.Pathways.LoadScenes();
+                    loadVideo();
+                }
+            })
         }
 
         var loadComponents = function() {
