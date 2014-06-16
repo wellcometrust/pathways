@@ -111,7 +111,7 @@
                 </header>
 
                 <ol>
-                    <li><a href="pathways/1-the-mind">The Mind</a></li>
+                    <li>The Mind</li>
                     <li>The Collectors</li>
                     <li>Breath</li>
                 </ol>

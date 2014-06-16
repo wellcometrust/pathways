@@ -241,5 +241,5 @@
         
     </main>
 
-<?php include($_SERVER['DOCUMENT_ROOT'].'/_includes/footer.php') ?>
+<?php include($docRoot.'/_includes/footer.php') ?>
 
