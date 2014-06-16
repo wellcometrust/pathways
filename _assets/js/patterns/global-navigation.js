@@ -19,6 +19,7 @@ Pathways.GlobalNavigation = function() {
 
     window.addEventListener('resize', function() {
         navHeight = $nav.outerHeight();
+        $nav.css('transform', 'translate(0, '+ -(navHeight - handleHeight) +'px)');
     })
 
     setTimeout(function() {
