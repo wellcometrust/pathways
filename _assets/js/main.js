@@ -249,6 +249,8 @@ Pathways.LoadScenes = function() {
 
     // Video
     if( _('.air-loom-content') ) {
+        $('.mute').hide();
+        
         $('.mute').on('click', function() {
             var $this   = $(this),
                 $video  = $this.parents('.panel').find('video').first().get(0);
@@ -269,10 +271,14 @@ Pathways.LoadScenes = function() {
                 duration:       panel_height
             })
             .on('enter', function(e) {
+                $('.mute').css({ position: 'fixed', display: 'block' });
+
                 if( _('.air-loom-content video') )
                     _('.air-loom-content video').play();
             })
             .on('leave', function(e) {
+                $('.mute').css({ position: 'absolute', display: 'none' });
+
                 if( _('.air-loom-content video') ) {
                     _('.air-loom-content video').pause();
                     _('.air-loom-content video').currentTime = 0;
