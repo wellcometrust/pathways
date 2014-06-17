@@ -56,7 +56,7 @@
                     <p>However, even in the very first demonstration something seems awry. Elliotson can’t get Elizabeth Okey to come out of her mesmerised state – and it is only when her demand that Dr Wood, Elliotson’s assistant, rubs her neck is met, that she surfaces. Some people become suspicious&hellip;</p>
                 </div>
 
-                <div class="scroll-content right" style="float: right; max-width: 40%; bottom: auto; top: 36%">
+                <div class="scroll-content right" style="float: right; width: 40%; max-width: 500px; bottom: auto; top: 36%">
                     <img src="/_assets/img/elliotson/demonstration1.jpg" style="display: block; margin-bottom: 40px; margin-left: -100px">
                     <img src="/_assets/img/elliotson/demonstration2.jpg" style="display: block; margin-bottom: 40px">
                     <img src="/_assets/img/elliotson/demonstration1.jpg" style="display: block; margin-bottom: 40px; margin-left: -100px">

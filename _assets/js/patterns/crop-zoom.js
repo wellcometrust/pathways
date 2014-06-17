@@ -7,12 +7,12 @@ Pathways.CropZoom = function(panel_height) {
         position:   'absolute',
         opacity:    0,
         width:      window.innerWidth,
-        height:     $('.tap-block .bg-container img').height(),
+        height:     $('.mesmers-salon .bg-container img').height(),
         'z-index':  10
     });
 
     window.addEventListener('resize', function() {
-        $elm.css( { 'width': window.innerWidth, 'height': $('.tap-block .bg-container img').height() } );
+        $elm.css( { 'width': window.innerWidth, 'height': $('.mesmers-salon .bg-container img').height() } );
     })
 
     // Tap targets

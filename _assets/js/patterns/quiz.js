@@ -12,7 +12,7 @@ Pathways.Quiz = function() {
         $('body').append( $overlay );
 
         $overlay.show();
-        $overlay.css('background-color', 'rgba(0,0,0,0.8)');
+        $overlay.css('background-color', 'rgba(0,0,0,0.9)');
 
         // append and initialize quiz
         setTimeout(function() {

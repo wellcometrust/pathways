@@ -55,7 +55,7 @@
 
             </div>
 
-            <div id="mesmers-salon" class="panel tap-block" data-component="crop-zoom" >
+            <div id="mesmers-salon" class="panel mesmers-salon" data-component="crop-zoom" >
 
                 <div class="bg-container">
                     <img src="/_assets/img/mesmer/mesmer-2.jpg">

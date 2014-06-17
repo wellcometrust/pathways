@@ -10,6 +10,10 @@ module.exports = function(grunt) {
                     '_assets/js/*.js', // All JS in the libs folder
                 ],
                 dest: '_assets/build/js/production.js',
+            },
+            panels: {
+                src:    [ '_assets/scss/panels/**/*.scss' ],
+                dest:   '_assets/scss/panels/all.scss'
             }
         },
 
@@ -55,13 +59,13 @@ module.exports = function(grunt) {
     });
 
     // 3. Where we tell Grunt we plan to use this plug-in.
-    // grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     // grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('css', ['sass']);
+    grunt.registerTask('css', ['concat', 'sass']);
     // grunt.registerTask('js', ['concat', 'uglify']);
 
     grunt.registerTask('default', ['css']);

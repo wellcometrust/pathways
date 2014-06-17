@@ -25,7 +25,7 @@ include($docRoot.'/_includes/header.php');
 
                 <p class="intro-body">A journey in <span>six parts</span> into the discovery of our modern understanding of the mind.</p>
 
-                <a href="mesmer.php" class="intro-button">Start your journey</a>
+                <a href="1-mesmer" class="intro-button">Start your journey</a>
             </div>
 
             <div class="intro-navigation">
