@@ -50,6 +50,8 @@
                     <img src="/_assets/img/svengali/svengali-2.jpg">
                 </div>
 
+                <?php pattern('library_panel'); ?>
+
                 <div class="scroll-content fixed">
                     
                     <div class="inner">
@@ -130,6 +132,8 @@
                 <div class="bg-container">
                     <img src="/_assets/img/svengali/svengali-2.jpg">
                 </div>
+
+                <?php pattern('library_panel'); ?>
 
                 <div class="scroll-content fixed">
                     

@@ -42,6 +42,8 @@
                     <img src="/_assets/img/elliotson/elliotson-2.jpg">
                 </div>
 
+                <?php pattern('library_panel'); ?>
+
                 <div class="black-strip" ></div>
                 
                 <div class="scroll-content left">  
@@ -177,6 +179,8 @@
                 <div class="bg-container">
                     <img src="/_assets/img/elliotson/elliotson-4.jpg">
                 </div>
+
+                <?php pattern('library_panel'); ?>
 
                 <div class="scroll-content">
                     

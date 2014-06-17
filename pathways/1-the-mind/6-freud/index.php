@@ -46,6 +46,8 @@
                     <img class="fragmented" src="/_assets/img/freud/freud-2.png">
                 </div>
 
+                <?php pattern('library_panel'); ?>
+
                 <div class="scroll-content fixed">
                     <div class="content">
                         <header>
@@ -68,6 +70,8 @@
                     <img src="/_assets/img/freud/freud-3.jpg">
                 </div>
 
+                <?php pattern('library_panel'); ?>
+
                 <div class="scroll-content text">
                     <div class="content">
                         <header>
@@ -86,6 +90,8 @@
                 </div>
 
                 <div class="black-strip" ></div>
+
+                <?php pattern('library_panel'); ?>
 
                 <div class="scroll-content left">  
                     <p>Freud installed a couch in his consulting room to hypnotise his patients. He soon abandoned the technique, finding that it imposed too much control. For the cure to work, patients had to find their own secrets for themselves.</p>

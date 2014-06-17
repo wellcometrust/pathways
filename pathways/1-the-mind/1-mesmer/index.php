@@ -82,6 +82,8 @@
                     <!-- <div class="tap-target mesmer"  data-crop="mesmer"><div></div></div> -->
                 </div>
 
+                <?php pattern('library_panel'); ?>
+
             </div>
 
             <div id="animal-magnetism" class="panel animal-magnetism" data-offset-height="350">
@@ -148,6 +150,8 @@
                     <p>However mesmerism, as it became known, provoked much scepticism and was widely satirised.</p>
                     <p>In this febrile atmosphere, the question of the whether Mesmer’s animal magnetism was real science - as he hoped to prove - had to be answered…</p>
                 </div>
+
+                <?php pattern('library_panel'); ?>
                 
             </div>
 
