@@ -93,7 +93,7 @@ Pathways.LoadScenes = function() {
             $bg             = $this.find('.bg-container'),
             $library_panel  = $this.find('.library-panel'),
             $gallery        = $this.find('[data-component="gallery"]'),
-            $quizes         = $this.find('[data-component="quiz"]'),
+            $quiz           = $this.find('[data-component="quiz"]'),
             
             tween           = TweenMax.to( $bg, 1, { opacity: 1 });
 
@@ -123,17 +123,19 @@ Pathways.LoadScenes = function() {
         }
 
         // Quiz
-        if( $quizes.length ) {
+        if( $quiz.length ) {
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
                     triggerHook:    'top',
                     duration:       panel_height
                 })
                 .on('enter', function() {
-                    $quizes.css({ position: 'fixed', display: 'block' });
+                    $quiz.css({ position: 'fixed', display: 'block' });
+                    setTimeout(function() { $quiz.addClass('active'); }, 50);
                 })
                 .on('leave', function() {
-                    $quizes.css({ position: 'absolute', display: 'none' });
+                    $quiz.css({ position: 'absolute', display: 'none' });
+                    setTimeout(function() { $quiz.removeClass('active'); }, 50);
                 })
         }
 

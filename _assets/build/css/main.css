@@ -298,25 +298,68 @@ iframe {
   position: absolute;
   top: 120px;
   right: 100px;
-  width: 90px;
-  height: 90px;
+  width: 190px;
   cursor: pointer;
   z-index: 20; }
-
-.info-box .inner {
-  -webkit-transform-origin: 50% 50%;
-  -webkit-animation: info-box-animation-inner 5s ease infinite;
-  -moz-transform-origin: 35px 35px;
-  -moz-animation: info-box-animation-inner 5s ease infinite; }
-.info-box .outer {
-  -webkit-transform-origin: 50% 50%;
-  -webkit-animation: info-box-animation-outer 5s ease infinite;
-  -webkit-animation-delay: 0.2s;
-  -moz-transform-origin: 35px 35px;
-  -moz-animation: info-box-animation-outer 5s ease infinite;
-  -moz-animation-delay: 0.2s; }
-.info-box:hover {
-  opacity: 0.8; }
+  .info-box svg {
+    width: 90px;
+    height: 90px; }
+  .info-box .inner {
+    -webkit-transform-origin: 50% 50%;
+    -webkit-animation: info-box-animation-inner 5s ease infinite;
+    -moz-transform-origin: 35px 35px;
+    -moz-animation: info-box-animation-inner 5s ease infinite; }
+  .info-box .outer {
+    -webkit-transform-origin: 50% 50%;
+    -webkit-animation: info-box-animation-outer 5s ease infinite;
+    -webkit-animation-delay: 0.2s;
+    -moz-transform-origin: 35px 35px;
+    -moz-animation: info-box-animation-outer 5s ease infinite;
+    -moz-animation-delay: 0.2s; }
+  .info-box:hover {
+    opacity: 0.8; }
+  .info-box .text {
+    position: absolute;
+    left: 95px;
+    top: 26px;
+    color: #fff;
+    font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    width: 120px; }
+    .info-box .text .info-type {
+      display: block;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      opacity: 0;
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      transition: all 1s ease;
+      -webkit-transform: translate(50px, 0);
+      -moz-transform: translate(50px, 0);
+      transform: translate(50px, 0); }
+    .info-box .text .info-title {
+      font-size: 0.8rem;
+      opacity: 0;
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      transition: all 1s ease;
+      -webkit-transform: translate(50px, 0);
+      -moz-transform: translate(50px, 0);
+      transform: translate(50px, 0);
+      -webkit-transition-delay: 0.15s;
+      -moz-transition-delay: 0.15s;
+      transition-delay: 0.15s; }
+  .info-box.active .info-type {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    transform: translate(0, 0); }
+  .info-box.active .info-title {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    transform: translate(0, 0); }
 
 @-webkit-keyframes info-box-animation-inner {
   0% {
@@ -560,9 +603,6 @@ iframe {
     height: 32px;
     width: 32px;
     margin: 5px 5px 5px 0px; }
-
-.js .library-panel {
-  display: block; }
 
 .quiz {
   width: 960px;
@@ -1322,6 +1362,766 @@ iframe {
   -webkit-transform: scale(1, 1);
   -moz-transform: scale(1, 1); }
 
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  #mesmers-salon p {
+    position: absolute;
+    top: 80px;
+    color: #fff;
+    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.236rem;
+    width: 100%;
+    text-align: center; } }
+/**
+    Crop zoom
+**/
+.crop-zoom {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-target {
+    position: absolute;
+    width: 36px;
+    height: 36px; }
+  .crop-zoom .tap-target.rod {
+    top: 46%;
+    left: 14%; }
+  .crop-zoom .tap-target.woman {
+    top: 74%;
+    left: 39%; }
+  .crop-zoom .tap-target.mesmer {
+    top: 26%;
+    left: 74%; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom {
+    display: block; } }
 @media screen and (min-width: 48em) {
   #mesmers-salon p {
     position: absolute;

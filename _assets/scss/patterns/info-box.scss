@@ -1,15 +1,17 @@
+
 .info-box {
     position:   absolute; 
     top:        120px; 
     right:      100px; 
-    width:      90px; 
-    height:     90px;
+    width:      190px;
     cursor:     pointer;
     z-index:    20;
-}
 
+    svg {
+        width:  90px; 
+        height: 90px;
+    }
 
-.info-box {
     .inner {
         -webkit-transform-origin: 50% 50%;
         -webkit-animation: info-box-animation-inner 5s ease infinite;
@@ -26,8 +28,65 @@
         -moz-animation:             info-box-animation-outer 5s ease infinite;
         -moz-animation-delay:       0.2s;
     }
+
     &:hover {
         opacity: 0.8;
+    }
+
+    .text {
+        position:   absolute;
+        left:       95px;
+        top:        26px;
+        color:      #fff;
+        @include    tablet-gothic;
+        width:      120px;
+
+        .info-type {
+            display:        block;
+            font-size:      0.9rem;
+            text-transform: uppercase;
+            opacity:        0;
+
+            -webkit-transition: all 1s ease;
+               -moz-transition: all 1s ease;
+                    transition: all 1s ease;
+
+            -webkit-transform: translate(50px, 0);
+               -moz-transform: translate(50px, 0);
+                    transform: translate(50px, 0);
+        }
+
+        .info-title {
+            font-size:  0.8rem;
+            opacity:    0;
+
+            -webkit-transition:         all 1s ease;
+               -moz-transition:         all 1s ease;
+                    transition:         all 1s ease;
+
+            -webkit-transform:          translate(50px, 0);
+               -moz-transform:          translate(50px, 0);
+                    transform:          translate(50px, 0);
+
+            -webkit-transition-delay:   0.15s;
+               -moz-transition-delay:   0.15s;
+                    transition-delay:   0.15s;
+        }
+    }
+
+    &.active {
+        .info-type {
+            opacity: 1;
+            -webkit-transform: translate(0, 0);
+               -moz-transform: translate(0, 0);
+                    transform: translate(0, 0);
+        }
+        .info-title {
+            opacity: 1;
+            -webkit-transform: translate(0, 0);
+               -moz-transform: translate(0, 0);
+                    transform: translate(0, 0);
+        }
     }
 }
 

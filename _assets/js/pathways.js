@@ -76,10 +76,11 @@
             $('.panel').each(function() {
                 var $this   = $(this),
                     $bg     = $this.find('.bg-container'),
-                    height  = $this.height();
+                    height  = $this.height(),
+                    offset  = (supports_touch || !$this.data('offset-height')) ? 0 : $this.data('offset-height');
 
-                if( height < panel_height || $this.data('offset-height') ) {
-                    $this.css('height', panel_height + ( $this.data('offset-height') ? $this.data('offset-height') : 0 ) );
+                if( height < panel_height || offset ) {
+                    $this.css('height', panel_height + offset );
                 }
 
                 $bg.css('height', panel_height);
