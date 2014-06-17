@@ -64,17 +64,17 @@
 
             </div>
 
-            <div class="panel thomas-wakley" data-offset-height="2400">
+            <div class="panel thomas-wakley" data-offset-height="2800">
                 <div class="bg-container">
                     <img src="/_assets/img/elliotson/elliotson-3.jpg">
                 </div>
 
                 <div class="scroll-content fixed position-center">
                     <header>
-                            <h1>Thomas Wakley, of the Lancet medical journal, challenged Elliot and his demonstrations</h1>
-                        </header>
+                        <h1>Thomas Wakley, of the Lancet medical journal, challenged Elliot and his demonstrations</h1>
+                    </header>
+
                     <div class="inner">
-                        
 
                         <div class="past-twitter clearfix">
                             
@@ -165,9 +165,11 @@
                                     “Those who know mesmerism to be true from their own experience are now a very large number…the great majority who know nothing of the matter laugh at it as a nonsense or a cheat”
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
+                    <div class="wibble">&nbsp;</div>
                 </div>
             </div>
 
