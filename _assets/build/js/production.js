@@ -249,6 +249,8 @@ Pathways.LoadScenes = function() {
 
     // Video
     if( _('.air-loom-content') ) {
+        $('.mute').hide();
+        
         $('.mute').on('click', function() {
             var $this   = $(this),
                 $video  = $this.parents('.panel').find('video').first().get(0);
@@ -269,10 +271,14 @@ Pathways.LoadScenes = function() {
                 duration:       panel_height
             })
             .on('enter', function(e) {
+                $('.mute').css({ position: 'fixed', display: 'block' });
+
                 if( _('.air-loom-content video') )
                     _('.air-loom-content video').play();
             })
             .on('leave', function(e) {
+                $('.mute').css({ position: 'absolute', display: 'none' });
+
                 if( _('.air-loom-content video') ) {
                     _('.air-loom-content video').pause();
                     _('.air-loom-content video').currentTime = 0;
@@ -518,14 +524,14 @@ var db = {
         }
 
         var resizeAllTheThings = function() {
-            panel_height = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15);
+            panel_height = window.innerHeight < 750 ? (750 + 10) : (window.innerHeight + 10);
 
             // Set the heights of the panels to a minimum of the window height, or the height of the content.
             // Use any offsets set on the panel to increase height where necessary.
             $('.panel').each(function() {
                 var $this   = $(this),
                     $bg     = $this.find('.bg-container'),
-                    height  = $this.height(),
+                    height  = $this.outerHeight(),
                     offset  = (supports_touch || !$this.data('offset-height')) ? 0 : $this.data('offset-height');
 
                 if( height < panel_height || offset ) {
