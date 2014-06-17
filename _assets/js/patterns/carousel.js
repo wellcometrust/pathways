@@ -50,6 +50,8 @@ function Carousel(element)
         panes           = null,
 
         widths          = [],
+        heights         = [],
+        ratios          = [],
 
         pane_width      = 0,
         pane_count      = 0,
@@ -111,17 +113,24 @@ function Carousel(element)
 
             ul.appendChild(li);
 
-            img.onload = function() {
+            img.onload = function(elm) {
                 imagesLoaded++;
 
                 if( imagesLoaded == totalImages ) {
                     // resize the panes/container
-                    var _panes      = document.querySelectorAll('#carousel li'),
+                    var _panes      = _element.querySelectorAll('li'),
                         totalWidth  = 0;
 
                     for(var i = 0; i < _panes.length; i++) {
-                        var w = parseInt( window.getComputedStyle(_panes[i]).width );
+                        var w = parseInt( window.getComputedStyle(_panes[i]).width ),
+                            h = parseInt( window.getComputedStyle(_panes[i]).height );
+                        
                         widths.push(w);
+                        heights.push(h);
+                        ratios.push( (w / h) );
+
+                        _panes[i].style['width'] = w + 'px';
+
                         totalWidth += w;
                     }
                     ul.style['width'] = totalWidth + 'px';
@@ -172,14 +181,23 @@ function Carousel(element)
         var $ul         = element.find('ul'),
             total_width = 0;
 
-        widths = [];
-        
-        panes.each(function() {
-            var w = $(this).width()
+        widths  = [];
+        heights = [];
 
-            widths.push(w);
-            total_width += w;
-        });
+        console.log(ratios);
+        
+        for (var i = 0; i < panes.length; i++) {
+            var newHeight = window.innerHeight,
+                newWidth  = ratios[i] * window.innerHeight;
+
+            // panes[i].style['height']    = newHeight + 'px';
+            panes[i].style['width']     = newWidth + 'px';
+
+            widths.push(newWidth);
+            heights.push(newHeight);
+
+            total_width += newWidth;
+        };
         
         container.width(total_width);
         total_offset = (window.innerWidth / 2);
@@ -192,6 +210,8 @@ function Carousel(element)
 
         $prev.height( window.innerHeight );
         $next.height( window.innerHeight );
+
+        self.showPane(current_pane, false);
     };
 
 
