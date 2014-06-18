@@ -87,16 +87,16 @@ function Carousel(element)
 
     var loadImages = function(callback) {
         var ul              = document.createElement('ul'),
-            totalImages     = imageDB.length,
+            totalImages     = imageDB.images.length,
             imagesLoaded    = 0;
 
         ul.style['height'] = window.innerHeight + 'px';
 
-        imageDB.forEach(function(obj) {
+        imageDB.images.forEach(function(obj) {
             var li  = document.createElement('li'),
                 img = new Image();
 
-            img.src = '/_assets/img/mesmer/carousel/' + obj.image + '.jpg';
+            img.src = '/_assets/img/' + imageDB.location + obj.image + '.jpg';
             img.style['height'] = '100%';
             li.style['height']  = '100%';
 
@@ -183,8 +183,6 @@ function Carousel(element)
 
         widths  = [];
         heights = [];
-
-        console.log(ratios);
         
         for (var i = 0; i < panes.length; i++) {
             var newHeight = window.innerHeight,

@@ -98,23 +98,54 @@
                 </div>
 
                 <script>
-                    var imageDB = [
-                        {
-                            image: 'L0000475',
-                            text: 'Here is some test text. Lorem ipsum is for suckers!'
-                        },
-                        {
-                            image: 'L0000477EA',
-                        },
-                        {
-                            image: 'L0028102',
-                            text: 'Here is some test text. Lorem ipsum is for suckers!'
-                        },
-                        {
-                            image: 'V0011934',
-                            text: 'Here is some test text. Lorem ipsum is for suckers!'
-                        },
-                    ];
+                    var imageDB = {
+                        location: 'airloom/gallery/',
+                        images: [
+                            {
+                                image: 'L0001964',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                            {
+                                image: 'L0011096',
+                            },
+                            {
+                                image: 'L0023892',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                            {
+                                image: 'L0023893',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                            {
+                                image: 'L0023894',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                            {
+                                image: 'L0023895',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                            {
+                                image: 'L0023897',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                            {
+                                image: 'L0023898',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                            {
+                                image: 'L0023899',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                            {
+                                image: 'L0029687',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                            {
+                                image: 'L0029689',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                        ]
+                    }
                 </script>
                 
                 <div class="scroll-content position-center">

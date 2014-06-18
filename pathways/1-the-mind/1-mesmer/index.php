@@ -128,23 +128,26 @@
                 </div>
 
                 <script>
-                    var imageDB = [
-                        {
-                            image: 'L0000475',
-                            text: 'Here is some test text. Lorem ipsum is for suckers!'
-                        },
-                        {
-                            image: 'L0000477EA',
-                        },
-                        {
-                            image: 'L0028102',
-                            text: 'Here is some test text. Lorem ipsum is for suckers!'
-                        },
-                        {
-                            image: 'V0011934',
-                            text: 'Here is some test text. Lorem ipsum is for suckers!'
-                        },
-                    ];
+                    var imageDB = {
+                        location: 'mesmer/gallery/',
+                        images: [
+                            {
+                                image: 'L0000475',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                            {
+                                image: 'L0000477EA',
+                            },
+                            {
+                                image: 'L0028102',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                            {
+                                image: 'V0011934',
+                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                            },
+                        ]
+                    }
                 </script>
                 
                 <div class="scroll-content position-center text-left">
@@ -195,9 +198,7 @@
 
             <div class="panel audio sciences-committee">
 
-                <div class="bg-container">
-                    <img src="/_assets/img/mesmer/mesmer-6.jpg">
-                </div>
+                <div class="bg-container"></div>
 
                 <div class="scroll-content position-center">
                     <div class="inner">
@@ -214,6 +215,12 @@
                         </div> -->
                     </div>
                 </div>
+
+            </div>
+
+            <div class="panel talking-head">
+                
+                <div class="bg-container"></div>
 
             </div>
 
