@@ -25,11 +25,11 @@
                 </div>
 
                 <header>
-                    <h1>Mesmerism on trial</h1>
+                    <h1>Who controls who?</h1>
                 </header>
 
-                <p class="intro-text">60 years after Mesmer in Paris, mesmerism has hit Victorian Britain. Dr John Elliotson, based at University College Hospital London, is holding dramatic demonstrations of his supposed mesmeric powers that draw the likes of Dickens, Faraday, &c.</p>p
-                <p class="intro-text">In 1838 he demonstrates his mesmeric control over Elizabeth and Jane Okey, two young servant girls who he has been treating for epileptic seizures. They are shortly to become celebrities. </p>
+                <p class="intro-text">Mesmerism is still being spread by a network of believers. Its most prominent champion in Britain is Dr John Elliotson, professor at University College Hospital.</p>
+                <p class="intro-text">His dramatic demonstrations of mesmeric powers draw the likes of Charles Dickens and Michael Faraday. His prize subjects are Elizabeth and Jane Okey, two young servant girls who he has been treating for epileptic seizures.</p>
             </div>
 
         </div>
@@ -47,15 +47,12 @@
                 <div class="black-strip" ></div>
                 
                 <div class="scroll-content left">  
-                    <header>
-                        <h1>Elliotson’s demonstrations on the Okey Sisters</h1>
-                    </header>
 
-                    <p>The Okey sisters are extraordinarily susceptible, slipping rapidly into trance states where they manifest quite different personalities. Elliotson can make them fall into stupor merely by waving a finger.</p>
-                    <p>Touching magnetised metals or even water sends them into a trance in which they spontaneously mirror each other’s actions.</p>
+                    <p>The Okey sisters were extraordinarily susceptible, slipping rapidly into trance states where they manifested quite different personalities. Elliotson could make them fall into stupor merely by waving a finger.</p>
+                    <p>Touching magnetised metals or even water sent them into a trance in which they spontaneously mirrored each other’s actions.</p>
                    
-                    <p>Elliotson’s demonstrations are crowded with doctors, dignitaries and luminaries. The Okey sisters seem to enjoy the attention, especially in their disinhibited trance states, when they tease the gentlemen and sit in their laps.</p>
-                    <p>However, even in the very first demonstration something seems awry. Elliotson can’t get Elizabeth Okey to come out of her mesmerised state – and it is only when her demand that Dr Wood, Elliotson’s assistant, rubs her neck is met, that she surfaces. Some people become suspicious&hellip;</p>
+                    <p>Elliotson’s demonstrations were crowded with doctors and dignitaries. The Okey sisters seemed to enjoy the attention, especially in their disinhibited trance states, when they teased the gentlemen and sat in their laps.</p>
+                    <p>The medical journal The Lancet had been reporting the demonstrations with interest. But its editor, Thomas Wakley, suspected deception. He requested a private demonstration at his house, where he took control.</p>
                 </div>
 
                 <div class="scroll-content right" style="float: right; width: 40%; max-width: 500px; bottom: auto; top: 36%">
@@ -73,7 +70,7 @@
 
                 <div class="scroll-content fixed position-center">
                     <header>
-                        <h1>Thomas Wakley, of the Lancet medical journal, challenged Elliot and his demonstrations</h1>
+                        <h1>Wakley’s experiments produced very different results</h1>
                     </header>
 
                     <div class="inner">
@@ -191,7 +188,7 @@
                             <p>“The ‘science’ of mesmerism, like the ‘science’ of fortune-telling, will always carry on a precarious existence wherever there are clever girls, philosophic bohemians, weak women and weaker men, but it can no longer affront the common sense of the medical profession.”</p>
                         </blockquote>
 
-                        <p class="outro">Mesmerism is banished to the margins.</p>
+                        <p class="outro">Mesmerism was banished to the margins. Elliotson started his own journal, The Zoist, to publish new evidence for it.</p>
                     </div>
 
                 </div>

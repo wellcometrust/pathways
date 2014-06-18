@@ -27,7 +27,7 @@
                     <h1>A machine to control the mind</h1>
                 </header>
 
-                <p class="intro-text">A man named James Tilly Matthews reveals that his mind is being controlled by a gang of “magnetic spies” and their secret machine, the Air Loom.</p>
+                <p class="intro-text">A Welsh tea merchant, James Tilly Matthews, reveals that his mind is being controlled by a gang of “magnetic spies” and their secret machine, the Air Loom.</p>
 
             </div>
 
@@ -43,7 +43,7 @@
 
                 <div class="scroll-content position-center align-left">
                     <div class="inner">
-                        <p class="intro-text">The Air Loom uses the magnetic fluids Mesmer had described as permeating all living things, and it takes control of people’s minds in malevolent ways. Matthews identified many victims whose minds were being controlled by machines. These included members of the Houses of Parliament, as well as himself&hellip;</p> 
+                        <p>The Air Loom is powered by Mesmer’s invisible fluids, which it concentrates and focuses on the minds of its unsuspecting victims. Many of Britain’s leading politicians, including the Prime Minister, are under its influence&hellip;</p> 
                     </div>
                 </div>
             </div>
@@ -71,8 +71,8 @@
                             <h1>Where will this technology lead?</h1>
                         </header>
 
-                        <p>Although the Air Loom was a creation of Matthews’ mind, it was formed out of newly discovered powers that were bringing the forces of nature under the control of science.</p>
-                        <p>Recent experiments on animals and humans had shown that electric current could animate living tissues. Matthews’ Air Loom posed the question: will these new technologies one day be able to control the mind as well as the body?</p>
+                        <p>Matthews was confined in Bedlam as an incurable lunatic. But his delusions captured the disturbing power of the latest discoveries in electricity and chemistry.</p>
+                        <p>Recent experiments on animals and humans had shown that electric currents could animate living tissue, and even dead bodies.</p>
                     </div>
                     
                 </div>
@@ -88,7 +88,7 @@
                 <img class="teaser-bkg" src="/_assets/img/teaser/teaser-oakey.jpg" alt="james tilly mathews and the air loom" />
                 <div class="teaser-text-container">
                     <p class="teaser-text">Continue with your journey in the <span>Mind</span></p>
-                    <h1>Mesmerism on trial</h1>
+                    <h1>Who controls who?</h1>
                     <img class="teaser-icon" src="/_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
                 </div>
             </a>            

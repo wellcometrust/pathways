@@ -164,44 +164,10 @@
     top:        0;
     background-color: rgba(0,0,0,0);
     width:      100%;
-    z-index:    40;
+    z-index:    100;
 
     -webkit-transition: all 0.5s ease;
        -moz-transition: all 0.5s ease;
-}
-
-.popup {
-    .image-crop {
-        position:   absolute;
-        width:      100%;
-        opacity:    0;
-        z-index:    15;
-    }
-    .image-crop.animate {
-        -webkit-transition: all 0.5s ease;
-           -moz-transition: all 0.5s ease;
-    }
-
-    .text {
-        position:           absolute;
-        color:              #fff;
-        background-color:   rgba(0,0,0,0.6);
-        width:              320px;
-        padding:            45px;
-        opacity:            0;
-        line-height:        1.4;
-        z-index:            20;
-        -webkit-transform:  translate3d(0, 100px, 0);
-        -webkit-transition: all 0.5s ease;
-
-        -moz-transform:     translate3d(0, 100px, 0);
-        -moz-transition:    all 0.5s ease;
-    }
-    .text.show {
-        opacity: 1;
-        -webkit-transform: translate3d(0, 0, 0);
-           -moz-transform: translate3d(0, 0, 0);
-    }
 }
 
 .animal-magnetism {

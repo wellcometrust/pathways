@@ -28,7 +28,7 @@
                     <h1>Mind over matter</h1>
                 </header>
 
-                <p class="intro-text">  The British surgeon James Esdaile is in India, conducting dozens of gruesome operations. Remarkably Esdaile has made the surgery pain-free by mesmerising patients before operating.</p>
+                <p class="intro-text">  The Zoist receives news that a British surgeon in India, James Esdaile, has performed dozens of pain-free operations by mesmerising his patients.</p>
             </div>
 
         </div>
@@ -65,8 +65,8 @@
                             <h1>Esdaile's first patient</h1>
                         </header>
                         
-                        <p>was a prisoner with a huge scrotal swelling. In front of an esteemed audience including doctors, magistrates and the local governor, he removed it painlessly in minutes, .</p>
-                        <p>Many similar operations followed, including tooth extractions and amputation of limbs, and Esdaile was given a hospital ward in Calcutta.</p>
+                        <p>was a prisoner with a huge scrotal swelling. In front of a distinguished audience including doctors, magistrates and the local governor, he removed it painlessly in minutes.</p>
+                        <p>Many more operations followed, from tooth extractions to amputations. Esdaile was given a hospital ward in Calcutta to develop his new technique.</p>
                     </div>
 
                 </div>
@@ -82,7 +82,7 @@
                 <div class="scroll-content right">
                     
                     <div class="content">
-                        <p>Esdaile set himself up as a follower of Indian healers called yogis and fakirs. In reality, he didn’t really believe in their methods, and instead practised mesmerism – which he had actually learnt from an English pamphlet.</p>
+                        <p>Esdaile had observed Indian yogis and fakirs putting themselves into trances. He presented himself to local healers as a fellow magician, though in private he didn’t share their mystical beliefs. He had learned his mesmeric techniques from an English pamphlet.</p>
                     </div>
 
                 </div>
@@ -100,14 +100,29 @@
                 <div class="scroll-content">
 
                     <div class="content">
-                        <p>Reports of Esdaile’s success spread across India, and eventually to Britain.</p>
-                        <p>It seemed that despite a debunking in the medical journal The Lancet just a few years earlier, mesmerism was real...</p>
+                        <p>The Lancet had pronounced mesmerism a fraud - but now Esdaile had proved its powers beyond doubt.</p>
                     </div>
                     
                 </div>
             </div>
+
+            <div id="surgery-under-hypnosis-intro" class="panel" data-offset-height="250">
+
+                <div class="scroll-content">
+                    <header>
+                        <h1>These techniques still work today</h1>
+                    </header>
+                </div>
+                
+            </div>
+
+            <div id="surgery-under-hypnosis" class="panel talking-head" data-offset-height="250">
+
+                <div class="bg-container"></div>
+                
+            </div>
             
-            <div class="panel" data-offset-height="450">
+            <div id="james-braid" class="panel" data-offset-height="450">
 
                 <div class="bg-container">
                     <img src="/_assets/img/esdaile/esdaile-5.jpg">
@@ -119,115 +134,28 @@
 
                     <div class="content">
                         <header>
-                            <h1>The surgeon James Braid decided to investigate</h1>
+                            <h1>How could these powers be explained?</h1>
                         </header>
 
-                        <p>Braid has a radical new theory. He investigates the practices of Indian yogis and fakirs, particularly their trance states or mental 'hibernation', in which some can be buried alive for days.</p>
-                        <p>Experimenting on his friends, Braid discovers that he can induce deep trances by simple mental techniques: suggestion, controlled breathing and focussed attention.</p>
-                        <p>Braid announces that there is no longer any need to believe in animal magnetism, occult powers or vital energies. Trance states, and all the mysterious phenomena they generate, can be produced by the mind alone. </p>
-                        <p>He coins a new term for the process: hypnotism.</p>
+                        <p>The Scottish surgeon James Braid developed a radical new theory. He investigated the trance states of Indian yogis and fakirs, particularly their state of mental 'hybernation', in which some could be buried alive for days.</p>
+                        <p>Experimenting on his friends, Braid discovered that he could induce deep trances by simple mental techniques: suggestion, controlled breathing and focussed attention.</p>
+                        <p>Braid announced that there was no need to believe in animal magnetism, occult powers or vital energies. Trance states, and all the mysterious phenomena they generated, could be produced by the mind alone.</p>
+                        <p>He coined a new term for the process: hypnotism.</p>
                     </div>
                 </div>
                 
             </div>
 
-            <div class="panel talking-head">
+            <div id="self-hypnosis" class="panel talking-head">
                 
                 <div class="bg-container"></div>
-
-                <div class="scroll-content">
-
-                    <div class="content">
-                        <header>
-                            <h1>These techniques still work today</h1>
-                        </header>
-                        <p>Dr Mike Gow is a dental hypnotist. He uses hypnosis to help people over their fear of dentistry, but also to perform surgery, including extractions, without anaesthetic.</p>
-                    </div>
-                </div>
 
             </div>
 
         </div>
 
-        <!-- <div class="quiz">
-            <div class="quiz-container">
-
-                <div class="quiz-icon">
-                    <i></i>
-                    <span>Quiz</span>
-                </div>
-
-                <div class="quiz-start">
-                    <div class="quiz-header-image">
-                        <img src="http://placekitten.com/250/250">
-                    </div>
-
-                    <header class="quiz-start--header">
-                        <h1>The Esdaile Game</h1>
-                    </header>
-
-                    <div class="quiz-start--text">
-                        <p>The surgeon performed dozens of operations, many of which were documented.</p>
-                        <p>See if you can work out what went on in each picture - but be quick, you’ve only got 10 seconds each!</p>
-                    </div>
-
-                    <span class="button">Start</span>
-                </div>
-
-                <div class="status-bar clearfix">
-                    <div class="remaining">
-                        <em>1</em> of <span>10</span>
-                    </div>
-
-                    <div class="score">
-                        Your Score: <span>0</span>
-                    </div>
-                </div>
-
-                <div class="quiz-playground">
-
-                    <div class="question">
-                        Estimate the weight of the tumour
-                    </div>
-
-                    <div class="image">
-                        <img src="http://placekitten.com/500/295">
-                    </div>
-
-                    <div class="answers">
-                        <ul>
-                            <li>0.5kg</li>
-                            <li>1kg</li>
-                            <li>2kg</li>
-                            <li>5kg</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="quiz-finish">
-
-                    <header class="quiz-finish--header">
-                        <h1>Not bad muchacho, you got</h1>
-                    </header>
-
-                    <div class="quiz-finish--score">
-                        <span>10</span>
-                        out of 10
-                    </div>
-
-                    <footer class="quiz-finish--footer clearfix">
-                        <div class="button play-again">Play Again?</div>
-
-                        <div class="sm-links">
-                            <a href="#" class="facebook"></a>
-                            <a href="#" class="twitter"></a>
-                        </div>
-                    </footer>
-                </div>
-
-            </div>
-        </div> -->
-
+        <!-- Quiz -->
+        
         <script type="text/html" id="template-quiz">
             <div class="quiz-container">
 

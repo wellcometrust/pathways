@@ -19,7 +19,7 @@
                             <?php foreach( $library_content['in the player'] as $data ): ?>
                                 <li>
                                     <div class="player-item clearfix">
-                                        <img src="http://placekitten.com/150/200" class="player-item--thumb">
+                                        <div class="player-item--thumb"></div>
 
                                         <div class="player-item--content">
                                             <header class="player-item--header">
@@ -43,7 +43,7 @@
 
                         <li>
                             <div class="player-item clearfix">
-                                <img src="http://placekitten.com/150/200" class="player-item--thumb">
+                                <div class="player-item--thumb"></div>
 
                                 <div class="player-item--content">
                                     <header class="player-item--header">
@@ -65,7 +65,7 @@
 
                         <li>
                             <div class="player-item clearfix">
-                                <img src="http://placekitten.com/150/200" class="player-item--thumb">
+                                <div class="player-item--thumb"></div>
 
                                 <div class="player-item--content">
                                     <header class="player-item--header">
@@ -87,7 +87,7 @@
 
                         <li>
                             <div class="player-item clearfix">
-                                <img src="http://placekitten.com/150/200" class="player-item--thumb">
+                                <div class="player-item--thumb"></div>
 
                                 <div class="player-item--content">
                                     <header class="player-item--header">
@@ -109,7 +109,7 @@
 
                         <li>
                             <div class="player-item clearfix">
-                                <img src="http://placekitten.com/150/200" class="player-item--thumb">
+                                <div class="player-item--thumb"></div>
 
                                 <div class="player-item--content">
                                     <header class="player-item--header">

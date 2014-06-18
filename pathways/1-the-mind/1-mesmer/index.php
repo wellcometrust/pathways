@@ -11,30 +11,33 @@
 
     <main role="main" class="mesmer-section">
 
-        <div class="sequence" data-sequence="cross-fade">
+        <div class="start">
 
-            <div class="panel start">
-
-                <div class="bg-container fixed">
-                    <img src="/_assets/img/mesmer/mesmer-1.jpg">
-                </div>
-                
-                <div class="content">
-                    <p class="scene-set">
-                        <span class="location">Paris 1778</span>
-                        <!-- <span class="date">Paris 1778</span> -->
-                    </p>
-
-                    <header>
-                        <h1>A new force in nature</h1>
-                    </header>
-
-                    <p class="intro-text">Franz Anton Mesmer arrives in Paris in 1778. He has a dramatic new theory: he believes that he can cure people by using the power of his mind to control the forces of the physical universe. He starts practising this ‘magnetic therapy’ on patients and it is a sensation.</p>
-
-                </div>
-
+            <div class="bg-container">
+                <img src="/_assets/img/mesmer/mesmer-1.jpg">
             </div>
             
+            <div class="content">
+                <p class="scene-set">
+                    <span class="location">Paris 1778</span>
+                    <!-- <span class="date">Paris 1778</span> -->
+                </p>
+
+                <header>
+                    <h1>A new force in nature</h1>
+                </header>
+
+                <p class="intro-text">Franz Anton Mesmer arrives in Paris to present a revolutionary theory to the French Academy of Sciences. He claims he has harnessed a universal life-force called ‘animal magnetism’ that can cure all disease.</p>
+                <p class="intro-text">His therapy is an immediate sensation. It becomes known as ‘mesmerism’.</p>
+
+            </div>
+
+        </div>
+
+        <!-- Sequence -->
+
+        <div class="sequence" data-sequence="cross-fade">
+
             <div id="mesmers-salon-intro" class="panel mesmers-salon" data-offset-height="550">
 
                 <div class="bg-container">
@@ -48,14 +51,14 @@
                             <h1>In Mesmer’s Salon</h1>
                         </header>
 
-                        <p>Hundreds of patients came to be treated for all sorts of afflictions. Patients would twitch, writhe, speak in tongues, and collapse in violent convulsions. When they revived, they were cured of all manners of illness: toothaches, cramps, paralysis and even blindness.</p>
+                        <p>In his salons, or séances, a mysterious ‘magnetic fluid’ flowed invisibly round the participants. They convulsed, spoke in tongues and collapsed in violent fits. When they revived they found themselves cured of all manner of illnesses, from toothache to paralysis and even blindness.</p>
                     </div>                    
 
                 </div>
 
             </div>
 
-            <div id="mesmers-salon" class="panel mesmers-salon" data-component="crop-zoom" >
+            <div id="mesmers-salon" class="panel mesmers-salon" data-component="crop-zoom">
 
                 <div class="bg-container">
                     <img src="/_assets/img/mesmer/mesmer-2.jpg">
@@ -76,11 +79,28 @@
                         <circle class="outer" cx="50%" cy="50%" r="30" fill="rgba(92,184,178,1)"/>
                         <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"/>
                     </svg>
-
-                    <!-- <div class="tap-target rod"     data-crop="rod"><div></div></div> -->
-                    <!-- <div class="tap-target woman"   data-crop="woman"><div></div></div> -->
-                    <!-- <div class="tap-target mesmer"  data-crop="mesmer"><div></div></div> -->
                 </div>
+
+                <script>
+                    var db = {
+                        'rod': {
+                            'image':    'rod-crop.jpg',
+                            'title':    '',
+                            'text':     'Mesmer ‘magnetised’ rods or wands that could be used to direct the fluid to the afflicted part of the body. He would often play music on a glass harmonica that sent shivers through the patients’ nerves.',
+                            'position': 'right'
+                        },
+                        'woman': {
+                            'image':    'woman-crop.jpg',
+                            'text':     'Patients would form circles, holding hands or grasping cords, to transfer the healing energies between them. Sometimes these healing circles would climax in mass convulsions.',
+                            'position': 'left'
+                        },
+                        'mesmer': {
+                            'image':    'mesmer-crop.jpg',
+                            'text':     'Mesmer, depicted here with his wand, taught his healing skills to initiates. They were obliged to take a strict vow of secrecy and pay the large sum of 100 livres. Many French aristocrats signed up.',
+                            'position': 'left'    
+                        }
+                    }
+                </script>
 
                 <?php pattern('library_panel'); ?>
 
@@ -114,7 +134,7 @@
                             <h1>Animal Magnetism</h1>
                         </header>
 
-                        <p>Mesmer claimed that he had discovered a new force in nature, which he named ‘animal magnetism’.  Animal magnetism was the superfine fluids and energy that permeated all living things. Mesmer manipulated it by the power of his mind. He had learned to do this by passing his hands over the bodies of his patients, to remove the blockages in the magnetic fluid that were causing their illnesses.</p>
+                        <p>Mesmer claimed that animal magnetism was a superfine fluid that permeated all living things. He had learned how to control and direct it by the power of his mind. By making stroking movements, or ‘passes’, over the bodies of his patients he could remove the blockages in the magnetic fluid that were causing their illnesses.</p>                        
                     </div>
 
                 </div>
@@ -131,8 +151,7 @@
                 <div class="black-strip" ></div>
                 
                 <div class="scroll-content left">                    
-                    <p>Mesmer’s reputation spread, and his salons became overwhelmed with patients. To accommodate the masses, he came up with novel ways and locations to treat them. </p>
-                    <p>In one famous example, Mesmer magnetised trees and connected his patients to the trees with rods.</p>
+                    <p>Mesmer’s salons became overwhelmed with patients. When he could no longer accommodate them he magnetised a tree in the street outside, to which crowds of people connected themselves with cords.</p>
                 </div>
 
                 <?php pattern('library_panel'); ?>
@@ -146,9 +165,8 @@
                 </div>
                 
                 <div class="scroll-content left">
-                    <p>Mesmer’s treatment was incredibly popular, and seemed to work.</p>
-                    <p>However mesmerism, as it became known, provoked much scepticism and was widely satirised.</p>
-                    <p>In this febrile atmosphere, the question of the whether Mesmer’s animal magnetism was real science - as he hoped to prove - had to be answered…</p>
+                    <p>Mesmer’s therapy, and the mass hysteria it provoked, were widely satirised.</p>
+                    <p>But Mesmer insisted that his theory should be assessed by the highest scientific authorities.</p>
                 </div>
 
                 <?php pattern('library_panel'); ?>
@@ -164,16 +182,16 @@
                 <div class="scroll-content position-center">
                     <div class="inner">
                         <header>
-                            <h1>A French Royal Academy of Sciences Committee was convened.</h1>
+                            <h1>The committee investigates</h1>
                         </header>
 
-                        <div class="audio-player" data-src="/_assets/audio/Riding.mp3" data-component="audio-player">
+                        <!-- <div class="audio-player" data-src="/_assets/audio/Riding.mp3" data-component="audio-player">
                             <div class="time-left">Time left: <span>0.00</span></div>
                             <div class="progress-bar">
                                 <div class="progressed"></div>
                             </div>
                             <div class="controls play"></div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 

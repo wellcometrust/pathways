@@ -1,25 +1,32 @@
 
 Pathways.CropZoom = function(panel_height) {
 
-    var $elm = $('.crop-zoom');
+    var $elm    = $('.crop-zoom'),
+        url     = '/_assets/img/mesmer/';
     
     $elm.css({
         position:   'absolute',
         opacity:    0,
         width:      window.innerWidth,
-        height:     $('.mesmers-salon .bg-container img').height(),
+        height:     $elm.parents('.panel').find('.bg-container').height(),
         'z-index':  10
     });
 
     window.addEventListener('resize', function() {
-        $elm.css( { 'width': window.innerWidth, 'height': $('.mesmers-salon .bg-container img').height() } );
+        $elm.css( { 'width': window.innerWidth, 'height': $elm.parents('.panel').find('.bg-container').height() } );
     })
 
     // Tap targets
     $elm.find('.tap-target').each(function() {
         var $target     = $(this),
-            key         = $target.data('crop'),
-            image       = '/_assets/img/mesmer/'+ db[key]['image'],
+            key         = $target.data('crop');
+
+        if( !db[key] ) {
+            console.warn('No related info was found for this tap target');
+            return;
+        }
+
+        var image       = url + db[key]['image'],
             title       = db[key]['title']      ? db[key]['title']      : '',
             text        = db[key]['text']       ? db[key]['text']       : '',
             position    = db[key]['position']   ? db[key]['position']   : '',
@@ -53,7 +60,7 @@ Pathways.CropZoom = function(panel_height) {
 
             $overlay.css('height', window.outerHeight );
 
-            $overlay.css('background-color', 'rgba(0,0,0,0.1)');
+            $overlay.css('background-color', 'rgba(0,0,0,0.9)');
 
             // Set an event so that after the image transitions in, show the text
             $image_crop.get(0).addEventListener('transitionend', function() {
@@ -87,6 +94,7 @@ Pathways.CropZoom = function(panel_height) {
 
             window.addEventListener('resize', function() {
                 $overlay.css('height', window.innerHeight );
+                $text.css( { top: (window.innerHeight - $text.outerHeight() - 15) } );
             })
         });
     });

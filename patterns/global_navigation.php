@@ -30,7 +30,7 @@
                 </li>
                 <li<?php echo $module == 'elliotson' ? ' class="active"' : '' ?>>
                     <a href="/pathways/1-the-mind/3-elliotson">
-                        <span>3. Mesmerism on trial</span>
+                        <span>3. Who controls who?</span>
                         <img src="/_assets/img/navigation/elliotson.jpg">
                     </a>
                 </li>
@@ -48,7 +48,7 @@
                 </li>
                 <li<?php echo $module == 'freud' ? ' class="active"' : '' ?>>
                     <a href="/pathways/1-the-mind/6-freud">
-                        <span>6. Can the mind cure the body?</span>
+                        <span>6. Secrets of the mind revealed</span>
                         <img src="/_assets/img/navigation/freud.jpg">
                     </a>
                 </li>

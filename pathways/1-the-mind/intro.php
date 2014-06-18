@@ -46,7 +46,7 @@ include($docRoot.'/_includes/header.php');
                             </li>
                             <li>
                                 <a href="3-elliotson">
-                                    <span>Mesmerism on trial</span>
+                                    <span>Who controls who?</span>
                                     <img src="/_assets/img/navigation/elliotson.jpg">
                                 </a>
                             </li>
@@ -64,7 +64,7 @@ include($docRoot.'/_includes/header.php');
                             </li>
                             <li>
                                 <a href="6-freud">
-                                    <span>Can the mind really cure the body?</span>
+                                    <span>Secrets of the mind revealed</span>
                                     <img src="/_assets/img/navigation/freud.jpg">
                                 </a>
                             </li>
