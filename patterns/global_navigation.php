@@ -13,7 +13,7 @@
                 <li<?php echo $module == 'intro' ? ' class="active"' : '' ?>>
                     <a href="/pathways/1-the-mind/intro.php">
                         <span>Intro</span>
-                        <img src="/_assets/img/navigation/mesmer.jpg">
+                        <img src="/_assets/img/navigation/intro.jpg">
                     </a>
                 </li>
                 <li<?php echo $module == 'mesmer' ? ' class="active"' : '' ?>>
