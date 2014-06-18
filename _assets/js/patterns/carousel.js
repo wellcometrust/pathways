@@ -308,21 +308,3 @@ function Carousel(element)
 
     new Hammer(element[0], { drag_lock_to_axis: true }).on("release dragleft dragright swipeleft swiperight", handleHammer);
 }
-
-var imageDB = [
-    {
-        image: 'L0000475',
-        text: 'Here is some test text. Lorem ipsum is for suckers!'
-    },
-    {
-        image: 'L0000477EA',
-    },
-    {
-        image: 'L0028102',
-        text: 'Here is some test text. Lorem ipsum is for suckers!'
-    },
-    {
-        image: 'V0011934',
-        text: 'Here is some test text. Lorem ipsum is for suckers!'
-    },
-];

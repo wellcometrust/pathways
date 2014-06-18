@@ -126,6 +126,26 @@
                         </g>
                     </svg>
                 </div>
+
+                <script>
+                    var imageDB = [
+                        {
+                            image: 'L0000475',
+                            text: 'Here is some test text. Lorem ipsum is for suckers!'
+                        },
+                        {
+                            image: 'L0000477EA',
+                        },
+                        {
+                            image: 'L0028102',
+                            text: 'Here is some test text. Lorem ipsum is for suckers!'
+                        },
+                        {
+                            image: 'V0011934',
+                            text: 'Here is some test text. Lorem ipsum is for suckers!'
+                        },
+                    ];
+                </script>
                 
                 <div class="scroll-content position-center text-left">
                     
@@ -160,7 +180,7 @@
 
             <div class="panel news" data-offset-height="350">
 
-                <div class="bg-container video" data-src="/_assets/video/mesmer.mp4">
+                <div class="bg-container video" data-src="/_assets/video/hysteria.webm">
                     <img src="/_assets/img/mesmer/mesmer-5.jpg">
                 </div>
                 

@@ -55,12 +55,18 @@
         var loadVideo = function() {
             $('.bg-container.video').each(function() {
                 var $this   = $(this),
-                    src     = $this.data('src');
+                    sources = $this.data('src').replace(/\s+/g, ' ').split(' ');
 
-                if( src ) {
+                if( sources && sources.length ) {
                     var video = document.createElement('video');
                     
-                    video.src   = src;
+                    sources.forEach(function(e) {
+                        var source = document.createElement('source');
+                        source.src = e;
+
+                        video.appendChild(source);
+                    });
+                    
                     video.loop  = true;
 
                     $this.html(video);
