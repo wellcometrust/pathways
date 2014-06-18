@@ -13,7 +13,7 @@ module.exports = function(grunt) {
             },
             panels: {
                 src:    [ '_assets/scss/panels/**/*.scss' ],
-                dest:   '_assets/scss/panels/all.scss'
+                dest:   '_assets/scss/panels.scss'
             }
         },
 
