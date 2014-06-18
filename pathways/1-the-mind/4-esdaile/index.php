@@ -55,13 +55,16 @@
                     </div>
                 </div>
 
+                <?php pattern('library_panel'); ?>
+
                 <!-- scroll content -->
                 <div class="scroll-content">
 
                     <div class="content">
-                    <header>
-                        <h1>Esdaile's first patient</h1>
-                    </header>
+                        <header>
+                            <h1>Esdaile's first patient</h1>
+                        </header>
+                        
                         <p>was a prisoner with a huge scrotal swelling. In front of an esteemed audience including doctors, magistrates and the local governor, he removed it painlessly in minutes, .</p>
                         <p>Many similar operations followed, including tooth extractions and amputation of limbs, and Esdaile was given a hospital ward in Calcutta.</p>
                     </div>
@@ -73,6 +76,8 @@
                 <div class="bg-container">
                     <img src="/_assets/img/esdaile/esdaile-3.jpg">
                 </div>
+
+                <?php pattern('library_panel'); ?>
 
                 <div class="scroll-content right">
                     
@@ -90,6 +95,8 @@
                     <div class="boats"></div>
                 </div>
 
+                <?php pattern('library_panel'); ?>
+
                 <div class="scroll-content">
 
                     <div class="content">
@@ -105,6 +112,8 @@
                 <div class="bg-container">
                     <img src="/_assets/img/esdaile/esdaile-5.jpg">
                 </div>
+
+                <?php pattern('library_panel'); ?>
 
                 <div class="scroll-content">
 
