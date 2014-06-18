@@ -100,7 +100,7 @@
                 <div class="scroll-content">
 
                     <div class="content">
-                        <p>The Lancet had pronounced mesmerism a fraud - but now Esdaile had proved its powers beyond doubt.</p>
+                        <p>The Lancet had pronounced mesmerism a fraud - but Esdaile's news from India had proved its powers beyond doubt</p>
                     </div>
                     
                 </div>
