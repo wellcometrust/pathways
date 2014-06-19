@@ -1,32 +1,28 @@
 .teaser {
 
-    position:           relative;
-    text-align:         center;
-    background:         #000;
+    position:               relative;
+    text-align:             center;
+    background-color:       #000;
+    background-position:    50% 50%;
+    background-size:        cover;
+    height:                 400px;
+    z-index:                10;
 
     a {
+        display:            block;
         color:              #fff;
         text-decoration:    none;
+        height:             100%;
     }
 
-    img {
-        &.teaser-bkg {
-            position:   absolute;
-            z-index:    0;
-            top:        0; 
-            left:       0;
-            width:      100%;
-        }
-
-        &.teaser-icon {
-            width:          82px;
-            height:         82px;
-            float:          right;
-            margin:         -90px 25px 0 0;
-        }   
+    .teaser-icon {
+        width:          82px;
+        height:         82px;
+        float:          right;
+        margin:         -90px 25px 0 0;
     }
 
-    .teaser-text-container{
+    .teaser-text-container {
         position:       relative;
         padding-top:    9%;
         z-index:        1;
@@ -47,4 +43,8 @@
     .teaser-text span {
         color:          $mind-pink;
     }
+}
+
+@media screen and (min-width: 48em) {
+
 }

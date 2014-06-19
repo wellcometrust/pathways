@@ -161,9 +161,8 @@
 
         <?php pattern('library_layer') ?>
 
-        <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;">
+        <div class="teaser" style="background-image: url(/_assets/img/teaser/teaser-oakey.jpg)">
             <a href="/pathways/1-the-mind/3-elliotson">
-                <img class="teaser-bkg" src="/_assets/img/teaser/teaser-oakey.jpg" alt="james tilly mathews and the air loom" />
                 <div class="teaser-text-container">
                     <p class="teaser-text">Continue with your journey in the <span>Mind</span></p>
                     <h1>Who controls who?</h1>

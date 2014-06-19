@@ -275,9 +275,8 @@
             pattern('library_layer', $library_content);
         ?>
 
-        <div class="teaser" style="position: relative; height: 100px; background-color: #ccc; z-index: 10;">
+        <div class="teaser" style="background-image: url(/_assets/img/teaser/teaser-jtm.jpg)">
             <a href="/pathways/1-the-mind/2-airloom">
-                <img class="teaser-bkg" src="/_assets/img/teaser/teaser-jtm.jpg" alt="james tilly mathews and the air loom" />
                 <div class="teaser-text-container">
                     <p class="teaser-text">Continue with your journey in the <span>Mind</span></p>
                     <h1>A machine to control the mind</h1>
