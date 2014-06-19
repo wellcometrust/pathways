@@ -5,7 +5,7 @@
     background-color:       #000;
     background-position:    50% 50%;
     background-size:        cover;
-    height:                 400px;
+    height:                 200px;
     z-index:                10;
 
     a {
@@ -16,10 +16,8 @@
     }
 
     .teaser-icon {
-        width:          82px;
-        height:         82px;
-        float:          right;
-        margin:         -90px 25px 0 0;
+        width:          40px;
+        height:         40px;
     }
 
     .teaser-text-container {
@@ -28,7 +26,7 @@
         z-index:        1;
         
         h1 {
-            font-size:  3.245rem;
+            font-size:  1.618rem;
             margin-top: 1rem;
         }
     }
@@ -38,6 +36,7 @@
         font-size:      0.766rem;
         text-transform: uppercase;
         letter-spacing: .2rem;
+        padding:        0 0.4rem
     }
 
     .teaser-text span {
@@ -46,5 +45,20 @@
 }
 
 @media screen and (min-width: 48em) {
+    .teaser {
+        height: 400px;
+        
+        .teaser-icon {
+            width:          82px;
+            height:         82px;
+            float:          right;
+            margin:         -90px 25px 0 0;
+        }
 
+        .teaser-text-container {
+            h1 {
+                font-size:  3.245rem;
+            }
+        }
+    }
 }

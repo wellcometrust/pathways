@@ -35,14 +35,13 @@
 
         <div class="sequence">
             
-            <div class="panel gonads" data-offset-height="550">
+            <div id="gonad-man" class="panel gonads" data-offset-height="550">
 
                 <div class="bg-container">
                     <img src="/_assets/img/esdaile/esdaile-2.jpg">
                 </div>
 
-
-                <div class="info-box" data-component="quiz">
+                <div class="info-box with-text" data-component="quiz">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
                         <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
                         <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
@@ -72,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="panel" data-offset-height="350">
+            <div id="fakir" class="panel" data-offset-height="350">
                 <div class="bg-container">
                     <img src="/_assets/img/esdaile/esdaile-3.jpg">
                 </div>
@@ -88,7 +87,7 @@
                 </div>
             </div>
 
-            <div class="panel india" data-height-offset="200">
+            <div id="india" class="panel india" data-height-offset="200">
 
                 <div class="bg-container">
                     <img src="/_assets/img/esdaile/esdaile-4.jpg">
@@ -108,6 +107,8 @@
 
             <div id="surgery-under-hypnosis-intro" class="panel" data-offset-height="250">
 
+                <div class="bg-container"></div>
+
                 <div class="scroll-content">
                     <header>
                         <h1>These techniques still work today</h1>
@@ -118,7 +119,9 @@
 
             <div id="surgery-under-hypnosis" class="panel talking-head" data-offset-height="250">
 
-                <div class="bg-container"></div>
+                <div class="bg-container video" data-src="/_assets/video/chris-pain-relief.webm"></div>
+
+                <div class="mute"></div>
                 
             </div>
             
@@ -146,10 +149,12 @@
                 
             </div>
 
-            <div id="self-hypnosis" class="panel talking-head">
-                
-                <div class="bg-container"></div>
+            <div id="self-hypnosis" class="panel talking-head" data-offset-height="250">
 
+                <div class="bg-container video" data-src="/_assets/video/chris-hypno-demo.webm"></div>
+
+                <div class="mute"></div>
+                
             </div>
 
         </div>

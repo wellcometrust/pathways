@@ -38,10 +38,12 @@
 
         <div class="sequence" data-sequence="cross-fade">
 
+
             <div id="mesmers-salon-intro" class="panel mesmers-salon" data-offset-height="550">
 
                 <div class="bg-container">
-                    <img src="/_assets/img/mesmer/mesmer-2-black.jpg">
+                    <img class="small-screen" src="/_assets/img/mesmer/mesmer-2.jpg">
+                    <img class="large-screen" src="/_assets/img/mesmer/mesmer-2-black.jpg">
                 </div>
                 
                 <div class="scroll-content position-center text-left">
@@ -58,6 +60,7 @@
 
             </div>
 
+
             <div id="mesmers-salon" class="panel mesmers-salon" data-component="crop-zoom">
 
                 <div class="bg-container">
@@ -66,17 +69,17 @@
 
                 <div class="crop-zoom">
                     <svg class="info-box tap-target rod" data-crop="rod" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
-                        <circle class="outer" cx="50%" cy="50%" r="30" fill="rgba(92,184,178,1)"/>
+                        <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"/>
                         <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"/>
                     </svg>
 
                     <svg class="info-box tap-target woman" data-crop="woman" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
-                        <circle class="outer" cx="50%" cy="50%" r="30" fill="rgba(92,184,178,1)"/>
+                        <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"/>
                         <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"/>
                     </svg>
 
                     <svg class="info-box tap-target mesmer" data-crop="mesmer" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
-                        <circle class="outer" cx="50%" cy="50%" r="30" fill="rgba(92,184,178,1)"/>
+                        <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"/>
                         <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"/>
                     </svg>
                 </div>
@@ -105,6 +108,7 @@
                 <?php pattern('library_panel'); ?>
 
             </div>
+
 
             <div id="animal-magnetism" class="panel animal-magnetism" data-offset-height="350">
 
@@ -181,7 +185,8 @@
 
             </div>
 
-            <div class="panel news" data-offset-height="350">
+
+            <div id="satirised" class="panel news" data-offset-height="350">
 
                 <div class="bg-container video" data-src="/_assets/video/hysteria.webm">
                     <img src="/_assets/img/mesmer/mesmer-5.jpg">
@@ -196,7 +201,7 @@
                 
             </div>
 
-            <div class="panel audio sciences-committee">
+            <div id="committee-investigates-intro" class="panel">
 
                 <div class="bg-container"></div>
 
@@ -205,22 +210,18 @@
                         <header>
                             <h1>The committee investigates</h1>
                         </header>
-
-                        <!-- <div class="audio-player" data-src="/_assets/audio/Riding.mp3" data-component="audio-player">
-                            <div class="time-left">Time left: <span>0.00</span></div>
-                            <div class="progress-bar">
-                                <div class="progressed"></div>
-                            </div>
-                            <div class="controls play"></div>
-                        </div> -->
                     </div>
                 </div>
 
             </div>
 
-            <div class="panel talking-head">
-                
-                <div class="bg-container"></div>
+            <div id="committee-investigates" class="panel talking-head">
+
+                <div class="bg-container video" data-src="/_assets/video/committee-investigates.webm"></div>
+
+                <div class="mute"></div>
+
+                <div class="controls"></div>
 
             </div>
 

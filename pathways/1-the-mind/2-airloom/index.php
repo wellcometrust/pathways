@@ -35,7 +35,7 @@
 
         <div class="sequence">
             
-            <div class="panel air-loom">
+            <div id="airloom-intro" class="panel air-loom">
 
                 <div class="bg-container"></div>
 
@@ -48,18 +48,18 @@
                 </div>
             </div>
 
-            <div class="panel air-loom-content">
+            <div id="airloom" class="panel air-loom-content">
 
-                <div class="bg-container video" data-src="/_assets/video/airloom.mp4">
-                    
-                </div>
+                <div class="bg-container video" data-src="/_assets/video/airloom.mp4"></div>
+                
+                <div class="mute"></div>
 
                 <div class="scroll-content position-center align-center"></div>
 
-                <div class="mute"></div>
             </div>
 
-            <div class="panel">
+            <div id="where-will-this-technology-lead" class="panel">
+
                 <div class="bg-container">
                     <img src="/_assets/img/airloom/airloom-2.jpg">
                 </div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <div class="panel">
+            <div id="grisly-experiments" class="panel">
 
                 <div class="bg-container">
                     <img src="/_assets/img/airloom/airloom-2.jpg">

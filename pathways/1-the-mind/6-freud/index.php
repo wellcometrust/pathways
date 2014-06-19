@@ -36,7 +36,8 @@
 
         <div class="sequence">
             
-            <div class="panel anna-o">
+            <div id="anna-o" class="panel anna-o">
+
                 <div class="bg-container">
                     <img src="/_assets/img/freud/freud-2.jpg">
 
@@ -63,7 +64,8 @@
                 </div>
             </div>
 
-            <div class="panel fred-breuer">
+            <div id="fred-breuer" class="panel fred-breuer">
+            
                 <div class="bg-container">
                     <img src="/_assets/img/freud/freud-3.jpg">
                 </div>
@@ -83,10 +85,12 @@
                 </div>
             </div>
 
-            <div class="panel talking-head">
-                
-                <div class="bg-container"></div>
+            <div id="anna-o-video" class="panel talking-head" data-offset-height="250">
 
+                <div class="bg-container video" data-src="/_assets/video/anna-o.webm"></div>
+
+                <div class="mute"></div>
+                
             </div>
 
             <div class="panel office">

@@ -1,9 +1,5 @@
 
 .info-box {
-    position:   absolute; 
-    top:        120px; 
-    right:      100px; 
-    width:      190px;
     cursor:     pointer;
     z-index:    20;
 
@@ -32,6 +28,10 @@
     &:hover {
         opacity: 0.8;
     }
+}
+
+.info-box.with-text {
+    width: 190px;
 
     .text {
         position:   absolute;
@@ -47,7 +47,6 @@
             text-transform: uppercase;
             opacity:        0;
 
-            -webkit-transition: all 1s ease;
                -moz-transition: all 1s ease;
                     transition: all 1s ease;
 
@@ -60,7 +59,6 @@
             font-size:  0.8rem;
             opacity:    0;
 
-            -webkit-transition:         all 1s ease;
                -moz-transition:         all 1s ease;
                     transition:         all 1s ease;
 
@@ -68,7 +66,6 @@
                -moz-transform:          translate(50px, 0);
                     transform:          translate(50px, 0);
 
-            -webkit-transition-delay:   0.15s;
                -moz-transition-delay:   0.15s;
                     transition-delay:   0.15s;
         }
@@ -77,6 +74,7 @@
     &.active {
         .info-type {
             opacity: 1;
+            
             -webkit-transform: translate(0, 0);
                -moz-transform: translate(0, 0);
                     transform: translate(0, 0);

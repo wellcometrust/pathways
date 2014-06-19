@@ -57,6 +57,24 @@ Pathways.LoadScenes = function() {
             .setTween(lady_tween);
     }
 
+    // Mute
+    $('.mute').hide();
+
+    $('.mute').on('click', function() {
+        var $this   = $(this),
+            $video  = $this.parents('.panel').find('video').first().get(0);
+
+        // active == muted
+        if( $this.hasClass('active') ) {
+            $video.volume = 1;
+            $this.removeClass('active');
+        }
+        else {
+            $video.volume = 0;
+            $this.addClass('active');
+        }
+    });
+
     /**************
         Sequence
      **************/
@@ -94,6 +112,7 @@ Pathways.LoadScenes = function() {
             $library_panel  = $this.find('.library-panel'),
             $gallery        = $this.find('[data-component="gallery"]'),
             $quiz           = $this.find('[data-component="quiz"]'),
+            $mute           = $this.find('.mute'),
             
             tween           = TweenMax.to( $bg, 1, { opacity: 1 });
 
@@ -153,6 +172,21 @@ Pathways.LoadScenes = function() {
                     $library_panel.css({ position: 'absolute', display: 'none' });
                 })
         }
+
+        // Mute
+        if( $mute.length ) {
+            scenes[idx++] = new ScrollScene({
+                    triggerElement: $this,
+                    duration:       panel_height,
+                    offset:         100
+                })
+                .on('enter', function() {
+                    $mute.css({ position: 'fixed', display: 'block' });
+                })
+                .on('leave', function() {
+                    $mute.css({ position: 'absolute', display: 'none' });
+                })
+        }
     })
 
 
@@ -185,11 +219,11 @@ Pathways.LoadScenes = function() {
 
     // Tree
     if( _('.tree' ) ) {
+        var tree_offset = $('.tree').data('offset-height') ? $('.tree').data('offset-height') : 0;
         $('.black-strip').css({'height': panel_height, 'transform': 'translate(0,'+panel_height+'px)'});
 
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.tree',
-                // triggerHook:    'top',
                 duration:       panel_height
             })
             .on('enter', function(e) {
@@ -200,14 +234,6 @@ Pathways.LoadScenes = function() {
                 if( e.scrollDirection == 'REVERSE' )
                     TweenMax.to('.black-strip', .2, { y: panel_height }); // scroll down
             })
-    }
-
-
-
-
-    // Tree
-    if( _('.tree') ) {
-        var tree_offset = $('.tree').data('offset-height') ? $('.tree').data('offset-height') : 0;
 
         scenes[idx++] = new ScrollScene({
                 triggerElement: '.tree',
@@ -225,22 +251,42 @@ Pathways.LoadScenes = function() {
             })
     }
 
+
     // News
-    if( _('.news') ) {
-        var news_offset = $('.news').data('offset-height') ? $('.tree').data('offset-height') : 0;
+    if( _('#satirised') ) {
+        var news_offset = $('#satirised').data('offset-height') ? $('#satirised').data('offset-height') : 0;
 
         scenes[idx++] = new ScrollScene({
-                triggerElement: '.news',
+                triggerElement: '#satirised',
                 duration:       panel_height + news_offset + 100
             })
             .on('enter', function(e) {
-                if( _('.news video') )
-                    _('.news video').play();
+                if( _('#satirised video') )
+                    _('#satirised video').play();
             })
             .on('leave', function(e) {
-                if( _('.news video') ) {
-                    _('.news video').pause();
-                    _('.news video').currentTime = 0;
+                if( _('#satirised video') ) {
+                    _('#satirised video').pause();
+                    _('#satirised video').currentTime = 0;
+                }
+            })
+    }
+
+    if( _('#committee-investigates') ) {
+        // var news_offset = $('.news').data('offset-height') ? $('.tree').data('offset-height') : 0;
+
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '#committee-investigates',
+                duration:       panel_height + 100
+            })
+            .on('enter', function(e) {
+                if( _('#committee-investigates video') )
+                    _('#committee-investigates video').play();
+            })
+            .on('leave', function(e) {
+                if( _('#committee-investigates video') ) {
+                    _('#committee-investigates video').pause();
+                    _('#committee-investigates video').currentTime = 0;
                 }
             })
     }
@@ -248,40 +294,20 @@ Pathways.LoadScenes = function() {
     // Airloom specific
 
     // Video
-    if( _('.air-loom-content') ) {
-        $('.mute').hide();
-
-        $('.mute').on('click', function() {
-            var $this   = $(this),
-                $video  = $this.parents('.panel').find('video').first().get(0);
-
-            // active == muted
-            if( $this.hasClass('active') ) {
-                $video.volume = 1;
-                $this.removeClass('active');
-            }
-            else {
-                $video.volume = 0;
-                $this.addClass('active');
-            }
-        });
+    if( _('#air-loom') ) {
 
         scenes[idx++] = new ScrollScene({
-                triggerElement: '.air-loom-content',
+                triggerElement: '#air-loom',
                 duration:       panel_height
             })
             .on('enter', function(e) {
-                $('.mute').css({ position: 'fixed', display: 'block' });
-
-                if( _('.air-loom-content video') )
-                    _('.air-loom-content video').play();
+                if( _('#air-loom video') )
+                    _('#air-loom video').play();
             })
             .on('leave', function(e) {
-                $('.mute').css({ position: 'absolute', display: 'none' });
-
-                if( _('.air-loom-content video') ) {
-                    _('.air-loom-content video').pause();
-                    _('.air-loom-content video').currentTime = 0;
+                if( _('#air-loom video') ) {
+                    _('#air-loom video').pause();
+                    _('#air-loom video').currentTime = 0;
                 }
             })
     }
@@ -289,15 +315,15 @@ Pathways.LoadScenes = function() {
     // Elliotson specific
 
     //
-    if( _('.okey-sisters') ) {
+    if( _('#okey-sisters') ) {
         
-        $('.okey-sisters .scroll-content').css({ 'bottom': 'auto', 'top': panel_height });
-        $('.thomas-wakley .scroll-content').css({ 'bottom': 'auto', 'top': (panel_height / 3) });
+        $('#okey-sisters .scroll-content').css({ 'bottom': 'auto', 'top': panel_height });
+        $('#thomas-wakley .scroll-content').css({ 'bottom': 'auto', 'top': (panel_height / 3) });
 
         $('.black-strip').css({'height': panel_height, 'transform': 'translate(0,'+panel_height+'px)'});
 
         scenes[idx++] = new ScrollScene({
-                triggerElement: '.okey-sisters',
+                triggerElement: '#okey-sisters',
                 triggerHook:    'top',
                 duration:       panel_height
             })
@@ -314,9 +340,9 @@ Pathways.LoadScenes = function() {
     // Esdaile
 
     // India/boats
-    if( _('.india') ) {
+    if( _('#india') ) {
         //
-        var $boats      = $('.boats'),
+        var $boats      = $('#india .boats'),
             ratio       = 1050 / 1900,
             boat_ratio  = 233 / 1900,
             boat_height = (boat_ratio * window.innerWidth);
@@ -329,11 +355,49 @@ Pathways.LoadScenes = function() {
         })
 
         scenes[idx++] = new ScrollScene({
-                triggerElement: '.india',
+                triggerElement: '#india',
                 duration:       panel_height
             })
             .on('enter', function() {
-                $('.boats').css('transform', 'translate(320px,0)');
+                $boats.css('transform', 'translate(320px,0)');
+            })
+    }
+
+    if( _('#surgery-under-hypnosis') ) {
+        // var news_offset = $('.news').data('offset-height') ? $('.tree').data('offset-height') : 0;
+
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '#surgery-under-hypnosis',
+                duration:       panel_height + 100
+            })
+            .on('enter', function(e) {
+                if( _('#surgery-under-hypnosis video') )
+                    _('#surgery-under-hypnosis video').play();
+            })
+            .on('leave', function(e) {
+                if( _('#surgery-under-hypnosis video') ) {
+                    _('#surgery-under-hypnosis video').pause();
+                    _('#surgery-under-hypnosis video').currentTime = 0;
+                }
+            })
+    }
+
+    if( _('#self-hypnosis') ) {
+        // var news_offset = $('.news').data('offset-height') ? $('.tree').data('offset-height') : 0;
+
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '#self-hypnosis',
+                duration:       panel_height + 100
+            })
+            .on('enter', function(e) {
+                if( _('#self-hypnosis video') )
+                    _('#self-hypnosis video').play();
+            })
+            .on('leave', function(e) {
+                if( _('#self-hypnosis video') ) {
+                    _('#self-hypnosis video').pause();
+                    _('#self-hypnosis video').currentTime = 0;
+                }
             })
     }
 
@@ -361,23 +425,6 @@ Pathways.LoadScenes = function() {
     // Freud
 
     //
-    if( _('.office') ) {
-        $('.black-strip').css({'height': panel_height, 'transform': 'translate(0,'+panel_height+'px)'});
-
-        scenes[idx++] = new ScrollScene({
-                triggerElement: '.office',
-                duration:       panel_height
-            })
-            .on('enter', function(e) {
-                if( e.scrollDirection == 'FORWARD' )
-                    TweenMax.to('.black-strip', .5, { y: 0 }); // Scroll up
-            })
-            .on('leave', function(e) {
-                if( e.scrollDirection == 'REVERSE' )
-                    TweenMax.to('.black-strip', .2, { y: panel_height }); // scroll down
-            })
-    }
-
     if( _('.anna-o') ) {
 
         var positions = [
@@ -401,12 +448,12 @@ Pathways.LoadScenes = function() {
         })
 
         $('.anna-o .fragmented').each(function() {
-            var tween = TweenMax.to( $(this), 1, { x: 0, y: 0 } );
+            var tween = TweenMax.to( $(this), 1, { x: 0, y: -3 } );
 
             scenes[idx++] = new ScrollScene({
                     triggerElement: '.anna-o',
                     triggerHook:    'top',
-                    duration:       $('.anna-o').height(),
+                    duration:       $('.anna-o').height() - 420,
                     offset:         50,
                 })
                 .setTween(tween);
@@ -414,6 +461,44 @@ Pathways.LoadScenes = function() {
 
     }
 
+    //
+    if( _('#anna-o-video') ) {
+
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '#anna-o-video',
+                duration:       panel_height + 100
+            })
+            .on('enter', function(e) {
+                if( _('#anna-o-video video') )
+                    _('#anna-o-video video').play();
+            })
+            .on('leave', function(e) {
+                if( _('#anna-o-video video') ) {
+                    _('#anna-o-video video').pause();
+                    _('#anna-o-video video').currentTime = 0;
+                }
+            })
+    }
+
+    //
+    if( _('.office') ) {
+        $('.black-strip').css({'height': panel_height, 'transform': 'translate(0,'+panel_height+'px)'});
+
+        scenes[idx++] = new ScrollScene({
+                triggerElement: '.office',
+                duration:       panel_height
+            })
+            .on('enter', function(e) {
+                if( e.scrollDirection == 'FORWARD' )
+                    TweenMax.to('.black-strip', .5, { y: 0 }); // Scroll up
+            })
+            .on('leave', function(e) {
+                if( e.scrollDirection == 'REVERSE' )
+                    TweenMax.to('.black-strip', .2, { y: panel_height }); // scroll down
+            })
+    }
+
+    //
     if( _('.office-2') ) {
 
         scenes[idx++] = new ScrollScene({
@@ -439,6 +524,7 @@ Pathways.LoadScenes = function() {
             panel_height    = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15),
 
             supports_touch  = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch);
+            // supports_touch  = true;
 
         /************************
             Private functions
@@ -447,11 +533,13 @@ Pathways.LoadScenes = function() {
         var init = function() {
 
             // Progressive loading. Some things need to happen before window load
-            resizeAllTheThings();
-            
-            window.addEventListener('resize', function() {
+            if( !supports_touch ) {
                 resizeAllTheThings();
-            });
+
+                window.addEventListener('resize', function() {
+                    resizeAllTheThings();
+                });
+            }
 
             window.addEventListener('load', function() {
                 loadComponents();

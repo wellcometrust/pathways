@@ -36,7 +36,7 @@
 
         <div class="sequence">
             
-            <div class="panel okey-sisters" data-offset-height="1200">
+            <div id="okey-sisters" class="panel okey-sisters" data-offset-height="1200">
 
                 <div class="bg-container">
                     <img src="/_assets/img/elliotson/elliotson-2.jpg">
@@ -106,7 +106,8 @@
 
             </div>
 
-            <div class="panel thomas-wakley" data-offset-height="2800">
+            <div id="thomas-wakley" class="panel thomas-wakley" data-offset-height="2800">
+
                 <div class="bg-container">
                     <img src="/_assets/img/elliotson/elliotson-3.jpg">
                 </div>
@@ -215,7 +216,8 @@
                 </div>
             </div>
 
-            <div class="panel verdict">
+            <div id="verdict" class="panel verdict">
+            
                 <div class="bg-container">
                     <img src="/_assets/img/elliotson/elliotson-4.jpg">
                 </div>

@@ -7,20 +7,21 @@
     }
 
     .content {
-        position:   relative;
-        width:      80%;
-        max-width:  1200px;
-        margin:     10vh auto 0 auto;
+        position:       relative;
+        width:          80%;
+        max-width:      1200px;
+        margin:         0 auto;
+        padding-top:    1.618rem;
     }
 
     .scene-set {
-        color: #fff;
-        margin-bottom: 6vh;
+        color:          #fff;
+        margin-bottom:  2rem;
 
         .location {
             display:        block;
             @include        tablet-gothic;
-            font-size:      1.618rem;
+            font-size:      1rem;
             text-transform: uppercase;
             letter-spacing: .2rem;
             text-align:     center;
@@ -36,7 +37,7 @@
     
     header h1 {
         color:          #fff;
-        font-size:      4.236rem;
+        font-size:      2.618rem;
         line-height:    1;
         text-align:     center;
         margin:         0.3rem 0 0 0;
@@ -62,6 +63,10 @@
 
         .scene-set {
             margin-bottom: 8em;
+
+            .location {
+                font-size: 1.618rem;
+            }
 
             .date {
                 font-size: 2.427rem;

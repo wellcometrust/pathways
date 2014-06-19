@@ -1,0 +1,29 @@
+
+#verdict {
+    .inner {
+        float:          right;
+        width:          60%;
+        margin-right:   142px;
+    }
+
+    .verdict-text {
+        font-size:      1.618rem;
+        margin-bottom:  0;
+    }
+
+    blockquote p {
+        @include        abril-italic;
+        font-size:      1.618rem;
+        line-height:    1.618;
+    }
+
+    blockquote + p {
+        font-size:      2.005rem;
+        margin-top:     2em;
+    }
+    .outro {
+        font-size:      2.618rem;
+        line-height:    1.219;
+        width:          80%;
+    }
+}

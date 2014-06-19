@@ -16,6 +16,7 @@
     .inner {
         max-width:  64em;
         margin:     0 auto;
+        padding:    0 0.4rem;
     }
 
     .bar {
@@ -26,19 +27,11 @@
         cursor:             pointer;
         z-index:            20;
 
-        -webkit-transition: -webkit-transform 0.2s ease;
-           -moz-transition:    -moz-transform 0.2s ease;
-
         span {
             color:          #fff;
             font-size:      0.9rem;
             text-transform: uppercase;
             cursor:         pointer;
-        }
-
-        &:hover {            
-            -webkit-transform: scale(1.2);
-               -moz-transform: scale(1.2);
         }
     }
 
@@ -49,7 +42,7 @@
     }
 
     .in-the-player {
-        padding: 2em 0;
+        padding-top: 2em;
 
         .in-the-player--header {
             border-bottom: 1px solid #999;
@@ -61,33 +54,17 @@
                 text-transform: uppercase;
             }
         }
-
-        li {
-            float: left;
-            width: 45%;
-        }
-
-        li:nth-child(odd) {
-            margin-right: 10%;
-        }
     }
 
     .player-item {
-        margin-bottom: 3em;
+        margin-bottom: 1em;
 
         img {
             float: left;
             margin-right: 0.8em;
         }
 
-        .player-item--content {
-            float: left;
-            width: 60%
-        }
-
         .player-item--header {
-            margin-bottom: 0.8em;
-
             h1 {
                 font-size: 1.2rem;
             }
@@ -99,7 +76,6 @@
 
             cite {
                 display:    block;
-                margin-top: 1em;
             }
         }
 
@@ -118,7 +94,7 @@
 
     .related-resources {
         background-color: #F9F9F9;
-        padding: 2em 0;
+        padding-top: 2em;
 
         .related-resources--header {
             border-bottom: 1px solid #999;
@@ -129,15 +105,6 @@
                 font-size:  0.9rem;
                 text-transform: uppercase;
             }
-        }
-
-        li {
-            float: left;
-            width: 45%;
-        }
-
-        li:nth-child(odd) {
-            margin-right: 10%;
         }
     }
 
@@ -158,6 +125,76 @@
 
             h1 {
                 font-size: 1.2rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 48em) {
+    .library-layer {
+        .bar {
+            -webkit-transition: -webkit-transform 0.2s ease;
+               -moz-transition:    -moz-transform 0.2s ease;
+
+            &:hover {            
+                -webkit-transform: scale(1.2);
+                   -moz-transform: scale(1.2);
+            }
+        }
+
+        .in-the-player {
+            padding: 2em 0;
+
+            .in-the-player--header {
+                border-bottom: 1px solid #999;
+                margin-bottom: 2em;
+
+                h1 {
+                    color:      #999;
+                    font-size:  0.9rem;
+                    text-transform: uppercase;
+                }
+            }
+
+            li {
+                float: left;
+                width: 45%;
+            }
+
+            li:nth-child(odd) {
+                margin-right: 10%;
+            }
+        }
+
+        .player-item {
+            margin-bottom: 3em;
+
+            .player-item--header {
+                margin-bottom: 0.8em;
+            }
+
+            .player-item--content {
+                float: left;
+                width: 60%
+            }
+
+            .player-item--body {
+                cite {
+                    margin-top: 1em;
+                }
+            }
+        }
+
+        .related-resources {
+            padding: 2em 0;
+            
+            li {
+                float: left;
+                width: 45%;
+            }
+
+            li:nth-child(odd) {
+                margin-right: 10%;
             }
         }
     }

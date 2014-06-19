@@ -7,6 +7,7 @@
             panel_height    = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15),
 
             supports_touch  = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch);
+            // supports_touch  = true;
 
         /************************
             Private functions
@@ -15,11 +16,13 @@
         var init = function() {
 
             // Progressive loading. Some things need to happen before window load
-            resizeAllTheThings();
-            
-            window.addEventListener('resize', function() {
+            if( !supports_touch ) {
                 resizeAllTheThings();
-            });
+
+                window.addEventListener('resize', function() {
+                    resizeAllTheThings();
+                });
+            }
 
             window.addEventListener('load', function() {
                 loadComponents();

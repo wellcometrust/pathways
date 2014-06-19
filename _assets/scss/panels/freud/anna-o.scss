@@ -1,0 +1,38 @@
+
+#anna-o {
+
+    .scroll-content {
+        left: 5%;
+    }
+
+    header {
+        margin: 2rem 0 4rem 0;
+    }
+
+    h1 {
+        color: #030303;
+    }
+
+    p {
+        color: #030303;
+    }
+
+    p:nth-child(3) {
+        margin-top: 12rem;
+    }
+
+    p:nth-child(4) {
+        margin-top: 12rem;
+    }
+
+    p:nth-child(5) {
+        margin-top: 12rem;
+    }
+
+    .fragmented {
+        position:   absolute;
+        top:        0;
+        left:       0;
+        width:      100%;
+    }
+}
