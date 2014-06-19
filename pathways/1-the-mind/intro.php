@@ -15,7 +15,7 @@ include($docRoot.'/_includes/header.php');
         <div class="intro">
 
             <div class="bg-container">
-                <img src="<?php echo asset('img/esdaile/esdaile-3.jpg') ?>">
+                <img src="<?php echo asset('img/intro/intro.jpg') ?>">
             </div>
 
             <div class="inner">
