@@ -491,7 +491,8 @@ iframe {
   display: block; }
 
 .panel {
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
 
 .bg-container {
   background-color: #000;

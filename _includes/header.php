@@ -23,6 +23,11 @@
         // Set JS class
         document.querySelector('html').classList.add('js');
 
+        if( ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch) )
+            document.querySelector('html').classList.add('touch');
+        else
+            document.querySelector('html').classList.add('no-touch');
+
         // Cuts the mustard
         var cuts_the_mustard = (document.querySelectorAll) ? true : false;
 
