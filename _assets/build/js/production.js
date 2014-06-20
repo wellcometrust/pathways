@@ -294,20 +294,20 @@ Pathways.LoadScenes = function() {
     // Airloom specific
 
     // Video
-    if( _('#air-loom') ) {
+    if( _('#airloom') ) {
 
         scenes[idx++] = new ScrollScene({
-                triggerElement: '#air-loom',
+                triggerElement: '#airloom',
                 duration:       panel_height
             })
             .on('enter', function(e) {
-                if( _('#air-loom video') )
-                    _('#air-loom video').play();
+                if( _('#airloom video') )
+                    _('#airloom video').play();
             })
             .on('leave', function(e) {
-                if( _('#air-loom video') ) {
-                    _('#air-loom video').pause();
-                    _('#air-loom video').currentTime = 0;
+                if( _('#airloom video') ) {
+                    _('#airloom video').pause();
+                    _('#airloom video').currentTime = 0;
                 }
             })
     }
