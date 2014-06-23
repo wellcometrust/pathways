@@ -78,6 +78,13 @@
     }
 }
 
+#fakir {
+    .bg-container img {
+        position:   absolute;
+        bottom:     0;
+    }
+}
+
 #gonad-man {
     img {
         -webkit-transform: scale(2.3, 2.3);
@@ -106,7 +113,14 @@
     }
 }
 
+
 #india {
+
+    .bg-container img {
+        position:   absolute;
+        bottom:     0;
+    }
+    
     .scroll-content {
         color: #333;
     }

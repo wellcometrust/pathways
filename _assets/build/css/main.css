@@ -990,6 +990,10 @@ iframe {
   line-height: 1.219;
   width: 80%; }
 
+#fakir .bg-container img {
+  position: absolute;
+  bottom: 0; }
+
 #gonad-man img {
   -webkit-transform: scale(2.3, 2.3);
   -webkit-transform-origin: 100% 0%;
@@ -1009,6 +1013,9 @@ iframe {
   top: 120px;
   right: 100px; }
 
+#india .bg-container img {
+  position: absolute;
+  bottom: 0; }
 #india .scroll-content {
   color: #333; }
 #india .boats {
