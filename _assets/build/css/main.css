@@ -1437,6 +1437,36 @@ iframe {
   -webkit-transform: scale(1, 1);
   -moz-transform: scale(1, 1); }
 
+.credits {
+  background: url("/_assets/img/intro/intro.jpg") 0 0 no-repeat fixed;
+  background-size: cover;
+  height: 100%; }
+  .credits .inner {
+    width: 1024px;
+    margin: 0 auto;
+    padding: 100px;
+    color: #fff;
+    font-size: 1.293rem; }
+    .credits .inner h1 {
+      font-size: 5.25rem;
+      text-transform: uppercase; }
+    .credits .inner h3 {
+      font-size: 3.23rem;
+      margin: 1em 0 .5em; }
+      .credits .inner h3 span {
+        font-size: 1.618rem; }
+    .credits .inner li {
+      list-style: none;
+      font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+      font-weight: normal;
+      font-style: normal;
+      font-size: 1rem;
+      margin-bottom: .618rem;
+      opacity: .7; }
+      .credits .inner li span {
+        display: inline-block;
+        width: 200px; }
+
 .teaser {
   position: relative;
   text-align: center;

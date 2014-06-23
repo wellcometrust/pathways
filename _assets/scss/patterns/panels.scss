@@ -442,3 +442,46 @@
     -webkit-transform: scale(1, 1);
        -moz-transform: scale(1, 1);
 }
+
+.credits {
+    background: url('/_assets/img/intro/intro.jpg') 0 0 no-repeat fixed;
+    background-size: cover;
+    height: 100%;
+
+    .inner {
+        width: 1024px;
+        margin: 0 auto;
+        padding: 100px;
+        color: #fff;
+        font-size: 1.293rem;
+
+        h1 {
+            font-size: 5.25rem;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-size: 3.23rem;
+            margin: 1em 0 .5em;
+
+            span{
+                font-size: 1.618rem;
+            }
+        }
+
+        li {
+            list-style: none;
+            @include tablet-gothic;
+            font-size: 1rem;
+            margin-bottom: .618rem;
+            opacity: .7;
+
+            span {
+                display: inline-block;
+                width: 200px;
+                // opacity: .5;
+            }
+        }
+        
+    }
+}
