@@ -4,7 +4,7 @@
 
     var Pathways = function(options) {
         var Pathways        = this,
-            panel_height    = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15),
+            panel_height    = window.innerHeight < 550 ? (550 + 10) : (window.innerHeight + 10),
 
             supports_touch  = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch);
             // supports_touch  = true;
@@ -78,7 +78,7 @@
         }
 
         var resizeAllTheThings = function() {
-            panel_height = window.innerHeight < 750 ? (750 + 10) : (window.innerHeight + 10);
+            panel_height = window.innerHeight < 550 ? (550 + 10) : (window.innerHeight + 10);
 
             // Set the heights of the panels to a minimum of the window height, or the height of the content.
             // Use any offsets set on the panel to increase height where necessary.
