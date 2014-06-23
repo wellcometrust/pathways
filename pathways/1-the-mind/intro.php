@@ -20,7 +20,7 @@ include($docRoot.'/_includes/header.php');
 
             <div class="inner">
                 <header class="intro-header">
-                    <h1>Is it all in your <span>Mind</span>?</h1>
+                    <h1>MINDCRAFT</h1>
                 </header>
 
                 <p class="intro-body">A journey in <span>six parts</span> into the discovery of our modern understanding of the mind.</p>
