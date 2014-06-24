@@ -50,20 +50,6 @@
                     <img src="/_assets/img/svengali/svengali-2.jpg">
                 </div>
 
-                <?php
-                    $panel = array(
-                        'links' => array(
-                            array(
-                                'title'         => 'Trilby, novel by George du Maurier, 1894',
-                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1265549',
-                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/M0005798.html'
-                            )
-                        )
-                    );
-                ?>
-
-                <?php pattern('library_panel'); ?>
-
                 <div class="scroll-content fixed">
                     
                     <div class="inner">
@@ -138,14 +124,71 @@
                     </div>
                     
                 </div>
+
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'Trilby, novel by George du Maurier, 1894',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1265549',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/M0005798.html'
+                            ),
+                            array(
+                                'title'         => 'The Bridge of Arts [Paris] by George du Maurier, 1894.',
+                                'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/3.html'
+                            ),
+                            array(
+                                'title'         => 'Trilby’s Forbears by George du Maurier, 1894.',
+                                'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/14.html'
+                            ),
+                            array(
+                                'title'         => 'The ‘Rosamund’ of Schubert by George du Maurier, 1894.',
+                                'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/8.html'
+                            ),
+                            array(
+                                'title'         => '“We took her voice note by note” by George du Maurier, 1894.',
+                                'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/118.html'
+                            ),
+                            array(
+                                'title'         => '“Et maintenant dors, ma mignonne!” by George du Maurier, 1894.',
+                                'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/103.html'
+                            ),
+                            array(
+                                'title'         => 'An incubus by George du Maurier, 1894.',
+                                'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/38.html'
+                            ),
+                            array(
+                                'title'         => 'Au clair de la lune by George du Maurier, 1894.',
+                                'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/84.html'
+                            ),
+                            array(
+                                'title'         => 'Petits Bonheurs de Contrebande by George du Maurier, 1894.',
+                                'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/116.html'
+                            ),
+                            array(
+                                'title'         => '"Hast thou found me, o mine enemy?" by George du Maurier, 1894.',
+                                'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/98.html'
+                            ),
+                            array(
+                                'title'         => '"The last they saw of Svengali" by George du Maurier, 1894.',
+                                'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/100.html'
+                            ),
+                            array(
+                                'title'         => 'It was Trilby by George du Maurier, 1894.',
+                                'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/83.html'
+                            ),
+                        )
+                    );
+                ?>
+
+                <?php pattern('library_panel'); ?>
+
             </div>
 
             <div class="panel bonpard">
                 <div class="bg-container">
                     <img src="/_assets/img/svengali/svengali-2.jpg">
                 </div>
-
-                <?php pattern('library_panel'); ?>
 
                 <div class="scroll-content fixed">
                     
@@ -212,12 +255,12 @@
                                 <div class="comic-column">
                                     <div class="comic-panel">
                                         <img src="/_assets/img/svengali/bonpard/bonpard-comic-10.jpg">
-                                        <p class="panel-text">All conscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.</p>
+                                        <p class="panel-text">All conscience has disappeared in a hypnotized subject who has been forced to commit a criminal act.</p>
                                     </div>
                                     <div class="comic-panel" data-offset="-200">
                                         <img src="/_assets/img/svengali/bonpard/bonpard-comic-11.jpg">
 
-                                        <p class="panel-text">All connscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.</p>
+                                        <p class="panel-text">Only he who has given the suggestion is guilty.</p>
                                     </div>
                                 </div>
                                 <div class="comic-column">
@@ -235,6 +278,23 @@
                     </div>
                     
                 </div>
+
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'Illustrations from Le Petit Parisien and Supplément Illustré du Petit Journal, 1890.',
+                            ),
+                            array(
+                                'title'         => 'Poster for the song “Gabrielle Bompétard” inspired by the affair called malle à Gouffé in France.',
+                                'catalogue_url' => 'http://commons.wikimedia.org/wiki/File:Gabrielle_Bomp%C3%A9tard.jpg'
+                            )
+                        )
+                    );
+                ?>
+
+                <?php pattern('library_panel'); ?>
+
             </div>
 
         </div>

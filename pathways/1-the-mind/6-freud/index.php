@@ -47,8 +47,6 @@
                     <img class="fragmented" src="/_assets/img/freud/freud-2.png">
                 </div>
 
-                <?php pattern('library_panel'); ?>
-
                 <div class="scroll-content fixed">
                     <div class="content">
                         <header>
@@ -62,6 +60,20 @@
                         <p>Freud and Breuer concluded that the mind had the power to cause physical illnesses – and also to heal them.</p>
                     </div>
                 </div>
+
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => '“Anna O” (Bertha Pappenheim)',
+                                'catalogue_url' => 'http://commons.wikimedia.org/wiki/File:Anna_O.jpg'
+                            )
+                        )
+                    );
+                
+                    pattern('library_panel');
+                ?>
+
             </div>
 
             <div id="fred-breuer" class="panel fred-breuer">
@@ -69,8 +81,6 @@
                 <div class="bg-container">
                     <img src="/_assets/img/freud/freud-3.jpg">
                 </div>
-
-                <?php pattern('library_panel'); ?>
 
                 <div class="scroll-content text">
                     <div class="content">
@@ -83,6 +93,19 @@
                         <p>Under her real name, Bertha Pappenheim, she became a pioneering social worker, author and campaigner for education and women’s rights. Her identity as Anna O was only revealed after her death.</p>
                     </div>
                 </div>
+
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'Bertha Pappenheim (1882)',
+                                'catalogue_url' => 'http://commons.wikimedia.org/wiki/File:Pappenheim_1882.jpg'
+                            )
+                        )
+                    );
+                
+                    pattern('library_panel');
+                ?>
             </div>
 
             <div id="anna-o-video" class="panel talking-head" data-offset-height="250">
@@ -100,12 +123,22 @@
 
                 <div class="black-strip" ></div>
 
-                <?php pattern('library_panel'); ?>
-
                 <div class="scroll-content left">  
                     <p>Freud installed a couch in his consulting room to hypnotise his patients. He soon abandoned the technique, finding that it imposed too much control. For the cure to work, patients had to solve their own riddles themselves.</p>
                     <p>He replaced hypnosis with ‘free association’, but he kept the couch.</p>
                 </div>
+
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'Freud’s office',
+                            )
+                        )
+                    );
+                
+                    pattern('library_panel');
+                ?>
             </div>
 
             <div class="panel office-2">
