@@ -130,9 +130,11 @@ Pathways.LoadScenes = function() {
                 })
                 .on('enter', function() {
                     $gallery.css({ position: 'fixed', display: 'block' });
+                    setTimeout(function() { $gallery.addClass('active'); }, 50);
                 })
                 .on('leave', function() {
                     $gallery.css({ position: 'absolute', display: 'none' });
+                    setTimeout(function() { $gallery.removeClass('active'); }, 50);
                 })
         }
 

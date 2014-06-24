@@ -68,7 +68,7 @@
 
                 <div class="black-strip" ></div>
 
-                <div class="info-box" data-component="gallery">
+                <div class="info-box with-text" data-component="gallery">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
                         <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
                         <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
@@ -79,6 +79,11 @@
                             <path d="M53.7,63.9 L96.2,63.9 L64.1,23.8 L42.9,53.1 L50.9,61.1 L53.7,63.9 Z" id="Shape"></path>
                         </g>
                     </svg>
+
+                    <div class="text">
+                        <span class="info-type">Gallery:</span>
+                        <span class="info-title">Hypnotised women</span>
+                    </div>
                 </div>
 
                 <script>
@@ -120,10 +125,9 @@
                     <p>The medical journal The Lancet had been reporting the demonstrations with interest. But its editor, Thomas Wakley, suspected deception. He requested a private demonstration at his house, where he took control.</p>
                 </div>
 
-                <div class="scroll-content right" style="float: right; width: 40%; max-width: 500px; bottom: auto; top: 36%">
+                <div class="scroll-content" style="width: 40%; max-width: 500px; bottom: auto; top: 36%; left: 600px">
                     <img src="/_assets/img/elliotson/demonstration1.jpg" style="display: block; margin-bottom: 40px; margin-left: -100px">
                     <img src="/_assets/img/elliotson/demonstration2.jpg" style="display: block; margin-bottom: 40px">
-                    <img src="/_assets/img/elliotson/demonstration1.jpg" style="display: block; margin-bottom: 40px; margin-left: -100px">
                 </div>
 
             </div>
@@ -161,7 +165,7 @@
                                 <div class="avatar"></div>
                                 <div class="header">
                                     <span class="time">12 July 1838</span>
-                                    <div class="username">Thomas Wakley <span>@wako_lancet</span></div>
+                                    <div class="username">Thomas Wakley <span>@bestdebunking</span></div>
                                 </div>
                                 <div class="body">
                                     “Careful investigation and a consideration of all experiments have convinced us that the phenomena are not real, and that animal magnetism is a delusion”
@@ -183,7 +187,7 @@
                                 <div class="avatar"></div>
                                 <div class="header">
                                     <span class="time">12 July 1838</span>
-                                    <div class="username">Thomas Wakley <span>@wako_lancet</span></div>
+                                    <div class="username">Thomas Wakley <span>@bestdebunking</span></div>
                                 </div>
                                 <div class="body">
                                     “Animal magnetism is one of the completest delusions the human mind ever entertained”
@@ -205,7 +209,7 @@
                                 <div class="avatar"></div>
                                 <div class="header">
                                     <span class="time">12 July 1838</span>
-                                    <div class="username">Thomas Wakley <span>@wako_lancet</span></div>
+                                    <div class="username">Thomas Wakley <span>@bestdebunking</span></div>
                                 </div>
                                 <div class="body">
                                     “The medical schools with which mesmerism is connected must be speedily and irreparably ruined, unless the moral quackery is at once put down by the governors”
@@ -227,7 +231,7 @@
                                 <div class="avatar"></div>
                                 <div class="header">
                                     <span class="time">12 July 1838</span>
-                                    <div class="username">Charles Dickens <span>@cdickens</span></div>
+                                    <div class="username">Charles Dickens <span>@oldcuriosityshop</span></div>
                                 </div>
                                 <div class="body">
                                     “With regard to my opinion on the subject of mesmerism, I have no hesitation in saying that I have watched Dr Elliotson’s experiments from the first… and that after what I have seen with my own senses, I should be untrue both to him and to myself, if I should shrink for a moment from saying that I am a believer”
@@ -238,7 +242,7 @@
                                 <div class="avatar"></div>
                                 <div class="header">
                                     <span class="time">12 July 1838</span>
-                                    <div class="username">Harriet Martineau<span>@hmartineau</span></div>
+                                    <div class="username">Harriet Martineau<span>@womanofletters</span></div>
                                 </div>
                                 <div class="body">
                                     “Those who know mesmerism to be true from their own experience are now a very large number…the great majority who know nothing of the matter laugh at it as a nonsense or a cheat”

@@ -97,7 +97,7 @@
                     <img src="/_assets/img/airloom/airloom-2.jpg">
                 </div>
 
-                <div class="info-box" data-component="gallery">
+                <div class="info-box with-text" data-component="gallery">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
                         <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
                         <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
@@ -108,6 +108,11 @@
                             <path d="M53.7,63.9 L96.2,63.9 L64.1,23.8 L42.9,53.1 L50.9,61.1 L53.7,63.9 Z" id="Shape"></path>
                         </g>
                     </svg>
+
+                    <div class="text">
+                        <span class="info-type">Gallery:</span>
+                        <span class="info-title">Aldini’s experiments</span>
+                    </div>
                 </div>
 
                 <script>

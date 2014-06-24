@@ -144,7 +144,7 @@
 
                 <?php pattern('library_panel'); ?>
 
-                <div class="info-box" data-component="gallery">
+                <div class="info-box with-text" data-component="gallery">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
                         <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
                         <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
@@ -155,6 +155,11 @@
                             <path d="M53.7,63.9 L96.2,63.9 L64.1,23.8 L42.9,53.1 L50.9,61.1 L53.7,63.9 Z" id="Shape"></path>
                         </g>
                     </svg>
+
+                    <div class="text">
+                        <span class="info-type">Gallery:</span>
+                        <span class="info-title">The tools of mesmerism</span>
+                    </div>
                 </div>
 
                 <script>
@@ -162,19 +167,25 @@
                         location: 'mesmer/gallery/',
                         images: [
                             {
-                                image: 'L0000475',
-                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                                image: 'L0023349',
                             },
                             {
-                                image: 'L0000477EA',
+                                image: 'L0023350',
                             },
                             {
-                                image: 'L0028102',
-                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                                image: 'L0023351',
                             },
                             {
-                                image: 'V0011934',
-                                text: 'Here is some test text. Lorem ipsum is for suckers!'
+                                image: 'L0023352',
+                            },
+                            {
+                                image: 'M0006352',
+                            },
+                            {
+                                image: 'V0011096',
+                            },
+                            {
+                                image: 'V0016530',
                             },
                         ]
                     }
