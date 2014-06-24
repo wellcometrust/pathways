@@ -204,12 +204,10 @@
             width: 100%;
         }
 
-        blockquote {
-            display: none;
-        }
         p {
             font-size: 1rem;
         }
+        
         span {
             font-size: 2.005rem;
         }
@@ -265,9 +263,11 @@
     }
 
     .comic-panel:nth-child(9) {
-        width: 45%;
-        margin-left: 5%;
+        width: 55%;
         margin-top: 14px;
+        -webkit-transform: translateX(50px);
+           -moz-transform: translateX(50px);
+                transform: translateX(50px);
     }
 
     .comic-panel:nth-child(10) {
@@ -285,6 +285,25 @@
         width: 35%;
         margin-left: 10%;
         margin-top: 25px;
+    }
+
+    .comic-quote {
+        position:   absolute;
+        top:        45px;
+        left:       310px;
+        width:      340px;
+
+        .info-box {
+            position: absolute;
+        }
+
+        p {
+            @include            abril-italic;
+            background-color:   rgba(0,0,0,0.9);
+            margin:             45px 0 0 45px;
+            padding:            1rem 1.2rem 1rem 3rem;
+            border-radius:      4px;
+        }
     }
 }
 
@@ -317,10 +336,6 @@
         img {
             display: block;
             width: 100%;
-        }
-
-        blockquote {
-            display: none;
         }
     }
 
@@ -405,6 +420,12 @@
 
     .comic-column .comic-panel {
         float: none;
+    }
+
+    .comic-quote {
+        position: absolute;
+        top: 45px;
+        left: 400px;
     }
 
     .outro {

@@ -103,6 +103,7 @@ Pathways.LoadScenes = function() {
 
     $('.sequence .panel').each(function() {
         var $this           = $(this),
+            height          = $this.height(),
             $bg             = $this.find('.bg-container'),
             $library_panel  = $this.find('.library-panel'),
             $gallery        = $this.find('[data-component="gallery"]'),
@@ -125,8 +126,9 @@ Pathways.LoadScenes = function() {
         if( $gallery.length ) {
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
-                    duration:       panel_height,
-                    offset:         100
+                    triggerHook:    'top',
+                    duration:       (height - 200),
+                    offset:         50
                 })
                 .on('enter', function() {
                     $gallery.css({ position: 'fixed', display: 'block' });

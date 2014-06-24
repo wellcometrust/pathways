@@ -553,10 +553,7 @@ iframe {
       left: 0; }
       .scroll-content.position-center .inner {
         width: 640px;
-        margin: 0 auto; }
-
-  .panel {
-    min-height: 700px; } }
+        margin: 0 auto; } }
 .library-panel {
   display: none;
   position: absolute;
@@ -976,8 +973,8 @@ iframe {
   width: 60%;
   margin-right: 142px; }
 #verdict .verdict-text {
-  font-size: 1.618rem;
-  margin-bottom: 0; }
+  font-size: 3.245rem;
+  margin-bottom: 4rem; }
 #verdict blockquote p {
   font-family: "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
   font-weight: normal;
@@ -988,7 +985,7 @@ iframe {
   font-size: 2.005rem;
   margin-top: 2em; }
 #verdict .outro {
-  font-size: 2.618rem;
+  font-size: 1.618rem;
   line-height: 1.219;
   width: 80%; }
 
@@ -1035,10 +1032,18 @@ iframe {
   -moz-transition: -moz-transform 30s linear;
   transition: transform 30s linear; }
 
+#surgery-under-hypnosis .bg-container video {
+  position: absolute;
+  bottom: 0; }
+
+#self-hypnosis .bg-container video {
+  position: absolute;
+  bottom: 0; }
+
 #anna-o .scroll-content {
   left: 5%; }
 #anna-o header {
-  margin: 2rem 0 4rem 0; }
+  margin: 8rem 0 6rem 0; }
 #anna-o h1 {
   color: #030303; }
 #anna-o p {
@@ -1295,8 +1300,6 @@ iframe {
   .trilby .comic-panel img {
     display: block;
     width: 100%; }
-  .trilby .comic-panel blockquote {
-    display: none; }
   .trilby .comic-panel p {
     font-size: 1rem; }
   .trilby .comic-panel span {
@@ -1332,9 +1335,11 @@ iframe {
   margin-left: 5%;
   padding: 2em 0; }
 .trilby .comic-panel:nth-child(9) {
-  width: 45%;
-  margin-left: 5%;
-  margin-top: 14px; }
+  width: 55%;
+  margin-top: 14px;
+  -webkit-transform: translateX(50px);
+  -moz-transform: translateX(50px);
+  transform: translateX(50px); }
 .trilby .comic-panel:nth-child(10) {
   width: 45%;
   margin-top: -100px; }
@@ -1346,6 +1351,21 @@ iframe {
   width: 35%;
   margin-left: 10%;
   margin-top: 25px; }
+.trilby .comic-quote {
+  position: absolute;
+  top: 45px;
+  left: 310px;
+  width: 340px; }
+  .trilby .comic-quote .info-box {
+    position: absolute; }
+  .trilby .comic-quote p {
+    font-family: "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: italic;
+    background-color: rgba(0, 0, 0, 0.9);
+    margin: 45px 0 0 45px;
+    padding: 1rem 1.2rem 1rem 3rem;
+    border-radius: 4px; }
 
 .bonpard .inner {
   max-width: 1024px;
@@ -1365,8 +1385,6 @@ iframe {
   .bonpard .comic-panel img {
     display: block;
     width: 100%; }
-  .bonpard .comic-panel blockquote {
-    display: none; }
 .bonpard .comic-row {
   position: relative;
   clear: both; }
@@ -1411,6 +1429,10 @@ iframe {
   float: left; }
 .bonpard .comic-column .comic-panel {
   float: none; }
+.bonpard .comic-quote {
+  position: absolute;
+  top: 45px;
+  left: 400px; }
 .bonpard .outro {
   margin: 7rem 0; }
   .bonpard .outro p {
@@ -1557,12 +1579,32 @@ iframe {
   .past-twitter .tweet.elliotson {
     float: right; }
     .past-twitter .tweet.elliotson .avatar {
+      right: -10px;
       background: url(/_assets/img/elliotson/twitter-elliotson.png) 0 0 no-repeat;
-      background-size: 100%;
-      right: -10px; }
+      background-size: 100%; }
     .past-twitter .tweet.elliotson .header {
       padding-right: 80px; }
     .past-twitter .tweet.elliotson .body {
+      padding-right: 80px; }
+  .past-twitter .tweet.dickens {
+    float: left; }
+    .past-twitter .tweet.dickens .avatar {
+      left: -10px;
+      background: url(/_assets/img/elliotson/twitter-dickens.png) 0 0 no-repeat;
+      background-size: 100%; }
+    .past-twitter .tweet.dickens .header {
+      padding-left: 80px; }
+    .past-twitter .tweet.dickens .body {
+      padding-left: 80px; }
+  .past-twitter .tweet.martineau {
+    float: right; }
+    .past-twitter .tweet.martineau .avatar {
+      right: -10px;
+      background: url(/_assets/img/elliotson/twitter-martineau.png) 0 0 no-repeat;
+      background-size: 100%; }
+    .past-twitter .tweet.martineau .header {
+      padding-right: 80px; }
+    .past-twitter .tweet.martineau .body {
       padding-right: 80px; }
 
 .intro .bg-container {

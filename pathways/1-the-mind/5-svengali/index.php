@@ -89,7 +89,14 @@
                                 <p class="panel-text">She falls under the spell of Svengali</p>
 
                                 <blockquote class="comic-quote">
-                                    <p>&hellip;a sticky, haunting, long, lean, uncanny, black spider-cat, if there is such an animal outside a bad dream</p>
+                                    <div class="info-box">
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
+                                            <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
+                                            <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
+                                        </svg>
+                                    </div>
+
+                                    <p>“&hellip;a sticky, haunting, long, lean, uncanny, black spider-cat, if there is such an animal outside a bad dream”</p>
                                 </blockquote>
                             </div>
 
@@ -116,8 +123,15 @@
                                 <img src="/_assets/img/svengali/trilby/trilby-comic-11.jpg">
                                 <p class="panel-text">Trilby finds herself on stage, frozen in front of a heckling crowd, with no recollection that she had ever been a singer</p>
 
-                                <blockquote>
-                                    <p>There were two Trilbys&hellip;with one look of his eye – with a word – Svengali could turn her into the other Trilby, and make her do whatever he liked&hellip;</p>
+                                <blockquote class="comic-quote">
+                                    <div class="info-box">
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
+                                            <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
+                                            <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
+                                        </svg>
+                                    </div>
+
+                                    <p>“There were two Trilbys&hellip;with one look of his eye – with a word – Svengali could turn her into the other Trilby, and make her do whatever he liked&hellip;”</p>
                                 </blockquote>
                             </div>
                         </div>

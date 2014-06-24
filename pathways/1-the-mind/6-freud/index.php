@@ -76,6 +76,27 @@
 
             </div>
 
+            <div id="fred-breuer-intro" class="panel fred-breuer" data-offset-height="-450">
+            
+                <div class="bg-container">
+                    <img src="/_assets/img/freud/freud-3.jpg">
+                </div>
+
+                <div class="scroll-content text">
+                    <div class="content">
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="anna-o-video" class="panel talking-head" data-offset-height="150">
+
+                <div class="bg-container video" data-src="/_assets/video/anna-o.webm"></div>
+
+                <div class="mute"></div>
+                
+            </div>
+
             <div id="fred-breuer" class="panel fred-breuer">
             
                 <div class="bg-container">
@@ -108,14 +129,6 @@
                 ?>
             </div>
 
-            <div id="anna-o-video" class="panel talking-head" data-offset-height="250">
-
-                <div class="bg-container video" data-src="/_assets/video/anna-o.webm"></div>
-
-                <div class="mute"></div>
-                
-            </div>
-
             <div class="panel office">
                 <div class="bg-container">
                     <img src="/_assets/img/freud/freud-6.jpg">
@@ -132,7 +145,7 @@
                     $panel = array(
                         'links' => array(
                             array(
-                                'title'         => 'Freud’s office',
+                                'title' => 'Freud’s office',
                             )
                         )
                     );
@@ -158,6 +171,17 @@
         </div>
         
         <?php pattern('library_layer') ?>
+
+        <div class="teaser">
+            <a href="/pathways/1-the-mind/credits.php">
+                <div class="teaser-text-container">
+                    <p class="teaser-text">Continue with your journey in the <span>Mind</span></p>
+                    <h1>Credits</h1>
+                    <img class="teaser-icon" src="/_assets/img/icons/icon-teaser.svg" alt="continue to the next section" />
+                </div>
+            </a>
+        </div>
+
         <?php pattern('global_navigation') ?>
 
     </main>

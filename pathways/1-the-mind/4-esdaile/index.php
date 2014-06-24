@@ -50,7 +50,7 @@
 
                     <div class="text">
                         <span class="info-type">Quiz:</span>
-                        <span class="info-title">Spot the tumour</span>
+                        <span class="info-title">Guess the tumour</span>
                     </div>
                 </div>
 
@@ -194,7 +194,7 @@
                 
             </div>
 
-            <div id="self-hypnosis" class="panel talking-head" data-offset-height="250">
+            <div id="self-hypnosis" class="panel talking-head">
 
                 <div class="bg-container video" data-src="/_assets/video/chris-hypno-demo.webm"></div>
 

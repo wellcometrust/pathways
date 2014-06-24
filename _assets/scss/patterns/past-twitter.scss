@@ -47,9 +47,9 @@
             float: left;
 
             .avatar {
-                left:   -10px;
-                background: url(/_assets/img/elliotson/twitter-wakley.png) 0 0 no-repeat;
-                background-size: 100%;
+                left:               -10px;
+                background:         url(/_assets/img/elliotson/twitter-wakley.png) 0 0 no-repeat;
+                background-size:    100%;
             }
 
             .header {
@@ -65,9 +65,45 @@
             float: right;
 
             .avatar {
-                background: url(/_assets/img/elliotson/twitter-elliotson.png) 0 0 no-repeat;
-                background-size: 100%;
-                right:  -10px;
+                right:              -10px;
+                background:         url(/_assets/img/elliotson/twitter-elliotson.png) 0 0 no-repeat;
+                background-size:    100%;
+            }
+
+            .header {
+                padding-right: 80px;
+            }
+
+            .body {
+                padding-right: 80px;
+            }
+        }
+
+        &.dickens {
+            float: left;
+
+            .avatar {
+                left:               -10px;
+                background:         url(/_assets/img/elliotson/twitter-dickens.png) 0 0 no-repeat;
+                background-size:    100%;
+            }
+
+            .header {
+                padding-left: 80px;
+            }
+
+            .body {
+                padding-left: 80px;
+            }
+        }
+
+        &.martineau {
+            float: right;
+
+            .avatar {
+                right:              -10px;
+                background:         url(/_assets/img/elliotson/twitter-martineau.png) 0 0 no-repeat;
+                background-size:    100%;
             }
 
             .header {
