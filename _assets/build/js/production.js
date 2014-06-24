@@ -163,7 +163,7 @@ Pathways.LoadScenes = function() {
 
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
-                    duration:       panel_height,
+                    duration:       (height - 200),
                     offset:         100
                 })
                 .on('enter', function() {
@@ -178,7 +178,7 @@ Pathways.LoadScenes = function() {
         if( $mute.length ) {
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
-                    duration:       panel_height,
+                    duration:       (height - 200),
                     offset:         100
                 })
                 .on('enter', function() {
