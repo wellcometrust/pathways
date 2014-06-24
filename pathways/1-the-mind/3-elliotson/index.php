@@ -42,6 +42,28 @@
                     <img src="/_assets/img/elliotson/elliotson-2.jpg">
                 </div>
 
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'University College Hospital, London',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1196522',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/V0013634.html'
+                            ),
+                            array(
+                                'title'         => 'A Mesmerist using Animal Magnetism on a woman who responds with convulsions',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1159956',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/V0011094EB.html'
+                            ),
+                            array(
+                                'title'         => 'A Mesmerist using Animal Magnetism on a woman who responds with convulsions',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1159957',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/V0011094ET.html'
+                            )
+                        )
+                    );
+                ?>
+
                 <?php pattern('library_panel'); ?>
 
                 <div class="black-strip" ></div>
@@ -111,6 +133,20 @@
                 <div class="bg-container">
                     <img src="/_assets/img/elliotson/elliotson-3.jpg">
                 </div>
+
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'Thomas Wakley',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1173333',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0008210.html'
+                            )
+                        )
+                    );
+                ?>
+
+                <?php pattern('library_panel'); ?>
 
                 <div class="scroll-content fixed position-center">
                     <header>

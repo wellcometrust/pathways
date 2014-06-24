@@ -1,9 +1,9 @@
 <?php
     global $module;
     
-    $module     = isset($module) ? $module : 'mesmer';
+    $module     = isset($module) ? $module : '';
     $indices    = ['mesmer' => 1,'airloom' => 2,'elliotson' => 3,'esdaile' => 4,'svengali' => 5,'freud' => 6];
-    $idx        = $indices[$module];
+    $idx        = isset($indices[$module]) ? $indices[$module] : '';
 ?>
 
 <div class="global-navigation active" data-component="global-navigation">

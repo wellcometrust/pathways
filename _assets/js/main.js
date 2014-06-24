@@ -15,14 +15,9 @@ function positionCenter($elm) {
 
 Pathways.LoadScenes = function() {
 
-    var panel_height    = window.innerHeight < 750 ? (750 + 15) : (window.innerHeight + 15),        
-        $start          = $('.start'),
+    var panel_height    = window.innerHeight < 550 ? (550 + 10) : (window.innerHeight + 10),
         $sequence       = $('.sequence'),
         controller      = new ScrollMagic();
-
-
-    // Begin!
-    $start.css('height', panel_height);
 
     /**************
         Scenes
@@ -160,6 +155,8 @@ Pathways.LoadScenes = function() {
 
         // Library panels
         if( $library_panel.length ) {
+            $library_panel.css('transform', 'translate('+ ($library_panel.outerWidth()) +'px, '+ ($library_panel.outerHeight() - 60) +'px)');
+
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
                     duration:       panel_height,
@@ -194,6 +191,13 @@ Pathways.LoadScenes = function() {
 
     // Crop zoom
     if( _('#mesmers-salon') ) {
+
+        $('.crop-zoom').css('height',  $('#mesmers-salon .bg-container img').height() );
+
+        window.addEventListener('resize', function() {
+            $('.crop-zoom').css('height',  $('#mesmers-salon .bg-container img').height() );
+        });
+
         scenes[idx++] = new ScrollScene({
                 triggerElement: '#mesmers-salon',
                 duration:       (panel_height - 100),
@@ -201,29 +205,24 @@ Pathways.LoadScenes = function() {
             })
             .on('enter', function(e) {
                 _('.crop-zoom').style['position'] = 'fixed';
-                TweenMax.to('.crop-zoom', 0.2, { opacity: 1 }); // Fade in
-                
-                setTimeout(function() {
-                    // $('.tap-target').addClass('animate');
-                }, 200);
+                TweenMax.to('.crop-zoom', 0.2, { opacity: 1 }); // Fade in                
             })
             .on('leave', function(e) {
                 TweenMax.to('.crop-zoom', 0.2, { opacity: 0 }); // Fade out
                 
                 setTimeout(function() {
-                    // $('.tap-target').removeClass('animate');
                     _('.crop-zoom').style['position'] = 'absolute';
                 }, 200);
             })
     }
 
     // Tree
-    if( _('.tree' ) ) {
-        var tree_offset = $('.tree').data('offset-height') ? $('.tree').data('offset-height') : 0;
+    if( _('#magnetised-trees' ) ) {
+        var tree_offset = $('#magnetised-trees').data('offset-height') ? $('#magnetised-trees').data('offset-height') : 0;
         $('.black-strip').css({'height': panel_height, 'transform': 'translate(0,'+panel_height+'px)'});
 
         scenes[idx++] = new ScrollScene({
-                triggerElement: '.tree',
+                triggerElement: '#magnetised-trees',
                 duration:       panel_height
             })
             .on('enter', function(e) {
@@ -236,17 +235,17 @@ Pathways.LoadScenes = function() {
             })
 
         scenes[idx++] = new ScrollScene({
-                triggerElement: '.tree',
+                triggerElement: '#magnetised-trees',
                 duration:       panel_height + tree_offset + 100
             })
             .on('enter', function(e) {
-                if( _('.tree video') )
-                    _('.tree video').play();
+                if( _('#magnetised-trees video') )
+                    _('#magnetised-trees video').play();
             })
             .on('leave', function(e) {
-                if( _('.tree video') ) {
-                    _('.tree video').pause();
-                    _('.tree video').currentTime = 0;
+                if( _('#magnetised-trees video') ) {
+                    _('#magnetised-trees video').pause();
+                    _('#magnetised-trees video').currentTime = 0;
                 }
             })
     }

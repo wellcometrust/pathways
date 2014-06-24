@@ -562,10 +562,10 @@ iframe {
   position: absolute;
   bottom: 0;
   right: 0;
-  z-index: 5;
-  -webkit-transform: translate(200px, 200px);
+  z-index: 15;
+  -webkit-transform: translate(100%, 88%);
   -webkit-transition: all 0.5s ease;
-  -moz-transform: translate(200px, 200px);
+  -moz-transform: translate(100%, 88%);
   -moz-transition: all 0.5s ease; }
   .library-panel .handle {
     display: block;
@@ -586,18 +586,20 @@ iframe {
   .library-panel .body {
     color: #fff;
     background-color: rgba(92, 184, 178, 0.9);
-    width: 200px;
-    height: 200px;
+    width: 420px;
+    min-height: 200px;
     padding: 15px;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease; }
     .library-panel .body li {
       list-style: none; }
+      .library-panel .body li span {
+        display: block; }
       .library-panel .body li a {
         font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
         font-weight: normal;
         font-style: normal;
-        font-size: .8rem;
+        font-size: 0.8rem;
         color: #333; }
         .library-panel .body li a:hover {
           color: #fff; }
@@ -1094,17 +1096,7 @@ iframe {
 
 @media screen and (min-width: 48em) {
   #mesmers-salon {
-    display: block; }
-    #mesmers-salon p {
-      position: absolute;
-      top: 80px;
-      color: #fff;
-      font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
-      font-weight: normal;
-      font-style: normal;
-      font-size: 2.236rem;
-      width: 100%;
-      text-align: center; } }
+    display: block; } }
 /**
     Crop zoom
 **/
@@ -1143,6 +1135,7 @@ iframe {
 .popup .text {
   position: absolute;
   color: #fff;
+  font-size: 1.239rem;
   background-color: rgba(0, 0, 0, 0.6);
   width: 320px;
   padding: 45px;

@@ -67,6 +67,21 @@
                     <img src="/_assets/img/mesmer/mesmer-2.jpg">
                 </div>
 
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'Mesmeric therapy',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1202566~S13',
+                                'download_url'  => '',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0014796.html'
+                            )
+                        )
+                    );
+                ?>
+
+                <?php pattern('library_panel'); ?>
+
                 <div class="crop-zoom">
                     <svg class="info-box tap-target rod" data-crop="rod" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                         <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"/>
@@ -105,8 +120,6 @@
                     }
                 </script>
 
-                <?php pattern('library_panel'); ?>
-
             </div>
 
 
@@ -115,6 +128,19 @@
                 <div class="bg-container">
                     <img src="/_assets/img/mesmer/mesmer-3.jpg">
                 </div>
+
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'A goat-headed man caresses a sleeping ewe-headed woman; satirizing the notion of animal magnetism and its application by physicians',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1175728',
+                                'download_url'  => '',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/V0011934.html'
+                            )
+                        )
+                    );
+                ?>
 
                 <?php pattern('library_panel'); ?>
 
@@ -181,6 +207,19 @@
                     <p>Mesmer’s salons became overwhelmed with patients. When he could no longer accommodate them he magnetised a tree in the street outside, to which crowds of people connected themselves with cords.</p>
                 </div>
 
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'Patients mesmerised by rods linked to the tree',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1070780',
+                                'download_url'  => '',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0016301.html'
+                            )
+                        )
+                    );
+                ?>
+
                 <?php pattern('library_panel'); ?>
 
             </div>
@@ -197,6 +236,44 @@
                     <p>But Mesmer insisted that his theory should be assessed by the highest scientific authorities.</p>
                 </div>
 
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => '18th century marbling studio',
+                                'catalogue_url' => '',
+                                'download_url'  => '',
+                                'images_url'    => '',
+                                'external_url'  => 'http://thecambridgeroom.files.wordpress.com/2011/12/18th.jpg'
+                            ),
+                            array(
+                                'title' => 'Caricature: A goat-headed man caresses a sleeping ewe-headed woman',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1175728',
+                                'download_url'  => '',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/V0011934.html'
+                            ),
+                            array(
+                                'title' => 'Caricature: Animal magnetism, ‘Our faculties are related’',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1059930',
+                                'download_url'  => '',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0000477.html',
+                            ),
+                            array(
+                                'title' => 'Caricature: The doctor hypnotises the woman in the guise of Bottom from ‘Midsummer Night’s Dream’',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1059930',
+                                'download_url'  => '',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0000477EA.html',
+                            ),
+                            array(
+                                'title' => 'Caricature: The effects of magnetism&hellip; animal',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1291063',
+                                'download_url'  => '',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0000475.html',
+                            )
+                        )
+                    );
+                ?>
+
                 <?php pattern('library_panel'); ?>
                 
             </div>
@@ -208,7 +285,7 @@
                 <div class="scroll-content position-center">
                     <div class="inner">
                         <header>
-                            <h1>The committee investigates</h1>
+                            <h1>The committee investigates&hellip;</h1>
                         </header>
                     </div>
                 </div>
@@ -223,6 +300,21 @@
 
                 <div class="controls"></div>
 
+
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'Title page of the Report of Benjamin Franklin Commission on animal magnetism',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1502897~S12',
+                                'download_url'  => 'http://wellcomelibrary.org/actual/b20595244/0/0a982e34-0666-425c-a810-4f11b27d58ac/jp2',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0016301.html'
+                            )
+                        )
+                    );
+                ?>
+
+                <?php pattern('library_panel'); ?>
             </div>
 
         </div>
