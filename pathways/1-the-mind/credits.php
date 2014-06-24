@@ -34,7 +34,7 @@ include($docRoot.'/_includes/header.php');
                 <h3>Clearleft</h3>
 
                 <ul>
-                    <li><span>Designer:</span> Michael Allan</li>
+                    <li><span>Art direction &amp; Design:</span> Michael Allan</li>
                     <li><span>Developer:</span> Graham Smith</li>
                     <li><span>UX Designer:</span> Richard Rutter and Ben Sauer</li>
                     <li><span>Project Manager:</span> Jessica Jebari</li>
