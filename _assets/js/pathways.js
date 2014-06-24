@@ -80,6 +80,8 @@
         var resizeAllTheThings = function() {
             panel_height = window.innerHeight < 550 ? (550 + 10) : (window.innerHeight + 10);
 
+            $('.start').css('height', panel_height);
+
             // Set the heights of the panels to a minimum of the window height, or the height of the content.
             // Use any offsets set on the panel to increase height where necessary.
             $('.panel').each(function() {

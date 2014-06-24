@@ -23,7 +23,7 @@ include($docRoot.'/_includes/header.php');
                     <h1>MINDCRAFT</h1>
                 </header>
 
-                <p class="intro-body">A journey in <span>six parts</span> into the discovery of our modern understanding of the mind.</p>
+                <p class="intro-body">A century of murder, mind control and mental healing.</p>
 
                 <a href="1-mesmer" class="intro-button">Start your journey</a>
             </div>

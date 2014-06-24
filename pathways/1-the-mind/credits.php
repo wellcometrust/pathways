@@ -50,7 +50,8 @@ include($docRoot.'/_includes/header.php');
             </div><!-- .inner -->
         </div><!-- .credits -->
 
-
+        <?php pattern('global_navigation') ?>
+        
     </main>
 
 <?php include($docRoot.'/_includes/footer.php') ?>

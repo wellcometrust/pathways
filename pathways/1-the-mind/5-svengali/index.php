@@ -50,6 +50,18 @@
                     <img src="/_assets/img/svengali/svengali-2.jpg">
                 </div>
 
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'Trilby, novel by George du Maurier, 1894',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1265549',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/M0005798.html'
+                            )
+                        )
+                    );
+                ?>
+
                 <?php pattern('library_panel'); ?>
 
                 <div class="scroll-content fixed">

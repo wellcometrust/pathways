@@ -54,6 +54,17 @@
                     </div>
                 </div>
 
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'Esdaile’s patient',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1309510~S12',
+                            )
+                        )
+                    );
+                ?>
+
                 <?php pattern('library_panel'); ?>
 
                 <!-- scroll content -->
@@ -76,6 +87,17 @@
                     <img src="/_assets/img/esdaile/esdaile-3.jpg">
                 </div>
 
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'Fakir sitting on a bed of nails (Benares, India)',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b2033739~S12',
+                            )
+                        )
+                    );
+                ?>
+
                 <?php pattern('library_panel'); ?>
 
                 <div class="scroll-content right">
@@ -93,6 +115,18 @@
                     <img src="/_assets/img/esdaile/esdaile-4.jpg">
                     <div class="boats"></div>
                 </div>
+
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'The north-east view of Angengo Fort on the coast of Malabar',
+                                'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1265549',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0038350.html'
+                            )
+                        )
+                    );
+                ?>
 
                 <?php pattern('library_panel'); ?>
 
@@ -130,6 +164,17 @@
                 <div class="bg-container">
                     <img src="/_assets/img/esdaile/esdaile-5.jpg">
                 </div>
+
+                <?php
+                    $panel = array(
+                        'links' => array(
+                            array(
+                                'title'         => 'James Braid',
+                                'images_url'    => 'http://wellcomeimages.org/indexplus/image/M0005798.html'
+                            )
+                        )
+                    );
+                ?>
 
                 <?php pattern('library_panel'); ?>
 
