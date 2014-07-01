@@ -27,7 +27,10 @@ include($docRoot.'/_includes/header.php');
 
                 <p class="intro-body">A century of madness, murder and mental healing.</p>
 
-                <a href="1-mesmer" class="intro-button">Start your journey</a>
+                <a href="1-mesmer" class="intro-button">
+                    Start your journey
+                    <span></span>
+                </a>
             </div>
 
             <div class="intro-navigation">
