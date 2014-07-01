@@ -305,6 +305,7 @@ Pathways.LoadScenes = function() {
             })
             .on('enter', function(e) {
                 if( _('#airloom video') )
+                    _('#airloom video').currentTime = 0.4;
                     _('#airloom video').play();
             })
             .on('leave', function(e) {
@@ -424,7 +425,20 @@ Pathways.LoadScenes = function() {
                     offset:             offset
                 })
                 .setTween(tween);
-        })
+        });
+
+        // put this here for now.
+        $('.comic-quote').on('click', '.info-box', function() {
+            var $this   = $(this),
+                $parent = $this.parent();
+
+            if( $parent.hasClass('active') ) {
+                $parent.removeClass('active');
+            }
+            else {
+                $parent.addClass('active');
+            }
+        });
     }
 
     // Freud

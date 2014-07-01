@@ -73,7 +73,8 @@
                             </div>
                             <div class="comic-panel">
                                 <img src="/_assets/img/svengali/trilby/trilby-comic-3.jpg">
-                                <p class="panel-text">She meets Svengali, a Jewish musical impresario. He wants to make her a star</p>
+                                <p class="panel-text">She meets Svengali, a Jewish musical impresario</p>
+                                <p class="panel-text">He wants to make her a star</p>
                             </div>
                             <div class="comic-panel">
                                 <img src="/_assets/img/svengali/trilby/trilby-comic-4.jpg">
@@ -93,6 +94,9 @@
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
                                             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
                                             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
+                                            <g sketch:type="MSShapeGroup" fill="#222" transform="translate(35, 37) scale(0.7, 0.7)">
+                                                <path d="M12.1 3.2l-3.6-3.1c-4.5 3.3-8 9.2-8 15.6 0 5.1 2.9 7.9 6.1 7.9 3 0 5.3-2.5 5.3-5.6 0-3-2.1-5.3-4.8-5.3-.5 0-1.2.2-1.3.2.4-3.4 3.1-7.5 6.3-9.7zM22.8 12.6c-.4 0-1.1.2-1.3.2.4-3.3 3.1-7.5 6.3-9.6l-3.6-3.1c-4.5 3.3-8 9.2-8 15.6 0 5.1 2.8 7.9 6.1 7.9 2.9 0 5.3-2.5 5.3-5.6 0-3.1-2-5.4-4.8-5.4z"/>
+                                            </g>
                                         </svg>
                                     </div>
 
@@ -128,6 +132,9 @@
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
                                             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
                                             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
+                                            <g sketch:type="MSShapeGroup" fill="#222" transform="translate(35, 37) scale(0.7, 0.7)">
+                                                <path d="M12.1 3.2l-3.6-3.1c-4.5 3.3-8 9.2-8 15.6 0 5.1 2.9 7.9 6.1 7.9 3 0 5.3-2.5 5.3-5.6 0-3-2.1-5.3-4.8-5.3-.5 0-1.2.2-1.3.2.4-3.4 3.1-7.5 6.3-9.7zM22.8 12.6c-.4 0-1.1.2-1.3.2.4-3.3 3.1-7.5 6.3-9.6l-3.6-3.1c-4.5 3.3-8 9.2-8 15.6 0 5.1 2.8 7.9 6.1 7.9 2.9 0 5.3-2.5 5.3-5.6 0-3.1-2-5.4-4.8-5.4z"/>
+                                            </g>
                                         </svg>
                                     </div>
 
@@ -223,15 +230,14 @@
                                 </div>
                                 <div class="comic-panel">
                                     <img src="/_assets/img/svengali/bonpard/bonpard-comic-2.jpg">
-                                </div>
-                                
-                                <p class="panel-text wide">In 1889 Paris was gripped by a sensational murder. A wealthy businessman was lured by a young woman named Gabrielle Bonpard to a rented apartment where her partner, a vicious con-man named Michel Eyraud, was lying in wait.</p>
+                                    <p class="panel-text">In 1889 Paris was gripped by a sensational murder. A wealthy businessman was lured by a young woman named Gabrielle Bompard to a rented apartment where her partner, a vicious con-man named Michel Eyraud, was lying in wait.</p>
+                                </div>                                
                             </div>
 
                             <div class="comic-row clearfix">
                                 <div class="comic-panel">
                                     <img src="/_assets/img/svengali/bonpard/bonpard-comic-3.jpg">
-                                    <p class="panel-text">The victim was strangled by a sil dressing gown cord, his body packed into a trunk and dumped off a remote mountainside.</p>
+                                    <p class="panel-text">The victim was strangled by a silk dressing gown cord, his body packed into a trunk and dumped off a remote mountainside.</p>
                                 </div>
                                 <div class="comic-panel">
                                     <img src="/_assets/img/svengali/bonpard/bonpard-comic-4.jpg">
@@ -260,7 +266,7 @@
                                 </div>
 
                                 <div class="comic-panel">
-                                    <p>If Eyraud was controlling Gabrielle’s mind how could she be guilty? But could hypnosis really compel an innocent woman to murder?</p>
+                                    <p>If Eyraud was controlling Gabrielle’s mind, how could she be guilty? But could hypnosis really compel an innocent woman to murder?</p>
                                     <p>The case split the psychiatric profession.</p>
                                 </div>
                             </div>
@@ -269,18 +275,18 @@
                                 <div class="comic-column">
                                     <div class="comic-panel">
                                         <img src="/_assets/img/svengali/bonpard/bonpard-comic-10.jpg">
-                                        <p class="panel-text">All conscience has disappeared in a hypnotized subject who has been forced to commit a criminal act.</p>
+                                        <p class="panel-text">“If hypnotism explains the crime, if it is a way to deny free will…no criminal will be accountable for the blood he spills.” <cite>- Jules Quesnay de Beaurepair</cite></p>
                                     </div>
                                     <div class="comic-panel" data-offset="-200">
                                         <img src="/_assets/img/svengali/bonpard/bonpard-comic-11.jpg">
 
-                                        <p class="panel-text">Only he who has given the suggestion is guilty.</p>
+                                        <p class="panel-text">“All conscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.” <cite>- Jules Liégeois</cite></p>
                                     </div>
                                 </div>
                                 <div class="comic-column">
                                     <div class="comic-panel" data-offset="200">
                                         <img src="/_assets/img/svengali/bonpard/bonpard-comic-12.jpg">
-                                        <p class="panel-text">Both defendants were found guilty, Eyraud was sentenced to death by guillotine. Gabrielle received a prison sentence of 21 years.</p>
+                                        <p class="panel-text">Both defendants were found guilty. Eyraud was sentenced to death by guillotine. Gabrielle received a prison sentence of 21 years.</p>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,7 @@
 /* Typography */
 @font-face {
   font-family: 'Comic Neue';
+  font-weight: 600;
   src: url("/_assets/fonts/ComicNeue-Bold.woff") format("woff"); }
 * {
   margin: 0;
@@ -237,6 +238,10 @@ iframe {
     .library-layer .player-item img {
       float: left;
       margin-right: 0.8em; }
+    .library-layer .player-item .player-item--thumb {
+      float: left;
+      width: 150px;
+      height: 220px; }
     .library-layer .player-item .player-item--header h1 {
       font-size: 1.2rem; }
     .library-layer .player-item .player-item--body {
@@ -252,6 +257,21 @@ iframe {
         font-size: 0.8rem;
         text-decoration: none;
         text-transform: uppercase; }
+    .library-layer .player-item.book .player-item--thumb {
+      background: url("/_assets/img/icons/library-layer/book.svg") 50% 0% no-repeat;
+      background-size: 40%; }
+    .library-layer .player-item.video .player-item--thumb {
+      background: url("/_assets/img/icons/library-layer/video.svg") 50% 0% no-repeat;
+      background-size: 40%; }
+    .library-layer .player-item.audio .player-item--thumb {
+      background: url("/_assets/img/icons/library-layer/audio.svg") 50% 0% no-repeat;
+      background-size: 40%; }
+    .library-layer .player-item.document .player-item--thumb {
+      background: url("/_assets/img/icons/library-layer/document.svg") 50% 0% no-repeat;
+      background-size: 40%; }
+    .library-layer .player-item.image .player-item--thumb {
+      background: url("/_assets/img/icons/library-layer/image.svg") 50% 0% no-repeat;
+      background-size: 40%; }
   .library-layer .related-resources {
     background-color: #F9F9F9;
     padding-top: 2em; }
@@ -876,12 +896,16 @@ iframe {
     width: 46px;
     background: url(/_assets/img/icons/icon-btn-prev.svg) 50% 50% no-repeat;
     background-size: 50%; }
+    .carousel .prev.disabled {
+      opacity: 0.2; }
   .carousel .next {
     position: absolute;
     top: 0;
     width: 46px;
     background: url(/_assets/img/icons/icon-btn-next.svg) 50% 50% no-repeat;
     background-size: 50%; }
+    .carousel .next.disabled {
+      opacity: 0.2; }
   .carousel .text {
     position: absolute;
     left: 0;
@@ -970,8 +994,7 @@ iframe {
 
 #verdict .inner {
   float: right;
-  width: 60%;
-  margin-right: 142px; }
+  width: 80%; }
 #verdict .verdict-text {
   font-size: 3.245rem;
   margin-bottom: 4rem; }
@@ -989,6 +1012,10 @@ iframe {
   line-height: 1.219;
   width: 80%; }
 
+@media screen and (min-width: 52em) {
+  #verdict .inner {
+    width: 60%;
+    margin-right: 142px; } }
 #fakir .bg-container img {
   position: absolute;
   bottom: 0; }
@@ -1017,6 +1044,11 @@ iframe {
   bottom: 0; }
 #india .scroll-content {
   color: #333; }
+  #india .scroll-content .content {
+    max-width: 460px;
+    margin-left: 50px; }
+  #india .scroll-content p {
+    font-size: 1.618rem; }
 #india .boats {
   position: absolute;
   bottom: 110px;
@@ -1031,6 +1063,10 @@ iframe {
   -webkit-transition: -webkit-transform 30s linear;
   -moz-transition: -moz-transform 30s linear;
   transition: transform 30s linear; }
+
+#surgery-under-hypnosis-intro .scroll-content {
+  width: 100%;
+  text-align: center; }
 
 #surgery-under-hypnosis .bg-container video {
   position: absolute;
@@ -1255,8 +1291,8 @@ iframe {
   right: 20px;
   bottom: 10px;
   color: #111;
-  font-family: "Comic Neue", 'Comic Sans', 'Helvetica Neue', Arial, sans-serif;
-  font-weight: normal;
+  font-family: "Comic Neue", 'Comic Sans MS', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
   font-style: normal;
   font-size: 0.9rem !important;
   font-weight: 600;
@@ -1300,8 +1336,9 @@ iframe {
   .trilby .comic-panel img {
     display: block;
     width: 100%; }
-  .trilby .comic-panel p {
-    font-size: 1rem; }
+  .trilby .comic-panel .panel-text {
+    font-size: 1rem;
+    line-height: 1; }
   .trilby .comic-panel span {
     font-size: 2.005rem; }
 .trilby .comic-panel:nth-child(1) {
@@ -1311,14 +1348,34 @@ iframe {
 .trilby .comic-panel:nth-child(2) {
   width: 45%;
   margin-left: 5%; }
+  .trilby .comic-panel:nth-child(2) .panel-text {
+    bottom: 190px;
+    font-style: italic;
+    width: 190px; }
 .trilby .comic-panel:nth-child(3) {
   width: 60%;
   margin-left: -15%;
   margin-top: -77px; }
+  .trilby .comic-panel:nth-child(3) .panel-text {
+    top: 0;
+    bottom: auto;
+    left: auto;
+    right: 0; }
+  .trilby .comic-panel:nth-child(3) .panel-text:nth-of-type(1) {
+    right: 40px; }
+  .trilby .comic-panel:nth-child(3) .panel-text:nth-of-type(2) {
+    top: 32px;
+    right: 20px; }
 .trilby .comic-panel:nth-child(4) {
   width: 45%;
   margin-left: 5%;
   margin-top: 52px; }
+  .trilby .comic-panel:nth-child(4) .panel-text {
+    left: 0;
+    right: auto; }
+  .trilby .comic-panel:nth-child(4) .panel-text:nth-of-type(1) {
+    left: 10px;
+    bottom: 60px; }
 .trilby .comic-panel:nth-child(5) {
   width: 45%;
   margin-top: -61px; }
@@ -1330,6 +1387,12 @@ iframe {
   width: 40%;
   margin-top: -135px;
   margin-left: 5%; }
+  .trilby .comic-panel:nth-child(7) .panel-text {
+    top: 0;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: 220px; }
 .trilby .comic-panel:nth-child(8) {
   width: 25%;
   margin-left: 5%;
@@ -1343,10 +1406,16 @@ iframe {
 .trilby .comic-panel:nth-child(10) {
   width: 45%;
   margin-top: -100px; }
+  .trilby .comic-panel:nth-child(10) .panel-text {
+    left: 0;
+    right: auto;
+    width: 260px; }
 .trilby .comic-panel:nth-child(11) {
   width: 45%;
   margin-top: 49px;
   margin-left: 5%; }
+  .trilby .comic-panel:nth-child(11) .panel-text {
+    font-style: italic; }
 .trilby .comic-panel:nth-child(12) {
   width: 35%;
   margin-left: 10%;
@@ -1359,6 +1428,7 @@ iframe {
   .trilby .comic-quote .info-box {
     position: absolute; }
   .trilby .comic-quote p {
+    display: none;
     font-family: "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
     font-weight: normal;
     font-style: italic;
@@ -1366,6 +1436,8 @@ iframe {
     margin: 45px 0 0 45px;
     padding: 1rem 1.2rem 1rem 3rem;
     border-radius: 4px; }
+  .trilby .comic-quote.active p {
+    display: block; }
 
 .bonpard .inner {
   max-width: 1024px;
@@ -1375,10 +1447,8 @@ iframe {
   margin: 90px auto;
   border-top: 1px solid rgba(255, 255, 255, 0.6);
   padding: 36px 0 0 0; }
-.bonpard .comic-row .panel-text.wide {
-  left: 0;
-  right: auto;
-  width: 80%; }
+.bonpard .panel-text {
+  line-height: 1; }
 .bonpard .comic-panel {
   position: relative;
   float: left; }
@@ -1389,27 +1459,45 @@ iframe {
   position: relative;
   clear: both; }
 .bonpard .comic-row:nth-child(1) .comic-panel {
-  width: 35.3%; }
+  width: 37.4%; }
 .bonpard .comic-row:nth-child(1) .comic-panel + .comic-panel {
-  width: 56%;
+  width: 59.2%;
   margin-left: 3%; }
-.bonpard .comic-row:nth-child(1) p {
-  position: absolute; }
+.bonpard .comic-row:nth-child(1) .panel-text {
+  left: -230px;
+  right: auto;
+  width: 470px;
+  z-index: 10; }
 .bonpard .comic-row:nth-child(2) {
   margin: 1.5em 0; }
   .bonpard .comic-row:nth-child(2) .comic-panel {
-    width: 58.4%;
+    width: 64.3%;
     margin-right: 2%; }
+    .bonpard .comic-row:nth-child(2) .comic-panel .panel-text {
+      top: 25px;
+      bottom: auto;
+      left: 0;
+      right: 0;
+      width: 70%; }
   .bonpard .comic-row:nth-child(2) .comic-panel + .comic-panel {
-    width: 30%;
+    width: 33.2%;
+    margin-right: 0;
     margin-bottom: 2%; }
   .bonpard .comic-row:nth-child(2) .comic-panel + .comic-panel + .comic-panel {
     margin-bottom: 0; }
 .bonpard .comic-panel:nth-child(3) {
-  width: 33.8%;
+  width: 37.6%;
   margin-right: 2%; }
+  .bonpard .comic-panel:nth-child(3) .panel-text {
+    top: -5px;
+    bottom: auto;
+    width: 80%; }
 .bonpard .comic-panel:nth-child(4) {
-  width: 54%; }
+  width: 59.9%; }
+  .bonpard .comic-panel:nth-child(4) .panel-text {
+    left: 0;
+    right: auto;
+    width: 210px; }
 .bonpard .comic-row:nth-child(5) .comic-panel:nth-child(1) {
   margin-top: 1em;
   margin-right: 3%; }
@@ -1419,20 +1507,33 @@ iframe {
 .bonpard .comic-row:nth-child(6) {
   margin-top: 1em; }
   .bonpard .comic-row:nth-child(6) .comic-column:nth-child(1) {
-    width: 25%;
+    width: 28%;
     margin-right: 5%; }
-    .bonpard .comic-row:nth-child(6) .comic-column:nth-child(1) .comic-panel:first-child {
-      margin-bottom: 15px; }
+    .bonpard .comic-row:nth-child(6) .comic-column:nth-child(1) .panel-text {
+      font-style: normal; }
+      .bonpard .comic-row:nth-child(6) .comic-column:nth-child(1) .panel-text cite {
+        display: block;
+        color: #999;
+        font-size: 0.8rem;
+        font-style: normal;
+        margin-top: 10px; }
+    .bonpard .comic-row:nth-child(6) .comic-column:nth-child(1) .comic-panel:nth-child(1) {
+      margin-bottom: 40px; }
+      .bonpard .comic-row:nth-child(6) .comic-column:nth-child(1) .comic-panel:nth-child(1) .panel-text {
+        bottom: -40px; }
+    .bonpard .comic-row:nth-child(6) .comic-column:nth-child(1) .comic-panel:nth-child(2) .panel-text {
+      bottom: -70px;
+      margin: 0px;
+      width: 100%;
+      left: 10px; }
   .bonpard .comic-row:nth-child(6) .comic-column:nth-child(2) {
-    width: 54.7%; }
+    width: 66%; }
+    .bonpard .comic-row:nth-child(6) .comic-column:nth-child(2) .panel-text {
+      width: 305px; }
 .bonpard .comic-column {
   float: left; }
 .bonpard .comic-column .comic-panel {
   float: none; }
-.bonpard .comic-quote {
-  position: absolute;
-  top: 45px;
-  left: 400px; }
 .bonpard .outro {
   margin: 7rem 0; }
   .bonpard .outro p {
@@ -1616,6 +1717,8 @@ iframe {
 .intro-header {
   color: #fff;
   margin-top: 1.618rem; }
+  .intro-header h1 {
+    text-transform: uppercase; }
 .intro-body {
   color: #fff;
   margin-top: 1.618rem; }

@@ -55,6 +55,10 @@
         width:              46px;
         background:         url(/_assets/img/icons/icon-btn-prev.svg) 50% 50% no-repeat;
         background-size:    50%;
+
+        &.disabled {
+            opacity: 0.2;
+        }
     }
 
     .next {
@@ -63,6 +67,10 @@
         width:              46px;
         background:         url(/_assets/img/icons/icon-btn-next.svg) 50% 50% no-repeat;
         background-size:    50%;
+
+        &.disabled {
+            opacity: 0.2;
+        }
     }
 
     .text {

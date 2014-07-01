@@ -20,7 +20,7 @@ include($docRoot.'/_includes/header.php');
 
             <div class="inner">
                 <header class="intro-header">
-                    <h1>MINDCRAFT</h1>
+                    <h1>Mindcraft</h1>
                 </header>
 
                 <p class="intro-body">A century of madness, murder and mental healing.</p>

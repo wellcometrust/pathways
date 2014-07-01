@@ -334,24 +334,28 @@
             $library_content = array(
                 'in the player' => array(
                     array(
+                        'type'      => 'book',
                         'title'     => 'The Commission’s report on Animal Magnetism',
                         'author'    => 'Benjamin Franklin',
                         'date'      => '1785',
                         'link'      => 'http://wellcomelibrary.org/package/b20595244'
                     ),
                     array(
+                        'type'      => 'video',
                         'title'     => 'A guide to Mesmer',
                         'author'    => 'M. Caullet de Veaumore',
                         'date'      => '1785',
                         'link'      => 'http://wellcomelibrary.org/package/b20595207'
                     ),
                     array(
+                        'type'      => 'audio',
                         'title'     => 'Animal Magnetism explained by its professors',
                         'author'    => 'George Toynbee',
                         'date'      => '1839',
                         'link'      => 'http://wellcomelibrary.org/package/b20458332'
                     ),
                     array(
+                        'type'      => 'document',
                         'title'     => 'Franz Anton Mesmer',
                         'author'    => 'Mesmer’s deeds agreeing to teach animal magnetism',
                         'date'      => '1783',
@@ -361,12 +365,14 @@
 
                 'related resources' => array(
                     array(
+                        'type'      => 'image',
                         'title'     => 'Mesmer and animal magnetism : a chapter in the history of medicine',
                         'author'    => 'Frank A. Pattie',
                         'date'      => '1994',
                         'link'      => ''
                     ),
                     array(
+                        'type'      => 'book',
                         'title'     => 'Mesmerism and the End of the Enlightenment in France',
                         'author'    => 'Robert Darnton',
                         'date'      => '2009',

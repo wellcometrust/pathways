@@ -2,8 +2,7 @@
 #verdict {
     .inner {
         float:          right;
-        width:          60%;
-        margin-right:   142px;
+        width:          80%;
     }
 
     .verdict-text {
@@ -26,5 +25,14 @@
         font-size:      1.618rem;
         line-height:    1.219;
         width:          80%;
+    }
+}
+
+@media screen and (min-width: 52em) {
+    #verdict {
+        .inner {
+            width:          60%;
+            margin-right:   142px;
+        }
     }
 }

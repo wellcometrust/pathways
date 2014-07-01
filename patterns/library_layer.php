@@ -2,7 +2,7 @@
 <div class="library-layer" data-component="library-layer">
     
     <div class="bar">
-        <span>Curious for more?</span>
+        <span>Further reading</span>
     </div>
 
     <div class="gap">
@@ -18,7 +18,7 @@
                         <?php if( isset($library_content) && isset($library_content['in the player']) ): ?>
                             <?php foreach( $library_content['in the player'] as $data ): ?>
                                 <li>
-                                    <div class="player-item clearfix">
+                                    <div class="player-item clearfix<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>">
                                         <div class="player-item--thumb"></div>
 
                                         <div class="player-item--content">
@@ -39,96 +39,6 @@
                                     </div>
                                 </li>
                             <?php endforeach ?>
-                        <?php else: ?>
-
-                        <li>
-                            <div class="player-item clearfix">
-                                <div class="player-item--thumb"></div>
-
-                                <div class="player-item--content">
-                                    <header class="player-item--header">
-                                        <h1>Benjamin Franklin’s Report of the French Commission</h1>
-                                    </header>
-
-                                    <div class="player-item--body">
-                                        <p>Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity</p>
-                                        
-                                        <cite>London: J Johnson, 1785</cite>
-                                    </div>
-
-                                    <footer class="player-item--footer">
-                                        <a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">View</a>
-                                    </footer>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="player-item clearfix">
-                                <div class="player-item--thumb"></div>
-
-                                <div class="player-item--content">
-                                    <header class="player-item--header">
-                                        <h1>Benjamin Franklin’s Report of the French Commission</h1>
-                                    </header>
-
-                                    <div class="player-item--body">
-                                        <p>Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity</p>
-                                        
-                                        <cite>London: J Johnson, 1785</cite>
-                                    </div>
-
-                                    <footer class="player-item--footer">
-                                        <a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">View</a>
-                                    </footer>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="player-item clearfix">
-                                <div class="player-item--thumb"></div>
-
-                                <div class="player-item--content">
-                                    <header class="player-item--header">
-                                        <h1>Benjamin Franklin’s Report of the French Commission</h1>
-                                    </header>
-
-                                    <div class="player-item--body">
-                                        <p>Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity</p>
-                                        
-                                        <cite>London: J Johnson, 1785</cite>
-                                    </div>
-
-                                    <footer class="player-item--footer">
-                                        <a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">View</a>
-                                    </footer>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="player-item clearfix">
-                                <div class="player-item--thumb"></div>
-
-                                <div class="player-item--content">
-                                    <header class="player-item--header">
-                                        <h1>Benjamin Franklin’s Report of the French Commission</h1>
-                                    </header>
-
-                                    <div class="player-item--body">
-                                        <p>Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity Yakkity shmackity</p>
-                                        
-                                        <cite>London: J Johnson, 1785</cite>
-                                    </div>
-
-                                    <footer class="player-item--footer">
-                                        <a href="#" data-embed="http://wellcomelibrary.org/package/b20458228">View</a>
-                                    </footer>
-                                </div>
-                            </div>
-                        </li>
-
                         <?php endif ?>
                     </ul>
                 </div>

@@ -144,9 +144,11 @@
                 <div class="bg-container"></div>
 
                 <div class="scroll-content">
-                    <header>
-                        <h1>These techniques still work today</h1>
-                    </header>
+                    <div class="inner">
+                        <header>
+                            <h1>These techniques still work today</h1>
+                        </header>
+                    </div>
                 </div>
                 
             </div>

@@ -64,6 +64,12 @@
             margin-right: 0.8em;
         }
 
+        .player-item--thumb {
+            float:  left;
+            width:  150px;
+            height: 220px;
+        }
+
         .player-item--header {
             h1 {
                 font-size: 1.2rem;
@@ -88,6 +94,41 @@
                 font-size:          0.8rem;
                 text-decoration:    none;
                 text-transform:     uppercase;
+            }
+        }
+
+        &.book {
+            .player-item--thumb {
+                background: url('/_assets/img/icons/library-layer/book.svg') 50% 0% no-repeat;
+                background-size: 40%;
+            }
+        }
+
+        &.video {
+            .player-item--thumb {
+                background: url('/_assets/img/icons/library-layer/video.svg') 50% 0% no-repeat;
+                background-size: 40%;
+            }
+        }
+
+        &.audio {
+            .player-item--thumb {
+                background: url('/_assets/img/icons/library-layer/audio.svg') 50% 0% no-repeat;
+                background-size: 40%;
+            }
+        }
+
+        &.document {
+            .player-item--thumb {
+                background: url('/_assets/img/icons/library-layer/document.svg') 50% 0% no-repeat;
+                background-size: 40%;
+            }
+        }
+
+        &.image {
+            .player-item--thumb {
+                background: url('/_assets/img/icons/library-layer/image.svg') 50% 0% no-repeat;
+                background-size: 40%;
             }
         }
     }

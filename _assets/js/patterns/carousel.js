@@ -147,9 +147,9 @@ function Carousel(element)
 
     var loadNavigation = function() {
         $prev   = $('<div/>'),
-        $next  = $('<div/>');
+        $next   = $('<div/>');
 
-        $prev.addClass('prev');
+        $prev.addClass('prev disabled');
         $next.addClass('next');
 
         $prev.css({
@@ -234,6 +234,18 @@ function Carousel(element)
         panes.get(current_pane).style['opacity'] = 1;
 
         setContainerOffset(offset, animate);
+
+        if( index > 0 )
+            $prev.removeClass('disabled');
+        else {
+            $prev.addClass('disabled');
+        }
+
+        if( index >= (pane_count - 1) )
+            $next.addClass('disabled');
+        else {
+            $next.removeClass('disabled');
+        }
     };
 
     function setContainerOffset(percent, animate) {

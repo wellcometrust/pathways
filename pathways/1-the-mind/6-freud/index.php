@@ -131,7 +131,7 @@
 
             <div class="panel office">
                 <div class="bg-container">
-                    <img src="/_assets/img/freud/freud-6.jpg">
+                    <img src="/_assets/img/freud/freud-4.jpg">
                 </div>
 
                 <div class="black-strip" ></div>
@@ -157,7 +157,7 @@
             <div class="panel office-2">
 
                 <div class="bg-container">
-                    <img src="/_assets/img/freud/freud-6.jpg">
+                    <img src="/_assets/img/freud/freud-4.jpg">
                 </div>
 
                 <div class="scroll-content">

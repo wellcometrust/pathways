@@ -204,8 +204,9 @@
             width: 100%;
         }
 
-        p {
-            font-size: 1rem;
+        .panel-text {
+            font-size:      1rem;
+            line-height:    1;
         }
         
         span {
@@ -225,18 +226,50 @@
     .comic-panel:nth-child(2) {
         width: 45%;
         margin-left: 5%;
+
+        .panel-text {
+            bottom:     190px;
+            font-style: italic;
+            width:      190px;
+        }
     }
 
     .comic-panel:nth-child(3) {
         width: 60%;
         margin-left: -15%;
         margin-top: -77px;
+
+        .panel-text {
+            top:    0;
+            bottom: auto;
+            left:   auto;
+            right:  0;
+        }
+
+        .panel-text:nth-of-type(1) {
+            right: 40px;
+        }
+
+        .panel-text:nth-of-type(2) {
+            top:    32px;
+            right:  20px;
+        }
     }
 
     .comic-panel:nth-child(4) {
         width: 45%;
         margin-left: 5%;
         margin-top: 52px;
+
+        .panel-text {
+            left:   0;
+            right:  auto;
+        }
+
+        .panel-text:nth-of-type(1) {
+            left:   10px;
+            bottom: 60px;
+        }
     }
 
     .comic-panel:nth-child(5) {
@@ -254,6 +287,14 @@
         width: 40%;
         margin-top: -135px;
         margin-left: 5%;
+
+        .panel-text {
+            top:    0;
+            bottom: auto;
+            left:   0;
+            right:  0;
+            width:  220px;
+        }
     }
 
     .comic-panel:nth-child(8) {
@@ -273,12 +314,22 @@
     .comic-panel:nth-child(10) {
         width: 45%;
         margin-top: -100px;
+
+        .panel-text {
+            left:   0;
+            right:  auto;
+            width:  260px;
+        }
     }
 
     .comic-panel:nth-child(11) {
         width: 45%;
         margin-top: 49px;
         margin-left: 5%;
+
+        .panel-text {
+            font-style: italic;
+        }
     }
 
     .comic-panel:nth-child(12) {
@@ -298,11 +349,18 @@
         }
 
         p {
+            display:            none;
             @include            abril-italic;
             background-color:   rgba(0,0,0,0.9);
             margin:             45px 0 0 45px;
             padding:            1rem 1.2rem 1rem 3rem;
             border-radius:      4px;
+        }
+
+        &.active {
+            p {
+                display: block;
+            }
         }
     }
 }
@@ -314,19 +372,15 @@
         margin:     0 auto;
     }
 
-    .bonpard-header{
-        width: 55%;
-        margin: 90px auto;
-        border-top: 1px solid rgba(255,255,255,0.6);
-        padding: 36px 0 0 0;
+    .bonpard-header {
+        width:          55%;
+        margin:         90px auto;
+        border-top:     1px solid rgba(255,255,255,0.6);
+        padding:        36px 0 0 0;
     }
 
-    .comic-row {
-        .panel-text.wide {
-            left:   0;
-            right:  auto;
-            width:  80%;
-        }
+    .panel-text {
+        line-height: 1;
     }
 
     .comic-panel {
@@ -334,8 +388,8 @@
         float:      left;
 
         img {
-            display: block;
-            width: 100%;
+            display:    block;
+            width:      100%;
         }
     }
 
@@ -346,16 +400,19 @@
 
     .comic-row:nth-child(1) {
         .comic-panel {
-            width: 35.3%;
+            width: 37.4%;
         }
 
         .comic-panel + .comic-panel {
-            width: 56%;
+            width: 59.2%;
             margin-left: 3%;
         }
 
-        p {
-            position: absolute;
+        .panel-text {
+            left:       -230px;
+            right:      auto;
+            width:      470px;
+            z-index:    10;
         }
     }
 
@@ -363,13 +420,22 @@
         margin: 1.5em 0;
 
         .comic-panel {
-            width: 58.4%;
+            width: 64.3%;
             margin-right: 2%;
+
+            .panel-text {
+                top:    25px;
+                bottom: auto;
+                left:   0;
+                right:  0;
+                width:  70%;
+            }
         }
 
         .comic-panel + .comic-panel {
-            width: 30%;
-            margin-bottom: 2%;
+            width:          33.2%;
+            margin-right:   0;
+            margin-bottom:  2%;
         }
 
         .comic-panel + .comic-panel + .comic-panel {
@@ -378,12 +444,24 @@
     }
 
     .comic-panel:nth-child(3) {
-        width: 33.8%;
-        margin-right: 2%;
+        width:          37.6%;
+        margin-right:   2%;
+
+        .panel-text {
+            top:    -5px;
+            bottom: auto;
+            width:  80%;
+        }
     }
 
     .comic-panel:nth-child(4) {
-        width: 54%;
+        width: 59.9%;
+
+        .panel-text {
+            left:   0;
+            right:  auto;
+            width:  210px;
+        }
     }
 
     .comic-row:nth-child(5) {
@@ -402,15 +480,44 @@
         margin-top: 1em;
         
         .comic-column:nth-child(1) {
-            width: 25%;
+            width: 28%;
             margin-right: 5%;
 
-            .comic-panel:first-child {
-                margin-bottom: 15px;
+            .panel-text {
+                font-style: normal;
+
+                cite {
+                    display:    block;
+                    color:      #999;
+                    font-size:  0.8rem;
+                    font-style: normal;
+                    margin-top: 10px;
+                }
+            }
+
+            .comic-panel:nth-child(1) {
+                margin-bottom: 40px;
+
+                .panel-text {
+                    bottom: -40px;
+                }
+            }
+
+            .comic-panel:nth-child(2) {
+                .panel-text {
+                    bottom: -70px;
+                    margin: 0px;
+                    width: 100%;
+                    left: 10px;
+                }
             }
         }
         .comic-column:nth-child(2) {
-            width: 54.7%;
+            width: 66%;
+
+            .panel-text {
+                width: 305px;
+            }
         }
     }
 
@@ -420,12 +527,6 @@
 
     .comic-column .comic-panel {
         float: none;
-    }
-
-    .comic-quote {
-        position: absolute;
-        top: 45px;
-        left: 400px;
     }
 
     .outro {
