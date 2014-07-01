@@ -18,6 +18,8 @@ include($docRoot.'/_includes/header.php');
                 <img src="<?php echo asset('img/intro/intro.jpg') ?>">
             </div>
 
+            <div class="logo"></div>
+
             <div class="inner">
                 <header class="intro-header">
                     <h1>Mindcraft</h1>

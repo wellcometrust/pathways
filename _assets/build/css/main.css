@@ -1710,6 +1710,14 @@ iframe {
 
 .intro .bg-container {
   z-index: -1; }
+.intro .logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 136px;
+  height: 47px;
+  background: url(/_assets/img/logo.png) 0 0 no-repeat;
+  background-size: 100%; }
 .intro .inner {
   max-width: 960px;
   margin: 0 auto;
@@ -1726,14 +1734,14 @@ iframe {
     color: #DD178C; }
 .intro-button {
   display: block;
-  color: #fefefe;
+  color: #030303;
   font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
   font-weight: normal;
   font-style: normal;
   font-size: 0.8rem;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 5px;
+  border-radius: 30px;
   text-align: center;
   margin: 1.618rem 1rem 0 1rem;
   padding: 1.2rem 0 1rem 0;
@@ -1743,24 +1751,22 @@ iframe {
 @media screen and (min-width: 48em) {
   .intro-header {
     color: #fff;
-    margin: 16vh 0 5vh 0; }
+    margin-top: 16vh; }
     .intro-header h1 {
-      font-size: 4rem; }
+      font-size: 4rem;
+      line-height: 1; }
       .intro-header h1 span {
         color: #DD178C; }
   .intro-body {
-    max-width: 40%;
-    margin: 0 auto 4em auto; }
+    font-size: 1.293rem;
+    margin: 0 auto 4rem auto; }
   .intro-button {
-    max-width: 40%;
-    color: #fefefe;
+    max-width: 30%;
     font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
     font-style: normal;
     font-size: 0.8rem;
-    background-color: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 5px;
     text-align: center;
     margin: 0 auto 10vh auto;
     padding: 1.2rem 0 1rem 0;
