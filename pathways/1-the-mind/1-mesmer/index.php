@@ -341,18 +341,18 @@
                         'link'      => 'http://wellcomelibrary.org/package/b20595244'
                     ),
                     array(
-                        'type'      => 'video',
+                        'type'      => 'book',
                         'title'     => 'A guide to Mesmer',
                         'author'    => 'M. Caullet de Veaumore',
                         'date'      => '1785',
                         'link'      => 'http://wellcomelibrary.org/package/b20595207'
                     ),
                     array(
-                        'type'      => 'audio',
+                        'type'      => 'book',
                         'title'     => 'Animal Magnetism explained by its professors',
                         'author'    => 'George Toynbee',
                         'date'      => '1839',
-                        'link'      => 'http://wellcomelibrary.org/package/b20458332'
+                        'link'      => ''
                     ),
                     array(
                         'type'      => 'document',
@@ -365,7 +365,7 @@
 
                 'related resources' => array(
                     array(
-                        'type'      => 'image',
+                        'type'      => 'book',
                         'title'     => 'Mesmer and animal magnetism : a chapter in the history of medicine',
                         'author'    => 'Frank A. Pattie',
                         'date'      => '1994',
@@ -376,6 +376,13 @@
                         'title'     => 'Mesmerism and the End of the Enlightenment in France',
                         'author'    => 'Robert Darnton',
                         'date'      => '2009',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Mental Healers: Mesmer, Eddy, Freud',
+                        'author'    => 'Stefan Zweig',
+                        'date'      => '2012',
                         'link'      => ''
                     ),
                 ),

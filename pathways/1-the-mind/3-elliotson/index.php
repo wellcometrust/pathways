@@ -281,8 +281,81 @@
 
         </div>
 
-        
-        <?php pattern('library_layer') ?>
+        <?php
+            $library_content = array(
+                'in the player' => array(
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Pamphlet - A full discovery of the strange practices of Dr Elliotson on the bodies of his female patients',
+                        'author'    => 'E. Hancock',
+                        'date'      => '1842',
+                        'link'      => 'http://wellcomelibrary.org/package/b20595220'
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Elliotson’s Pain-Free Surgical Operations',
+                        'author'    => 'John Elliotson',
+                        'date'      => '1843',
+                        'link'      => 'http://wellcomelibrary.org/package/b20603514'
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Magnetic and Mesmeric Fluids',
+                        'author'    => 'John Ashburner',
+                        'date'      => '1848',
+                        'link'      => 'http://wellcomelibrary.org/pckage/b20458228'
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Animal Magnetism & Homeopathy',
+                        'author'    => 'Edwin Lee',
+                        'date'      => '1835',
+                        'link'      => 'http://wellcomelibrary.org/package/b20603460'
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Painless removal of a female breast in the mesmeric trance',
+                        'author'    => 'Theodosius Purland',
+                        'date'      => '1854',
+                        'link'      => 'http://wellcomelibrary.org/package/b20603484'
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Cases cured by Mesmerism',
+                        'author'    => '',
+                        'date'      => '',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Harriet Martineau’s Letters on Mesmerism',
+                        'author'    => '',
+                        'date'      => '1845',
+                        'link'      => ''
+                    ),
+                ),
+
+                'related resources' => array(
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Mesmerized',
+                        'author'    => 'Alison Winter',
+                        'date'      => '2000',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Servants of the Supernatural: the night side of the Victorian mind',
+                        'author'    => 'Antonio Melechi',
+                        'date'      => '2009',
+                        'link'      => ''
+                    ),
+                ),
+                
+            );
+
+            pattern('library_layer', $library_content);
+        ?>
 
         <div class="teaser" style="background-image: url(/_assets/img/teaser/teaser-esdaile.jpg)">
             <a href="/pathways/1-the-mind/4-esdaile">

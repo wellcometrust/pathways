@@ -176,8 +176,53 @@
 
         </div>
 
+        <?php
+            $library_content = array(
+                'in the player' => array(
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Illustrations of madness [by the patient, James Tilly Matthews, in hallucinations]',
+                        'author'    => 'John Haslam',
+                        'date'      => '1810',
+                        'link'      => 'http://wellcomelibrary.org/package/b20458265'
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Aldini’s Experiments (with images)',
+                        'author'    => 'Giovanni Aldini',
+                        'date'      => '1803',
+                        'link'      => 'http://wellcomelibrary.org/package/b20595256'
+                    )
+                ),
 
-        <?php pattern('library_layer') ?>
+                'related resources' => array(
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'The influencing machine : James Tilly Matthews and the air loom',
+                        'author'    => 'Mike Jay',
+                        'date'      => '2012',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'The Air Loom and Other Dangerous Influencing Machines',
+                        'author'    => 'Roske and Brand-Claussen',
+                        'date'      => '2006',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Shocking Bodies: Life, Death & Electricity in Victorian England',
+                        'author'    => 'Iwan Rhys Morus',
+                        'date'      => '2011',
+                        'link'      => ''
+                    ),
+                ),
+                
+            );
+
+            pattern('library_layer', $library_content);
+        ?>
 
         <div class="teaser" style="background-image: url(/_assets/img/teaser/teaser-oakey.jpg)">
             <a href="/pathways/1-the-mind/3-elliotson">

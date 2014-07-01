@@ -170,7 +170,47 @@
 
         </div>
         
-        <?php pattern('library_layer') ?>
+        <?php
+            $library_content = array(
+                'in the player' => array(
+                    
+                ),
+
+                'related resources' => array(
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'From Mesmer to Freud',
+                        'author'    => 'Adam Crabtree',
+                        'date'      => '1993',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'The Discovery of the Unconscious',
+                        'author'    => 'Henri Ellenberger',
+                        'date'      => '1970',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'The Enigma of Anna O',
+                        'author'    => 'Melinda Guttman',
+                        'date'      => '2001',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Remembering Anna O',
+                        'author'    => 'Mikkel Borch-Jacobsen',
+                        'date'      => '1996',
+                        'link'      => ''
+                    ),
+                ),
+                
+            );
+
+            pattern('library_layer', $library_content);
+        ?>
 
         <div class="teaser">
             <a href="/pathways/1-the-mind/credits.php">

@@ -275,8 +275,67 @@
             </div>
         </script>
 
-        
-        <?php pattern('library_layer') ?>
+        <?php
+            $library_content = array(
+                'in the player' => array(
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Pain-free operations in India',
+                        'author'    => 'James Esdaile',
+                        'date'      => '1856',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'James Braid on trance',
+                        'author'    => 'James Braid',
+                        'date'      => '1850',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'The introduction of mesmerism into the hospitals of India',
+                        'author'    => 'James Esdaile',
+                        'date'      => '1852',
+                        'link'      => 'http://wellcomelibrary.org/package/b20603447'
+                    ),
+                    array(
+                        'type'      => 'image',
+                        'title'     => 'A fakir or sadhu',
+                        'author'    => 'Photograph by E.D. Lyo',
+                        'date'      => '18--',
+                        'link'      => ''
+                    ),
+                ),
+
+                'related resources' => array(
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Hypnotism: a history',
+                        'author'    => 'Derek Forrest & Anthony Storr',
+                        'date'      => '2000',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'A History of Hypnotism',
+                        'author'    => 'Alan Gauld',
+                        'date'      => '1992',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'document',
+                        'title'     => 'ARTICLE: Colonial psychiatry, magic and religion. The case of mesmerism in British India',
+                        'author'    => 'Waltraud Ernst',
+                        'date'      => '2004',
+                        'link'      => 'http://www.hawaii.edu/hivandaids/Colonial_Psychiatry,_Magic_and_Religion__The_Case_of_Mesmerism_in_British_India.pdf'
+                    ),
+                ),
+                
+            );
+
+            pattern('library_layer', $library_content);
+        ?>
 
         <div class="teaser" style="background-image: url(/_assets/img/teaser/teaser-svengali.jpg)">
             <a href="/pathways/1-the-mind/5-svengali">

@@ -319,7 +319,47 @@
 
         </div>
 
-        <?php pattern('library_layer') ?>
+        <?php
+            $library_content = array(
+                'in the player' => array(
+                    
+                ),
+
+                'related resources' => array(
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Svengali’s Web',
+                        'author'    => 'Daniel Pick',
+                        'date'      => '2000',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Hypnosis: a brief history',
+                        'author'    => 'Judith Pintar and Steven Jay Lynn',
+                        'date'      => '2008',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Little Demon in the City of Light: A True Story of Murder and Mesmerism in Belle Epoque Paris',
+                        'author'    => 'Steven Levingston',
+                        'date'      => '2014',
+                        'link'      => ''
+                    ),
+                    array(
+                        'type'      => 'book',
+                        'title'     => 'Trilby',
+                        'author'    => 'George du Maurier',
+                        'date'      => '1894',
+                        'link'      => 'http://www.gutenberg.org/ebooks/39858'
+                    ),
+                ),
+                
+            );
+
+            pattern('library_layer', $library_content);
+        ?>
 
         <div class="teaser" style="background-image: url(/_assets/img/teaser/teaser-freud.jpg)">
             <a href="/pathways/1-the-mind/6-freud">
