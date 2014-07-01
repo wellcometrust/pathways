@@ -484,9 +484,9 @@ iframe {
   .start {
     min-height: 600px; }
     .start .content {
-      margin-top: 20vh; }
+      margin-top: 14vh; }
     .start .scene-set {
-      margin-bottom: 8em; }
+      margin-bottom: 14vh; }
       .start .scene-set .location {
         font-size: 1.618rem; }
       .start .scene-set .date {
@@ -967,15 +967,10 @@ iframe {
   top: 120px;
   right: 90px; }
 
-#okey-sisters header {
-  padding: 1em 0; }
-  #okey-sisters header h1 {
-    color: #fff;
-    line-height: 1; }
-#okey-sisters p {
+#okey-sisters .scroll-content p {
   color: #fff;
   margin: 1em 0; }
-#okey-sisters img {
+#okey-sisters .scroll-content img {
   width: 100%; }
 #okey-sisters .info-box {
   position: absolute;

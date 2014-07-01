@@ -1,22 +1,15 @@
 
 #okey-sisters {
     
-    header {
-        padding: 1em 0;
-
-        h1 {
+    .scroll-content {
+        p {
             color: #fff;
-            line-height: 1;
+            margin: 1em 0;
         }
-    }
 
-    p {
-        color: #fff;
-        margin: 1em 0;
-    }
-
-    img {
-        width: 100%;
+        img {
+            width: 100%;
+        }
     }
 
     .info-box {

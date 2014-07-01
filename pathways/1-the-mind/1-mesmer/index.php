@@ -6,6 +6,7 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
+    include($docRoot.'/_includes/Spyc.php');
     include($docRoot.'/_includes/header.php');
 ?>
 
@@ -20,7 +21,6 @@
             <div class="content">
                 <p class="scene-set">
                     <span class="location">Paris 1778</span>
-                    <!-- <span class="date">Paris 1778</span> -->
                 </p>
 
                 <header>
