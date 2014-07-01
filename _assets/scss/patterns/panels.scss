@@ -541,7 +541,7 @@
 /* Freud */
 
 .office img {
-    -webkit-transform:          scale(2, 2);
+    -webkit-transform:          scale(1.6, 1.6);
     -webkit-transform-origin:   0 0;
     -webkit-transition:         -webkit-transform 14s ease;
 
@@ -551,7 +551,7 @@
 }
 
 .office-2 img {
-    -webkit-transform:          scale(2, 2);
+    -webkit-transform:          scale(1.6, 1.6);
     -webkit-transform-origin:   0 0;
     -webkit-transition:         -webkit-transform 14s ease;
 
@@ -561,8 +561,8 @@
 }
 
 .office-2.active img {
-    -webkit-transform: scale(1, 1);
-       -moz-transform: scale(1, 1);
+    -webkit-transform: translate(-80%, -40%) scale(1.8, 1.8);
+       -moz-transform: translate(-80%, -40%) scale(1.8, 1.8);
 }
 
 .credits {
