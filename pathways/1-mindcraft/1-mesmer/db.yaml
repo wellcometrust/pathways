@@ -1,0 +1,51 @@
+# A resource example:
+# -   type: book
+#     thumb: image.jpg
+#     title: The Commission’s report on Animal Magnetism
+#     author: Benjamin Franklin
+#     date: 1785
+#     link: http://wellcomelibrary.org/package/b20595244
+#
+# A resource can have all the attributes, but some empty, or only the attributes it requires. It all works.
+#
+# Links to player resources are in the following format: http://wellcomelibrary.org/package/b20595244
+# If copied from the site, it has 'player' in the link, which is wrong. Must be 'package'. And it doesn't need any cruft after the id.
+
+player:
+    -   type: book
+        title: The Commission’s report on Animal Magnetism
+        author: Benjamin Franklin
+        date: 1785
+        link: http://wellcomelibrary.org/package/b20595244
+
+    -   type: book
+        title: A guide to Mesmer
+        author: M. Caullet de Veaumore
+        date: 1785
+        link: http://wellcomelibrary.org/package/b20595207
+
+    -   type: book
+        title: Animal Magnetism explained by its professors
+        author: George Toynbee
+        date: 1839
+
+    -   type: document
+        title: Franz Anton Mesmer
+        author: Mesmer’s deeds agreeing to teach animal magnetism
+        date: 1783
+
+related:
+    -   type: book
+        title: 'Mesmer and animal magnetism: a chapter in the history of medicine'
+        author: Frank A. Pattie
+        date: 1994
+
+    -   type:   book
+        title:  Mesmerism and the End of the Enlightenment in France
+        author: Robert Darnton
+        date:   2009
+
+    -   type: book
+        title: 'Mental Healers: Mesmer, Eddy, Freud'
+        author: Stefan Zweig
+        date: 2012

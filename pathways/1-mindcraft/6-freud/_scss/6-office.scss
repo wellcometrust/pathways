@@ -1,0 +1,12 @@
+
+#office {
+    img {
+        -webkit-transform:          scale(1.6, 1.6);
+        -webkit-transform-origin:   0 0;
+        -webkit-transition:         -webkit-transform 14s ease;
+
+        -moz-transform:          scale(2, 2);
+        -moz-transform-origin:   0 0;
+        -moz-transition:         -moz-transform 14s ease;
+    }
+}

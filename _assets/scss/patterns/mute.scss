@@ -1,0 +1,13 @@
+
+.mute {
+    position:   absolute;
+    top:        40px;
+    right:      40px;
+    background: url('/_assets/img/icons/icon-btn-sound-on.svg') 0 0 no-repeat;
+    width:      40px;
+    height:     40px;
+
+    &.active {
+        background: url('/_assets/img/icons/icon-btn-sound-off.svg') 0 0 no-repeat;
+    }
+}

@@ -12,7 +12,7 @@ module.exports = function(grunt) {
                 dest: '_assets/build/js/production.js',
             },
             panels: {
-                src:    [ '_assets/scss/panels/**/*.scss' ],
+                src:    [ 'pathways/**/**/_scss/*.scss' ],
                 dest:   '_assets/scss/panels.scss'
             }
         },
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
                 livereload: true,
             },
             css: {
-                files: ['_assets/scss/**/*.scss'],
+                files: ['_assets/scss/**/*.scss', 'pathways/**/**/_scss/*.scss'],
                 tasks: ['css']
             },
             // js: {

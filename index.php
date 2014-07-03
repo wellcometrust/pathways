@@ -1,3 +1,16 @@
+<?php #header('Location: /tapestry') ?>
+
+<?php
+    // Settings & Includes
+    if( $_SERVER['SERVER_NAME'] == 'wellcome-pathways.clearleft.com' )
+        $docRoot = '/home/clearleft/subdomains/wellcome-pathways';
+    else
+        $docRoot = $_SERVER['DOCUMENT_ROOT'];
+
+    include $docRoot.'/_includes/config.php';
+
+    $path = $config['pathways'][1]['url'];
+?>
 <!DOCTYPE HTML>
 <html lang="en"> 
 <head>
@@ -121,13 +134,13 @@
                 </header>
 
                 <ul>
-                    <li><a href="pathways/1-the-mind/intro.php">Intro</a></li>
-                    <li><a href="pathways/1-the-mind/1-mesmer">Mesmer</a></li>
-                    <li><a href="pathways/1-the-mind/2-airloom">Airloom</a></li>
-                    <li><a href="pathways/1-the-mind/3-elliotson">Elliotson</a></li>
-                    <li><a href="pathways/1-the-mind/4-esdaile">Esdaile</a></li>
-                    <li><a href="pathways/1-the-mind/5-svengali">Svengali</a></li>
-                    <li><a href="pathways/1-the-mind/6-freud">Sigmund Freud</a></li>
+                    <li><a href="<?php echo $path ?>intro">Intro</a></li>
+                    <li><a href="<?php echo $path ?>1-mesmer">Mesmer</a></li>
+                    <li><a href="<?php echo $path ?>2-airloom">Airloom</a></li>
+                    <li><a href="<?php echo $path ?>3-elliotson">Elliotson</a></li>
+                    <li><a href="<?php echo $path ?>4-esdaile">Esdaile</a></li>
+                    <li><a href="<?php echo $path ?>5-svengali">Svengali</a></li>
+                    <li><a href="<?php echo $path ?>6-freud">Sigmund Freud</a></li>
                 </ul>
 
                 <header>

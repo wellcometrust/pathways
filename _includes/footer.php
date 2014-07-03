@@ -1,5 +1,5 @@
     
-    <script src="<?php echo asset('js/lib/jquery-2.1.0.min.js') ?>"></script>
+    <script src="<?php echo asset('js/lib/jquery-2.1.1.min.js') ?>"></script>
     <script src="<?php echo asset('js/lib/hammer.min.js') ?>"></script>
     
     <script src="<?php echo asset('js/lib/greensock/TweenMax.min.js') ?>"></script>

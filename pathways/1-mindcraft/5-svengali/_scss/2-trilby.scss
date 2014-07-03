@@ -1,0 +1,214 @@
+
+#trilby {
+
+    .inner {
+        max-width:  1024px;
+        margin:     0 auto;
+    }
+
+    .trilby-header {
+        width:  1200px;
+        margin: 5.25rem auto 0 auto;
+
+        img {
+            display:    block;
+            float:      left;
+            width:      200px;
+            margin-right: 1em;
+
+        }
+
+        header {
+            span {
+                display:    block;
+                @include    tablet-gothic;
+                font-size:  0.7rem;
+                text-transform: uppercase;
+                margin-bottom: 0.5em;
+            }
+
+            h1 {
+                margin-bottom: 1em;
+            }
+
+            p {
+                font-size: 1.239rem;
+            }
+        }
+    }
+
+    .comic-strip {
+        border-top:     1px solid rgba(255,255,255,0.8);
+        margin-top:     2em;
+        padding-top:    2em;
+    }
+
+    .comic-panel {
+        position:   relative;
+        float:      left;
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        .panel-text {
+            font-size:      1rem;
+            line-height:    1;
+        }
+        
+        span {
+            font-size: 2.005rem;
+        }
+
+    }
+
+    .comic-panel:nth-child(1) {
+        width: 45%;
+
+        p {
+            width: 40%;
+        }
+    }
+
+    .comic-panel:nth-child(2) {
+        width: 45%;
+        margin-left: 5%;
+
+        .panel-text {
+            bottom:     190px;
+            font-style: italic;
+            width:      190px;
+        }
+    }
+
+    .comic-panel:nth-child(3) {
+        width: 60%;
+        margin-left: -15%;
+        margin-top: -77px;
+
+        .panel-text {
+            top:    0;
+            bottom: auto;
+            left:   auto;
+            right:  0;
+        }
+
+        .panel-text:nth-of-type(1) {
+            right: 40px;
+        }
+
+        .panel-text:nth-of-type(2) {
+            top:    32px;
+            right:  20px;
+        }
+    }
+
+    .comic-panel:nth-child(4) {
+        width: 45%;
+        margin-left: 5%;
+        margin-top: 52px;
+
+        .panel-text {
+            left:   0;
+            right:  auto;
+        }
+
+        .panel-text:nth-of-type(1) {
+            left:   10px;
+            bottom: 60px;
+        }
+    }
+
+    .comic-panel:nth-child(5) {
+        width: 45%;
+        margin-top: -61px;
+    }
+
+    .comic-panel:nth-child(6) {
+        width: 35%;
+        margin-left: 5%;
+        margin-top: 49px;
+    }
+
+    .comic-panel:nth-child(7) {
+        width: 40%;
+        margin-top: -135px;
+        margin-left: 5%;
+
+        .panel-text {
+            top:    0;
+            bottom: auto;
+            left:   0;
+            right:  0;
+            width:  220px;
+        }
+    }
+
+    .comic-panel:nth-child(8) {
+        width: 25%;
+        margin-left: 5%;
+        padding: 2em 0;
+    }
+
+    .comic-panel:nth-child(9) {
+        width: 55%;
+        margin-top: 14px;
+        -webkit-transform: translateX(50px);
+           -moz-transform: translateX(50px);
+                transform: translateX(50px);
+    }
+
+    .comic-panel:nth-child(10) {
+        width: 45%;
+        margin-top: -100px;
+
+        .panel-text {
+            left:   0;
+            right:  auto;
+            width:  260px;
+        }
+    }
+
+    .comic-panel:nth-child(11) {
+        width: 45%;
+        margin-top: 49px;
+        margin-left: 5%;
+
+        .panel-text {
+            font-style: italic;
+        }
+    }
+
+    .comic-panel:nth-child(12) {
+        width: 35%;
+        margin-left: 10%;
+        margin-top: 25px;
+    }
+
+    .comic-quote {
+        position:   absolute;
+        top:        45px;
+        left:       310px;
+        width:      340px;
+
+        .info-box {
+            position: absolute;
+        }
+
+        p {
+            display:            none;
+            @include            abril-italic;
+            background-color:   rgba(0,0,0,0.9);
+            margin:             45px 0 0 45px;
+            padding:            1rem 1.2rem 1rem 3rem;
+            border-radius:      4px;
+        }
+
+        &.active {
+            p {
+                display: block;
+            }
+        }
+    }
+}

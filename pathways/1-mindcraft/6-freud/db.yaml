@@ -1,0 +1,27 @@
+
+player:
+
+related:
+    -   type: book
+        title: 'From Mesmer to Freud'
+        author: 'Adam Crabtree'
+        date: '1993'
+        link: ''
+
+    -   type: book
+        title: 'The Discovery of the Unconscious'
+        author: 'Henri Ellenberger'
+        date: '1970'
+        link: ''
+
+    -   type: book
+        title: 'The Enigma of Anna O'
+        author: 'Melinda Guttman'
+        date: '2001'
+        link: ''
+
+    -   type: book
+        title: 'Remembering Anna O'
+        author: 'Mikkel Borch-Jacobsen'
+        date: '1996'
+        link: ''

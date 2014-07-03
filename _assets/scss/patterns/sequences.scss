@@ -12,9 +12,11 @@
 }
 
 .bg-container {
-    background-color: #000;
-    width:          100%;
-    overflow:       hidden;
+    background-color:       #000;
+    background-size:        cover;
+    background-position:    50% 0%;
+    width:                  100%;
+    overflow:               hidden;
 
     img, video {
         display:    block;
@@ -92,9 +94,5 @@
                 margin: 0 auto;
             }
         }
-    }
-
-    .panel {
-        // min-height: 700px;
     }
 }

@@ -44,6 +44,7 @@
         color:              #fff;
         @include            tablet-gothic;
         text-decoration:    none;
+        margin-bottom:      8%;
         margin-bottom:      8vh;
 
         span {
@@ -53,6 +54,18 @@
             background:         url(/_assets/img/icons/icon-teaser.svg) 50% 50% no-repeat;
             background-size:    100%;
             margin:             0.5rem auto 0 auto;
+
+            -webkit-transition: all 0.2s ease;
+               -moz-transition: all 0.2s ease;
+                    transition: all 0.2s ease;
+        }
+
+        &:hover {
+            span {
+                -webkit-transform: translate(6px, 0);
+                   -moz-transform: translate(6px, 0);
+                        transform: translate(6px, 0);
+            }
         }
     }
 }
@@ -61,6 +74,7 @@
     .intro {
         .intro-header {
             color:      #fff;
+            margin-top: 16%;
             margin-top: 16vh;
 
             h1 {
