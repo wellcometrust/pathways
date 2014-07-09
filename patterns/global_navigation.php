@@ -13,7 +13,7 @@
         <nav>
             <ul class="clearfix">
                 <li<?php echo $module == 'intro' ? ' class="active"' : '' ?>>
-                    <a href="<?php echo $path ?>intro">
+                    <a href="<?php echo $path ?>intro.php">
                         <span>Intro</span>
                         <img src="/_assets/img/navigation/intro.jpg">
                     </a>
