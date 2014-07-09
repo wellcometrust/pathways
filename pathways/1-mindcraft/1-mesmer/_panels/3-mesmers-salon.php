@@ -1,39 +1,24 @@
 
-<div id="mesmers-salon" class="panel mesmers-salon" data-component="crop-zoom">
+<div id="mesmers-salon" class="panel mesmers-salon" data-component="crop-zoom" data-scene="mesmers-salon">
 
-    <div class="bg-container">
+    <div class="bg-container preserve-ratio">
         <img src="/_assets/img/mesmer/mesmer-2.jpg">
     </div>
 
-    <?php
-        $panel = array(
-            'links' => array(
-                array(
-                    'title'         => 'Mesmeric therapy',
-                    'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1202566~S13',
-                    'download_url'  => '',
-                    'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0014796.html'
-                )
-            )
-        );
-    ?>
-
-    <?php pattern('library_panel'); ?>
-
     <div class="crop-zoom">
         <svg class="info-box tap-target rod" data-crop="rod" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
-            <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"/>
-            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"/>
+            <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
+            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
         </svg>
 
         <svg class="info-box tap-target woman" data-crop="woman" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
-            <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"/>
-            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"/>
+            <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
+            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
         </svg>
 
         <svg class="info-box tap-target mesmer" data-crop="mesmer" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
-            <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"/>
-            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"/>
+            <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
+            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
         </svg>
     </div>
 

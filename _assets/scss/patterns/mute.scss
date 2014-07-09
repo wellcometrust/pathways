@@ -1,5 +1,6 @@
 
 .mute {
+    display:    none;
     position:   absolute;
     top:        40px;
     right:      40px;
@@ -9,5 +10,11 @@
 
     &.active {
         background: url('/_assets/img/icons/icon-btn-sound-off.svg') 0 0 no-repeat;
+    }
+}
+
+@media screen and (min-width: 48em) {
+    .no-touch .mute {
+        display: block;
     }
 }

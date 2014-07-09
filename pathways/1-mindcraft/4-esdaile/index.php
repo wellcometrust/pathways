@@ -42,6 +42,21 @@
 
         </div>
 
+        <div class="info-panels">
+            <?php
+            if( isset( $library_db['info_panels'] ) ) {
+                foreach ($library_db['info_panels'] as $key => $ip) {
+                    $panel = array(
+                        'id'    => $key,
+                        'links' => $ip
+                    );
+
+                    pattern('library_panel');
+                }
+            }
+            ?>
+        </div>
+
         <!-- Quiz -->
 
         <script type="text/html" id="template-quiz">

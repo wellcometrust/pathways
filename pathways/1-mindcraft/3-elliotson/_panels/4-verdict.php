@@ -2,12 +2,10 @@
 <div id="verdict" class="panel verdict">
 
     <div class="bg-container">
-        <img src="/_assets/img/elliotson/elliotson-4.jpg">
+        <img src="/_assets/img/spacer.png">
     </div>
 
-    <?php pattern('library_panel'); ?>
-
-    <div class="scroll-content">
+    <div class="main-content">
         
         <div class="inner">
             <p class="verdict-text">Wakley’s verdict</p>
@@ -20,4 +18,5 @@
         </div>
 
     </div>
+    
 </div>

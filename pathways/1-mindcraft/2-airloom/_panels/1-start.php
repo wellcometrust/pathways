@@ -1,15 +1,12 @@
 
-<div class="start">
+<div class="start start-airloom">
 
     <div class="bg-container">
-        <img src="/_assets/img/airloom/airloom-1.jpg">
+        <img src="/_assets/img/spacer.png">
     </div>
     
     <div class="content">
-        <p class="scene-set">
-            <span class="location">London 1810</span>
-            <!-- <span class="date">1810</span> -->
-        </p>
+        <p class="scene-set">London 1810</p>
 
         <header>
             <h1>A machine to control the mind</h1>

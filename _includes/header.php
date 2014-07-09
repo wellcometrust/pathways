@@ -21,14 +21,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo asset('build/css/main.css') ?>">
 
     <script>
-        // Set JS class
-        document.querySelector('html').classList.add('js');
-
-        if( ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch) )
-            document.querySelector('html').classList.add('touch');
-        else
-            document.querySelector('html').classList.add('no-touch');
-
         // Cuts the mustard
         var cuts_the_mustard = (document.querySelectorAll) ? true : false;
 
@@ -45,5 +37,7 @@
         //   s.parentNode.insertBefore(wf, s);
         // })();
     </script>
+
+    <script src="/_assets/js/lib/modernizr-2.8.3.custom.min.js"></script>
 </head>
 <body>

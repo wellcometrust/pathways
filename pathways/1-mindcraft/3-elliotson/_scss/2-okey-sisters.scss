@@ -1,0 +1,81 @@
+
+#okey-sisters {
+
+    .bg-container {
+        background-image: url(/_assets/img/elliotson/elliotson-2.jpg);
+    }
+    
+    .main-content {
+        p {
+            margin: 1em 0;
+        }
+    }
+
+    .secondary-content {
+        img {
+            display:    block;
+            width:      100%;
+        }
+    }
+
+}
+
+@media all and (min-width: 48em) {
+    #okey-sisters {
+        .secondary-content {
+            position:   absolute;
+            left:       600px;
+            width:      40%;
+            max-width:  500px;
+        }
+
+        img:first-child {
+            margin-bottom:  10rem;
+        }
+    }
+
+    .no-touch {
+        #okey-sisters {
+            .main-content {
+                p {
+                    margin: 1em 0 10rem 0;
+                }
+            }
+
+            img:first-child {
+                margin-left:    -100px;
+            }
+
+            .info-box {
+                position:   absolute;
+                top:        120px;
+                right:      90px;
+            }
+        }
+    }
+
+    .touch {
+        #okey-sisters {
+            .main-content {
+                top:        36%;
+                position:   relative;
+
+                p {
+                    margin: 1em 0 6rem 0;
+                }
+            }
+
+            .secondary-content {
+                top:    26%;
+                left:   auto;
+                right:  20px;
+            }
+
+            .info-box {
+                position:   absolute;
+                top:        20px;
+                right:      90px;
+            }
+        }
+    }
+}

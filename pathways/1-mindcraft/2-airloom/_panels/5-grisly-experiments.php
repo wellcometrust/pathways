@@ -2,7 +2,14 @@
 <div id="grisly-experiments" class="panel">
 
     <div class="bg-container">
-        <img src="/_assets/img/airloom/airloom-2.jpg">
+        <img src="/_assets/img/spacer.png">
+    </div>
+
+    <div class="main-content center">
+        <div class="inner">
+            <p>In 1803 the Italian physicist Giovanni Aldini performed a grisly experiment in London, applying an electric battery to the corpse of an executed criminal. It began to twitch, its facial muscles grimaced and the eye opened in a terrifying stare…</p>
+            <p>The Air Loom posed the question: will these new technologies one day be able to control the mind as well as the body?</p>
+        </div>
     </div>
 
     <div class="info-box with-text" data-component="gallery">
@@ -74,10 +81,4 @@
         }
     </script>
     
-    <div class="scroll-content position-center">
-        <div class="inner">
-            <p>In 1803 the Italian physicist Giovanni Aldini performed a grisly experiment in London, applying an electric battery to the corpse of an executed criminal. It began to twitch, its facial muscles grimaced and the eye opened in a terrifying stare…</p>
-            <p>The Air Loom posed the question: will these new technologies one day be able to control the mind as well as the body?</p>
-        </div>
-    </div>
 </div>

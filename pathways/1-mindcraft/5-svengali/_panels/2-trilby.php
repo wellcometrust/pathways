@@ -1,10 +1,11 @@
 
-<div class="panel trilby">
+<div id="trilby" class="panel" data-scene="trilby">
+
     <div class="bg-container">
-        <img src="/_assets/img/svengali/svengali-2.jpg">
+        <img src="/_assets/img/spacer.png">
     </div>
 
-    <div class="scroll-content fixed">
+    <div class="main-content fixed">
         
         <div class="inner">
             <div class="trilby-header clearfix">
@@ -19,7 +20,7 @@
             <div class="comic-strip clearfix">
                 <div class="comic-panel">
                     <img src="/_assets/img/svengali/trilby/trilby-comic-1.jpg">
-                    <p class="panel-text">Paris, the Latin Quarter, 1850s Trilbuy O’Ferrall is living the bohemian life as an artist’s model</p>
+                    <p class="panel-text">Paris, the Latin Quarter, 1850s Trilby O’Ferrall is living the bohemian life as an artist’s model</p>
                 </div>
                 <div class="comic-panel" data-offset="250">
                     <img src="/_assets/img/svengali/trilby/trilby-comic-2.jpg">
@@ -99,63 +100,5 @@
         </div>
         
     </div>
-
-    <?php
-        $panel = array(
-            'links' => array(
-                array(
-                    'title'         => 'Trilby, novel by George du Maurier, 1894',
-                    'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1265549',
-                    'images_url'    => 'http://wellcomeimages.org/indexplus/image/M0005798.html'
-                ),
-                array(
-                    'title'         => 'The Bridge of Arts [Paris] by George du Maurier, 1894.',
-                    'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/3.html'
-                ),
-                array(
-                    'title'         => 'Trilby’s Forbears by George du Maurier, 1894.',
-                    'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/14.html'
-                ),
-                array(
-                    'title'         => 'The ‘Rosamund’ of Schubert by George du Maurier, 1894.',
-                    'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/8.html'
-                ),
-                array(
-                    'title'         => '“We took her voice note by note” by George du Maurier, 1894.',
-                    'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/118.html'
-                ),
-                array(
-                    'title'         => '“Et maintenant dors, ma mignonne!” by George du Maurier, 1894.',
-                    'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/103.html'
-                ),
-                array(
-                    'title'         => 'An incubus by George du Maurier, 1894.',
-                    'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/38.html'
-                ),
-                array(
-                    'title'         => 'Au clair de la lune by George du Maurier, 1894.',
-                    'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/84.html'
-                ),
-                array(
-                    'title'         => 'Petits Bonheurs de Contrebande by George du Maurier, 1894.',
-                    'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/116.html'
-                ),
-                array(
-                    'title'         => '"Hast thou found me, o mine enemy?" by George du Maurier, 1894.',
-                    'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/98.html'
-                ),
-                array(
-                    'title'         => '"The last they saw of Svengali" by George du Maurier, 1894.',
-                    'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/100.html'
-                ),
-                array(
-                    'title'         => 'It was Trilby by George du Maurier, 1894.',
-                    'catalogue_url' => 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/83.html'
-                ),
-            )
-        );
-    ?>
-
-    <?php pattern('library_panel'); ?>
 
 </div>

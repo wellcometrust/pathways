@@ -3,12 +3,14 @@
 
     <div class="bg-container"></div>
 
-    <div class="scroll-content">
+    <div class="main-content center align-center">
+
         <div class="inner">
             <header>
                 <h1>These techniques still work today</h1>
             </header>
         </div>
+
     </div>
     
 </div>

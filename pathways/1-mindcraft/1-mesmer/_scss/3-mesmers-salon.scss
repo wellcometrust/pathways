@@ -6,16 +6,6 @@
 @media screen and (min-width: 48em) {
     #mesmers-salon {
         display: block;
-
-        // p {
-        //     position:   absolute;
-        //     top:        80px;
-        //     color:      #fff;
-        //     @include    abril-regular;
-        //     font-size:  2.236rem;
-        //     width:      100%;
-        //     text-align: center;
-        // }
     }
 }
 
@@ -69,6 +59,8 @@
     .image-crop.animate {
         -webkit-transition: all 0.5s ease;
            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+                transition: all 0.5s ease;
     }
 
     .text {
@@ -81,17 +73,23 @@
         opacity:            0;
         line-height:        1.4;
         z-index:            20;
-        -webkit-transform:  translate3d(0, 100px, 0);
-        -webkit-transition: all 0.5s ease;
 
-        -moz-transform:     translate3d(0, 100px, 0);
-        -moz-transition:    all 0.5s ease;
+        -webkit-transform: translate3d(0, 100px, 0);
+           -moz-transform: translate3d(0, 100px, 0);
+            -ms-transform: translate3d(0, 100px, 0);
+                transform: translate3d(0, 100px, 0);
+
+        -webkit-transition: all 0.5s ease;
+           -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+                transition: all 0.5s ease;
     }
     .text.show {
         opacity: 1;
 
         -webkit-transform: translate(0, -20px);
            -moz-transform: translate(0, -20px);
+            -ms-transform: translate(0, -20px);
                 transform: translate(0, -20px);
     }
 }

@@ -1,10 +1,8 @@
 
-<div id="airloom" class="panel air-loom-content">
+<div id="airloom" class="panel air-loom-content" data-scene="airloom">
 
-    <div class="bg-container video" data-src="/_assets/video/airloom.mp4"></div>
+    <div class="bg-container video content" data-src="/_assets/video/airloom.mp4"></div>
     
     <div class="mute"></div>
-
-    <div class="scroll-content position-center align-center"></div>
 
 </div>

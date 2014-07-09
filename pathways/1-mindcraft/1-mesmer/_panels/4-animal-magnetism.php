@@ -2,23 +2,21 @@
 <div id="animal-magnetism" class="panel animal-magnetism" data-offset-height="350">
 
     <div class="bg-container">
-        <img src="/_assets/img/mesmer/mesmer-3.jpg">
+        <!-- <img src="/_assets/img/mesmer/mesmer-3.jpg"> -->
+        <img src="/_assets/img/spacer.png">
     </div>
 
-    <?php
-        $panel = array(
-            'links' => array(
-                array(
-                    'title'         => 'A goat-headed man caresses a sleeping ewe-headed woman; satirizing the notion of animal magnetism and its application by physicians',
-                    'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1175728',
-                    'download_url'  => '',
-                    'images_url'    => 'http://wellcomeimages.org/indexplus/image/V0011934.html'
-                )
-            )
-        );
-    ?>
+    <div class="main-content center">
+        
+        <div class="inner">
+            <header>
+                <h1>Animal Magnetism</h1>
+            </header>
 
-    <?php pattern('library_panel'); ?>
+            <p>Mesmer claimed that animal magnetism was a superfine fluid that permeated all living things. He had learned how to control and direct it by the power of his mind. By making stroking movements, or ‘passes’, over the bodies of his patients he could remove the blockages in the magnetic fluid that were causing their illnesses.</p>                        
+        </div>
+
+    </div>
 
     <div class="info-box with-text" data-component="gallery">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
@@ -43,6 +41,9 @@
             location: 'mesmer/gallery/',
             images: [
                 {
+                    image: 'V0016530',
+                },
+                {
                     image: 'L0023349',
                 },
                 {
@@ -60,23 +61,8 @@
                 {
                     image: 'V0011096',
                 },
-                {
-                    image: 'V0016530',
-                },
             ]
         }
     </script>
-    
-    <div class="scroll-content position-center text-left">
-        
-        <div class="inner">
-            <header>
-                <h1>Animal Magnetism</h1>
-            </header>
-
-            <p>Mesmer claimed that animal magnetism was a superfine fluid that permeated all living things. He had learned how to control and direct it by the power of his mind. By making stroking movements, or ‘passes’, over the bodies of his patients he could remove the blockages in the magnetic fluid that were causing their illnesses.</p>                        
-        </div>
-
-    </div>
 
 </div>

@@ -1,8 +1,19 @@
 
-<div id="gonad-man" class="panel gonads" data-offset-height="550">
+<div id="gonad-man" class="panel" data-scene="gonad-man" data-offset-height="550">
 
     <div class="bg-container">
         <img src="/_assets/img/esdaile/esdaile-2.jpg">
+        <!-- <img src="/_assets/img/spacer.png"> -->
+    </div>
+
+    <!-- scroll content -->
+    <div class="main-content left">
+        <header>
+            <h1>Esdaile's first patient</h1>
+        </header>
+        
+        <p>was a prisoner with a huge scrotal swelling. In front of a distinguished audience including doctors, magistrates and the local governor, he removed it painlessly in minutes.</p>
+        <p>Many more operations followed, from tooth extractions to amputations. Esdaile was given a hospital ward in Calcutta to develop his new technique.</p>
     </div>
 
     <div class="info-box with-text" data-component="quiz">
@@ -30,18 +41,4 @@
     ?>
 
     <?php pattern('library_panel'); ?>
-
-    <!-- scroll content -->
-    <div class="scroll-content">
-
-        <div class="content">
-            <header>
-                <h1>Esdaile's first patient</h1>
-            </header>
-            
-            <p>was a prisoner with a huge scrotal swelling. In front of a distinguished audience including doctors, magistrates and the local governor, he removed it painlessly in minutes.</p>
-            <p>Many more operations followed, from tooth extractions to amputations. Esdaile was given a hospital ward in Calcutta to develop his new technique.</p>
-        </div>
-
-    </div>
 </div>

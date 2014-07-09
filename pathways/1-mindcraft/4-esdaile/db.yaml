@@ -1,44 +1,81 @@
 
-player:
-    -   type: book
-        title: 'Pain-free operations in India'
-        author: 'James Esdaile'
-        date: '1856'
-        link: ''
+# Esdaile panels:
+# 
+# gonad-man
+# fakir
+# india
+# surgery-under-hypnosis-intro
+# surgery-under-hypnosis
+# james-braid
+# self-hypnosis
 
-    -   type: book
-        title: 'James Braid on trance'
-        author: 'James Braid'
-        date: '1850'
-        link: ''
 
-    -   type: book
-        title: 'The introduction of mesmerism into the hospitals of India'
-        author: 'James Esdaile'
-        date: '1852'
-        link: 'http://wellcomelibrary.org/package/b20603447'
 
-    -   type: image
-        title: 'A fakir or sadhu'
-        author: 'Photograph by E.D. Lyo'
-        date: '18--'
-        link: ''
+# Info Panels
 
-related:
-    -   type: book
-        title: 'Hypnotism: a history'
-        author: 'Derek Forrest & Anthony Storr'
-        date: '2000'
-        link: ''
+info_panels:
 
-    -   type: book
-        title: 'A History of Hypnotism'
-        author: 'Alan Gauld'
-        date: '1992'
-        link: ''
+    gonad-man:
+        -   title: 'Esdaile’s patient'
+            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1309510~S12'
 
-    -   type: document
-        title: 'ARTICLE: Colonial psychiatry, magic and religion. The case of mesmerism in British India'
-        author: 'Waltraud Ernst'
-        date: '2004'
-        link: 'http://www.hawaii.edu/hivandaids/Colonial_Psychiatry,_Magic_and_Religion__The_Case_of_Mesmerism_in_British_India.pdf'
+    fakir:
+        -   title: 'Fakir sitting on a bed of nails (Benares, India)'
+            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b2033739~S12'
+
+    india:
+        -   title: 'The north-east view of Angengo Fort on the coast of Malabar'
+            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1265549'
+            images_url: 'http://wellcomeimages.org/indexplus/image/L0038350.html'
+
+    james-braid:
+        -   title: 'James Braid'
+            images_url: 'http://wellcomeimages.org/indexplus/image/M0005798.html'
+
+
+# Library Layer
+library_layer:
+
+    player:
+        -   type: book
+            title: 'Pain-free operations in India'
+            author: 'James Esdaile'
+            date: '1856'
+            link: ''
+
+        -   type: book
+            title: 'James Braid on trance'
+            author: 'James Braid'
+            date: '1850'
+            link: ''
+
+        -   type: book
+            title: 'The introduction of mesmerism into the hospitals of India'
+            author: 'James Esdaile'
+            date: '1852'
+            link: 'http://wellcomelibrary.org/package/b20603447'
+
+        -   type: image
+            title: 'A fakir or sadhu'
+            author: 'Photograph by E.D. Lyo'
+            date: '18--'
+            link: ''
+
+    related:
+        -   type: book
+            title: 'Hypnotism: a history'
+            author: 'Derek Forrest & Anthony Storr'
+            date: '2000'
+            link: ''
+
+        -   type: book
+            title: 'A History of Hypnotism'
+            author: 'Alan Gauld'
+            date: '1992'
+            link: ''
+
+        -   type: document
+            title: 'ARTICLE: Colonial psychiatry, magic and religion. The case of mesmerism in British India'
+            author: 'Waltraud Ernst'
+            date: '2004'
+            link: 'http://www.hawaii.edu/hivandaids/Colonial_Psychiatry,_Magic_and_Religion__The_Case_of_Mesmerism_in_British_India.pdf'

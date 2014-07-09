@@ -1,15 +1,12 @@
 
-<div class="start">
+<div class="start start-elliotson">
 
     <div class="bg-container">
-        <img src="/_assets/img/elliotson/elliotson-1.jpg">
+        <img src="/_assets/img/spacer.png">
     </div>
     
     <div class="content">
-
-        <div class="scene-set">
-            <span class="location">London 1838</span>
-        </div>
+        <p class="scene-set">London 1838</p>
 
         <header>
             <h1>Who controls who?</h1>

@@ -1,10 +1,20 @@
 
 #fred-breuer {
-    h1 {
-        color: #030303;
-    }
 
-    p {
-        color: #030303;
+    .bg-container {
+        background-image: url(/_assets/img/freud/freud-3.jpg);
+    }
+    
+}
+
+@media all and (min-width: 48rem) {
+    #fred-breuer {
+        h1 {
+            color: #030303;
+        }
+
+        p {
+            color: #030303;
+        }
     }
 }

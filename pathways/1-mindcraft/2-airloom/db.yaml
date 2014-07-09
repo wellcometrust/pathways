@@ -1,33 +1,57 @@
 
-player:
-    -   type: book
-        title: 'Illustrations of madness [by the patient, James Tilly Matthews, in hallucinations]'
-        author: John Haslam
-        date: 1810
-        link: http://wellcomelibrary.org/package/b20458265
-
-    -   type: book
-        title: 'Aldini’s Experiments (with images)'
-        author: Giovanni Aldini
-        date: 1803
-        link: http://wellcomelibrary.org/package/b20595256
+# Airloom panels:
+# 
+# airloom-intro
+# airloom
+# where-will-this-technology-lead
+# grisly-experiments
 
 
-related:
-    -   type: book
-        title: 'The influencing machine : James Tilly Matthews and the air loom'
-        author: Mike Jay
-        date: 2012
-        link: ''
 
-    -   type: book
-        title: The Air Loom and Other Dangerous Influencing Machines
-        author: Roske and Brand-Claussen
-        date: 2006
-        link: ''
+# Info Panels
 
-    -   type: book
-        title: 'Shocking Bodies: Life, Death & Electricity in Victorian England'
-        author: Iwan Rhys Morus
-        date: 2011
-        link: ''
+info_panels:
+
+    where-will-this-technology-lead:
+        -   title: 'The Hospital of Bethlem [Bedlam] at Moorfields, London, seen from the north.'
+            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1183474'
+            download_url: ''
+            images_url: 'http://wellcomeimages.org/indexplus/image/L0012307.html'
+
+
+# Library Layer
+
+library_layer:
+
+    player:
+        -   type: book
+            title: 'Illustrations of madness [by the patient, James Tilly Matthews, in hallucinations]'
+            author: John Haslam
+            date: 1810
+            link: http://wellcomelibrary.org/package/b20458265
+
+        -   type: book
+            title: 'Aldini’s Experiments (with images)'
+            author: Giovanni Aldini
+            date: 1803
+            link: http://wellcomelibrary.org/package/b20595256
+
+
+    related:
+        -   type: book
+            title: 'The influencing machine : James Tilly Matthews and the air loom'
+            author: Mike Jay
+            date: 2012
+            link: ''
+
+        -   type: book
+            title: The Air Loom and Other Dangerous Influencing Machines
+            author: Roske and Brand-Claussen
+            date: 2006
+            link: ''
+
+        -   type: book
+            title: 'Shocking Bodies: Life, Death & Electricity in Victorian England'
+            author: Iwan Rhys Morus
+            date: 2011
+            link: ''

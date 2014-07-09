@@ -2,8 +2,18 @@
 .start {
 
     .bg-container {
-        position:   absolute;
-        top:        0;
+        position:               absolute;
+        top:                    0;
+        background-color:       #000;
+        background-size:        cover;
+        background-position:    50% 0%;
+        width:                  100%;
+        overflow:               hidden;
+
+        img, video, canvas {
+            display:    block;
+            width:      100%;
+        }
     }
 
     .content {
@@ -11,28 +21,18 @@
         width:          80%;
         max-width:      1200px;
         margin:         0 auto;
-        padding-top:    1.618rem;
+        padding:        1.618rem 0;
     }
 
     .scene-set {
+        display:        block;
         color:          #fff;
+        @include        tablet-gothic;
+        font-size:      1.239rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+        text-align:     center;
         margin-bottom:  2rem;
-
-        .location {
-            display:        block;
-            @include        tablet-gothic;
-            font-size:      1rem;
-            text-transform: uppercase;
-            letter-spacing: .2rem;
-            text-align:     center;
-        }
-
-        .date {
-            display:        block;
-            @include        abril-display;
-            font-size:      1.618rem;
-            text-align:     center;
-        }
     }
     
     header h1 {
@@ -57,8 +57,12 @@
     .start {
         min-height: 600px;
 
+        .bg-container {
+            min-height: 600px;
+        }
+
         .content {
-            margin-top: 14vh;
+            padding-top: 14vh;
         }
 
         .scene-set {

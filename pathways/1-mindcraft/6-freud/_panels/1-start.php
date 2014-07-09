@@ -1,16 +1,12 @@
 
-<div class="start">
+<div class="start start-freud">
 
     <div class="bg-container">
-        <img src="/_assets/img/freud/freud-1.jpg">
+        <img src="/_assets/img/spacer.png">
     </div>
     
     <div class="content">
-
-        <div class="scene-set">
-            <span class="location">Vienna 1895</span>
-            <!-- <span class="date">1895</span> -->
-        </div>
+        <p class="scene-set">Vienna 1895</p>
 
         <header>
             <h1>Secrets of the mind revealed</h1>

@@ -1,15 +1,12 @@
 
-<div class="start">
+<div class="start start-esdaile">
 
     <div class="bg-container">
-        <img src="/_assets/img/esdaile/esdaile-1.jpg">
+        <img src="/_assets/img/spacer.png">
     </div>
     
     <div class="content">
-
-        <div class="scene-set">
-            <span class="location">Bengal 1845</span>
-        </div>
+        <p class="scene-set">Bengal 1845</p>
 
         <header>
             <h1>Mind over matter</h1>

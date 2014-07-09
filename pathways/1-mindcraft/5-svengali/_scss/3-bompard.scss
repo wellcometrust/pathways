@@ -1,173 +1,193 @@
 
 #bompard {
 
-    .inner {
-        max-width:  1024px;
-        margin:     0 auto;
+    .bg-container {
+        background-image: url(/_assets/img/svengali/svengali-2.jpg);
     }
 
-    .bompard-header {
-        width:          55%;
-        margin:         90px auto;
-        border-top:     1px solid rgba(255,255,255,0.6);
-        padding:        36px 0 0 0;
-    }
-
-    .panel-text {
-        line-height: 1;
+    img {
+        width: 100%;
     }
 
     .comic-panel {
-        position:   relative;
-        float:      left;
+        position: relative;
+    }
 
-        img {
+    .panel-text {
+        cite {
             display:    block;
-            width:      100%;
+            color:      #999;
+            font-size:  0.8rem;
+            font-style: normal;
+            margin-top: 10px;
         }
     }
+}
 
-    .comic-row {
-        position:   relative;
-        clear:      both;
-    }
+@media all and (min-width: 48rem) {
+    #bompard {
 
-    .comic-row:nth-child(1) {
-        .comic-panel {
-            width: 37.4%;
+        .inner {
+            max-width:  1024px;
+            margin:     0 auto;
         }
 
-        .comic-panel + .comic-panel {
-            width: 59.2%;
-            margin-left: 3%;
+        .bompard-header {
+            max-width:      500px;
+            margin:         90px auto;
+            border-top:     1px solid rgba(255,255,255,0.6);
+            padding:        36px 0 0 0;
         }
 
         .panel-text {
-            left:       -230px;
-            right:      auto;
-            width:      470px;
-            z-index:    10;
+            line-height: 1;
         }
-    }
-
-    .comic-row:nth-child(2) {
-        margin: 1.5em 0;
 
         .comic-panel {
-            width: 64.3%;
-            margin-right: 2%;
+            position:   relative;
+            float:      left;
 
-            .panel-text {
-                top:    25px;
-                bottom: auto;
-                left:   0;
-                right:  0;
-                width:  70%;
+            img {
+                display:    block;
+                width:      100%;
             }
         }
 
-        .comic-panel + .comic-panel {
-            width:          33.2%;
-            margin-right:   0;
-            margin-bottom:  2%;
+        .comic-row {
+            position:   relative;
+            clear:      both;
         }
 
-        .comic-panel + .comic-panel + .comic-panel {
-            margin-bottom: 0;
-        }
-    }
+        .comic-row:nth-child(1) {
+            .comic-panel {
+                width: 37.4%;
+            }
 
-    .comic-panel:nth-child(3) {
-        width:          37.6%;
-        margin-right:   2%;
-
-        .panel-text {
-            top:    -5px;
-            bottom: auto;
-            width:  80%;
-        }
-    }
-
-    .comic-panel:nth-child(4) {
-        width: 59.9%;
-
-        .panel-text {
-            left:   0;
-            right:  auto;
-            width:  210px;
-        }
-    }
-
-    .comic-row:nth-child(5) {
-
-        .comic-panel:nth-child(1) {
-            margin-top: 1em;
-            margin-right: 3%;
-        }
-        .comic-panel:nth-child(2) {
-            margin-top: 1em;
-            margin-right: 3%;
-        }
-    }
-
-    .comic-row:nth-child(6) {
-        margin-top: 1em;
-        
-        .comic-column:nth-child(1) {
-            width: 28%;
-            margin-right: 5%;
+            .comic-panel + .comic-panel {
+                width: 59.2%;
+                margin-left: 3%;
+            }
 
             .panel-text {
-                font-style: normal;
+                left:       -230px;
+                right:      auto;
+                width:      470px;
+                z-index:    10;
+            }
+        }
 
-                cite {
-                    display:    block;
-                    color:      #999;
-                    font-size:  0.8rem;
-                    font-style: normal;
-                    margin-top: 10px;
+        .comic-row:nth-child(2) {
+            margin: 1.5em 0;
+
+            .comic-panel {
+                width: 64.3%;
+                margin-right: 2%;
+
+                .panel-text {
+                    top:    25px;
+                    bottom: auto;
+                    left:   0;
+                    right:  0;
+                    width:  70%;
                 }
             }
+
+            .comic-panel + .comic-panel {
+                width:          33.2%;
+                margin-right:   0;
+                margin-bottom:  2%;
+            }
+
+            .comic-panel + .comic-panel + .comic-panel {
+                margin-bottom: 0;
+            }
+        }
+
+        .comic-panel:nth-child(3) {
+            width:          37.6%;
+            margin-right:   2%;
+
+            .panel-text {
+                top:    -5px;
+                bottom: auto;
+                width:  80%;
+            }
+        }
+
+        .comic-panel:nth-child(4) {
+            width: 59.9%;
+
+            .panel-text {
+                left:   0;
+                right:  auto;
+                width:  210px;
+            }
+        }
+
+        .comic-row:nth-child(5) {
 
             .comic-panel:nth-child(1) {
-                margin-bottom: 40px;
-
-                .panel-text {
-                    bottom: -40px;
-                }
+                margin-top: 1em;
+                margin-right: 3%;
             }
-
             .comic-panel:nth-child(2) {
+                margin-top: 1em;
+                margin-right: 3%;
+            }
+        }
+
+        .comic-row:nth-child(6) {
+            margin-top: 1em;
+            
+            .comic-column:nth-child(1) {
+                width: 28%;
+                margin-right: 5%;
+
                 .panel-text {
-                    bottom: -70px;
-                    margin: 0px;
-                    width: 100%;
-                    left: 10px;
+                    font-style: normal;
+                }
+
+                .comic-panel:nth-child(1) {
+                    margin-bottom: 40px;
+
+                    .panel-text {
+                        bottom: -40px;
+                    }
+                }
+
+                .comic-panel:nth-child(2) {
+                    .panel-text {
+                        bottom: -70px;
+                        margin: 0px;
+                        width: 100%;
+                        left: 10px;
+                    }
+                }
+            }
+            .comic-column:nth-child(2) {
+                width: 66%;
+
+                .panel-text {
+                    width: 305px;
                 }
             }
         }
-        .comic-column:nth-child(2) {
-            width: 66%;
 
-            .panel-text {
-                width: 305px;
+        .comic-column {
+            float: left;
+        }
+
+        .comic-column .comic-panel {
+            float: none;
+        }
+
+        .outro {
+            margin: 7rem 0;
+
+            p {
+                font-size: 2.005rem;
             }
         }
     }
 
-    .comic-column {
-        float: left;
-    }
-
-    .comic-column .comic-panel {
-        float: none;
-    }
-
-    .outro {
-        margin: 7rem 0;
-
-        p {
-            font-size: 2.005rem;
-        }
-    }
 }

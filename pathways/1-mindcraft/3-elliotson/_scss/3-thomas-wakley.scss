@@ -1,0 +1,32 @@
+
+#thomas-wakley {
+
+    .bg-container {
+        background-image: url(/_assets/img/elliotson/elliotson-3.jpg);
+    }
+
+    header {
+        h1 {
+            text-align: left;
+            line-height: 1.239;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media all and (min-width: 48em) {
+    #thomas-wakley {
+        header {
+            padding: 3em 0;
+
+            h1 {
+                color: #030303;
+                text-align: center;
+                line-height: 1;
+                width:80%;
+                margin: 0 auto;
+            }
+        }
+    }
+}

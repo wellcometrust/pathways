@@ -4,6 +4,9 @@
     
     <div class="bar">
         <span>Further reading</span>
+        <div class="show-more">
+            <span>Show</span>
+        </div>
     </div>
 
     <div class="gap">
@@ -62,7 +65,7 @@
                             <li>
                                 <div class="related-item book">
                                     <header class="related-item--header">
-                                        <a href="#"><h1><?php echo isset( $data['title'] ) ? $data['title'] : '' ?></h1></a>
+                                        <h1><?php echo isset( $data['title'] ) ? $data['title'] : '' ?></h1>
                                     </header>
 
                                     <div class="related-item--body">

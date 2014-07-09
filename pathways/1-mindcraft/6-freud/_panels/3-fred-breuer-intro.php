@@ -5,9 +5,4 @@
         <img src="/_assets/img/freud/freud-3.jpg">
     </div>
 
-    <div class="scroll-content text">
-        <div class="content">
-        </div>
-    </div>
-
 </div>

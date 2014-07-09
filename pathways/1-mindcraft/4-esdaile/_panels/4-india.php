@@ -1,9 +1,13 @@
 
-<div id="india" class="panel india" data-height-offset="200">
+<div id="india" class="panel" data-scene="india" data-height-offset="200">
 
     <div class="bg-container">
-        <img src="/_assets/img/esdaile/esdaile-4.jpg">
+        <img src="/_assets/img/spacer.png">
         <div class="boats"></div>
+    </div>
+
+    <div class="main-content left">
+        <p>The Lancet had pronounced mesmerism a fraud - but Esdaile's news from India had proved its powers beyond doubt.</p>
     </div>
 
     <?php
@@ -19,12 +23,4 @@
     ?>
 
     <?php pattern('library_panel'); ?>
-
-    <div class="scroll-content">
-
-        <div class="content">
-            <p>The Lancet had pronounced mesmerism a fraud - but Esdaile's news from India had proved its powers beyond doubt.</p>
-        </div>
-        
-    </div>
 </div>

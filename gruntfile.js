@@ -7,12 +7,15 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 src: [
-                    '_assets/js/*.js', // All JS in the libs folder
+                    '_assets/js/pathways.js', // Start with the Pathways Core file.
+                    '_assets/js/main.js', // Then the main file.
+                    '_assets/js/patterns/*.js', // Then the patterns
+                    'pathways/**/**/_js/*.js' // And finally the scenes
                 ],
                 dest: '_assets/build/js/production.js',
             },
             panels: {
-                src:    [ 'pathways/**/**/_scss/*.scss' ],
+                src:    [ 'pathways/**/**/_scss/*.scss' ], // The panel specific CSS
                 dest:   '_assets/scss/panels.scss'
             }
         },
@@ -43,13 +46,13 @@ module.exports = function(grunt) {
                 files: ['_assets/scss/**/*.scss', 'pathways/**/**/_scss/*.scss'],
                 tasks: ['css']
             },
-            // js: {
-            //     files: ['_assets/js/*.js'],
-            //     tasks: ['js'],
-            //     options: {
-            //         spawn: false,
-            //     },
-            // },
+            js: {
+                files: ['_assets/js/*.js', '_assets/js/patterns/*.js', 'pathways/**/**/_js/*.js'],
+                tasks: ['js'],
+                options: {
+                    spawn: false,
+                },
+            },
             grunt: {
                 files: ['gruntfile.js'],
                 tasks: ['default']
@@ -60,13 +63,13 @@ module.exports = function(grunt) {
 
     // 3. Where we tell Grunt we plan to use this plug-in.
     grunt.loadNpmTasks('grunt-contrib-concat');
-    // grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
     grunt.registerTask('css', ['concat', 'sass']);
-    // grunt.registerTask('js', ['concat', 'uglify']);
+    grunt.registerTask('js', ['concat', 'uglify']);
 
     grunt.registerTask('default', ['css']);
 

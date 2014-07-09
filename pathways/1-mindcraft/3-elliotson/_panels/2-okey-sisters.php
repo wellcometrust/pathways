@@ -1,35 +1,25 @@
 
-<div id="okey-sisters" class="panel okey-sisters" data-offset-height="1200">
+<div id="okey-sisters" class="panel okey-sisters" data-scene="okey-sisters" data-offset-height="1400">
 
     <div class="bg-container">
-        <img src="/_assets/img/elliotson/elliotson-2.jpg">
+        <img src="/_assets/img/spacer.png">
     </div>
 
-    <?php
-        $panel = array(
-            'links' => array(
-                array(
-                    'title'         => 'University College Hospital, London',
-                    'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1196522',
-                    'images_url'    => 'http://wellcomeimages.org/indexplus/image/V0013634.html'
-                ),
-                array(
-                    'title'         => 'A Mesmerist using Animal Magnetism on a woman who responds with convulsions',
-                    'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1159956',
-                    'images_url'    => 'http://wellcomeimages.org/indexplus/image/V0011094EB.html'
-                ),
-                array(
-                    'title'         => 'A Mesmerist using Animal Magnetism on a woman who responds with convulsions',
-                    'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1159957',
-                    'images_url'    => 'http://wellcomeimages.org/indexplus/image/V0011094ET.html'
-                )
-            )
-        );
-    ?>
+    <div class="black-strip"></div>
 
-    <?php pattern('library_panel'); ?>
+    <div class="main-content left strip">
 
-    <div class="black-strip" ></div>
+        <p>The Okey sisters were extraordinarily susceptible, slipping rapidly into trance states where they manifested quite different personalities. Elliotson could make them fall into stupor merely by waving a finger.</p>
+        <p>Touching magnetised metals or even water sent them into a trance in which they spontaneously mirrored each other’s actions.</p>
+       
+        <p>Elliotson’s demonstrations were crowded with doctors and dignitaries. The Okey sisters seemed to enjoy the attention, especially in their disinhibited trance states, when they teased the gentlemen and sat in their laps.</p>
+        <p>The medical journal The Lancet had been reporting the demonstrations with interest. But its editor, Thomas Wakley, suspected deception. He requested a private demonstration at his house, where he took control.</p>
+    </div>
+
+    <div class="secondary-content">
+        <img src="/_assets/img/elliotson/demonstration1.jpg">
+        <img src="/_assets/img/elliotson/demonstration2.jpg">
+    </div>
 
     <div class="info-box with-text" data-component="gallery">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
@@ -78,19 +68,5 @@
             ]
         }
     </script>
-    
-    <div class="scroll-content left">  
-
-        <p>The Okey sisters were extraordinarily susceptible, slipping rapidly into trance states where they manifested quite different personalities. Elliotson could make them fall into stupor merely by waving a finger.</p>
-        <p>Touching magnetised metals or even water sent them into a trance in which they spontaneously mirrored each other’s actions.</p>
-       
-        <p>Elliotson’s demonstrations were crowded with doctors and dignitaries. The Okey sisters seemed to enjoy the attention, especially in their disinhibited trance states, when they teased the gentlemen and sat in their laps.</p>
-        <p>The medical journal The Lancet had been reporting the demonstrations with interest. But its editor, Thomas Wakley, suspected deception. He requested a private demonstration at his house, where he took control.</p>
-    </div>
-
-    <div class="scroll-content" style="width: 40%; max-width: 500px; bottom: auto; top: 36%; left: 600px">
-        <img src="/_assets/img/elliotson/demonstration1.jpg" style="display: block; margin-bottom: 40px; margin-left: -100px">
-        <img src="/_assets/img/elliotson/demonstration2.jpg" style="display: block; margin-bottom: 40px">
-    </div>
 
 </div>

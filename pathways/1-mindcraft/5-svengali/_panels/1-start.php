@@ -1,8 +1,8 @@
 
-<div class="start">
+<div class="start start-svengali">
 
     <div class="bg-container">
-        <img src="/_assets/img/svengali/svengali-1.jpg">
+        <img src="/_assets/img/spacer.png">
     </div>
 
     <div class="falling-lady">
@@ -10,10 +10,7 @@
     </div>
     
     <div class="content">
-        <p class="scene-set">
-            <span class="location">Paris 1894</span>
-            <!-- <span class="date">1894</span> -->
-        </p>
+        <p class="scene-set">Paris 1894</p>
 
         <header>
             <h1>Dark forces</h1>

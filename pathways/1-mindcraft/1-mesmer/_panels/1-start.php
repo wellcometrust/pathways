@@ -1,14 +1,12 @@
 
-<div class="start">
+<div class="start start-mesmer">
 
     <div class="bg-container">
-        <img src="/_assets/img/mesmer/mesmer-1.jpg">
+        <img src="/_assets/img/spacer.png">
     </div>
     
     <div class="content">
-        <p class="scene-set">
-            <span class="location">Paris 1778</span>
-        </p>
+        <p class="scene-set">Paris 1778</p>
 
         <header>
             <h1>A new force in nature</h1>

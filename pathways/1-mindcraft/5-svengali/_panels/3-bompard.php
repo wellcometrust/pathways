@@ -1,13 +1,14 @@
 
-<div class="panel bompard">
+<div id="bompard" class="panel bompard">
+
     <div class="bg-container">
-        <img src="/_assets/img/svengali/svengali-2.jpg">
+        <img src="/_assets/img/spacer.png">
     </div>
 
-    <div class="scroll-content fixed">
+    <div class="main-content fixed">
         
         <div class="inner">
-            <div class="bonpard-header">
+            <div class="bompard-header">
                 <header>
                     <h1>Murder under hypnosis</h1>
                     <p>Du Maurier's novel reflected sensational true-life stories, such as the case of Gabrielle Bompard in Paris in 1889. On trial for murder, Gabrielle claimed she had been hypnotised by her male accomplice and had no memory of the crime.</p>
@@ -68,12 +69,12 @@
                     <div class="comic-column">
                         <div class="comic-panel">
                             <img src="/_assets/img/svengali/bonpard/bonpard-comic-10.jpg">
-                            <p class="panel-text">“If hypnotism explains the crime, if it is a way to deny free will…no criminal will be accountable for the blood he spills.” <cite>- Jules Quesnay de Beaurepair</cite></p>
+                            <p class="panel-text"><cite>For the prosecution: Jules Quesnay de Beaurepair</cite> “If hypnotism explains the crime, if it is a way to deny free will…no criminal will be accountable for the blood he spills.”</p>
                         </div>
                         <div class="comic-panel" data-offset="-200">
                             <img src="/_assets/img/svengali/bonpard/bonpard-comic-11.jpg">
 
-                            <p class="panel-text">“All conscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.” <cite>- Jules Liégeois</cite></p>
+                            <p class="panel-text"><cite>For the defence: Jules Liégeois</cite> “All conscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.”</p>
                         </div>
                     </div>
                     <div class="comic-column">
@@ -91,21 +92,5 @@
         </div>
         
     </div>
-
-    <?php
-        $panel = array(
-            'links' => array(
-                array(
-                    'title'         => 'Illustrations from Le Petit Parisien and Supplément Illustré du Petit Journal, 1890.',
-                ),
-                array(
-                    'title'         => 'Poster for the song “Gabrielle Bompétard” inspired by the affair called malle à Gouffé in France.',
-                    'catalogue_url' => 'http://commons.wikimedia.org/wiki/File:Gabrielle_Bomp%C3%A9tard.jpg'
-                )
-            )
-        );
-    ?>
-
-    <?php pattern('library_panel'); ?>
 
 </div>

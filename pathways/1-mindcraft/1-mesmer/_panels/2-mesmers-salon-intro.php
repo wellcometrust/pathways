@@ -1,12 +1,12 @@
 
-<div id="mesmers-salon-intro" class="panel mesmers-salon" data-offset-height="550">
+<div id="mesmers-salon-intro" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": true } }' data-offset-height="550">
 
-    <div class="bg-container">
-        <img class="small-screen" src="/_assets/img/mesmer/mesmer-2.jpg">
+    <div class="bg-container preserve-ratio">
         <img class="large-screen" src="/_assets/img/mesmer/mesmer-2-black.jpg">
+        <img class="small-screen" src="/_assets/img/mesmer/mesmer-2.jpg">
     </div>
     
-    <div class="scroll-content position-center text-left">
+    <div class="main-content center">
 
         <div class="inner">
             <header>

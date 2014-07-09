@@ -1,38 +1,46 @@
 
 #anna-o {
-
-    .scroll-content {
-        left: 5%;
-    }
-
-    header {
-        margin: 8rem 0 6rem 0;
-    }
-
-    h1 {
-        color: #030303;
-    }
-
-    p {
-        color: #030303;
-    }
-
-    p:nth-child(3) {
-        margin-top: 12rem;
-    }
-
-    p:nth-child(4) {
-        margin-top: 12rem;
-    }
-
-    p:nth-child(5) {
-        margin-top: 12rem;
-    }
-
     .fragmented {
         position:   absolute;
         top:        0;
         left:       0;
         width:      100%;
+    }
+}
+
+@media all and (min-width: 48rem) {
+    #anna-o {
+
+        header {
+            margin: 8rem 0 6rem 0;
+        }
+
+        h1 {
+            color: #030303;
+        }
+
+        p {
+            color: #030303;
+        }
+
+        p + p {
+            margin-top: 12rem;
+        }
+    }
+
+    .touch {
+        #anna-o {
+            header {
+                height: 370px;
+            }
+
+            p {
+                color: #fff;
+            }
+
+            p + p {
+                margin-top: 3rem;
+            }
+        }
     }
 }

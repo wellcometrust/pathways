@@ -2,7 +2,7 @@
     global $panel;
 ?>
 
-<div class="library-panel" data-component="library-panel">
+<div class="library-panel" data-panel="<?php echo isset($panel['id']) ? $panel['id'] : '' ?>" data-component="library-panel">
     <div class="handle">i</div>
     <div class="body">
         <span>Sources</span>
@@ -11,10 +11,10 @@
             <?php foreach ($panel['links'] as $link): ?>
             <li>
                 <span><?php echo $link['title'] ?></span>
-                <?php if( isset( $link['catalogue_url'] ) ):    ?><a href="<?php echo $link['catalogue_url'] ?>">catalogue</a><?php endif ?>
-                <?php if( isset( $link['images_url'] ) ):       ?><a href="<?php echo $link['images_url'] ?>">images</a><?php       endif ?>
-                <?php if( isset( $link['download_url'] ) ):     ?><a href="<?php echo $link['download_url'] ?>">download</a><?php   endif ?>
-                <?php if( isset( $link['external_url'] ) ):     ?><a href="<?php echo $link['external_url'] ?>">external</a><?php   endif ?>
+                <?php if( isset( $link['catalogue_url'] ) ):    ?><a href="<?php echo $link['catalogue_url'] ?>" rel="external">catalogue</a><?php endif ?>
+                <?php if( isset( $link['images_url'] ) ):       ?><a href="<?php echo $link['images_url'] ?>" rel="external">images</a><?php       endif ?>
+                <?php if( isset( $link['download_url'] ) ):     ?><a href="<?php echo $link['download_url'] ?>" rel="external">download</a><?php   endif ?>
+                <?php if( isset( $link['external_url'] ) ):     ?><a href="<?php echo $link['external_url'] ?>" rel="external">external</a><?php   endif ?>
             </li>
             <?php endforeach ?>
         </ul>

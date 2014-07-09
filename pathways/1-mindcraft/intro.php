@@ -12,7 +12,9 @@ include($docRoot.'/_includes/header.php');
 
         <div class="intro">
 
-            <div class="bg-container" style="background-image: url(<?php echo asset('img/intro/intro.jpg') ?>)"></div>
+            <div class="bg-container">
+                <img src="/_assets/img/spacer.png">
+            </div>
 
             <div class="logo"></div>
 

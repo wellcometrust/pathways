@@ -2,24 +2,10 @@
 <div id="thomas-wakley" class="panel thomas-wakley" data-offset-height="2800">
 
     <div class="bg-container">
-        <img src="/_assets/img/elliotson/elliotson-3.jpg">
+        <img src="/_assets/img/spacer.png">
     </div>
 
-    <?php
-        $panel = array(
-            'links' => array(
-                array(
-                    'title'         => 'Thomas Wakley',
-                    'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1173333',
-                    'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0008210.html'
-                )
-            )
-        );
-    ?>
-
-    <?php pattern('library_panel'); ?>
-
-    <div class="scroll-content fixed position-center">
+    <div class="main-content center fixed">
         <header>
             <h1>Wakley’s experiments produced very different results</h1>
         </header>
@@ -28,7 +14,7 @@
 
             <div class="past-twitter clearfix">
                 
-                <div class="tweet wakley">
+                <div class="tweet wakley left">
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
@@ -39,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="tweet elliotson">
+                <div class="tweet elliotson right">
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
@@ -50,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="tweet wakley">
+                <div class="tweet wakley left">
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
@@ -61,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="tweet elliotson">
+                <div class="tweet elliotson right">
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
@@ -72,7 +58,7 @@
                     </div>
                 </div>
 
-                <div class="tweet wakley">
+                <div class="tweet wakley left">
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
@@ -83,7 +69,7 @@
                     </div>
                 </div>
 
-                <div class="tweet elliotson">
+                <div class="tweet elliotson right">
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
@@ -94,7 +80,7 @@
                     </div>
                 </div>
 
-                <div class="tweet dickens">
+                <div class="tweet dickens left">
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
@@ -105,11 +91,11 @@
                     </div>
                 </div>
 
-                <div class="tweet martineau">
+                <div class="tweet martineau right">
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
-                        <div class="username">Harriet Martineau<span>@womanofletters</span></div>
+                        <div class="username">Harriet Martineau <span>@womanofletters</span></div>
                     </div>
                     <div class="body">
                         “Those who know mesmerism to be true from their own experience are now a very large number…the great majority who know nothing of the matter laugh at it as a nonsense or a cheat”
@@ -119,6 +105,18 @@
             </div>
         </div>
 
-        <div class="wibble">&nbsp;</div>
+        <?php
+            $panel = array(
+                'links' => array(
+                    array(
+                        'title'         => 'Thomas Wakley',
+                        'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1173333',
+                        'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0008210.html'
+                    )
+                )
+            );
+        ?>
+
+        <?php pattern('library_panel'); ?>
     </div>
 </div>

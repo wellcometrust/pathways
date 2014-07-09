@@ -16,7 +16,7 @@
     .inner {
         max-width:  64em;
         margin:     0 auto;
-        padding:    0 0.4rem;
+        padding:    0 0.6rem;
     }
 
     .bar {
@@ -26,6 +26,10 @@
         text-align:         center;
         cursor:             pointer;
         z-index:            20;
+
+        .show-more {
+            display: none;
+        }
 
         span {
             color:          #fff;
@@ -66,13 +70,17 @@
 
         .player-item--thumb {
             float:  left;
-            width:  150px;
-            height: 220px;
+            width:  75px;
+            height: 110px;
+        }
+
+        .player-item--content {
+            padding-left: 80px;
         }
 
         .player-item--header {
             h1 {
-                font-size: 1.2rem;
+                font-size: 1.239rem;
             }
         }
 
@@ -153,7 +161,7 @@
         margin-bottom: 2em;
 
         .related-item--header {
-            margin-bottom: 0.8em;
+            margin-bottom: 0.2em;
 
             a {
                 color:              #000;
@@ -165,7 +173,7 @@
             }
 
             h1 {
-                font-size: 1.2rem;
+                font-size: 1.239rem;
             }
         }
     }
@@ -174,12 +182,21 @@
 @media screen and (min-width: 48em) {
     .library-layer {
         .bar {
-            -webkit-transition: -webkit-transform 0.2s ease;
-               -moz-transition:    -moz-transform 0.2s ease;
+            .show-more {
+                display:    block;
+                position:   absolute;
+                bottom:     -24px;
+                width:      100%;
 
-            &:hover {            
-                -webkit-transform: scale(1.2);
-                   -moz-transform: scale(1.2);
+                span {
+                    display:            block;
+                    background-color:   $blue;
+                    font-size:          0.8rem;
+                    width:              100px;
+                    margin:             0 auto;
+                    padding:            0.2rem;
+                    border-radius:      0 0 4px 4px;
+                }
             }
         }
 
@@ -210,13 +227,17 @@
         .player-item {
             margin-bottom: 3em;
 
-            .player-item--header {
-                margin-bottom: 0.8em;
+            .player-item--thumb {
+                width:  150px;
+                height: 220px;
             }
 
             .player-item--content {
-                float: left;
-                width: 60%
+                padding-left: 150px;
+            }
+
+            .player-item--header {
+                margin-bottom: 0.8em;
             }
 
             .player-item--body {
@@ -236,6 +257,22 @@
 
             li:nth-child(odd) {
                 margin-right: 10%;
+            }
+        }
+    }
+
+    .no-touch .library-layer {
+        .bar {
+            -webkit-transition: -webkit-transform 0.2s ease;
+               -moz-transition:    -moz-transform 0.2s ease;
+                -ms-transition:     -ms-transform 0.2s ease;
+                    transition:         transform 0.2s ease;
+
+            &:hover {            
+                -webkit-transform: scale(1.2);
+                   -moz-transform: scale(1.2);
+                    -ms-transform: scale(1.2);
+                        transform: scale(1.2);
             }
         }
     }

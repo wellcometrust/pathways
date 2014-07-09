@@ -8,7 +8,7 @@
     $idx        = isset($indices[$module]) ? $indices[$module] : '';
 ?>
 
-<div class="global-navigation active" data-component="global-navigation">
+<div class="global-navigation active">
     <div class="container clearfix">
         <nav>
             <ul class="clearfix">
@@ -58,7 +58,6 @@
         </nav>
         <div class="handle closed">
             <div class="current-section"><?php echo $idx ?></div>
-            <div class="open-nav-btn"><img src="/_assets/img/icons/icon-btn-next.svg"></div>
         </div>
     </div>
 </div>

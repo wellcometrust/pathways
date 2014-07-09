@@ -2,9 +2,22 @@
 #animal-magnetism {
     overflow: hidden;
 
+    .bg-container {
+        background-image: url(/_assets/img/mesmer/mesmer-3.jpg);
+    }
+
     .info-box {
         position:   absolute; 
-        top:        120px; 
-        right:      100px; 
+        top:        20px;
+        right:      60px;
+    }
+}
+
+.no-touch {
+    #animal-magnetism {
+        .info-box {
+            top:        120px;
+            right:      100px;
+        }
     }
 }
