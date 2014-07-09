@@ -134,13 +134,14 @@
                 </header>
 
                 <ul>
-                    <li><a href="<?php echo $path ?>intro">Intro</a></li>
-                    <li><a href="<?php echo $path ?>1-mesmer">Mesmer</a></li>
-                    <li><a href="<?php echo $path ?>2-airloom">Airloom</a></li>
-                    <li><a href="<?php echo $path ?>3-elliotson">Elliotson</a></li>
-                    <li><a href="<?php echo $path ?>4-esdaile">Esdaile</a></li>
-                    <li><a href="<?php echo $path ?>5-svengali">Svengali</a></li>
-                    <li><a href="<?php echo $path ?>6-freud">Sigmund Freud</a></li>
+                    <li><a href="<?php echo $path ?>intro.php">Intro</a></li>
+                    <li><a href="<?php echo $path ?>1-mesmer/index.php">Mesmer</a></li>
+                    <li><a href="<?php echo $path ?>2-airloom/index.php">Airloom</a></li>
+                    <li><a href="<?php echo $path ?>3-elliotson/index.php">Elliotson</a></li>
+                    <li><a href="<?php echo $path ?>4-esdaile/index.php">Esdaile</a></li>
+                    <li><a href="<?php echo $path ?>5-svengali/index.php">Svengali</a></li>
+                    <li><a href="<?php echo $path ?>6-freud/index.php">Sigmund Freud</a></li>
+                    <li><a href="<?php echo $path ?>credits.php">Credits</a></li>
                 </ul>
 
                 <header>

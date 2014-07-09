@@ -36,37 +36,37 @@ include($docRoot.'/_includes/header.php');
                     <nav>
                         <ul class="clearfix">
                             <li>
-                                <a class="section-link" href="1-mesmer">
+                                <a class="section-link" href="1-mesmer/index.php">
                                     <span>A new force in nature</span>
                                     <img src="/_assets/img/navigation/mesmer.jpg">
                                 </a>
                             </li>
                             <li>
-                                <a class="section-link" href="2-airloom">
+                                <a class="section-link" href="2-airloom/index.php">
                                     <span>A machine to control the mind</span>
                                     <img src="/_assets/img/navigation/airloom.jpg">
                                 </a>
                             </li>
                             <li>
-                                <a class="section-link" href="3-elliotson">
+                                <a class="section-link" href="3-elliotson/index.php">
                                     <span>Who controls who?</span>
                                     <img src="/_assets/img/navigation/elliotson.jpg">
                                 </a>
                             </li>
                             <li>
-                                <a class="section-link" href="4-esdaile">
+                                <a class="section-link" href="4-esdaile/index.php">
                                     <span>Mind over matter</span>
                                     <img src="/_assets/img/navigation/esdaile.jpg">
                                 </a>
                             </li>
                             <li>
-                                <a class="section-link" href="5-svengali">
+                                <a class="section-link" href="5-svengali/index.php">
                                     <span>Dark forces</span>
                                     <img src="/_assets/img/navigation/svengali.jpg">
                                 </a>
                             </li>
                             <li>
-                                <a class="section-link" href="6-freud">
+                                <a class="section-link" href="6-freud/index.php">
                                     <span>Secrets of the mind revealed</span>
                                     <img src="/_assets/img/navigation/freud.jpg">
                                 </a>
@@ -79,9 +79,5 @@ include($docRoot.'/_includes/header.php');
         </div>
 
     </main>
-
-    <script>
-        // document.querySelector('.bg-container').style['height'] = window.innerHeight + 'px';
-    </script>
 
 <?php include($docRoot.'/_includes/footer.php') ?>
