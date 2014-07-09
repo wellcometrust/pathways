@@ -1,4 +1,8 @@
-<?php global $library_db; ?>
+<?php
+    global $library_db;
+
+    $layer = isset( $library_db['library_layer'] ) ? $library_db['library_layer'] : [];
+?>
 
 <div class="library-layer" data-component="library-layer">
     
@@ -19,8 +23,8 @@
 
                 <div>
                     <ul class="player-items clearfix">
-                        <?php if( isset($library_db) && isset($library_db['player']) ): ?>
-                            <?php foreach( $library_db['player'] as $data ): ?>
+                        <?php if( isset($layer['player']) ): ?>
+                            <?php foreach( $layer['player'] as $data ): ?>
                                 <li>
                                     <div class="player-item clearfix<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>">
                                         <div class="player-item--thumb"></div>
@@ -49,7 +53,7 @@
             </div>
         </div>
 
-        <?php if( isset($library_db) && isset($library_db['related']) ): ?>
+        <?php if( isset($layer['related']) ): ?>
 
         <div class="related-resources">
             
@@ -61,7 +65,7 @@
                 <div>
                     <ul class="related-items clearfix">
 
-                        <?php foreach ($library_db['related'] as $data): ?>
+                        <?php foreach ($layer['related'] as $data): ?>
                             <li>
                                 <div class="related-item book">
                                     <header class="related-item--header">
