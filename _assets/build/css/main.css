@@ -387,7 +387,7 @@ iframe {
       font-size: 0.8rem;
       width: 100px;
       margin: 0 auto;
-      padding: 0.2rem;
+      padding: 0.6rem 0.2rem 0.2rem 0.2rem;
       border-radius: 0 0 4px 4px; }
   .library-layer .in-the-player {
     padding: 2em 0; }
@@ -422,16 +422,16 @@ iframe {
     .library-layer .related-resources li:nth-child(odd) {
       margin-right: 10%; }
 
-  .no-touch .library-layer .bar {
-    -webkit-transition: -webkit-transform 0.2s ease;
-    -moz-transition: -moz-transform 0.2s ease;
-    -ms-transition: -ms-transform 0.2s ease;
-    transition: transform 0.2s ease; }
-    .no-touch .library-layer .bar:hover {
-      -webkit-transform: scale(1.2);
-      -moz-transform: scale(1.2);
-      -ms-transform: scale(1.2);
-      transform: scale(1.2); } }
+  .no-touch .library-layer .bar .show-more {
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    transition: all 0.2s ease; }
+  .no-touch .library-layer .bar:hover .show-more {
+    -webkit-transform: translate(0, 5px);
+    -moz-transform: translate(0, 5px);
+    -ms-transform: translate(0, 5px);
+    transform: translate(0, 5px); } }
 .info-box {
   display: none;
   cursor: pointer;
@@ -1862,29 +1862,37 @@ iframe {
     .panel .bg-container img {
       display: block;
       width: 100%; }
-    .panel .bg-container video {
-      height: 100%; }
+    .panel .bg-container video, .panel .bg-container canvas {
+      width: 100%; }
   .panel .main-content {
     color: #fff;
     font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
     font-weight: normal;
     font-style: normal;
     font-size: 0.9rem;
-    padding: 1.239 0; }
+    padding: 1.239rem 0; }
     .panel .main-content .content {
       max-width: 500px; }
     .panel .main-content p {
       margin-bottom: 1.239rem; }
     .panel .main-content.align-center {
       text-align: center; }
-    .panel .main-content.light {
-      color: #fff; }
   .panel .main-content.fixed {
     position: relative;
     top: auto;
     bottom: auto;
     left: auto;
     right: auto; }
+
+.no-touch .panel .bg-container video, .no-touch .panel .bg-container canvas {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  background-size: cover; }
 
 @media screen and (min-width: 48em) {
   .panel {
@@ -1914,6 +1922,9 @@ iframe {
         .panel .main-content.center .inner {
           width: 500px;
           margin: 0 auto; }
+
+  .touch .panel .main-content {
+    top: 15%; }
 
   .no-touch .panel .main-content {
     bottom: 20%; } }
@@ -1951,21 +1962,19 @@ iframe {
     color: #e0008d; }
 
 @media screen and (min-width: 48em) {
-  .teaser {
-    height: 400px; }
-    .teaser .teaser-text-container {
-      padding: 7rem 0; }
-      .teaser .teaser-text-container h1 {
-        font-size: 3.245rem;
-        padding: 0 5.5rem; }
-    .teaser .teaser-icon {
-      position: absolute;
-      top: 0;
-      right: 5px;
-      background: url(/_assets/img/icons/icon-teaser.svg) 50% 50% no-repeat;
-      background-size: 100%;
-      width: 75px;
-      height: 100%; } }
+  .teaser .teaser-text-container {
+    padding: 7rem 0; }
+    .teaser .teaser-text-container h1 {
+      font-size: 3.245rem;
+      padding: 0 5.5rem; }
+  .teaser .teaser-icon {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    background: url(/_assets/img/icons/icon-teaser.svg) 50% 50% no-repeat;
+    background-size: 100%;
+    width: 75px;
+    height: 100%; } }
 .past-twitter .tweet {
   float: left;
   position: relative;

@@ -80,6 +80,12 @@ Pathways.LoadScenes = function() {
         'transform':    'translate(0,'+panel_height+'px)'
     });
 
+    window.addEventListener('resize', function() {
+        $('.black-strip').css({
+            'height': window.innerHeight < 550 ? (550 + 10) : (window.innerHeight + 10),
+        });
+    });
+
     /**************
         Scenes
     **************/
@@ -98,7 +104,7 @@ Pathways.LoadScenes = function() {
         window.addEventListener('scroll', parallaxStart, false);
 
         function parallaxStart() {
-            scrollY = window.scrollY;
+            scrollY = window.pageYOffset;
 
             if( scrollY > panel_height )
                 return;
@@ -122,7 +128,7 @@ Pathways.LoadScenes = function() {
         window.addEventListener('scroll', parallaxLady, false);
 
         function parallaxLady() {
-            scrollY2 = window.scrollY;
+            scrollY2 = window.pageYOffset;
 
             if( scrollY2 > panel_height )
                 return;

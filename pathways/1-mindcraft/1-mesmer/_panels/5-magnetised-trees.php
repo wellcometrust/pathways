@@ -2,8 +2,8 @@
 <div id="magnetised-trees" class="panel tree" data-offset-height="350" data-scene="magnetised-trees">
 
     <div class="bg-container" data-src="/_assets/video/tree-animation.m4v">
-        <!-- <img src="/_assets/animations/magnetised-trees/images/Bitmap1.jpg"> -->
         <canvas id="canvas" width="1900" height="1050"></canvas>
+        <img src="/_assets/animations/magnetised-trees/images/Bitmap1.jpg">
     </div>
 
     <div class="black-strip" ></div>

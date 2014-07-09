@@ -16,7 +16,7 @@
         var init = function() {
 
             // Progressive loading. Some things need to happen before window load
-            if( !supports_touch ) {
+            if( !supports_touch || window.innerWidth > 1000 ) {
                 resizeAllTheThings();
 
                 window.addEventListener('resize', function() {

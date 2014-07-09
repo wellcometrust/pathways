@@ -194,7 +194,7 @@
                     font-size:          0.8rem;
                     width:              100px;
                     margin:             0 auto;
-                    padding:            0.2rem;
+                    padding:            0.6rem 0.2rem 0.2rem 0.2rem;
                     border-radius:      0 0 4px 4px;
                 }
             }
@@ -263,16 +263,20 @@
 
     .no-touch .library-layer {
         .bar {
-            -webkit-transition: -webkit-transform 0.2s ease;
-               -moz-transition:    -moz-transform 0.2s ease;
-                -ms-transition:     -ms-transform 0.2s ease;
-                    transition:         transform 0.2s ease;
+            .show-more {
+                -webkit-transition: all 0.2s ease;
+                   -moz-transition: all 0.2s ease;
+                    -ms-transition: all 0.2s ease;
+                        transition: all 0.2s ease;
+            }
 
-            &:hover {            
-                -webkit-transform: scale(1.2);
-                   -moz-transform: scale(1.2);
-                    -ms-transform: scale(1.2);
-                        transform: scale(1.2);
+            &:hover {       
+                .show-more {
+                    -webkit-transform: translate(0, 5px);
+                       -moz-transform: translate(0, 5px);
+                        -ms-transform: translate(0, 5px);
+                            transform: translate(0, 5px);
+                }
             }
         }
     }
