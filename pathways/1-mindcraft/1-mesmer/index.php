@@ -34,11 +34,18 @@
 
             <?php
                 /* Panels */
-                $d = dir('_panels/');
+                $d          = dir('_panels/');
+                $file_array = [];
 
                 while (false !== ($file = $d->read())) {
                     if( $file != '.' && $file != '..' && !preg_match('/start/', $file) )
-                        include '_panels/'.$file;
+                        $file_array[] = $file;
+                }
+
+                sort($file_array);
+
+                foreach ($file_array as $file) {
+                    include '_panels/'.$file;
                 }
             ?>
 
