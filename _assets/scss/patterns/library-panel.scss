@@ -7,25 +7,29 @@
     z-index:    15;
 
     -webkit-transform:  translate(100%, 88%);
-    -webkit-transition: all 0.5s ease;
+       -moz-transform:  translate(100%, 88%);
+        -ms-transform:  translate(100%, 88%);
+            transform:  translate(100%, 88%);
 
-    -moz-transform:  translate(100%, 88%);
-    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+       -moz-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+            transition: all 0.5s ease;
     
     .handle {
-        display:        block;
-        position:       relative;
-        color:          #5cb8b2;
-        @include        abril-italic;
-        width:          46px;
-        border:         3px solid #5cb8b2;
-        border-radius:  50%;
-        text-align:     center;
-        margin:         0 0 15px -61px;
-        line-height:    40px;
-        cursor:         default;
-        background-color: rgba(0,0,0, .8);
-        z-index:        900;
+        display:            block;
+        position:           relative;
+        color:              #5cb8b2;
+        @include            abril-italic;
+        width:              46px;
+        border:             3px solid #5cb8b2;
+        border-radius:      50%;
+        text-align:         center;
+        margin:             0 0 15px -61px;
+        line-height:        40px;
+        cursor:             default;
+        background-color:   rgba(0,0,0, .8);
+        z-index:            900;
     }
 
     .body {
@@ -37,6 +41,8 @@
 
         -webkit-transition: all 0.3s ease;
            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+                transition: all 0.3s ease;
 
         li {
             list-style: none; 
@@ -60,6 +66,8 @@
     &.active {
         -webkit-transform:  translate(38px, 38px);
            -moz-transform:  translate(38px, 38px);
+            -ms-transform:  translate(38px, 38px);
+                transform:  translate(38px, 38px);
 
         .handle {
             background-color: rgba(0,0,0, 1);
@@ -67,16 +75,20 @@
         .body {
             -webkit-transform: translate(-38px, -38px);
                -moz-transform: translate(-38px, -38px);
+                -ms-transform: translate(-38px, -38px);
+                    transform: translate(-38px, -38px);
         }
     }
+
     .share-me {
         p {
-            @include        tablet-gothic;
-            font-size:      .8rem;  
-            color:          #333;
-            text-decoration: none;
+            @include            tablet-gothic;
+            font-size:          0.8rem;  
+            color:              #333;
+            text-decoration:    none;
         }
         img {
+            border: none;
             height: 32px;
             width:  32px;
             margin: 5px 5px 5px 0px;

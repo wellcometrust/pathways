@@ -1,0 +1,86 @@
+
+# Svengali panels:
+# 
+# trilby
+# bompard
+
+
+# Info Panels
+
+info_panels:
+
+    trilby:
+        -   title: 'Trilby, novel by George du Maurier, 1894'
+            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1265549'
+            images_url: 'http://wellcomeimages.org/indexplus/image/M0005798.html'
+
+        -   title: 'The Bridge of Arts [Paris] by George du Maurier, 1894.'
+            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/3.html'
+
+        -   title: 'Trilby’s Forbears by George du Maurier, 1894.'
+            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/14.html'
+
+        -   title: 'The ‘Rosamund’ of Schubert by George du Maurier, 1894.'
+            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/8.html'
+
+        -   title: '“We took her voice note by note” by George du Maurier, 1894.'
+            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/118.html'
+
+        -   title: '“Et maintenant dors, ma mignonne!” by George du Maurier, 1894.'
+            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/103.html'
+
+        -   title: 'An incubus by George du Maurier, 1894.'
+            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/38.html'
+
+        -   title: 'Au clair de la lune by George du Maurier, 1894.'
+            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/84.html'
+
+        -   title: 'Petits Bonheurs de Contrebande by George du Maurier, 1894.'
+            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/116.html'
+
+        -   title: '"Hast thou found me, o mine enemy?" by George du Maurier, 1894.'
+            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/98.html'
+
+        -   title: '"The last they saw of Svengali" by George du Maurier, 1894.'
+            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/100.html'
+
+        -   title: 'It was Trilby by George du Maurier, 1894.'
+            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/83.html'
+
+    bompard:
+        -   title: 'Illustrations from Le Petit Parisien and Supplément Illustré du Petit Journal, 1890.'
+
+        -   title: 'Poster for the song “Gabrielle Bompétard” inspired by the affair called malle à Gouffé in France.'
+            catalogue_url: 'http://commons.wikimedia.org/wiki/File:Gabrielle_Bomp%C3%A9tard.jpg'
+
+
+# Library Layer
+
+library_layer:
+
+    player:
+
+    related:
+        -   type: book
+            title: 'Svengali’s Web'
+            author: 'Daniel Pick'
+            date: '2000'
+            link: ''
+
+        -   type: book
+            title: 'Hypnosis: a brief history'
+            author: 'Judith Pintar and Steven Jay Lynn'
+            date: '2008'
+            link: ''
+
+        -   type: book
+            title: 'Little Demon in the City of Light: A True Story of Murder and Mesmerism in Belle Epoque Paris'
+            author: 'Steven Levingston'
+            date: '2014'
+            link: ''
+
+        -   type: book
+            title: 'Trilby'
+            author: 'George du Maurier'
+            date: '1894'
+            link: 'http://www.gutenberg.org/ebooks/39858'

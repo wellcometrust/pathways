@@ -2,7 +2,17 @@
 .intro {
 
     .bg-container {
-        z-index: -1;
+        position:           absolute;
+        top:                0;
+        left:               0;
+        background:         url(/_assets/img/intro/intro.jpg) 50% 50% no-repeat;
+        background-size:    cover;
+        width:              100%;
+        z-index:            -1;
+
+        img {
+            width: 100%;
+        }
     }
 
     .logo {
@@ -16,6 +26,7 @@
     }
 
     .inner {
+        position: relative;
         max-width:  960px;
         margin:     0 auto;
         text-align: center;
@@ -44,6 +55,7 @@
         color:              #fff;
         @include            tablet-gothic;
         text-decoration:    none;
+        margin-bottom:      8%;
         margin-bottom:      8vh;
 
         span {
@@ -53,6 +65,20 @@
             background:         url(/_assets/img/icons/icon-teaser.svg) 50% 50% no-repeat;
             background-size:    100%;
             margin:             0.5rem auto 0 auto;
+
+            -webkit-transition: all 0.2s ease;
+               -moz-transition: all 0.2s ease;
+                -ms-transition: all 0.2s ease;
+                    transition: all 0.2s ease;
+        }
+
+        &:hover {
+            span {
+                -webkit-transform: translate(6px, 0);
+                   -moz-transform: translate(6px, 0);
+                    -ms-transform: translate(6px, 0);
+                        transform: translate(6px, 0);
+            }
         }
     }
 }
@@ -61,6 +87,7 @@
     .intro {
         .intro-header {
             color:      #fff;
+            margin-top: 16%;
             margin-top: 16vh;
 
             h1 {

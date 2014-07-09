@@ -1,8 +1,12 @@
+<?php global $library_db; ?>
 
 <div class="library-layer" data-component="library-layer">
     
     <div class="bar">
         <span>Further reading</span>
+        <div class="show-more">
+            <span>Show</span>
+        </div>
     </div>
 
     <div class="gap">
@@ -15,8 +19,8 @@
 
                 <div>
                     <ul class="player-items clearfix">
-                        <?php if( isset($library_content) && isset($library_content['in the player']) ): ?>
-                            <?php foreach( $library_content['in the player'] as $data ): ?>
+                        <?php if( isset($library_db) && isset($library_db['player']) ): ?>
+                            <?php foreach( $library_db['player'] as $data ): ?>
                                 <li>
                                     <div class="player-item clearfix<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>">
                                         <div class="player-item--thumb"></div>
@@ -45,7 +49,7 @@
             </div>
         </div>
 
-        <?php if( isset($library_content) && isset($library_content['related resources']) ): ?>
+        <?php if( isset($library_db) && isset($library_db['related']) ): ?>
 
         <div class="related-resources">
             
@@ -57,11 +61,11 @@
                 <div>
                     <ul class="related-items clearfix">
 
-                        <?php foreach ($library_content['related resources'] as $data): ?>
+                        <?php foreach ($library_db['related'] as $data): ?>
                             <li>
                                 <div class="related-item book">
                                     <header class="related-item--header">
-                                        <a href="#"><h1><?php echo isset( $data['title'] ) ? $data['title'] : '' ?></h1></a>
+                                        <h1><?php echo isset( $data['title'] ) ? $data['title'] : '' ?></h1>
                                     </header>
 
                                     <div class="related-item--body">

@@ -1,0 +1,89 @@
+
+# Elliotson panels:
+# 
+# okey-sisters
+# thomas-wakley
+# verdict
+
+
+# Info Panels
+
+info_panels:
+
+    okey-sisters:
+        -   title: 'University College Hospital, London'
+            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1196522'
+            images_url: 'http://wellcomeimages.org/indexplus/image/V0013634.html'
+
+        -   title: 'A Mesmerist using Animal Magnetism on a woman who responds with convulsions'
+            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1159956'
+            images_url: 'http://wellcomeimages.org/indexplus/image/V0011094EB.html'
+
+        -   title: 'A Mesmerist using Animal Magnetism on a woman who responds with convulsions'
+            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1159957'
+            images_url: 'http://wellcomeimages.org/indexplus/image/V0011094ET.html'
+
+    thomas-wakley:
+        -   title: 'Thomas Wakley'
+            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1173333'
+            images_url: 'http://wellcomeimages.org/indexplus/image/L0008210.html'
+
+
+# Library Layer
+library_layer:
+
+    player:
+        -   type: book
+            title: 'Pamphlet - A full discovery of the strange practices of Dr Elliotson on the bodies of his female patients'
+            author: 'E. Hancock'
+            date: '1842'
+            link: 'http://wellcomelibrary.org/package/b20595220'
+
+        -   type: book
+            title: 'Elliotson’s Pain-Free Surgical Operations'
+            author: 'John Elliotson'
+            date: '1843'
+            link: 'http://wellcomelibrary.org/package/b20603514'
+
+        -   type: book
+            title: 'Magnetic and Mesmeric Fluids'
+            author: 'John Ashburner'
+            date: '1848'
+            link: 'http://wellcomelibrary.org/pckage/b20458228'
+
+        -   type: book
+            title: 'Animal Magnetism & Homeopathy'
+            author: 'Edwin Lee'
+            date: '1835'
+            link: 'http://wellcomelibrary.org/package/b20603460'
+
+        -   type: book
+            title: 'Painless removal of a female breast in the mesmeric trance'
+            author: 'Theodosius Purland'
+            date: '1854'
+            link: 'http://wellcomelibrary.org/package/b20603484'
+
+        -   type: book
+            title: 'Cases cured by Mesmerism'
+            author: ''
+            date: ''
+            link: ''
+
+        -   type: book
+            title: 'Harriet Martineau’s Letters on Mesmerism'
+            author: ''
+            date: '1845'
+            link: ''
+
+    related:
+        -   type: book
+            title: 'Mesmerized'
+            author: 'Alison Winter'
+            date: '2000'
+            link: ''
+
+        -   type: book
+            title: 'Servants of the Supernatural: the night side of the Victorian mind'
+            author: 'Antonio Melechi'
+            date: '2009'
+            link: ''

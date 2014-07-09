@@ -1,0 +1,18 @@
+
+.start-svengali {
+    .bg-container {
+        background-image: url(/_assets/img/svengali/svengali-1.jpg);
+    }
+
+    .falling-lady {
+        display: none;
+    }
+}
+
+@media all and (min-width: 48rem) {
+    .start-svengali {
+        .falling-lady {
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+
+@media all and (min-width: 48rem) {
+    #office {
+        img {
+            -webkit-transform:          scale(1.6, 1.6);
+               -moz-transform:          scale(1.6, 1.6);
+                -ms-transform:          scale(1.6, 1.6);
+                    transform:          scale(1.6, 1.6);
+
+            -webkit-transform-origin:   0 0;
+               -moz-transform-origin:   0 0;
+                -ms-transform-origin:   0 0;
+                    transform-origin:   0 0;
+
+            -webkit-transition:         -webkit-transform 14s ease;
+               -moz-transition:         -moz-transform 14s ease;
+                -ms-transition:         -ms-transform 14s ease;
+                    transition:         transform 14s ease;
+        }
+
+        &.active img {
+            -webkit-transform: translate(-80%, -40%) scale(1.8, 1.8);
+               -moz-transform: translate(-80%, -40%) scale(1.8, 1.8);
+                -ms-transform: translate(-80%, -40%) scale(1.8, 1.8);
+                    transform: translate(-80%, -40%) scale(1.8, 1.8);
+        }
+    }    
+}

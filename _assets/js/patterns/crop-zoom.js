@@ -6,14 +6,13 @@ Pathways.CropZoom = function(panel_height) {
     
     $elm.css({
         position:   'absolute',
-        opacity:    0,
+        opacity:    Modernizr.touch ? 1 : 0,
         width:      window.innerWidth,
-        height:     $elm.parents('.panel').find('.bg-container').height(),
         'z-index':  10
     });
 
     window.addEventListener('resize', function() {
-        $elm.css( { 'width': window.innerWidth, 'height': $elm.parents('.panel').find('.bg-container').height() } );
+        $elm.css( { 'width': window.innerWidth } );
     })
 
     // Tap targets
@@ -88,6 +87,7 @@ Pathways.CropZoom = function(panel_height) {
             });
 
             $close.on('click', function() {
+                console.log('wibble');
                 $overlay.get(0).addEventListener('transitionend', function() { $(this).remove() }, false);
                 $overlay.css('opacity', 0);
             });

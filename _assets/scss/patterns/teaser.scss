@@ -1,11 +1,10 @@
-.teaser {
 
+.teaser {
     position:               relative;
     text-align:             center;
     background-color:       #000;
     background-position:    50% 50%;
     background-size:        cover;
-    height:                 200px;
     z-index:                10;
 
     a {
@@ -22,7 +21,7 @@
 
     .teaser-text-container {
         position:       relative;
-        padding-top:    9%;
+        padding:        1.6rem 0;
         z-index:        1;
         
         h1 {
@@ -35,7 +34,7 @@
         @include        tablet-gothic;
         font-size:      0.766rem;
         text-transform: uppercase;
-        letter-spacing: .2rem;
+        letter-spacing: 0.2rem;
         padding:        0 0.4rem
     }
 
@@ -46,19 +45,26 @@
 
 @media screen and (min-width: 48em) {
     .teaser {
-        height: 400px;
-        
-        .teaser-icon {
-            width:          82px;
-            height:         82px;
-            float:          right;
-            margin:         -90px 25px 0 0;
-        }
+        // height: 400px;
 
         .teaser-text-container {
+            padding: 7rem 0;
+
             h1 {
                 font-size:  3.245rem;
+                padding:    0 5.5rem;
             }
         }
+        
+        .teaser-icon {
+            position:           absolute;
+            top:                0;
+            right:              5px;
+            background:         url(/_assets/img/icons/icon-teaser.svg) 50% 50% no-repeat;
+            background-size:    100%;
+            width:              75px;
+            height:             100%
+        }
+
     }
 }

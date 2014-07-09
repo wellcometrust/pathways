@@ -1,22 +1,17 @@
     
-    <script src="<?php echo asset('js/lib/jquery-2.1.0.min.js') ?>"></script>
+    <script src="<?php echo asset('js/lib/jquery-2.1.1.min.js') ?>"></script>
     <script src="<?php echo asset('js/lib/hammer.min.js') ?>"></script>
     
     <script src="<?php echo asset('js/lib/greensock/TweenMax.min.js') ?>"></script>
     <script src="<?php echo asset('js/lib/jquery.scrollmagic.js') ?>"></script>
 
-    <!-- Pathways Core -->
-    <script src="<?php echo asset('js/pathways.js') ?>"></script>
+    <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+    <script src="http://code.createjs.com/tweenjs-0.5.0.min.js"></script>
+    <script src="http://code.createjs.com/movieclip-0.7.0.min.js"></script>
+    <script src="http://code.createjs.com/preloadjs-0.4.0.min.js"></script>
+    <script src="/_assets/animations/magnetised-trees/tree2.js"></script>
 
-    <script src="<?php echo asset('js/patterns/crop-zoom.js') ?>"></script>
-    <script src="<?php echo asset('js/patterns/global-navigation.js') ?>"></script>
-    <script src="<?php echo asset('js/patterns/library-panel.js') ?>"></script>
-    <script src="<?php echo asset('js/patterns/library-layer.js') ?>"></script>
-    <script src="<?php echo asset('js/patterns/quiz.js') ?>"></script>
-    <script src="<?php echo asset('js/patterns/audio-player.js') ?>"></script>
-    <script src="<?php echo asset('js/patterns/carousel.js') ?>"></script>
-
-    <script src="<?php echo asset('js/main.js') ?>"></script>
+    <script src="<?php echo asset('build/js/production.js') ?>"></script>
 
     <script>
         var pw = new Pathways();

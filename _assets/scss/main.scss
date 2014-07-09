@@ -19,13 +19,17 @@
 @import 'patterns/quiz';
 @import 'patterns/carousel';
 @import 'patterns/audio-player';
+@import 'patterns/black-strip';
+@import 'patterns/overlay';
+@import 'patterns/mute';
+@import 'patterns/panel-text';
 
 // Panels
-
 @import 'panels';
-@import 'patterns/panels';
+@import 'patterns/panel';
 @import 'patterns/teaser';
 @import 'patterns/past-twitter';
 
 // Modules
 @import 'patterns/intro';
+@import 'patterns/credits';

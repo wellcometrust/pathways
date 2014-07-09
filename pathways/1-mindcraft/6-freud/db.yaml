@@ -1,0 +1,57 @@
+
+# Esdaile panels:
+# 
+# anna-o
+# fred-breuer-intro
+# anna-o-video
+# fred-breuer
+# office
+# office-2
+
+
+# Info Panels
+
+info_panels:
+
+    anna-o:
+        -   title: '“Anna O” (Bertha Pappenheim)'
+            catalogue_url: 'http://commons.wikimedia.org/wiki/File:Anna_O.jpg'
+
+    fred-breuer:
+        -   title: 'Bertha Pappenheim (1882)'
+            catalogue_url: 'http://commons.wikimedia.org/wiki/File:Pappenheim_1882.jpg'
+
+    office:
+        -   title: 'Freud’s office'
+
+
+# Library Layer
+
+library_layer:
+
+    player:
+
+    related:
+        -   type: book
+            title: 'From Mesmer to Freud'
+            author: 'Adam Crabtree'
+            date: '1993'
+            link: ''
+
+        -   type: book
+            title: 'The Discovery of the Unconscious'
+            author: 'Henri Ellenberger'
+            date: '1970'
+            link: ''
+
+        -   type: book
+            title: 'The Enigma of Anna O'
+            author: 'Melinda Guttman'
+            date: '2001'
+            link: ''
+
+        -   type: book
+            title: 'Remembering Anna O'
+            author: 'Mikkel Borch-Jacobsen'
+            date: '1996'
+            link: ''

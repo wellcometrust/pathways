@@ -1,0 +1,17 @@
+
+#fakir {
+    .bg-container {
+        background-image: url(/_assets/img/esdaile/esdaile-3.jpg);
+        background-position: 50% 100%;
+    }
+}
+
+@media all and (min-width: 48rem) {
+    #fakir {
+        .main-content {
+            p {
+                text-shadow: 1px 1px 0px #030303;
+            }
+        }
+    }
+}

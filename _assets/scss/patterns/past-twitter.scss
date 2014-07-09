@@ -7,16 +7,19 @@
         color:              #fff;
         background-color:   rgba(0,0,0,0.8);
         border-radius:      5px;
-        width:              400px;
+        max-width:          400px;
         padding:            0.6em 1em;
-        margin:             3em 0;
+        margin:             2em 0;
 
         .avatar {
-            position:           absolute;
-            top:                -10px;
-            width:              90px;
-            height:             90px;
-            border-radius:      10px;
+            position:               absolute;
+            top:                    -10px;
+            width:                  70px;
+            height:                 70px;
+            border-radius:          10px;
+            background-position:    0 0;
+            background-repeat:      no-repeat;
+            background-size:        100%;
         }
 
         .header {
@@ -43,76 +46,85 @@
             padding: 0.6em 0;
         }
 
-        &.wakley {
+        &.left {
             float: left;
 
+            .header {
+                margin-left: 80px;
+            }
+        }
+
+        &.right {
+            float: right;
+
             .avatar {
-                left:               -10px;
-                background:         url(/_assets/img/elliotson/twitter-wakley.png) 0 0 no-repeat;
-                background-size:    100%;
+                right: 0;
             }
 
             .header {
-                padding-left: 80px;
+                margin-right: 80px;
             }
 
-            .body {
-                padding-left: 80px;
+        }
+
+        &.wakley {
+            .avatar {
+                background-image: url(/_assets/img/elliotson/twitter-wakley.png);
+                
             }
         }
 
         &.elliotson {
-            float: right;
-
             .avatar {
-                right:              -10px;
-                background:         url(/_assets/img/elliotson/twitter-elliotson.png) 0 0 no-repeat;
-                background-size:    100%;
+                background-image: url(/_assets/img/elliotson/twitter-elliotson.png);
             }
 
-            .header {
-                padding-right: 80px;
-            }
-
-            .body {
-                padding-right: 80px;
-            }
+            
         }
 
         &.dickens {
-            float: left;
-
             .avatar {
-                left:               -10px;
-                background:         url(/_assets/img/elliotson/twitter-dickens.png) 0 0 no-repeat;
-                background-size:    100%;
-            }
-
-            .header {
-                padding-left: 80px;
-            }
-
-            .body {
-                padding-left: 80px;
+                background-image: url(/_assets/img/elliotson/twitter-dickens.png);
             }
         }
 
         &.martineau {
-            float: right;
-
             .avatar {
-                right:              -10px;
-                background:         url(/_assets/img/elliotson/twitter-martineau.png) 0 0 no-repeat;
-                background-size:    100%;
-            }
-
-            .header {
-                padding-right: 80px;
-            }
-
-            .body {
-                padding-right: 80px;
+                background-image: url(/_assets/img/elliotson/twitter-martineau.png);
             }
         }
     }
+}
+
+@media all and (min-width: 48rem) {
+    .past-twitter {
+        .tweet {
+            margin: 3em 0;
+
+            .avatar {
+                width:  90px;
+                height: 90px;
+            }
+
+            &.left {
+                .avatar {
+                    left: -10px;
+                }
+
+                .body {
+                    padding-left: 80px;
+                }
+            }
+
+            &.right {
+                .avatar {
+                    right: -10px;
+                }
+
+                .body {
+                    padding-right: 80px;
+                }
+            }
+        }
+    }    
 }

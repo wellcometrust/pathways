@@ -73,7 +73,7 @@ function Carousel(element)
 
             loadNavigation();
 
-            _element.querySelector('ul').style['-webkit-transform'] = 'translate('+ (total_offset - (widths[0] / 2)) +'px,0)';
+            $(_element).find('ul').css( 'transform', 'translate('+ (total_offset - (widths[0] / 2)) +'px,0)');
             setPaneDimensions();
 
             panes.css('opacity', 0.4);
@@ -116,6 +116,8 @@ function Carousel(element)
             img.onload = function(elm) {
                 imagesLoaded++;
 
+                console.log(imagesLoaded, totalImages);
+
                 if( imagesLoaded == totalImages ) {
                     // resize the panes/container
                     var _panes      = _element.querySelectorAll('li'),
@@ -134,6 +136,8 @@ function Carousel(element)
                         totalWidth += w;
                     }
                     ul.style['width'] = totalWidth + 'px';
+
+                    console.log(totalWidth);
 
                     callback.call();
                 }
@@ -165,12 +169,12 @@ function Carousel(element)
         element.append($prev);
         element.append($next);
 
-        $prev.on('click', function() {
-            self.prev();
+        new Hammer($prev[0]).on("tap", function() {
+           self.prev(); 
         });
 
-        $next.on('click', function() {
-            self.next();
+        new Hammer($next[0]).on("tap", function() {
+           self.next(); 
         });
     }
 
