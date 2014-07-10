@@ -124,6 +124,8 @@
                     $img            = $this.find('img').first(),
                     img_height      = $img.outerHeight();
 
+                    var w = '';
+
                 $img.css('transform', 'translate(0, '+ ( (panel_height - img_height) / 2 ) +'px)');
             });
         }
