@@ -317,6 +317,12 @@
         background-image: url(/_assets/img/elliotson/elliotson-3.jpg);
     }
 
+    .main-content {
+        .inner {
+            width: 640px;
+        }
+    }
+
     header {
         h1 {
             text-align: left;
@@ -1246,6 +1252,16 @@
                -moz-transform: translate(-80%, -40%) scale(1.8, 1.8);
                 -ms-transform: translate(-80%, -40%) scale(1.8, 1.8);
                     transform: translate(-80%, -40%) scale(1.8, 1.8);
+        }
+    }
+
+    .no-touch {
+        #office-2 {
+            header {
+                h1 {
+                    text-shadow: 1px 1px 1px #030303;
+                }
+            }
         }
     }
 }

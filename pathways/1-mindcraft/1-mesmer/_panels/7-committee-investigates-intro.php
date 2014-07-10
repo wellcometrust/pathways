@@ -3,7 +3,7 @@
 
     <div class="bg-container"></div>
 
-    <div class="main-content center align-center">
+    <div class="main-content title align-center">
 
         <div class="inner">
             <header>
