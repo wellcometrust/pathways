@@ -5,7 +5,7 @@
     var Pathways = function(options) {
         var Pathways        = this,
             orientation     = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait',
-            panel_height    = window.innerHeight < 550 ? (550 + 10) : (window.innerHeight + 10),
+            panel_height    = window.innerHeight < 550 ? 550 : window.innerHeight,
 
             supports_touch  = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch);
 
@@ -16,7 +16,7 @@
         var init = function() {
 
             // Progressive loading. Some things need to happen before window load
-            if( !supports_touch || window.innerWidth > 1000 ) {
+            if( !supports_touch || orientation == 'landscape' ) {
                 resizeAllTheThings();
 
                 window.addEventListener('resize', function() {
@@ -69,7 +69,7 @@
                 var handler = $(this).attr('data-component');
 
                 if ( handler ) {
-                    var handlerClass = toTitleCase(handler);
+                    var handlerClass = window.Pathways.Utils.toTitleCase(handler);
 
                     // Check the handler exists and it hasn't already been loaded
                     if ( window.Pathways[handlerClass] != null && loaded.indexOf(handlerClass) == -1 ) {
@@ -122,7 +122,6 @@
             $('.preserve-ratio').each(function() {
                 var $this           = $(this),
                     $img            = $this.find('img').first(),
-                    // panel_height    = $this.parent().outerHeight(),
                     img_height      = $img.outerHeight();
 
                 $img.css('transform', 'translate(0, '+ ( (panel_height - img_height) / 2 ) +'px)');
@@ -148,13 +147,6 @@
 
                 $bg.css('height', panel_height);
             });
-        }
-
-        // Utils
-        var toTitleCase = function(str){
-            str = str.replace(/-/g,' ').replace(/_/g,' ');
-            str = str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);});
-            return str.replace(/\W/g,'');
         }
 
         /************************

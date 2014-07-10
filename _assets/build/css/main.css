@@ -1923,6 +1923,10 @@ iframe {
           width: 500px;
           margin: 0 auto; }
 
+  .panel:last-child .bg-container {
+    top: auto;
+    bottom: 0; }
+
   .touch .panel .main-content {
     top: 15%; }
 
