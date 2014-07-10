@@ -9,6 +9,9 @@
 
             supports_touch  = ('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch);
 
+        if( supports_touch && orientation == 'portrait' )
+            panel_height = 550;
+
         /************************
             Private functions
         *************************/
@@ -115,7 +118,7 @@
         }
 
         var resizeSomeThings = function() {
-            if( supports_touch ) {
+            if( window.innerWidth < 768 ) {
                 return;
             }
             
@@ -124,14 +127,12 @@
                     $img            = $this.find('img').first(),
                     img_height      = $img.outerHeight();
 
-                    var w = '';
-
-                $img.css('transform', 'translate(0, '+ ( (panel_height - img_height) / 2 ) +'px)');
+                $this.css('transform', 'translate(0, '+ ( (panel_height - img_height) / 2 ) +'px)');
             });
         }
 
         var resizeAllTheThings = function() {
-            panel_height = window.innerHeight < 550 ? (550 + 10) : (window.innerHeight + 10);
+            panel_height = window.innerHeight < 550 ? 550 : window.innerHeight;
 
             $('.start').css('height', panel_height);
 

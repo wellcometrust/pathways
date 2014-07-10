@@ -131,13 +131,6 @@
         }
     }
 
-    .panel:last-child {
-        .bg-container {
-            top:    auto;
-            bottom: 0;
-        }
-    }
-
     .touch {
         .panel {
             .main-content {
@@ -150,6 +143,13 @@
         .panel {
             .main-content {
                 bottom: 20%;
+            }
+        }
+
+        .panel:last-child {
+            .bg-container {
+                top:    auto;
+                bottom: 0;
             }
         }
     }

@@ -146,10 +146,28 @@
     }
 }
 
-.touch {
+#magnetised-trees {
+    .bg-container {
+        canvas {
+            display: none;
+        }
+    }
+
+    p {
+        text-shadow: 2px 2px 0px #030303;
+    }
+}
+
+@media all and (min-width: 48rem) {
     #magnetised-trees {
-        p {
-            text-shadow: 2px 2px 0px #030303;
+        .bg-container {
+            img {
+                display: none;
+            }
+
+            canvas {
+                display: block;
+            }
         }
     }
 }
@@ -344,11 +362,8 @@
 @media screen and (min-width: 48rem) {
     #verdict {
         .main-content {
+            padding:        0 1.618rem;
             bottom:         30%;
-        }
-
-        .inner {
-            float:          right;
         }
 
         .verdict-text {
@@ -381,6 +396,7 @@
 @media screen and (min-width: 52rem) {
     #verdict {
         .inner {
+            float:          right;
             width:          70%;
             margin-right:   20px;
         }
@@ -408,14 +424,14 @@
 
 #gonad-man {
 
-    .bg-container {
-        img {
-            width:  auto;
-            height: 100%;
-        }
-        // background-image:       url(/_assets/img/esdaile/esdaile-2.jpg);
-        // background-position:    100% 0;
-    }
+    // .bg-container {
+    //     img {
+    //         width:  auto;
+    //         height: 100%;
+    //     }
+    //     // background-image:       url(/_assets/img/esdaile/esdaile-2.jpg);
+    //     // background-position:    100% 0;
+    // }
 
     .info-box {
         position:   absolute;
@@ -465,6 +481,27 @@
                 -webkit-transform: scale(1, 1);
                    -moz-transform: scale(1, 1);
                         transform: scale(1, 1);
+            }
+        }
+    }
+}
+
+@media all and (min-width: 64rem) {
+    .touch {
+        #gonad-man {
+            .bg-container {
+                img {
+                    width:  auto;
+                    height: 100%;
+                }
+                // background-image:       url(/_assets/img/esdaile/esdaile-2.jpg);
+                // background-position:    100% 0;
+            }
+
+            .info-box {
+                position:   absolute;
+                top:        20px;
+                right:      100px;
             }
         }
     }

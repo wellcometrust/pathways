@@ -1,8 +1,26 @@
 
-.touch {
+#magnetised-trees {
+    .bg-container {
+        canvas {
+            display: none;
+        }
+    }
+
+    p {
+        text-shadow: 2px 2px 0px #030303;
+    }
+}
+
+@media all and (min-width: 48rem) {
     #magnetised-trees {
-        p {
-            text-shadow: 2px 2px 0px #030303;
+        .bg-container {
+            img {
+                display: none;
+            }
+
+            canvas {
+                display: block;
+            }
         }
     }
 }

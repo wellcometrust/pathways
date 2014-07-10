@@ -66,10 +66,60 @@ $('.library-panel').on('click', '[rel="external"]', function(e) {
     e.preventDefault();
 });
 
+if( window.innerWidth >= 720 ) {
+
+    // Begin the tree animation. Forget trying to pause/play on entering exiting the panel. Let it go, man. Just let it go...
+    var canvas, stage, exportRoot;
+
+    function init() {
+        canvas = document.getElementById("canvas");
+        images = images||{};
+
+        var loader = new createjs.LoadQueue(false);
+        loader.addEventListener("fileload", handleFileLoad);
+        loader.addEventListener("complete", handleComplete);
+        loader.loadManifest(lib.properties.manifest);
+    }
+
+    function handleFileLoad(evt) {
+        if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+    }
+
+    function handleComplete() {
+        exportRoot = new lib.tree2();
+
+        stage = new createjs.Stage(canvas);
+        stage.addChild(exportRoot);
+        stage.update();
+
+        createjs.Ticker.setFPS(lib.properties.fps);
+        createjs.Ticker.addEventListener("tick", stage);
+    }
+
+    init();
+}
+
+if( window.innerWidth >= 768 ) {
+    var aspect_ratio    = 1900 / 1050,
+        new_height      = window.innerWidth / aspect_ratio,
+        p_height        = Modernizr.touch ? 550 : window.innerHeight ;
+
+    function positionCrop() {
+        new_height = window.innerWidth / aspect_ratio;
+        $('.crop-zoom').css({
+            'height':       new_height,
+            'transform':    'translate(0, '+ ( (p_height - new_height) / 2 ) +'px)'
+        });
+    }
+
+    positionCrop();
+    window.addEventListener('resize', positionCrop);
+}
+
 
 Pathways.LoadScenes = function() {
 
-    var panel_height    = window.innerHeight < 550 ? (550 + 10) : (window.innerHeight + 10),
+    var panel_height    = window.innerHeight < 550 ? 550 : window.innerHeight,
         $sequence       = $('.sequence'),
         controller      = new ScrollMagic();
 
@@ -82,9 +132,36 @@ Pathways.LoadScenes = function() {
 
     window.addEventListener('resize', function() {
         $('.black-strip').css({
-            'height': window.innerHeight < 550 ? (550 + 10) : (window.innerHeight + 10),
+            'height': window.innerHeight < 550 ? 550 : window.innerHeight,
         });
     });
+
+    function parallaxStart() {
+        scrollY = window.pageYOffset;
+
+        if( scrollY > panel_height )
+            return;
+
+        if( scrollY > 0 ) {
+            $content.css({
+                'opacity':  1 - (unit * scrollY),
+                'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 2) +'px,0)' : 'translate(0,'+ (scrollY / 2) +'px)'
+            });
+        }
+    }
+
+    function parallaxLady() {
+        scrollY2 = window.pageYOffset;
+
+        if( scrollY2 > panel_height )
+            return;
+
+        if( scrollY2 > 0 ) {
+            $lady.css({
+                'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 3) +'px,0)' : 'translate(0,'+ (scrollY / 3) +'px)'
+            });
+        }
+    }
 
     /**************
         Scenes
@@ -102,20 +179,6 @@ Pathways.LoadScenes = function() {
             unit        = 1 / (panel_height / 2);
 
         window.addEventListener('scroll', parallaxStart, false);
-
-        function parallaxStart() {
-            scrollY = window.pageYOffset;
-
-            if( scrollY > panel_height )
-                return;
-
-            if( scrollY > 0 ) {
-                $content.css({
-                    'opacity':  1 - (unit * scrollY),
-                    'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 2) +'px,0)' : 'translate(0,'+ (scrollY / 2) +'px)'
-                });
-            }
-        }
     }
 
 
@@ -126,19 +189,6 @@ Pathways.LoadScenes = function() {
             scrollY2    = 0;
 
         window.addEventListener('scroll', parallaxLady, false);
-
-        function parallaxLady() {
-            scrollY2 = window.pageYOffset;
-
-            if( scrollY2 > panel_height )
-                return;
-
-            if( scrollY2 > 0 ) {
-                $lady.css({
-                    'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 3) +'px,0)' : 'translate(0,'+ (scrollY / 3) +'px)'
-                });
-            }
-        }
     }
 
     // Mute
@@ -187,16 +237,15 @@ Pathways.LoadScenes = function() {
             })
      }
 
-    // Panels
+    // Panels & Components
 
     $('[data-component="gallery"]').hide();
     $('[data-component="quiz"]').hide();
 
     $('.sequence .panel').each(function() {
         var $this           = $(this),
-            height          = $this.height(),
+            height          = $this.outerHeight(),
             $bg             = $this.find('.bg-container'),
-            // $library_panel  = $this.find('.library-panel'),
             $library_panel  = $('[data-panel="'+ $this.attr('id') +'"]').first(),
             $gallery        = $this.find('[data-component="gallery"]'),
             $quiz           = $this.find('[data-component="quiz"]'),
@@ -204,12 +253,19 @@ Pathways.LoadScenes = function() {
             
             tween           = TweenMax.to( $bg, 1, { opacity: 1 });
 
+        /*
+            I can't entirely explain why we need to set the bg to block on both enter and leave. But it fixes
+            a layering issue when loading the page during or after a sequence. SCIENCE!
+        */
         // Panels
         scenes[idx++] = new ScrollScene({
                 triggerElement: $this,
                 duration:       (panel_height / 4)
             })
             .on('enter', function() {
+                $bg.css('display', 'block');
+            })
+            .on('leave', function() {
                 $bg.css('display', 'block');
             })
             .setTween(tween)
@@ -219,8 +275,7 @@ Pathways.LoadScenes = function() {
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
                     triggerHook:    'top',
-                    duration:       (height - 200),
-                    offset:         50
+                    duration:       (height - (height / 4) )
                 })
                 .on('enter', function() {
                     $gallery.css({ position: 'fixed', display: 'block' });
