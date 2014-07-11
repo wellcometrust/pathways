@@ -159,6 +159,14 @@
                 position:   absolute;
                 bottom:     20%;
             }
+
+            .main-content.fixed {
+                position:   relative;
+                top:        auto;
+                bottom:     auto;
+                left:       auto;
+                right:      auto;
+            }
         }
 
         .panel:last-child {
