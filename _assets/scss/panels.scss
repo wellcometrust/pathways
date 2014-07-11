@@ -25,6 +25,14 @@
             display: block;
         }   
     }
+
+    .touch {
+        #mesmers-salon-intro {
+            .main-content {
+                top: 15%;
+            }
+        }
+    }
 }
 
 #mesmers-salon {
@@ -98,27 +106,35 @@
         background-color:   rgba(0,0,0,0.6);
         width:              320px;
         padding:            45px;
-        opacity:            0;
         line-height:        1.4;
         z-index:            20;
 
-        -webkit-transform: translate3d(0, 100px, 0);
-           -moz-transform: translate3d(0, 100px, 0);
-            -ms-transform: translate3d(0, 100px, 0);
-                transform: translate3d(0, 100px, 0);
+        -webkit-transform: translate(0, 100px);
+           -moz-transform: translate(0, 100px);
+            -ms-transform: translate(0, 100px);
+                transform: translate(0, 100px);
 
-        -webkit-transition: all 0.5s ease;
-           -moz-transition: all 0.5s ease;
-            -ms-transition: all 0.5s ease;
-                transition: all 0.5s ease;
+        -webkit-transition: -webkit-transform 0.5s ease;
+           -moz-transition: -moz-transform 0.5s ease;
+            -ms-transition: -ms-transform 0.5s ease;
+                transition: transform 0.5s ease;
     }
-    .text.show {
-        opacity: 1;
+}
 
-        -webkit-transform: translate(0, -20px);
-           -moz-transform: translate(0, -20px);
-            -ms-transform: translate(0, -20px);
-                transform: translate(0, -20px);
+.csstransforms {
+    .popup {
+        .text {
+            opacity: 0;
+        }
+
+        .text.show {
+            opacity: 1;
+
+            -webkit-transform: translate(0, -20px);
+               -moz-transform: translate(0, -20px);
+                -ms-transform: translate(0, -20px);
+                    transform: translate(0, -20px);
+        }
     }
 }
 
@@ -146,6 +162,16 @@
     }
 }
 
+@media all and (min-width: 48rem) {
+    .touch {
+        #animal-magnetism {
+            .main-content {
+                top: 15%;
+            }
+        }
+    }
+}
+
 #magnetised-trees {
     .bg-container {
         canvas {
@@ -167,6 +193,17 @@
 
             canvas {
                 display: block;
+            }
+        }
+    }
+
+    .no-touch {
+        #magnetised-trees {
+            .bg-container {
+                canvas {
+                    right: auto;
+                    left: 0;
+                }
             }
         }
     }
@@ -657,6 +694,18 @@
         width: 100%;
     }
 
+    .trilby-header {
+        img {
+            display:    block;
+            width:      40%;
+            margin:     0 auto;
+        }
+
+        header {
+            padding: 0 1rem;
+        }
+    }
+
     .comic-panel {
         position: relative;
     }
@@ -678,11 +727,9 @@
         }
 
         .trilby-header {
-            width:  1200px;
             margin: 5.25rem auto 0 auto;
 
             img {
-                display:        block;
                 float:          left;
                 width:          200px;
                 margin-right:   1em;
@@ -690,6 +737,8 @@
             }
 
             header {
+                padding-left: 220px;
+
                 span {
                     display:        block;
                     @include        tablet-gothic;
@@ -859,7 +908,7 @@
         .comic-quote {
             position:   absolute;
             top:        45px;
-            left:       310px;
+            left:       0;
             width:      340px;
 
             .info-box {
@@ -913,6 +962,10 @@
 
         .comic-panel:nth-child(12) {
             margin-top: -40px;
+        }
+
+        .comic-quote {
+            right: -300px;
         }
     }
 }
@@ -1191,6 +1244,14 @@
 }
 
 
+#office {
+    .bg-container {
+        .large-screen {
+            display: none;
+        }
+    }
+}
+
 @media all and (min-width: 48rem) {
     #office {
         img {
@@ -1216,9 +1277,30 @@
                 -ms-transform: translate(-80%, -40%) scale(1.8, 1.8);
                     transform: translate(-80%, -40%) scale(1.8, 1.8);
         }
-    }    
+    }
+
+    .no-touch {
+        #office {
+            .bg-container {
+                .small-screen {
+                    display: none;
+                }
+                .large-screen {
+                    display: block;
+                }
+            }
+        }
+    }
 }
 
+
+#office-2 {
+    header {
+        h1 {
+            font-size: 1.618rem;
+        }
+    }
+}
 
 .touch {
     #office-2 {
@@ -1252,6 +1334,12 @@
                -moz-transform: translate(-80%, -40%) scale(1.8, 1.8);
                 -ms-transform: translate(-80%, -40%) scale(1.8, 1.8);
                     transform: translate(-80%, -40%) scale(1.8, 1.8);
+        }
+
+        header {
+            h1 {
+                font-size: 2.618rem;
+            }
         }
     }
 

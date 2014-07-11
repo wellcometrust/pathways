@@ -259,7 +259,10 @@ function Carousel(element)
             container.addClass("animate");
         }
 
-        container.css("transform", "translate3d("+ percent +"px,0,0)");
+        if( Modernizr.csstransforms3d )
+            container.css("transform", "translate3d("+ percent +"px,0,0)");
+        else
+            container.css("transform", "translate("+ percent +"px,0)");
     }
 
     this.next = function() { return this.showPane(current_pane+1, true); };

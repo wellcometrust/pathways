@@ -2,7 +2,8 @@
 <div id="office" class="panel" data-scene="office">
 
     <div class="bg-container">
-        <img src="/_assets/img/freud/freud-4.jpg">
+        <img class="small-screen" src="/_assets/img/freud/freud-4-crop.jpg">
+        <img class="large-screen" src="/_assets/img/freud/freud-4.jpg">
     </div>
 
     <div class="black-strip" ></div>

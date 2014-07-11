@@ -58,6 +58,7 @@ $('.comic-quote').on('click', '.info-box', function() {
     }
 });
 
+// Open links marked with rel="external" in a new window/tab
 $('.library-panel').on('click', '[rel="external"]', function(e) {
     var $this = $(this);
 
@@ -65,6 +66,7 @@ $('.library-panel').on('click', '[rel="external"]', function(e) {
 
     e.preventDefault();
 });
+
 
 if( window.innerWidth >= 720 ) {
 
@@ -93,7 +95,10 @@ if( window.innerWidth >= 720 ) {
         stage.update();
 
         createjs.Ticker.setFPS(lib.properties.fps);
-        createjs.Ticker.addEventListener("tick", stage);
+
+        if( Modernizr.touch ) {
+            createjs.Ticker.addEventListener("tick", stage);
+        }
     }
 
     init();

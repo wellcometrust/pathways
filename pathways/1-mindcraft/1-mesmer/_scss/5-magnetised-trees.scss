@@ -23,4 +23,15 @@
             }
         }
     }
+
+    .no-touch {
+        #magnetised-trees {
+            .bg-container {
+                canvas {
+                    right: auto;
+                    left: 0;
+                }
+            }
+        }
+    }
 }

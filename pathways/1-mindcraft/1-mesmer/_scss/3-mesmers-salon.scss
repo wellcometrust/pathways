@@ -70,26 +70,34 @@
         background-color:   rgba(0,0,0,0.6);
         width:              320px;
         padding:            45px;
-        opacity:            0;
         line-height:        1.4;
         z-index:            20;
 
-        -webkit-transform: translate3d(0, 100px, 0);
-           -moz-transform: translate3d(0, 100px, 0);
-            -ms-transform: translate3d(0, 100px, 0);
-                transform: translate3d(0, 100px, 0);
+        -webkit-transform: translate(0, 100px);
+           -moz-transform: translate(0, 100px);
+            -ms-transform: translate(0, 100px);
+                transform: translate(0, 100px);
 
-        -webkit-transition: all 0.5s ease;
-           -moz-transition: all 0.5s ease;
-            -ms-transition: all 0.5s ease;
-                transition: all 0.5s ease;
+        -webkit-transition: -webkit-transform 0.5s ease;
+           -moz-transition: -moz-transform 0.5s ease;
+            -ms-transition: -ms-transform 0.5s ease;
+                transition: transform 0.5s ease;
     }
-    .text.show {
-        opacity: 1;
+}
 
-        -webkit-transform: translate(0, -20px);
-           -moz-transform: translate(0, -20px);
-            -ms-transform: translate(0, -20px);
-                transform: translate(0, -20px);
+.csstransforms {
+    .popup {
+        .text {
+            opacity: 0;
+        }
+
+        .text.show {
+            opacity: 1;
+
+            -webkit-transform: translate(0, -20px);
+               -moz-transform: translate(0, -20px);
+                -ms-transform: translate(0, -20px);
+                    transform: translate(0, -20px);
+        }
     }
 }

@@ -86,14 +86,17 @@ Pathways.CropZoom = function(panel_height) {
             }, 50);
 
             $image_crop.on('click', function() {
-                $overlay.get(0).addEventListener('transitionend', function() { $(this).remove() }, false);
                 $overlay.css('opacity', 0);
+                setTimeout(function() {
+                    $overlay.remove();
+                }, 600);
             });
 
             $close.on('click', function() {
-                console.log('wibble');
-                $overlay.get(0).addEventListener('transitionend', function() { $(this).remove() }, false);
                 $overlay.css('opacity', 0);
+                setTimeout(function() {
+                    $overlay.remove();
+                }, 600);
             });
 
             window.addEventListener('resize', function() {

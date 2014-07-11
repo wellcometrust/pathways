@@ -1,4 +1,12 @@
 
+#office {
+    .bg-container {
+        .large-screen {
+            display: none;
+        }
+    }
+}
+
 @media all and (min-width: 48rem) {
     #office {
         img {
@@ -24,5 +32,18 @@
                 -ms-transform: translate(-80%, -40%) scale(1.8, 1.8);
                     transform: translate(-80%, -40%) scale(1.8, 1.8);
         }
-    }    
+    }
+
+    .no-touch {
+        #office {
+            .bg-container {
+                .small-screen {
+                    display: none;
+                }
+                .large-screen {
+                    display: block;
+                }
+            }
+        }
+    }
 }

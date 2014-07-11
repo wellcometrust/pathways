@@ -58,7 +58,7 @@
         position:           absolute;
         top:                0;
         width:              46px;
-        background:         url(/_assets/img/icons/icon-btn-prev.svg) 50% 50% no-repeat;
+        background:         rgba(0,0,0,0.2) url(/_assets/img/icons/icon-btn-prev.svg) 50% 50% no-repeat;
         background-size:    50%;
 
         &.disabled {
@@ -70,7 +70,7 @@
         position:           absolute;
         top:                0;
         width:              46px;
-        background:         url(/_assets/img/icons/icon-btn-next.svg) 50% 50% no-repeat;
+        background:         rgba(0,0,0,0.2) url(/_assets/img/icons/icon-btn-next.svg) 50% 50% no-repeat;
         background-size:    50%;
 
         &.disabled {
@@ -95,9 +95,10 @@
     position:           absolute;
     top:                40px;
     right:              40px;
-    background:         url(/_assets/img/icons/icon-close.svg) 0 0 no-repeat;
-    background-size:    100%;
+    background:         rgba(0,0,0,0.3) url(/_assets/img/icons/icon-close.svg) 50% 50% no-repeat;
+    background-size:    80%;
     width:              40px;
     height:             40px;
+    border-radius:      5px;
     z-index:            100;
 }

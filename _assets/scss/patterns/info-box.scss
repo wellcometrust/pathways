@@ -11,25 +11,25 @@
 
     .inner {
         -webkit-transform-origin: 50% 50%;
-           -moz-transform-origin: 50% 50%;
+           -moz-transform-origin: 35px 35px;
             -ms-transform-origin: 50% 50%;
-                transform-origin: 50% 50%;
+                transform-origin: 35px 35px;
 
-        -webkit-animation: info-box-animation-inner 4s ease infinite;
-           -moz-animation: info-box-animation-inner 4s ease infinite;
-            -ms-animation: info-box-animation-inner 4s ease infinite;
-                animation: info-box-animation-inner 4s ease infinite;
+        -webkit-animation: info-box-animation-inner 3s ease infinite;
+           -moz-animation: info-box-animation-inner 3s ease infinite;
+            -ms-animation: info-box-animation-inner 3s ease infinite;
+                animation: info-box-animation-inner 3s ease infinite;
     }
     .outer {
         -webkit-transform-origin: 50% 50%;
-           -moz-transform-origin: 50% 50%;
+           -moz-transform-origin: 35px 35px;
             -ms-transform-origin: 50% 50%;
-                transform-origin: 50% 50%;
+                transform-origin: 35px 35px;
 
-        -webkit-animation: info-box-animation-outer 4s ease infinite;
-           -moz-animation: info-box-animation-outer 4s ease infinite;
-            -ms-animation: info-box-animation-outer 4s ease infinite;
-                animation: info-box-animation-outer 4s ease infinite;
+        -webkit-animation: info-box-animation-outer 3s ease infinite;
+           -moz-animation: info-box-animation-outer 3s ease infinite;
+            -ms-animation: info-box-animation-outer 3s ease infinite;
+                animation: info-box-animation-outer 3s ease infinite;
 
         -webkit-animation-delay: 0.3s;
            -moz-animation-delay: 0.3s;
@@ -52,6 +52,16 @@
 
 .info-box.with-text {
     width: 190px;
+
+    .inner {
+        -moz-transform-origin: 45px 45px;
+             transform-origin: 45px 45px;
+    }
+
+    .outer {
+        -moz-transform-origin: 45px 45px;
+             transform-origin: 45px 45px;
+    }
 
     .text {
         position:   absolute;
