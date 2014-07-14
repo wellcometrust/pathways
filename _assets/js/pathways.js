@@ -19,7 +19,7 @@
         var init = function() {
 
             // Progressive loading. Some things need to happen before window load
-            if( !supports_touch || orientation == 'landscape' ) {
+            if( !supports_touch ) {
                 resizeAllTheThings();
 
                 window.addEventListener('resize', function() {
@@ -60,8 +60,6 @@
             for (var i = 0; i < length; i++) {
                 var data    = _panels[i].getAttribute('data-config'),
                     ob2     = JSON.parse(data);
-
-                console.log( ob2 );
             };
         }
 
