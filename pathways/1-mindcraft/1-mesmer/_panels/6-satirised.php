@@ -1,7 +1,7 @@
 
 <div id="satirised" class="panel news" data-offset-height="350" data-scene="satirised">
 
-    <div class="bg-container video" data-src="/_assets/video/hysteria.webm">
+    <div class="bg-container video" data-src="/_assets/video/hysteria.mp4 /_assets/video/hysteria.webm">
         <img src="/_assets/img/mesmer/mesmer-5.jpg">
     </div>
     

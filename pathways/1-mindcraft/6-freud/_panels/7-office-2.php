@@ -1,5 +1,5 @@
 
-<div id="office-2" class="panel" data-scene="office-2">
+<div id="office-2" class="panel" data-scene="office-2" data-offset="300">
 
     <div class="bg-container">
         <img src="/_assets/img/freud/freud-4.jpg">
