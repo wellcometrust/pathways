@@ -147,12 +147,10 @@ Pathways.LoadScenes = function() {
         if( scrollY > panel_height )
             return;
 
-        if( scrollY > 0 ) {
-            $content.css({
-                'opacity':  1 - (unit * scrollY),
-                'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 2) +'px,0)' : 'translate(0,'+ (scrollY / 2) +'px)'
-            });
-        }
+        $content.css({
+            'opacity':  1 - (unit * scrollY),
+            'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 2) +'px,0)' : 'translate(0,'+ (scrollY / 2) +'px)'
+        });
     }
 
     function parallaxLady() {
@@ -161,11 +159,9 @@ Pathways.LoadScenes = function() {
         if( scrollY2 > panel_height )
             return;
 
-        if( scrollY2 > 0 ) {
-            $lady.css({
-                'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 3) +'px,0)' : 'translate(0,'+ (scrollY / 3) +'px)'
-            });
-        }
+        $lady.css({
+            'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 3) +'px,0)' : 'translate(0,'+ (scrollY / 3) +'px)'
+        });
     }
 
     /**************
