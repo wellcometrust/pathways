@@ -6,6 +6,7 @@
             <source src="/_assets/video/chris-hypno-demo.mp4">
             <source src="/_assets/video/chris-hypno-demo.webm">
         </video>
+        <img src="/_assets/img/spacer.png">
     </div>
 
     <div class="mute"></div>

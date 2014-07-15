@@ -6,6 +6,7 @@
             <source src="/_assets/video/anna-o.mp4">
             <source src="/_assets/video/anna-o.webm">
         </video>
+        <img src="/_assets/img/spacer.png">
     </div>
 
     <div class="mute"></div>
