@@ -8,7 +8,9 @@
     <div class="main-content">
         
         <div class="inner">
-            <p class="verdict-text">Wakley’s verdict</p>
+            <header>
+                <h1>Wakley’s verdict</h1>
+            </header>
 
             <blockquote>
                 <p>“The ‘science’ of mesmerism, like the ‘science’ of fortune-telling, will always carry on a precarious existence wherever there are clever girls, philosophic bohemians, weak women and weaker men, but it can no longer affront the common sense of the medical profession.”</p>

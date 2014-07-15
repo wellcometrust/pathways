@@ -5,12 +5,16 @@
             font-size: 1.618rem;
         }
     }
+
+    img {
+        display: none;
+    }
 }
 
-.touch {
+.no-touch {
     #office-2 {
         img {
-            display: none;
+            display: block;
         }
     }
 }

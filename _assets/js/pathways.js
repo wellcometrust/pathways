@@ -113,6 +113,13 @@
                     $this.html(video);
                 }
             });
+
+            // feature videos
+            $('.talking-head, .animation').each(function() {
+                var $video = $(this).find('video');
+                $video.attr('preload', 'true');
+                $video.removeAttr('controls');
+            })
         }
 
         var resizeSomeThings = function() {

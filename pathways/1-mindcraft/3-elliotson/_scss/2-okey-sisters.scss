@@ -12,10 +12,7 @@
     }
 
     .secondary-content {
-        img {
-            display:    block;
-            width:      100%;
-        }
+        display: none;
     }
 
 }
@@ -23,14 +20,20 @@
 @media all and (min-width: 48em) {
     #okey-sisters {
         .secondary-content {
+            display:    block;
             position:   absolute;
             left:       600px;
             width:      40%;
             max-width:  500px;
-        }
 
-        img:first-child {
-            margin-bottom:  10rem;
+            img {
+                display:    block;
+                width:      100%;
+            }
+
+            img:first-child {
+                margin-bottom:  10rem;
+            }
         }
     }
 

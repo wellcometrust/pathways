@@ -280,10 +280,7 @@
     }
 
     .secondary-content {
-        img {
-            display:    block;
-            width:      100%;
-        }
+        display: none;
     }
 
 }
@@ -291,14 +288,20 @@
 @media all and (min-width: 48em) {
     #okey-sisters {
         .secondary-content {
+            display:    block;
             position:   absolute;
             left:       600px;
             width:      40%;
             max-width:  500px;
-        }
 
-        img:first-child {
-            margin-bottom:  10rem;
+            img {
+                display:    block;
+                width:      100%;
+            }
+
+            img:first-child {
+                margin-bottom:  10rem;
+            }
         }
     }
 
@@ -393,10 +396,6 @@
         background-position: 30% 0;
     }
 
-    .verdict-text {
-        font-size:      2.618rem;
-    }
-
     blockquote p {
         @include        abril-italic;
     }
@@ -404,13 +403,7 @@
 
 @media screen and (min-width: 48rem) {
     #verdict {
-        .main-content {
-            padding:        0 1.618rem;
-            bottom:         30%;
-        }
-
-        .verdict-text {
-            font-size:      3.245rem;
+        header {
             margin-bottom:  4rem;
         }
 
@@ -427,10 +420,11 @@
         }
     }
 
-    .touch {
+    .no-touch {
         #verdict {
             .main-content {
-                position: relative;
+                padding:        0 1.618rem;
+                bottom:         30%;
             }
         }
     }
@@ -438,6 +432,10 @@
 
 @media screen and (min-width: 52rem) {
     #verdict {
+        .main-content {
+            @include clearfix;
+        }
+
         .inner {
             float:          right;
             width:          70%;
@@ -533,10 +531,6 @@
     .touch {
         #gonad-man {
             .bg-container {
-                img {
-                    width:  auto;
-                    height: 100%;
-                }
                 // background-image:       url(/_assets/img/esdaile/esdaile-2.jpg);
                 // background-position:    100% 0;
             }
@@ -714,6 +708,17 @@
         p {
             display: none;
         }
+    }
+
+    .comic-panel:nth-child(3) {
+        .panel-text:nth-of-type(1) {
+            margin-left:    5px;
+            margin-bottom:  55px;
+        }
+    }
+
+    .comic-panel:nth-child(8) {
+        padding: 1rem 0;
     }
 }
 
@@ -1226,9 +1231,13 @@
 }
 
 
-.touch {
+#fred-breuer-intro {
+    display: none;
+}
+
+.no-touch {
     #fred-breuer-intro {
-        display: none;
+        display: block;
     }
 }
 
@@ -1309,12 +1318,16 @@
             font-size: 1.618rem;
         }
     }
+
+    img {
+        display: none;
+    }
 }
 
-.touch {
+.no-touch {
     #office-2 {
         img {
-            display: none;
+            display: block;
         }
     }
 }

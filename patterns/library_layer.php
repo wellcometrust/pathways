@@ -78,7 +78,7 @@
 
                                     <?php if( isset( $data['link'] ) && $data['link'] != '' ): ?>
                                     <footer class="related-item--footer">
-                                        <a href="#<?php echo $data['link'] ?>">View</a>
+                                        <a href="<?php echo $data['link'] ?>" rel="external">View</a>
                                     </footer>
                                     <?php endif ?>
                                 </div>

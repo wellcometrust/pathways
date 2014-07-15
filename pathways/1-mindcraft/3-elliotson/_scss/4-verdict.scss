@@ -6,10 +6,6 @@
         background-position: 30% 0;
     }
 
-    .verdict-text {
-        font-size:      2.618rem;
-    }
-
     blockquote p {
         @include        abril-italic;
     }
@@ -17,13 +13,7 @@
 
 @media screen and (min-width: 48rem) {
     #verdict {
-        .main-content {
-            padding:        0 1.618rem;
-            bottom:         30%;
-        }
-
-        .verdict-text {
-            font-size:      3.245rem;
+        header {
             margin-bottom:  4rem;
         }
 
@@ -40,10 +30,11 @@
         }
     }
 
-    .touch {
+    .no-touch {
         #verdict {
             .main-content {
-                position: relative;
+                padding:        0 1.618rem;
+                bottom:         30%;
             }
         }
     }
@@ -51,6 +42,10 @@
 
 @media screen and (min-width: 52rem) {
     #verdict {
+        .main-content {
+            @include clearfix;
+        }
+
         .inner {
             float:          right;
             width:          70%;

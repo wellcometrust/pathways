@@ -1,23 +1,10 @@
 
 .global-navigation {
-    position:   fixed;
-    top:        0;
-    left:       0;
-    width:      100%;
-    overflow:   hidden;
-    z-index:    20;
-
-    -webkit-transition: -webkit-transform 0.4s ease;
-       -moz-transition: -moz-transform 0.4s ease;
-        -ms-transition: -ms-transform 0.4s ease;
-            transition: transform 0.4s ease;
 
     nav {
-        float:              left;
-        background-color:   rgba(0,0,0,0.8);
-        width:              100%;
+        background-color: rgba(0,0,0,0.8);
     }
-
+    
     li {
         list-style: none;
         opacity:    0.5;
@@ -55,9 +42,8 @@
         height:             46px;
         border-radius:      0 0 2px 2px;
         margin-left:        8px;
-        cursor:             pointer;
 
-        .current-section{
+        .current-section {
             color:              #fff;
             width:              30px;
             height:             30px;
@@ -67,23 +53,34 @@
             margin:             10px 0 0 6px;
             padding:            6px 3px 0px 3px;
             @include            tablet-gothic;
-
-            -webkit-transition: 0.2s ease;
-               -moz-transition: 0.2s ease;
-                -ms-transition: 0.2s ease;
-                    transition: 0.2s ease;
-
-            &:hover {
-                background-color:   #fff;
-                color:              $mind-pink;
-            }
         }
     }
     
 }
 
+.js {
+    .global-navigation {
+        position:   fixed;
+        top:        0;
+        left:       0;
+        width:      100%;
+        overflow:   hidden;
+        z-index:    50;
+
+        -webkit-transition: -webkit-transform 0.4s ease;
+           -moz-transition: -moz-transform 0.4s ease;
+            -ms-transition: -ms-transform 0.4s ease;
+                transition: transform 0.4s ease;
+    }
+}
+
 @media screen and (min-width: 48em) {
     .global-navigation {
+
+        nav {
+            float:              left;
+            width:              100%;
+        }
 
         li {
             float:  left;
@@ -127,6 +124,22 @@
 
         li:nth-child(7) span {
             border-top: 1px solid #A921D9;
+        }
+
+        .handle {
+            cursor: pointer;
+
+            .current-section {
+                -webkit-transition: 0.2s ease;
+                   -moz-transition: 0.2s ease;
+                    -ms-transition: 0.2s ease;
+                        transition: 0.2s ease;
+
+                &:hover {
+                    background-color:   #fff;
+                    color:              $mind-pink;
+                }
+            }
         }
     }
 }
