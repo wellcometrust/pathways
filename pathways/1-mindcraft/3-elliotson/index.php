@@ -8,12 +8,14 @@
     include($docRoot.'/_includes/Spyc.php');
     include $docRoot.'/_includes/config.php';
 
-    $path = $config['pathways'][1]['url'];
+    $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
+    $library_db = spyc_load_file('db.yaml');
 
     // Config
-    $module = 'elliotson';
-
-    $library_db = spyc_load_file('db.yaml');
+    $pathway    = 'mindcraft';
+    $module     = 'elliotson';
+    $path       = $config_yml['site']['pathways'][$pathway]['path'];
+    
 
     $teaser = array(
         'image' => 'teaser-esdaile.jpg',

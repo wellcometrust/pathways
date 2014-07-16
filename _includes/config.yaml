@@ -1,0 +1,107 @@
+#
+
+site:
+    pathways:
+        mindcraft:
+            path: /pathways/1-mindcraft/
+            modules:
+                -   id: mesmer
+                    title: A New Force in Nature
+                    panels:
+                        - id: mesmers-salon-intro
+                        - id: mesmers-salon
+                        - id: animal-magnetism
+                        - id: satirised
+                        - id: committee-investigates-intro
+                        - id: committee-investigates
+
+                -   id: airloom
+                    title: A Machine to Control the Mind
+                    panels:
+                        - id: airloom-intro
+                        - id: airloom
+                        - id: where-will-this-technology-lead
+                        - id: grisly-experiments
+
+                -   id: elliotson
+                    title: Who Controls Who?
+                    panels:
+                        - id: okey-sisters
+                        - id: thomas-wakley
+                        - id: verdict
+
+                -   id: esdaile
+                    title: Mind Over Matter
+                    panels:
+                        - id: gonad-man
+                        - id: fakir
+                        - id: india
+                        - id: surgery-under-hypnosis-intro
+                        - id: surgery-under-hypnosis
+                        - id: james-braid
+                        - id: self-hypnosis
+
+                -   id: svengali
+                    title: Dark Forces
+                    panels:
+                        - id: trilby
+                        - id: bompard
+
+                -   id: freud
+                    title: Secrets of the Mind Revealed
+                    panels:
+                        - id: anna-o
+                        - id: fred-breuer-intro
+                        - id: anna-o-video
+                        - id: fred-breuer
+                        - id: office
+                        - id: office-2
+
+        the-collectors:
+            path: /pathways/2-the-collectors/
+            modules:
+                -   id: curious-gardener
+                    title: The Curious Gardener
+                    panels:
+                        - id: john-tradescent
+                        - id: duke-of-buckingham
+                        - id: unique-artifacts
+                        - id: tradescants-ark
+
+                -   id: merchants-of-light
+                    title: Merchants of Light
+                    panels:
+                        - id: bensalem-intro
+                        - id: bensalem
+
+                -   id: death-collector
+                    title: The Death Collector
+                    panels:
+                        - id: bills-of-mortality
+                        - id: gaunt-records
+                        - id: isaac-newton
+
+                -   id: unceasing-seeker
+                    title: The Unceasing Seeker
+                    panels:
+                        - id: wellcome-collection
+
+                -   id: obscene-doctor
+                    title: The Obscene Doctor
+                    panels:
+                        - id: khans-anatomical-museum
+                        - id: quackery
+                        - id: obscene-publications-act
+                        - id: seized-and-destroyed
+
+                -   id: ignorant-bride
+                    title: The Ignorant Bride
+                    panels:
+                        - id: british-museum
+                        - id: married-love
+                        - id: shared-experiences
+                        - id: letters
+
+        breath:
+            path: /pathways/3-breath/
+

@@ -1,11 +1,17 @@
 <?php
-    global $module, $path;
+    global $config_yml, $pathway, $module, $path;
 
-    // $path = $config['pathways'][1]['url'];
+    $modules = $config_yml['site']['pathways'][$pathway]['modules'];
     
-    $module     = isset($module) ? $module : '';
-    $indices    = ['mesmer' => 1,'airloom' => 2,'elliotson' => 3,'esdaile' => 4,'svengali' => 5,'freud' => 6];
-    $idx        = isset($indices[$module]) ? $indices[$module] : '';
+    $idx    = '';
+    $count  = 1;
+
+    foreach( $modules as $m ):
+        if( $module == $m['id'] )
+            $idx = $count;
+
+        $count++;
+    endforeach;
 ?>
 
 <div class="global-navigation active">

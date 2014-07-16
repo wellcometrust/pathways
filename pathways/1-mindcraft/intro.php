@@ -10,7 +10,7 @@ include($docRoot.'/_includes/header.php');
 
     <main role="main">
 
-        <div class="intro">
+        <div class="intro intro--mindcraft">
 
             <div class="bg-container">
                 <img src="/_assets/img/spacer.png">

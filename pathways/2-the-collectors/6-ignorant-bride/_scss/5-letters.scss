@@ -1,0 +1,36 @@
+
+#letters {
+    .bg-container {
+        background-image: url(/pathways/2-the-collectors/_assets/6-ignorant-bride/m6-ignorant-bride-4.jpg);
+    }
+}
+
+.touch {
+    #letters {
+
+    }
+}
+
+.no-touch {
+    #letters {
+        
+    }
+}
+
+@media screen and (min-width: 48em) {
+    #letters {
+           
+    }
+
+    .touch {
+        #letters {
+
+        }
+    }
+
+    .no-touch {
+        #letters {
+
+        }
+    }
+}

@@ -1,0 +1,36 @@
+
+#bills-of-mortality {
+    .bg-container {
+        background-image: url(/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-2.jpg);
+    }
+}
+
+.touch {
+    #bills-of-mortality {
+
+    }
+}
+
+.no-touch {
+    #bills-of-mortality {
+        
+    }
+}
+
+@media screen and (min-width: 48em) {
+    #bills-of-mortality {
+           
+    }
+
+    .touch {
+        #bills-of-mortality {
+
+        }
+    }
+
+    .no-touch {
+        #bills-of-mortality {
+
+        }
+    }
+}

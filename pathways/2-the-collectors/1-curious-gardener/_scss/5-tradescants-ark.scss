@@ -1,0 +1,36 @@
+
+#tradescants-ark {
+    .bg-container {
+        background-image: url(/pathways/2-the-collectors/_assets/1-curious-gardener/m1-curious-gardener-4.jpg);
+    }
+}
+
+.touch {
+    #tradescants-ark {
+
+    }
+}
+
+.no-touch {
+    #tradescants-ark {
+        
+    }
+}
+
+@media screen and (min-width: 48em) {
+    #tradescants-ark {
+           
+    }
+
+    .touch {
+        #tradescants-ark {
+
+        }
+    }
+
+    .no-touch {
+        #tradescants-ark {
+
+        }
+    }
+}

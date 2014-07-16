@@ -1,0 +1,36 @@
+
+#married-love {
+    .bg-container {
+        background-image: url(/pathways/2-the-collectors/_assets/6-ignorant-bride/m6-ignorant-bride-3.jpg);
+    }
+}
+
+.touch {
+    #married-love {
+
+    }
+}
+
+.no-touch {
+    #married-love {
+        
+    }
+}
+
+@media screen and (min-width: 48em) {
+    #married-love {
+           
+    }
+
+    .touch {
+        #married-love {
+
+        }
+    }
+
+    .no-touch {
+        #married-love {
+
+        }
+    }
+}

@@ -1,0 +1,60 @@
+
+# Example panel ids:
+# 
+# example
+# ...
+
+
+
+# Info Panels
+
+info_panels:
+
+    example:
+        -   title: ''
+            catalogue_url: ''
+            download_url: ''
+            images_url: ''
+            external_url: ''
+
+
+
+# Library Layer
+#
+# A resource example:
+# -   type: book
+#     thumb: image.jpg
+#     title: The Commission’s report on Animal Magnetism
+#     author: Benjamin Franklin
+#     date: 1785
+#     link: http://wellcomelibrary.org/package/b20595244
+#
+# A resource can have all the attributes, but some empty, or only the attributes it requires. It all works.
+#
+# A library item can have one of 5 types:
+# - book
+# - video
+# - audio
+# - document
+# - image
+#
+# These just dictate which thumbnail fallback image it receives.
+#
+# Links to player resources are in the following format: http://wellcomelibrary.org/package/b20595244
+# If copied from the site, it has 'player' in the link, which is wrong. Must be 'package'. And it doesn't need any cruft after the id.
+
+library_layer:
+
+    player:
+        -   type: ''
+            title: ''
+            author: ''
+            date: 2014
+            link: ''
+
+    related:
+        -   type: ''
+            title: ''
+            author: ''
+            date: 2014
+            link: ''

@@ -8,12 +8,14 @@
     include($docRoot.'/_includes/Spyc.php');
     include $docRoot.'/_includes/config.php';
 
-    $path = $config['pathways'][1]['url'];
+    $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
+    $library_db = spyc_load_file('db.yaml');
 
     // Config
-    $module = 'mesmer';
+    $pathway    = 'mindcraft';
+    $module     = 'mesmer';
+    $path       = $config_yml['site']['pathways'][$pathway]['path'];
 
-    $library_db = spyc_load_file('db.yaml');
 
     $teaser = array(
         'image' => 'teaser-jtm.jpg',

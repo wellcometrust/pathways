@@ -1,0 +1,36 @@
+
+#seized-and-destroyed {
+    .bg-container {
+        background-image: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/m5-obscene-doctor-5.jpg);
+    }
+}
+
+.touch {
+    #seized-and-destroyed {
+
+    }
+}
+
+.no-touch {
+    #seized-and-destroyed {
+        
+    }
+}
+
+@media screen and (min-width: 48em) {
+    #seized-and-destroyed {
+           
+    }
+
+    .touch {
+        #seized-and-destroyed {
+
+        }
+    }
+
+    .no-touch {
+        #seized-and-destroyed {
+
+        }
+    }
+}

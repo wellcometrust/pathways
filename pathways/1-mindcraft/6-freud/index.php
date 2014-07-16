@@ -8,12 +8,14 @@
     include($docRoot.'/_includes/Spyc.php');
     include $docRoot.'/_includes/config.php';
 
-    $path = $config['pathways'][1]['url'];
-
-    //Config
-    $module = 'freud';
-
+    $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
     $library_db = spyc_load_file('db.yaml');
+
+    // Config
+    $pathway    = 'mindcraft';
+    $module     = 'freud';
+    $path       = $config_yml['site']['pathways'][$pathway]['path'];
+
 
     $teaser = array(
         'image' => '',

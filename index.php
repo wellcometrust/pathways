@@ -9,7 +9,9 @@
 
     include $docRoot.'/_includes/config.php';
 
-    $path = $config['pathways'][1]['url'];
+    $path   = $config['pathways'][1]['url'];
+    $path2  = $config['pathways'][2]['url'];
+    $path3  = $config['pathways'][3]['url'];
 ?>
 <!DOCTYPE HTML>
 <html lang="en"> 
@@ -147,6 +149,16 @@
                 <header>
                     <h2>The Collectors</h2>
                 </header>
+
+                <ul>
+                    <li><a href="<?php echo $path2 ?>intro.php">Intro</a></li>
+                    <li><a href="<?php echo $path2 ?>1-curious-gardener/index.php">The Curious Gardener</a></li>
+                    <li><a href="<?php echo $path2 ?>2-merchants-of-light/index.php">Merchants of Light</a></li>
+                    <li><a href="<?php echo $path2 ?>3-death-collector/index.php">The Death Collector</a></li>
+                    <li><a href="<?php echo $path2 ?>4-unceasing-seeker/index.php">The Unceasing Seeker</a></li>
+                    <li><a href="<?php echo $path2 ?>5-obscene-doctor/index.php">The Obscene Doctor</a></li>
+                    <li><a href="<?php echo $path2 ?>6-ignorant-bride/index.php">The Ignorant Bride</a></li>
+                </ul>
             </div>
 
             <div class="tab" data-tab="patterns">
