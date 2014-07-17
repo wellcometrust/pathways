@@ -1,8 +1,18 @@
 
-<div id="seized-and-destroyed" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": true } }'>
+<div id="seized-and-destroyed" class="panel" data-scene="seized-and-destroyed" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": true } }' data-offset-height="500">
 
     <div class="bg-container">
         <img src="/_assets/img/spacer.png">
+
+        <div class="rubbish">
+            <div class="carrot"></div>
+            <div class="cat"></div>
+            <div class="rubbish1"></div>
+            <div class="rubbish2"></div>
+            <div class="rubbish3"></div>
+            <div class="rubbish4"></div>
+            <div class="rubbish5"></div>
+        </div>
     </div>
     
     <div class="main-content right">

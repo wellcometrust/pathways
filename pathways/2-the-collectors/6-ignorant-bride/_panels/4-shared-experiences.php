@@ -5,7 +5,7 @@
         <img src="/_assets/img/spacer.png">
     </div>
     
-    <div class="main-content right">
+    <div class="main-content center">
 
         <div class="inner">
             <p>Stopes honest account, written in plain language, prompted thousands of women – and men – to write to her in thanks, in outrage, sharing their experiences or asking for advice.</p>

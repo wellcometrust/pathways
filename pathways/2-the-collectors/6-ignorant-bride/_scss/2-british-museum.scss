@@ -1,8 +1,6 @@
 
 #british-museum {
-    .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/6-ignorant-bride/m6-ignorant-bride-british-museum.jpg);
-    }
+
 }
 
 .touch {
@@ -19,7 +17,32 @@
 
 @media screen and (min-width: 48em) {
     #british-museum {
-           
+        img {
+            position:   absolute;
+            bottom:     0;
+
+            -webkit-transform-origin:   35% 70%;
+               -moz-transform-origin:   35% 70%;
+                -ms-transform-origin:   35% 70%;
+                    transform-origin:   35% 70%;
+
+            -webkit-transition:         -webkit-transform 14s ease;
+               -moz-transition:         -moz-transform 14s ease;
+                -ms-transition:         -ms-transform 14s ease;
+                    transition:         transform 14s ease;
+        }
+
+        &.active img {
+            -webkit-transform: scale(1.8, 1.8);
+               -moz-transform: scale(1.8, 1.8);
+                -ms-transform: scale(1.8, 1.8);
+                    transform: scale(1.8, 1.8);
+        }
+
+        .main-content {
+            border-top:     1px solid #fff;
+            text-shadow:    1px 1px 1px #333;
+        }
     }
 
     .touch {
@@ -33,4 +56,5 @@
 
         }
     }
+
 }

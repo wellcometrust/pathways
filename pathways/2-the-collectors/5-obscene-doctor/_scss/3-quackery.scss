@@ -19,7 +19,10 @@
 
 @media screen and (min-width: 48em) {
     #quackery {
-           
+        .info-box {
+            bottom: 100px;
+            left:   40%
+        }
     }
 
     .touch {

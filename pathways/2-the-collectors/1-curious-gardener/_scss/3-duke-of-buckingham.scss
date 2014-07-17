@@ -19,6 +19,24 @@
 
 @media screen and (min-width: 48em) {
     #duke-of-buckingham {
+        .pence {
+            position:           absolute;
+            top:                50%;
+            left:               40%;
+            background:         url(/pathways/2-the-collectors/_assets/1-curious-gardener/6pence.png) 0 0 no-repeat;
+            background-size:    100%;
+            width:              140px;
+            height:             155px;
+        }
+
+        .clip {
+            position:   absolute;
+            top:        0;
+            width:      100%;
+            height:     90%;
+            overflow:   hidden;
+        }
+
         .main-content {
             color:          #030303;
             

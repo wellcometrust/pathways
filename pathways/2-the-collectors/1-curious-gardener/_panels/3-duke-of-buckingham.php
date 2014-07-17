@@ -1,14 +1,18 @@
 
-<div id="duke-of-buckingham" class="panel" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="duke-of-buckingham" class="panel" data-scene="duke-of-buckingham" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="500">
 
     <div class="bg-container">
         <img src="/_assets/img/spacer.png">
+
+        <div class="clip">
+            <div class="pence"></div>
+        </div>
     </div>
     
     <div class="main-content center">
 
         <div class="inner">
-            <p>When he joined the Duke of Buckingham’s staff in his fifties (in 1624), Tradescant’s position as gardener to the Lord Admiral of England enabled him to acquire more. Tradescant called on British ships trading around the globe to ‘furnishe His Grace With All Maner of Beasts & Fowels & Birds Alyve’ and especially requested the biggest, greatest or strangest specimens.</p>
+            <p>When Buckingham died, Tradescant installed the collection of rarities in his new home in South Lambeth and opened it up to the public. Anyone who could afford the 6d entrance fee, to what became known as ‘Tradescant’s Ark’, could see hands of mermaids and mummies, a salamander, chameleon, pelican and remora, a bat as large as a pigeon, a Madagascan dodo, a small piece of wood from the cross of Christ, and more were all displayed.</p>
         </div>                    
 
     </div>

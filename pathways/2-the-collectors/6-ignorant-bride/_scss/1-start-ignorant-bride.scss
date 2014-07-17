@@ -4,3 +4,30 @@
         background-image: url(/pathways/2-the-collectors/_assets/6-ignorant-bride/m6-ignorant-bride-1.jpg);
     }
 }
+
+@media all and (min-width: 48rem) {
+    .start-ignorant-bride {
+        .content {
+            margin: 0;
+            float:  left;
+        }
+
+        .scene-set {
+            color: #030303;
+
+            sup {
+                font-size: 0.8rem;
+            }
+        }
+
+        header {
+            h1 {
+                color: #030303;
+            }
+        }
+
+        .intro-text {
+            color: #030303;
+        }
+    }
+}

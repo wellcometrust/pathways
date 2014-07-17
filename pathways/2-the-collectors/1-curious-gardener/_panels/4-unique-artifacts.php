@@ -1,5 +1,5 @@
 
-<div id="unique-artifacts" class="panel" data-component="crop-zoom" data-scene="unique-artifacts" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="unique-artifacts" class="panel" data-component="crop-zoom" data-scene="unique-artifacts" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="500">
 
     <div class="bg-container">
         <img src="/_assets/img/spacer.png">
@@ -8,7 +8,7 @@
     <div class="main-content left">
 
         <div class="inner">
-            <p>Tradescant’s connections with John Smith and King Charles I (another employer) led to donations of unique artefacts, such as the robe of ‘the King of Virginia’ and Henry VIII’s stirrups.</p>
+            <p>Yackity shmackity. Yackity shmackity. Yackity shmackity.</p>
         </div>                    
 
     </div>

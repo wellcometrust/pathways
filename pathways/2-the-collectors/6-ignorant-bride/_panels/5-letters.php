@@ -8,7 +8,7 @@
     <div class="main-content right">
 
         <div class="inner">
-            <p>Treating her quest for knowledge like a scientific research project, Stopes went to the British Museum to read every book on sex in English, French or German. It wasn’t until she gained access to the ‘locked cabinet’ of books unavailable to the public, that she realised the reality of her own situation.</p>
+            
         </div>                    
 
     </div>

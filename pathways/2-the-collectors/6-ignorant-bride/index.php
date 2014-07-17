@@ -34,14 +34,13 @@
         <!-- Sequence -->
 
         <div class="sequence" data-sequence="cross-fade">
-
             <?php
                 /* Panels */
                 $d          = dir('_panels/');
                 $file_array = [];
 
                 while (false !== ($file = $d->read())) {
-                    if( $file != '.' && $file != '..' && !preg_match('/start/', $file) )
+                    if( $file[0] != '.' && !preg_match('/start/', $file) )
                         $file_array[] = $file;
                 }
 
@@ -51,7 +50,6 @@
                     include '_panels/'.$file;
                 }
             ?>
-
         </div>
 
         <div class="info-panels">

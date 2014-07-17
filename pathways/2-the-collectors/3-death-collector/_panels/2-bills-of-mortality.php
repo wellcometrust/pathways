@@ -1,5 +1,5 @@
 
-<div id="bills-of-mortality" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="bills-of-mortality" class="panel" data-scene="bills-of-mortality" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="500">
 
     <div class="bg-container">
         <img src="/_assets/img/spacer.png">

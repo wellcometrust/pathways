@@ -41,7 +41,7 @@
                 $file_array = [];
 
                 while (false !== ($file = $d->read())) {
-                    if( $file != '.' && $file != '..' && !preg_match('/start/', $file) )
+                    if( $file[0] != '.' && !preg_match('/start/', $file) )
                         $file_array[] = $file;
                 }
 

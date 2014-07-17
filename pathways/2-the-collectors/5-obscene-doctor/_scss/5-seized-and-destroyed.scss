@@ -19,7 +19,72 @@
 
 @media screen and (min-width: 48em) {
     #seized-and-destroyed {
-           
+        .main-content {
+            color:          #030303;
+            border-top:     1px solid #030303;
+            border-bottom:  1px solid #030303;
+        }
+    }
+
+    .rubbish {
+        width:  100%;
+        height: 100%;
+
+        div {
+            position: absolute;
+        }
+
+        .carrot {
+            top:        70%;
+            right:      14%;
+            width:      185px;
+            height:     87px;
+            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/carrot.png) 0 0 no-repeat;
+        }
+
+        .cat {
+            top:        60%;
+            right:      32%;
+            width:      178px;
+            height:     143px;
+            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/cat.png) 0 0 no-repeat;
+        }
+
+        .rubbish1 {
+            top:        43%;
+            right:      28%;
+            width:      85px;
+            height:     52px;
+            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/rubbish1.png) 0 0 no-repeat;
+        }
+        .rubbish2 {
+            top:        85%;
+            right:      3%;
+            width:      85px;
+            height:     45px;
+            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/rubbish2.png) 0 0 no-repeat;
+        }
+        .rubbish3 {
+            top:        80%;
+            right:      25%;
+            width:      185px;
+            height:     87px;
+            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/rubbish3.png) 0 0 no-repeat;
+        }
+        .rubbish4 {
+            top:        40%;
+            right:      30%;
+            width:      106px;
+            height:     113px;
+            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/rubbish4.png) 0 0 no-repeat;
+        }
+        .rubbish5 {
+            top:        55%;
+            right:      5%;
+            width:      70px;
+            height:     48px;
+            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/rubbish5.png) 0 0 no-repeat;
+        }
     }
 
     .touch {
