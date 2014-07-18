@@ -25,11 +25,71 @@ function InfiniteCanvas(element) {
         totalWidth  = $element.outerWidth();
         totalHeight = $element.outerHeight();
 
-        // center the canvas
-        totalOffsetX = (viewportWidth - totalWidth) / 2;
-        totalOffsetY = (viewportHeight - totalHeight) / 2;
+        // center the first text block.
+        centerText( $('[data-chapter="1"]', $element) );
 
-        setContainerOffset( totalOffsetX, totalOffsetY );
+        // prev/next events
+        $element.on('click', '.prev, .next', function(e) {
+            var $this   = $(this),
+                $target = $(e.target),
+                chapter = $this.parents('.text-panel').data('chapter');
+
+            if( $target.hasClass('prev') ) {
+                var $text = $('[data-chapter="'+(chapter - 1)+'"]', $element);
+
+                if( $text.length ) {
+                    centerText($text);
+                }
+            }
+
+            if( $target.hasClass('next') ) {
+                var $text = $('[data-chapter="'+(chapter + 1)+'"]', $element);
+
+                if( $text.length ) {
+                    centerText($text);
+                }
+            }
+
+            e.preventDefault();
+        });
+
+        window.addEventListener('resize', function() {
+            viewportWidth   = window.innerWidth,
+            viewportHeight  = window.innerHeight;
+        });
+    }
+
+    // Try to position the text in the middle of the screen, but also keep the canvas within bounds.
+    function centerText($elm) {
+        var width   = $elm.outerWidth(),
+            height  = $elm.outerHeight(),
+            top     = $elm.position().top,
+            left    = $elm.position().left,
+
+            offsetX = (viewportWidth - width) / 2,
+            offsetY = (viewportHeight - height) / 2,
+
+            totalX = (-left + offsetX),
+            totalY = (-top + offsetY);
+
+        // Keep within the bounds of the canvas
+        if( totalX > 0 )
+            totalX = 0;
+
+        if( Math.abs(totalX - viewportWidth) > totalWidth ) {
+            totalX = -(totalWidth - viewportWidth);
+        }
+
+        if( totalY > 0 )
+            totalY = 0;
+
+        if( Math.abs(totalY - viewportHeight) > totalHeight ) {
+            totalY = -(totalHeight - viewportHeight);
+        }
+
+        setContainerOffset(totalX, totalY, true);
+        totalOffsetX = totalX;
+        totalOffsetY = totalY;
     }
 
     function setContainerOffset(x, y, animate) {
@@ -50,16 +110,13 @@ function InfiniteCanvas(element) {
         ev.gesture.preventDefault();
 
         switch(ev.type) {
-            case 'dragright':
-            case 'dragleft':
+            case 'drag':
                 setContainerOffset( (ev.gesture.deltaX + totalOffsetX), (ev.gesture.deltaY + totalOffsetY) );
                 break;
 
             case 'release':
                 totalOffsetX += ev.gesture.deltaX;
                 totalOffsetY += ev.gesture.deltaY;
-
-                console.log( (totalOffsetX - viewportWidth), totalWidth );
 
                 // Drag too far right
                 if( totalOffsetX > 0 ) {
@@ -80,15 +137,14 @@ function InfiniteCanvas(element) {
                 }
 
                 // Drag too far up
-                if( (totalOffsetX - viewportHeight) > totalHeight ) {
+                if( Math.abs(totalOffsetY - viewportHeight) > totalHeight ) {
                     setContainerOffset(totalOffsetX, -(totalHeight - viewportHeight), true);
                     totalOffsetY = -(totalHeight - viewportHeight);
                 }
-
 
                 break;
         }
     }
 
-    new Hammer(_element, {}).on("release dragleft dragright", handleHammer);
+    new Hammer(_element, {}).on("release drag", handleHammer);
 }

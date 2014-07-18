@@ -1,0 +1,26 @@
+
+.infinite-canvas {
+    position:           absolute;
+    top:                0;
+    left:               0;
+    background-color:   #fff;
+    width:              3000px;
+    height:             2000px;
+    cursor:             move;
+
+
+    -webkit-transform:          translateZ(0);
+       -moz-transform:          translateZ(0);
+        -ms-transform:          translateZ(0);
+            transform:          translateZ(0);
+
+    -webkit-transform-style:    preserve-3d;
+    -webkit-backface-visibility: hidden;
+
+    &.animate {
+        -webkit-transition: all 0.3s;
+           -moz-transition: all 0.3s;
+            -ms-transition: all 0.3s;
+                transition: all 0.3s;
+    }
+}

@@ -107,12 +107,6 @@
     }
 }
 
-.intro-navigation--the-collectors {
-    a {
-        color: #030303;
-    }
-}
-
 .csstransitions {
     .intro-navigation {
         li {
@@ -145,6 +139,12 @@
                 width:      100%;
                 border:     none;
             }
+        }
+    }
+
+    .intro-navigation--the-collectors {
+        a {
+            color: #030303;
         }
     }
 }
