@@ -1,6 +1,10 @@
 
 Pathways.Scene.UniqueArtifacts = function(panel_height) {
 
+    var $bg         = $('#unique-artifacts .bg-container'),
+        bg_tween    = TweenMax.to( _('#unique-artifacts .bg-container'),    1, { 'background-position': '50% -216px' }),
+        crop_tween  = TweenMax.to( _('#unique-artifacts .crop-zoom'),       1, { 'y': '-216' });
+
     var scene = new ScrollScene({
             triggerElement: '#unique-artifacts',
             duration:       (panel_height - 100),
@@ -16,7 +20,21 @@ Pathways.Scene.UniqueArtifacts = function(panel_height) {
             setTimeout(function() {
                 _('.crop-zoom').style['position'] = 'absolute';
             }, 200);
+        });
+
+    var scene2 = new ScrollScene({
+            triggerElement: '#unique-artifacts',
+            duration:       (panel_height - 100)
         })
+        .setTween(bg_tween)
+
+    var scene3 = new ScrollScene({
+            triggerElement: '#unique-artifacts',
+            duration:       (panel_height - 100)
+        })
+        .setTween(crop_tween)
 
     Pathways.Scenes.push(scene);
+    Pathways.Scenes.push(scene2);
+    Pathways.Scenes.push(scene3);
 }

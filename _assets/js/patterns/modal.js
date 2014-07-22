@@ -25,15 +25,12 @@ function Modal(elm) {
         img.src = "http://placekitten.com/640/800";
 
         img.onload = function() {
-            // console.log(this);
 
             var width   = this.width,
                 height  = this.height,
 
                 top     = (window.innerHeight / 2) - (height / 2),
                 left    = (window.innerWidth / 2) - (width / 2);
-
-            console.log(width, height);
 
             $image_crop.css({ position: 'absolute', top: top, left: left });
 

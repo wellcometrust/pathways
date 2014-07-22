@@ -68,15 +68,12 @@ function Quiz(element) {
     this.init = function() {
         var self = this;
 
-        console.log('init');
-
         $quiz.on('click', '.quiz-start .button', function() {
             self.start();
         });
     }
 
     this.start = function() {
-        console.log('starting');
 
         var self = this;
 

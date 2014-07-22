@@ -116,8 +116,6 @@ function Carousel(element)
             img.onload = function(elm) {
                 imagesLoaded++;
 
-                console.log(imagesLoaded, totalImages);
-
                 if( imagesLoaded == totalImages ) {
                     // resize the panes/container
                     var _panes      = _element.querySelectorAll('li'),
@@ -136,8 +134,6 @@ function Carousel(element)
                         totalWidth += w;
                     }
                     ul.style['width'] = totalWidth + 'px';
-
-                    console.log(totalWidth);
 
                     callback.call();
                 }

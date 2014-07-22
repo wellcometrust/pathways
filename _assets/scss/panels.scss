@@ -1511,7 +1511,7 @@
         .pence {
             position:           absolute;
             top:                30%;
-            left:               40%;
+            left:               45%;
             background:         url(/pathways/2-the-collectors/_assets/1-curious-gardener/6pence.png) 0 0 no-repeat;
             background-size:    100%;
             width:              140px;
@@ -2312,6 +2312,28 @@
 
         .inner + .inner {
             border-top: 1px solid #030303;
+        }
+
+        .married-love-film-gallery {
+            position:   absolute;
+            top:        40%;
+            right:      30%;
+        }
+
+        .info-box {
+            position:   absolute;
+            top:        80px;
+            right:      100px;
+
+            .stub {
+                position:   absolute;
+                z-index:    -1;
+                @include    transform( translate(-127px, -20px) );
+            }
+
+            .text {
+                color: #030303;
+            }
         }
     }
 
