@@ -19,7 +19,7 @@
 
     $teaser = array(
         'image' => '',
-        'link'  => $path.'',
+        'link'  => $path.'4-unceasing-seeker/index.php',
         'title' => 'Example teaser title',
         'text'  => 'Almost 150 years later another London businessman deliberately set out to gain a similar level of academic respectability. His own plans for collecting data to publish a ground-breaking book were, however, thwarted by his unceasing desire to acquire the perfect collection.'
     );

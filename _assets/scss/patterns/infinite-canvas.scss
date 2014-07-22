@@ -8,19 +8,12 @@
     height:             2000px;
     cursor:             move;
 
-
-    -webkit-transform:          translateZ(0);
-       -moz-transform:          translateZ(0);
-        -ms-transform:          translateZ(0);
-            transform:          translateZ(0);
+    @include transform(translateZ(0));
 
     -webkit-transform-style:    preserve-3d;
     -webkit-backface-visibility: hidden;
 
     &.animate {
-        -webkit-transition: all 0.3s;
-           -moz-transition: all 0.3s;
-            -ms-transition: all 0.3s;
-                transition: all 0.3s;
+        @include transition(all 0.3s ease);
     }
 }

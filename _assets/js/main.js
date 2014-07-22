@@ -196,16 +196,27 @@ Pathways.LoadScenes = function() {
     $('.mute').hide();
 
     $('.mute').on('click', function() {
-        var $this   = $(this),
-            $video  = $this.parents('.panel').find('video').first().get(0);
+        var $this   = $(this);
 
         // active == muted
         if( $this.hasClass('active') ) {
-            $video.volume = 1;
+            $this.parents('.panel').find('video').each(function() {
+                $(this).get(0).volume = 1;
+            });
+            $this.parents('.panel').find('audio').each(function() {
+                $(this).get(0).volume = 1;
+            });
+            // $video.volume = 1;
             $this.removeClass('active');
         }
         else {
-            $video.volume = 0;
+            $this.parents('.panel').find('video').each(function() {
+                $(this).get(0).volume = 0;
+            });
+            $this.parents('.panel').find('audio').each(function() {
+                $(this).get(0).volume = 0;
+            });
+            // $video.volume = 0;
             $this.addClass('active');
         }
     });

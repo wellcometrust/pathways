@@ -2,6 +2,7 @@
 #duke-of-buckingham {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/_assets/1-curious-gardener/m1-curious-gardener-3.jpg);
+        background-position: 50% 100%;
     }
 }
 
@@ -21,7 +22,7 @@
     #duke-of-buckingham {
         .pence {
             position:           absolute;
-            top:                50%;
+            top:                30%;
             left:               40%;
             background:         url(/pathways/2-the-collectors/_assets/1-curious-gardener/6pence.png) 0 0 no-repeat;
             background-size:    100%;

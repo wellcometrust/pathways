@@ -19,7 +19,7 @@
     
     $teaser = array(
         'image' => '',
-        'link'  => $path.'',
+        'link'  => $path.'credits.php',
         'title' => 'Example teaser title',
         'text'  => 'While opening up the ‘locked cabinet’ of sex knowledge to a mass audience, Stopes inadvertently become a collector of confessional and emotional personal accounts that illustrate the appetite for – and impact of – the knowledge she shared.'
     );

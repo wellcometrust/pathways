@@ -7,14 +7,16 @@
     $count  = 1;
 ?>
 
-<div class="global-navigation active">
+<div class="global-navigation global-navigation--the-collectors active">
     <div class="container clearfix">
         <nav>
             <ul class="clearfix">
                 <li>
                     <a href="<?php echo $path ?>intro.php">
                         <span>Intro</span>
-                        <img src="/_assets/img/spacer.png">
+                        <div class="image">
+                            <img src="/_assets/img/spacer.png">
+                        </div>
                     </a>
                 </li>
 
@@ -22,7 +24,9 @@
                 <li<?php echo $module == $m['id'] ? ' class="active"' : '' ?>>
                     <a href="<?php echo $path . $count . '-' . $m['id'] ?>/index.php">
                         <span><?php echo $count . '. ' . $m['title'] ?></span>
-                        <img src="/_assets/img/spacer.png">
+                        <div class="image">
+                            <img src="/_assets/img/spacer.png">
+                        </div>
                     </a>
                 </li>
             <?php

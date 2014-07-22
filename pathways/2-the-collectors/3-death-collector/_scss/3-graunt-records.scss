@@ -19,7 +19,26 @@
 
 @media screen and (min-width: 48em) {
     #graunt-records {
-           
+        .bg-container {
+            .numbers {
+                position:   absolute;
+                right:      0;
+                top:        0;
+                width:      50%;
+
+                @include transition(all 30s linear);
+
+                // &.active {
+                //     @include transform( translate(0, -800px) );
+                // }
+            }
+        }
+
+        &.active {
+            .numbers {
+                @include transform( translate(0, -2000px) );
+            }
+        }
     }
 
     .touch {

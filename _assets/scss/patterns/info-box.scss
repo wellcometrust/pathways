@@ -15,10 +15,7 @@
             -ms-transform-origin: 50% 50%;
                 transform-origin: 35px 35px;
 
-        -webkit-animation: info-box-animation-inner 3s ease infinite;
-           -moz-animation: info-box-animation-inner 3s ease infinite;
-            -ms-animation: info-box-animation-inner 3s ease infinite;
-                animation: info-box-animation-inner 3s ease infinite;
+        @include animation(info-box-animation-inner 3s ease infinite);
     }
     .outer {
         -webkit-transform-origin: 50% 50%;
@@ -26,10 +23,7 @@
             -ms-transform-origin: 50% 50%;
                 transform-origin: 35px 35px;
 
-        -webkit-animation: info-box-animation-outer 3s ease infinite;
-           -moz-animation: info-box-animation-outer 3s ease infinite;
-            -ms-animation: info-box-animation-outer 3s ease infinite;
-                animation: info-box-animation-outer 3s ease infinite;
+        @include animation(info-box-animation-outer 3s ease infinite);
 
         -webkit-animation-delay: 0.3s;
            -moz-animation-delay: 0.3s;
@@ -85,19 +79,11 @@
     &.active {
         .info-type {
             opacity: 1;
-            
-            -webkit-transform: translate(0, 0);
-               -moz-transform: translate(0, 0);
-                -ms-transform: translate(0, 0);
-                    transform: translate(0, 0);
+            @include transform(translate(0, 0));
         }
         .info-title {
             opacity: 1;
-
-            -webkit-transform: translate(0, 0);
-               -moz-transform: translate(0, 0);
-                -ms-transform: translate(0, 0);
-                    transform: translate(0, 0);
+            @include transform(translate(0, 0));
         }
     }
 }
@@ -105,31 +91,15 @@
 .no-touch .info-box {
     .info-type {
         opacity: 0;
-
-        -webkit-transition: all 1s ease;
-           -moz-transition: all 1s ease;
-            -ms-transition: all 1s ease;
-                transition: all 1s ease;
-
-        -webkit-transform: translate(50px, 0);
-           -moz-transform: translate(50px, 0);
-            -ms-transform: translate(50px, 0);
-                transform: translate(50px, 0);
+        @include transition(all 1s ease);
+        @include transform(translate(50px, 0));
     }
 
     .info-title {
         font-size:  0.8rem;
         opacity:    0;
-
-        -webkit-transition:         all 1s ease;
-           -moz-transition:         all 1s ease;
-            -ms-transition:         all 1s ease;
-                transition:         all 1s ease;
-
-        -webkit-transform:          translate(50px, 0);
-           -moz-transform:          translate(50px, 0);
-            -ms-transform:          translate(50px, 0);
-                transform:          translate(50px, 0);
+        @include transition(all 1s ease);
+        @include transform(translate(50px, 0));
 
         -webkit-transition-delay:   0.15s;
            -moz-transition-delay:   0.15s;

@@ -1,5 +1,5 @@
 
-<div id="married-love" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="400">
+<div id="married-love" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img src="/_assets/img/spacer.png">

@@ -19,7 +19,7 @@
 
     $teaser = array(
         'image' => '',
-        'link'  => $path.'',
+        'link'  => $path.'6-ignorant-bride/index.php',
         'title' => 'Example teaser title'
     );
 

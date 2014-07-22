@@ -11,13 +11,38 @@
             <p>As a young man, John Tradescant travelled to France and the Low Countries acquiring rare and exotic species for his employer, Lord Treasurer Robert Cecil.</p>
         </div>
 
-        <div class="sliding-panels" data-scene="john-tradescant">
+        <div class="sliding-panels" data-scene="john-tradescant" data-component="modal">
             
-            <div class="sliding-panel"></div>
-            <div class="sliding-panel"></div>
-            <div class="sliding-panel"></div>
-            <div class="sliding-panel"></div>
-            <div class="sliding-panel"></div>
+            <div class="sliding-panel">
+                <svg class="info-box modal" data-image="" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                    <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
+                    <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
+                </svg>
+            </div>
+            <div class="sliding-panel">
+                <svg class="info-box modal" data-image="" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                    <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
+                    <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
+                </svg>
+            </div>
+            <div class="sliding-panel">
+                <svg class="info-box modal" data-image="" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                    <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
+                    <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
+                </svg>
+            </div>
+            <div class="sliding-panel">
+                <svg class="info-box modal" data-image="" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                    <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
+                    <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
+                </svg>
+            </div>
+            <div class="sliding-panel">
+                <svg class="info-box modal" data-image="" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                    <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
+                    <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
+                </svg>
+            </div>
 
         </div>
 

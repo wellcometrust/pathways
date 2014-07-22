@@ -19,7 +19,7 @@
 
     $teaser = array(
         'image' => '',
-        'link'  => $path.'',
+        'link'  => $path.'5-obscene-doctor/index.php',
         'title' => 'Example teaser title'
     );
 

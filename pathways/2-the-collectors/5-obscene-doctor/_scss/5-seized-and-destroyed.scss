@@ -89,7 +89,10 @@
 
     .touch {
         #seized-and-destroyed {
-
+            .main-content {
+                position:   absolute;
+                margin-top: 2rem;
+            }
         }
     }
 

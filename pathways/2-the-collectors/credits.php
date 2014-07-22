@@ -1,10 +1,18 @@
 <?php
-if( $_SERVER['SERVER_NAME'] == 'wellcome-pathways.clearleft.com' )
-    $docRoot = '/home/clearleft/subdomains/wellcome-pathways';
-else
-    $docRoot = $_SERVER['DOCUMENT_ROOT'];
+    if( $_SERVER['SERVER_NAME'] == 'wellcome-pathways.clearleft.com' )
+        $docRoot = '/home/clearleft/subdomains/wellcome-pathways';
+    else
+        $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-include($docRoot.'/_includes/header.php');
+    include($docRoot.'/_includes/Spyc.php');
+    include($docRoot.'/_includes/header.php');
+
+    $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
+
+    // Config
+    $pathway    = 'the-collectors';
+    $module     = '';
+    $path       = $config_yml['site']['pathways'][$pathway]['path'];
 ?>
 
     <main role="main">
@@ -37,17 +45,10 @@ include($docRoot.'/_includes/header.php');
                     <li><span>Project Manager:</span> Jessica Jebari</li>
                 </ul>
 
-                <h3>Beakus <span>(Air Loom Animation)</span></h3>
-
-                <ul>
-                    <li><span>Producer:</span> Laura Thomas</li>
-                    <li><span>Director:</span> Leo Bridle</li>
-                </ul>
-
             </div><!-- .inner -->
         </div><!-- .credits -->
 
-        <?php pattern('global_navigation') ?>
+        <?php pattern('global-navigation--the-collectors') ?>
         
     </main>
 

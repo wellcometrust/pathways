@@ -19,7 +19,7 @@
 
     $teaser = array(
         'image' => '',
-        'link'  => $path.'',
+        'link'  => $path.'3-death-collector/index.php',
         'title' => 'Example teaser title',
         'text'  => 'Bacon’s vision of scientific investigations based on evidence collected from the real world and the systematic study of observations was powerfully realised three decades later by a London haberdasher with an unhealthy interest in death.'
     );
