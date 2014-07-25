@@ -1,5 +1,5 @@
 
-<div id="death-infographic" class="panel" data-scene="" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="0">
+<div id="death-infographic" class="panel" data-component="infographic" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="0">
 
     <div class="bg-container">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1900 1050" enable-background="new 0 0 1900 1050">

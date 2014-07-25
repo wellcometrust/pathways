@@ -1,4 +1,6 @@
 
+'use strict';
+
 function _(str) { return document.querySelector(str); }
 
 
@@ -67,55 +69,51 @@ $('.library-panel').on('click', '[rel="external"]', function(e) {
     e.preventDefault();
 });
 
+// Begin the tree animation. Forget trying to pause/play on entering exiting the panel. Let it go, man. Just let it go...
+var canvas, stage, exportRoot;
 
-if( window.innerWidth >= 720 ) {
+function initCanvas() {
+    canvas = document.getElementById("canvas");
+    images = images||{};
 
-    // Begin the tree animation. Forget trying to pause/play on entering exiting the panel. Let it go, man. Just let it go...
-    var canvas, stage, exportRoot;
+    var loader = new createjs.LoadQueue(false);
+    loader.addEventListener("fileload", handleFileLoad);
+    loader.addEventListener("complete", handleComplete);
+    loader.loadManifest(lib.properties.manifest);
+}
 
-    function init() {
-        canvas = document.getElementById("canvas");
-        images = images||{};
+function handleFileLoad(evt) {
+    if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
 
-        var loader = new createjs.LoadQueue(false);
-        loader.addEventListener("fileload", handleFileLoad);
-        loader.addEventListener("complete", handleComplete);
-        loader.loadManifest(lib.properties.manifest);
+function handleComplete() {
+    exportRoot = new lib.tree2();
+
+    stage = new createjs.Stage(canvas);
+    stage.addChild(exportRoot);
+    stage.update();
+
+    createjs.Ticker.setFPS(lib.properties.fps);
+
+    if( Modernizr.touch ) {
+        createjs.Ticker.addEventListener("tick", stage);
     }
+}
 
-    function handleFileLoad(evt) {
-        if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
-    }
+var aspect_ratio    = 1900 / 1050,
+    new_height      = window.innerWidth / aspect_ratio,
+    p_height        = Modernizr.touch ? 550 : window.innerHeight ;
 
-    function handleComplete() {
-        exportRoot = new lib.tree2();
-
-        stage = new createjs.Stage(canvas);
-        stage.addChild(exportRoot);
-        stage.update();
-
-        createjs.Ticker.setFPS(lib.properties.fps);
-
-        if( Modernizr.touch ) {
-            createjs.Ticker.addEventListener("tick", stage);
-        }
-    }
-
-    init();
+function positionCrop() {
+    new_height = window.innerWidth / aspect_ratio;
+    $('.crop-zoom').css({
+        'height':       new_height,
+        'transform':    'translate(0, '+ ( (p_height - new_height) / 2 ) +'px)'
+    });
 }
 
 if( window.innerWidth >= 768 ) {
-    var aspect_ratio    = 1900 / 1050,
-        new_height      = window.innerWidth / aspect_ratio,
-        p_height        = Modernizr.touch ? 550 : window.innerHeight ;
-
-    function positionCrop() {
-        new_height = window.innerWidth / aspect_ratio;
-        $('.crop-zoom').css({
-            'height':       new_height,
-            'transform':    'translate(0, '+ ( (p_height - new_height) / 2 ) +'px)'
-        });
-    }
+    initCanvas();
 
     positionCrop();
     window.addEventListener('resize', positionCrop);
