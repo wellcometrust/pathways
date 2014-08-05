@@ -1,5 +1,5 @@
 
-Pathways.Scene.BritishMuseum = function(panel_height) {
+Pathways.Scene.BritishMuseum = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#british-museum',

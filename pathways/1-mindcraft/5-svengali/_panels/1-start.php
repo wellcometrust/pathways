@@ -6,7 +6,7 @@
     </div>
 
     <div class="falling-lady">
-        <img src="/_assets/img/svengali/falling-lady.png">
+        <img src="/pathways/1-mindcraft/_assets/5-svengali/falling-lady.png">
     </div>
     
     <div class="content">

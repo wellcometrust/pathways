@@ -1,5 +1,5 @@
 
-<div id="james-braid" class="panel" data-offset-height="450">
+<div id="james-braid" class="panel" data-offset-height="450" data-config='{ "offset_height": 450, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img src="/_assets/img/spacer.png">
@@ -16,16 +16,4 @@
         <p>He coined a new term for the process: hypnotism.</p>
     </div>
 
-    <?php
-        $panel = array(
-            'links' => array(
-                array(
-                    'title'         => 'James Braid',
-                    'images_url'    => 'http://wellcomeimages.org/indexplus/image/M0005798.html'
-                )
-            )
-        );
-    ?>
-
-    <?php pattern('library_panel'); ?>
 </div>

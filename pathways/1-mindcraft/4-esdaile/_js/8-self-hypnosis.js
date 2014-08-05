@@ -1,9 +1,9 @@
 
-Pathways.Scene.SelfHypnosis = function(panel_height) {
+Pathways.Scene.SelfHypnosis = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#self-hypnosis',
-            duration:       panel_height + 100
+            duration:       Pathways.panel_height + 100
         })
         .on('enter', function(e) {
             if( _('#self-hypnosis video') )

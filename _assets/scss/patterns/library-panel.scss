@@ -6,15 +6,8 @@
     right:      0;
     z-index:    15;
 
-    -webkit-transform:  translate(100%, 88%);
-       -moz-transform:  translate(100%, 88%);
-        -ms-transform:  translate(100%, 88%);
-            transform:  translate(100%, 88%);
-
-    -webkit-transition: all 0.5s ease;
-       -moz-transition: all 0.5s ease;
-        -ms-transition: all 0.5s ease;
-            transition: all 0.5s ease;
+    @include transform( translate(100%, 88%) );
+    @include transition( all 0.5s ease );
     
     .handle {
         display:            block;
@@ -39,10 +32,7 @@
         min-height:         200px;
         padding:            15px;
 
-        -webkit-transition: all 0.3s ease;
-           -moz-transition: all 0.3s ease;
-            -ms-transition: all 0.3s ease;
-                transition: all 0.3s ease;
+        @include transition( all 0.3s ease );
 
         li {
             list-style: none; 
@@ -64,19 +54,13 @@
     }
 
     &.active {
-        -webkit-transform:  translate(38px, 38px);
-           -moz-transform:  translate(38px, 38px);
-            -ms-transform:  translate(38px, 38px);
-                transform:  translate(38px, 38px);
+        @include transform( translate(38px, 38px));
 
         .handle {
             background-color: rgba(0,0,0, 1);
         }
         .body {
-            -webkit-transform: translate(-38px, -38px);
-               -moz-transform: translate(-38px, -38px);
-                -ms-transform: translate(-38px, -38px);
-                    transform: translate(-38px, -38px);
+            @include transform( translate(-38px, -38px));
         }
     }
 

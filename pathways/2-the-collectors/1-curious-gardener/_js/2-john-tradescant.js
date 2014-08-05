@@ -1,5 +1,5 @@
 
-Pathways.Scene.JohnTradescant = function(panel_height) {
+Pathways.Scene.JohnTradescant = function() {
 
     $('.sliding-panel').css({ 'opacity': 0 });
 

@@ -1,5 +1,5 @@
 
-<div id="where-will-this-technology-lead" class="panel">
+<div id="where-will-this-technology-lead" class="panel" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img src="/_assets/img/spacer.png">
@@ -18,18 +18,4 @@
         
     </div>
 
-    <?php
-        $panel = array(
-            'links' => array(
-                array(
-                    'title'         => 'The Hospital of Bethlem [Bedlam] at Moorfields, London, seen from the north.',
-                    'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1183474',
-                    'download_url'  => '',
-                    'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0012307.html'
-                )
-            )
-        );
-    ?>
-
-    <?php pattern('library_panel'); ?>
 </div>

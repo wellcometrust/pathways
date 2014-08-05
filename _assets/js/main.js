@@ -3,18 +3,6 @@
 
 function _(str) { return document.querySelector(str); }
 
-
-function positionCenter($elm) {
-    var width   = $elm.width(),
-        height  = $elm.height(),
-
-        top     = (window.innerHeight / 2) - (height / 2),
-        left    = (window.innerWidth / 2) - (width / 2);
-
-    $elm.css({ position: 'absolute', top: top, left: left });
-}
-
-
 // Global Nav
 (function($) {
     var $nav            = $('.global-navigation'),
@@ -44,33 +32,40 @@ function positionCenter($elm) {
     setTimeout(function() {
         $nav_handle.trigger('click');
     }, 1000);
+
+
+    /*
+        Events
+    */
+
+    // put this here for now.
+    $('.comic-quote').on('click', '.info-box', function() {
+        var $this   = $(this),
+            $parent = $this.parent();
+
+        if( $parent.hasClass('active') ) {
+            $parent.removeClass('active');
+        }
+        else {
+            $parent.addClass('active');
+        }
+    });
+
+    // Open links marked with rel="external" in a new window/tab
+    $('.library-panel').on('click', '[rel="external"]', function(e) {
+        var $this = $(this);
+
+        window.open( $this.attr('href') );
+
+        e.preventDefault();
+    });
+
 })($);
 
 
-// put this here for now.
-$('.comic-quote').on('click', '.info-box', function() {
-    var $this   = $(this),
-        $parent = $this.parent();
-
-    if( $parent.hasClass('active') ) {
-        $parent.removeClass('active');
-    }
-    else {
-        $parent.addClass('active');
-    }
-});
-
-// Open links marked with rel="external" in a new window/tab
-$('.library-panel').on('click', '[rel="external"]', function(e) {
-    var $this = $(this);
-
-    window.open( $this.attr('href') );
-
-    e.preventDefault();
-});
-
-// Begin the tree animation. Forget trying to pause/play on entering exiting the panel. Let it go, man. Just let it go...
 var canvas, stage, exportRoot;
+
+// Canvas animations. Forget trying to pause/play on entering exiting the panel. Let it go, man. Just let it go...
 
 function initCanvas() {
     canvas = document.getElementById("canvas");
@@ -100,52 +95,40 @@ function handleComplete() {
     }
 }
 
-var aspect_ratio    = 1900 / 1050,
-    new_height      = window.innerWidth / aspect_ratio,
-    p_height        = Modernizr.touch ? 550 : window.innerHeight ;
-
-function positionCrop() {
-    new_height = window.innerWidth / aspect_ratio;
-    $('.crop-zoom').css({
-        'height':       new_height,
-        'transform':    'translate(0, '+ ( (p_height - new_height) / 2 ) +'px)'
-    });
-}
-
 if( window.innerWidth >= 768 ) {
     initCanvas();
-
-    positionCrop();
-    window.addEventListener('resize', positionCrop);
 }
 
 
 Pathways.LoadScenes = function() {
 
-    var panel_height    = window.innerHeight < 550 ? 550 : window.innerHeight,
-        $sequence       = $('.sequence'),
+    var $sequence       = $('.sequence'),
         controller      = new ScrollMagic();
 
 
     $('.black-strip').css({
         position:       'fixed',
-        'height':       panel_height,
-        'transform':    'translate(0,'+panel_height+'px)'
+        'height':       Pathways.panel_height,
+        'transform':    'translate(0,'+Pathways.panel_height+'px)'
     });
 
     window.addEventListener('resize', function() {
         $('.black-strip').css({
-            'height': window.innerHeight < 550 ? 550 : window.innerHeight,
+            'height':       Pathways.panel_height,
+            'transform':    'translate(0,'+Pathways.panel_height+'px)'
         });
     });
 
     function parallaxStart() {
         scrollY = window.pageYOffset;
 
-        if( scrollY > panel_height )
+        if( scrollY > Pathways.panel_height ) {
+            $content.css('display', 'none');
             return;
+        }
 
         $content.css({
+            'display': 'block',
             'opacity':  1 - (unit * scrollY),
             'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 2) +'px,0)' : 'translate(0,'+ (scrollY / 2) +'px)'
         });
@@ -154,7 +137,7 @@ Pathways.LoadScenes = function() {
     function parallaxLady() {
         scrollY2 = window.pageYOffset;
 
-        if( scrollY2 > panel_height )
+        if( scrollY2 > Pathways.panel_height )
             return;
 
         $lady.css({
@@ -175,7 +158,8 @@ Pathways.LoadScenes = function() {
         var $start      = $('.start'),
             $content    = $start.find('.content').first(),
             scrollY     = 0,
-            unit        = 1 / (panel_height / 2);
+            unit        = 1 / (Pathways.panel_height / 2),
+            hidden      = false;
 
         window.addEventListener('scroll', parallaxStart, false);
     }
@@ -231,7 +215,7 @@ Pathways.LoadScenes = function() {
         scenes[idx++] = new ScrollScene({
                 triggerElement: $sequence,
                 triggerHook:    'top',
-                duration:       ($sequence.height() - panel_height)
+                duration:       ($sequence.height() - Pathways.panel_height)
             })
             .on('enter', function(e) {
                 if( e.scrollDirection == 'FORWARD') {
@@ -270,7 +254,7 @@ Pathways.LoadScenes = function() {
         // Panels
         scenes[idx++] = new ScrollScene({
                 triggerElement: $this,
-                duration:       (panel_height / 4)
+                duration:       (Pathways.panel_height / 4)
             })
             .on('enter', function() {
                 $bg.css('display', 'block');
@@ -302,7 +286,7 @@ Pathways.LoadScenes = function() {
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
                     triggerHook:    'top',
-                    duration:       panel_height
+                    duration:       Pathways.panel_height
                 })
                 .on('enter', function() {
                     $quiz.css({ position: 'fixed', display: 'block' });
@@ -355,7 +339,7 @@ Pathways.LoadScenes = function() {
 
             // Check the handler exists and it hasn't already been loaded
             if ( window.Pathways.Scene[handlerClass] != null ) {
-                window.Pathways.Scene[handlerClass](panel_height);
+                window.Pathways.Scene[handlerClass]();
             }
             
             if( window.Pathways.Scene[handlerClass] == null )

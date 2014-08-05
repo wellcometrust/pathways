@@ -1,9 +1,9 @@
 
-Pathways.Scene.SurgeryUnderHypnosis = function(panel_height) {
+Pathways.Scene.SurgeryUnderHypnosis = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#surgery-under-hypnosis',
-            duration:       panel_height + 100
+            duration:       Pathways.panel_height + 100
         })
         .on('enter', function(e) {
             if( _('#surgery-under-hypnosis video') )

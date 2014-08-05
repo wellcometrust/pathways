@@ -1,5 +1,5 @@
 
-Pathways.Scene.Office2 = function(panel_height) {
+Pathways.Scene.Office2 = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#office-2',

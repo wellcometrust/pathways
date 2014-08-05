@@ -1,9 +1,6 @@
 <?php
     global $teaser, $module;
 
-    if( !isset($teaser) )
-        return;
-
     $teaser_bg      = isset($teaser['image']) ? $teaser['image']  : '';
     $teaser_link    = isset($teaser['link'])  ? $teaser['link']   : '';
     $teaser_title   = isset($teaser['title']) ? $teaser['title']  : '';

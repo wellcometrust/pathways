@@ -57,10 +57,7 @@
         z-index:    15;
     }
     .image-crop.animate {
-        -webkit-transition: all 0.5s ease;
-           -moz-transition: all 0.5s ease;
-            -ms-transition: all 0.5s ease;
-                transition: all 0.5s ease;
+        @include transition(all 0.5s ease);
     }
 
     .text {
@@ -73,15 +70,12 @@
         line-height:        1.4;
         z-index:            20;
 
-        -webkit-transform: translate(0, 100px);
-           -moz-transform: translate(0, 100px);
-            -ms-transform: translate(0, 100px);
-                transform: translate(0, 100px);
+        @include transform(translate(0, 100px));
 
         -webkit-transition: -webkit-transform 0.5s ease;
-           -moz-transition: -moz-transform 0.5s ease;
-            -ms-transition: -ms-transform 0.5s ease;
-                transition: transform 0.5s ease;
+           -moz-transition:    -moz-transform 0.5s ease;
+            -ms-transition:     -ms-transform 0.5s ease;
+                transition:         transform 0.5s ease;
     }
 }
 
@@ -94,10 +88,7 @@
         .text.show {
             opacity: 1;
 
-            -webkit-transform: translate(0, -20px);
-               -moz-transform: translate(0, -20px);
-                -ms-transform: translate(0, -20px);
-                    transform: translate(0, -20px);
+            @include transform(translate(0, -20px));
         }
     }
 }

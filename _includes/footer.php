@@ -13,9 +13,5 @@
 
     <script src="<?php echo asset('build/js/production.js') ?>"></script>
 
-    <script>
-        var pw = new Pathways();
-    </script>
-
 </body>
 </html>

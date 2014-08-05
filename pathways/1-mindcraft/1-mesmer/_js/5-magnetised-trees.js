@@ -1,11 +1,11 @@
 
-Pathways.Scene.MagnetisedTrees = function(panel_height) {
+Pathways.Scene.MagnetisedTrees = function() {
     
     // var tree_offset = $('#magnetised-trees').data('offset-height') ? $('#magnetised-trees').data('offset-height') : 0;
     
     var scene1 = new ScrollScene({
             triggerElement: '#magnetised-trees',
-            duration:       panel_height
+            duration:       Pathways.panel_height
         })
         .on('enter', function(e) {
             if( e.scrollDirection == 'FORWARD' ) {
@@ -15,7 +15,7 @@ Pathways.Scene.MagnetisedTrees = function(panel_height) {
         })
         .on('leave', function(e) {
             if( e.scrollDirection == 'REVERSE' ) {
-                TweenMax.to('#magnetised-trees .black-strip', .2, { y: panel_height }); // scroll down
+                TweenMax.to('#magnetised-trees .black-strip', .2, { y: Pathways.panel_height }); // scroll down
                 createjs.Ticker.removeEventListener("tick", stage);
             }
         });

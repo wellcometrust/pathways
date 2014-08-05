@@ -1,5 +1,5 @@
 
-Pathways.LibraryLayer = function(panel_height) {
+Pathways.LibraryLayer = function() {
 
     var $gap    = $('.library-layer .gap'),
         height  = $gap.height(),
@@ -41,7 +41,7 @@ Pathways.LibraryLayer = function(panel_height) {
             $iframe.attr('width', playerWidth );
             $iframe.attr('height', playerHeight );
 
-            $overlay.css('height', panel_height );
+            $overlay.css('height', Pathways.panel_height );
 
             $('body').append($overlay);
 
@@ -49,7 +49,7 @@ Pathways.LibraryLayer = function(panel_height) {
             $overlay.css('background-color', 'rgba(0,0,0,0.8)');
 
             setTimeout(function() {
-                positionCenter($embed);
+                Pathways.Utils.positionCenter($embed);
                 $overlay.append($embed);
 
                 $overlay.append( $('<script id="embedWellcomePlayer" src="http://wellcomelibrary.org/spas/player/build/wellcomeplayer/js/embed.js"><\/script>') );

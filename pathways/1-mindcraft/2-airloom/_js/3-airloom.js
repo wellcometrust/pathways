@@ -1,9 +1,9 @@
 
-Pathways.Scene.Airloom = function(panel_height) {
+Pathways.Scene.Airloom = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#airloom',
-            duration:       panel_height
+            duration:       Pathways.panel_height
         })
         .on('enter', function(e) {
             if( _('#airloom video') ) {

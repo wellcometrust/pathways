@@ -1,7 +1,7 @@
 
 .start-mesmer {
     .bg-container {
-        background-image: url(/_assets/img/mesmer/mesmer-1.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/1-mesmer/mesmer-1.jpg);
     }
 }
 
@@ -93,10 +93,7 @@
         z-index:    15;
     }
     .image-crop.animate {
-        -webkit-transition: all 0.5s ease;
-           -moz-transition: all 0.5s ease;
-            -ms-transition: all 0.5s ease;
-                transition: all 0.5s ease;
+        @include transition(all 0.5s ease);
     }
 
     .text {
@@ -109,15 +106,12 @@
         line-height:        1.4;
         z-index:            20;
 
-        -webkit-transform: translate(0, 100px);
-           -moz-transform: translate(0, 100px);
-            -ms-transform: translate(0, 100px);
-                transform: translate(0, 100px);
+        @include transform(translate(0, 100px));
 
         -webkit-transition: -webkit-transform 0.5s ease;
-           -moz-transition: -moz-transform 0.5s ease;
-            -ms-transition: -ms-transform 0.5s ease;
-                transition: transform 0.5s ease;
+           -moz-transition:    -moz-transform 0.5s ease;
+            -ms-transition:     -ms-transform 0.5s ease;
+                transition:         transform 0.5s ease;
     }
 }
 
@@ -130,10 +124,7 @@
         .text.show {
             opacity: 1;
 
-            -webkit-transform: translate(0, -20px);
-               -moz-transform: translate(0, -20px);
-                -ms-transform: translate(0, -20px);
-                    transform: translate(0, -20px);
+            @include transform(translate(0, -20px));
         }
     }
 }
@@ -143,7 +134,7 @@
     overflow: hidden;
 
     .bg-container {
-        background-image: url(/_assets/img/mesmer/mesmer-3.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/1-mesmer/mesmer-3.jpg);
     }
 
     .info-box {
@@ -229,20 +220,16 @@
     }
 }
 
-@media all and (min-width: 48em) {
-    
-}
-
 .start-airloom {
     .bg-container {
-        background-image: url(/_assets/img/airloom/airloom-1.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/2-airloom/airloom-1.jpg);
     }
 }
 
 #where-will-this-technology-lead {
 
     .bg-container {
-        background-image: url(/_assets/img/airloom/airloom-2.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/2-airloom/airloom-2.jpg);
     }
     
 }
@@ -250,7 +237,7 @@
 #grisly-experiments {
 
     .bg-container {
-        background-image: url(/_assets/img/airloom/airloom-2.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/2-airloom/airloom-2.jpg);
     }
 
     .info-box {
@@ -263,14 +250,14 @@
 
 .start-elliotson {
     .bg-container {
-        background-image: url(/_assets/img/elliotson/elliotson-1.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/elliotson-1.jpg);
     }
 }
 
 #okey-sisters {
 
     .bg-container {
-        background-image: url(/_assets/img/elliotson/elliotson-2.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/elliotson-2.jpg);
     }
     
     .main-content {
@@ -354,7 +341,7 @@
 #thomas-wakley {
 
     .bg-container {
-        background-image: url(/_assets/img/elliotson/elliotson-3.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/elliotson-3.jpg);
     }
 
     .main-content {
@@ -392,7 +379,7 @@
 #verdict {
 
     .bg-container {
-        background-image: url(/_assets/img/elliotson/elliotson-4.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/elliotson-4.jpg);
         background-position: 30% 0;
     }
 
@@ -459,21 +446,11 @@
 
 .start-esdaile {
     .bg-container {
-        background-image: url(/_assets/img/esdaile/esdaile-1.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-1.jpg);
     }
 }
 
 #gonad-man {
-
-    // .bg-container {
-    //     img {
-    //         width:  auto;
-    //         height: 100%;
-    //     }
-    //     // background-image:       url(/_assets/img/esdaile/esdaile-2.jpg);
-    //     // background-position:    100% 0;
-    // }
-
     .info-box {
         position:   absolute;
         top:        120px;
@@ -494,34 +471,14 @@
 
     .no-touch {
         #gonad-man {
-            // .bg-container {
-            //     background-size: 250%;
-
-            //     -webkit-transition: background-size 14s ease;
-            // }
-
-            // &.active .bg-container {
-            //     background-size: 100%;
-            // }
-
             img {
-                -webkit-transform: scale(2.3, 2.3);
-                -webkit-transform-origin: 100% 0%;
-                -webkit-transition: -webkit-transform 14s ease;
-
-                -moz-transform: scale(2.3, 2.3);
-                -moz-transform-origin: 100% 0%;
-                -moz-transition: -moz-transform 14s ease;
-
-                transform: scale(2.3, 2.3);
-                transform-origin: 100% 0%;
-                transition: transform 14s ease;
+                @include transform(scale(2.3, 2.3));
+                @include transform-origin(100% 0%);
+                @include transition(all 14s ease);
             }
 
             &.active img {
-                -webkit-transform: scale(1, 1);
-                   -moz-transform: scale(1, 1);
-                        transform: scale(1, 1);
+                @include transform(scale(1, 1));
             }
         }
     }
@@ -530,11 +487,6 @@
 @media all and (min-width: 64rem) {
     .touch {
         #gonad-man {
-            .bg-container {
-                // background-image:       url(/_assets/img/esdaile/esdaile-2.jpg);
-                // background-position:    100% 0;
-            }
-
             .info-box {
                 position:   absolute;
                 top:        20px;
@@ -547,7 +499,7 @@
 
 #fakir {
     .bg-container {
-        background-image: url(/_assets/img/esdaile/esdaile-3.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-3.jpg);
         background-position: 50% 100%;
     }
 }
@@ -565,7 +517,7 @@
 #india {
 
     .bg-container {
-        background-image: url(/_assets/img/esdaile/esdaile-4.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-4.jpg);
         background-position: 50% 100%;
     }
 
@@ -586,16 +538,15 @@
             bottom:             110px;
             width:              100%;
             height:             161px;
-            background:         url('/_assets/img/esdaile/esdaile-4-boat.png') 0 0 no-repeat;
+            background:         url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-4-boat.png) 0 0 no-repeat;
             background-size:    100%;
 
-            -webkit-transform: translate(20px, 0);
-               -moz-transform: translate(20px, 0);
-                    transform: translate(20px, 0);
+            @include transform( translate(20px, 0) );
 
             -webkit-transition: -webkit-transform 30s linear;
-               -moz-transition: -moz-transform 30s linear;
-                    transition: transform 30s linear;
+               -moz-transition:    -moz-transform 30s linear;
+                -ms-transition:     -ms-transform 30s linear;
+                    transition:         transform 30s linear;
         }
     }
 
@@ -635,7 +586,7 @@
 
 #james-braid {
     .bg-container {
-        background-image:       url(/_assets/img/esdaile/esdaile-5.jpg);
+        background-image:       url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-5.jpg);
         background-position:    100% 0;
     }
 
@@ -662,7 +613,7 @@
 
 .start-svengali {
     .bg-container {
-        background-image: url(/_assets/img/svengali/svengali-1.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/5-svengali/svengali-1.jpg);
     }
 
     .falling-lady {
@@ -681,7 +632,7 @@
 #trilby {
 
     .bg-container {
-        background-image: url(/_assets/img/svengali/svengali-2.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/5-svengali/svengali-2.jpg);
     }
 
     img {
@@ -979,7 +930,7 @@
 #bompard {
 
     .bg-container {
-        background-image: url(/_assets/img/svengali/svengali-2.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/5-svengali/svengali-2.jpg);
     }
 
     img {
@@ -1171,7 +1122,7 @@
 
 .start-freud {
     .bg-container {
-        background-image: url(/_assets/img/freud/freud-1.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/6-freud/freud-1.jpg);
     }
 }
 
@@ -1244,7 +1195,7 @@
 #fred-breuer {
 
     .bg-container {
-        background-image: url(/_assets/img/freud/freud-3.jpg);
+        background-image: url(/pathways/1-mindcraft/_assets/6-freud/freud-3.jpg);
     }
     
 }
@@ -1273,27 +1224,13 @@
 @media all and (min-width: 48rem) {
     #office {
         img {
-            -webkit-transform:          scale(1.6, 1.6);
-               -moz-transform:          scale(1.6, 1.6);
-                -ms-transform:          scale(1.6, 1.6);
-                    transform:          scale(1.6, 1.6);
-
-            -webkit-transform-origin:   0 0;
-               -moz-transform-origin:   0 0;
-                -ms-transform-origin:   0 0;
-                    transform-origin:   0 0;
-
-            -webkit-transition:         -webkit-transform 14s ease;
-               -moz-transition:         -moz-transform 14s ease;
-                -ms-transition:         -ms-transform 14s ease;
-                    transition:         transform 14s ease;
+            @include transform( scale(1.6, 1.6) );
+            @include transform-origin( 0 0 );
+            @include transition( all 14s ease );
         }
 
         &.active img {
-            -webkit-transform: translate(-80%, -40%) scale(1.8, 1.8);
-               -moz-transform: translate(-80%, -40%) scale(1.8, 1.8);
-                -ms-transform: translate(-80%, -40%) scale(1.8, 1.8);
-                    transform: translate(-80%, -40%) scale(1.8, 1.8);
+            @include transform( translate(-80%, -40%) scale(1.8, 1.8) );
         }
     }
 
@@ -1335,27 +1272,13 @@
 @media all and (min-width: 48rem) {
     #office-2 {
         img {
-            -webkit-transform:          scale(1.6, 1.6);
-               -moz-transform:          scale(1.6, 1.6);
-                -ms-transform:          scale(1.6, 1.6);
-                    transform:          scale(1.6, 1.6);
-
-            -webkit-transform-origin:   0 0;
-               -moz-transform-origin:   0 0;
-                -ms-transform-origin:   0 0;
-                    transform-origin:   0 0;
-
-            -webkit-transition:         -webkit-transform 14s ease;
-               -moz-transition:         -moz-transform 14s ease;
-                -ms-transition:         -ms-transform 14s ease;
-                    transition:         transform 14s ease;
+            @include transform( scale(1.6, 1.6) );
+            @include transform-origin( 0 0 );
+            @include transition( all 14s ease );
         }
 
         &.active img {
-            -webkit-transform: translate(-80%, -40%) scale(1.8, 1.8);
-               -moz-transform: translate(-80%, -40%) scale(1.8, 1.8);
-                -ms-transform: translate(-80%, -40%) scale(1.8, 1.8);
-                    transform: translate(-80%, -40%) scale(1.8, 1.8);
+            @include transform( translate(-80%, -40%) scale(1.8, 1.8) );
         }
 
         header {
@@ -1734,10 +1657,6 @@
                 width:      50%;
 
                 @include transition(all 30s linear);
-
-                // &.active {
-                //     @include transform( translate(0, -800px) );
-                // }
             }
         }
 
@@ -2245,22 +2164,12 @@
             position:   absolute;
             bottom:     0;
 
-            -webkit-transform-origin:   35% 70%;
-               -moz-transform-origin:   35% 70%;
-                -ms-transform-origin:   35% 70%;
-                    transform-origin:   35% 70%;
-
-            -webkit-transition:         -webkit-transform 14s ease;
-               -moz-transition:         -moz-transform 14s ease;
-                -ms-transition:         -ms-transform 14s ease;
-                    transition:         transform 14s ease;
+            @include transform-origin( 35% 70% );
+            @include transition( all 14s ease );
         }
 
         &.active img {
-            -webkit-transform: scale(1.8, 1.8);
-               -moz-transform: scale(1.8, 1.8);
-                -ms-transform: scale(1.8, 1.8);
-                    transform: scale(1.8, 1.8);
+            @include transform( scale(1.8, 1.8));
         }
 
         .main-content {

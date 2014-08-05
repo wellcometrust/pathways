@@ -1,5 +1,5 @@
 
-<div id="committee-investigates-intro" class="panel">
+<div id="committee-investigates-intro" class="panel" data-config='{ "offset_height": 0, "background": { "type": "none", "preserve_ratio": false } }'>
 
     <div class="bg-container"></div>
 

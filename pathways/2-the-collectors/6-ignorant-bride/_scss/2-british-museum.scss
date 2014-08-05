@@ -21,22 +21,12 @@
             position:   absolute;
             bottom:     0;
 
-            -webkit-transform-origin:   35% 70%;
-               -moz-transform-origin:   35% 70%;
-                -ms-transform-origin:   35% 70%;
-                    transform-origin:   35% 70%;
-
-            -webkit-transition:         -webkit-transform 14s ease;
-               -moz-transition:         -moz-transform 14s ease;
-                -ms-transition:         -ms-transform 14s ease;
-                    transition:         transform 14s ease;
+            @include transform-origin( 35% 70% );
+            @include transition( all 14s ease );
         }
 
         &.active img {
-            -webkit-transform: scale(1.8, 1.8);
-               -moz-transform: scale(1.8, 1.8);
-                -ms-transform: scale(1.8, 1.8);
-                    transform: scale(1.8, 1.8);
+            @include transform( scale(1.8, 1.8));
         }
 
         .main-content {

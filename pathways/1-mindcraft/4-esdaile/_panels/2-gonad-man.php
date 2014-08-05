@@ -1,15 +1,14 @@
 
-<div id="gonad-man" class="panel" data-scene="gonad-man" data-offset-height="550">
+<div id="gonad-man" class="panel" data-scene="gonad-man" data-offset-height="550" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img src="/_assets/img/esdaile/esdaile-2.jpg">
-        <!-- <img src="/_assets/img/spacer.png"> -->
+        <img src="/pathways/1-mindcraft/_assets/4-esdaile/esdaile-2.jpg">
     </div>
 
     <!-- scroll content -->
     <div class="main-content left">
         <header>
-            <h1>Esdaile's first patient</h1>
+            <h1>Esdaile’s first patient</h1>
         </header>
         
         <p>was a prisoner with a huge scrotal swelling. In front of a distinguished audience including doctors, magistrates and the local governor, he removed it painlessly in minutes.</p>
@@ -29,16 +28,4 @@
         </div>
     </div>
 
-    <?php
-        $panel = array(
-            'links' => array(
-                array(
-                    'title'         => 'Esdaile’s patient',
-                    'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1309510~S12',
-                )
-            )
-        );
-    ?>
-
-    <?php pattern('library_panel'); ?>
 </div>

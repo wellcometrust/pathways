@@ -1,10 +1,10 @@
 
-Pathways.Scene.Satirised = function(panel_height) {
+Pathways.Scene.Satirised = function() {
     var news_offset = $('#satirised').data('offset-height') ? $('#satirised').data('offset-height') : 0;
 
     var scene = new ScrollScene({
             triggerElement: '#satirised',
-            duration:       panel_height + news_offset + 100
+            duration:       Pathways.panel_height + news_offset + 100
         })
         .on('enter', function(e) {
             if( _('#satirised video') )

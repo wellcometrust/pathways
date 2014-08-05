@@ -1,10 +1,10 @@
 
-Pathways.Scene.BillsOfMortality = function(panel_height) {
+Pathways.Scene.BillsOfMortality = function() {
 
     var scene1 = new ScrollScene({
             triggerElement: '#bills-of-mortality',
             triggerHook:    'top',
-            duration:       panel_height + 150
+            duration:       Pathways.panel_height + 150
         })
         .on('enter', function(e) {
             if( _('#bills-of-mortality video') )

@@ -1,9 +1,9 @@
 
-Pathways.Scene.Letters = function(panel_height) {
+Pathways.Scene.Letters = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#letters',
-            duration:       panel_height
+            duration:       Pathways.panel_height
         })
         .on('enter', function(e) {
             if( _('#letters audio') ) {

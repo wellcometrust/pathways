@@ -1,5 +1,5 @@
 
-<div id="thomas-wakley" class="panel thomas-wakley" data-offset-height="2800">
+<div id="thomas-wakley" class="panel thomas-wakley" data-offset-height="2800" data-config='{ "offset_height": 2800, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img src="/_assets/img/spacer.png">
@@ -105,18 +105,5 @@
             </div>
         </div>
 
-        <?php
-            $panel = array(
-                'links' => array(
-                    array(
-                        'title'         => 'Thomas Wakley',
-                        'catalogue_url' => 'http://catalogue.wellcomelibrary.org/record=b1173333',
-                        'images_url'    => 'http://wellcomeimages.org/indexplus/image/L0008210.html'
-                    )
-                )
-            );
-        ?>
-
-        <?php pattern('library_panel'); ?>
     </div>
 </div>

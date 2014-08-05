@@ -1,9 +1,9 @@
 
-Pathways.Scene.Office = function(panel_height) {
+Pathways.Scene.Office = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#office',
-            duration:       panel_height
+            duration:       Pathways.panel_height
         })
         .on('enter', function(e) {
             if( e.scrollDirection == 'FORWARD' )
@@ -11,7 +11,7 @@ Pathways.Scene.Office = function(panel_height) {
         })
         .on('leave', function(e) {
             if( e.scrollDirection == 'REVERSE' )
-                TweenMax.to('#office .black-strip', .2, { y: panel_height }); // scroll down
+                TweenMax.to('#office .black-strip', .2, { y: Pathways.panel_height }); // scroll down
         })
 
     Pathways.Scenes.push(scene);

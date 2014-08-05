@@ -1,8 +1,8 @@
 
-Pathways.CropZoom = function(panel_height) {
+Pathways.CropZoom = function() {
 
     var $elm    = $('.crop-zoom'),
-        url     = '/_assets/img/mesmer/';
+        url     = '';
     
     $elm.css({
         position:   'absolute',
@@ -73,7 +73,7 @@ Pathways.CropZoom = function(panel_height) {
                 $text.addClass('show');
             });
 
-            $image_crop.css( { top: 0, left: 0, 'transform': 'translate(0, '+(panel_height / 4)+'px)', opacity: 0 } );
+            $image_crop.css( { top: 0, left: 0, 'transform': 'translate(0, '+(Pathways.panel_height / 4)+'px)', opacity: 0 } );
 
             // Animate in the text
             setTimeout(function() {
@@ -105,5 +105,23 @@ Pathways.CropZoom = function(panel_height) {
             })
         });
     });
+
+    var new_height      = window.innerWidth / Pathways.aspect_ratio,
+        p_height        = Modernizr.touch ? 550 : window.innerHeight;
+
+    function positionCrop() {
+        new_height = window.innerWidth / Pathways.aspect_ratio;
+        if( p_height - new_height ) {
+            $('.crop-zoom').css({
+                'height':       new_height,
+                'transform':    'translate(0, '+ ( (p_height - new_height) / 2 ) +'px)'
+            });
+        }
+    }
+
+    if( window.innerWidth >= 768 ) {
+        positionCrop();
+        window.addEventListener('resize', positionCrop);
+    }
 
 }

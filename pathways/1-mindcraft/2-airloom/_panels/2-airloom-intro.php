@@ -1,5 +1,5 @@
 
-<div id="airloom-intro" class="panel air-loom">
+<div id="airloom-intro" class="panel air-loom" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container"></div>
 

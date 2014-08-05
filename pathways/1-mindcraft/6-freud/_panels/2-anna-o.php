@@ -1,13 +1,13 @@
 
-<div id="anna-o" class="panel" data-scene="anna-o">
+<div id="anna-o" class="panel" data-scene="anna-o" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img src="/_assets/img/freud/freud-2.jpg">
+        <img src="/pathways/1-mindcraft/_assets/6-freud/freud-2.jpg">
 
-        <img class="fragmented" src="/_assets/img/freud/freud-2.png">
-        <img class="fragmented" src="/_assets/img/freud/freud-2.png">
-        <img class="fragmented" src="/_assets/img/freud/freud-2.png">
-        <img class="fragmented" src="/_assets/img/freud/freud-2.png">
+        <img class="fragmented" src="/pathways/1-mindcraft/_assets/6-freud/freud-2.png">
+        <img class="fragmented" src="/pathways/1-mindcraft/_assets/6-freud/freud-2.png">
+        <img class="fragmented" src="/pathways/1-mindcraft/_assets/6-freud/freud-2.png">
+        <img class="fragmented" src="/pathways/1-mindcraft/_assets/6-freud/freud-2.png">
     </div>
 
     <div class="main-content left">

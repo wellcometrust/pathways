@@ -1,5 +1,5 @@
 
-<div id="grisly-experiments" class="panel">
+<div id="grisly-experiments" class="panel" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img src="/_assets/img/spacer.png">

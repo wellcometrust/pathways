@@ -1,8 +1,8 @@
 
-<div id="mesmers-salon" class="panel mesmers-salon" data-component="crop-zoom" data-scene="mesmers-salon">
+<div id="mesmers-salon" class="panel" data-component="crop-zoom" data-scene="mesmers-salon" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": true } }'>
 
     <div class="bg-container preserve-ratio">
-        <img src="/_assets/img/mesmer/mesmer-2.jpg">
+        <img src="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-2.jpg">
     </div>
 
     <div class="crop-zoom">
@@ -25,18 +25,18 @@
     <script>
         var db = {
             'rod': {
-                'image':    'rod-crop.jpg',
+                'image':    '/pathways/1-mindcraft/_assets/1-mesmer/rod-crop.jpg',
                 'title':    '',
                 'text':     'Mesmer ‘magnetised’ rods or wands that could be used to direct the fluid to the afflicted part of the body. He would often play music on a glass harmonica that sent shivers through the patients’ nerves.',
                 'position': 'right'
             },
             'woman': {
-                'image':    'woman-crop.jpg',
+                'image':    '/pathways/1-mindcraft/_assets/1-mesmer/woman-crop.jpg',
                 'text':     'Patients would form circles, holding hands or grasping cords, to transfer the healing energies between them. Sometimes these healing circles would climax in mass convulsions.',
                 'position': 'left'
             },
             'mesmer': {
-                'image':    'mesmer-crop.jpg',
+                'image':    '/pathways/1-mindcraft/_assets/1-mesmer/mesmer-crop.jpg',
                 'text':     'Mesmer, depicted here with his wand, taught his healing skills to initiates. They were obliged to take a strict vow of secrecy and pay the large sum of 100 livres. Many French aristocrats signed up.',
                 'position': 'left'    
             }

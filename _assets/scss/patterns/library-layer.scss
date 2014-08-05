@@ -266,18 +266,12 @@
     .no-touch .library-layer {
         .bar {
             .show-more {
-                -webkit-transition: all 0.2s ease;
-                   -moz-transition: all 0.2s ease;
-                    -ms-transition: all 0.2s ease;
-                        transition: all 0.2s ease;
+                @include transition(all 0.2s ease);
             }
 
             &:hover {       
                 .show-more {
-                    -webkit-transform: translate(0, 5px);
-                       -moz-transform: translate(0, 5px);
-                        -ms-transform: translate(0, 5px);
-                            transform: translate(0, 5px);
+                    @include transform( translate(0, 5px) );
                 }
             }
         }

@@ -1,7 +1,7 @@
 
-<div id="self-hypnosis" class="panel talking-head" data-scene="self-hypnosis">
+<div id="self-hypnosis" class="panel talking-head" data-scene="self-hypnosis" data-config='{ "offset_height": 0, "background": { "type": "video", "preserve_ratio": false } }'>
 
-    <div class="bg-container" data-src=" /_assets/video/chris-hypno-demo.mp4">
+    <div class="bg-container">
         <video controls="true" preload="none">
             <source src="/_assets/video/chris-hypno-demo.mp4">
             <source src="/_assets/video/chris-hypno-demo.webm">

@@ -1,5 +1,5 @@
 
-Pathways.Scene.SeizedAndDestroyed = function(panel_height) {
+Pathways.Scene.SeizedAndDestroyed = function() {
 
     var vector = { x: -10, y: -5 };
 

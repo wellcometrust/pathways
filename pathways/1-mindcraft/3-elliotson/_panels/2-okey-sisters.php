@@ -1,5 +1,5 @@
 
-<div id="okey-sisters" class="panel okey-sisters" data-scene="okey-sisters" data-offset-height="1400">
+<div id="okey-sisters" class="panel okey-sisters" data-scene="okey-sisters" data-offset-height="1400" data-config='{ "offset_height": 1400, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img src="/_assets/img/spacer.png">
@@ -17,8 +17,8 @@
     </div>
 
     <div class="secondary-content">
-        <img src="/_assets/img/elliotson/demonstration1.jpg">
-        <img src="/_assets/img/elliotson/demonstration2.jpg">
+        <img src="/pathways/1-mindcraft/_assets/3-elliotson/demonstration1.jpg">
+        <img src="/pathways/1-mindcraft/_assets/3-elliotson/demonstration2.jpg">
     </div>
 
     <div class="info-box with-text" data-component="gallery">

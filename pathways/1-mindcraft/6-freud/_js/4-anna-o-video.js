@@ -1,9 +1,9 @@
 
-Pathways.Scene.AnnaOVideo = function(panel_height) {
+Pathways.Scene.AnnaOVideo = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#anna-o-video',
-            duration:       panel_height + 100
+            duration:       Pathways.panel_height + 100
         })
         .on('enter', function(e) {
             if( _('#anna-o-video video') )

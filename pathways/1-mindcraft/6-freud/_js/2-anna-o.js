@@ -1,5 +1,5 @@
 
-Pathways.Scene.AnnaO = function(panel_height) {
+Pathways.Scene.AnnaO = function() {
 
     var positions = [
         { x: -57,   y: -107 },
@@ -13,7 +13,7 @@ Pathways.Scene.AnnaO = function(panel_height) {
     $('#anna-o .fragmented').each(function() {
         var $this = $(this);
 
-        var x = positions[counter].x;
+        var x = positions[counter].x,
             y = positions[counter].y;
 
         if( Modernizr.csstransforms3d )

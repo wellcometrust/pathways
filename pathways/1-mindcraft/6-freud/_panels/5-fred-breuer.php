@@ -1,5 +1,5 @@
 
-<div id="fred-breuer" class="panel fred-breuer">
+<div id="fred-breuer" class="panel fred-breuer" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img src="/_assets/img/spacer.png">
@@ -13,17 +13,5 @@
         <p>Anna O christened Freud and Breuer’s method ‘the talking cure’. Her crippling afflictions had grown from a mental distress she had been unable to confront, or even consciously recognise.</p>
         <p>Under her real name, Bertha Pappenheim, she became a pioneering social worker, author and campaigner for education and women’s rights. Her identity as Anna O was only revealed after her death.</p>
     </div>
-
-    <?php
-        $panel = array(
-            'links' => array(
-                array(
-                    'title'         => 'Bertha Pappenheim (1882)',
-                    'catalogue_url' => 'http://commons.wikimedia.org/wiki/File:Pappenheim_1882.jpg'
-                )
-            )
-        );
     
-        pattern('library_panel');
-    ?>
 </div>

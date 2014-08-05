@@ -1,5 +1,5 @@
 
-Pathways.Scene.GonadMan = function(panel_height) {
+Pathways.Scene.GonadMan = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#gonad-man',

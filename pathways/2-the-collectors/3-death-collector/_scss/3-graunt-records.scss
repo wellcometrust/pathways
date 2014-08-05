@@ -27,10 +27,6 @@
                 width:      50%;
 
                 @include transition(all 30s linear);
-
-                // &.active {
-                //     @include transform( translate(0, -800px) );
-                // }
             }
         }
 

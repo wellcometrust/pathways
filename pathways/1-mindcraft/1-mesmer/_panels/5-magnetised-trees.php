@@ -1,7 +1,7 @@
 
-<div id="magnetised-trees" class="panel tree" data-offset-height="350" data-scene="magnetised-trees">
+<div id="magnetised-trees" class="panel tree" data-scene="magnetised-trees" data-config='{ "offset_height": 350, "background": { "type": "animation", "preserve_ratio": false } }' data-offset-height="350">
 
-    <div class="bg-container" data-src="/_assets/video/tree-animation.m4v">
+    <div class="bg-container">
         <canvas id="canvas" width="1900" height="1050"></canvas>
         <img src="/_assets/animations/magnetised-trees/images/Bitmap1.jpg">
     </div>

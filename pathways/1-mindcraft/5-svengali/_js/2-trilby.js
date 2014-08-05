@@ -1,5 +1,5 @@
 
-Pathways.Scene.Trilby = function(panel_height) {
+Pathways.Scene.Trilby = function() {
 
     $('.comic-panel').css('opacity', 0);
 

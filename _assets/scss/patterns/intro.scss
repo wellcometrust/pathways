@@ -70,18 +70,12 @@
             margin-left:        1rem;
             vertical-align:     middle;
 
-            -webkit-transition: all 0.2s ease;
-               -moz-transition: all 0.2s ease;
-                -ms-transition: all 0.2s ease;
-                    transition: all 0.2s ease;
+            @include transition( all 0.2s ease );
         }
 
         &:hover {
             span {
-                -webkit-transform: translate(6px, 0);
-                   -moz-transform: translate(6px, 0);
-                    -ms-transform: translate(6px, 0);
-                        transform: translate(6px, 0);
+                @include transform( translate(6px, 0) );
             }
         }
     }
