@@ -1,5 +1,5 @@
 
-<div id="seized-and-destroyed" class="panel" data-scene="seized-and-destroyed" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": true } }' data-offset-height="500">
+<div id="seized-and-destroyed" class="panel" data-scene="seized-and-destroyed" data-config='{ "offset_height": 500, "background": { "type": "image", "preserve_ratio": true } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

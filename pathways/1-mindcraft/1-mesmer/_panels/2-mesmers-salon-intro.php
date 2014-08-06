@@ -1,5 +1,5 @@
 
-<div id="mesmers-salon-intro" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": true } }' data-offset-height="550">
+<div id="mesmers-salon-intro" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": true } }'>
 
     <div class="bg-container preserve-ratio">
         <img alt="" class="large-screen" src="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-2-black.jpg">

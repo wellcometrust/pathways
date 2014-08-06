@@ -1,5 +1,5 @@
 
-<div id="fakir" class="panel" data-offset-height="250" data-config='{ "offset_height": 250, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="fakir" class="panel" data-config='{ "offset_height": 250, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

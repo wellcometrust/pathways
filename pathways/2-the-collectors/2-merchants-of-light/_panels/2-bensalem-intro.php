@@ -1,5 +1,5 @@
 
-<div id="bensalem-intro" class="panel" data-config='{ "offset_height": 550, "background": "none" }'>
+<div id="bensalem-intro" class="panel" data-config='{ "offset_height": 150, "background": "none" }'>
 
     <div class="bg-container"></div>
     

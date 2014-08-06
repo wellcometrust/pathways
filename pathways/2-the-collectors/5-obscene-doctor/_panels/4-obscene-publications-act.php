@@ -1,5 +1,5 @@
 
-<div id="obscene-publications-act" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": true } }'>
+<div id="obscene-publications-act" class="panel" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": true } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

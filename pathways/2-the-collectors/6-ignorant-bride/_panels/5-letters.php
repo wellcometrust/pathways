@@ -1,5 +1,5 @@
 
-<div id="letters" class="panel" data-scene="letters" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="letters" class="panel" data-scene="letters" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <!-- <img alt="" src="/_assets/img/spacer.png"> -->

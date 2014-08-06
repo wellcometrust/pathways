@@ -13,7 +13,11 @@
 
         init: function() {
 
+            // Get the enhancement level
             this.level = this.getEnhancementLevel();
+
+            //
+            this.storePanelConfig();
 
             if( Pathways.supports_touch && Pathways.orientation == 'portrait' )
                 Pathways.panel_height = 550;
@@ -21,14 +25,18 @@
             // Progressive loading. Some things need to happen before window load
             if( Pathways.level > 3 ) {
                 Pathways.resizeAllTheThings();
-
-                w.addEventListener('resize', function() {
-                    Pathways.resizeAllTheThings();
-                });
             }
 
             w.addEventListener('resize', function() {
+
+                Pathways.panel_height = w.innerHeight < 550 ? 550 : w.innerHeight;
+                Pathways.level = this.getEnhancementLevel();
+                
                 Pathways.resizeSomeThings();
+
+                if( Pathways.level > 3 ) {
+                    Pathways.resizeAllTheThings();
+                }
             });
 
             // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
@@ -46,8 +54,6 @@
 
                 // For things that need resizing all the time, even on touch devices.
                 Pathways.resizeSomeThings();
-
-                Pathways.configurePanels();
 
                 Pathways.loadVideo();
             });
@@ -88,16 +94,47 @@
         return level;
     }
 
-    Pathways.configurePanels = function() {
-        var _panels = doc.querySelectorAll('[data-config]'),
+    Pathways.storePanelConfig = function() {
+        var _panels = doc.querySelectorAll('.panel'),
             length  = _panels.length;
 
-        this.panels = [];
+        this._panels = [];
+
+        this._panels['offset_height']   = [];
+        this._panels['preserve_ratio']  = [];
+        this._panels['video']           = [];
 
         for (var i = 0; i < length; i++) {
             var data    = _panels[i].getAttribute('data-config'),
                 ob2     = JSON.parse(data);
+
+            this._panels.push({ panel: _panels[i], config: ob2 });
+
+            if( ob2.offset_height )
+                this._panels['offset_height'].push(_panels[i]);
+
+            if( ob2.background && ob2.background.preserve_ratio )
+                this._panels['preserve_ratio'].push(_panels[i]);
         };
+    }
+
+    Pathways.setPanelHeights = function() {
+        // Set the heights of the panels to a minimum of the window height, or the height of the content.
+        // Use any offsets set on the panel to increase height where necessary.
+        
+        for( var i = 0; i < this._panels.length; i++ ) {
+            var _panel  = this._panels[i].panel,
+                config  = this._panels[i].config,
+                _bg     = _panel.querySelector('.bg-container'),
+                height  = _panel.offsetHeight,
+                offset  = (Pathways.supports_touch || !config.offset_height) ? 0 : config.offset_height;
+
+            if( height < Pathways.panel_height || offset ) {
+                _panel.style['height'] = Pathways.panel_height + parseInt(offset) + 'px';
+            }
+
+            _bg.style['height'] = Pathways.panel_height + 'px';
+        }
     }
 
     Pathways.loadComponents = function() {
@@ -177,51 +214,26 @@
         }
 
         var new_height      = w.innerWidth / Pathways.aspect_ratio,
-            p_height        = Pathways.supports_touch ? 550 : Pathways.panel_height,
-            _containers     = doc.querySelectorAll('.preserve-ratio');
+            panel_height    = Pathways.supports_touch ? 550 : Pathways.panel_height;
 
-        for (var i = 0; i < _containers.length; i++) {            
-            var _container  = _containers[i],
-                _img        = _container.querySelector('img'),
-                img_height  = _img.offsetHeight,
-                new_height  = w.innerWidth / Pathways.aspect_ratio,
+        for (var i = 0; i < this._panels['preserve_ratio'].length; i++) {
+            var _container  = this._panels['preserve_ratio'][i].querySelector('.bg-container'),
                 prefixes    = ['-ms-', '-moz-', '-webkit-', ''];
 
-            if( p_height > new_height ) {
+            if( panel_height > new_height ) {
                 for (var p = 0; p < prefixes.length; p++) {
-                    _container.style[prefixes[p]+'transform'] = 'translate(0, '+ ( (p_height - new_height) / 2 ) +'px)';
+                    _container.style[prefixes[p]+'transform'] = 'translate(0, '+ ( (panel_height - new_height) / 2 ) +'px)';
                 }
             }
-
-        }
-
+        };
     }
 
     Pathways.resizeAllTheThings = function() {
 
-        this.level = this.getEnhancementLevel();
-
-        Pathways.panel_height = w.innerHeight < 550 ? 550 : w.innerHeight;
-
         if( doc.querySelector('.start') )
             doc.querySelector('.start').style['height'] = Pathways.panel_height + 'px';
 
-        // Set the heights of the panels to a minimum of the window height, or the height of the content.
-        // Use any offsets set on the panel to increase height where necessary.
-        var _panels = doc.querySelectorAll('.panel');
-        
-        for( var i = 0; i < _panels.length; i++ ) {
-            var _panel = _panels[i],
-                _bg     = _panel.querySelector('.bg-container'),
-                height  = _panel.offsetHeight,
-                offset  = (Pathways.supports_touch || !_panel.getAttribute('data-offset-height')) ? 0 : _panel.getAttribute('data-offset-height');
-
-            if( height < Pathways.panel_height || offset ) {
-                _panel.style['height'] = Pathways.panel_height + parseInt(offset) + 'px';
-            }
-
-            _bg.style['height'] = Pathways.panel_height + 'px';
-        }
+        Pathways.setPanelHeights();
     }
 
     Pathways.init();

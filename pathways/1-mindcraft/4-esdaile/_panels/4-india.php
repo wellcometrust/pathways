@@ -1,5 +1,5 @@
 
-<div id="india" class="panel" data-scene="india" data-height-offset="200" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="india" class="panel" data-scene="india" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

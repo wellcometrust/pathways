@@ -1,5 +1,5 @@
 
-<div id="magnetised-trees" class="panel tree" data-scene="magnetised-trees" data-config='{ "offset_height": 350, "background": { "type": "animation", "preserve_ratio": false } }' data-offset-height="350">
+<div id="magnetised-trees" class="panel tree" data-scene="magnetised-trees" data-config='{ "offset_height": 350, "background": { "type": "animation", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <canvas id="canvas" width="1900" height="1050"></canvas>
