@@ -2,7 +2,7 @@
 <div id="thomas-wakley" class="panel thomas-wakley" data-offset-height="2800" data-config='{ "offset_height": 2800, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
 
     <div class="main-content center fixed">

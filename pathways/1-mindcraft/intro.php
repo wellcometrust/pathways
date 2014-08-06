@@ -13,7 +13,7 @@ include($docRoot.'/_includes/header.php');
         <div class="intro intro--mindcraft">
 
             <div class="bg-container">
-                <img src="/_assets/img/spacer.png">
+                <img alt="" src="/_assets/img/spacer.png">
             </div>
 
             <div class="logo"></div>
@@ -38,37 +38,37 @@ include($docRoot.'/_includes/header.php');
                             <li>
                                 <a class="section-link" href="1-mesmer/index.php">
                                     <span>A new force in nature</span>
-                                    <img src="/_assets/img/navigation/mesmer.jpg">
+                                    <img alt="" src="/_assets/img/navigation/mesmer.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a class="section-link" href="2-airloom/index.php">
                                     <span>A machine to control the mind</span>
-                                    <img src="/_assets/img/navigation/airloom.jpg">
+                                    <img alt="" src="/_assets/img/navigation/airloom.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a class="section-link" href="3-elliotson/index.php">
                                     <span>Who controls who?</span>
-                                    <img src="/_assets/img/navigation/elliotson.jpg">
+                                    <img alt="" src="/_assets/img/navigation/elliotson.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a class="section-link" href="4-esdaile/index.php">
                                     <span>Mind over matter</span>
-                                    <img src="/_assets/img/navigation/esdaile.jpg">
+                                    <img alt="" src="/_assets/img/navigation/esdaile.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a class="section-link" href="5-svengali/index.php">
                                     <span>Dark forces</span>
-                                    <img src="/_assets/img/navigation/svengali.jpg">
+                                    <img alt="" src="/_assets/img/navigation/svengali.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a class="section-link" href="6-freud/index.php">
                                     <span>Secrets of the mind revealed</span>
-                                    <img src="/_assets/img/navigation/freud.jpg">
+                                    <img alt="" src="/_assets/img/navigation/freud.jpg">
                                 </a>
                             </li>
                         </ul>

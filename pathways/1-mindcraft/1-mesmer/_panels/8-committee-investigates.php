@@ -6,7 +6,7 @@
             <source src="/_assets/video/committee-investigates.mp4">
             <source src="/_assets/video/committee-investigates.webm">
         </video>
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
 
     <div class="mute"></div>

@@ -2,7 +2,7 @@
 <div id="bompard" class="panel bompard" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
 
     <div class="main-content fixed">
@@ -20,43 +20,43 @@
 
                 <div class="comic-row clearfix">
                     <div class="comic-panel">
-                        <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-1.jpg">
+                        <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-1.jpg">
                     </div>
                     <div class="comic-panel">
-                        <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-2.jpg">
+                        <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-2.jpg">
                         <p class="panel-text">In 1889 Paris was gripped by a sensational murder. A wealthy businessman was lured by a young woman named Gabrielle Bompard to a rented apartment where her partner, a vicious con-man named Michel Eyraud, was lying in wait.</p>
                     </div>                                
                 </div>
 
                 <div class="comic-row clearfix">
                     <div class="comic-panel">
-                        <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-3.jpg">
+                        <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-3.jpg">
                         <p class="panel-text">The victim was strangled by a silk dressing gown cord, his body packed into a trunk and dumped off a remote mountainside.</p>
                     </div>
                     <div class="comic-panel">
-                        <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-4.jpg">
+                        <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-4.jpg">
                     </div>
                     <div class="comic-panel">
-                        <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-5.jpg">
+                        <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-5.jpg">
                     </div>
                 </div>
                 
                 <div class="comic-panel">
-                    <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-6.jpg">
+                    <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-6.jpg">
                     <p class="panel-text">Gabrielle eventually confessed to being at the scene of the crime, but insisted that Eyraud had put her under hypnosis. She had no memory of the fateful moment.</p>
                 </div>
 
                 <div class="comic-panel">
-                    <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-7.jpg">
+                    <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-7.jpg">
                     <p class="panel-text">It was the first time that hypnosis had been used as a defence in a court of law.</p>
                 </div>
 
                 <div class="comic-row clearfix">
                     <div class="comic-panel">
-                        <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-8.jpg">
+                        <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-8.jpg">
                     </div>
                     <div class="comic-panel">
-                        <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-9.jpg">
+                        <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-9.jpg">
                     </div>
 
                     <div class="comic-panel">
@@ -68,18 +68,18 @@
                 <div class="comic-row clearfix">
                     <div class="comic-column">
                         <div class="comic-panel">
-                            <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-10.jpg">
+                            <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-10.jpg">
                             <p class="panel-text"><cite>For the prosecution: Jules Quesnay de Beaurepair</cite> “If hypnotism explains the crime, if it is a way to deny free will…no criminal will be accountable for the blood he spills.”</p>
                         </div>
                         <div class="comic-panel" data-offset="-200">
-                            <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-11.jpg">
+                            <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-11.jpg">
 
                             <p class="panel-text"><cite>For the defence: Jules Liégeois</cite> “All conscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.”</p>
                         </div>
                     </div>
                     <div class="comic-column">
                         <div class="comic-panel" data-offset="200">
-                            <img src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-12.jpg">
+                            <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-12.jpg">
                             <p class="panel-text">Both defendants were found guilty. Eyraud was sentenced to death by guillotine. Gabrielle received a prison sentence of 21 years.</p>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
 <div id="office-2" class="panel" data-scene="office-2" data-offset="300" data-config='{ "offset_height": 300, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img src="/pathways/1-mindcraft/_assets/6-freud/freud-4.jpg">
+        <img alt="" src="/pathways/1-mindcraft/_assets/6-freud/freud-4.jpg">
     </div>
 
     <div class="main-content title align-center">

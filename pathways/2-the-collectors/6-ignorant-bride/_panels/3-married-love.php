@@ -2,13 +2,13 @@
 <div id="married-love" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
     
     <div class="main-content center fixed">
 
         <div class="inner">
-            <img src="/pathways/2-the-collectors/_assets/6-ignorant-bride/married-love.png">
+            <img alt="" src="/pathways/2-the-collectors/_assets/6-ignorant-bride/married-love.png">
         </div>
 
         <div class="inner">
@@ -20,7 +20,7 @@
 
 
     <div class="info-box with-text" data-component="gallery">
-        <img class="stub" src="/pathways/2-the-collectors/_assets/6-ignorant-bride/ticket-stub.jpg">
+        <img alt="" class="stub" src="/pathways/2-the-collectors/_assets/6-ignorant-bride/ticket-stub.jpg">
 
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>

@@ -2,7 +2,7 @@
 <div id="animal-magnetism" class="panel animal-magnetism" data-config='{ "offset_height": 350, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="350">
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
 
     <div class="main-content center">

@@ -2,7 +2,7 @@
 <div class="start start-mesmer">
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
     
     <div class="content">

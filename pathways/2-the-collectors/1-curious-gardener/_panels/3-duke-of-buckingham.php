@@ -2,7 +2,7 @@
 <div id="duke-of-buckingham" class="panel" data-scene="duke-of-buckingham" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="500">
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
 
         <div class="clip">
             <div class="pence"></div>

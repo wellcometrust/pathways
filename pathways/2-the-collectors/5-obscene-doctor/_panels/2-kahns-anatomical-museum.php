@@ -2,7 +2,7 @@
 <div id="kahns-anatomical-museum" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": true } }'>
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
     
     <div class="main-content center fixed">

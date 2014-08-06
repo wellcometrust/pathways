@@ -2,7 +2,7 @@
 <div id="india" class="panel" data-scene="india" data-height-offset="200" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
         <div class="boats"></div>
     </div>
 

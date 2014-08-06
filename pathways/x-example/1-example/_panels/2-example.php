@@ -2,7 +2,7 @@
 <div id="example" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": true } }' data-offset-height="550">
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
     
     <div class="main-content center">

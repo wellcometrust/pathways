@@ -2,7 +2,7 @@
 <div id="unique-artifacts" class="panel" data-component="crop-zoom" data-scene="unique-artifacts" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="500">
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
     
     <div class="main-content left">

@@ -78,7 +78,7 @@
 
                 <div class="quiz-start">
                     <div class="quiz-header-image">
-                        <img src="http://placekitten.com/250/250">
+                        <img alt="" src="http://placekitten.com/250/250">
                     </div>
 
                     <header class="quiz-start--header">
@@ -108,7 +108,7 @@
                     <div class="question"></div>
 
                     <div class="image">
-                        <img src="http://placekitten.com/500/295">
+                        <img alt="" src="http://placekitten.com/500/295">
                     </div>
 
                     <div class="answers"></div>

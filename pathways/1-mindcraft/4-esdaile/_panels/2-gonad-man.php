@@ -2,7 +2,7 @@
 <div id="gonad-man" class="panel" data-scene="gonad-man" data-offset-height="550" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img src="/pathways/1-mindcraft/_assets/4-esdaile/esdaile-2.jpg">
+        <img alt="" src="/pathways/1-mindcraft/_assets/4-esdaile/esdaile-2.jpg">
     </div>
 
     <!-- scroll content -->

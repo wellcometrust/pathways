@@ -2,7 +2,7 @@
 <div class="start start-merchants-of-light">
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
     
     <div class="content">

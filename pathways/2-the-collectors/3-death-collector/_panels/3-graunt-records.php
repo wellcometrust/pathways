@@ -2,8 +2,8 @@
 <div id="graunt-records" class="panel" data-scene="graunt-records" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
-        <img class="numbers" src="/pathways/2-the-collectors/_assets/3-death-collector/numbers.png">
+        <img alt="" src="/_assets/img/spacer.png">
+        <img alt="" class="numbers" src="/pathways/2-the-collectors/_assets/3-death-collector/numbers.png">
     </div>
     
     <div class="main-content left">

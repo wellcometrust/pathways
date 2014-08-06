@@ -2,7 +2,7 @@
 <div id="bills-of-mortality" class="panel" data-scene="bills-of-mortality" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="500">
 
     <div class="bg-container video" data-src="/_assets/video/bills-of-mortality.mp4">
-        <img src="/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-2.jpg">
+        <img alt="" src="/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-2.jpg">
     </div>
     
     <div class="main-content left">

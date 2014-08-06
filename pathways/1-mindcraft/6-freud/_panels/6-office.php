@@ -2,8 +2,8 @@
 <div id="office" class="panel" data-scene="office" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img class="small-screen" src="/pathways/1-mindcraft/_assets/6-freud/freud-4-crop.jpg">
-        <img class="large-screen" src="/pathways/1-mindcraft/_assets/6-freud/freud-4.jpg">
+        <img alt="" class="small-screen" src="/pathways/1-mindcraft/_assets/6-freud/freud-4-crop.jpg">
+        <img alt="" class="large-screen" src="/pathways/1-mindcraft/_assets/6-freud/freud-4.jpg">
     </div>
 
     <div class="black-strip" ></div>

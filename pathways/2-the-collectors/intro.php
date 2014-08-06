@@ -13,7 +13,7 @@ include($docRoot.'/_includes/header.php');
         <div class="intro intro--the-collectors">
 
             <div class="bg-container">
-                <img src="/_assets/img/spacer.png">
+                <img alt="" src="/_assets/img/spacer.png">
             </div>
 
             <div class="logo"></div>
@@ -39,7 +39,7 @@ include($docRoot.'/_includes/header.php');
                                 <a class="section-link" href="1-curious-gardener/index.php">
                                     <span>The Curious Gardener</span>
                                     <div class="image">
-                                        <img src="/_assets/img/spacer.png">
+                                        <img alt="" src="/_assets/img/spacer.png">
                                     </div>
                                 </a>
                             </li>
@@ -47,7 +47,7 @@ include($docRoot.'/_includes/header.php');
                                 <a class="section-link" href="2-merchants-of-light/index.php">
                                     <span>Merchants of Light</span>
                                     <div class="image">
-                                        <img src="/_assets/img/spacer.png">
+                                        <img alt="" src="/_assets/img/spacer.png">
                                     </div>
                                 </a>
                             </li>
@@ -55,7 +55,7 @@ include($docRoot.'/_includes/header.php');
                                 <a class="section-link" href="3-death-collector/index.php">
                                     <span>The Death Collector</span>
                                     <div class="image">
-                                        <img src="/_assets/img/spacer.png">
+                                        <img alt="" src="/_assets/img/spacer.png">
                                     </div>
                                 </a>
                             </li>
@@ -63,7 +63,7 @@ include($docRoot.'/_includes/header.php');
                                 <a class="section-link" href="4-unceasing-seeker/index.php">
                                     <span>The Unceasing Seeker</span>
                                     <div class="image">
-                                        <img src="/_assets/img/spacer.png">
+                                        <img alt="" src="/_assets/img/spacer.png">
                                     </div>
                                 </a>
                             </li>
@@ -71,7 +71,7 @@ include($docRoot.'/_includes/header.php');
                                 <a class="section-link" href="5-obscene-doctor/index.php">
                                     <span>The Obscene Doctor</span>
                                     <div class="image">
-                                        <img src="/_assets/img/spacer.png">
+                                        <img alt="" src="/_assets/img/spacer.png">
                                     </div>
                                 </a>
                             </li>
@@ -79,7 +79,7 @@ include($docRoot.'/_includes/header.php');
                                 <a class="section-link" href="6-ignorant-bride/index.php">
                                     <span>The Ignorant Bride</span>
                                     <div class="image">
-                                        <img src="/_assets/img/spacer.png">
+                                        <img alt="" src="/_assets/img/spacer.png">
                                     </div>
                                 </a>
                             </li>

@@ -2,7 +2,7 @@
 <div id="mesmers-salon" class="panel" data-component="crop-zoom" data-scene="mesmers-salon" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": true } }'>
 
     <div class="bg-container preserve-ratio">
-        <img src="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-2.jpg">
+        <img alt="" src="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-2.jpg">
     </div>
 
     <div class="crop-zoom">

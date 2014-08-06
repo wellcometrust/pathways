@@ -2,7 +2,7 @@
 <div id="fakir" class="panel" data-offset-height="250" data-config='{ "offset_height": 250, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img src="/_assets/img/spacer.png">
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
 
     <div class="main-content left">        
