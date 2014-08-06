@@ -60,89 +60,6 @@
         }
     }
 
-    .player-item {
-        margin-bottom: 1em;
-
-        img {
-            float: left;
-            margin-right: 0.8em;
-        }
-
-        .player-item--thumb {
-            float:  left;
-            width:  75px;
-            height: 110px;
-        }
-
-        .player-item--content {
-            padding-left: 80px;
-        }
-
-        .player-item--header {
-            margin-bottom: 0.6rem;
-
-            h1 {
-                font-size: 1rem;
-            }
-        }
-
-        .player-item--body {
-            color:      #64696A;
-            font-size:  0.9rem;
-
-            cite {
-                display:    block;
-            }
-        }
-
-        .player-item--footer {
-            border-top:     1px solid #ccc;
-            padding-top:    0.5em;
-
-            a {
-                color:              #8CC4D4;
-                font-size:          0.8rem;
-                text-decoration:    none;
-                text-transform:     uppercase;
-            }
-        }
-
-        &.book {
-            .player-item--thumb {
-                background: url('/_assets/img/icons/library-layer/book.svg') 50% 0% no-repeat;
-                background-size: 40%;
-            }
-        }
-
-        &.video {
-            .player-item--thumb {
-                background: url('/_assets/img/icons/library-layer/video.svg') 50% 0% no-repeat;
-                background-size: 40%;
-            }
-        }
-
-        &.audio {
-            .player-item--thumb {
-                background: url('/_assets/img/icons/library-layer/audio.svg') 50% 0% no-repeat;
-                background-size: 40%;
-            }
-        }
-
-        &.document {
-            .player-item--thumb {
-                background: url('/_assets/img/icons/library-layer/document.svg') 50% 0% no-repeat;
-                background-size: 40%;
-            }
-        }
-
-        &.image {
-            .player-item--thumb {
-                background: url('/_assets/img/icons/library-layer/image.svg') 50% 0% no-repeat;
-                background-size: 40%;
-            }
-        }
-    }
-
     .related-resources {
         background-color: #F9F9F9;
         padding-top: 2em;
@@ -180,6 +97,7 @@
         }
     }
 }
+
 
 @media screen and (min-width: 48em) {
     .library-layer {
@@ -223,29 +141,6 @@
 
             li:nth-child(odd) {
                 margin-right: 10%;
-            }
-        }
-
-        .player-item {
-            margin-bottom: 3em;
-
-            .player-item--thumb {
-                width:  150px;
-                height: 220px;
-            }
-
-            .player-item--content {
-                padding-left: 150px;
-            }
-
-            .player-item--header {
-                margin-bottom: 0.8em;
-            }
-
-            .player-item--body {
-                cite {
-                    margin-top: 1em;
-                }
             }
         }
 

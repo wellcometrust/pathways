@@ -1,0 +1,126 @@
+
+.tweet {
+    float:              left;
+    position:           relative;
+    color:              #fff;
+    background-color:   rgba(0,0,0,0.8);
+    border-radius:      5px;
+    max-width:          400px;
+    padding:            0.6em 1em;
+    margin:             2em 0;
+
+    .avatar {
+        position:               absolute;
+        top:                    -10px;
+        width:                  70px;
+        height:                 70px;
+        border-radius:          10px;
+        background-position:    0 0;
+        background-repeat:      no-repeat;
+        background-size:        100%;
+    }
+
+    .header {
+        border-bottom:  1px solid #777;
+        padding-bottom: 0.5em;
+
+        .time {
+            color:      #999;
+            @include    tablet-gothic;
+            font-size:  0.8rem;
+        }
+
+        .username {
+            @include    tablet-gothic;
+            font-size:  0.9rem;
+
+            span {
+                color: #999;
+            }
+        }
+    }
+
+    .body {
+        padding: 0.6em 0;
+    }
+
+    &.left {
+        float: left;
+
+        .header {
+            margin-left: 80px;
+        }
+    }
+
+    &.right {
+        float: right;
+
+        .avatar {
+            right: 0;
+        }
+
+        .header {
+            margin-right: 80px;
+        }
+
+    }
+
+    &.wakley {
+        .avatar {
+            background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/twitter-wakley.png);
+            
+        }
+    }
+
+    &.elliotson {
+        .avatar {
+            background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/twitter-elliotson.png);
+        }
+
+        
+    }
+
+    &.dickens {
+        .avatar {
+            background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/twitter-dickens.png);
+        }
+    }
+
+    &.martineau {
+        .avatar {
+            background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/twitter-martineau.png);
+        }
+    }
+}
+
+
+@media all and (min-width: 48rem) {
+    .tweet {
+        margin: 3em 0;
+
+        .avatar {
+            width:  90px;
+            height: 90px;
+        }
+
+        &.left {
+            .avatar {
+                left: -10px;
+            }
+
+            .body {
+                padding-left: 80px;
+            }
+        }
+
+        &.right {
+            .avatar {
+                right: -10px;
+            }
+
+            .body {
+                padding-right: 80px;
+            }
+        }
+    }
+}

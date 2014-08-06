@@ -24,12 +24,19 @@
 @import 'patterns/mute';
 @import 'patterns/panel-text';
 @import 'patterns/infinite-canvas';
+@import 'patterns/player-item';
+@import 'patterns/close';
+@import 'patterns/tweet';
+
+// Animations
+@import 'animations/info-box-animation-inner.scss';
+@import 'animations/info-box-animation-outer.scss';
+@import 'animations/nav-reveal.scss';
 
 // Panels
 @import 'panels';
 @import 'patterns/panel';
 @import 'patterns/teaser';
-@import 'patterns/past-twitter';
 
 // Modules
 @import 'patterns/intro';
