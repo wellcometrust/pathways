@@ -39,7 +39,7 @@ The `.bg-container` element is the most important, because that is what gets fix
 
 When text is involved in a panel, it uses an element with a class of `.main-content`. It is typically positioned absolutely, on the left and near the bottom of the panel so as to get a nice sweeping scrolling motion over the course of the panel. Positioning of the text is handled by modifier classes such as `.left`, `.right`, `.center`, `.title` and `.strip` depending on the type of content and where it should sit best. These classes will suit most of the time, but when they do not, then more classes can be added, or they can be overridden in a panel's specific CSS.
 
-If the content is longer than a panel would typically be, then use the modifier class `.fixed`. This prevents the content being positioned absolutely, and allows the code to calculate how tall a panel actually is so that it gets scrolled completely instead of cutting off early.
+If the content is longer than a panel would typically be, then use the modifier class `.fixed` on the `.main-content` element. This prevents the content being positioned absolutely, and allows the code to calculate how tall a panel actually is so that it gets scrolled completely instead of cutting off early.
 
 ### Scenes
 
