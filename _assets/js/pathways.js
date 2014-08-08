@@ -30,7 +30,7 @@
             w.addEventListener('resize', function() {
 
                 Pathways.panel_height = w.innerHeight < 550 ? 550 : w.innerHeight;
-                Pathways.level = this.getEnhancementLevel();
+                Pathways.level = Pathways.getEnhancementLevel();
                 
                 Pathways.resizeSomeThings();
 
