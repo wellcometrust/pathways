@@ -105,8 +105,12 @@
         this._panels['video']           = [];
 
         for (var i = 0; i < length; i++) {
-            var data    = _panels[i].getAttribute('data-config'),
-                ob2     = JSON.parse(data);
+            var data = _panels[i].getAttribute('data-config');
+
+            if( !data )
+                continue;
+
+            var ob2 = JSON.parse(data);
 
             this._panels.push({ panel: _panels[i], config: ob2 });
 

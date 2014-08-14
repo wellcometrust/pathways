@@ -3,8 +3,8 @@
 
     <div class="bg-container">
         <video controls="true" preload="none">
-            <source src="/_assets/video/chris-pain-relief.mp4">
-            <source src="/_assets/video/chris-pain-relief.webm">
+            <source src="http://wellcome-pathways.s3.amazonaws.com/chris-pain-relief.mp4">
+            <source src="http://wellcome-pathways.s3.amazonaws.com/chris-pain-relief.webm">
         </video>
         <img alt="" src="/_assets/img/spacer.png">
     </div>

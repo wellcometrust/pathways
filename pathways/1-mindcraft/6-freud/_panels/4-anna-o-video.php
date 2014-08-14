@@ -3,8 +3,8 @@
 
     <div class="bg-container">
         <video controls="true" preload="none">
-            <source src="/_assets/video/anna-o.mp4">
-            <source src="/_assets/video/anna-o.webm">
+            <source src="http://wellcome-pathways.s3.amazonaws.com/anna-o.mp4">
+            <source src="http://wellcome-pathways.s3.amazonaws.com/anna-o.webm">
         </video>
         <img alt="" src="/_assets/img/spacer.png">
     </div>

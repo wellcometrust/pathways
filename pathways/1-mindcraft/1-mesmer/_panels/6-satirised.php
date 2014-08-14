@@ -1,7 +1,7 @@
 
 <div id="satirised" class="panel news" data-scene="satirised" data-config='{ "offset_height": 350, "background": { "type": "video", "preserve_ratio": false } }'>
 
-    <div class="bg-container video" data-src="/_assets/video/hysteria.mp4 /_assets/video/hysteria.webm">
+    <div class="bg-container video" data-src="http://wellcome-pathways.s3.amazonaws.com/hysteria.mp4 http://wellcome-pathways.s3.amazonaws.com/hysteria.webm">
         <img alt="" src="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-5.jpg">
     </div>
     
