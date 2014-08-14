@@ -78,8 +78,8 @@
             /* Teaser */
             pattern('teaser');
             
-            /* Global Navigation */
-            pattern('global-navigation--the-collectors');
+            /* Navigation */
+            include '../patterns/navigation.php';
         ?>
         
     </main>

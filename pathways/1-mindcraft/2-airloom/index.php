@@ -74,8 +74,8 @@
             /* Teaser */
             pattern('teaser');
             
-            /* Global Navigation */
-            pattern('global_navigation');
+            /* Navigation */
+            include '../patterns/navigation.php';
         ?>
 
     </main>
