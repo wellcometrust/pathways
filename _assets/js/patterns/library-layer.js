@@ -32,7 +32,7 @@ Pathways.LibraryLayer = function() {
             playerHeight    = (window.innerHeight - 180);
 
         if( $this.data('embed') ) {
-            var embed_str   = '<div class="wellcomePlayer" data-uri="'+ $this.data('embed') +'" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:'+playerWidth+'px; height:'+playerHeight+'px; background-color: #000"></div>',
+            var embed_str   = '<div class="wellcomePlayer" data-no-load="true" data-config="/player-config.js" data-uri="'+ $this.data('embed') +'" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:'+playerWidth+'px; height:'+playerHeight+'px; background-color: #000"></div>',
                 $embed      = $(embed_str),
                 $overlay    = $('<div class="overlay"></div>'),
                 $close      = $('<div class="close"></div>');
@@ -52,7 +52,8 @@ Pathways.LibraryLayer = function() {
                 Pathways.Utils.positionCenter($embed);
                 $overlay.append($embed);
 
-                $overlay.append( $('<script id="embedWellcomePlayer" src="http://wellcomelibrary.org/spas/player/build/wellcomeplayer/js/embed.js"><\/script>') );
+                window.initPlayers($('.wellcomePlayer'));
+                //$overlay.append( $('<script id="embedWellcomePlayer" src="/wellcomeplayer/js/embed.js"><\/script>') );
                 $overlay.append( $close );
             }, 800);
 
@@ -73,6 +74,15 @@ Pathways.LibraryLayer = function() {
 
                 $embed.css('width', playerWidth );
                 $embed.css('height', playerHeight );
+            });
+
+            $(document).bind("onToggleFullScreen", function (event, isFullScreen) {
+                console.log('full screen: ' + isFullScreen);
+            });
+
+            // test currentViewUri event
+            $(document).bind("onCurrentViewUri", function (event, uri) {
+                console.log('download uri: ' + uri);
             });
 
             e.preventDefault();
