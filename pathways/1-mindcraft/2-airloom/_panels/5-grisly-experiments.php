@@ -32,7 +32,7 @@
 
     <script>
         var imageDB = {
-            location: 'airloom/gallery/',
+            location: 'galleries/aldinis-experiments/',
             images: [
                 {
                     image: 'L0001964',

@@ -13,6 +13,8 @@ Requirements:
 
 Once you've cloned the repo, navigate to the folder in terminal and run `npm install`
 
+When that's finished run `grunt && grunt watch` and leave the terminal tab open to start the task runner on the project.
+
 
 ### Pathways - A guide
 
@@ -85,4 +87,13 @@ To run an abitrary animation, just add the code to a scene event:
     })
 
 This makes up most of the JS for any given module's chapter. You can see get an idea of more advanced uses by perusing the code for other modules or checking out the ScrollMagic documentation.
+
+
+## Components
+
+### Galleries
+
+
+
+### Quizes
 

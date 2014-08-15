@@ -83,7 +83,7 @@
 
 .intro--mindcraft {
     .bg-container {
-        background-image: url(/_assets/img/intro/intro.jpg);
+        background-image: url($mindcraft-assets + '/intro.jpg');
     }
 }
 

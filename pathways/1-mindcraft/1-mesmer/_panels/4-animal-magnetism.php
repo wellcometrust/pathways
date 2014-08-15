@@ -37,7 +37,7 @@
 
     <script>
         var imageDB = {
-            location: 'mesmer/gallery/',
+            location: 'galleries/tools-of-mesmerism/',
             images: [
                 {
                     image: 'V0016530',

@@ -47,7 +47,9 @@ include($docRoot.'/_includes/header.php');
             </div><!-- .inner -->
         </div><!-- .credits -->
 
-        <?php pattern('global_navigation') ?>
+        <?php
+            include 'patterns/navigation.php';
+        ?>
         
     </main>
 
