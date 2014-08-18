@@ -20,28 +20,28 @@
         margin-bottom: 0.6rem;
 
         h1 {
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
     }
 
     .player-item--body {
-        color:      #64696A;
-        font-size:  0.9rem;
+        color: #64696A;
+        font-size:  0.8rem;
 
         cite {
-            display:    block;
+            display: block;
+            font-style: normal;
         }
     }
 
     .player-item--footer {
-        border-top:     1px solid #ccc;
-        padding-top:    0.5em;
+        padding-top: 0.5em;
 
         a {
-            color:              #8CC4D4;
-            font-size:          0.8rem;
-            text-decoration:    none;
-            text-transform:     uppercase;
+            color: #8CC4D4;
+            font-size: 0.8rem;
+            text-decoration: none;
+            text-transform: uppercase;
         }
     }
 
@@ -83,7 +83,8 @@
 
 @media screen and (min-width: 48em) {
     .player-item {
-        margin-bottom: 3em;
+        margin-bottom: 2em;
+        padding: 0 1rem;
 
         .player-item--thumb {
             width:  150px;

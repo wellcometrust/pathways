@@ -1,14 +1,15 @@
 
 Pathways.LibraryLayer = function() {
 
-    var $gap    = $('.library-layer .gap'),
-        height  = $gap.height(),
-        state   = 'closed';
+    var $gap                = $('.library-layer .gap'),
+        $further_reading    = $('.further-reading'),
+        height              = $gap.height(),
+        state               = 'closed';
 
     $gap.css({ 'height': 0, 'transition': 'height 0.4s ease' });
     $('.library-layer .button').html('open');
 
-    $('.library-layer').on('click', '.bar', function() {
+    $('.further-reading, .library-layer .controls').on('click', function() {
         if( state == 'closed' ) {
             $('.library-layer .gap').css('height', height);
             state = 'open';
@@ -26,7 +27,7 @@ Pathways.LibraryLayer = function() {
         return false;
     });
 
-    $gap.on('click', 'a', function(e) {
+    $further_reading.on('click', 'a', function(e) {
         var $this           = $(this),
             playerWidth     = (window.innerWidth - 180),
             playerHeight    = (window.innerHeight - 180);

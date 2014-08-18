@@ -1,0 +1,67 @@
+.related-item {
+    margin-bottom: 2em;
+    padding: 0 1rem 0 36px;
+
+    .related-item--header {
+        margin-bottom: 0.2em;
+
+        h1 {
+            font-size: 0.9rem;
+        }
+    }
+
+    .related-item--body {
+        color: #64696A;
+        font-size: 0.8rem;
+
+        cite {
+            font-style: normal;
+        }
+    }
+
+    .related-item--footer {
+        a {
+            color: #8CC4D4;
+            font-size: 0.8rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+    }
+
+    &.book {
+        background: url('/_assets/img/icons/library-layer/book.svg') 0 0 no-repeat;
+        background-size: 24px;
+    }
+
+    &.video {
+        background: url('/_assets/img/icons/library-layer/video.svg') 0 0 no-repeat;
+        background-size: 24px;
+    }
+
+    &.audio {
+        background: url('/_assets/img/icons/library-layer/audio.svg') 0 0 no-repeat;
+        background-size: 24px;
+    }
+
+    &.document {
+        background: url('/_assets/img/icons/library-layer/document.svg') 0 0 no-repeat;
+        background-size: 24px;
+    }
+
+    &.image {
+        background: url('/_assets/img/icons/library-layer/image.svg') 0 0 no-repeat;
+        background-size: 24px;
+    }
+}
+
+@media screen and (min-width: 48em) {
+    .related-item {
+        padding: 0 4rem 0 36px;
+
+        .related-item--header {
+            h1 {
+                font-size: 1rem;
+            }
+        }
+    }
+}

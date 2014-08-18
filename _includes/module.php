@@ -46,7 +46,7 @@
 
         <?php
             /* Teaser */
-            pattern('teaser');
+            pattern('fork');
 
             /* Library Layer */
             pattern('library_layer');

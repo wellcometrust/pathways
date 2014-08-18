@@ -2,8 +2,8 @@
 /** Library layer */
 
 .library-layer {
-    position:   relative;
-    @include    tablet-gothic;
+    position: relative;
+    @include tablet-gothic;
 
     h1 {
         @include tablet-gothic;
@@ -14,35 +14,18 @@
     }
 
     .inner {
-        max-width:  64em;
-        margin:     0 auto;
-        padding:    0 0.6rem;
+        margin: 0 auto;
+        padding: 0 0.8rem;
     }
 
-    .bar {
-        position:           relative;
-        background-color:   $blue;
-        padding:            1.2rem 0;
-        text-align:         center;
-        cursor:             pointer;
-        z-index:            20;
-
-        .show-more {
-            display: none;
-        }
-
-        span {
-            color:          #fff;
-            font-size:      0.9rem;
-            text-transform: uppercase;
-            cursor:         pointer;
-        }
+    .controls {
+        display: none;
     }
 
     .gap {
         background: #fff;
-        width:      100%;
-        overflow:   hidden;
+        width: 100%;
+        overflow: hidden;
     }
 
     .in-the-player {
@@ -53,8 +36,8 @@
             margin-bottom: 2em;
 
             h1 {
-                color:      #999;
-                font-size:  0.9rem;
+                color: #999;
+                font-size: 0.9rem;
                 text-transform: uppercase;
             }
         }
@@ -65,34 +48,13 @@
         padding-top: 2em;
 
         .related-resources--header {
-            border-bottom: 1px solid #999;
+            border-bottom: 1px solid #D3D3D3;
             margin-bottom: 1em;
 
             h1 {
-                color:      #999;
-                font-size:  0.9rem;
+                color: #030303;
+                font-size: 0.9rem;
                 text-transform: uppercase;
-            }
-        }
-    }
-
-    .related-item {
-        margin-bottom: 2em;
-
-        .related-item--header {
-            margin-bottom: 0.2em;
-
-            h1 {
-                font-size: 1rem;
-            }
-        }
-
-        .related-item--footer {
-            a {
-                color:              #8CC4D4;
-                font-size:          0.8rem;
-                text-decoration:    none;
-                text-transform:     uppercase;
             }
         }
     }
@@ -101,59 +63,60 @@
 
 @media screen and (min-width: 48em) {
     .library-layer {
-        .bar {
-            .show-more {
-                display:    block;
-                position:   absolute;
-                bottom:     -24px;
-                width:      100%;
 
-                span {
-                    display:            block;
-                    background-color:   $blue;
-                    font-size:          0.8rem;
-                    width:              100px;
-                    margin:             0 auto;
-                    padding:            0.6rem 0.2rem 0.2rem 0.2rem;
-                    border-radius:      0 0 4px 4px;
-                }
+        .controls {
+            display: block;
+            padding: 0.8rem;
+            cursor: pointer;
+
+            svg {
+                float: left;
+                margin-right: 0.3rem;
+            }
+
+            span {
+                line-height: 32px;
+                font-size: 0.8rem;
+                color: #808080;
+                padding-top: 2px;
             }
         }
 
         .in-the-player {
-            padding: 2em 0;
+            padding: 1rem 0 2em 0;
 
             .in-the-player--header {
-                border-bottom: 1px solid #999;
+                border-top: 1px solid #D3D3D3;
+                border-bottom: 1px solid #D3D3D3;
                 margin-bottom: 2rem;
+                padding: 1rem 0.8rem;
+                line-height: 1;
 
                 h1 {
-                    color:      #999;
-                    font-size:  0.9rem;
-                    text-transform: uppercase;
+                    color: $blue;
                 }
             }
 
             li {
                 float: left;
-                width: 45%;
-            }
-
-            li:nth-child(odd) {
-                margin-right: 10%;
+                width: 33.3%
             }
         }
 
         .related-resources {
-            padding: 2em 0;
+            padding: 0 0 2em 0;
+
+            .related-resources--header {
+                padding: 1rem 0.8rem;
+
+                h1 {
+                    line-height: 1;
+                }
+            }
             
             li {
                 float: left;
-                width: 45%;
-            }
-
-            li:nth-child(odd) {
-                margin-right: 10%;
+                width: 33.3%;
             }
         }
     }
