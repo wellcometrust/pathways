@@ -3,7 +3,7 @@ Pathways.Scene.JohnTradescant = function() {
 
     $('.sliding-panel').css({ 'opacity': 0 });
 
-    var translate_array = [-100, 100, -100, 100, -100, 100],
+    var translate_array = [-100, 100, -100, 100, -100, 100, -100, 100, -100, 100, -100, 100],
         count           = 0;
 
     $('.sliding-panel').each(function() {
