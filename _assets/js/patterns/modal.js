@@ -22,7 +22,7 @@ function Modal(elm) {
             $image_crop = $(img).css('opacity', 0),
             $close      = $('<div class="close"></div>');
 
-        img.src = "http://placekitten.com/640/800";
+        img.src = $elm.attr('data-image');
 
         img.onload = function() {
 
