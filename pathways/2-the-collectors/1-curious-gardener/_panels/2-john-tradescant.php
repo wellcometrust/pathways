@@ -47,7 +47,7 @@
         </div>
 
         <div class="inner">
-            <p>When he joined the Duke of Buckingham’s staff in his fifties (in 1624), Tradescant’s position as gardener to the Lord Admiral of England enabled him to acquire more. Tradescant called on British ships trading around the globe to ‘furnishe His Grace With All Maner of Beasts & Fowels & Birds Alyve’ and especially requested the biggest, greatest or strangest specimens.</p>
+            <p>When he joined the Duke of Buckingham’s staff in his fifties (in 1624), Tradescant’s position as gardener to the Lord Admiral of England enabled him to acquire more. Tradescant called on British ships trading around the globe to ‘furnishe His Grace With All Maner of Beasts &amp; Fowels &amp; Birds Alyve’ and especially requested the biggest, greatest or strangest specimens.</p>
         </div>
 
         <div class="inner">
