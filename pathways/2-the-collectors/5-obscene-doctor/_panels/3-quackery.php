@@ -1,5 +1,5 @@
 
-<div id="quackery" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": true } }'>
+<div id="quackery" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
@@ -31,31 +31,41 @@
         </div>
     </div>
 
+
     <script>
         var imageDB = {
-            location: 'mesmer/gallery/',
+            location: 'galleries/quacks-of-the-18th-century/',
             images: [
                 {
-                    image: 'V0016530',
+                    image: 'L0018661a',
                 },
                 {
-                    image: 'L0023349',
+                    image: 'M0013726',
                 },
                 {
-                    image: 'L0023350',
+                    image: 'V0007356a',
                 },
                 {
-                    image: 'L0023351',
+                    image: 'V0010929a',
                 },
                 {
-                    image: 'L0023352',
+                    image: 'V0011005',
                 },
                 {
-                    image: 'M0006352',
+                    image: 'V0016170',
                 },
                 {
-                    image: 'V0011096',
+                    image: 'V0016171',
                 },
+                {
+                    image: 'V0016188a',
+                },
+                {
+                    image: 'V0016215',
+                },
+                {
+                    image: 'V0016230a',
+                }
             ]
         }
     </script>

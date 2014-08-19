@@ -1,5 +1,5 @@
 
-<div id="obscene-publications-act" class="panel" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": true } }'>
+<div id="obscene-publications-act" class="panel" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
@@ -33,29 +33,38 @@
 
     <script>
         var imageDB = {
-            location: 'mesmer/gallery/',
+            location: 'galleries/indecent-sexual-images/',
             images: [
                 {
-                    image: 'V0016530',
+                    image: 'L0038201',
                 },
                 {
-                    image: 'L0023349',
+                    image: 'L0038202',
                 },
                 {
-                    image: 'L0023350',
+                    image: 'L0038205',
                 },
                 {
-                    image: 'L0023351',
+                    image: 'L0038206',
                 },
                 {
-                    image: 'L0023352',
+                    image: 'L0038209',
                 },
                 {
-                    image: 'M0006352',
+                    image: 'L0060656',
                 },
                 {
-                    image: 'V0011096',
+                    image: 'L0074250',
                 },
+                {
+                    image: 'V0009962',
+                },
+                {
+                    image: 'V0009971',
+                },
+                {
+                    image: 'V0010253',
+                }
             ]
         }
     </script>

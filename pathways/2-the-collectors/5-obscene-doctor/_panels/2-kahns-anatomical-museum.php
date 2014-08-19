@@ -1,5 +1,5 @@
 
-<div id="kahns-anatomical-museum" class="panel" data-config='{ "offset_height": 2400, "background": { "type": "image", "preserve_ratio": true } }'>
+<div id="kahns-anatomical-museum" class="panel" data-config='{ "offset_height": 2700, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
