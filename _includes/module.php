@@ -15,8 +15,9 @@
                 $d          = dir('_panels/');
                 $file_array = [];
 
+                // Process the files unless they are a hidden file (starts with a .) a directory command (. and ..) or the start panel
                 while (false !== ($file = $d->read())) {
-                    if( $file != '.' && $file != '..' && !preg_match('/start/', $file) )
+                    if( $file[0] != '.' && !preg_match('/start/', $file) )
                         $file_array[] = $file;
                 }
 
