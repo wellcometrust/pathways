@@ -26,8 +26,8 @@
 
                 <div>
                     <ul class="player-items clearfix">
-                        <?php if( isset($layer['player']) ): ?>
-                            <?php foreach( $layer['player'] as $data ): ?>
+                        <?php if( isset($layer['See_in_the_Wellcome_Library']) ): ?>
+                            <?php foreach( $layer['See_in_the_Wellcome_Library'] as $data ): ?>
                                 <li>
                                     <div class="player-item clearfix<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>">
                                         <div class="player-item--thumb"></div>
@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <?php if( isset($layer['related']) ): ?>
+        <?php if( isset($layer['See_Elsewhere']) ): ?>
 
         <div class="related-resources">
             
@@ -68,7 +68,7 @@
                 <div>
                     <ul class="related-items clearfix">
 
-                        <?php foreach ($layer['related'] as $data): ?>
+                        <?php foreach ($layer['See_Elsewhere'] as $data): ?>
                             <li>
                                 <div class="related-item<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>">
                                     <header class="related-item--header">

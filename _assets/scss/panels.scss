@@ -231,21 +231,13 @@
     .bg-container {
         background-image: url(/pathways/1-mindcraft/_assets/2-airloom/airloom-2.jpg);
     }
-    
-}
-
-#grisly-experiments {
-
-    .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/2-airloom/airloom-2.jpg);
-    }
 
     .info-box {
         position:   absolute;
         top:        60px;
         right:      90px;
     }
-
+    
 }
 
 .start-elliotson {
@@ -541,12 +533,7 @@
             background:         url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-4-boat.png) 0 0 no-repeat;
             background-size:    100%;
 
-            @include transform( translate(20px, 0) );
-
-            -webkit-transition: -webkit-transform 30s linear;
-               -moz-transition:    -moz-transform 30s linear;
-                -ms-transition:     -ms-transform 30s linear;
-                    transition:         transform 30s linear;
+            @include transform( translate(-600px, 0) );
         }
     }
 
@@ -1138,12 +1125,17 @@
 @media all and (min-width: 48rem) {
     #anna-o {
 
+        .main-content {
+            padding-left: 48px;
+        }
+
         header {
             margin: 8rem 0 6rem 0;
         }
 
         h1 {
             color: #030303;
+            white-space: nowrap;
         }
 
         p {
@@ -1151,7 +1143,7 @@
         }
 
         p + p {
-            margin-top: 12rem;
+            margin-top: 8rem;
         }
     }
 
@@ -1181,16 +1173,6 @@
     }
 }
 
-
-#fred-breuer-intro {
-    display: none;
-}
-
-.no-touch {
-    #fred-breuer-intro {
-        display: block;
-    }
-}
 
 #fred-breuer {
 
@@ -1274,11 +1256,11 @@
         img {
             @include transform( scale(1.6, 1.6) );
             @include transform-origin( 0 0 );
-            @include transition( all 14s ease );
+            // @include transition( all 14s ease );
         }
 
         &.active img {
-            @include transform( translate(-80%, -40%) scale(1.8, 1.8) );
+            // @include transform( translate(-80%, -40%) scale(1.8, 1.8) );
         }
 
         header {

@@ -23,7 +23,7 @@ include($docRoot.'/_includes/header.php');
                     <h1>Mindcraft</h1>
                 </header>
 
-                <p class="intro-body">A century of madness, murder and mental healing.</p>
+                <p class="intro-body">A century of madness, murder and mental healing</p>
 
                 <a href="1-mesmer/index.php" class="intro-button">
                     Start your journey
@@ -37,37 +37,37 @@ include($docRoot.'/_includes/header.php');
                         <ul class="clearfix">
                             <li>
                                 <a class="section-link" href="1-mesmer/index.php">
-                                    <span>A new force in nature</span>
+                                    <span>1. A new force in nature</span>
                                     <img alt="" src="_assets/navigation/mesmer.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a class="section-link" href="2-airloom/index.php">
-                                    <span>A machine to control the mind</span>
+                                    <span>2. A machine to control the mind</span>
                                     <img alt="" src="_assets/navigation/airloom.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a class="section-link" href="3-elliotson/index.php">
-                                    <span>Who controls who?</span>
+                                    <span>3. Who controls who?</span>
                                     <img alt="" src="_assets/navigation/elliotson.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a class="section-link" href="4-esdaile/index.php">
-                                    <span>Mind over matter</span>
+                                    <span>4. Mind over matter</span>
                                     <img alt="" src="_assets/navigation/esdaile.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a class="section-link" href="5-svengali/index.php">
-                                    <span>Dark forces</span>
+                                    <span>5. Dark forces</span>
                                     <img alt="" src="_assets/navigation/svengali.jpg">
                                 </a>
                             </li>
                             <li>
                                 <a class="section-link" href="6-freud/index.php">
-                                    <span>Secrets of the mind revealed</span>
+                                    <span>6. Secrets of the mind revealed</span>
                                     <img alt="" src="_assets/navigation/freud.jpg">
                                 </a>
                             </li>

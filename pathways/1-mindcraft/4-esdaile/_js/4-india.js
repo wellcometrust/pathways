@@ -15,10 +15,15 @@ Pathways.Scene.India = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#india',
-            duration:       Pathways.panel_height
+            duration:       Pathways.panel_height + (Pathways.panel_height / 2)
         })
         .on('enter', function() {
-            $boats.css('transform', 'translate(320px,0)');
+            $boats.css('transition', 'transform 120s linear');
+            $boats.css('transform', 'translate('+window.innerWidth+'px,0)');
+        })
+        .on('leave', function() {
+            $boats.css('transition', 'none');
+            $boats.css('transform', 'translate(-600px,0)');
         })
 
     Pathways.Scenes.push(scene);

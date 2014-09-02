@@ -26,12 +26,7 @@
             background:         url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-4-boat.png) 0 0 no-repeat;
             background-size:    100%;
 
-            @include transform( translate(20px, 0) );
-
-            -webkit-transition: -webkit-transform 30s linear;
-               -moz-transition:    -moz-transform 30s linear;
-                -ms-transition:     -ms-transform 30s linear;
-                    transition:         transform 30s linear;
+            @include transform( translate(-600px, 0) );
         }
     }
 

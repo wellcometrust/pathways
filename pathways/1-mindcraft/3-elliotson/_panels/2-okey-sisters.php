@@ -41,7 +41,7 @@
 
     <script>
         var imageDB = {
-            location: 'galleries/hypnotised-women',
+            location: 'galleries/hypnotised-women/',
             images: [
                 {
                     image: 'L0000476',

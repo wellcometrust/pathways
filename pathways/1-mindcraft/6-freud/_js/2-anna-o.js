@@ -30,7 +30,7 @@ Pathways.Scene.AnnaO = function() {
         var scene = new ScrollScene({
                 triggerElement: '#anna-o',
                 triggerHook:    'top',
-                duration:       $('#anna-o').height() - 420,
+                duration:       $('#anna-o').height() - 320,
                 offset:         50,
             })
             .setTween(tween);

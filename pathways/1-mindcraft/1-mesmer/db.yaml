@@ -12,64 +12,60 @@
 
 
 # Info Panels
+#
+# An info panel example:
+# -   title: Title
+#     see_in_Wellcome_Library_url: http://thecambridgeroom.files.wordpress.com/2011/12/18th.jpg
+#     download_hi_res_url: http://thecambridgeroom.files.wordpress.com/2011/12/18th.jpg
+#     external_url: http://thecambridgeroom.files.wordpress.com/2011/12/18th.jpg
 
 info_panels:
 
     mesmers-salon:
-        -   title: 'Mesmeric therapy'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1202566~S13'
-            download_url: ''
-            images_url: 'http://wellcomeimages.org/indexplus/image/L0014796.html'
+
+        -   title: Mesmeric therapy
+            see_in_Wellcome_Library_url: http://catalogue.wellcomelibrary.org/record=b1202566
+            download_hi_res_url: http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2
 
     animal-magnetism:
-        -   title: 'A goat-headed man caresses a sleeping ewe-headed woman; satirizing the notion of animal magnetism and its application by physicians'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1175728'
-            download_url: ''
-            images_url: 'http://wellcomeimages.org/indexplus/image/V0011934.html'
+
+        -   title: A goat-headed man caresses a sleeping ewe-headed woman; satirizing the notion of animal magnetism and its application by physicians
+            see_in_Wellcome_Library_url: http://catalogue.wellcomelibrary.org/record=b1175728          
+            download_hi_res_url: http://wellcomelibrary.org/actual/b11757280/0/ba2ccaf1-308f-4afb-934f-448cc71cf50b/jp2
 
     magnetised-trees:
-        -   title: 'Patients mesmerised by rods linked to the tree'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1070780'
-            download_url: ''
-            images_url: 'http://wellcomeimages.org/indexplus/image/L0016301.html'
+
+        -   title: Patients mesmerised by rods linked to the tree
+            see_in_Wellcome_Library_url: http://catalogue.wellcomelibrary.org/record=b1070780            
+            download_hi_res_url: http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2
 
     satirised:
-        -   title: '18th century marbling studio'
-            catalogue_url: ''
-            download_url: ''
-            images_url: ''
-            external_url: 'http://thecambridgeroom.files.wordpress.com/2011/12/18th.jpg'
 
-        -   title: 'Caricature: A goat-headed man caresses a sleeping ewe-headed woman'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1175728'
-            download_url: ''
-            images_url: 'http://wellcomeimages.org/indexplus/image/V0011934.html'
+        -   title: 18th century marbling studio
+            external_url: http://thecambridgeroom.files.wordpress.com/2011/12/18th.jpg
 
-        -   title: 'Caricature: Animal magnetism, ‘Our faculties are related’'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1059930'
-            download_url: ''
-            images_url: 'http://wellcomeimages.org/indexplus/image/L0000477.html'
+        -   title: "Caricature: A goat-headed man caresses a sleeping ewe-headed woman"
+            see_in_Wellcome_Library_url: http://catalogue.wellcomelibrary.org/record=b1175728
+            download_hi_res_url: http://wellcomelibrary.org/actual/b11757280/0/ba2ccaf1-308f-4afb-934f-448cc71cf50b/jp2   
 
-        -   title: 'Caricature: The doctor hypnotises the woman in the guise of Bottom from ‘Midsummer Night’s Dream’'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1059930'
-            download_url: ''
-            images_url: 'http://wellcomeimages.org/indexplus/image/L0000477EA.html'
+        -   title: "Caricature: Animal magnetism, ‘Our faculties are related’"
+            see_in_Wellcome_Library_url: http://catalogue.wellcomelibrary.org/record=b1059930
+            download_hi_res_url: http://wellcomelibrary.org/actual/b21269440/0/a587c69d-f418-44c5-a014-efb4d74731a3/jp2
 
-        -   title: 'Caricature: The effects of magnetism&hellip; animal'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1291063'
-            download_url: ''
-            images_url: 'http://wellcomeimages.org/indexplus/image/L0000475.html'
+        -   title: "Caricature: The doctor hypnotises the woman in the guise of Bottom from ‘Midsummer Night’s Dream’"
+            see_in_Wellcome_Library_url: http://catalogue.wellcomelibrary.org/record=b1059930
+            download_hi_res_url: http://wellcomelibrary.org/actual/b21269452/0/e1a54fd8-58f4-4fb3-8b13-5af97f1dca4c/jp2                   
 
-    committee-investigates:
-        -   title: 'Title page of the Report of Benjamin Franklin Commission on animal magnetism'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1502897~S12'
-            download_url: 'http://wellcomelibrary.org/actual/b20595244/0/0a982e34-0666-425c-a810-4f11b27d58ac/jp2'
-            images_url: 'http://wellcomeimages.org/indexplus/image/L0016301.html'
+        -   title: "Caricature: The effects of magnetism&hellip; animal"
+            see_in_Wellcome_Library_url: http://catalogue.wellcomelibrary.org/record=b1291063
+            download__hi_res_url: http://wellcomelibrary.org/actual/b21269476/0/b6512dda-32a4-46af-adf4-f58fea62e514/jp2   
+
 
 
 
 # Library Layer
 #
+# 
 # A resource example:
 # -   type: book
 #     thumb: image.jpg
@@ -83,13 +79,16 @@ info_panels:
 # Links to player resources are in the following format: http://wellcomelibrary.org/package/b20595244
 # If copied from the site, it has 'player' in the link, which is wrong. Must be 'package'. And it doesn't need any cruft after the id.
 
+
+
 library_layer:
 
-    player:
+    See_in_the_Wellcome_Library:
+
         -   type: book
             title: The Commission’s report on Animal Magnetism
             author: Benjamin Franklin
-            date: 1785
+            date: 1785           
             link: http://wellcomelibrary.org/package/b20595244
 
         -   type: book
@@ -102,24 +101,30 @@ library_layer:
             title: Animal Magnetism explained by its professors
             author: George Toynbee
             date: 1839
+            link: http://wellcomelibrary.org/package/b20458332
 
         -   type: document
             title: Franz Anton Mesmer
             author: Mesmer’s deeds agreeing to teach animal magnetism
             date: 1783
+            link:
 
-    related:
+    See_Elsewhere:
+
         -   type: book
-            title: 'Mesmer and animal magnetism: a chapter in the history of medicine'
+            title: "Mesmer and animal magnetism: a chapter in the history of medicine"
             author: Frank A. Pattie
             date: 1994
-
-        -   type:   book
-            title:  Mesmerism and the End of the Enlightenment in France
-            author: Robert Darnton
-            date:   2009
+            link:
 
         -   type: book
-            title: 'Mental Healers: Mesmer, Eddy, Freud'
+            title: Mesmerism and the End of the Enlightenment in France
+            author: Robert Darnton
+            date: 2009
+            link: http://bookshop.blackwell.co.uk/jsp/id/MESMERISM_AND_THE_END_OF_THE_ENLIGHTENMENT_IN_FRANCE/E9780674030190
+
+        -   type: book
+            title: "Mental Healers: Mesmer, Eddy, Freud"          
             author: Stefan Zweig
             date: 2012
+            link: http://bookshop.blackwell.co.uk/jsp/id/Mental_Healers_Mesmer_Eddy_and_Freud/9781906548940

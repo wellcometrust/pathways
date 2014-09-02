@@ -11,12 +11,17 @@
 @media all and (min-width: 48rem) {
     #anna-o {
 
+        .main-content {
+            padding-left: 48px;
+        }
+
         header {
             margin: 8rem 0 6rem 0;
         }
 
         h1 {
             color: #030303;
+            white-space: nowrap;
         }
 
         p {
@@ -24,7 +29,7 @@
         }
 
         p + p {
-            margin-top: 12rem;
+            margin-top: 8rem;
         }
     }
 

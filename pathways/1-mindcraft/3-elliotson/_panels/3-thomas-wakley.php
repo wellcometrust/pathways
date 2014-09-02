@@ -18,7 +18,7 @@
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
-                        <div class="username">Thomas Wakley <span>@bestdebunking</span></div>
+                        <div class="username">Thomas Wakley <span>@scourgeofquackery</span></div>
                     </div>
                     <div class="body">
                         “Careful investigation and a consideration of all experiments have convinced us that the phenomena are not real, and that animal magnetism is a delusion”
@@ -29,7 +29,7 @@
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
-                        <div class="username">John Elliotson <span>@im4mesmerism</span></div>
+                        <div class="username">John Elliotson <span>@magneticfluids</span></div>
                     </div>
                     <div class="body">
                         “Mr. Wakley fulminated forth what he called experiments on a subject of which he is as ignorant as of Latin, French or mathematics”
@@ -40,7 +40,7 @@
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
-                        <div class="username">Thomas Wakley <span>@bestdebunking</span></div>
+                        <div class="username">Thomas Wakley <span>@scourgeofquackery</span></div>
                     </div>
                     <div class="body">
                         “Animal magnetism is one of the completest delusions the human mind ever entertained”
@@ -51,7 +51,7 @@
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
-                        <div class="username">John Elliotson <span>@im4mesmerism</span></div>
+                        <div class="username">John Elliotson <span>@magneticfluids</span></div>
                     </div>
                     <div class="body">
                         “These phenomena, I know to be real, to be independent of imagination or any other cause to which other persons are pleased to ascribe them”
@@ -62,7 +62,7 @@
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
-                        <div class="username">Thomas Wakley <span>@bestdebunking</span></div>
+                        <div class="username">Thomas Wakley <span>@scourgeofquackery</span></div>
                     </div>
                     <div class="body">
                         “The medical schools with which mesmerism is connected must be speedily and irreparably ruined, unless the moral quackery is at once put down by the governors”
@@ -73,7 +73,7 @@
                     <div class="avatar"></div>
                     <div class="header">
                         <span class="time">12 July 1838</span>
-                        <div class="username">John Elliotson <span>@im4mesmerism</span></div>
+                        <div class="username">John Elliotson <span>@magneticfluids</span></div>
                     </div>
                     <div class="body">
                         “As a gentleman in the first place, and a physician in the next, I feel myself compelled at once to resign my office of Professor of the Principles and Practice of Medicine”

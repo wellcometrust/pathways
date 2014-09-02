@@ -24,11 +24,11 @@
         img {
             @include transform( scale(1.6, 1.6) );
             @include transform-origin( 0 0 );
-            @include transition( all 14s ease );
+            // @include transition( all 14s ease );
         }
 
         &.active img {
-            @include transform( translate(-80%, -40%) scale(1.8, 1.8) );
+            // @include transform( translate(-80%, -40%) scale(1.8, 1.8) );
         }
 
         header {

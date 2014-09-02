@@ -21,6 +21,11 @@ function _(str) { return document.querySelector(str); }
         else {
             $nav.css('transform', 'translate(0, 0)');
             state = 'open';
+
+            // add an event listener on scroll to close the nav if open.
+            $(window).one('scroll', function() {
+                $nav_handle.trigger('click');
+            });
         }
     });
 
@@ -158,7 +163,7 @@ Pathways.LoadScenes = function() {
         var $start      = $('.start'),
             $content    = $start.find('.content').first(),
             scrollY     = 0,
-            unit        = 1 / (Pathways.panel_height / 2),
+            unit        = 0.5 / (Pathways.panel_height / 2),
             hidden      = false;
 
         window.addEventListener('scroll', parallaxStart, false);

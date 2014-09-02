@@ -12,10 +12,9 @@
             <?php foreach ($panel['links'] as $link): ?>
             <li>
                 <span><?php echo $link['title'] ?></span>
-                <?php if( isset( $link['catalogue_url'] ) ):    ?><a href="<?php echo $link['catalogue_url'] ?>" rel="external">catalogue</a><?php endif ?>
-                <?php if( isset( $link['images_url'] ) ):       ?><a href="<?php echo $link['images_url'] ?>" rel="external">images</a><?php       endif ?>
-                <?php if( isset( $link['download_url'] ) ):     ?><a href="<?php echo $link['download_url'] ?>" rel="external">download</a><?php   endif ?>
-                <?php if( isset( $link['external_url'] ) ):     ?><a href="<?php echo $link['external_url'] ?>" rel="external">external</a><?php   endif ?>
+                <?php if( isset( $link['see_in_Wellcome_Library_url'] ) ):  ?><a href="<?php echo $link['see_in_Wellcome_Library_url'] ?>" rel="external">See in Wellcome Library</a><?php       endif ?>
+                <?php if( isset( $link['download_hi_res_url'] ) ):          ?><a href="<?php echo $link['download_hi_res_url'] ?>" rel="external">Download Hi-Res Image</a><?php   endif ?>
+                <?php if( isset( $link['external_url'] ) ):                 ?><a href="<?php echo $link['external_url'] ?>" rel="external">External</a><?php   endif ?>
             </li>
             <?php endforeach ?>
             <?php else: ?>

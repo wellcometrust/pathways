@@ -5,7 +5,21 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         concat: {
-            dist: {
+            libs: {
+                src: [
+                    '_assets/js/lib/jquery-2.1.1.min.js',
+                    '_assets/js/lib/hammer.min.js',
+                    '_assets/js/lib/greensock/TweenMax.min.js',
+                    '_assets/js/lib/jquery.scrollmagic.js',
+
+                    '_assets/js/lib/createjs/easeljs-0.7.1.min.js',
+                    '_assets/js/lib/createjs/tweenjs-0.5.1.min.js',
+                    '_assets/js/lib/createjs/movieclip-0.7.1.min.js',
+                    '_assets/js/lib/createjs/preloadjs-0.4.1.min.js',
+                ],
+                dest: '_assets/build/js/libs.js',
+            },
+            app_files: {
                 src: [
                     '_assets/js/pathways.js', // Start with the Pathways Core file.
                     '_assets/js/main.js', // Then the main file.
@@ -21,7 +35,11 @@ module.exports = function(grunt) {
         },
 
         uglify: {
-            build: {
+            libs: {
+                src: '_assets/build/js/libs.js',
+                dest: '_assets/build/js/libs.min.js'
+            },
+            app_files: {
                 src: '_assets/build/js/production.js',
                 dest: '_assets/build/js/production.min.js'
             }
@@ -71,6 +89,6 @@ module.exports = function(grunt) {
     grunt.registerTask('css', ['concat', 'sass']);
     grunt.registerTask('js', ['concat', 'uglify']);
 
-    grunt.registerTask('default', ['css']);
+    grunt.registerTask('default', ['css', 'js']);
 
 };

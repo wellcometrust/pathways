@@ -10,7 +10,7 @@
         <img alt="" class="fragmented" src="/pathways/1-mindcraft/_assets/6-freud/freud-2.png">
     </div>
 
-    <div class="main-content left">
+    <div class="main-content left fixed">
         <header>
             <h1>The curious case of Anna&nbsp;O</h1>
         </header>

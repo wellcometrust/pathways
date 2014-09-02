@@ -181,11 +181,11 @@
                     video.appendChild(source);
                 });
                 
-                video.loop  = true;
+                video.loop      = true;
+                video.controls  = true;
 
                 if( Pathways.level < 4 ) {
-                    video.controls  = true;
-                    video.preload   = 'none';
+                    video.preload = 'none';
                 }
 
                 _video.innerHTML = '';
@@ -207,7 +207,6 @@
                     _video = _panel.querySelector('video');
 
                 _video.setAttribute('preload', 'true');
-                _video.removeAttribute('controls');
             };
         }
     }

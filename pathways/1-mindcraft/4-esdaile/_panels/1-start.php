@@ -12,7 +12,7 @@
             <h1>Mind over matter</h1>
         </header>
 
-        <p class="intro-text">The Zoist receives news that a British surgeon in India, James Esdaile, has performed dozens of pain-free operations by mesmerising his patients.</p>
+        <p class="intro-text"><em>The Zoist</em> receives news that a British surgeon in India, James Esdaile, has performed dozens of pain-free operations by mesmerising his patients.</p>
     </div>
 
 </div>

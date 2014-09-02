@@ -80,13 +80,13 @@
                     <div class="comic-column">
                         <div class="comic-panel" data-offset="200">
                             <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-12.jpg">
-                            <p class="panel-text">Both defendants were found guilty. Eyraud was sentenced to death by guillotine. Gabrielle received a prison sentence of 21 years.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="outro">
+                <p>Both defendants were found guilty. Eyraud was sentenced to death by guillotine. Gabrielle received a prison sentence of 21 years.</p>
                 <p>After winning early release in 1903 she toured with a hypnotic stage show, in which she re-enacted her crime.</p>
             </div>
         </div>
