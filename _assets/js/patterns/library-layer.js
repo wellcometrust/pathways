@@ -27,7 +27,7 @@ Pathways.LibraryLayer = function() {
         return false;
     });
 
-    $further_reading.on('click', 'a', function(e) {
+    $gap.on('click', 'a', function(e) {
         var $this           = $(this),
             playerWidth     = (window.innerWidth - 180),
             playerHeight    = (window.innerHeight - 180);
