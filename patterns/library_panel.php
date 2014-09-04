@@ -4,11 +4,9 @@
 
 <div class="library-panel" data-panel="<?php echo isset($panel['id']) ? $panel['id'] : '' ?>" data-component="library-panel">
     <div class="handle">i</div>
-    <div class="body">
-        <span>Sources</span>
-        
+    <div class="body">        
+        <?php if( isset($panel['links']) ): ?>
         <ul>
-            <?php if( isset($panel['links']) ): ?>
             <?php foreach ($panel['links'] as $link): ?>
             <li>
                 <span><?php echo $link['title'] ?></span>
@@ -17,16 +15,8 @@
                 <?php if( isset( $link['external_url'] ) ):                 ?><a href="<?php echo $link['external_url'] ?>" rel="external">External</a><?php   endif ?>
             </li>
             <?php endforeach ?>
-            <?php else: ?>
-            <li>
-                <span>title</span>
-                <a href="#" rel="external">catalogue</a>
-                <a href="#" rel="external">images</a>
-                <a href="#" rel="external">download</a>
-                <a href="#" rel="external">external</a>
-            </li>
-            <?php endif ?>
         </ul>
+        <?php endif ?>
 
         <div class="share-me">
             <p>Share</p>

@@ -69,12 +69,12 @@
                     <div class="comic-column">
                         <div class="comic-panel">
                             <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-10.jpg">
-                            <p class="panel-text"><cite>For the prosecution: Jules Quesnay de Beaurepair</cite> “If hypnotism explains the crime, if it is a way to deny free will…no criminal will be accountable for the blood he spills.”</p>
+                            <p class="panel-text"><cite><b>For the prosecution:</b> Jules Quesnay de Beaurepair</cite> “If hypnotism explains the crime, if it is a way to deny free will…no criminal will be accountable for the blood he spills.”</p>
                         </div>
                         <div class="comic-panel" data-offset="-200">
                             <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-11.jpg">
 
-                            <p class="panel-text"><cite>For the defence: Jules Liégeois</cite> “All conscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.”</p>
+                            <p class="panel-text"><cite><b>For the defence:</b> Jules Liégeois</cite> “All conscience has disappeared in a hypnotized subject who has been forced to commit a criminal act. Only he who has given the suggestion is guilty.”</p>
                         </div>
                     </div>
                     <div class="comic-column">
