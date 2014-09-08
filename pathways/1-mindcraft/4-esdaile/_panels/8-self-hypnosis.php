@@ -5,6 +5,7 @@
         <video controls="true" preload="none">
             <source src="http://wellcome-pathways.s3.amazonaws.com/chris-hypno-demo.mp4">
             <source src="http://wellcome-pathways.s3.amazonaws.com/chris-hypno-demo.webm">
+            <track src="/_assets/video/pathways_CGhypno_subtitles.vtt" kind="subtitles" srclang="en" label="English" />
         </video>
         <img alt="" src="/_assets/img/spacer.png">
     </div>
