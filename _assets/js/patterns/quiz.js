@@ -14,6 +14,9 @@ Pathways.Quiz = function() {
         $overlay.show();
         $overlay.css('background-color', 'rgba(0,0,0,0.9)');
 
+        // prevent scrolling
+        $('body').addClass('modal-open');
+
         // append and initialize quiz
         setTimeout(function() {
             var $code           = $( _('#template-quiz').innerHTML ),
@@ -33,6 +36,8 @@ Pathways.Quiz = function() {
 
         $close.on('click', function() {
             $overlay.css('opacity', 0);
+            $('body').removeClass('modal-open');
+
             setTimeout(function() {
                 $overlay.remove();
             }, 800);

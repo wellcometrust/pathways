@@ -3,7 +3,7 @@
 ?>
 
 <div class="library-panel" data-panel="<?php echo isset($panel['id']) ? $panel['id'] : '' ?>" data-component="library-panel">
-    <div class="handle">i</div>
+    <div class="handle"></div>
     <div class="body">        
         <?php if( isset($panel['links']) ): ?>
         <ul>

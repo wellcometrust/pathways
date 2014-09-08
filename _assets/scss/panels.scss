@@ -638,6 +638,17 @@
         }
     }
 
+    .panel-number {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #030303;
+        @include abril-italic;
+        background-color: #fff;
+        padding: 7px 12px;
+        line-height: 1;
+    }
+
     .comic-panel {
         position: relative;
     }
@@ -726,15 +737,16 @@
 
         }
 
-        .comic-panel:nth-child(1) {
-            width: 45%;
+        .comic-panel--1 {
+            width: 42%;
+            margin-left: 5%;
 
             p {
                 width: 40%;
             }
         }
 
-        .comic-panel:nth-child(2) {
+        .comic-panel--2 {
             width: 45%;
             margin-left: 5%;
 
@@ -745,9 +757,10 @@
             }
         }
 
-        .comic-panel:nth-child(3) {
-            width: 48%;
-            margin-top: -77px;
+        .comic-panel--3 {
+            width: 52%;
+            margin-top: -120px;
+            margin-left: -50px;
 
             .panel-text {
                 top:    0;
@@ -758,6 +771,7 @@
 
             .panel-text:nth-of-type(1) {
                 right: 40px;
+                width: 80%;
             }
 
             .panel-text:nth-of-type(2) {
@@ -766,13 +780,13 @@
             }
         }
 
-        .comic-panel:nth-child(4) {
+        .comic-panel--4 {
             width: 45%;
             margin-left: 5%;
             margin-top: 52px;
 
             .panel-text {
-                left:   0;
+                left:   8px;
                 right:  auto;
             }
 
@@ -782,26 +796,31 @@
             }
         }
 
-        .comic-panel:nth-child(5) {
-            width:          45%;
-            margin-top:     -61px;
+        .comic-panel--5 {
+            width:          47%;
+            margin-top:     -160px;
         }
 
-        .comic-panel:nth-child(6) {
+        .comic-panel--6 {
             width:          35%;
             margin-left:    5%;
             margin-top:     49px;
         }
 
-        .comic-panel:nth-child(7) {
+        .comic-panel--7 {
             width:          40%;
-            margin-top:     -135px;
-            margin-left:    5%;
+            margin-top:     -240px;
+            margin-left:    7%;
+
+            .panel-number {
+                left: auto;
+                right: 0;
+            }
 
             .panel-text {
                 top:    0;
                 bottom: auto;
-                left:   0;
+                left:   10px;
                 right:  0;
                 width:  220px;
             }
@@ -821,18 +840,19 @@
                     transform: translateX(50px);
         }
 
-        .comic-panel:nth-child(10) {
-            width:          35%;
-            margin-top:     -20px;
+        .comic-panel--9 {
+            width:          43%;
+            margin-top:     -90px;
+            margin-left:    4%;
 
             .panel-text {
-                left:   0;
+                left:   10px;
                 right:  auto;
                 width:  260px;
             }
         }
 
-        .comic-panel:nth-child(11) {
+        .comic-panel--10 {
             width:          45%;
             margin-top:     49px;
             margin-left:    5%;
@@ -842,10 +862,14 @@
             }
         }
 
-        .comic-panel:nth-child(12) {
-            width:          35%;
-            margin-left:    10%;
-            margin-top:     25px;
+        .comic-panel--11 {
+            width:          33%;
+            margin-left:    14%;
+            margin-top:     -5px;
+
+            .panel-text {
+                left: 10px;
+            }
         }
 
         .comic-quote {
@@ -884,10 +908,10 @@
             }
         }
 
-        .comic-panel:nth-child(3) {
+        .comic-panel--3 {
             width: 60%;
             margin-left: -15%;
-            margin-top: -77px;
+            margin-top: -90px;
         }
 
         .comic-panel:nth-child(8) {
@@ -926,6 +950,17 @@
 
     .comic-panel {
         position: relative;
+    }
+
+    .panel-number {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #030303;
+        @include abril-italic;
+        background-color: #fff;
+        padding: 7px 12px;
+        line-height: 1;
     }
 
     .panel-text {
@@ -977,52 +1012,51 @@
             clear:      both;
         }
 
-        .comic-row:nth-child(1) {
-            .comic-panel {
-                width: 37.4%;
-            }
-
-            .comic-panel + .comic-panel {
-                width: 59.2%;
-                margin-left: 3%;
-            }
-
+        .comic-row--1 {
             .panel-text {
                 left:       -230px;
                 right:      auto;
                 width:      470px;
                 z-index:    10;
             }
-        }
-
-        .comic-row:nth-child(2) {
-            margin: 1.5em 0;
 
             .comic-panel {
-                width: 64.3%;
-                margin-right: 2%;
-
-                .panel-text {
-                    top:    25px;
-                    bottom: auto;
-                    left:   0;
-                    right:  0;
-                    width:  70%;
-                }
+                width: 37.4%;
             }
 
-            .comic-panel + .comic-panel {
-                width:          33.2%;
-                margin-right:   0;
-                margin-bottom:  2%;
-            }
-
-            .comic-panel + .comic-panel + .comic-panel {
-                margin-bottom: 0;
+            .comic-panel--2 {
+                width: 59.2%;
+                margin-left: 3%;
             }
         }
 
-        .comic-panel:nth-child(3) {
+        .comic-row--2 {
+            margin: 1.5em 0;
+
+            .panel-text {
+                top:    25px;
+                bottom: auto;
+                left:   10px;
+                right:  0;
+                width:  70%;
+            }
+
+            .comic-panel--3 {
+                width: 64.3%;
+                margin-right: 2%;
+            }
+
+            .comic-panel--4 {
+                width: 33.2%;
+                margin-bottom: 2%;
+            }
+
+            .comic-panel--5 {
+                width: 33.2%;
+            }
+        }
+
+        .comic-panel--6 {
             width:          37.6%;
             margin-right:   2%;
 
@@ -1033,29 +1067,31 @@
             }
         }
 
-        .comic-panel:nth-child(4) {
+        .comic-panel--7 {
             width: 59.9%;
 
             .panel-text {
-                left:   0;
+                left:   10px;
                 right:  auto;
                 width:  210px;
             }
         }
 
-        .comic-row:nth-child(5) {
-
-            .comic-panel:nth-child(1) {
-                margin-top: 1em;
-                margin-right: 3%;
-            }
-            .comic-panel:nth-child(2) {
-                margin-top: 1em;
-                margin-right: 3%;
-            }
+        .comic-panel--8 {
+            margin-top: 1em;
+            margin-right: 3%;
         }
 
-        .comic-row:nth-child(6) {
+        .comic-panel--9 {
+            margin-top: 1em;
+            margin-right: 3%;
+        }
+
+        .text-panel--1 {
+            width: 45%;
+        }
+
+        .comic-row--4 {
             margin-top: 1em;
             
             .comic-column:nth-child(1) {
@@ -1065,24 +1101,25 @@
                 .panel-text {
                     font-style: normal;
                 }
+            }
 
-                .comic-panel:nth-child(1) {
-                    margin-bottom: 40px;
+            .comic-panel--10 {
+                margin-bottom: 40px;
 
-                    .panel-text {
-                        bottom: -40px;
-                    }
-                }
-
-                .comic-panel:nth-child(2) {
-                    .panel-text {
-                        bottom: -70px;
-                        margin: 0px;
-                        width: 100%;
-                        left: 10px;
-                    }
+                .panel-text {
+                    bottom: -40px;
+                    left: 10px;
                 }
             }
+
+            .comic-panel--11 {
+                .panel-text {
+                    bottom: -70px;
+                    margin: 0px;
+                    left: 10px;
+                }
+            }
+
             .comic-column:nth-child(2) {
                 width: 66%;
 

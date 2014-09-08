@@ -75,6 +75,9 @@ Pathways.CropZoom = function() {
 
             $image_crop.css( { top: 0, left: 0, 'transform': 'translate(0, '+(Pathways.panel_height / 4)+'px)', opacity: 0 } );
 
+            // prevent scrolling
+            $('body').addClass('modal-open');
+
             // Animate in the text
             setTimeout(function() {
                 $image_crop.addClass('animate');
@@ -87,6 +90,7 @@ Pathways.CropZoom = function() {
 
             $image_crop.on('click', function() {
                 $overlay.css('opacity', 0);
+                $('body').removeClass('modal-open');
                 setTimeout(function() {
                     $overlay.remove();
                 }, 600);
@@ -94,6 +98,7 @@ Pathways.CropZoom = function() {
 
             $close.on('click', function() {
                 $overlay.css('opacity', 0);
+                $('body').removeClass('modal-open');
                 setTimeout(function() {
                     $overlay.remove();
                 }, 600);

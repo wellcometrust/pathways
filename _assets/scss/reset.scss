@@ -62,6 +62,10 @@ iframe {
     border: none;
 }
 
+.modal-open {
+    overflow: hidden;
+}
+
 .clearfix {
     &:after {
         content: "";

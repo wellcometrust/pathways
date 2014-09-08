@@ -8,14 +8,13 @@
     
     <div class="gap">
 
-        <div class="controls">
+        <div class="controls clearfix">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32" xml:space="preserve">
                 <g>
                     <polygon fill="#60B8B2" points="20.9,9.6 16,14.6 11,9.6 9.7,11 14.6,16 9.7,20.9 11,22.3 16,17.4 20.9,22.3 22.4,20.9 17.4,16 22.4,11"/>
                     <path fill="#60B8B2" d="M16,0C7.2,0,0,7.2,0,16s7.1,16,16,16s16-7.1,16-16S24.8,0,16,0z M16,29.5c-7.5,0-13.5-6-13.5-13.5 S8.5,2.5,16,2.5s13.5,6,13.5,13.5C29.5,23.4,23.4,29.5,16,29.5z"/>
                 </g>
             </svg>
-            <span>[close]</span>
         </div>
 
         <div class="in-the-player">

@@ -55,7 +55,7 @@ info_panels:
 
 library_layer:
 
-    See_in_the Wellcome_Library:
+    See_in_the_Wellcome_Library:
         -   type: book
             title: "Illustrations of madness [by the patient, James Tilly Matthews, in hallucinations]"
             author: John Haslam

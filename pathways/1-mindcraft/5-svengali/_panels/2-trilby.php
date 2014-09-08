@@ -18,29 +18,35 @@
             </div>
             
             <div class="comic-strip clearfix">
-                <div class="comic-panel">
+                <div class="comic-panel comic-panel--1">
+                    <div class="panel-number">1</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/trilby/trilby-comic-1.jpg">
                     <p class="panel-text">Paris, the Latin Quarter, 1850s Trilby O’Ferrall is living the bohemian life as an artist’s model</p>
                 </div>
-                <div class="comic-panel" data-offset="250">
+                <div class="comic-panel comic-panel--2" data-offset="250">
+                    <div class="panel-number">2</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/trilby/trilby-comic-2.jpg">
                     <p class="panel-text">All the men are in love with her</p>
                 </div>
-                <div class="comic-panel">
+                <div class="comic-panel comic-panel--3">
+                    <div class="panel-number">3</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/trilby/trilby-comic-3.jpg">
                     <p class="panel-text">She meets Svengali, a Jewish musical impresario</p>
                     <p class="panel-text">He wants to make her a star</p>
                 </div>
-                <div class="comic-panel">
+                <div class="comic-panel comic-panel--4">
+                    <div class="panel-number">4</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/trilby/trilby-comic-4.jpg">
                     <p class="panel-text">Trilby protests that she’s tone deaf</p>
                     <p class="panel-text">But he transforms her into a sensational singer&hellip;</p>
                 </div>
-                <div class="comic-panel">
+                <div class="comic-panel comic-panel--5">
+                    <div class="panel-number">5</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/trilby/trilby-comic-5.jpg">
                     <p class="panel-text">&hellip;by using hypnosis</p>
                 </div>
-                <div class="comic-panel">
+                <div class="comic-panel comic-panel--6">
+                    <div class="panel-number">6</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/trilby/trilby-comic-6.jpg">
                     <p class="panel-text">She falls under the spell of Svengali</p>
 
@@ -59,26 +65,31 @@
                     </blockquote>
                 </div>
 
-                <div class="comic-panel">
+                <div class="comic-panel comic-panel--7">
+                    <div class="panel-number">7</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/trilby/trilby-comic-7.jpg">
                     <p class="panel-text">Under his tutelage Trilby becomes an international sensation</p>
                 </div>
                 <div class="comic-panel">
                     <span>&hellip;but once Svengali releases her from hypnosis, she has no memory of her performance</span>
                 </div>
-                <div class="comic-panel">
+                <div class="comic-panel comic-panel--8">
+                    <div class="panel-number">8</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/trilby/trilby-comic-8.jpg">
                     <p class="panel-text">She travels to London for her biggest concert yet</p>
                 </div>
-                <div class="comic-panel">
+                <div class="comic-panel comic-panel--9">
+                    <div class="panel-number">9</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/trilby/trilby-comic-9.jpg">
                     <p class="panel-text">But as she takes to the stage, Svengali collapses&hellip;</p>
                 </div>
-                <div class="comic-panel">
+                <div class="comic-panel comic-panel--10">
+                    <div class="panel-number">10</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/trilby/trilby-comic-10.jpg">
                     <p class="panel-text">&hellip;and dies of a heart attack</p>
                 </div>
-                <div class="comic-panel">
+                <div class="comic-panel comic-panel--11">
+                    <div class="panel-number">11</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/trilby/trilby-comic-11.jpg">
                     <p class="panel-text">Trilby finds herself on stage, frozen in front of a heckling crowd, with no recollection that she had ever been a singer</p>
 

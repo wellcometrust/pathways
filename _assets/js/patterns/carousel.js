@@ -16,6 +16,9 @@ Pathways.Gallery = function() {
         $overlay.show();
         $overlay.css('background-color', 'rgba(0,0,0,0.8)');
 
+        // prevent scrolling
+        $('body').addClass('modal-open');
+
         setTimeout(function() {
             // Load the carousel
             var $div = $('<div class="carousel"></div>');
@@ -29,6 +32,8 @@ Pathways.Gallery = function() {
 
         $close.on('click', function() {
             $overlay.css('opacity', 0);
+            $('body').removeClass('modal-open');
+
             setTimeout(function() {
                 $overlay.remove();
             }, 800);
