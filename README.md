@@ -18,10 +18,10 @@ When that's finished run `grunt && grunt watch` and leave the terminal tab open 
 
 ### Pathways - A guide
 
-The pathways project is a sort of 'short-form journalism' partially inspired by the NYTimes long-form journalism pieces.
-A 'Pathway' is a collection of, usually, around 5 or 6 stories/modules. Each module is made up of panels, each being, in effect, a chapter/scene.
+The pathways project, I like to think, is a sort of 'short-form journalism' partially inspired by the NYTimes long-form journalism pieces and other interactive ‘scroll enhanced’ sites.
+A 'Pathway' is a collection of, usually, around 5 or 6 stories/modules. Each module is made up of panels, each being, in effect, a chapter or scene (the naming conventions throughout are a little flexible).
 
-Each module has an introductory starting panel, followed a sequence of 1 or more panels which cross fade between each other and perform actions, then end with the library layer and teaser for the next module.
+Each module has an introductory starting panel, followed a sequence of 1 or more panels which ‘fix’ to the screen and cross fade between each other and trigger actions, then end with the library layer and teaser for the next module. This is the intended structure for all Pathways current and future and the system is built to reflect this. Any deviations may require potentially significant rewriting of parts of the code and are out of scope of the project.
 
 
 ### Creating a Pathway

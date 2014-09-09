@@ -43,8 +43,8 @@
         position:           absolute;
         top:                0;
         width:              46px;
-        background:         rgba(0,0,0,0.2) url(/_assets/img/icons/icon-btn-prev.svg) 50% 50% no-repeat;
-        background-size:    50%;
+        background:         url(/_assets/img/icons/icon-arrow-left-circle-white-black-bg.svg) 50% 50% no-repeat;
+        background-size:    95%;
 
         &.disabled {
             opacity: 0.2;
@@ -55,8 +55,8 @@
         position:           absolute;
         top:                0;
         width:              46px;
-        background:         rgba(0,0,0,0.2) url(/_assets/img/icons/icon-btn-next.svg) 50% 50% no-repeat;
-        background-size:    50%;
+        background:         url(/_assets/img/icons/icon-arrow-right-circle-white-black-bg.svg) 50% 50% no-repeat;
+        background-size:    95%;
 
         &.disabled {
             opacity: 0.2;

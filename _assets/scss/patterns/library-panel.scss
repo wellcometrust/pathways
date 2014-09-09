@@ -22,7 +22,7 @@
         margin:             0 0 15px -61px;
         line-height:        40px;
         cursor:             default;
-        background:         rgba(0,0,0, .8) url('/_assets/img/icons/share.svg') 50% 50% no-repeat;
+        background:         rgba(0,0,0, .8) url(/_assets/img/icons/icon-share-green.svg) 50% 50% no-repeat;
         background-size:    20px;
         z-index:            900;
     }
@@ -60,7 +60,7 @@
 
         .handle {
             background-color: rgba(0,0,0, 1);
-            background-image: url('/_assets/img/icons/cross.svg');
+            background-image: url(/_assets/img/icons/icon-cross-green.svg);
             background-size:  16px;
         }
         .body {

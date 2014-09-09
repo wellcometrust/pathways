@@ -200,8 +200,12 @@
     }
 }
 
-#satrised {
-    
+@media all and (min-width: 48em) and (max-width: 80em) {
+    #satirised {
+        .main-content {
+            max-width: 320px;
+        }
+    }
 }
 
 #committee-investigates-intro {
@@ -532,8 +536,14 @@
             height:             161px;
             background:         url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-4-boat.png) 0 0 no-repeat;
             background-size:    100%;
+        }
+    }
 
-            @include transform( translate(-600px, 0) );
+    .no-touch {
+        #india {
+            .boats {
+                @include transform( translate(-600px, 0) );
+            }
         }
     }
 
@@ -546,8 +556,10 @@
             }
 
             .boats {
-                bottom: 0;
+                bottom: 10px;
                 height: 130px;
+
+                @include animation(boats 100s linear infinite);
             }
         }
     }

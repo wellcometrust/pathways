@@ -13,7 +13,11 @@
         </header>
 
         <p class="intro-text">Hypnosis, tarnished by scandal and abuse, has fallen from medical favour. But two doctors still believe it holds the key to understanding the mind and its powers to heal.</p>
-
+        <p class="intro-text scroll-down">
+            <span class="scroll-down--text">Scroll down</span>
+            <span class="scroll-down--arrow"></span>
+        </p>
+        
     </div>
 
 </div>

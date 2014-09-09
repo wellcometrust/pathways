@@ -75,7 +75,7 @@
         }
 
         .in-the-player {
-            padding: 1rem 0 2em 0;
+            padding: 1rem 0;
 
             .in-the-player--header {
                 border-top: 1px solid #D3D3D3;
@@ -91,7 +91,7 @@
 
             li {
                 float: left;
-                width: 33.3%
+                width: 50%;
             }
         }
 
@@ -108,7 +108,7 @@
             
             li {
                 float: left;
-                width: 33.3%;
+                width: 50%;
             }
         }
     }
@@ -123,6 +123,22 @@
                 .show-more {
                     @include transform( translate(0, 5px) );
                 }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 80em) {
+    .library-layer {
+        .in-the-player {
+            li {
+                width: 33.3%;
+            }
+        }
+
+        .related-resources {
+            li {
+                width: 33.3%;
             }
         }
     }

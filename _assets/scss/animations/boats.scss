@@ -1,0 +1,20 @@
+
+@-webkit-keyframes boats {
+    0%      { -webkit-transform: translate(-640px, 0); }
+    100%    { -webkit-transform: translate(1024px, 0); }
+}
+
+@-moz-keyframes boats {
+    0%      { -moz-transform: translate(-640px, 0); }
+    100%    { -moz-transform: translate(1024px, 0); }
+}
+
+@-ms-keyframes boats {
+    0%      { -ms-transform: translate(-640px, 0); }
+    100%    { -ms-transform: translate(1024px, 0); }
+}
+
+@keyframes boats {
+    0%      { transform: translate(-640px, 0); }
+    100%    { transform: translate(1024px, 0); }
+}

@@ -11,7 +11,7 @@
     <a class="teaser" href="<?php echo $teaser_link != '' ? $teaser_link : '#' ?>" <?php if( $teaser_bg != '' ) { echo ' style="background-image: url('.$path.'/_assets/teaser/'.$teaser_bg.')"'; } ?>>
         <div class="teaser-text-container">
             <?php if( $module != 'freud' ): ?>
-            <p class="teaser-text">Continue with your journey in the Mind</p>
+            <p class="teaser-text">Next:</p>
             <?php endif ?>
             <h1><?php echo $teaser_title != '' ? $teaser_title : '' ?></h1>
             <div class="teaser-icon"></div>

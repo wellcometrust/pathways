@@ -47,48 +47,35 @@
 
     &.book {
         .player-item--thumb {
-            background: url('/_assets/img/icons/library-layer/book.svg') 50% 0% no-repeat;
-            background-size: 40%;
-        }
-    }
-
-    &.video {
-        .player-item--thumb {
-            background: url('/_assets/img/icons/library-layer/video.svg') 50% 0% no-repeat;
-            background-size: 40%;
-        }
-    }
-
-    &.audio {
-        .player-item--thumb {
-            background: url('/_assets/img/icons/library-layer/audio.svg') 50% 0% no-repeat;
+            background: #DBDBDB url('/_assets/img/icons/icon-book-white.svg') 50% 50% no-repeat;
             background-size: 40%;
         }
     }
 
     &.document {
         .player-item--thumb {
-            background: url('/_assets/img/icons/library-layer/document.svg') 50% 0% no-repeat;
+            background: #DBDBDB url('/_assets/img/icons/icon-document-white.svg') 50% 50% no-repeat;
             background-size: 40%;
         }
     }
 
     &.image {
         .player-item--thumb {
-            background: url('/_assets/img/icons/library-layer/image.svg') 50% 0% no-repeat;
+            background: #DBDBDB url('/_assets/img/icons/icon-picture-white.svg') 50% 50% no-repeat;
             background-size: 40%;
         }
     }
 }
 
-@media screen and (min-width: 48em) {
+/** 650px */
+@media screen and (min-width: 40.625em) {
     .player-item {
         margin-bottom: 2em;
         padding: 0 1rem;
 
         .player-item--thumb {
-            width:  150px;
-            height: 220px;
+            width: 130px;
+            height: 200px;
         }
 
         .player-item--content {
@@ -97,12 +84,26 @@
 
         .player-item--header {
             margin-bottom: 0.8em;
+
+            h1 {
+                font-size: 1rem;
+            }
         }
 
         .player-item--body {
             cite {
                 margin-top: 1em;
             }
+        }
+    }
+}
+
+@media screen and (min-width: 100em) {
+    .player-item {
+        .player-item--thumb {
+            width: 150px;
+            height: 220px;
+            margin-right: 20px;
         }
     }
 }

@@ -20,10 +20,10 @@
 
         <div class="share-me">
             <p>Share</p>
-            <a href=""><img src="/_assets/img/icons/icon-twitter.svg"></a>
-            <a href=""><img src="/_assets/img/icons/icon-facebook.svg"></a>
-            <a href=""><img src="/_assets/img/icons/icon-pinterest.svg"></a>
-            <a href=""><img src="/_assets/img/icons/icon-google.svg"></a>
+            <a href=""><img src="/_assets/img/icons/icon-twitter-circle-white.svg" alt="share on twitter"></a>
+            <a href=""><img src="/_assets/img/icons/icon-facebook-circle-white.svg" alt="share on facebook"></a>
+            <a href=""><img src="/_assets/img/icons/icon-pinterest-circle-white.svg" alt="share on pinterest"></a>
+            <a href=""><img src="/_assets/img/icons/icon-gplus-circle-white.svg" alt="share on google plus"></a>
         </div>
     </div>
     

@@ -14,6 +14,10 @@
 
         <p class="intro-text">Franz Anton Mesmer arrives in Paris to present a revolutionary theory to the French Academy of Sciences. He claims he has harnessed a universal life-force called ‘animal magnetism’ that can cure all disease.</p>
         <p class="intro-text">His therapy is an immediate sensation. It becomes known as ‘mesmerism’.</p>
+        <p class="intro-text scroll-down">
+            <span class="scroll-down--text">Scroll down</span>
+            <span class="scroll-down--arrow"></span>
+        </p>
 
     </div>
 

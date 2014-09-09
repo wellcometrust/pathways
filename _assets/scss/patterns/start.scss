@@ -90,6 +90,19 @@
             line-height: 1.239;
             width:      90%;
         }
+
+        .scroll-down--text {
+            font-size: 1.1rem;
+        }
+
+        .scroll-down--arrow {
+            display: block;
+            background: url(/_assets/img/icons/icon-arrow-down-circle-white.svg) 50% 50% no-repeat;
+            background-size: 100%;
+            width: 32px;
+            height: 32px;
+            margin: 5px auto 0 auto;
+        }
     }
 
     .no-touch {

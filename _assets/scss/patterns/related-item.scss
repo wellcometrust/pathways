@@ -29,34 +29,24 @@
     }
 
     &.book {
-        background: url('/_assets/img/icons/library-layer/book.svg') 0 0 no-repeat;
-        background-size: 24px;
-    }
-
-    &.video {
-        background: url('/_assets/img/icons/library-layer/video.svg') 0 0 no-repeat;
-        background-size: 24px;
-    }
-
-    &.audio {
-        background: url('/_assets/img/icons/library-layer/audio.svg') 0 0 no-repeat;
+        background: url('/_assets/img/icons/icon-book-black.svg') 16px 0 no-repeat;
         background-size: 24px;
     }
 
     &.document {
-        background: url('/_assets/img/icons/library-layer/document.svg') 0 0 no-repeat;
+        background: url('/_assets/img/icons/icon-document-black.svg') 16px 0 no-repeat;
         background-size: 24px;
     }
 
     &.image {
-        background: url('/_assets/img/icons/library-layer/image.svg') 0 0 no-repeat;
+        background: url('/_assets/img/icons/icon-picture-black.svg') 16px 0 no-repeat;
         background-size: 24px;
     }
 }
 
 @media screen and (min-width: 48em) {
     .related-item {
-        padding: 0 4rem 0 36px;
+        padding: 0 4rem 0 54px;
 
         .related-item--header {
             h1 {
