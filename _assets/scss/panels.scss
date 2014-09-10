@@ -626,6 +626,39 @@
             display: block;
         }
     }
+    .touch {
+        .start-svengali {
+            .falling-lady {
+                @include animation(lady 30s linear);
+
+                -webkit-animation-fill-mode: forwards;
+                   -moz-animation-fill-mode: forwards;
+                    -ms-animation-fill-mode: forwards;
+                        animation-fill-mode: forwards;
+            }
+        }
+    }
+}
+
+
+@-webkit-keyframes lady {
+    0%      { -webkit-transform: translate(0, 0); }
+    100%    { -webkit-transform: translate(0, 500px); }
+}
+
+@-moz-keyframes lady {
+    0%      { -moz-transform: translate(0, 0); }
+    100%    { -moz-transform: translate(0, 500px); }
+}
+
+@-ms-keyframes lady {
+    0%      { -ms-transform: translate(0, 0); }
+    100%    { -ms-transform: translate(0, 500px); }
+}
+
+@keyframes lady {
+    0%      { transform: translate(0, 0); }
+    100%    { transform: translate(0, 500px); }
 }
 
 #trilby {
@@ -688,8 +721,9 @@
     #trilby {
 
         .inner {
-            max-width:  1024px;
-            margin:     0 auto;
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .trilby-header {
@@ -770,9 +804,9 @@
         }
 
         .comic-panel--3 {
-            width: 52%;
-            margin-top: -120px;
-            margin-left: -50px;
+            width: 47%;
+            margin-top: -86px;
+            margin-left: 0;
 
             .panel-text {
                 top:    0;
@@ -787,7 +821,7 @@
             }
 
             .panel-text:nth-of-type(2) {
-                top:    32px;
+                top:    42px;
                 right:  20px;
             }
         }
@@ -795,7 +829,7 @@
         .comic-panel--4 {
             width: 45%;
             margin-left: 5%;
-            margin-top: 52px;
+            margin-top: 42px;
 
             .panel-text {
                 left:   8px;
@@ -844,17 +878,17 @@
             padding:        2em 0;
         }
 
-        .comic-panel:nth-child(9) {
+        .comic-panel--8 {
             width:          50%;
             margin-top:     14px;
-            -webkit-transform: translateX(50px);
-               -moz-transform: translateX(50px);
-                    transform: translateX(50px);
+            -webkit-transform: translateX(38px);
+               -moz-transform: translateX(38px);
+                    transform: translateX(38px);
         }
 
         .comic-panel--9 {
             width:          43%;
-            margin-top:     -90px;
+            margin-top:     -140px;
             margin-left:    4%;
 
             .panel-text {
@@ -877,7 +911,7 @@
         .comic-panel--11 {
             width:          33%;
             margin-left:    14%;
-            margin-top:     -5px;
+            margin-top:     -65px;
 
             .panel-text {
                 left: 10px;
@@ -912,6 +946,22 @@
 
 }
 
+@media all and (min-width: 62.5rem) {
+    #trilby {
+        .comic-panel--9 {
+            margin-top: -105px;
+        }
+
+        .comic-panel--10 {
+            margin-left: 3%;
+        }
+
+        .comic-panel--11 {
+            margin-top: -25px;
+        }
+    }
+}
+
 @media all and (min-width: 84rem) {
     #trilby {
         .comic-panel {
@@ -921,17 +971,28 @@
         }
 
         .comic-panel--3 {
-            width: 60%;
-            margin-left: -15%;
-            margin-top: -90px;
+            width: 52%;
+            margin-top: -120px;
+            margin-left: -50px;
+
+            .panel-text:nth-of-type(2) {
+                top: 32px;
+            }
+        }
+
+        .comic-panel--4 {
+            margin-top: 52px;
         }
 
         .comic-panel:nth-child(8) {
-            width: 25%;
+            width: 40%;
         }
 
-        .comic-panel:nth-child(9) {
-            width: 55%;
+        .comic-panel--8 {
+            width: 50%;
+            -webkit-transform: translateX(50px);
+               -moz-transform: translateX(50px);
+                    transform: translateX(50px);
         }
 
         .comic-panel:nth-child(10) {
@@ -939,7 +1000,7 @@
             margin-top: -150px;
         }
 
-        .comic-panel:nth-child(12) {
+        .comic-panel--11 {
             margin-top: -40px;
         }
 

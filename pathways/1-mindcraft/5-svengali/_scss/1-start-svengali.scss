@@ -15,4 +15,37 @@
             display: block;
         }
     }
+    .touch {
+        .start-svengali {
+            .falling-lady {
+                @include animation(lady 30s linear);
+
+                -webkit-animation-fill-mode: forwards;
+                   -moz-animation-fill-mode: forwards;
+                    -ms-animation-fill-mode: forwards;
+                        animation-fill-mode: forwards;
+            }
+        }
+    }
+}
+
+
+@-webkit-keyframes lady {
+    0%      { -webkit-transform: translate(0, 0); }
+    100%    { -webkit-transform: translate(0, 500px); }
+}
+
+@-moz-keyframes lady {
+    0%      { -moz-transform: translate(0, 0); }
+    100%    { -moz-transform: translate(0, 500px); }
+}
+
+@-ms-keyframes lady {
+    0%      { -ms-transform: translate(0, 0); }
+    100%    { -ms-transform: translate(0, 500px); }
+}
+
+@keyframes lady {
+    0%      { transform: translate(0, 0); }
+    100%    { transform: translate(0, 500px); }
 }

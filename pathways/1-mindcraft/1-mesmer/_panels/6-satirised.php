@@ -1,8 +1,12 @@
 
 <div id="satirised" class="panel news" data-scene="satirised" data-config='{ "offset_height": 350, "background": { "type": "video", "preserve_ratio": false } }'>
 
-    <div class="bg-container video" data-src="http://wellcome-pathways.s3.amazonaws.com/hysteria.mp4 http://wellcome-pathways.s3.amazonaws.com/hysteria.webm">
-        <img alt="" src="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-5.jpg">
+    <div class="bg-container">
+        <video controls="true" preload="none" poster="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-5.jpg">
+            <source src="http://wellcome-pathways.s3.amazonaws.com/hysteria.m4v">
+            <source src="http://wellcome-pathways.s3.amazonaws.com/hysteria.webm">
+        </video>
+        <img alt="" src="/_assets/img/spacer.png">
     </div>
     
     <div class="main-content left">
