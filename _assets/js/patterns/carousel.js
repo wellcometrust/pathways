@@ -7,7 +7,8 @@ Pathways.Gallery = function() {
     $('body').on('click', '[data-component="gallery"]', function(e) {
 
         var $overlay    = $('<div class="overlay"></div>'),
-            $close      = $('<div class="close"></div>');
+            $close      = $('<div class="close"></div>'),
+            $loading    = $('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
 
         $overlay.css('height', window.innerHeight );
 
@@ -15,6 +16,10 @@ Pathways.Gallery = function() {
 
         $overlay.show();
         $overlay.css('background-color', 'rgba(0,0,0,0.8)');
+
+        $overlay.append($loading);
+
+        $loading.css({ position: 'absolute', top: ((window.innerHeight / 2) - 12), left: ((window.innerWidth / 2) - 35) });
 
         // prevent scrolling
         $('body').addClass('modal-open');
@@ -47,15 +52,18 @@ function Carousel(element)
 {
     var self            = this,
         _element        = document.querySelector(element),
-        element         = $(element),
+        $element        = $(element),
         $prev           = null,
         $next           = null,
 
-        container       = null,
-        panes           = null,
+        $container      = null,
+        $panes          = null,
+
+        // TODO: Remove hardcoded images variable
+        images          = imageDB.images,
+        location        = imageDB.location,
 
         widths          = [],
-        heights         = [],
         ratios          = [],
 
         pane_width      = 0,
@@ -68,21 +76,37 @@ function Carousel(element)
      * initial
      */
     this.init = function() {
-        // Load the images, run the rest of the logic after all the images have loaded via anonymous callback function.
-        loadImages(function() {
 
-            // reset
-            container   = $(">ul", element);
-            panes       = $(">ul>li", element);
-            pane_count  = panes.length;
+        // Steps to loading the carousel:
+        // - Set up the carousel container
+        // - Load the first image.
+        // - On load, calculate dimensions of the image, update the container, set local width vars, move the container so the image is in the centre.
+        // - Load the navigation
+        // - Load rest of the images sequentially in the onload event of the previous one.
+        // - Update the container and local variables on each load, keeping the carousel in the correct place.
+        
+        // Create the container
+        $container = $('<ul/>');
+        $container.height( window.innerHeight );
 
+        $element.append($container);
+
+        // Load the first image
+        var first = images[0];
+
+        loadImage(first, function() {
             loadNavigation();
 
-            $(_element).find('ul').css( 'transform', 'translate('+ (total_offset - (widths[0] / 2)) +'px,0)');
+            $panes       = $element.find('li');
+            pane_count   = $panes.length;
+
+            $container.css( 'transform', 'translate('+ (total_offset - (widths[0] / 2)) +'px,0)');
             setPaneDimensions();
 
-            panes.css('opacity', 0.4);
-            panes.first().css('opacity', 1);
+            images.shift();
+
+            // load the rest of the images
+            loadImages(images);
         });
 
         $(window).on("load resize orientationchange", function() {
@@ -90,66 +114,77 @@ function Carousel(element)
         })
     };
 
-    var loadImages = function(callback) {
-        var ul              = document.createElement('ul'),
-            totalImages     = imageDB.images.length,
-            imagesLoaded    = 0;
+    /*
+     * Load an image and take a function to call once the image has finished asynchronously loading
+     */
+    var loadImage = function(obj, callback) {
+        var img = new Image(),
+            $li = $('<li/>'),
+            $img;
 
-        ul.style['height'] = window.innerHeight + 'px';
+        img.src = '/_assets/img/' + location + obj.image + '.jpg';
 
-        imageDB.images.forEach(function(obj) {
-            var li  = document.createElement('li'),
-                img = new Image();
+        img.onload = function() {
+            $img = $(img);
+            $img.css('height', '100%');
 
-            img.src = '/_assets/img/' + imageDB.location + obj.image + '.jpg';
-            img.style['height'] = '100%';
-            li.style['height']  = '100%';
+            $li.append($img);
 
-            li.appendChild(img);
-
+            // add potential text
             if( obj.text ) {
-                var span = document.createElement('span'),
-                    txt = document.createTextNode(obj.text);
+                var $span = ('<span>'+obj.text+'</span>').addClass('text');
 
-                span.classList.add('text');
-                span.appendChild(txt);
-                li.appendChild(span);
+                $li.append($span);
             }
 
-            ul.appendChild(li);
+            // what is the ratio of the image?
+            var w           = img.naturalWidth,
+                h           = img.naturalHeight,
+                ratio       = (h / w),
+                newWidth    = window.innerHeight / ratio;
 
-            img.onload = function(elm) {
-                imagesLoaded++;
+            // store the width and ratio for resize recalculations
+            widths.push(newWidth);
+            ratios.push(ratio);
 
-                if( imagesLoaded == totalImages ) {
-                    // resize the panes/container
-                    var _panes      = _element.querySelectorAll('li'),
-                        totalWidth  = 0;
+            // set the panel to the image's width
+            $li.width(newWidth);
 
-                    for(var i = 0; i < _panes.length; i++) {
-                        var w = parseInt( window.getComputedStyle(_panes[i]).width ),
-                            h = parseInt( window.getComputedStyle(_panes[i]).height );
-                        
-                        widths.push(w);
-                        heights.push(h);
-                        ratios.push( (w / h) );
+            // Add it to the container
+            $container.append($li);
 
-                        _panes[i].style['width'] = w + 'px';
+            // calculate and set the width of the whole container
+            var total = widths.reduce(function(a, b) {
+                return a + b;
+            });
 
-                        totalWidth += w;
-                    }
-                    ul.style['width'] = totalWidth + 'px';
+            $container.width(total);
 
-                    callback.call();
-                }
-            }
-        });
-
-        _element.appendChild(ul);
-
-        container = $(ul);
+            if( callback )
+                callback.call();
+        }
     }
 
+    /*
+     * Takes an array of image objects and recursively sets up a callback chain to load in images sequentially
+     */
+    var loadImages = function(images) {
+        if( images.length ) {
+            loadImage(images[0], function() {
+                $panes       = $element.find('li');
+                pane_count   = $panes.length;
+                setPaneDimensions();
+
+                images.shift()
+
+                loadImages(images);
+            });
+        }
+    }
+
+    /*
+     * load the navigation into the carousel
+     */
     var loadNavigation = function() {
         $prev   = $('<div/>'),
         $next   = $('<div/>');
@@ -167,8 +202,8 @@ function Carousel(element)
             'height':   window.innerHeight + 'px',
         });
 
-        element.append($prev);
-        element.append($next);
+        $element.append($prev);
+        $element.append($next);
 
         new Hammer($prev[0]).on("tap", function() {
            self.prev(); 
@@ -183,36 +218,31 @@ function Carousel(element)
      * set the pane dimensions and scale the container
      */
     function setPaneDimensions() {
-        var $ul         = element.find('ul'),
-            total_width = 0;
+        var total_width = 0,
+            wH          = window.innerHeight;
 
         widths  = [];
-        heights = [];
         
-        for (var i = 0; i < panes.length; i++) {
-            var newHeight = window.innerHeight,
-                newWidth  = ratios[i] * window.innerHeight;
+        for (var i = 0; i < $panes.length; i++) {
+            var newWidth = wH / ratios[i];
 
-            // panes[i].style['height']    = newHeight + 'px';
-            panes[i].style['width']     = newWidth + 'px';
+            $panes[i].style['width'] = newWidth + 'px';
 
             widths.push(newWidth);
-            heights.push(newHeight);
 
             total_width += newWidth;
         };
         
-        container.width(total_width);
+        $container.width(total_width);
         total_offset = (window.innerWidth / 2);
 
-        pane_width = parseInt(total_width / panes.length);
+        pane_width = parseInt(total_width / $panes.length);
 
-        // Heights
-        $ul.css('height', window.innerHeight);
-        container.css('height', window.innerHeight);
+        // Set the container and navigation links to the height of the screen.
+        $container.css('height', wH);
 
-        $prev.height( window.innerHeight );
-        $next.height( window.innerHeight );
+        $prev.height( wH );
+        $next.height( wH );
 
         self.showPane(current_pane, false);
     };
@@ -235,8 +265,8 @@ function Carousel(element)
 
         offset += (total_offset - (widths[index] / 2));
 
-        panes.css('opacity', 0.4);
-        panes.get(current_pane).style['opacity'] = 1;
+        $panes.css('opacity', 0.4);
+        $panes.get(current_pane).style['opacity'] = 1;
 
         setContainerOffset(offset, animate);
 
@@ -253,17 +283,20 @@ function Carousel(element)
         }
     };
 
-    function setContainerOffset(percent, animate) {
-        container.removeClass("animate");
+    /* 
+     * Move the whole list of panels by x. Animation optional.
+     */
+    function setContainerOffset(x, animate) {
+        $container.removeClass("animate");
 
         if(animate) {
-            container.addClass("animate");
+            $container.addClass("animate");
         }
 
         if( Modernizr.csstransforms3d )
-            container.css("transform", "translate3d("+ percent +"px,0,0)");
+            $container.css("transform", "translate3d("+ x +"px,0,0)");
         else
-            container.css("transform", "translate("+ percent +"px,0)");
+            $container.css("transform", "translate("+ x +"px,0)");
     }
 
     this.next = function() { return this.showPane(current_pane+1, true); };
@@ -324,5 +357,5 @@ function Carousel(element)
         }
     }
 
-    new Hammer(element[0], { drag_lock_to_axis: true }).on("release dragleft dragright swipeleft swiperight", handleHammer);
+    new Hammer($element[0], { drag_lock_to_axis: true }).on("release dragleft dragright swipeleft swiperight", handleHammer);
 }

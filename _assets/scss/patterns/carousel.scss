@@ -31,6 +31,7 @@
         position:   relative;
         float:      left;
         overflow:   hidden;
+        height:     100%;
 
         @include transform( translate3d(0,0,0) );
 
