@@ -132,7 +132,7 @@ function Carousel(element)
 
             // add potential text
             if( obj.text ) {
-                var $span = ('<span>'+obj.text+'</span>').addClass('text');
+                var $span = $('<span>'+obj.text+'</span>').addClass('text');
 
                 $li.append($span);
             }
@@ -142,6 +142,8 @@ function Carousel(element)
                 h           = img.naturalHeight,
                 ratio       = (h / w),
                 newWidth    = window.innerHeight / ratio;
+
+            console.log(w, newWidth);
 
             // store the width and ratio for resize recalculations
             widths.push(newWidth);
