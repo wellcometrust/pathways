@@ -59,7 +59,6 @@
 @mixin transform($args...) {
     -webkit-transform: $args;
        -moz-transform: $args;
-        -ms-transform: $args;
          -o-transform: $args;
             transform: $args;
 }
@@ -91,9 +90,6 @@
     @-moz-keyframes $animation-name {
         @content;
     }
-    @-ms-keyframes $animation-name {
-        @content;
-    }
     @-o-keyframes $animation-name {
         @content;
     }
@@ -105,7 +101,6 @@
 @mixin animation($str) {
     -webkit-animation: #{$str};
        -moz-animation: #{$str};
-        -ms-animation: #{$str};
          -o-animation: #{$str};
             animation: #{$str};
 }

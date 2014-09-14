@@ -241,6 +241,9 @@ Pathways.LoadScenes = function() {
     $('[data-component="gallery"]').hide();
     $('[data-component="quiz"]').hide();
 
+    var panel_total = document.querySelectorAll('.sequence .panel').length,
+        panel_count = 0;
+
     $('.sequence .panel').each(function() {
         var $this           = $(this),
             height          = $this.outerHeight(),
@@ -251,6 +254,8 @@ Pathways.LoadScenes = function() {
             $mute           = $this.find('.mute'),
             
             tween           = TweenMax.to( $bg, 1, { opacity: 1 });
+
+        panel_count+=1; // for tracking first and last panels (when logic needs to differ because of the lack of cross-fading)
 
         /*
             I can't entirely explain why we need to set the bg to block on both enter and leave. But it fixes
@@ -270,38 +275,38 @@ Pathways.LoadScenes = function() {
             .setTween(tween)
 
         // Galleries
-        if( $gallery.length ) {
-            scenes[idx++] = new ScrollScene({
-                    triggerElement: $this,
-                    triggerHook:    'top',
-                    duration:       (height - (height / 4) )
-                })
-                .on('enter', function() {
-                    $gallery.css({ position: 'fixed', display: 'block' });
-                    setTimeout(function() { $gallery.addClass('active'); }, 50);
-                })
-                .on('leave', function() {
-                    $gallery.css({ position: 'absolute', display: 'none' });
-                    setTimeout(function() { $gallery.removeClass('active'); }, 50);
-                })
-        }
+        // if( $gallery.length ) {
+        //     scenes[idx++] = new ScrollScene({
+        //             triggerElement: $this,
+        //             triggerHook:    'top',
+        //             duration:       (height - (height / 4) )
+        //         })
+        //         .on('enter', function() {
+        //             $gallery.css({ position: 'fixed', display: 'block' });
+        //             setTimeout(function() { $gallery.addClass('active'); }, 50);
+        //         })
+        //         .on('leave', function() {
+        //             $gallery.css({ position: 'absolute', display: 'none' });
+        //             setTimeout(function() { $gallery.removeClass('active'); }, 50);
+        //         })
+        // }
 
         // Quiz
-        if( $quiz.length ) {
-            scenes[idx++] = new ScrollScene({
-                    triggerElement: $this,
-                    triggerHook:    'top',
-                    duration:       Pathways.panel_height
-                })
-                .on('enter', function() {
-                    $quiz.css({ position: 'fixed', display: 'block' });
-                    setTimeout(function() { $quiz.addClass('active'); }, 50);
-                })
-                .on('leave', function() {
-                    $quiz.css({ position: 'absolute', display: 'none' });
-                    setTimeout(function() { $quiz.removeClass('active'); }, 50);
-                })
-        }
+        // if( $quiz.length ) {
+        //     scenes[idx++] = new ScrollScene({
+        //             triggerElement: $this,
+        //             triggerHook:    'top',
+        //             duration:       Pathways.panel_height
+        //         })
+        //         .on('enter', function() {
+        //             $quiz.css({ position: 'fixed', display: 'block' });
+        //             setTimeout(function() { $quiz.addClass('active'); }, 50);
+        //         })
+        //         .on('leave', function() {
+        //             $quiz.css({ position: 'absolute', display: 'none' });
+        //             setTimeout(function() { $quiz.removeClass('active'); }, 50);
+        //         })
+        // }
 
         // Library panels
         if( $library_panel.length ) {
@@ -309,7 +314,7 @@ Pathways.LoadScenes = function() {
 
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
-                    duration:       (height - 200),
+                    duration:       (panel_count == panel_total) ? height - (height / 2) : (height - 300),
                     offset:         100
                 })
                 .on('enter', function() {

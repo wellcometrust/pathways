@@ -9,11 +9,6 @@
     100%    { -moz-transform: translate(1024px, 0); }
 }
 
-@-ms-keyframes boats {
-    0%      { -ms-transform: translate(-640px, 0); }
-    100%    { -ms-transform: translate(1024px, 0); }
-}
-
 @keyframes boats {
     0%      { transform: translate(-640px, 0); }
     100%    { transform: translate(1024px, 0); }

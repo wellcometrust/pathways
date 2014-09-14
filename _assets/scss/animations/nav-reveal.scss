@@ -21,17 +21,6 @@
     }
 }
 
-@-ms-keyframes nav-reveal {
-    0% {
-        opacity: 0;
-        -ms-transform: translate(0, 50px);
-    }
-    100% {
-        opacity: 1;
-        -ms-transform: translate(0, 0);
-    }
-}
-
 @keyframes nav-reveal {
     0% {
         opacity: 0;

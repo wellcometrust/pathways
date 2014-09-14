@@ -476,6 +476,16 @@
             &.active img {
                 @include transform(scale(1, 1));
             }
+
+            .main-content {
+                h1, p {
+                    color: #333;
+                }
+            }
+
+            .info-box.with-text .text {
+                color: #333;
+            }
         }
     }
 }

@@ -58,5 +58,11 @@
 
     </main>
 
+    <?php
+        if( isset($audio) ) {
+            echo '<div data-audio="http://wellcome-pathways.s3.amazonaws.com/'. $audio .'.mp3"></div>';
+        }
+    ?>
+
 
 <?php include($docRoot.'/_includes/footer.php') ?>

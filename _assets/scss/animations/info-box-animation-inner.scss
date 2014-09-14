@@ -15,14 +15,6 @@
     100%    { -moz-transform: scale(0.9); }
 }
 
-@-ms-keyframes info-box-animation-inner {
-    0%      { -ms-transform: scale(0.9); }
-    35%     { -ms-transform: scale(0.9); }
-    45%     { -ms-transform: scale(1.1); }
-    80%     { -ms-transform: scale(0.9); }
-    100%    { -ms-transform: scale(0.9); }
-}
-
 @keyframes info-box-animation-inner {
     0%      { transform: scale(0.9); }
     35%     { transform: scale(0.9); }

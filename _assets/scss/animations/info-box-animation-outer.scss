@@ -15,14 +15,6 @@
     100%    { -moz-transform: scale(1.1); opacity: 0; }
 }
 
-@-ms-keyframes info-box-animation-outer {
-    0%      { -ms-transform: scale(0.8); opacity: 0; }
-    30%     { -ms-transform: scale(0.8); opacity: 0; }
-    45%     { opacity: 1; }
-    80%     { -ms-transform: scale(1.1); opacity: 0; }
-    100%    { -ms-transform: scale(1.1); opacity: 0; }
-}
-
 @keyframes info-box-animation-outer {
     0%      { transform: scale(0.8); opacity: 0; }
     30%     { transform: scale(0.8); opacity: 0; }

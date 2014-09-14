@@ -23,4 +23,6 @@
         'title' => 'A machine to control the mind'
     );
 
+    $audio = 'PARIS_ATMOSPHERE';
+
     include($docRoot.'/_includes/module.php');

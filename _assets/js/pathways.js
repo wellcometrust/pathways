@@ -5,7 +5,7 @@
     var doc = w.document;
 
     var Pathways = {
-        orientation:    w.innerWidth > w.innerHeight ? 'landscape' : 'portrait',                            // pretty crude but it'll do
+        orientation:    (w.innerWidth / w.innerHeight) > 1.2 ? 'landscape' : 'portrait',                    // pretty crude but it'll do
         panel_height:   w.innerHeight < 550 ? 550 : w.innerHeight,                                          // 550px minimum panel height
         supports_touch: ('ontouchstart' in w) || (w.DocumentTouch && document instanceof DocumentTouch),    // is it a touch device?
 
@@ -23,7 +23,7 @@
                 Pathways.panel_height = 550;
 
             // Progressive loading. Some things need to happen before window load
-            if( Pathways.level > 3 ) {
+            if( Pathways.level >= 3 ) {
                 Pathways.resizeAllTheThings();
             }
 
@@ -56,6 +56,7 @@
                 Pathways.resizeSomeThings();
 
                 Pathways.loadVideo();
+                Pathways.loadAudio();
             });
 
         }
@@ -211,6 +212,19 @@
         }
     }
 
+    Pathways.loadAudio = function() {
+        var _audio  = document.querySelector('[data-audio]'),
+            src     = _audio.getAttribute('data-audio'),
+            audio   = document.createElement('audio');
+
+        audio.src       = src;
+        audio.preload   = true;
+        audio.autoplay  = true;
+        audio.loop      = true;
+
+        _audio.appendChild(audio);
+    }
+
     Pathways.resizeSomeThings = function() {
         if( w.innerWidth < 768 ) {
             return;
@@ -221,7 +235,7 @@
 
         for (var i = 0; i < this._panels['preserve_ratio'].length; i++) {
             var _container  = this._panels['preserve_ratio'][i].querySelector('.bg-container'),
-                prefixes    = ['-ms-', '-moz-', '-webkit-', ''];
+                prefixes    = ['-moz-', '-webkit-', ''];
 
             if( panel_height > new_height ) {
                 for (var p = 0; p < prefixes.length; p++) {

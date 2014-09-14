@@ -1,5 +1,5 @@
 
-<div id="where-will-this-technology-lead" class="panel" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="where-will-this-technology-lead" class="panel" data-scene="where-will-this-technology-lead" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
