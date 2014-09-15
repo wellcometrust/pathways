@@ -13,7 +13,11 @@
         </header>
 
         <p class="intro-text">Whether paying a shilling to peek at an Italian anatomical model in a grocer’s shop on the Strand, or visiting a public museum, Londoners were avid consumers of anatomy collections in the eighteenth and early nineteenth century. But, by the late 1870s, all the city’s public anatomy museums had been closed down, disgraced by accusations of obscenity.</p>
-
+        <p class="intro-text scroll-down">
+            <span class="scroll-down--text">Scroll down</span>
+            <span class="scroll-down--arrow"></span>
+        </p>
+        
     </div>
 
 </div>

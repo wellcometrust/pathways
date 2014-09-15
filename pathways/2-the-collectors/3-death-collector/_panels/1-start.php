@@ -13,7 +13,11 @@
         </header>
 
         <p class="intro-text">At a time when plague periodically decimated London’s population, haberdasher John Graunt applied his knowledge of book-keeping to collect, analyse and interpret data relating to the City’s deaths. His revolutionary approach established Graunt as the world’s first epidemiologist and demographer.</p>
-
+        <p class="intro-text scroll-down">
+            <span class="scroll-down--text">Scroll down</span>
+            <span class="scroll-down--arrow"></span>
+        </p>
+        
     </div>
 
 </div>
