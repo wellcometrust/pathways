@@ -178,7 +178,7 @@
             }
 
             &.correct {
-                background:         #fff url(/_assets/img/icons/icon-tick.svg) 95% 50% no-repeat;
+                background:         #fff url(/_assets/img/icons/icon-tick-green.svg) 95% 50% no-repeat;
                 background-size:    10%;
                 border:             2px solid #A6D470;
                 line-height:        26px;
@@ -190,7 +190,7 @@
             }
 
             &.wrong {
-                background:         #fff url(/_assets/img/icons/icon-cross.svg) 95% 50% no-repeat;
+                background:         #fff url(/_assets/img/icons/icon-cross-red.svg) 95% 50% no-repeat;
                 background-size:    10%;
                 border:             2px solid #FC341E;
                 line-height:        26px;
@@ -268,14 +268,16 @@
 
         .facebook {
             float:          left;
-            background:     url(/_assets/img/icons/icon-facebook.svg) 0 0 no-repeat;
+            background:     url(/_assets/img/icons/icon-facebook-circle-white.svg) 0 0 no-repeat;
+            background-size: 100%;
             width:          36px;
             height:         36px;
         }
 
         .twitter {
             float:          left;
-            background:     url(/_assets/img/icons/icon-twitter.svg) 0 0 no-repeat;
+            background:     url(/_assets/img/icons/icon-twitter-circle-white.svg) 0 0 no-repeat;
+            background-size: 100%;
             width:          36px;
             height:         36px;
             margin-left:    0.8rem;

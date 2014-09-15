@@ -1,8 +1,9 @@
 
-<div id="office-2" class="panel" data-scene="office-2" data-config='{ "offset_height": 300, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="office-2" class="panel" data-scene="office-2" data-config='{ "offset_height": 400, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <img alt="" src="/pathways/1-mindcraft/_assets/6-freud/freud-4.jpg">
+        <img alt="" class="small-screen" src="/pathways/1-mindcraft/_assets/6-freud/freud-4-crop.jpg">
+        <img alt="" class="large-screen" src="/pathways/1-mindcraft/_assets/6-freud/freud-4.jpg">
     </div>
 
     <div class="main-content title align-center">

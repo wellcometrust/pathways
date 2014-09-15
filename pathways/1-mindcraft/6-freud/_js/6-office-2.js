@@ -1,7 +1,7 @@
 
 Pathways.Scene.Office2 = function() {
 
-    var $img = $('#office-2').find('img').first();
+    var $img = $('#office-2').find('.large-screen').first();
 
     var scene = new ScrollScene({
             triggerElement: '#office-2',

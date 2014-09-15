@@ -12,7 +12,10 @@ Pathways.Quiz = function() {
         $('body').append( $overlay );
 
         $overlay.show();
-        $overlay.css('background-color', 'rgba(0,0,0,0.9)');
+        $overlay.css({
+            'background-color': 'rgba(0,0,0,0.9)',
+            'background-image': 'url('+quiz_db['images'] + '/' + 'bg.jpg)'
+        });
 
         // prevent scrolling
         $('body').addClass('modal-open');
@@ -52,9 +55,9 @@ Pathways.Quiz = function() {
 
 function Quiz(element) {
     var $quiz           = $(element),
-        started         = false,
         paused          = false,
         level           = 1,
+        imagesLocation  = quiz_db['images'],
         questions       = quiz_db['questions'],
         answers         = quiz_db['questions'][level]['answers'],
         totalQuestions  = questions.length,
@@ -67,14 +70,30 @@ function Quiz(element) {
         $score      = $quiz.find('.score span'),
 
         $timer      = $('<div/>').addClass('timer').css('display', 'none'),
-        timerID;
+        timerID,
+        timeoutWaitID;
 
 
     this.init = function() {
         var self = this;
 
+        // load the intro image
+        var $quizHeader = $quiz.find('.quiz-header-image'),
+            $image      = $('<img/>').attr('src', imagesLocation + '/intro.jpg');
+
+        $quizHeader.html($image);
+
+        // Add the timer
+        $quiz.append($timer);
+
         $quiz.on('click', '.quiz-start .button', function() {
             self.start();
+        });
+
+        // set up the click events
+        $quiz.on('click', 'li', function(e) {
+            if( !paused )
+                self.validate(e);
         });
     }
 
@@ -86,17 +105,8 @@ function Quiz(element) {
         $quiz.find('.status-bar').show();
         $quiz.find('.quiz-playground').show();
 
-        // Add the timer
-        $quiz.append($timer);
-
         // Load the level
         this.loadLevel();
-
-        // set up the click events
-        $quiz.on('click', 'li', function(e) {
-            if( !paused )
-                self.validate(e);
-        });
     }
 
     this.getCurrentQuestion = function() {
@@ -107,7 +117,7 @@ function Quiz(element) {
         // image
         var self        = this,
             question    = this.getCurrentQuestion(),
-            $image      = $('<img/>').attr('src', question['image']),
+            $image      = $('<img/>').attr('src', imagesLocation + '/' + question['image']),
             str         = '<ul>';
 
         $quiz.find('.image').html($image);
@@ -128,7 +138,7 @@ function Quiz(element) {
         this.updateQuestionsRemaining();
 
         // Wait for timerWait seconds then start a timerLength countdown
-        setTimeout(function() {
+        timeoutWaitID = setTimeout(function() {
             self.startTimer();
         }, (timerWait * 1000));
     }
@@ -203,11 +213,10 @@ function Quiz(element) {
         var self    = this,
             counter = timerLength;
 
-        clearInterval(timerID);
+        this.stopTimer();
 
-        var elm = $quiz.find('.quiz-playground .image');
-
-        var diff = $quiz.find('.quiz-playground .image').offset().top - $quiz.find('.quiz-playground').offset().top;
+        var elm     = $quiz.find('.quiz-playground .image'),
+            diff    = $quiz.find('.quiz-playground .image').offset().top - $quiz.find('.quiz-playground').offset().top;
 
         $timer.css({
             top:        (diff + elm.outerHeight() / 2) - ($timer.height() / 2),
@@ -217,6 +226,7 @@ function Quiz(element) {
 
         $timer.fadeIn(100);
 
+        // Every second, count down.
         timerID = setInterval(function() {
             if(counter > 1) {
                 $timer.html(--counter);
@@ -239,6 +249,8 @@ function Quiz(element) {
 
     this.stopTimer = function() {
         clearInterval(timerID);
+        clearTimeout(timeoutWaitID);
+        
         $timer.fadeOut(100);
     }
 
@@ -261,30 +273,15 @@ function Quiz(element) {
     }
 
     this.restart = function() {
+        this.stopTimer();
+
         score = 0;
         level = 1;
+
+        $quiz.find('.quiz-finish').hide();
 
         this.start();
     }
 
     this.init();
-}
-
-
-var quiz_db = {
-    'title': 'The Esdaile Game',
-    'questions' : [
-         {
-            'image':    'http://placekitten.com/500/295',
-            'title':    'Estimate the weight of the tumour',
-            'answers':  ['0.5kg', '1kg', '2kg', '5kg'],
-            'correct':  1
-         },
-         {
-            'image':    'http://placekitten.com/600/300',
-            'title':    'How long did it take to remove?',
-            'answers':  ['5 minutes', '30 minutes', '2 hours', '4 hours'],
-            'correct':  4
-         },
-    ]
 }

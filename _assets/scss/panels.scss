@@ -455,8 +455,25 @@
 }
 
 @media all and (min-width: 48rem) {
+    #gonad-man {
+        .main-content {
+            h1, p {
+                color: #333;
+            }
+        }
+
+        .info-box.with-text .text {
+            color: #333;
+        }
+    }
+
     .touch {
         #gonad-man {
+            img {
+                @include transform(scale(1.4));
+                @include transform-origin(50% 0%);
+            }
+
             .info-box {
                 position:   absolute;
                 top:        20px;
@@ -475,17 +492,7 @@
 
             &.active img {
                 @include transform(scale(1, 1));
-            }
-
-            .main-content {
-                h1, p {
-                    color: #333;
-                }
-            }
-
-            .info-box.with-text .text {
-                color: #333;
-            }
+            }            
         }
     }
 }
@@ -495,7 +502,7 @@
         #gonad-man {
             .info-box {
                 position:   absolute;
-                top:        20px;
+                top:        51%;
                 right:      100px;
             }
         }
@@ -602,6 +609,16 @@
     .main-content {
         h1, p {
             text-shadow: 1px 1px 0 #030303;
+        }
+    }
+}
+
+@media all and (min-width: 48rem) {
+    .touch {
+        #james-braid {
+            .main-content.left {
+                max-width: 530px;
+            }
         }
     }
 }
@@ -1332,11 +1349,6 @@
         img {
             @include transform( scale(1.6, 1.6) );
             @include transform-origin( 0 0 );
-            @include transition( all 14s ease );
-        }
-
-        &.active img {
-            @include transform( translate(-80%, -40%) scale(1.8, 1.8) );
         }
     }
 
@@ -1356,14 +1368,14 @@
 
 
 #office-2 {
+    .large-screen {
+        display: none;
+    }
+
     header {
         h1 {
             font-size: 1.618rem;
         }
-    }
-
-    img {
-        display: none;
     }
 }
 
@@ -1377,14 +1389,9 @@
 
 @media all and (min-width: 48rem) {
     #office-2 {
-        img {
-            @include transform( scale(1.6, 1.6) );
+        .large-screen {
             @include transform-origin( 0 0 );
-            // @include transition( all 14s ease );
-        }
-
-        &.active img {
-            // @include transform( translate(-80%, -40%) scale(1.8, 1.8) );
+            @include transform( scale(1.6, 1.6) );
         }
 
         header {
@@ -1394,8 +1401,24 @@
         }
     }
 
+    .touch {
+        #office-2 {
+            .small-screen {
+                @include transform-origin( 100% 0 );
+                @include transform( scale(1.6, 1.6) );
+            }
+        }
+    }
+
     .no-touch {
         #office-2 {
+            .small-screen {
+                display: none;
+            }
+            .large-screen {
+                display: block;
+            }
+
             header {
                 h1 {
                     text-shadow: 1px 1px 1px #030303;

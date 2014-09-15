@@ -11,3 +11,13 @@
         }
     }
 }
+
+@media all and (min-width: 48rem) {
+    .touch {
+        #james-braid {
+            .main-content.left {
+                max-width: 530px;
+            }
+        }
+    }
+}

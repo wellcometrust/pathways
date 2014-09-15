@@ -24,7 +24,7 @@
     <div class="further-reading">
         <div class="further-reading-container">
             <span>Further reading from</span>
-            <img src="/_assets/img/logo-black.png" alt="wellcome library">
+            <img src="/_assets/img/logo-black.svg" alt="wellcome library">
         </div>
 
         <div class="show-more">

@@ -1,13 +1,13 @@
 
 #office-2 {
+    .large-screen {
+        display: none;
+    }
+
     header {
         h1 {
             font-size: 1.618rem;
         }
-    }
-
-    img {
-        display: none;
     }
 }
 
@@ -21,14 +21,9 @@
 
 @media all and (min-width: 48rem) {
     #office-2 {
-        img {
-            @include transform( scale(1.6, 1.6) );
+        .large-screen {
             @include transform-origin( 0 0 );
-            // @include transition( all 14s ease );
-        }
-
-        &.active img {
-            // @include transform( translate(-80%, -40%) scale(1.8, 1.8) );
+            @include transform( scale(1.6, 1.6) );
         }
 
         header {
@@ -38,8 +33,24 @@
         }
     }
 
+    .touch {
+        #office-2 {
+            .small-screen {
+                @include transform-origin( 100% 0 );
+                @include transform( scale(1.6, 1.6) );
+            }
+        }
+    }
+
     .no-touch {
         #office-2 {
+            .small-screen {
+                display: none;
+            }
+            .large-screen {
+                display: block;
+            }
+
             header {
                 h1 {
                     text-shadow: 1px 1px 1px #030303;

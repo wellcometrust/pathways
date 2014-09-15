@@ -8,8 +8,25 @@
 }
 
 @media all and (min-width: 48rem) {
+    #gonad-man {
+        .main-content {
+            h1, p {
+                color: #333;
+            }
+        }
+
+        .info-box.with-text .text {
+            color: #333;
+        }
+    }
+
     .touch {
         #gonad-man {
+            img {
+                @include transform(scale(1.4));
+                @include transform-origin(50% 0%);
+            }
+
             .info-box {
                 position:   absolute;
                 top:        20px;
@@ -28,17 +45,7 @@
 
             &.active img {
                 @include transform(scale(1, 1));
-            }
-
-            .main-content {
-                h1, p {
-                    color: #333;
-                }
-            }
-
-            .info-box.with-text .text {
-                color: #333;
-            }
+            }            
         }
     }
 }
@@ -48,7 +55,7 @@
         #gonad-man {
             .info-box {
                 position:   absolute;
-                top:        20px;
+                top:        51%;
                 right:      100px;
             }
         }
