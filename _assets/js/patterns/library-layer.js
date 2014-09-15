@@ -4,7 +4,8 @@ Pathways.LibraryLayer = function() {
     var $gap                = $('.library-layer .gap'),
         $further_reading    = $('.further-reading'),
         height              = $gap.height(),
-        state               = 'closed';
+        state               = 'closed',
+        scrollTo            = $('.fork').offset().top - 200;
 
     $gap.css({ 'height': 0, 'transition': 'height 0.4s ease' });
     $('.library-layer .button').html('open');
@@ -16,8 +17,8 @@ Pathways.LibraryLayer = function() {
 
             // scroll to the top of the library layer
             $('html, body').animate({
-                scrollTop: ($gap.offset().top - 100)
-            }, 500)
+                scrollTop: scrollTo
+            }, 300);
         }
         else {
             $('.library-layer .gap').css('height', 0);

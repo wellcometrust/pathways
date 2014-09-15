@@ -56,7 +56,7 @@
                 Pathways.resizeSomeThings();
 
                 Pathways.loadVideo();
-                Pathways.loadAudio();
+                // Pathways.loadAudio();
             });
 
         }
@@ -218,7 +218,7 @@
             audio   = document.createElement('audio');
 
         audio.src       = src;
-        audio.preload   = true;
+        audio.preload   = 'auto';
         audio.autoplay  = true;
         audio.loop      = true;
 
