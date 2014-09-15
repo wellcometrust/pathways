@@ -20,8 +20,8 @@
     $teaser = array(
         'image' => '',
         'link'  => $path.'credits.php',
-        'title' => 'Example teaser title',
-        'text'  => 'While opening up the ‘locked cabinet’ of sex knowledge to a mass audience, Stopes inadvertently become a collector of confessional and emotional personal accounts that illustrate the appetite for – and impact of – the knowledge she shared.'
+        'title' => 'Credits',
+        'text'  => 'By opening up the ‘locked cabinet’ of sexual knowledge to a mass audience, Stopes unintentionally built up a collection of deeply personal correspondence. These confessional and emotional letters illustrate the appetite for – and impact of – the information Stopes once again exposed to the public.'
     );
 
     include($docRoot.'/_includes/module.php');

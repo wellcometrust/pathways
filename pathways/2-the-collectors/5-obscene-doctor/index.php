@@ -18,9 +18,10 @@
 
 
     $teaser = array(
-        'image' => '',
+        'image' => 'teaser-ignorant-bride.jpg',
         'link'  => $path.'6-ignorant-bride/index.php',
-        'title' => 'Example teaser title'
+        'title' => 'The Ignorant Bride',
+        'text'  => 'The legal action taken against collections like Kahn’s transformed the public study of anatomy from a source of entertainment and wonder to a secret and shameful activity. It would take a woman distressed by her own ignorance to expose much of this anatomical knowledge again.'
     );
 
     include($docRoot.'/_includes/module.php');

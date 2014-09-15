@@ -14,6 +14,9 @@
             <p class="teaser-text">Next:</p>
             <?php endif ?>
             <h1><?php echo $teaser_title != '' ? $teaser_title : '' ?></h1>
+            <?php if ( isset($teaser['text']) ): ?>
+                <p><?php echo $teaser['text'] ?></p>
+            <?php endif ?>
             <div class="teaser-icon"></div>
         </div>
     </a>

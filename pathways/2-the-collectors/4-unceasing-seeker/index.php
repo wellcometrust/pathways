@@ -18,9 +18,10 @@
 
 
     $teaser = array(
-        'image' => '',
+        'image' => 'teaser-obscene-doctor.jpg',
         'link'  => $path.'5-obscene-doctor/index.php',
-        'title' => 'Example teaser title'
+        'title' => 'The Obscene Doctor',
+        'text'  => 'Wellcome intended his museums to be used primarily by those engaged in research. Yet he also knew how to exploit his acquisitions to create a spectacle, a skill he shared with another London immigrant, whose popular collection was ultimately destroyed.'
     );
 
     include($docRoot.'/_includes/module.php');

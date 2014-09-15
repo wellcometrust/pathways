@@ -12,8 +12,8 @@
         </div>
 
         <div class="inner">
-            <p>Her reading formed the basis for Married Love, a book published in 1918 after being turned down by many publishers. In it, Stopes addresses the ‘infinitely complex’ problems of the sex-life with ‘both sympathy and scientific research’. Inspired by her own experience, Stopes’ intention was to help ‘average, healthy, mating creatures… find the key to the happiness which should be the portion of each’.</p>
-            <p>Condemned by churches, the medical establishment and the press it sold 2000 copies within a fortnight and was reprinted six times by the end of the year.</p>
+            <p>Stopes’s reading formed the basis for Married Love, a book published in 1918 after being rejected by many publishers. In it, Stopes addresses the ‘infinitely complex’ problems of marital sex with ‘sympathy and scientific research’. Drawing on first hand observations, Stopes aimed to provide information that might save ‘average, healthy, mating creatures…years of heartache and groping in the dark’.</p>
+            <p>Despite being condemned by churches, the medical establishment and the press, Married Love sold 2000 copies within a fortnight and was reprinted six times by the end of the year.</p>
         </div>                    
 
     </div>

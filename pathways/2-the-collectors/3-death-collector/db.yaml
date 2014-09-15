@@ -1,20 +1,22 @@
 
-# Example panel ids:
-# 
-# example
-# ...
-
+# Curious Gardener Panels:
+#
+# bills-of-mortality
+# graunt-records
+# political-mortality-book
+# death-infographic
+# isaac-newton
 
 
 # Info Panels
 
 info_panels:
 
-    example:
+    bills-of-mortality:
         -   title: ''
-            catalogue_url: ''
-            download_url: ''
-            images_url: ''
+
+            see_in_Wellcome_Library_url: ''
+            download_hi_res_url: ''
             external_url: ''
 
 
@@ -45,14 +47,15 @@ info_panels:
 
 library_layer:
 
-    player:
+    See_in_the_Wellcome_Library:
+
         -   type: ''
             title: ''
             author: ''
             date: 2014
             link: ''
 
-    related:
+    See_Elsewhere:
         -   type: ''
             title: ''
             author: ''

@@ -8,7 +8,7 @@
     <div class="main-content left">
 
         <div class="inner">
-            <p>Taken to court by The Society for the Suppression of Vice, Kahn was successfully prosecuted under the 1857 Obscene Publications Act, which made it illegal for anatomical museums to publish or distribute texts on venereal diseases or sexual health.</p>
+            <p>Taken to court by The Society for the Suppression of Vice, Kahn was successfully prosecuted under the 1857 Obscene Publications Act, which made it illegal to publish texts on venereal disease and sexual health aimed at a general audience.</p>
         </div>                    
 
     </div>

@@ -18,10 +18,10 @@
 
 
     $teaser = array(
-        'image' => '',
+        'image' => 'teaser-death-collector.jpg',
         'link'  => $path.'3-death-collector/index.php',
-        'title' => 'Example teaser title',
-        'text'  => 'Bacon’s vision of scientific investigations based on evidence collected from the real world and the systematic study of observations was powerfully realised three decades later by a London haberdasher with an unhealthy interest in death.'
+        'title' => 'The Death Collector',
+        'text'  => 'Bacon’s vision of scientific investigations based on evidence collected from the real world was powerfully realised three decades later by a London haberdasher, who appeared to exhibit an unhealthy interest in death.'
     );
 
     include($docRoot.'/_includes/module.php');

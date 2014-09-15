@@ -17,10 +17,10 @@
     $path       = $config_yml['site']['pathways'][$pathway]['path'];
 
     $teaser = array(
-        'image' => '',
+        'image' => 'teaser-merchants-of-light.jpg',
         'link'  => $path.'2-merchants-of-light/index.php',
-        'title' => 'Example teaser title',
-        'text'  => 'Renowned as a worthy, curious and diligent searcher and preserver of all nature’s rarities, Tradescant built up a collection that held more curiosities than a man might see in a lifetime of travel. By the time of his death, however, collecting was transitioning from the eclectic, intriguing and alluring to an ordered search for specimens studied to gain knowledge. In one proto-scientist’s mind, the men compiling such collections were nothing less than ‘merchants of light’.'
+        'title' => 'Merchants of Light',
+        'text'  => 'By the time Tradescant died in 1638, a new approach to collecting was emerging: not the gathering and display of eclectic and rare curiosities, but an ordered search for specimens that might be studied to understand the world. In one philosopher’s mind, the men building up such collections were nothing less than ‘merchants of light’.'
     );
 
     include($docRoot.'/_includes/module.php');

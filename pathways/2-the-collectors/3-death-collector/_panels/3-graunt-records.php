@@ -9,7 +9,8 @@
     <div class="main-content left">
 
         <div class="inner">
-            <p>Graunt collected a few of these ‘scattered bills’ and began tabulating the data they contained. Like a merchant’s account book, the Bills provided a continuous record of additions and subtractions to the City’s population, data that provided useful insights into the market for their wares.</p>
+            <p>Graunt collected a few ‘scattered bills’ and began tabulating the data they shared. Like a merchant’s account book, Graunt’s tables provide a continuous record of additions and subtractions to the City’s population.</p>
+            <p>Graunt also interpreted the information he collected, documenting insights about the causes and trends behind the changing market for trade.</p>
         </div>                    
 
     </div>

@@ -6,7 +6,7 @@
     <div class="main-content center">
 
         <div class="inner">
-            <p>The ‘eye’ of the Kingdom is Salomon’s House, an institution whose members seek enlightenment through an organised system of empirical scientific research.</p>
+            <p>Bacon’s utopian novella New Atlantis was published shortly after his death. It describes the fictitious island of Bensalem, a community centred around an institution whose members seek enlightenment through an organised process of empirical scientific research.</p>
         </div>
 
     </div>

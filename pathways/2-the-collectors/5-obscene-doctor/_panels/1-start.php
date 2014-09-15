@@ -6,13 +6,13 @@
     </div>
     
     <div class="content">
-        <p class="scene-set">London 1888</p>
+        <p class="scene-set">Joseph Kahn’s Anatomical Museum, 315 Oxford Street, 1873</p>
 
         <header>
             <h1>The Obscene Doctor</h1>
         </header>
 
-        <p class="intro-text">From 1719, when you could view one of Italian surgeon Guillaume Desnoues’ anatomical wax models for a shilling, in a grocer’s shop on the Strand, Londoners were avid visitors to anatomical displays and shows. But by the 1870s all the city’s public anatomy museums had closed down, under accusations of obscenity and legal censure.</p>
+        <p class="intro-text">Whether paying a shilling to peek at an Italian anatomical model in a grocer’s shop on the Strand, or visiting a public museum, Londoners were avid consumers of anatomy collections in the eighteenth and early nineteenth century. But, by the late 1870s, all the city’s public anatomy museums had been closed down, disgraced by accusations of obscenity.</p>
 
     </div>
 

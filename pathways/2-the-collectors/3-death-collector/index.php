@@ -18,10 +18,10 @@
 
 
     $teaser = array(
-        'image' => '',
+        'image' => 'teaser-unceasing-seeker.jpg',
         'link'  => $path.'4-unceasing-seeker/index.php',
-        'title' => 'Example teaser title',
-        'text'  => 'Almost 150 years later another London businessman deliberately set out to gain a similar level of academic respectability. His own plans for collecting data to publish a ground-breaking book were, however, thwarted by his unceasing desire to acquire the perfect collection.'
+        'title' => 'The Unceasing Seeker',
+        'text'  => 'Almost 150 years after Graunt’s election to the Royal Society, another London businessman deliberately set out to gain a similar level of academic respectability. His own plans to publish a ground-breaking book were, however, thwarted by an unceasing desire to acquire the perfect collection.'
     );
 
     include($docRoot.'/_includes/module.php');

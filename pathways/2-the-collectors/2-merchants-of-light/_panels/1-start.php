@@ -6,13 +6,13 @@
     </div>
     
     <div class="content">
-        <p class="scene-set">Francis Bacon’s novel - New Atlantis</p>
+        <p class="scene-set">Gorhambury House, Hertfordshire, c.1624</p>
 
         <header>
             <h1>Merchants of Light</h1>
         </header>
 
-        <p class="intro-text">In seventeenth-century philosopher Francis Bacon’s futuristic 1627 novel New Atlantis, sailors aboard a Spanish ship journeying from Peru to China inadvertently discovered ‘a fair city’ on the South Sea island of Bensalem. The isolated community is free from pollution or foulness and has access to mechanical arts, precious stones and engine-houses unknown to the visiting Europeans.</p>
+        <p class="intro-text">While John Tradescant had been securing the most alluring and intriguing treasures from cooperative ships in the British fleet, lawyer and philosopher Francis Bacon developed a vision of a world where evidence and knowledge were collected through more ordered voyages of exploration.</p>
 
     </div>
 

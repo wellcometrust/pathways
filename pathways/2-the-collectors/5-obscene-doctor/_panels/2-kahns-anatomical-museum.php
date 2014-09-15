@@ -12,8 +12,10 @@
             <div class="obscene-panels" data-component="modal">
 
                 <div class="text-panel">
-                    <p>Like Rackstrows before it, visitors to self-styled ‘doctor’ Joseph Kahn’s anatomical museum on Oxford Street encountered a life-size anatomical Venus and shocking models of the pathology of venereal disease. They could view microscopic slides and listen to daily lectures about the ‘wondrous’ structure and function of the human body.</p>
+                    <p>The 2000 people who visited self-styled ‘Doctor’ Joseph Kahn’s Museum every week encountered a life-sized anatomical Venus, models of dissections and monstrous births and candid displays on the pathology of venereal disease. They might also study slides under a microscope or listen to daily educational lectures about the ‘wondrous’ structure and function of the human body.</p>
+                    <p>Ladies were admitted only on specified days, when Kahn insisted the most offensive models were removed from display.</p>
                 </div>
+
                 <div class="image-panel">
                     <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/1.jpg">
                     <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/1-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
@@ -106,9 +108,6 @@
                     </svg>
                 </div>
 
-                <div class="text-panel">
-                    <p>Ladies were admitted only on specific days, when Kahn insisted the most offensive models were removed from display.</p>
-                </div>
             </div>
             
         </div>                    

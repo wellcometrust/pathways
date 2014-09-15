@@ -6,13 +6,13 @@
     </div>
     
     <div class="content">
-        <p class="scene-set">London 1918</p>
+        <p class="scene-set">The British Museum Reading Room, Bloomsbury, 1913</p>
 
         <header>
             <h1>The Ignorant Bride</h1>
         </header>
 
-        <p class="intro-text">Despite her scientific training, brilliant young paleobotanist Marie Stopes’ knowledge of the human body and sex was extremely limited. She claimed not to have understood that her marriage was unconsummated until she decided to research the subject. And her efforts lifted the veil of ignorance for a whole generation of women.</p>
+        <p class="intro-text">Brilliant young paleobotanist Marie Stopes was so ignorant about the workings of the human body that she claimed not to realise her own marriage was unconsummated. After she learned the truth, and shared her findings in a best-selling book, Stopes inadvertently became a collector of personal stories about sex and marriage.</p>
 
     </div>
 

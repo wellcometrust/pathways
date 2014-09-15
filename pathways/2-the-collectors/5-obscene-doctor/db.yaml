@@ -1,20 +1,22 @@
 
-# Example panel ids:
-# 
-# example
-# ...
-
+# Curious Gardener Panels:
+#
+# khans-anatomical-museum
+# quackery
+# obscene-publications-act
+# joseph-khan
+# seized-and-destroyed
 
 
 # Info Panels
 
 info_panels:
 
-    example:
+    khans-anatomical-museum:
         -   title: ''
-            catalogue_url: ''
-            download_url: ''
-            images_url: ''
+
+            see_in_Wellcome_Library_url: ''
+            download_hi_res_url: ''
             external_url: ''
 
 
@@ -45,14 +47,15 @@ info_panels:
 
 library_layer:
 
-    player:
+    See_in_the_Wellcome_Library:
+
         -   type: ''
             title: ''
             author: ''
             date: 2014
             link: ''
 
-    related:
+    See_Elsewhere:
         -   type: ''
             title: ''
             author: ''

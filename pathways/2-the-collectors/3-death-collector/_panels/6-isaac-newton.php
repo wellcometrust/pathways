@@ -10,7 +10,7 @@
     <div class="main-content left strip">
 
         <div class="inner">
-            <p>Developed before Isaac Newton’s mathematical treatise Principia, Observations was published at a time when ‘probability’ still referred to pure speculation and mathematicians were most likely to be astrologers. Its impact led to Graunt’s immediate election to the nascent Royal Society, at the request of the King.</p>
+            <p>Graunt lived at a time when mathematicians were akin to astrologers and ‘probability’ relied on imagination rather than considered analysis. His work so impressed King Charles II that the monarch decreed Graunt should be elected to the nascent Royal Society, an unexpected honour for a tradesman.</p>
         </div>                    
 
     </div>

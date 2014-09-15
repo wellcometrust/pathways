@@ -6,13 +6,17 @@
     </div>
     
     <div class="content">
-        <p class="scene-set">16<sup>th</sup> Century London</p>
+        <p class="scene-set">John Tradescant’s Thames-side home, 1634</p>
 
         <header>
             <h1>The curious gardener</h1>
         </header>
 
-        <p class="intro-text">In seventeenth-century London the must-see tourist attraction was a garden in South Lambeth full of outlandish herbs and flowers and a house full of strange curiosities. But how did a humble gardener build up a collection visited by nobility that also became London’s first public museum?</p>
+        <p class="intro-text">In 1634, anyone who spent a day at John Tradescant’s house and garden in south Lambeth could discover more curiosities than a man might see in a lifetime of travel. A must-see attraction for half a century, Tradescant’s ‘Ark’ was destined to become the first museum in Britain.</p>
+        <p class="intro-text scroll-down">
+            <span class="scroll-down--text">Scroll down</span>
+            <span class="scroll-down--arrow"></span>
+        </p>
 
     </div>
 
