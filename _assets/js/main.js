@@ -365,3 +365,22 @@ Pathways.LoadScenes = function() {
         s.addTo(controller);
     })
 }
+
+// Cross fade between panel audio and global audio
+Pathways.LoadPanelAudio = function(panel_audio) {
+    if( Pathways.globalAudio ) {
+        $(Pathways.globalAudio).animate({volume: 0}, 1000);
+    }
+
+    // fade in
+    $(panel_audio).animate({volume: 1}, 1000);
+}
+
+Pathways.UnloadPanelAudio = function(panel_audio) {
+    if( Pathways.globalAudio ) {
+        $(Pathways.globalAudio).animate({volume: 1}, 1000);
+    }
+
+    // fade in
+    $(panel_audio).animate({volume: 0}, 1000);
+}

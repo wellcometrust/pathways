@@ -22,5 +22,7 @@
         'link'  => $path.'3-elliotson',
         'title' => 'Who controls who?'
     );
+
+    $audio = 'asylum';
     
     include($docRoot.'/_includes/module.php');

@@ -56,7 +56,7 @@
                 Pathways.resizeSomeThings();
 
                 Pathways.loadVideo();
-                // Pathways.loadAudio();
+                Pathways.loadAudio();
             });
 
         }
@@ -222,6 +222,8 @@
         audio.autoplay  = true;
         audio.loop      = true;
 
+        this.globalAudio = audio;
+
         _audio.appendChild(audio);
     }
 
@@ -267,6 +269,8 @@ Pathways.Utils = (function(){
             return str.replace(/\W/g,'');
         },
 
+        // Takes a jQuery object as an argument.
+        // This wasn't here originally which is why it uses jQuery at all.
         positionCenter: function($elm) {
             var width   = $elm.width(),
                 height  = $elm.height(),
