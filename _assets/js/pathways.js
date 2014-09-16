@@ -56,7 +56,7 @@
                 Pathways.resizeSomeThings();
 
                 Pathways.loadVideo();
-                Pathways.loadAudio();
+                // Pathways.loadAudio();
             });
 
         }
@@ -85,8 +85,8 @@
         if( w.innerWidth >= 760 )
             level = 2;
 
-        // ~ iPad landscape (mid screens)
-        if( w.innerWidth >= 1020 )
+        // ~ Nexus 7 landscape (mid screens)
+        if( w.innerWidth >= 960 )
             level = 3;
 
         if( w.innerWidth >= 1020 && !Pathways.supports_touch )

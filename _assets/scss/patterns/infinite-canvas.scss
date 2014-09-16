@@ -4,8 +4,8 @@
     top:                0;
     left:               0;
     background-color:   #fff;
-    width:              3000px;
-    height:             2000px;
+    width:              8000px;
+    height:             4328px;
     cursor:             move;
 
     @include transform(translateZ(0));
@@ -15,5 +15,54 @@
 
     &.animate {
         @include transition(all 0.3s ease);
+    }
+
+    .text-panel {
+        position:       absolute;
+        width:          750px;
+        border-top:     1px solid #030303;
+        border-bottom:  1px solid #030303;
+        line-height:    1.618;
+
+        header {
+            padding: 2rem 0 1.6rem 0;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        p + p {
+            margin-top: 1rem;
+        }
+
+        .controls {
+            padding: 1rem 0;
+            @include clearfix;
+
+            .navigation {
+                float: right;
+
+                a {
+                    font-size: 24px;
+                    padding: 0.6rem 0;
+                    text-decoration: none;
+                }
+
+                .prev {
+                    color: #a1a1a1;
+                    margin-right: 1rem;
+                }
+
+                .next {
+                    color: #f83f36;
+                }
+            }
+        }
+    }
+
+    .image-panel {
+        position: absolute;
+        width: auto !important;
     }
 }
