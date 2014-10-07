@@ -212,7 +212,7 @@ Pathways.LoadScenes = function() {
         Sequence
      **************/
 
-     if( _('.sequence') ) {
+    if( _('.sequence') ) {
         var $bgs            = $sequence.find('.bg-container'),
             $first_panel    = $sequence.find('.panel').first(),
             $last_panel     = $sequence.find('.panel').last();
@@ -339,21 +339,14 @@ Pathways.LoadScenes = function() {
                     $mute.css({ position: 'absolute', display: 'none' });
                 })
         }
-    })
 
-    $('[data-scene]').each(function(){
-        var handler = $(this).attr('data-scene');
+        // Panel specific scene code if it has any
+        var panelID         = $this.attr('id'),
+            handlerClass    = Pathways.Utils.toTitleCase(panelID);
 
-        if ( handler ) {
-            var handlerClass = Pathways.Utils.toTitleCase(handler);
-
-            // Check the handler exists and it hasn't already been loaded
-            if ( window.Pathways.Scene[handlerClass] != null ) {
-                window.Pathways.Scene[handlerClass]();
-            }
-            
-            if( window.Pathways.Scene[handlerClass] == null )
-                console.warn('Could not load the necessary scene: ' + handlerClass);
+        // Check the handler exists, then load
+        if ( window.Pathways.Scene[handlerClass] != null ) {
+            window.Pathways.Scene[handlerClass]();
         }
     });
 

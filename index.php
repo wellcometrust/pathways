@@ -6,7 +6,7 @@
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
     include($docRoot.'/_includes/Spyc.php');
-    include $docRoot.'/_includes/config.php';
+    
 
     $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
 
