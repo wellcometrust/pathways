@@ -24,7 +24,7 @@ info_panels:
             catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b2033739~S12'
 
     india:
-        -   title: 'The north-east view of Angengo Fort on the coast of Malabar'
+        -   title: 'The north-east view of Anjengo Fort on the coast of Malabar'
             catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1265549'
             images_url: 'http://wellcomeimages.org/indexplus/image/L0038350.html'
 

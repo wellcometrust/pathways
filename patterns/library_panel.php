@@ -10,9 +10,9 @@
             <?php foreach ($panel['links'] as $link): ?>
             <li>
                 <span><?php echo $link['title'] ?></span>
-                <?php if( isset( $link['see_in_Wellcome_Library_url'] ) ):  ?><a href="<?php echo $link['see_in_Wellcome_Library_url'] ?>" rel="external">See in Wellcome Library</a><?php       endif ?>
-                <?php if( isset( $link['download_hi_res_url'] ) ):          ?><a href="<?php echo $link['download_hi_res_url'] ?>" rel="external">Download Hi-Res Image</a><?php   endif ?>
-                <?php if( isset( $link['external_url'] ) ):                 ?><a href="<?php echo $link['external_url'] ?>" rel="external">External</a><?php   endif ?>
+                <?php if( isset( $link['see_in_Wellcome_Library_url'] ) ):  ?><a href="<?php echo $link['see_in_Wellcome_Library_url'] ?>" rel="external">View</a><?php       endif ?>
+                <?php if( isset( $link['download_hi_res_url'] ) ):          ?><a href="<?php echo $link['download_hi_res_url'] ?>" rel="external">Download hi-res image</a><?php   endif ?>
+                <?php if( isset( $link['external_url'] ) ):                 ?><a href="<?php echo $link['external_url'] ?>" rel="external">View on external website</a><?php   endif ?>
             </li>
             <?php endforeach ?>
         </ul>

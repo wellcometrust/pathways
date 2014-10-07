@@ -9,7 +9,7 @@
     <div class="black-strip" ></div>
     
     <div class="main-content left strip">                    
-        <p>Mesmer’s salons became overwhelmed with patients. When he could no longer accommodate them he magnetised a tree in the street outside, to which crowds of people connected themselves with cords.</p>
+        <p>Mesmer’s salons became overwhelmed with patients. When he could no longer accommodate them, he magnetised a tree in the street outside and crowds of people connected themselves to it using cords.</p>
     </div>
 
 </div>

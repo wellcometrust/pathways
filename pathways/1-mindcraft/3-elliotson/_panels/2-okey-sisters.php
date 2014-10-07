@@ -12,8 +12,8 @@
         <p>The Okey sisters were extraordinarily susceptible, slipping rapidly into trance states where they manifested quite different personalities. Elliotson could make them fall into stupor merely by waving a finger.</p>
         <p>Touching magnetised metals or even water sent them into a trance in which they spontaneously mirrored each other’s actions.</p>
        
-        <p>Elliotson’s demonstrations were crowded with doctors and dignitaries. The Okey sisters seemed to enjoy the attention, especially in their disinhibited trance states, when they teased the gentlemen and sat in their laps.</p>
-        <p>The medical journal The Lancet had been reporting the demonstrations with interest. But its editor, Thomas Wakley, suspected deception. He requested a private demonstration at his house, where he took control.</p>
+        <p>Elliotson’s demonstrations were crowded with doctors and dignitaries. The Okey sisters seemed to enjoy the attention – especially in their disinhibited trance states, when they teased the gentlemen and sat in their laps.</p>
+        <p>The medical journal <i>The Lancet</i> had been reporting the demonstrations with interest. But its editor, Thomas Wakley, suspected deception. He requested a private demonstration at his house, where he took control.</p>
     </div>
 
     <div class="secondary-content">

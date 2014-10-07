@@ -12,7 +12,7 @@
         </header>
         
         <p>was a prisoner with a huge scrotal swelling. In front of a distinguished audience including doctors, magistrates and the local governor, he removed it painlessly in minutes.</p>
-        <p>Many more operations followed, from tooth extractions to amputations. Esdaile was given a hospital ward in Calcutta to develop his new technique.</p>
+        <p>Many more operations followed, from tooth extractions to amputations. Esdaile was given a hospital ward in Kolkata to develop his new technique.</p>
     </div>
 
     <div class="info-box with-text" data-component="quiz">
@@ -86,7 +86,7 @@
 
                 <div class="quiz-start--text">
                     <p>The surgeon performed dozens of operations, many of which were documented.</p>
-                    <p>See if you can work out what went on in each picture - but be quick, you’ve only got 10 seconds each!</p>
+                    <p>See if you can work out what went on in these pictures – but be quick, you’ve only got ten seconds for each one!</p>
                 </div>
 
                 <span class="button">Start</span>
@@ -114,7 +114,7 @@
             <div class="quiz-finish">
 
                 <header class="quiz-finish--header">
-                    <h1>Not bad muchacho, you got</h1>
+                    <h1>Not bad, muchacho. You got</h1>
                 </header>
 
                 <div class="quiz-finish--score"></div>

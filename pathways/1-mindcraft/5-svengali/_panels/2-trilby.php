@@ -13,7 +13,7 @@
 
                 <header>
                     <h1>Svengali</h1>
-                    <p>In his bestselling book "Trilby", George du Maurier drew on contemporary fears and anti-semitic stereotypes to create the ultimate evil hypnotist: Svengali.</p>
+                    <p>In his bestselling book <i>Trilby</i>, George du Maurier drew on contemporary fears and anti-semitic stereotypes to create the ultimate evil hypnotist: Svengali.</p>
                 </header>
             </div>
             

@@ -12,9 +12,9 @@
                 <h1>Where will this technology lead?</h1>
             </header>
 
-            <p>Matthews was confined in Bedlam as an incurable lunatic. But his delusions captured the disturbing power of the latest discoveries in electricity and chemistry.</p>
-            <p>Recent experiments on animals and humans had shown that electric currents could animate living tissue, and even dead bodies.</p>        
-            <p>The Air Loom posed the question: will these new technologies one day be able to control the mind as well as the body?</p>
+            <p>Matthews was confined in Bedlam as an incurable lunatic, but his delusions captured the disturbing power of the latest discoveries in electricity and chemistry.</p>
+            <p>Recent experiments on animals and humans had shown that electric currents could animate living tissue and even dead bodies.</p>        
+            <p>The Air Loom posed an important question: will these new technologies one day be able to control the mind as well as the body?</p>
         </div>
     </div>
 

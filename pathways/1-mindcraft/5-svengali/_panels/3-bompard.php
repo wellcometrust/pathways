@@ -11,7 +11,7 @@
             <div class="bompard-header">
                 <header>
                     <h1>Murder under hypnosis</h1>
-                    <p>Du Maurier's novel reflected sensational true-life stories, such as the case of Gabrielle Bompard in Paris in 1889. On trial for murder, Gabrielle claimed she had been hypnotised by her male accomplice and had no memory of the crime.</p>
+                    <p>Du Maurier’s novel reflected sensational true-life stories, such as the case of Gabrielle Bompard in Paris in 1889. On trial for murder, Gabrielle claimed she had been hypnotised by her male accomplice and had no memory of the crime.</p>
                     <p>At her trial, expert witnesses disputed the power of hypnosis. Could it be used to make someone commit murder against their will, or without their knowledge?</p>
                 </header>
             </div>
@@ -75,7 +75,7 @@
                         <div class="comic-panel comic-panel--10">
                             <div class="panel-number">6</div>
                             <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-10.jpg">
-                            <p class="panel-text"><cite><b>For the prosecution:</b> Jules Quesnay de Beaurepair</cite> “If hypnotism explains the crime, if it is a way to deny free will…no criminal will be accountable for the blood he spills.”</p>
+                            <p class="panel-text"><cite><b>For the prosecution:</b> Jules Quesnay de Beaurepaire</cite> “If hypnotism explains the crime, if it is a way to deny free will…no criminal will be accountable for the blood he spills.”</p>
                         </div>
                         <div class="comic-panel comic-panel--11" data-offset="-200">
                             <div class="panel-number">7</div>
@@ -93,8 +93,8 @@
             </div>
 
             <div class="outro">
-                <p>Both defendants were found guilty. Eyraud was sentenced to death by guillotine. Gabrielle received a prison sentence of 21 years.</p>
-                <p>After winning early release in 1903 she toured with a hypnotic stage show, in which she re-enacted her crime.</p>
+                <p>Both defendants were found guilty. Eyraud was sentenced to death by guillotine. Bompard received a prison sentence of 21 years.</p>
+                <p>After winning early release in 1903, she toured with a hypnotic stage show, in which she re-enacted her crime.</p>
             </div>
         </div>
         

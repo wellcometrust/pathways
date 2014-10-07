@@ -13,7 +13,7 @@
                 <h1>In Mesmer’s Salon</h1>
             </header>
 
-            <p>In his salons, or séances, a mysterious ‘magnetic fluid’ flowed invisibly round the participants. They convulsed, spoke in tongues and collapsed in violent fits. When they revived they found themselves cured of all manner of illnesses, from toothache to paralysis and even blindness.</p>
+            <p>In his salons, or séances, a mysterious ‘magnetic fluid’ flowed invisibly round the participants. They convulsed, spoke in tongues and collapsed in violent fits. When they were revived they found themselves cured of all manner of illnesses, from toothache to paralysis and even blindness.</p>
         </div>                    
 
     </div>

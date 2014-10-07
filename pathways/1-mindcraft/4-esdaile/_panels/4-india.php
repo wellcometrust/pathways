@@ -7,7 +7,7 @@
     </div>
 
     <div class="main-content left">
-        <p>The Lancet had pronounced mesmerism a fraud - but Esdaile's news from India had proved its powers beyond doubt.</p>
+        <p><i>The Lancet</i> had pronounced mesmerism a fraud – but Esdaile’s news from India had proved its powers beyond doubt.</p>
     </div>
 
 </div>
