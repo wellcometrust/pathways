@@ -23,7 +23,7 @@ info_panels:
             catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1159957'
             images_url: 'http://wellcomeimages.org/indexplus/image/V0011094ET.html'
 
-    thomas-wakley:
+    verdict:
         -   title: 'Thomas Wakley'
             catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1173333'
             images_url: 'http://wellcomeimages.org/indexplus/image/L0008210.html'
