@@ -1,5 +1,5 @@
 
-<div id="duke-of-buckingham" class="panel" data-scene="duke-of-buckingham" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="500">
+<div id="duke-of-buckingham" class="panel" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="500">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

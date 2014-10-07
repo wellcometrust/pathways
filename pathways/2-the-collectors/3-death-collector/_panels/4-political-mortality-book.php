@@ -1,5 +1,5 @@
 
-<div id="political-mortality-book" class="panel" data-scene="political-mortality-book" data-config='{ "offset_height": 150, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="political-mortality-book" class="panel" data-config='{ "offset_height": 150, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

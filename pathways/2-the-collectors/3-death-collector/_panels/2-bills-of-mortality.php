@@ -1,5 +1,5 @@
 
-<div id="bills-of-mortality" class="panel" data-scene="bills-of-mortality" data-config='{ "offset_height": 500, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="bills-of-mortality" class="panel" data-config='{ "offset_height": 500, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container video" data-src="http://wellcome-pathways.s3.amazonaws.com/bills-of-mortality.mp4">
         <img alt="" src="/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-2.jpg">

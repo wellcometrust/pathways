@@ -1,5 +1,5 @@
 
-<div id="thomas-wakley" class="panel thomas-wakley" data-config='{ "offset_height": 2800, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="thomas-wakley" class="panel" data-config='{ "offset_height": 2800, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

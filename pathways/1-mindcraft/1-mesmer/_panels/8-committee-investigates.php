@@ -1,5 +1,5 @@
 
-<div id="committee-investigates" class="panel talking-head" data-scene="committee-investigates" data-config='{ "offset_height": 200, "background": { "type": "video", "preserve_ratio": false } }'>
+<div id="committee-investigates" class="panel talking-head" data-config='{ "offset_height": 200, "background": { "type": "video", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <video controls="true" preload="none">

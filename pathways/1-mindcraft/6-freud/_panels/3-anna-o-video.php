@@ -1,5 +1,5 @@
 
-<div id="anna-o-video" class="panel talking-head" data-scene="anna-o-video" data-config='{ "offset_height": 150, "background": { "type": "video", "preserve_ratio": false } }'>
+<div id="anna-o-video" class="panel talking-head" data-config='{ "offset_height": 150, "background": { "type": "video", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <video controls="true" preload="none">

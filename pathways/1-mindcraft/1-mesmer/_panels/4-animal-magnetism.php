@@ -1,5 +1,5 @@
 
-<div id="animal-magnetism" class="panel" data-scene="animal-magnetism" data-config='{ "offset_height": 350, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="animal-magnetism" class="panel" data-config='{ "offset_height": 350, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

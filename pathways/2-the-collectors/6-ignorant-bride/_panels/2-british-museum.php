@@ -1,5 +1,5 @@
 
-<div id="british-museum" class="panel" data-scene="british-museum" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="british-museum" class="panel" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/pathways/2-the-collectors/_assets/6-ignorant-bride/m6-ignorant-bride-british-museum.jpg">

@@ -1,5 +1,5 @@
 
-<div id="surgery-under-hypnosis" class="panel talking-head" data-scene="surgery-under-hypnosis" data-config='{ "offset_height": 250, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="surgery-under-hypnosis" class="panel talking-head" data-config='{ "offset_height": 250, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <video controls="true" preload="none">
