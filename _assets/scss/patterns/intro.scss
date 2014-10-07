@@ -22,8 +22,11 @@
         left:               20px;
         width:              100px;
         height:             47px;
-        background:         url(/_assets/img/logo.png) 0 0 no-repeat;
-        background-size:    100%;
+        
+        a, img { 
+            display:        block;  
+            width:          100%; 
+        }
     }
 
     .inner {
