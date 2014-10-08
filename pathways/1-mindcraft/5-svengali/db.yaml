@@ -10,77 +10,60 @@
 info_panels:
 
     trilby:
-        -   title: 'Trilby, novel by George du Maurier, 1894'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1265549'
-            images_url: 'http://wellcomeimages.org/indexplus/image/M0005798.html'
-
-        -   title: 'The Bridge of Arts [Paris] by George du Maurier, 1894.'
-            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/3.html'
-
-        -   title: 'Trilby’s Forbears by George du Maurier, 1894.'
-            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/14.html'
-
-        -   title: 'The ‘Rosamund’ of Schubert by George du Maurier, 1894.'
-            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/8.html'
-
-        -   title: '“We took her voice note by note” by George du Maurier, 1894.'
-            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/118.html'
-
-        -   title: '“Et maintenant dors, ma mignonne!” by George du Maurier, 1894.'
-            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/103.html'
-
-        -   title: 'An incubus by George du Maurier, 1894.'
-            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/38.html'
-
-        -   title: 'Au clair de la lune by George du Maurier, 1894.'
-            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/84.html'
-
-        -   title: 'Petits Bonheurs de Contrebande by George du Maurier, 1894.'
-            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/116.html'
-
-        -   title: '"Hast thou found me, o mine enemy?" by George du Maurier, 1894.'
-            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/98.html'
-
-        -   title: '"The last they saw of Svengali" by George du Maurier, 1894.'
-            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/100.html'
-
-        -   title: 'It was Trilby by George du Maurier, 1894.'
-            catalogue_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/83.html'
+        -   title: 'George Du Maurier’s illustrations for Trilby in the 1894 Harper’s New Monthly Magazine. Scanned image and text by Philip V. Allingham'
+            external_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/index.html'
 
     bompard:
-        -   title: 'Illustrations from Le Petit Parisien and Supplément Illustré du Petit Journal, 1890.'
+        -   title: 'Illustrations from Le Petit Parisien and Supplément Illustré du Petit Journal, 1890'
 
         -   title: 'Poster for the song “Gabrielle Bompétard” inspired by the affair called malle à Gouffé in France.'
-            catalogue_url: 'http://commons.wikimedia.org/wiki/File:Gabrielle_Bomp%C3%A9tard.jpg'
+            external_url: 'http://commons.wikimedia.org/wiki/File:Gabrielle_Bomp%C3%A9tard.jpg'
 
 
 # Library Layer
 
 library_layer:
 
-    player:
+    See_in_the_Wellcome_Library:
+        -   type: book
+            title: Psychology and Crime
+            author: Hugo Munsterberg
+            date: 1909
+            link: 'http://wellcomelibrary.org/package/b20444072'
 
-    related:
+        -   type: book
+            title: On Unsoundness of Mind
+            author: 'J. W. Hume Williams'
+            date: 1890
+            link: 'http://wellcomelibrary.org/package/b20400627'
+
+        -   type: book
+            title: Unsoundness of mind					            		  
+            author: Samuel Knaggs
+            date: 1854
+            link: 'http://wellcomelibrary.org/package/b2044414x'
+
+    See_Elsewhere:
         -   type: book
             title: 'Svengali’s Web'
-            author: 'Daniel Pick'
-            date: '2000'
-            link: ''
+            author: Daniel Pick
+            date: 2000
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Svengalis_Web/9780300082043'
 
         -   type: book
             title: 'Hypnosis: a brief history'
-            author: 'Judith Pintar and Steven Jay Lynn'
+            author: Judith Pintar and Steven Jay Lynn
             date: '2008'
-            link: ''
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Hypnosis/9781405134521'
 
         -   type: book
             title: 'Little Demon in the City of Light: A True Story of Murder and Mesmerism in Belle Epoque Paris'
-            author: 'Steven Levingston'
-            date: '2014'
-            link: ''
+            author: Steven Levingston
+            date: 2014
+            link: 'http://stevenlevingston.com/books/little-demon-in-the-city-of-light/'
 
         -   type: book
-            title: 'Trilby'
-            author: 'George du Maurier'
-            date: '1894'
+            title: Trilby
+            author: George du Maurier
+            date: 1894
             link: 'http://www.gutenberg.org/ebooks/39858'

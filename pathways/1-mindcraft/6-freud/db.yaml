@@ -1,5 +1,5 @@
 
-# Esdaile panels:
+# Freud panels:
 # 
 # anna-o
 # fred-breuer-intro
@@ -14,44 +14,49 @@
 info_panels:
 
     anna-o:
-        -   title: '“Anna O” (Bertha Pappenheim)'
-            catalogue_url: 'http://commons.wikimedia.org/wiki/File:Anna_O.jpg'
+        -   title: '‘Anna O.’ (Bertha Pappenheim)'
+            external_url: 'http://commons.wikimedia.org/wiki/File:Anna_O.jpg'
 
     fred-breuer:
         -   title: 'Bertha Pappenheim (1882)'
-            catalogue_url: 'http://commons.wikimedia.org/wiki/File:Pappenheim_1882.jpg'
+            external_url: 'http://commons.wikimedia.org/wiki/File:Pappenheim_1882.jpg'
 
     office:
-        -   title: 'Freud’s office'
+        -   title: 'Sigmund Freud’s office at Freud Museum, London'
 
 
 # Library Layer
 
 library_layer:
 
-    player:
-
-    related:
+    See_in_the_Wellcome_Library:
         -   type: book
-            title: 'From Mesmer to Freud'
-            author: 'Adam Crabtree'
-            date: '1993'
-            link: ''
+            title: Three Contributions to the Theory of Sex
+            author: Sigmund Freud
+            date: 1930
+            link: 'http://wellcomelibrary.org/package/b2044221x'
 
+    See_Elsewhere:
         -   type: book
-            title: 'The Discovery of the Unconscious'
-            author: 'Henri Ellenberger'
-            date: '1970'
-            link: ''
-
-        -   type: book
-            title: 'The Enigma of Anna O'
-            author: 'Melinda Guttman'
-            date: '2001'
-            link: ''
+            title: From Mesmer to Freud
+            author: Adam Crabtree
+            date: 1993
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/From_Mesmer_to_Freud/9780300055887'
 
         -   type: book
-            title: 'Remembering Anna O'
+            title: The Discovery of the Unconscious
+            author: Henri Ellenberger
+            date: 1970
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/The_Discovery_of_the_Unconscious/9780465016730'
+
+        -   type: book
+            title: 'The Enigma of Anna O.'
+            author: Melinda Given Guttman
+            date: 2001
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/The_Enigma_of_Anna_O/9781559212854'
+
+        -   type: book
+            title: 'Remembering Anna O.'
             author: 'Mikkel Borch-Jacobsen'
-            date: '1996'
-            link: ''
+            date: 1996
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Remembering_Anna_O/9780415917773'

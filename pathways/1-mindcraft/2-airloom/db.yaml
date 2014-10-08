@@ -4,8 +4,6 @@
 # airloom-intro
 # airloom
 # where-will-this-technology-lead
-# Aldinis-electric-experiments-gallery
-
 
 
 # Info Panels
@@ -14,76 +12,43 @@ info_panels:
 
     where-will-this-technology-lead:
         -   title: 'The Hospital of Bethlem [Bedlam] at Moorfields, London, seen from the north'
-            see_in_Wellcome_Library_url: http://wellcomelibrary.org/package/b11834742
-            download_hi_res_url: http://wellcomelibrary.org/actual/b11834742/0/b11834742/0/26634fc3-b366-416b-8c18-19ec7ee6254f.jp2
+            player_url: 'http://wellcomelibrary.org/package/b11834742'
+            download_url: 'http://wellcomelibrary.org/actual/b11834742/0/26634fc3-b366-416b-8c18-19ec7ee6254f/jp2?download=true'
 
-    Aldinis-electric-experiments-gallery:
-        -   title: Animal electricity produced without any intermediate body
-            see_in_Wellcome_Library_url: http://wellcomelibrary.org/package/b21269488
-            download_hi_res_url: http://wellcomelibrary.org/actual/b21269488/0/6055c21e-dd6c-44f2-9f77-e5fead70732d/jp2
-        -   title: Galvanism experiment
-            see_in_Wellcome_Library_url: http://wellcomelibrary.org/package/b2126949x
-            download_hi_res_url: http://wellcomelibrary.org/actual/b2126949x/0/11da1832-09d6-4730-939a-47d9e19869a6.jp2
-        -   title: Galvanism experiment
-            see_in_Wellcome_Library_url: http://catalogue.wellcomelibrary.org/record=b1119983            
-        -   title: Galvanism experiment
-            see_in_Wellcome_Library_url: http://wellcomelibrary.org/package/b21269518
-            download_hi_res_url: http://wellcomelibrary.org/actual/b21269518/0/4701efee-e7a1-414d-8c28-f9198b541a55.jp2
-        -   title: Human dissection
-            see_in_Wellcome_Library_url: http://wellcomelibrary.org/package/b21269555
-            download_hi_res_url: http://wellcomelibrary.org/actual/b21269555/0/00553c2c-9898-4afd-85eb-0141ca511b0a.jp2
-        -   title: Human dissection
-            see_in_Wellcome_Library_url: http://wellcomelibrary.org/package/b21269580
-            download_hi_res_url: http://wellcomelibrary.org/actual/b21269580/0/5bb68dd3-15ed-4c4c-bd0a-6cee7e75165b.jp2        
-        -   title: Galvanism experiment
-            see_in_Wellcome_Library_url: http://wellcomelibrary.org/package/b21269609
-            download_hi_res_url: http://wellcomelibrary.org/actual/b21269609/0/0eab0c0f-2866-4d33-aece-195de8d40576.jp2
-        -   title: Galvanism experiment
-            see_in_Wellcome_Library_url: http://wellcomelibrary.org/package/b21269725
-            download_hi_res_url: http://wellcomelibrary.org/actual/b21269725/0/1aeaa02a-858b-4ad5-8eba-e3c1dec2fec1.jp2
-        -   title: Galvanism experiment
-            see_in_Wellcome_Library_url: http://wellcomelibrary.org/package/b21269737
-            download_hi_res_url: http://wellcomelibrary.org/actual/b21269737/0/6d6b92b9-0b89-4bcd-ba5c-74737a297a0e.jp2
-        -   title: Dissection of a sheep
-            see_in_Wellcome_Library_url: http://wellcomelibrary.org/package/b21269749
-            download_hi_res_url: http://wellcomelibrary.org/actual/b21269749/0/fbf8c86c-7f5a-45d5-951e-297ac75c208c.jp2
-        -   title: Galvanism                                     see_in_Wellcome_Library_url: http://wellcomelibrary.org/package/b21269750
-            download_hi_res_url: http://wellcomelibrary.org/actual/b21269750/0/535b4862-9586-44bc-8cef-0281dc44d398.jp2
-      
 
 # Library Layer
 
 library_layer:
 
-    See_in_the_Wellcome_Library:
+    player:
         -   type: book
-            title: "Illustrations of madness [by the patient, James Tilly Matthews, in hallucinations]"
+            title: 'Illustrations of madness [by the patient, James Tilly Matthews, in hallucinations]'
             author: John Haslam
             date: 1810
-            link: http://wellcomelibrary.org/package/b20458265
+            link: 'http://wellcomelibrary.org/package/b20458265'
 
         -   type: book
-            title: "Aldini's Experiments (with images)"
+            title: 'Aldini’s Experiments (with images)'
             author: Giovanni Aldini
             date: 1803
-            link: http://wellcomelibrary.org/package/b20595256
+            link: 'http://wellcomelibrary.org/package/b20595256'
 
 
-    See_Elsewhere:
+    related:
         -   type: book
-            title: "The influencing machine : James Tilly Matthews and the air loom"
+            title: 'The influencing machine : James Tilly Matthews and the air loom'
             author: Mike Jay
             date: 2012
-            link: http://bookshop.blackwell.co.uk/jsp/id/The_Influencing_Machine/9781907222139
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/The_Influencing_Machine/9781907222139'
 
         -   type: book
             title: The Air Loom and Other Dangerous Influencing Machines
             author: Thomas Roeske and Bettina Brand-Claussen
             date: 2006
-            link: http://www.allbookstores.com/Air-Loom-Der-Luft-Webstuhl/9783884232378
+            link: 'http://www.allbookstores.com/Air-Loom-Der-Luft-Webstuhl/9783884232378'
 
         -   type: book
-            title: "Shocking Bodies: Life, Death & Electricity in Victorian England"
+            title: 'Shocking Bodies: Life, Death & Electricity in Victorian England'
             author: Iwan Rhys Morus
             date: 2011
-            link: http://bookshop.blackwell.co.uk/jsp/id/Shocking_Bodies_Life_Death_and_Electricity_in_Victorian_England/9780752458007
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Shocking_Bodies_Life_Death_and_Electricity_in_Victorian_England/9780752458007'

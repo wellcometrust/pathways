@@ -17,65 +17,56 @@ info_panels:
 
     gonad-man:
         -   title: 'Esdaile’s patient'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1309510~S12'
+            player_url: 'http://wellcomelibrary.org/package/b20641424#?asi=0&ai=53&z=-0.8024%2C-0.098%2C2.5725%2C1.6202'
+            download_url: 'http://wellcomelibrary.org/actual/b20641424/0/af83704d-f099-4edd-a942-c1061fbc8ff8/jp2?download=true'
 
     fakir:
         -   title: 'Fakir sitting on a bed of nails (Benares, India)'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b2033739~S12'
+            player_url: 'http://wellcomelibrary.org/package/b20337395'
+            download_url: 'http://wellcomelibrary.org/actual/b20337395/0/dddc230b-a93d-4140-9bb6-82bbea935627/jp2?download=true'
 
     india:
-        -   title: 'The north-east view of Anjengo Fort on the coast of Malabar'
-            catalogue_url: 'http://catalogue.wellcomelibrary.org/record=b1265549'
-            images_url: 'http://wellcomeimages.org/indexplus/image/L0038350.html'
+        -   title: 'The north-east view of Anjenjo Fort on the coast of Malabar'
+            player_url: 'http://wellcomelibrary.org/package/b21369963'
+            download_url: 'http://wellcomelibrary.org/actual/b21369963/0/cc424c4b-30a3-4c1b-bd86-66004d93b28a/jp2?download=true'
 
     james-braid:
         -   title: 'James Braid'
-            images_url: 'http://wellcomeimages.org/indexplus/image/M0005798.html'
-
+            player_url: 'http://wellcomelibrary.org/package/b21270107'
+            download_url: 'http://wellcomelibrary.org/actual/b21270107/0/57cd7450-e09b-4976-bcdf-288f2702e6a5/jp2?download=true'
 
 # Library Layer
 library_layer:
 
-    player:
+    See_in_the_Wellcome_Library:
         -   type: book
             title: 'Pain-free operations in India'
             author: 'James Esdaile'
             date: '1856'
-            link: ''
+            link: 'http://wellcomelibrary.org/package/b20641424'
 
         -   type: book
-            title: 'James Braid on trance'
+            title: 'Observations on trance, or, Human Hybernation [sic]'
             author: 'James Braid'
             date: '1850'
-            link: ''
+            link: 'http://wellcomelibrary.org/package/b14604899'
 
         -   type: book
-            title: 'The introduction of mesmerism into the hospitals of India'
+            title: 'The introduction of mesmerism, as an aesthetic and curative agent, into the hospitals of India'
             author: 'James Esdaile'
             date: '1852'
             link: 'http://wellcomelibrary.org/package/b20603447'
 
-        -   type: image
-            title: 'A fakir or sadhu'
-            author: 'Photograph by E.D. Lyo'
-            date: '18--'
-            link: ''
-
-    related:
+    See_Elsewhere:
         -   type: book
             title: 'Hypnotism: a history'
             author: 'Derek Forrest & Anthony Storr'
             date: '2000'
-            link: ''
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Hypnotism/9780140280401'
 
         -   type: book
             title: 'A History of Hypnotism'
             author: 'Alan Gauld'
             date: '1992'
-            link: ''
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/A_History_of_Hypnotism/9780521483292'
 
-        -   type: document
-            title: 'ARTICLE: Colonial psychiatry, magic and religion. The case of mesmerism in British India'
-            author: 'Waltraud Ernst'
-            date: '2004'
-            link: 'http://www.hawaii.edu/hivandaids/Colonial_Psychiatry,_Magic_and_Religion__The_Case_of_Mesmerism_in_British_India.pdf'
