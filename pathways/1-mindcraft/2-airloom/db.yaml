@@ -20,7 +20,7 @@ info_panels:
 
 library_layer:
 
-    player:
+    See_in_the_Wellcome_Library:
         -   type: book
             title: 'Illustrations of madness [by the patient, James Tilly Matthews, in hallucinations]'
             author: John Haslam
@@ -34,7 +34,7 @@ library_layer:
             link: 'http://wellcomelibrary.org/package/b20595256'
 
 
-    related:
+    See_Elsewhere:
         -   type: book
             title: 'The influencing machine : James Tilly Matthews and the air loom'
             author: Mike Jay
@@ -42,7 +42,7 @@ library_layer:
             link: 'http://bookshop.blackwell.co.uk/jsp/id/The_Influencing_Machine/9781907222139'
 
         -   type: book
-            title: The Air Loom and Other Dangerous Influencing Machines
+            title: 'The Air Loom and Other Dangerous Influencing Machines'
             author: Thomas Roeske and Bettina Brand-Claussen
             date: 2006
             link: 'http://www.allbookstores.com/Air-Loom-Der-Luft-Webstuhl/9783884232378'
