@@ -152,10 +152,10 @@
 
             if ( handler ) {
                 var handlerClass = Pathways.Utils.toTitleCase(handler);
-
+                                
                 // Check the handler exists and it hasn't already been loaded
-                if ( Pathways[handlerClass] != null && loaded.indexOf(handlerClass) == -1 ) {
-                    Pathways[handlerClass](Pathways.panel_height);
+                if ( Pathways[handlerClass] != null && (loaded.indexOf(handlerClass) == -1 || Pathways[handlerClass].alwaysLoad == true) ) {                    
+                    Pathways[handlerClass](Pathways.panel_height, _panel);
                     loaded.push(handlerClass);
                 }
                 

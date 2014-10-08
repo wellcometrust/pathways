@@ -1,34 +1,10 @@
 
-Pathways.LibraryLayer = function() {
+Pathways.PlayerOverlay = function(panel_height, elem) {
 
-    var $gap                = $('.library-layer .gap'),
-        $further_reading    = $('.further-reading'),
-        height              = $gap.height(),
-        state               = 'closed',
-        scrollTo            = ($('.library-layer').offset().top - window.innerHeight) + 250;
+    var $element            = $(elem);
 
-    $gap.css({ 'height': 0, 'transition': 'height 0.4s ease' });
-    $('.library-layer .button').html('open');
+    $element.on('click', function(e) {
 
-    $('.further-reading, .library-layer .controls').on('click', function() {
-        if( state == 'closed' ) {
-            $('.library-layer .gap').css('height', height);
-            state = 'open';
-
-            // scroll to the top of the library layer
-            $('html, body').animate({
-                scrollTop: scrollTo
-            }, 400);
-        }
-        else {
-            $('.library-layer .gap').css('height', 0);
-            state = 'closed';
-        }
-
-        return false;
-    });
-
-    $gap.on('click', 'a', function(e) {
         var $this           = $(this),
             playerWidth     = (window.innerWidth - 180),
             playerHeight    = (window.innerHeight - 180);
@@ -93,3 +69,5 @@ Pathways.LibraryLayer = function() {
     });
 
 }
+
+Pathways.PlayerOverlay.alwaysLoad = true;

@@ -21,7 +21,7 @@
         </div>
     </a>
 
-    <div class="further-reading">
+    <div class="further-reading" data-component="toggle-section" data-toggle-section-target=".library-layer .gap" data-toggle-section-anchor=".library-layer">
         <div class="further-reading-container">
             <span>Further reading from</span>
             <img src="/_assets/img/logo-black.svg" alt="wellcome library">

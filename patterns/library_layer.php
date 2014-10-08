@@ -4,11 +4,11 @@
     $layer = isset( $library_db['library_layer'] ) ? $library_db['library_layer'] : [];
 ?>
 
-<div class="library-layer" data-component="library-layer">
+<div class="library-layer">
     
     <div class="gap">
 
-        <div class="controls clearfix">
+        <div class="controls clearfix" data-component="toggle-section" data-toggle-section-target=".library-layer .gap" data-toggle-section-anchor=".library-layer">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32" xml:space="preserve">
                 <g>
                     <polygon fill="#60B8B2" points="20.9,9.6 16,14.6 11,9.6 9.7,11 14.6,16 9.7,20.9 11,22.3 16,17.4 20.9,22.3 22.4,20.9 17.4,16 22.4,11"/>
@@ -42,7 +42,7 @@
 
                                             <footer class="player-item--footer">
                                                 <?php if( isset( $data['link'] ) && $data['link'] != '' ): ?>
-                                                <a href="#" data-embed="<?php echo $data['link'] ?>">View</a>
+                                                <a href="#" data-component="player-overlay" data-embed="<?php echo $data['link'] ?>">View</a>
                                                 <?php endif ?>
                                             </footer>
                                         </div>
