@@ -19,7 +19,7 @@
 
     $teaser = array(
         'image' => 'teaser-jtm.jpg',
-        'link'  => $path.'2-airloom',
+        'link'  => $path.'2-airloom/',
         'title' => 'A machine to control the mind'
     );
 

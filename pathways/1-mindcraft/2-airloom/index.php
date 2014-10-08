@@ -19,7 +19,7 @@
 
     $teaser = array(
         'image' => 'teaser-oakey.jpg',
-        'link'  => $path.'3-elliotson',
+        'link'  => $path.'3-elliotson/',
         'title' => 'Who controls who?'
     );
 

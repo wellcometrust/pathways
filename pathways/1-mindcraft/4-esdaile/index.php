@@ -19,7 +19,7 @@
 
     $teaser = array(
         'image' => 'teaser-svengali.jpg',
-        'link'  => $path.'5-svengali',
+        'link'  => $path.'5-svengali/',
         'title' => 'Dark forces'
     );
 

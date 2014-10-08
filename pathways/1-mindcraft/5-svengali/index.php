@@ -19,7 +19,7 @@
 
     $teaser = array(
         'image' => 'teaser-freud.jpg',
-        'link'  => $path.'6-freud',
+        'link'  => $path.'6-freud/',
         'title' => 'Secrets of the mind revealed'
     );
 

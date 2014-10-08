@@ -19,7 +19,7 @@
 
     $teaser = array(
         'image' => 'teaser-esdaile.jpg',
-        'link'  => $path.'4-esdaile',
+        'link'  => $path.'4-esdaile/',
         'title' => 'Mind over matter'
     );
 
