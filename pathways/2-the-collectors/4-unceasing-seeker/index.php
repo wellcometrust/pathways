@@ -15,7 +15,7 @@
     $pathway    = 'the-collectors';
     $module     = 'unceasing-seeker';
     $path       = $config_yml['site']['pathways'][$pathway]['path'];
-
+    $root       = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
 
     $teaser = array(
         'image' => 'teaser-obscene-doctor.jpg',

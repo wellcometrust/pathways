@@ -6,6 +6,7 @@ site:
             path: /pathways/1-mindcraft/
             modules:
                 -   id: mesmer
+                    path: 1-mesmer/
                     title: A New Force in Nature
                     panels:
                         - id: mesmers-salon-intro
@@ -16,6 +17,7 @@ site:
                         - id: committee-investigates
 
                 -   id: airloom
+                    path: 2-airloom/
                     title: A Machine to Control the Mind
                     panels:
                         - id: airloom-intro
@@ -24,6 +26,7 @@ site:
                         - id: grisly-experiments
 
                 -   id: elliotson
+                    path: 3-elliotson/
                     title: Who Controls Who?
                     panels:
                         - id: okey-sisters
@@ -31,6 +34,7 @@ site:
                         - id: verdict
 
                 -   id: esdaile
+                    path: 4-esdaile/
                     title: Mind Over Matter
                     panels:
                         - id: gonad-man
@@ -42,12 +46,14 @@ site:
                         - id: self-hypnosis
 
                 -   id: svengali
+                    path: 5-svengali/
                     title: Dark Forces
                     panels:
                         - id: trilby
                         - id: bompard
 
                 -   id: freud
+                    path: 6-freud/
                     title: Secrets of the Mind Revealed
                     panels:
                         - id: anna-o
@@ -61,6 +67,7 @@ site:
             path: /pathways/2-the-collectors/
             modules:
                 -   id: curious-gardener
+                    path: 1-curious-gardener/
                     title: The Curious Gardener
                     panels:
                         - id: john-tradescent
@@ -69,12 +76,14 @@ site:
                         - id: tradescants-ark
 
                 -   id: merchants-of-light
+                    path: 2-merchants-of-light/
                     title: Merchants of Light
                     panels:
                         - id: bensalem-intro
                         - id: bensalem
 
                 -   id: death-collector
+                    path: 3-death-collector/
                     title: The Death Collector
                     panels:
                         - id: bills-of-mortality
@@ -82,11 +91,13 @@ site:
                         - id: isaac-newton
 
                 -   id: unceasing-seeker
+                    path: 4-unceasing-seeker/
                     title: The Unceasing Seeker
                     panels:
                         - id: wellcome-collection
 
                 -   id: obscene-doctor
+                    path: 5-obscene-doctor/
                     title: The Obscene Doctor
                     panels:
                         - id: khans-anatomical-museum
@@ -95,6 +106,7 @@ site:
                         - id: seized-and-destroyed
 
                 -   id: ignorant-bride
+                    path: 6-ignorant-bride/
                     title: The Ignorant Bride
                     panels:
                         - id: british-museum

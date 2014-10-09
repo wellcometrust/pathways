@@ -15,7 +15,8 @@
     $pathway    = 'the-collectors';
     $module     = 'curious-gardener';
     $path       = $config_yml['site']['pathways'][$pathway]['path'];
-
+    $root       = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+    
     $teaser = array(
         'image' => 'teaser-merchants-of-light.jpg',
         'link'  => $path.'2-merchants-of-light/index.php',
