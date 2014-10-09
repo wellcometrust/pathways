@@ -1,5 +1,6 @@
 .player-item {
     margin-bottom: 1em;
+    cursor: pointer;
 
     img {
         float: left;
@@ -37,7 +38,7 @@
     .player-item--footer {
         padding-top: 0.5em;
 
-        a {
+        a, span {
             color: #8CC4D4;
             font-size: 0.8rem;
             text-decoration: none;

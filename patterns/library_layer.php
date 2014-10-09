@@ -28,7 +28,7 @@
                         <?php if( isset($layer['See_in_the_Wellcome_Library']) ): ?>
                             <?php foreach( $layer['See_in_the_Wellcome_Library'] as $data ): ?>
                                 <li>
-                                    <div class="player-item clearfix<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>">
+                                    <div class="player-item clearfix<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>" data-component="player-overlay" data-embed="<?php echo isset($data['link']) ? $data['link'] : '' ?>">
                                         <div class="player-item--thumb"></div>
 
                                         <div class="player-item--content">
@@ -42,7 +42,7 @@
 
                                             <footer class="player-item--footer">
                                                 <?php if( isset( $data['link'] ) && $data['link'] != '' ): ?>
-                                                <a href="#" data-component="player-overlay" data-embed="<?php echo $data['link'] ?>">View</a>
+                                                <span>View</span>
                                                 <?php endif ?>
                                             </footer>
                                         </div>
@@ -69,7 +69,7 @@
 
                         <?php foreach ($layer['See_Elsewhere'] as $data): ?>
                             <li>
-                                <div class="related-item<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>">
+                                <a href="<?php echo isset($data['link'] ) ? ' '.$data['link'] : '' ?>" rel="external" class="related-item<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>">
                                     <header class="related-item--header">
                                         <h1><?php echo isset( $data['title'] ) ? $data['title'] : '' ?></h1>
                                     </header>
@@ -80,10 +80,10 @@
 
                                     <?php if( isset( $data['link'] ) && $data['link'] != '' ): ?>
                                     <footer class="related-item--footer">
-                                        <a href="<?php echo $data['link'] ?>" rel="external">View</a>
+                                        <span>View</span>
                                     </footer>
                                     <?php endif ?>
-                                </div>
+                                </a>
                             </li>
                         <?php endforeach ?>
                     </ul>
