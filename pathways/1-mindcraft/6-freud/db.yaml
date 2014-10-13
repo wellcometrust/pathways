@@ -14,15 +14,30 @@
 info_panels:
 
     anna-o:
-        -   title: '‘Anna O.’ (Bertha Pappenheim)'
-            external_url: 'http://commons.wikimedia.org/wiki/File:Anna_O.jpg'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links:
+            -   title: '‘Anna O.’ (Bertha Pappenheim)'
+                external_url: 'http://commons.wikimedia.org/wiki/File:Anna_O.jpg'
 
     fred-breuer:
-        -   title: 'Bertha Pappenheim (1882)'
-            external_url: 'http://commons.wikimedia.org/wiki/File:Pappenheim_1882.jpg'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links:
+            -   title: 'Bertha Pappenheim (1882)'
+                external_url: 'http://commons.wikimedia.org/wiki/File:Pappenheim_1882.jpg'
 
     office:
-        -   title: 'Sigmund Freud’s office at Freud Museum, London'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links:
+            -   title: 'Sigmund Freud’s office at Freud Museum, London'
 
 
 # Library Layer

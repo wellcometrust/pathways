@@ -16,24 +16,44 @@
 info_panels:
 
     gonad-man:
-        -   title: 'Esdaile’s patient'
-            player_url: 'http://wellcomelibrary.org/package/b20641424#?asi=0&ai=53&z=-0.8024%2C-0.098%2C2.5725%2C1.6202'
-            download_url: 'http://wellcomelibrary.org/actual/b20641424/0/af83704d-f099-4edd-a942-c1061fbc8ff8/jp2?download=true'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links:
+            -   title: 'Esdaile’s patient'
+                player_url: 'http://wellcomelibrary.org/package/b20641424#?asi=0&ai=53&z=-0.8024%2C-0.098%2C2.5725%2C1.6202'
+                download_url: 'http://wellcomelibrary.org/actual/b20641424/0/af83704d-f099-4edd-a942-c1061fbc8ff8/jp2?download=true'
 
     fakir:
-        -   title: 'Fakir sitting on a bed of nails (Benares, India)'
-            player_url: 'http://wellcomelibrary.org/package/b20337395'
-            download_url: 'http://wellcomelibrary.org/actual/b20337395/0/dddc230b-a93d-4140-9bb6-82bbea935627/jp2?download=true'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links: 
+            -   title: 'Fakir sitting on a bed of nails (Benares, India)'
+                player_url: 'http://wellcomelibrary.org/package/b20337395'
+                download_url: 'http://wellcomelibrary.org/actual/b20337395/0/dddc230b-a93d-4140-9bb6-82bbea935627/jp2?download=true'
 
     india:
-        -   title: 'The north-east view of Anjenjo Fort on the coast of Malabar'
-            player_url: 'http://wellcomelibrary.org/package/b21369963'
-            download_url: 'http://wellcomelibrary.org/actual/b21369963/0/cc424c4b-30a3-4c1b-bd86-66004d93b28a/jp2?download=true'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links:
+            -   title: 'The north-east view of Anjenjo Fort on the coast of Malabar'
+                player_url: 'http://wellcomelibrary.org/package/b21369963'
+                download_url: 'http://wellcomelibrary.org/actual/b21369963/0/cc424c4b-30a3-4c1b-bd86-66004d93b28a/jp2?download=true'
 
     james-braid:
-        -   title: 'James Braid'
-            player_url: 'http://wellcomelibrary.org/package/b21270107'
-            download_url: 'http://wellcomelibrary.org/actual/b21270107/0/57cd7450-e09b-4976-bcdf-288f2702e6a5/jp2?download=true'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links:
+            -   title: 'James Braid'
+                player_url: 'http://wellcomelibrary.org/package/b21270107'
+                download_url: 'http://wellcomelibrary.org/actual/b21270107/0/57cd7450-e09b-4976-bcdf-288f2702e6a5/jp2?download=true'
 
 # Library Layer
 library_layer:

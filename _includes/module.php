@@ -34,12 +34,15 @@
             <?php
             if( isset( $library_db['info_panels'] ) ) {
                 foreach ($library_db['info_panels'] as $key => $ip) {
-                    $panel = array(
-                        'id'    => $key,
-                        'links' => $ip
-                    );
+                    if (isset($ip['links'])) {
+                        $panel = array(
+                            'id'    => $key,
+                            'links' => $ip['links'],
+                            'share' => $ip['share']
+                        );
 
-                    pattern('library_panel');
+                        pattern('library_panel');
+                    }
                 }
             }
             ?>

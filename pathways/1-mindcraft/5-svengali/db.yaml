@@ -10,14 +10,24 @@
 info_panels:
 
     trilby:
-        -   title: 'George Du Maurier’s illustrations for Trilby in the 1894 Harper’s New Monthly Magazine. Scanned image and text by Philip V. Allingham'
-            external_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/index.html'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links:
+            -   title: 'George Du Maurier’s illustrations for Trilby in the 1894 Harper’s New Monthly Magazine. Scanned image and text by Philip V. Allingham'
+                external_url: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/index.html'
 
     bompard:
-        -   title: 'Illustrations from Le Petit Parisien and Supplément Illustré du Petit Journal, 1890'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
 
-        -   title: 'Poster for the song “Gabrielle Bompétard” inspired by the affair called malle à Gouffé in France.'
-            external_url: 'http://commons.wikimedia.org/wiki/File:Gabrielle_Bomp%C3%A9tard.jpg'
+        links:
+            -   title: 'Illustrations from Le Petit Parisien and Supplément Illustré du Petit Journal, 1890'
+
+            -   title: 'Poster for the song “Gabrielle Bompétard” inspired by the affair called malle à Gouffé in France.'
+                external_url: 'http://commons.wikimedia.org/wiki/File:Gabrielle_Bomp%C3%A9tard.jpg'
 
 
 # Library Layer

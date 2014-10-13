@@ -21,44 +21,63 @@
 info_panels:
 
     mesmers-salon:
-        -   title: Mesmeric therapy
-            player_url: 'http://wellcomelibrary.org/package/b12025665'
-            download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links:
+            -   title: Mesmeric therapy
+                player_url: 'http://wellcomelibrary.org/package/b12025665'
+                download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
 
     animal-magnetism:
-        -   title: 'A goat-headed man caresses a sleeping ewe-headed woman, in a satire of the notion of animal magnetism'
-            player_url: 'http://wellcomelibrary.org/package/b11757280'
-            download_url: 'http://wellcomelibrary.org/actual/b11757280/0/ba2ccaf1-308f-4afb-934f-448cc71cf50b/jp2?download=true'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links:        
+            -   title: 'A goat-headed man caresses a sleeping ewe-headed woman, in a satire of the notion of animal magnetism'
+                player_url: 'http://wellcomelibrary.org/package/b11757280'
+                download_url: 'http://wellcomelibrary.org/actual/b11757280/0/ba2ccaf1-308f-4afb-934f-448cc71cf50b/jp2?download=true'
 
     magnetised-trees:
-        -   title: 'Patients mesmerised by rods linked to a tree'
-            player_url: 'http://wellcomelibrary.org/package/b21269439'
-            download_url: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2?download=true'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links:
+            -   title: 'Patients mesmerised by rods linked to a tree'
+                player_url: 'http://wellcomelibrary.org/package/b21269439'
+                download_url: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2?download=true'
 
 
     satirised:
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
 
-        -   title: 18th-century marbling studio
-            external_url: http://thecambridgeroom.files.wordpress.com/2011/12/18th.jpg
-
-
-        -   title: 'Caricature: A goat-headed man caresses a sleeping ewe-headed woman'
-            player_url: 'http://wellcomelibrary.org/package/b11757280'
-            download_url: 'http://wellcomelibrary.org/actual/b11757280/0/ba2ccaf1-308f-4afb-934f-448cc71cf50b/jp2?download=true'
-
-
-        -   title: "Caricature: Animal magnetism, &lsquo;Our faculties are related&rsquo;"
-            player_url: 'http://wellcomelibrary.org/package/b21269440'
-            download_url: 'http://wellcomelibrary.org/actual/b21269440/0/a587c69d-f418-44c5-a014-efb4d74731a3/jp2?download=true'
+        links:
+            -   title: 18th-century marbling studio
+                external_url: http://thecambridgeroom.files.wordpress.com/2011/12/18th.jpg
 
 
-        -   title: 'Caricature: The doctor hypnotises the woman in the guise of Bottom from &lsquo;A Midsummer Night&rsquo;s Dream&rsquo;'
-            player_url: 'http://wellcomelibrary.org/package/b21269452'
-            download_url: 'http://wellcomelibrary.org/actual/b21269452/0/e1a54fd8-58f4-4fb3-8b13-5af97f1dca4c/jp2?download=true'
+            -   title: 'Caricature: A goat-headed man caresses a sleeping ewe-headed woman'
+                player_url: 'http://wellcomelibrary.org/package/b11757280'
+                download_url: 'http://wellcomelibrary.org/actual/b11757280/0/ba2ccaf1-308f-4afb-934f-448cc71cf50b/jp2?download=true'
 
-        -   title: 'Caricature: The effects of magnetism&hellip; animal'
-            player_url: 'http://wellcomelibrary.org/package/b21269476'
-            download_url: 'http://wellcomelibrary.org/actual/b21269476/0/b6512dda-32a4-46af-adf4-f58fea62e514/jp2?download=true'
+
+            -   title: "Caricature: Animal magnetism, &lsquo;Our faculties are related&rsquo;"
+                player_url: 'http://wellcomelibrary.org/package/b21269440'
+                download_url: 'http://wellcomelibrary.org/actual/b21269440/0/a587c69d-f418-44c5-a014-efb4d74731a3/jp2?download=true'
+
+
+            -   title: 'Caricature: The doctor hypnotises the woman in the guise of Bottom from &lsquo;A Midsummer Night&rsquo;s Dream&rsquo;'
+                player_url: 'http://wellcomelibrary.org/package/b21269452'
+                download_url: 'http://wellcomelibrary.org/actual/b21269452/0/e1a54fd8-58f4-4fb3-8b13-5af97f1dca4c/jp2?download=true'
+
+            -   title: 'Caricature: The effects of magnetism&hellip; animal'
+                player_url: 'http://wellcomelibrary.org/package/b21269476'
+                download_url: 'http://wellcomelibrary.org/actual/b21269476/0/b6512dda-32a4-46af-adf4-f58fea62e514/jp2?download=true'
 
 
 

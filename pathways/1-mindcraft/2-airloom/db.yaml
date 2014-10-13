@@ -11,9 +11,14 @@
 info_panels:
 
     where-will-this-technology-lead:
-        -   title: 'The Hospital of Bethlem [Bedlam] at Moorfields, London, seen from the north'
-            player_url: 'http://wellcomelibrary.org/package/b11834742'
-            download_url: 'http://wellcomelibrary.org/actual/b11834742/0/26634fc3-b366-416b-8c18-19ec7ee6254f/jp2?download=true'
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+            text: 'Wellcome Collection'
+
+        links:
+            -   title: 'The Hospital of Bethlem [Bedlam] at Moorfields, London, seen from the north'
+                player_url: 'http://wellcomelibrary.org/package/b11834742'
+                download_url: 'http://wellcomelibrary.org/actual/b11834742/0/26634fc3-b366-416b-8c18-19ec7ee6254f/jp2?download=true'
 
 
 # Library Layer
