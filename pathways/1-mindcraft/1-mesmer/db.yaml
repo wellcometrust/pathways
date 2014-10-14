@@ -1,21 +1,27 @@
 
 # Mesmer panels:
 # 
+# mesmers-salon-intro
 # mesmers-salon
 # animal-magnetism
 # magnetised-trees
 # satirised
+# committee-investigates-intro
+# committee-investigates
+
 
 # Info Panels
 #
 # An info panel example:
 
-# -   title: Title
+# share:
+#     img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
+#     text: 'Wellcome Collection'
 
-#     player_url: 'http://wellcomelibrary.org/package/b12025665'
-#     download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
-#     external_url: 'http://thecambridgeroom.files.wordpress.com/2011/12/18th.jpg'
-
+# links:
+#     -   title: Mesmeric therapy
+#         player_url: 'http://wellcomelibrary.org/package/b12025665'
+#         download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
 
 
 info_panels:
@@ -146,5 +152,18 @@ library_layer:
             link: 'http://bookshop.blackwell.co.uk/jsp/id/Mental_Healers_Mesmer_Eddy_and_Freud/9781906548940'
 
 
+gallery: 
+    location: 'galleries/tools-of-mesmerism/'
+    images:
+        -   image: 'V0016530'
+            text: 'Dummy text'
+
+        -   image: 'L0023349'
+
+        -   image: 'L0023350'
+        -   image: 'L0023351'
+        -   image: 'L0023352'
+        -   image: 'M0006352'
+        -   image: 'V0011096'
 
 

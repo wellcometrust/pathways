@@ -41,6 +41,7 @@
             images: [
                 {
                     image: 'V0016530',
+                    text: 'Dummy text'
                 },
                 {
                     image: 'L0023349',

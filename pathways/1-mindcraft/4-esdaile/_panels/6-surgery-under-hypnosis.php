@@ -5,7 +5,7 @@
         <video controls="true" preload="none">
             <source src="http://wellcome-pathways.s3.amazonaws.com/ChrisGreen_Pain_relief.mp4">
             <source src="http://wellcome-pathways.s3.amazonaws.com/ChrisGreen_Pain_relief.webm">
-            <track src="/_assets/video/ChrisGreen_Pain_relief.vtt" kind="subtitles" srclang="en" label="English" />
+            <track src="/_assets/video/ChrisGreen_Pain_relief.vtt" kind="captions" srclang="en" label="English" />
         </video>
         <img alt="" src="/_assets/img/spacer.png">
     </div>

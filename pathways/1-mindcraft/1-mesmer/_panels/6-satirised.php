@@ -2,7 +2,7 @@
 <div id="satirised" class="panel" data-config='{ "offset_height": 350, "background": { "type": "video", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <video controls="true" preload="none" poster="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-5.jpg">
+        <video preload="none" poster="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-5.jpg">
             <source src="http://wellcome-pathways.s3.amazonaws.com/hysteria.m4v">
             <source src="http://wellcome-pathways.s3.amazonaws.com/hysteria.webm">
         </video>

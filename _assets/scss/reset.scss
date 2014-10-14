@@ -53,13 +53,15 @@ h2, h3, h4, h5, h6 {
     @include        abril-display;
     margin-bottom:  1em;
 }
-
+a img {
+    border:         0px none;
+}
 em, i {
     @include        abril-italic;
 }
 
 iframe {
-    border: none;
+    border: 0px none;
 }
 
 .modal-open {

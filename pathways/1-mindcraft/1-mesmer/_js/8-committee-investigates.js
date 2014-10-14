@@ -1,18 +1,17 @@
 
 Pathways.Scene.CommitteeInvestigates = function() {
+
+    var videoStr = '#committee-investigates video';
+
+    var videoPlayOnEnter = Pathways.autoPlayVideoOnEnter(videoStr);
+    var videoStopOnLeave = Pathways.autoStopVideoOnLeave(videoStr);
+
     var scene = new ScrollScene({
             triggerElement: '#committee-investigates',
             duration:       Pathways.panel_height + 100
         })
-        .on('enter', function(e) {
-            var ci_vid = _('#committee-investigates video');
-            ci_vid.play();
-        })
-        .on('leave', function(e) {
-            var ci_vid = _('#committee-investigates video');
-            ci_vid.pause();
-            ci_vid.currentTime = 0;
-        });
+        .on('enter', videoPlayOnEnter)
+        .on('leave', videoStopOnLeave);
 
     Pathways.Scenes.push(scene);
 }

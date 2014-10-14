@@ -5,7 +5,7 @@
         <video controls="true" preload="none">
             <source src="http://wellcome-pathways.s3.amazonaws.com/MikeJay_Mesmer.mp4">
             <source src="http://wellcome-pathways.s3.amazonaws.com/MikeJay_Mesmer.webm">
-            <track src="/_assets/video/MikeJay_Mesmer.vtt" kind="subtitles" srclang="en" label="English" />
+            <track src="/_assets/video/MikeJay_Mesmer.vtt" kind="captions" srclang="en" label="English" />
         </video>
         <img alt="" src="/_assets/img/spacer.png">
     </div>
