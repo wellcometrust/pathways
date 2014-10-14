@@ -5,7 +5,7 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    include($docRoot.'/_includes/Spyc.php');
+    include_once($docRoot.'/_includes/Spyc.php');
     
 
     $path = $config['pathways'][1]['url'];
@@ -21,7 +21,7 @@
         'title' => 'Example teaser title'
     );
 
-    include($docRoot.'/_includes/header.php');
+    include_once($docRoot.'/_includes/header.php');
 ?>
 
     <main role="main" class="section">
@@ -81,5 +81,5 @@
         
     </main>
 
-<?php include($docRoot.'/_includes/footer.php') ?>
+<?php include_once($docRoot.'/_includes/footer.php') ?>
 

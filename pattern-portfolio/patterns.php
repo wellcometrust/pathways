@@ -13,7 +13,7 @@ endwhile;
 
 sort($files);
 
-include( str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) .'/_includes/Spyc.php');
+include_once( str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) .'/_includes/Spyc.php');
 
 $config_yml = spyc_load_file( str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) .'/_includes/config.yaml');
 

@@ -6,7 +6,7 @@
     function pattern($pattern, $library_content = '') {
         global $docRoot;
 
-        include($docRoot . '/patterns/' . $pattern . '.php' );
+        include_once($docRoot . '/patterns/' . $pattern . '.php' );
     }
 ?>
 <!DOCTYPE HTML>

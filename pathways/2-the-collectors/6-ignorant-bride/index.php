@@ -5,7 +5,7 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    include($docRoot.'/_includes/Spyc.php');
+    include_once($docRoot.'/_includes/Spyc.php');
     
 
     $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
@@ -24,4 +24,4 @@
         'text'  => 'By opening up the ‘locked cabinet’ of sexual knowledge to a mass audience, Stopes unintentionally built up a collection of deeply personal correspondence. These confessional and emotional letters illustrate the appetite for – and impact of – the information Stopes once again exposed to the public.'
     );
 
-    include($docRoot.'/_includes/module.php');
+    include_once($docRoot.'/_includes/module.php');

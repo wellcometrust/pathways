@@ -1,12 +1,12 @@
 <?php
     global $library_db;
 
-    include($docRoot.'/_includes/header.php');
+    include_once($docRoot.'/_includes/header.php');
 ?>
 
     <main role="main">
 
-        <?php include '_panels/1-start.php'; ?>
+        <?php include_once('_panels/1-start.php'); ?>
 
         <div class="sequence">
 
@@ -24,7 +24,7 @@
                 sort($file_array);
 
                 foreach ($file_array as $file) {
-                    include '_panels/'.$file;
+                    include_once '_panels/'.$file;
                 }
             ?>
 
@@ -53,7 +53,7 @@
             pattern('library_layer');
             
             /* Navigation */
-            include '../patterns/navigation.php';
+            include_once '../patterns/navigation.php';
         ?>
 
     </main>
@@ -65,4 +65,4 @@
     ?>
 
 
-<?php include($docRoot.'/_includes/footer.php') ?>
+<?php include_once($docRoot.'/_includes/footer.php') ?>
