@@ -132,9 +132,9 @@ function Carousel(element)
 
             // add potential text
             if( obj.text ) {
-                var $span = $('<span>'+obj.text+'</span>').addClass('text');
+                var $child = $('<div>'+obj.text+'</div>').addClass('text');
 
-                $li.append($span);
+                $li.append($child);
             }
 
             // what is the ratio of the image?
