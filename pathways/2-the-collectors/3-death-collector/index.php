@@ -5,7 +5,7 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    include($docRoot.'/_includes/Spyc.php');
+    include_once($docRoot.'/_includes/Spyc.php');
     
 
     $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
@@ -24,4 +24,4 @@
         'text'  => 'Almost 150 years after Graunt’s election to the Royal Society, another London businessman deliberately set out to gain a similar level of academic respectability. His own plans to publish a ground-breaking book were, however, thwarted by an unceasing desire to acquire the perfect collection.'
     );
 
-    include($docRoot.'/_includes/module.php');
+    include_once($docRoot.'/_includes/module.php');

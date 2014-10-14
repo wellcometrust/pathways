@@ -5,7 +5,7 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    include($docRoot.'/_includes/Spyc.php');
+    include_once($docRoot.'/_includes/Spyc.php');
     
 
     $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
@@ -24,4 +24,4 @@
         'text'  => 'By the time Tradescant died in 1638, a new approach to collecting was emerging: not the gathering and display of eclectic and rare curiosities, but an ordered search for specimens that might be studied to understand the world. In one philosopher’s mind, the men building up such collections were nothing less than ‘merchants of light’.'
     );
 
-    include($docRoot.'/_includes/module.php');
+    include_once($docRoot.'/_includes/module.php');

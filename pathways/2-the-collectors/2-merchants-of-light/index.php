@@ -5,7 +5,7 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    include($docRoot.'/_includes/Spyc.php');
+    include_once($docRoot.'/_includes/Spyc.php');
     
 
     $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
@@ -24,4 +24,4 @@
         'text'  => 'Bacon’s vision of scientific investigations based on evidence collected from the real world was powerfully realised three decades later by a London haberdasher, who appeared to exhibit an unhealthy interest in death.'
     );
 
-    include($docRoot.'/_includes/module.php');
+    include_once($docRoot.'/_includes/module.php');

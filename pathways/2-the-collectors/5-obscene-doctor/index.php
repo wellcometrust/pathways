@@ -5,7 +5,7 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    include($docRoot.'/_includes/Spyc.php');
+    include_once($docRoot.'/_includes/Spyc.php');
     
 
     $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
@@ -24,4 +24,4 @@
         'text'  => 'The legal action taken against collections like Kahn’s transformed the public study of anatomy from a source of entertainment and wonder to a secret and shameful activity. It would take a woman distressed by her own ignorance to expose much of this anatomical knowledge again.'
     );
 
-    include($docRoot.'/_includes/module.php');
+    include_once($docRoot.'/_includes/module.php');

@@ -4,8 +4,8 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    include($docRoot.'/_includes/Spyc.php');
-    include($docRoot.'/_includes/header.php');
+    include_once($docRoot.'/_includes/Spyc.php');
+    include_once($docRoot.'/_includes/header.php');
 
     $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
 
@@ -52,4 +52,4 @@
         
     </main>
 
-<?php include($docRoot.'/_includes/footer.php') ?>
+<?php include_once($docRoot.'/_includes/footer.php') ?>

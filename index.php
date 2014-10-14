@@ -5,7 +5,7 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    include($docRoot.'/_includes/Spyc.php');
+    include_once($docRoot.'/_includes/Spyc.php');
     
 
     $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
@@ -173,6 +173,8 @@
                             <li><a href="<?php echo $path ?>6-freud/index.php">Sigmund Freud</a></li>
                             <li><a href="<?php echo $path ?>credits.php">Credits</a></li>
                         </ul>
+
+                        <div><a href="tapestry/download.php?pathway=mindcraft">Download</a></div>
                     </div>
 
                     <div class="pathway">
@@ -188,6 +190,8 @@
                             <li><a href="<?php echo $path2 ?>6-ignorant-bride/index.php">The Ignorant Bride</a></li>
                             <li><a href="<?php echo $path2 ?>credits.php">Credits</a></li>
                         </ul>
+
+                        <div><a href="tapestry/download.php?pathway=the-collectors">Download</a></div>
                     </div>
                 </div>
             </div>

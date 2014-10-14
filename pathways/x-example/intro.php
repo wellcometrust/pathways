@@ -5,7 +5,7 @@ if( $_SERVER['SERVER_NAME'] == 'wellcome-pathways.clearleft.com' )
 else
     $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-include($docRoot.'/_includes/header.php');
+include_once($docRoot.'/_includes/header.php');
 ?>
 
     <main role="main">
@@ -80,4 +80,4 @@ include($docRoot.'/_includes/header.php');
 
     </main>
 
-<?php include($docRoot.'/_includes/footer.php') ?>
+<?php include_once($docRoot.'/_includes/footer.php') ?>
