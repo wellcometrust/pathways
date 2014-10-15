@@ -2,9 +2,13 @@
 .overlay {
     position:           fixed;
     top:                0;
-    background-color:   rgba(0,0,0,0);
+    background-color:   rgba(0,0,0,0.8);
     width:              100%;
     z-index:            100;
+    opacity: 			0;
 
-    @include transition( opacity 0.3s ease );
+    @include transition( opacity 0.4s ease );
+}
+.overlay-active {	
+	opacity: 			1;
 }

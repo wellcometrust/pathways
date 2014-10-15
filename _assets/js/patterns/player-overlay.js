@@ -1,70 +1,158 @@
-
 Pathways.PlayerOverlay = function(panel_height, elem) {
 
-    var $element            = $(elem);
+    var $element = $(elem),
+
+        defaultPanelOffset = 180,
+        fullScreenPanelOffset = 0,
+        minPanelHeight = 550,
+
+        rootSel = 'body',
+        playerSel = '.wellcomePlayer',
+        
+        activeClass = 'overlay-active',
+        overlayFullscreenClass = 'overlay-fullscreen',
+
+        closeTmpl = '<div class="close"></div>',
+        overlayTmpl = '<div class="overlay"></div>',
+        iframeTmpl = '<iframe/>';
+        
+
+    function getPanelHeight() {
+        return window.innerHeight < minPanelHeight ? minPanelHeight : window.innerHeight;
+    }
+
+    function getHeightWithOffset(offset) {
+        offset = offset || 0;
+        return getPanelHeight() - offset;
+    }
+
+    function getWidthWithOffset(offset) {
+        offset = offset || 0;
+        return window.innerWidth - offset;
+    }
+
 
     $element.on('click', function(e) {
 
-        var $this           = $(this),
-            playerWidth     = (window.innerWidth - 180),
-            playerHeight    = (window.innerHeight - 180);
+        var $this = $(this),      
+            embedData = $this.data('embed'),
+            isFullScreen = false;
 
-        if( $this.data('embed') ) {
-            var embed_str   = '<div class="wellcomePlayer" data-no-load="true" data-config="/player-config.js" data-uri="'+ $this.data('embed') +'" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:'+playerWidth+'px; height:'+playerHeight+'px; background-color: #000"></div>',
-                $embed      = $(embed_str),
-                $overlay    = $('<div class="overlay"></div>'),
-                $close      = $('<div class="close"></div>');
-                $iframe     = $('<iframe/>').attr('src', $this.attr('href'));
+        if (embedData) {
 
-            $iframe.attr('width', playerWidth );
-            $iframe.attr('height', playerHeight );
+            var initHeight = getHeightWithOffset(defaultPanelOffset),
+                initWidth = getWidthWithOffset(defaultPanelOffset),
 
-            $overlay.css('height', Pathways.panel_height );
+                playerTmpl = '<div class="wellcomePlayer" data-no-load="true" data-config="/player-config.js" data-uri="' + embedData + '" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:' + initWidth + 'px; height:' + initHeight + 'px; background-color: #000"></div>',
+        
+                $player,
+                $overlay,
+                $close;
 
-            $('body').append($overlay);
+            function getOffset() {
+                if (isFullScreen) {
+                    return fullScreenPanelOffset;
+                } else {
+                    return defaultPanelOffset;
+                }
+            }
 
-            $overlay.show();
-            $overlay.css('background-color', 'rgba(0,0,0,0.8)');
+            function resizePlayerToDimensions(width, height) {
 
-            setTimeout(function() {
-                Pathways.Utils.positionCenter($embed);
-                $overlay.append($embed);
+                $overlay.css('height', getHeightWithOffset(0));
 
-                window.initPlayers($('.wellcomePlayer'));
-                //$overlay.append( $('<script id="embedWellcomePlayer" src="/wellcomeplayer/js/embed.js"><\/script>') );
-                $overlay.append( $close );
-            }, 800);
+                $player.css('width', width);
+                $player.css('height', height);
 
-            $overlay.on('click', function() {
-                this.addEventListener('transitionend', function() { $(this).remove() }, false);
-                $overlay.css('opacity', 0);
-                window.embedScriptIncluded = false;
-            })
+                Pathways.Utils.positionCenter($player);
+            }
 
-            window.addEventListener('resize', function() {
-                playerWidth     = (window.innerWidth - 180),
-                playerHeight    = (window.innerHeight - 180);
+            function resizePlayer() {
+                var offset = getOffset();
+                resizePlayerToDimensions(getWidthWithOffset(offset), getHeightWithOffset(offset));
+            }
 
-                $overlay.css('height', window.innerHeight );
 
-                $iframe.css('width', playerWidth );
-                $iframe.css('height', playerHeight );
+            function createOverlay(tmpl, $rootEl, $closeEl) {
+                var $el = $(tmpl);
+                $el.append($closeEl);
+                $rootEl.append($el);          
+                return $el;
+            }
 
-                $embed.css('width', playerWidth );
-                $embed.css('height', playerHeight );
-            });
+            function createPlayer(tmpl, $rootEl) {
+                $el = $(tmpl);
+                $rootEl.append($el);
+                return $el;
+            }
 
-            $(document).bind("onToggleFullScreen", function (event, isFullScreen) {
-                console.log('full screen: ' + isFullScreen);
-            });
+            function initPlayer(sel){                
+                window.initPlayers($(sel));  
+            }
 
-            // test currentViewUri event
-            $(document).bind("onCurrentViewUri", function (event, uri) {
-                console.log('download uri: ' + uri);
-            });
+            function initOverlay($el, sel) {
+                
+                $el.on('transitionend', function() {                     
+                    if($el.hasClass(activeClass)) {    // fading in complete
+                        initPlayer(sel);
+                    } else {                        // fading out complete
+                        $(this).remove();
+                    }                     
+                });
+               
+                $el.on('click', function() {   
+                    $(this).removeClass(activeClass);
+                    isFullScreen = false;
+                    window.embedScriptIncluded = false;
+                });
+
+                setTimeout(function() {
+                    $el.addClass(activeClass);                   
+                }, 10); // delay before adding class to ensure transition event will fire
+                    
+            }
+
+
+            function addDocListeners() {
+
+                $(window).resize(resizePlayer);
+
+                $(document).bind('onToggleFullScreen', function(event, goFullScreen) {                    
+
+                    if (goFullScreen) {
+                        isFullScreen = true;                       
+                        $overlay.addClass(overlayFullscreenClass);
+                    } else {
+                        isFullScreen = false;
+                        $overlay.removeClass(overlayFullscreenClass);
+                    }
+                    
+                    resizePlayer();
+                });
+
+                // test currentViewUri event
+                //$(document).bind("onCurrentViewUri", function(event, uri) {
+                    //console.log('download uri: ' + uri);
+                //});
+            }
+
+            function init() {
+                var $root = $(rootSel);
+
+                $close = $(closeTmpl);
+                $overlay = createOverlay(overlayTmpl, $root, $close);
+                $player = createPlayer(playerTmpl, $overlay);
+                
+                addDocListeners();
+
+                initOverlay($overlay, playerSel);
+            }
+
+            init();
+            resizePlayer();
 
             e.preventDefault();
-            return false; 
+            return false;
         }
     });
 
