@@ -4,6 +4,13 @@
 # trilby
 # bompard
 
+# Page Information
+#
+
+page_info:
+    pathway_id: 'mindcraft'
+    module_id: 'svengali'
+
 
 # Info Panels
 
@@ -77,3 +84,29 @@ library_layer:
             author: George du Maurier
             date: 1894
             link: 'http://www.gutenberg.org/ebooks/39858'
+
+
+            # 
+# Teaser/Fork info
+# 
+
+teaser:
+    image: 'teaser-freud.jpg'
+    link: '6-freud/'
+    title: 'Secrets of the mind revealed'
+
+
+# 
+# Audio info
+# 
+
+audio: 
+    global: 'paris_atmosphere'
+    intro: 'paris_atmosphere'
+    mesmers-salon-intro: 'paris_atmosphere'
+    mesmers-salon: 'paris_atmosphere'
+    animal-magnetism: 'paris_atmosphere'
+    magnetised-trees: 'paris_atmosphere'
+    satirised: 'paris_atmosphere'
+    committee-investigates-intro: 'paris_atmosphere'
+    committee-investigates: 'paris_atmosphere'

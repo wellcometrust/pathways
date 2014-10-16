@@ -5,6 +5,13 @@
 # airloom
 # where-will-this-technology-lead
 
+# Page Information
+#
+
+page_info:
+    pathway_id: 'mindcraft'
+    module_id: 'airloom'
+
 
 # Info Panels
 
@@ -57,3 +64,28 @@ library_layer:
             author: Iwan Rhys Morus
             date: 2011
             link: 'http://bookshop.blackwell.co.uk/jsp/id/Shocking_Bodies_Life_Death_and_Electricity_in_Victorian_England/9780752458007'
+
+# 
+# Teaser/Fork info
+# 
+
+teaser:
+    image: 'teaser-oakey.jpg'
+    link: '3-elliotson/'
+    title: 'Who controls who?'
+
+# 
+# Audio info
+# 
+
+audio: 
+    global: 'asylum'
+    intro: 'asylum'
+    mesmers-salon-intro: 'asylum'
+    mesmers-salon: 'asylum'
+    animal-magnetism: 'asylum'
+    magnetised-trees: 'asylum'
+    satirised: 'asylum'
+    committee-investigates-intro: 'asylum'
+    committee-investigates: 'asylum'
+

@@ -9,7 +9,12 @@
 # james-braid
 # self-hypnosis
 
+# Page Information
+#
 
+page_info:
+    pathway_id: 'mindcraft'
+    module_id: 'esdaile'
 
 # Info Panels
 
@@ -90,3 +95,27 @@ library_layer:
             date: '1992'
             link: 'http://bookshop.blackwell.co.uk/jsp/id/A_History_of_Hypnotism/9780521483292'
 
+# 
+# Teaser/Fork info
+# 
+
+teaser:
+    image: 'teaser-svengali.jpg'
+    link: '5-svengali/'
+    title: 'Dark forces'
+
+
+# 
+# Audio info
+# 
+
+audio: 
+    global: 'paris_atmosphere'
+    intro: 'paris_atmosphere'
+    mesmers-salon-intro: 'paris_atmosphere'
+    mesmers-salon: 'paris_atmosphere'
+    animal-magnetism: 'paris_atmosphere'
+    magnetised-trees: 'paris_atmosphere'
+    satirised: 'paris_atmosphere'
+    committee-investigates-intro: 'paris_atmosphere'
+    committee-investigates: 'paris_atmosphere'

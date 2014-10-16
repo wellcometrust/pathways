@@ -1,21 +1,24 @@
 <?php
-    global $teaser, $module, $path;
+    
+    $teaser =   $page->getTeaserData();
+    $module =   $page->getModuleId();
+    $path =     $page->getPathwayPath();
 
     $teaser_bg      = isset($teaser['image']) ? $teaser['image']  : '';
-    $teaser_link    = isset($teaser['link'])  ? $teaser['link']   : '';
+    $teaser_link    = $path.(isset($teaser['link'])  ? $teaser['link']   : '');
     $teaser_title   = isset($teaser['title']) ? $teaser['title']  : '';
 ?>
 
 <div class="fork">
 
-    <a class="teaser" href="<?php echo $teaser_link != '' ? $teaser_link : '#' ?>" <?php if( $teaser_bg != '' ) { echo ' style="background-image: url('.$path.'/_assets/teaser/'.$teaser_bg.')"'; } ?>>
+    <a class="teaser" href="<?= $teaser_link != '' ? $teaser_link : '#' ?>" <?php if( $teaser_bg != '' ) { echo ' style="background-image: url('.$path.'/_assets/teaser/'.$teaser_bg.')"'; } ?>>
         <div class="teaser-text-container">
             <?php if( $module != 'freud' ): ?>
             <p class="teaser-text">Next:</p>
             <?php endif ?>
-            <h1><?php echo $teaser_title != '' ? $teaser_title : '' ?></h1>
+            <h1><?= $teaser_title != '' ? $teaser_title : '' ?></h1>
             <?php if ( isset($teaser['text']) ): ?>
-                <p><?php echo $teaser['text'] ?></p>
+                <p><?= $teaser['text'] ?></p>
             <?php endif ?>
             <div class="teaser-icon"></div>
         </div>

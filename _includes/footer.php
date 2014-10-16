@@ -1,7 +1,7 @@
     
-    <script src="<?php echo asset('build/js/libs.min.js') ?>"></script>
+    <script src="<?= $page->getAsset('build/js/libs.min.js') ?>"></script>
     <script src="/_assets/animations/magnetised-trees/tree2.js"></script>
-    <script src="<?php echo asset('build/js/production.js') ?>"></script>
+    <script src="<?= $page->getAsset('build/js/production.js') ?>"></script>
     <script id="embedWellcomePlayer" src="/wellcomeplayer/js/embed.js"></script>
 
     <!-- Facebook API -->
@@ -23,7 +23,7 @@
 	</script>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 
-	<!-- Pinerest API -->
+	<!-- Pinterest API -->
 	<!-- Please call pinit.js only once per page -->
 	<script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
 	

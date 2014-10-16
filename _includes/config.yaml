@@ -3,11 +3,26 @@
 site:
     pathways:
         mindcraft:
-            path: /pathways/1-mindcraft/
+            path: '/pathways/1-mindcraft/'  
+
             modules:
+                -   id: intro
+                    path: 'intro.php'
+                    title: 'Mindcraft: A century of madness, murder and mental healing'
+                    title_postfix: ' | Wellcome Collection'
+                    description: 'Mindcraft: A century of madness, murder and mental healing.'
+
+                -   id: credits
+                    path: 'credits.php'
+                    title: 'Credits'
+                    title_postfix: ' | Mindcraft | Wellcome Collection'
+                    description: 'Production credits for Mindcraft, a digital story from Wellcome Collection.'
+
                 -   id: mesmer
-                    path: 1-mesmer/
-                    title: A New Force in Nature
+                    path: '1-mesmer/'
+                    title: A new force in nature
+                    title_postfix: ' | Mindcraft | Wellcome Collection'
+                    description: 'Franz Anton Mesmer arrives in Paris to present a revolutionary theory to the French Academy of Sciences. He claims he has harnessed a universal life-force called ‘animal magnetism’ that can cure all disease.'
                     panels:
                         - id: mesmers-salon-intro
                         - id: mesmers-salon
@@ -17,8 +32,10 @@ site:
                         - id: committee-investigates
 
                 -   id: airloom
-                    path: 2-airloom/
-                    title: A Machine to Control the Mind
+                    path: '2-airloom/'
+                    title: A machine to control the mind
+                    title_postfix: ' | Mindcraft | Wellcome Collection'
+                    description: 'A Welsh tea merchant, James Tilly Matthews, reveals that his mind is being controlled by a gang of “magnetic spies” and their secret machine, the Air Loom.'
                     panels:
                         - id: airloom-intro
                         - id: airloom
@@ -26,16 +43,20 @@ site:
                         - id: grisly-experiments
 
                 -   id: elliotson
-                    path: 3-elliotson/
-                    title: Who Controls Who?
+                    path: '3-elliotson/'
+                    title: Who controls who?
+                    title_postfix: ' | Mindcraft | Wellcome Collection'
+                    description: 'Mesmerism is still being spread by a network of believers. Its most prominent champion in Britain is Dr John Elliotson, professor at University College Hospital.'
                     panels:
                         - id: okey-sisters
                         - id: thomas-wakley
                         - id: verdict
 
                 -   id: esdaile
-                    path: 4-esdaile/
-                    title: Mind Over Matter
+                    path: '4-esdaile/'
+                    title: Mind over matter
+                    title_postfix: ' | Mindcraft | Wellcome Collection'
+                    description: 'The Zoist receives news that a British surgeon in India, James Esdaile, has performed dozens of pain-free operations by mesmerising his patients.'
                     panels:
                         - id: gonad-man
                         - id: fakir
@@ -46,15 +67,19 @@ site:
                         - id: self-hypnosis
 
                 -   id: svengali
-                    path: 5-svengali/
-                    title: Dark Forces
+                    path: '5-svengali/'
+                    title: Dark forces
+                    title_postfix: ' | Mindcraft | Wellcome Collection'
+                    description: 'Hypnotism has now been accepted by medical science. ‘Mind over matter’ is real – but what are its limits and its dangers? Can it be exploited for evil ends?'
                     panels:
                         - id: trilby
                         - id: bompard
 
                 -   id: freud
-                    path: 6-freud/
-                    title: Secrets of the Mind Revealed
+                    path: '6-freud/'
+                    title: Secrets of the mind revealed
+                    title_postfix: ' | Mindcraft | Wellcome Collection'
+                    description: 'Hypnosis, tarnished by scandal and abuse, has fallen from medical favour. But two doctors still believe it holds the key to understanding the mind and its powers to heal.'
                     panels:
                         - id: anna-o
                         - id: fred-breuer-intro
@@ -64,10 +89,10 @@ site:
                         - id: office-2
 
         the-collectors:
-            path: /pathways/2-the-collectors/
+            path: '/pathways/2-the'-collectors/
             modules:
                 -   id: curious-gardener
-                    path: 1-curious-gardener/
+                    path: '1-curious-gardener'/
                     title: The Curious Gardener
                     panels:
                         - id: john-tradescent
@@ -76,14 +101,14 @@ site:
                         - id: tradescants-ark
 
                 -   id: merchants-of-light
-                    path: 2-merchants-of-light/
+                    path: '2-merchants-of'-light/
                     title: Merchants of Light
                     panels:
                         - id: bensalem-intro
                         - id: bensalem
 
                 -   id: death-collector
-                    path: 3-death-collector/
+                    path: '3-death-collector'/
                     title: The Death Collector
                     panels:
                         - id: bills-of-mortality
@@ -91,13 +116,13 @@ site:
                         - id: isaac-newton
 
                 -   id: unceasing-seeker
-                    path: 4-unceasing-seeker/
+                    path: '4-unceasing-seeker'/
                     title: The Unceasing Seeker
                     panels:
                         - id: wellcome-collection
 
                 -   id: obscene-doctor
-                    path: 5-obscene-doctor/
+                    path: '5-obscene-doctor'/
                     title: The Obscene Doctor
                     panels:
                         - id: khans-anatomical-museum
@@ -106,7 +131,7 @@ site:
                         - id: seized-and-destroyed
 
                 -   id: ignorant-bride
-                    path: 6-ignorant-bride/
+                    path: '6-ignorant-bride'/
                     title: The Ignorant Bride
                     panels:
                         - id: british-museum
@@ -115,5 +140,5 @@ site:
                         - id: letters
 
         breath:
-            path: /pathways/3-breath/
+            path: '/pathways/3-breath'/
 

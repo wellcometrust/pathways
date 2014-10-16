@@ -10,6 +10,14 @@
 # committee-investigates
 
 
+# Page Information
+#
+
+page_info:
+    pathway_id: 'mindcraft'
+    module_id: 'mesmer'
+
+
 # Info Panels
 #
 # An info panel example:
@@ -151,19 +159,49 @@ library_layer:
             date: 2012
             link: 'http://bookshop.blackwell.co.uk/jsp/id/Mental_Healers_Mesmer_Eddy_and_Freud/9781906548940'
 
+# 
+# Gallery information
+# 
 
-gallery: 
-    location: 'galleries/tools-of-mesmerism/'
-    images:
-        -   image: 'V0016530'
-            text: 'Dummy text'
+galleries: 
 
-        -   image: 'L0023349'
+    animal-magnetism:
+        location: 'galleries/tools-of-mesmerism/'
+        images:
+            -   image: 'V0016530'
+                text: 'Dummy text'
 
-        -   image: 'L0023350'
-        -   image: 'L0023351'
-        -   image: 'L0023352'
-        -   image: 'M0006352'
-        -   image: 'V0011096'
+            -   image: 'L0023349'
+            -   image: 'L0023350'
+            -   image: 'L0023351'
+            -   image: 'L0023352'
+            -   image: 'M0006352'
+            -   image: 'V0011096'
 
+
+
+# 
+# Teaser/Fork info
+# 
+
+teaser:
+    image: 'teaser-jtm.jpg'
+    link: '2-airloom/'
+    title: 'A machine to control the mind'
+
+
+# 
+# Audio info
+# 
+
+audio: 
+    global: 'paris_atmosphere'
+    intro: 'paris_atmosphere'
+    mesmers-salon-intro: 'paris_atmosphere'
+    mesmers-salon: 'paris_atmosphere'
+    animal-magnetism: 'paris_atmosphere'
+    magnetised-trees: 'paris_atmosphere'
+    satirised: 'paris_atmosphere'
+    committee-investigates-intro: 'paris_atmosphere'
+    committee-investigates: 'paris_atmosphere'
 

@@ -1,8 +1,4 @@
-<?php
-    global $library_db;
-
-    include_once($docRoot.'/_includes/header.php');
-?>
+<?php include_once($page->docRoot.'/_includes/header.php'); ?>
 
     <main role="main">
 
@@ -31,41 +27,43 @@
         </div>
 
         <div class="info-panels">
-            <?php
-            if( isset( $library_db['info_panels'] ) ) {
-                foreach ($library_db['info_panels'] as $key => $ip) {
-                    if (isset($ip['links'])) {
+
+            <?php            
+                $panels = $page->getModuleData('info_panels');
+
+                foreach ($panels as $key => $ip) {                   
+                    if (isset($ip['links'])) {  
                         $panel = array(
                             'id'    => $key,
                             'links' => $ip['links'],
                             'share' => $ip['share']
                         );
-
-                        pattern('library_panel');
+                        $page->renderPattern('library_panel', $panel);
                     }
                 }
-            }
+            
             ?>
         </div>
 
         <?php
             /* Teaser */
-            pattern('fork');
+            $page->renderPattern('fork');            
 
             /* Library Layer */
-            pattern('library_layer');
+            $page->renderPattern('library_layer');
             
-            /* Navigation */
-            include_once '../patterns/navigation.php';
+            /* Navigation */   
+            $page->renderPattern('navigation'); 
         ?>
 
     </main>
 
     <?php
-        if( isset($audio) ) {
-            echo '<div class="global-audio" data-audio="http://wellcome-pathways.s3.amazonaws.com/'. $audio .'.mp3"></div>';
+        $globalAudio = $page->getAudioByPanelId('global');
+
+        if( isset($globalAudio) ) {
+            echo '<div class="global-audio" data-audio="'. $page->mediaUrl . $globalAudio .'.mp3"></div>';
         }
     ?>
 
-
-<?php include_once($docRoot.'/_includes/footer.php') ?>
+<?php include_once($page->docRoot.'/_includes/footer.php'); ?>

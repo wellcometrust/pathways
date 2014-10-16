@@ -5,6 +5,13 @@
 # thomas-wakley
 # verdict
 
+# Page Information
+#
+
+page_info:
+    pathway_id: 'mindcraft'
+    module_id: 'elliotson'
+
 
 # Info Panels
 
@@ -91,3 +98,31 @@ library_layer:
             author: 'Antonio Melechi'
             date: '2009'
             link: 'http://bookshop.blackwell.co.uk/jsp/id/Servants_of_the_Supernatural/9780099478867'
+
+
+# 
+# Teaser/Fork info
+# 
+
+teaser:
+    image: 'teaser-esdaile.jpg'
+    link: '4-esdaile/'
+    title: 'Mind over matter'
+
+
+# 
+# Audio info
+# 
+
+audio: 
+    global: 'paris_atmosphere'
+    intro: 'paris_atmosphere'
+    mesmers-salon-intro: 'paris_atmosphere'
+    mesmers-salon: 'paris_atmosphere'
+    animal-magnetism: 'paris_atmosphere'
+    magnetised-trees: 'paris_atmosphere'
+    satirised: 'paris_atmosphere'
+    committee-investigates-intro: 'paris_atmosphere'
+    committee-investigates: 'paris_atmosphere'
+
+

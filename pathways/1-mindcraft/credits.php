@@ -4,6 +4,9 @@ if( $_SERVER['SERVER_NAME'] == 'wellcome-pathways.clearleft.com' )
 else
     $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
+include_once($docRoot.'/_includes/page-data.php');
+$page = PageBuilder::getPage('mindcraft','credits');
+
 include_once($docRoot.'/_includes/header.php');
 ?>
 
@@ -48,7 +51,7 @@ include_once($docRoot.'/_includes/header.php');
         </div><!-- .credits -->
 
         <?php
-            include 'patterns/navigation.php';
+            $page->renderPattern('navigation'); 
         ?>
         
     </main>

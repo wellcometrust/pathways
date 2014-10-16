@@ -1,24 +1,14 @@
-<?php    
-    function asset($location) {
-        return '/_assets' . ( strpos($location, '/') != 0 ? '/' . $location : $location);
-    }
-
-    function pattern($pattern, $library_content = '') {
-        global $docRoot;
-
-        include_once($docRoot . '/patterns/' . $pattern . '.php' );
-    }
-?>
 <!DOCTYPE HTML>
 <html lang="en"> 
 <head>
     <meta charset="utf-8"> 
-    <title>Pathways: The Mind</title>
+    <title><?= $page->getPageTitle()?></title>
 
+    <meta name="description" content="<?= $page->getDescription()?>">
     <meta name="viewport" content="initial-scale=1,width=device-width">
 
-    <link rel="stylesheet" href="//f.fontdeck.com/s/css/VWVFQa58PbJBMqY5yx0LaLm3Wok/<?php echo $_SERVER['SERVER_NAME'] ?>/44200.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo asset('build/css/main.css') ?>">
+    <link rel="stylesheet" href="//f.fontdeck.com/s/css/VWVFQa58PbJBMqY5yx0LaLm3Wok/<?= $_SERVER['SERVER_NAME'] ?>/44200.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="<?= $page->getAsset('build/css/main.css') ?>">
 
     <script>
         // Cuts the mustard

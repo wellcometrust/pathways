@@ -2,7 +2,9 @@
 
 $patterns_dir = str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) . "patterns";
 // $sections_dir = str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) . "patterns/sections/";
-
+function getHostRoot(){
+    return (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']; 
+}
 
 function section($str) {
     global $sections_dir;
@@ -24,13 +26,14 @@ if( !function_exists('export') ) {
         $dirPath = $config_yml['site']['pathways'][$pathway]['path'];
 
         // get the pathway directory
-        $d          = dir($docRoot . '/' . $dirPath);
+        //$d          = dir($docRoot . '/' . $dirPath);
+        $d          = dir($docRoot . $dirPath);
 
         // add the intro and credits
-        $intro = file_get_contents('http://'.$_SERVER['SERVER_NAME'] . $dirPath . '/intro.php');
+        $intro = file_get_contents(getHostRoot(). $dirPath . 'intro.php');
         $zip->addFromString('intro.html', $intro);
 
-        $credits = file_get_contents('http://'.$_SERVER['SERVER_NAME'] . $dirPath . '/credits.php');
+        $credits = file_get_contents(getHostRoot() . $dirPath . 'credits.php');
         $zip->addFromString('credits.html', $credits);
 
         // Find the pathway modules
@@ -40,8 +43,7 @@ if( !function_exists('export') ) {
             // only get the numbered modules
             if( preg_match('/^\d/', $file) && is_dir( $childFolderStr ) ) {
                 // get the file and load the contents into a string
-                $loc = $_SERVER['SERVER_NAME'] . $dirPath . $file . '/index.php';
-                $page = file_get_contents('http://'.$loc);
+                $page = file_get_contents(getHostRoot() . $dirPath . $file . '/index.php');
 
                 // create a file from the string and add straight to the zip file.
                 $zip->addFromString($file.'.html', $page);

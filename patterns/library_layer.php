@@ -1,7 +1,5 @@
-<?php
-    global $library_db;
-
-    $layer = isset( $library_db['library_layer'] ) ? $library_db['library_layer'] : [];
+<?php        
+    $library = $page->getModuleData('library_layer');
 ?>
 
 <div class="library-layer">
@@ -25,8 +23,8 @@
 
                 <div>
                     <ul class="player-items clearfix">
-                        <?php if( isset($layer['See_in_the_Wellcome_Library']) ): ?>
-                            <?php foreach( $layer['See_in_the_Wellcome_Library'] as $data ): ?>
+                        <?php if( isset($library['See_in_the_Wellcome_Library']) ): ?>
+                            <?php foreach( $library['See_in_the_Wellcome_Library'] as $data ): ?>
                                 <li>
                                     <div class="player-item clearfix<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>" data-component="player-overlay" data-embed="<?php echo isset($data['link']) ? $data['link'] : '' ?>">
                                         <div class="player-item--thumb"></div>
@@ -55,7 +53,7 @@
             </div>
         </div>
 
-        <?php if( isset($layer['See_Elsewhere']) ): ?>
+        <?php if( isset($library['See_Elsewhere']) ): ?>
 
         <div class="related-resources">
             
@@ -67,7 +65,7 @@
                 <div>
                     <ul class="related-items clearfix">
 
-                        <?php foreach ($layer['See_Elsewhere'] as $data): ?>
+                        <?php foreach ($library['See_Elsewhere'] as $data): ?>
                             <li>
                                 <a href="<?php echo isset($data['link'] ) ? ' '.$data['link'] : '' ?>" rel="external" class="related-item<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>">
                                     <header class="related-item--header">
