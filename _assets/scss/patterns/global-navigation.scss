@@ -85,12 +85,12 @@
         }
 
         a {
-            padding: 1rem;
+            padding: 0.7rem 0.5rem 0.5rem 0.5rem;
 
             span {
                 display: block;
-                padding: 0.6em 0;
-                height:  48px;
+                padding: 0.4em 0;
+                height:  54px;
             }
 
             img {
@@ -184,6 +184,20 @@
             .image {
                 background:         url($the-collectors-assets + '/navigation/6-ignorant-bride.jpg') 0 0 no-repeat;
                 background-size:    100%;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 68em) {
+    .global-navigation {
+
+        a {
+            padding: 1rem;
+
+            span {
+                padding: 0.6em 0;
+                height:  48px;
             }
         }
     }
