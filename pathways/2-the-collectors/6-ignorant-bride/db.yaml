@@ -7,6 +7,14 @@
 # letters
 
 
+
+# Page Information
+#
+
+page_info:
+    pathway_id: 'the-collectors'
+    module_id: 'ignorant-bride'
+
 # Info Panels
 
 info_panels:
@@ -60,3 +68,15 @@ library_layer:
             author: ''
             date: 2014
             link: ''
+
+
+
+# 
+# Teaser/Fork info
+# 
+
+teaser:
+    image: ''
+    link: 'credits.php'
+    title: 'Credits'
+    text: 'By opening up the ‘locked cabinet’ of sexual knowledge to a mass audience, Stopes unintentionally built up a collection of deeply personal correspondence. These confessional and emotional letters illustrate the appetite for – and impact of – the information Stopes once again exposed to the public.'

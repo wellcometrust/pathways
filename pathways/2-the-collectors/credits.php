@@ -4,15 +4,11 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    include_once($docRoot.'/_includes/Spyc.php');
+    include_once($docRoot.'/_includes/page-data.php');
+
+    $page = PageBuilder::getPage('the-collectors', 'credits');
+
     include_once($docRoot.'/_includes/header.php');
-
-    $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
-
-    // Config
-    $pathway    = 'the-collectors';
-    $module     = '';
-    $path       = $config_yml['site']['pathways'][$pathway]['path'];
 ?>
 
     <main role="main">
@@ -45,10 +41,19 @@
                     <li><span>Project Manager:</span> Jessica Jebari</li>
                 </ul>
 
+            <h3>Beakus <span>(Air Loom Animation)</span></h3>
+
+                <ul>
+                    <li><span>Producer:</span> Laura Thomas</li>
+                    <li><span>Director:</span> Leo Bridle</li>
+                </ul>
+
             </div><!-- .inner -->
         </div><!-- .credits -->
 
-        <?php pattern('global-navigation--the-collectors') ?>
+        <?php
+            $page->renderPattern('navigation'); 
+        ?>
         
     </main>
 

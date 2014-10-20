@@ -5,7 +5,12 @@ if( $_SERVER['SERVER_NAME'] == 'wellcome-pathways.clearleft.com' )
 else
     $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
+include_once($docRoot.'/_includes/page-data.php');
+
+$page = PageBuilder::getPage('the-collectors', 'intro');
+
 include_once($docRoot.'/_includes/header.php');
+
 ?>
 
     <main role="main">

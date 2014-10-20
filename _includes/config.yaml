@@ -89,10 +89,10 @@ site:
                         - id: office-2
 
         the-collectors:
-            path: '/pathways/2-the'-collectors/
+            path: '/pathways/2-the-collectors/'
             modules:
                 -   id: curious-gardener
-                    path: '1-curious-gardener'/
+                    path: '1-curious-gardener/'
                     title: The Curious Gardener
                     panels:
                         - id: john-tradescent
@@ -101,14 +101,14 @@ site:
                         - id: tradescants-ark
 
                 -   id: merchants-of-light
-                    path: '2-merchants-of'-light/
+                    path: '2-merchants-of-light/'
                     title: Merchants of Light
                     panels:
                         - id: bensalem-intro
                         - id: bensalem
 
                 -   id: death-collector
-                    path: '3-death-collector'/
+                    path: '3-death-collector/'
                     title: The Death Collector
                     panels:
                         - id: bills-of-mortality
@@ -116,13 +116,13 @@ site:
                         - id: isaac-newton
 
                 -   id: unceasing-seeker
-                    path: '4-unceasing-seeker'/
+                    path: '4-unceasing-seeker/'
                     title: The Unceasing Seeker
                     panels:
                         - id: wellcome-collection
 
                 -   id: obscene-doctor
-                    path: '5-obscene-doctor'/
+                    path: '5-obscene-doctor/'
                     title: The Obscene Doctor
                     panels:
                         - id: khans-anatomical-museum
@@ -131,7 +131,7 @@ site:
                         - id: seized-and-destroyed
 
                 -   id: ignorant-bride
-                    path: '6-ignorant-bride'/
+                    path: '6-ignorant-bride/'
                     title: The Ignorant Bride
                     panels:
                         - id: british-museum
@@ -140,5 +140,5 @@ site:
                         - id: letters
 
         breath:
-            path: '/pathways/3-breath'/
+            path: '/pathways/3-breath/'
 

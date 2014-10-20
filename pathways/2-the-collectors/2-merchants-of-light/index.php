@@ -5,23 +5,9 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    include_once($docRoot.'/_includes/Spyc.php');
-    
+    include_once($docRoot.'/_includes/page-data.php');
 
-    $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
-    $library_db = spyc_load_file('db.yaml');
-
-    // Config
-    $pathway    = 'the-collectors';
-    $module     = 'merchants-of-light';
-    $path       = $config_yml['site']['pathways'][$pathway]['path'];
-    $root       = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
-
-    $teaser = array(
-        'image' => 'teaser-death-collector.jpg',
-        'link'  => $path.'3-death-collector/index.php',
-        'title' => 'The Death Collector',
-        'text'  => 'Bacon’s vision of scientific investigations based on evidence collected from the real world was powerfully realised three decades later by a London haberdasher, who appeared to exhibit an unhealthy interest in death.'
-    );
+    $page = PageBuilder::getPage();
 
     include_once($docRoot.'/_includes/module.php');
+

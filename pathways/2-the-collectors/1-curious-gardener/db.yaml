@@ -7,6 +7,17 @@
 # ken-video
 
 
+
+# Page Information
+#
+
+page_info:
+    pathway_id: 'the-collectors'
+    module_id: 'curious-gardener'
+
+
+
+
 # Info Panels
 
 info_panels:
@@ -60,3 +71,14 @@ library_layer:
             author: ''
             date: 2014
             link: ''
+
+
+# 
+# Teaser/Fork info
+# 
+
+teaser:
+    image: 'teaser-merchants-of-light.jpg'
+    link: '2-merchants-of-light/'
+    title: 'Merchants of Light'
+    text: 'By the time Tradescant died in 1638, a new approach to collecting was emerging: not the gathering and display of eclectic and rare curiosities, but an ordered search for specimens that might be studied to understand the world. In one philosopher’s mind, the men building up such collections were nothing less than ‘merchants of light’.'

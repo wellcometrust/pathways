@@ -8,6 +8,15 @@
 # isaac-newton
 
 
+# Page Information
+#
+
+page_info:
+    pathway_id: 'the-collectors'
+    module_id: 'death-collector'
+
+
+
 # Info Panels
 
 info_panels:
@@ -61,3 +70,15 @@ library_layer:
             author: ''
             date: 2014
             link: ''
+
+
+
+# 
+# Teaser/Fork info
+# 
+
+teaser:
+    image: 'teaser-unceasing-seeker.jpg'
+    link: '4-unceasing-seeker/'
+    title: 'The Unceasing Seeker'
+    text: 'Almost 150 years after Graunt’s election to the Royal Society, another London businessman deliberately set out to gain a similar level of academic respectability. His own plans to publish a ground-breaking book were, however, thwarted by an unceasing desire to acquire the perfect collection.'

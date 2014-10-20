@@ -5,23 +5,8 @@
     else
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
-    include_once($docRoot.'/_includes/Spyc.php');
-    
+    include_once($docRoot.'/_includes/page-data.php');
 
-    $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
-    $library_db = spyc_load_file('db.yaml');
-
-    // Config
-    $pathway    = 'the-collectors';
-    $module     = 'death-collector';
-    $path       = $config_yml['site']['pathways'][$pathway]['path'];
-    $root       = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
-
-    $teaser = array(
-        'image' => 'teaser-unceasing-seeker.jpg',
-        'link'  => $path.'4-unceasing-seeker/index.php',
-        'title' => 'The Unceasing Seeker',
-        'text'  => 'Almost 150 years after Graunt’s election to the Royal Society, another London businessman deliberately set out to gain a similar level of academic respectability. His own plans to publish a ground-breaking book were, however, thwarted by an unceasing desire to acquire the perfect collection.'
-    );
+    $page = PageBuilder::getPage();
 
     include_once($docRoot.'/_includes/module.php');

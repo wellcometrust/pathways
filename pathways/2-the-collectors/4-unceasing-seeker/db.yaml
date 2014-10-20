@@ -4,6 +4,16 @@
 # wellcome-collection
 
 
+
+
+# Page Information
+#
+
+page_info:
+    pathway_id: 'the-collectors'
+    module_id: 'unceasing-seeker'
+
+
 # Info Panels
 
 info_panels:
@@ -57,3 +67,16 @@ library_layer:
             author: ''
             date: 2014
             link: ''
+
+
+
+# 
+# Teaser/Fork info
+# 
+
+teaser:
+    image: 'teaser-obscene-doctor.jpg'
+    link: '5-obscene-doctor/'
+    title: 'The Obscene Doctor'
+    text: 'Wellcome intended his museums to be used primarily by those engaged in research. Yet he also knew how to exploit his acquisitions to create a spectacle, a skill he shared with another London immigrant, whose popular collection was ultimately destroyed.'
+
