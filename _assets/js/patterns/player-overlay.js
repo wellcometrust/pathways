@@ -9,7 +9,7 @@ Pathways.PlayerOverlay = function(panel_height, elem) {
         rootSel = 'body',
         playerSel = '.wellcomePlayer',
         
-        activeClass = 'overlay-active',
+        activeClass = 'modal-open',
         overlayFullscreenClass = 'overlay-fullscreen',
 
         closeTmpl = '<div class="close"></div>',
@@ -93,7 +93,7 @@ Pathways.PlayerOverlay = function(panel_height, elem) {
             function initOverlay($el, sel) {
                 
                 $el.on('transitionend', function() {                     
-                    if($el.hasClass(activeClass)) {    // fading in complete
+                    if($(rootSel).hasClass(activeClass)) {    // fading in complete
                         initPlayer(sel);
                     } else {                        // fading out complete
                         $(this).remove();
@@ -101,13 +101,14 @@ Pathways.PlayerOverlay = function(panel_height, elem) {
                 });
                
                 $el.on('click', function() {   
-                    $(this).removeClass(activeClass);
+                    $(rootSel).removeClass(activeClass);
                     isFullScreen = false;
                     window.embedScriptIncluded = false;
                 });
 
                 setTimeout(function() {
-                    $el.addClass(activeClass);                   
+                    // prevent scrolling
+                    $(rootSel).addClass(activeClass);                 
                 }, 10); // delay before adding class to ensure transition event will fire
                     
             }

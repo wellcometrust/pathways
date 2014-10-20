@@ -91,9 +91,22 @@ site:
         the-collectors:
             path: '/pathways/2-the-collectors/'
             modules:
+                -   id: intro
+                    path: 'intro.php'
+                    title: 'The Collectors'
+                    title_postfix: ' | Wellcome Collection'
+                    description: 'The Collectors.'
+
+                -   id: credits
+                    path: 'credits.php'
+                    title: 'Credits'
+                    title_postfix: ' | The Collectors | Wellcome Collection'
+                    description: 'Production credits for The Collectors, a digital story from Wellcome Collection.'
+
                 -   id: curious-gardener
                     path: '1-curious-gardener/'
                     title: The Curious Gardener
+                    title_postfix: ' | Wellcome Collection'
                     panels:
                         - id: john-tradescent
                         - id: duke-of-buckingham
@@ -103,6 +116,7 @@ site:
                 -   id: merchants-of-light
                     path: '2-merchants-of-light/'
                     title: Merchants of Light
+                    title_postfix: ' | Wellcome Collection'
                     panels:
                         - id: bensalem-intro
                         - id: bensalem
@@ -110,6 +124,7 @@ site:
                 -   id: death-collector
                     path: '3-death-collector/'
                     title: The Death Collector
+                    title_postfix: ' | Wellcome Collection'
                     panels:
                         - id: bills-of-mortality
                         - id: gaunt-records
@@ -118,12 +133,14 @@ site:
                 -   id: unceasing-seeker
                     path: '4-unceasing-seeker/'
                     title: The Unceasing Seeker
+                    title_postfix: ' | Wellcome Collection'
                     panels:
                         - id: wellcome-collection
 
                 -   id: obscene-doctor
                     path: '5-obscene-doctor/'
                     title: The Obscene Doctor
+                    title_postfix: ' | Wellcome Collection'
                     panels:
                         - id: khans-anatomical-museum
                         - id: quackery
@@ -133,6 +150,7 @@ site:
                 -   id: ignorant-bride
                     path: '6-ignorant-bride/'
                     title: The Ignorant Bride
+                    title_postfix: ' | Wellcome Collection'
                     panels:
                         - id: british-museum
                         - id: married-love

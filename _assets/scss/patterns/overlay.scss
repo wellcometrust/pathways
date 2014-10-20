@@ -9,6 +9,6 @@
 
     @include transition( opacity 0.4s ease );
 }
-.overlay-active {	
+.modal-open .overlay {	
 	opacity: 			1;
 }
