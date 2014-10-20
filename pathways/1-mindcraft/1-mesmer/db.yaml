@@ -163,20 +163,20 @@ library_layer:
 # Gallery information
 # 
 
-galleries: 
+# galleries: 
 
-    animal-magnetism:
-        location: 'galleries/tools-of-mesmerism/'
-        images:
-            -   image: 'V0016530'
-                text: 'Dummy text'
+#     animal-magnetism:
+#         location: 'galleries/tools-of-mesmerism/'
+#         images:
+#             -   image: 'V0016530'
+#                 text: 'Dummy text'
 
-            -   image: 'L0023349'
-            -   image: 'L0023350'
-            -   image: 'L0023351'
-            -   image: 'L0023352'
-            -   image: 'M0006352'
-            -   image: 'V0011096'
+#             -   image: 'L0023349'
+#             -   image: 'L0023350'
+#             -   image: 'L0023351'
+#             -   image: 'L0023352'
+#             -   image: 'M0006352'
+#             -   image: 'V0011096'
 
 
 
@@ -195,13 +195,5 @@ teaser:
 # 
 
 audio: 
-    global: 'paris_atmosphere'
-    intro: 'paris_atmosphere'
-    mesmers-salon-intro: 'paris_atmosphere'
-    mesmers-salon: 'paris_atmosphere'
-    animal-magnetism: 'paris_atmosphere'
-    magnetised-trees: 'paris_atmosphere'
-    satirised: 'paris_atmosphere'
-    committee-investigates-intro: 'paris_atmosphere'
-    committee-investigates: 'paris_atmosphere'
+    global: 'http://wellcome-pathways.s3.amazonaws.com/paris_atmosphere.mp3'
 

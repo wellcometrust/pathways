@@ -1,6 +1,8 @@
 <?php include_once($page->docRoot.'/_includes/header.php'); ?>
 
     <main role="main">
+        
+        <a class="mute"></a>
 
         <?php include_once('_panels/1-start.php'); ?>
 
@@ -62,7 +64,7 @@
         $globalAudio = $page->getAudioByPanelId('global');
 
         if( isset($globalAudio) ) {
-            echo '<div class="global-audio" data-audio="'. $page->mediaUrl . $globalAudio .'.mp3"></div>';
+            echo '<div class="global-audio" data-audio="'.$globalAudio.'"></div>';
         }
     ?>
 

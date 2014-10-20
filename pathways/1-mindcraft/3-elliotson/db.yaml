@@ -115,14 +115,6 @@ teaser:
 # 
 
 audio: 
-    global: 'paris_atmosphere'
-    intro: 'paris_atmosphere'
-    mesmers-salon-intro: 'paris_atmosphere'
-    mesmers-salon: 'paris_atmosphere'
-    animal-magnetism: 'paris_atmosphere'
-    magnetised-trees: 'paris_atmosphere'
-    satirised: 'paris_atmosphere'
-    committee-investigates-intro: 'paris_atmosphere'
-    committee-investigates: 'paris_atmosphere'
+    global: 'http://wellcome-pathways.s3.amazonaws.com/paris_atmosphere.mp3'
 
 
