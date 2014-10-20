@@ -92,7 +92,9 @@ function Carousel(element)
         $element.append($container);
 
         // Load the first image
-        var first = images[0];
+        var imagesCopy = [].concat(images);
+        var first = imagesCopy[0];
+        console.log(first);
 
         loadImage(first, function() {
             loadNavigation();
@@ -103,10 +105,10 @@ function Carousel(element)
             $container.css( 'transform', 'translate('+ (total_offset - (widths[0] / 2)) +'px,0)');
             setPaneDimensions();
 
-            images.shift();
+            imagesCopy.shift();
 
             // load the rest of the images
-            loadImages(images);
+            loadImages(imagesCopy);
         });
 
         $(window).on("load resize orientationchange", function() {
