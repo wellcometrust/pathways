@@ -22,8 +22,8 @@ info_panels:
 
     anna-o:
         share:
-            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
-            text: 'Wellcome Collection'
+            img: 'http://upload.wikimedia.org/wikipedia/commons/c/cf/Anna_O.jpg'
+            text: '‘Anna O.’ (Bertha Pappenheim)'
 
         links:
             -   title: '‘Anna O.’ (Bertha Pappenheim)'
@@ -31,17 +31,14 @@ info_panels:
 
     fred-breuer:
         share:
-            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
-            text: 'Wellcome Collection'
+            img: 'http://upload.wikimedia.org/wikipedia/commons/0/00/Pappenheim_1882.jpg'
+            text: Bertha Pappenheim (1882)'
 
         links:
             -   title: 'Bertha Pappenheim (1882)'
                 external_url: 'http://commons.wikimedia.org/wiki/File:Pappenheim_1882.jpg'
 
-    office:
-        share:
-            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
-            text: 'Wellcome Collection'
+    office:        
 
         links:
             -   title: 'Sigmund Freud’s office at Freud Museum, London'

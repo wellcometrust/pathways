@@ -18,8 +18,8 @@ info_panels:
 
     trilby:
         share:
-            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
-            text: 'Wellcome Collection'
+            img: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/84.jpg'
+            text: 'Au clair de la lune. Scanned image by Philip V. Allingham'
 
         links:
             -   title: 'George Du Maurier’s illustrations for Trilby in the 1894 Harper’s New Monthly Magazine. Scanned image and text by Philip V. Allingham'
@@ -27,8 +27,8 @@ info_panels:
 
     bompard:
         share:
-            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
-            text: 'Wellcome Collection'
+            img: 'http://upload.wikimedia.org/wikipedia/commons/7/7c/Gabrielle_Bomp%C3%A9tard.jpg'
+            text: 'Poster for the song "Gabrielle Bompétard"'
 
         links:
             -   title: 'Illustrations from Le Petit Parisien and Supplément Illustré du Petit Journal, 1890'

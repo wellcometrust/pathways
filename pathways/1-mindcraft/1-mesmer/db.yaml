@@ -36,8 +36,8 @@ info_panels:
 
     mesmers-salon:
         share:
-            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
-            text: 'Wellcome Collection'
+            img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
+            text: 'Mesmeric therapy'
 
         links:
             -   title: Mesmeric therapy
@@ -46,8 +46,8 @@ info_panels:
 
     animal-magnetism:
         share:
-            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
-            text: 'Wellcome Collection'
+            img: http://wellcomelibrary.org/actual/b11757280/0/ba2ccaf1-308f-4afb-934f-448cc71cf50b/jp2'
+            text: 'A goat-headed man caresses a sleeping ewe-headed woman'
 
         links:        
             -   title: 'A goat-headed man caresses a sleeping ewe-headed woman, in a satire of the notion of animal magnetism'
@@ -57,7 +57,7 @@ info_panels:
     magnetised-trees:
         share:
             img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
-            text: 'Wellcome Collection'
+            text: 'Patients mesmerised by rods linked to a tree'
 
         links:
             -   title: 'Patients mesmerised by rods linked to a tree'
@@ -67,8 +67,8 @@ info_panels:
 
     satirised:
         share:
-            img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
-            text: 'Wellcome Collection'
+            img: 'http://thecambridgeroom.files.wordpress.com/2011/12/18th.jpg'
+            text: '18th-century marbling studio'
 
         links:
             -   title: 18th-century marbling studio
