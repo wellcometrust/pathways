@@ -1,5 +1,5 @@
 
-Pathways.Scene.AnnaO = function() {
+Pathways.Scene.AnnaO = function(panelID) {
 
     var positions = [
         { x: -57,   y: -107 },
@@ -10,7 +10,7 @@ Pathways.Scene.AnnaO = function() {
 
     var counter = 0;
 
-    $('#anna-o .fragmented').each(function() {
+    $(panelID + ' .fragmented').each(function() {
         var $this = $(this);
 
         var x = positions[counter].x,
@@ -24,7 +24,7 @@ Pathways.Scene.AnnaO = function() {
         counter++;
     })
 
-    $('#anna-o .fragmented').each(function() {
+    $(panelID + ' .fragmented').each(function() {
         var tween = TweenMax.to( $(this), 1, { x: 0, y: -3 } );
 
         var scene = new ScrollScene({

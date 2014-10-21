@@ -2,7 +2,7 @@
 
     <main role="main">
         
-        <a class="mute"></a>
+        <a class="mute" href="#"></a>
 
         <?php include_once('_panels/1-start.php'); ?>
 
@@ -64,7 +64,8 @@
         $globalAudio = $page->getAudioByPanelId('global');
 
         if( isset($globalAudio) ) {
-            echo '<div class="global-audio" data-audio="'.$globalAudio.'"></div>';
+            //echo '<div class="global-audio" data-audio="'.$globalAudio.'"></div>';
+            echo '<audio data-audio-global src="'.$globalAudio.'" loop></audio>';
         }
     ?>
 

@@ -1,16 +1,16 @@
 
-Pathways.Scene.GonadMan = function() {
+Pathways.Scene.GonadMan = function(panelID) {
 
-    var $panel  = $('#gonad-man'),
+    var $panel  = $(panelID),
         $quiz   = $panel.find('[data-component="quiz"]'),
         height  = $panel.outerHeight();
 
     var scene1 = new ScrollScene({
-            triggerElement: '#gonad-man',
+            triggerElement: panelID,
             triggerHook:    'top'
         })
         .on('enter', function() {
-            $('#gonad-man').addClass('active');
+            $(panelID).addClass('active');
         });
 
     var scene2 = new ScrollScene({

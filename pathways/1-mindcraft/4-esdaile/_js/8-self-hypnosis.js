@@ -1,20 +1,18 @@
 
-Pathways.Scene.SelfHypnosis = function() {
+Pathways.Scene.SelfHypnosis = function(panelID) {
+
+    var video = Pathways.getPanelVideoElement(panelID);
 
     var scene = new ScrollScene({
-            triggerElement: '#self-hypnosis',
+            triggerElement: panelID,
             duration:       Pathways.panel_height + 100
         })
-        .on('enter', function(e) {
-            if( _('#self-hypnosis video') )
-                _('#self-hypnosis video').play();
+        .on('enter', function(e){
+            Pathways.autoPlayVideoOnEnter(video);
         })
-        .on('leave', function(e) {
-            if( _('#self-hypnosis video') ) {
-                _('#self-hypnosis video').pause();
-                _('#self-hypnosis video').currentTime = 0;
-            }
-        })
+        .on('leave', function(e){
+            Pathways.autoStopVideoOnLeave(video);
+        });
 
     Pathways.Scenes.push(scene);
 }

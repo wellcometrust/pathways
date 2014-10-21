@@ -1,10 +1,10 @@
 
-Pathways.Scene.Office2 = function() {
+Pathways.Scene.Office2 = function(panelID) {
 
-    var $img = $('#office-2').find('.large-screen').first();
+    var $img = $(panelID).find('.large-screen').first();
 
     var scene = new ScrollScene({
-            triggerElement: '#office-2',
+            triggerElement: panelID,
             duration:       Pathways.panel_height + (Pathways.panel_height / 2)
         })
         .on('enter', function() {            

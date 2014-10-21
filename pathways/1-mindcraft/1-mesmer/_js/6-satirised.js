@@ -1,18 +1,19 @@
 
-Pathways.Scene.Satirised = function() {
-    var news_offset = $('#satirised').data('offset-height') ? $('#satirised').data('offset-height') : 0;
+Pathways.Scene.Satirised = function(panelID) {
+    var news_offset = $(panelID).data('offset-height') ? $(panelID).data('offset-height') : 0;
     
-    var videoStr = '#satirised video';
+    var video = Pathways.getPanelVideoElement(panelID);
 
-    var videoPlayOnEnter = Pathways.autoPlayVideoOnEnter(videoStr);
-    var videoStopOnLeave = Pathways.autoStopVideoOnLeave(videoStr);
-    
     var scene = new ScrollScene({
-            triggerElement: '#satirised',
+            triggerElement: panelID,
             duration:       Pathways.panel_height + news_offset + 100
         })
-        .on('enter', videoPlayOnEnter)
-        .on('leave', videoStopOnLeave);
+        .on('enter', function(e){
+            Pathways.autoPlayVideoOnEnter(video, 0, false);
+        })
+        .on('leave', function(e){
+            Pathways.autoStopVideoOnLeave(video, 0, false);
+        });
 
     Pathways.Scenes.push(scene);
 }

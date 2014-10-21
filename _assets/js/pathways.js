@@ -10,6 +10,9 @@
 
         aspect_ratio: 1900 / 1050,
 
+        muted: false,
+        muteButton: null,
+
         init: function() {
 
             // Get the enhancement level
@@ -54,8 +57,14 @@
                 // For things that need resizing all the time, even on touch devices.
                 Pathways.resizeSomeThings();
 
-                Pathways.loadVideo();
-                //Pathways.loadAudio();
+                Pathways.muteButton = Pathways.initMute('.mute');
+
+                Pathways.initVideo(Pathways.muteButton);
+                Pathways.initAudio();
+
+                
+
+                Pathways.globalAudio = Pathways.initGlobalAudio();
 
                 Pathways.hideAllTextTracks();
 
@@ -171,33 +180,53 @@
     }
 
 
-    Pathways.loadVideo = function() {        
+
+
+// Video
+
+    Pathways.initVideo = function($btn) {        
+        var _panels = doc.querySelectorAll('.panel');        
+        
+        for (var i = 0; i < _panels.length; i++) {
+            var _panel = _panels[i];
+            var _video = _panel.querySelector('video');
+
+            if (_video) {
+                _video.addEventListener('volumechange', function(e){                    
+                    if (_video.muted !== Pathways.muted) {
+                        setPathwaysMuted(_video.muted);
+                        updateButtonView();
+                    }
+                });
+
+                _video.addEventListener('error', function(e){                    
+                    console.log('error');
+                });
+
+                if (!Pathways.supports_touch) {            
+                    _video.setAttribute('preload', 'true');
+                } else {
+                    _video.setAttribute('preload', 'false');
+                }
+            }
+            
+        }
+        
+
         /*
             Feature videos
 
             These videos are embedded into the page already as they're classed as content. All we're doing here is removing
             the controls and allowing the files to preload since, in theory, the user in on a fast(er) desktop-like connection. Assumptions, ahoy!
         */
-        if (!Pathways.supports_touch) {
-            var _panels = doc.querySelectorAll('.talking-head, .animation');
-
-            for (var i = 0; i < _panels.length; i++) {
-                var _panel = _panels[i],
-                    _video = _panel.querySelector('video');
-
-                _video.setAttribute('preload', 'true');
-            };
-        }
+        
     }
 
     Pathways.hideAllTextTracks = function(videoSelector) {
-        videoSelector = videoSelector || 'video';
-        console.log('hiding captions');
+        videoSelector = videoSelector || 'video';        
         $(videoSelector).each(function(index, video) {
-            if (video) {
-                
-                var tracks = video.textTracks;   
-                console.log('video has tracks: ', tracks.length);            
+            if (video) {                
+                var tracks = video.textTracks;            
                 if (tracks.length) {
                     for (var i = 0, j = tracks.length; i < j; i++) {
                         var track = tracks[i];
@@ -208,56 +237,155 @@
         })
     }
 
-    Pathways.autoPlayVideoOnEnter = function(videoStr, initTime) {
-        var video = _(videoStr);
-        initTime = initTime || 0;
+    Pathways.getPanelVideoElement = function (panelID) {       
+        return _(panelID + ' video');
+    }
 
-        return function(e) {
-            if (video) {
+    Pathways.autoPlayVideoOnEnter = function(video, initTime, stopGlobalAudio) {        
+        initTime = initTime || 0;
+        if ((typeof stopGlobalAudio == 'undefined')) stopGlobalAudio = true;
+        
+        if (video) {
+            if (video.readyState !== 0) video.currentTime = initTime;               
+            if (stopGlobalAudio) crossFade(Pathways.globalAudio, video);
+        }
+        
+    }
+
+    Pathways.autoStopVideoOnLeave = function(video, initTime, restartGlobalAudio) {       
+        initTime = initTime || 0;
+        if ((typeof restartGlobalAudio == 'undefined')) restartGlobalAudio = true;
+
+        if (video) {    
+            if (restartGlobalAudio) crossFade(video, Pathways.globalAudio, function() {  
                 if (video.readyState !== 0) video.currentTime = initTime;
-                video.play();
-            }
+            });
+        }
+        
+    }
+
+
+
+
+
+// Audio
+
+
+    function crossFade(fromAudio, toAudio, callback){
+        
+        var delay = 1000;
+
+        var onlyFrom = (fromAudio && !toAudio);
+
+        if (fromAudio === toAudio) {
+            if (callback) w.setTimeout(callback, delay);
+            return;
+        }
+
+        if (fromAudio && (typeof fromAudio !== 'undefined')) {
+            $(fromAudio).stop(false, true);
+            $(fromAudio).animate({volume: 0}, { duration: delay, complete: function() {                 
+                this.pause(); 
+                if (onlyFrom && callback) {                    
+                    callback();
+                    callback = null;
+                }
+            }});
+        }
+
+        // fade in
+        if (toAudio && (typeof toAudio !== 'undefined')) {
+            $(toAudio).stop(false, true);
+            toAudio.volume = 0;
+            toAudio.muted = Pathways.muted;            
+            toAudio.play();
+            $(toAudio).animate({volume: 1}, { duration: delay, complete: function() {                
+                if (!onlyFrom && callback) {                    
+                    callback();
+                    callback = null;
+                }
+            }});
         }
     }
 
-    Pathways.autoStopVideoOnLeave = function(videoStr, initTime) {
-        var video = _(videoStr);
-        initTime = initTime || 0;
+    function setPathwaysMuted(value){
+        Pathways.muted = value;
 
-        return function(e) {
-            if (video) {
-                video.pause();
-                if (video.readyState !== 0) video.currentTime = initTime;
-            }
+        var $body = $('body');
+
+        $body.find('video').each(function() {                
+            this.muted = Pathways.muted;
+        });
+        $body.find('audio').each(function() {
+            console.log(Pathways.muted, this);
+            this.muted = Pathways.muted;
+        });
+    }
+
+    function updateButtonView() {
+        if(Pathways.muted) {
+            Pathways.muteButton.addClass('active'); 
+        } else {
+            Pathways.muteButton.removeClass('active'); 
         }
     }
 
-    Pathways.initAudio = function(src, autoplay, loop) {
-        autoplay = autoplay || false;
-        loop = loop || true;
 
-        var audio = document.createElement('audio');
-        audio.src       = src;
-        audio.preload   = 'auto';
-        audio.autoplay  = autoplay;
-        audio.loop      = loop;
-        return audio;
+    Pathways.initMute = function(muteSelector) {
+        var $btn = $(muteSelector);        
+
+        $btn.on('click', function(e) { 
+
+            // active == muted
+            if( $(this).hasClass('active') ) {
+                setPathwaysMuted(false);                
+            } else {
+                setPathwaysMuted(true);         
+            }
+
+            updateButtonView();
+
+            e.preventDefault();
+            return false;
+        });
+
+        return $btn;
     }
 
-    Pathways.loadAudio = function() {
-        var _audio = document.querySelector('[data-audio]'),
-            src = _audio.getAttribute('data-audio'),
-            audio = document.createElement('audio');
-
-        audio.src = src;
-        audio.preload = 'auto';
-        audio.autoplay = true;
-        audio.loop = true;
-
-        this.globalAudio = audio;
-
-        _audio.appendChild(audio);
+    // Cross fade between panel audio and global audio
+    Pathways.LoadPanelAudio = function(panel_audio) {
+        crossFade(Pathways.globalAudio, panel_audio);    
     }
+
+    Pathways.UnloadPanelAudio = function(panel_audio) {
+        crossFade(panel_audio, Pathways.globalAudio);    
+    }
+
+    Pathways.getPanelAudioElement = function(panelID) {
+        return $(panelID + ' audio').first()[0];        
+    }
+
+    Pathways.initAudio = function(){
+        var _audios = document.querySelector('audio');
+        for (var i = 0; i < _audios.length; i++) {
+            var _audio = _audios[i];
+            
+        }
+    }
+
+    Pathways.initGlobalAudio = function() {
+        console.log('init global');
+        var _audio = document.querySelector('[data-audio-global]');
+            //src = _audio.getAttribute('data-audio'),
+            //audio = Pathways.createAudioElement(src, true);
+
+        crossFade(null, _audio);
+
+        return _audio;
+    }
+
+
+
 
     Pathways.resizeSomeThings = function() {
         if (w.innerWidth < 768) {
@@ -286,6 +414,9 @@
 
         Pathways.setPanelHeights();
     }
+
+    
+
 
     Pathways.init();
 

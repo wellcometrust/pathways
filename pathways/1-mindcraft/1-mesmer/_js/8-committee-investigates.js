@@ -1,17 +1,18 @@
 
-Pathways.Scene.CommitteeInvestigates = function() {
+Pathways.Scene.CommitteeInvestigates = function(panelID) {
 
-    var videoStr = '#committee-investigates video';
-
-    var videoPlayOnEnter = Pathways.autoPlayVideoOnEnter(videoStr);
-    var videoStopOnLeave = Pathways.autoStopVideoOnLeave(videoStr);
+    var video = Pathways.getPanelVideoElement(panelID);
 
     var scene = new ScrollScene({
-            triggerElement: '#committee-investigates',
+            triggerElement: panelID,
             duration:       Pathways.panel_height + 100
         })
-        .on('enter', videoPlayOnEnter)
-        .on('leave', videoStopOnLeave);
+        .on('enter', function(e){
+            Pathways.autoPlayVideoOnEnter(video);
+        })
+        .on('leave', function(e){
+            Pathways.autoStopVideoOnLeave(video);
+        });
 
     Pathways.Scenes.push(scene);
 }

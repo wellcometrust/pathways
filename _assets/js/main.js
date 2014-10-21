@@ -179,34 +179,6 @@ Pathways.LoadScenes = function() {
         window.addEventListener('scroll', parallaxLady, false);
     }
 
-    // Mute
-    $('.mute').hide();
-
-    $('.mute').on('click', function() {
-        var $this   = $(this);
-
-        // active == muted
-        if( $this.hasClass('active') ) {
-            $this.parents('.panel').find('video').each(function() {
-                $(this).get(0).volume = 1;
-            });
-            $this.parents('.panel').find('audio').each(function() {
-                $(this).get(0).volume = 1;
-            });
-            // $video.volume = 1;
-            $this.removeClass('active');
-        }
-        else {
-            $this.parents('.panel').find('video').each(function() {
-                $(this).get(0).volume = 0;
-            });
-            $this.parents('.panel').find('audio').each(function() {
-                $(this).get(0).volume = 0;
-            });
-            // $video.volume = 0;
-            $this.addClass('active');
-        }
-    });
 
     /**************
         Sequence
@@ -325,20 +297,24 @@ Pathways.LoadScenes = function() {
                 })
         }
 
+
+        // Below commented out as individual mutes no longer apply
+
         // Mute
-        if( $mute.length ) {
-            scenes[idx++] = new ScrollScene({
-                    triggerElement: $this,
-                    duration:       (height - 200),
-                    offset:         100
-                })
-                .on('enter', function() {
-                    $mute.css({ position: 'fixed', display: 'block' });
-                })
-                .on('leave', function() {
-                    $mute.css({ position: 'absolute', display: 'none' });
-                })
-        }
+        // 
+        // if( $mute.length ) {
+        //     scenes[idx++] = new ScrollScene({
+        //             triggerElement: $this,
+        //             duration:       (height - 200),
+        //             offset:         100
+        //         })
+        //         .on('enter', function() {
+        //             $mute.css({ position: 'fixed', display: 'block' });
+        //         })
+        //         .on('leave', function() {
+        //             $mute.css({ position: 'absolute', display: 'none' });
+        //         })
+        // }
 
         // Panel specific scene code if it has any
         var panelID         = $this.attr('id'),
@@ -346,7 +322,7 @@ Pathways.LoadScenes = function() {
 
         // Check the handler exists, then load
         if ( window.Pathways.Scene[handlerClass] != null ) {
-            window.Pathways.Scene[handlerClass]();
+            window.Pathways.Scene[handlerClass]('#'+panelID);
         }
     });
 
@@ -359,21 +335,3 @@ Pathways.LoadScenes = function() {
     })
 }
 
-// Cross fade between panel audio and global audio
-Pathways.LoadPanelAudio = function(panel_audio) {
-    if( Pathways.globalAudio ) {
-        $(Pathways.globalAudio).animate({volume: 0}, 1000);
-    }
-
-    // fade in
-    $(panel_audio).animate({volume: 1}, 1000);
-}
-
-Pathways.UnloadPanelAudio = function(panel_audio) {
-    if( Pathways.globalAudio ) {
-        $(Pathways.globalAudio).animate({volume: 1}, 1000);
-    }
-
-    // fade in
-    $(panel_audio).animate({volume: 0}, 1000);
-}

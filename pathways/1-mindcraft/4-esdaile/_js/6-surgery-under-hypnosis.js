@@ -1,20 +1,18 @@
 
-Pathways.Scene.SurgeryUnderHypnosis = function() {
+Pathways.Scene.SurgeryUnderHypnosis = function(panelID) {
+
+    var video = Pathways.getPanelVideoElement(panelID);
 
     var scene = new ScrollScene({
-            triggerElement: '#surgery-under-hypnosis',
+            triggerElement: panelID,
             duration:       Pathways.panel_height + 100
         })
-        .on('enter', function(e) {
-            if( _('#surgery-under-hypnosis video') )
-                _('#surgery-under-hypnosis video').play();
+        .on('enter', function(e){
+            Pathways.autoPlayVideoOnEnter(video);
         })
-        .on('leave', function(e) {
-            if( _('#surgery-under-hypnosis video') ) {
-                _('#surgery-under-hypnosis video').pause();
-                _('#surgery-under-hypnosis video').currentTime = 0;
-            }
-        })
+        .on('leave', function(e){
+            Pathways.autoStopVideoOnLeave(video);
+        });
 
     Pathways.Scenes.push(scene);
 }

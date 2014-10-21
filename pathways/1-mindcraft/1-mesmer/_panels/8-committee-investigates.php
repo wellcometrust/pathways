@@ -8,8 +8,6 @@
             <track src="/_assets/video/MikeJay_Mesmer.vtt" kind="captions" srclang="en" label="English" />
         </video>
         <img alt="" src="/_assets/img/spacer.png">
-    </div>
-
-    
+    </div>   
     
 </div>

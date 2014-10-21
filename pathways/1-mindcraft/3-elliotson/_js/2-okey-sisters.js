@@ -1,15 +1,15 @@
 
-Pathways.Scene.OkeySisters = function() {
+Pathways.Scene.OkeySisters = function(panelID) {
 
     $('#okey-sisters .main-content, #okey-sisters .secondary-content').css({ 'bottom': 'auto', 'top': Pathways.panel_height });
     $('#thomas-wakley .main-content').css({ 'bottom': 'auto', 'top': (Pathways.panel_height / 3) });
 
-    var $panel      = $('#okey-sisters'),
+    var $panel      = $(panelID),
         $gallery    = $panel.find('[data-component="gallery"]'),
         height      = $panel.outerHeight();
 
     var scene = new ScrollScene({
-            triggerElement: '#okey-sisters',
+            triggerElement: panelID,
             triggerHook:    'top',
             duration:       Pathways.panel_height
         })

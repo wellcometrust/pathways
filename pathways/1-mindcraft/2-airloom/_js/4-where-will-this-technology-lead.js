@@ -1,7 +1,7 @@
 
 Pathways.Scene.WhereWillThisTechnologyLead = function() {
     
-    var $panel      = $('#where-will-this-technology-lead'),
+    var $panel      = $(panelID),
         $gallery    = $panel.find('[data-component="gallery"]'),
         height      = $panel.outerHeight();
     

@@ -1,7 +1,7 @@
 
-Pathways.Scene.India = function() {
+Pathways.Scene.India = function(panelID) {
 
-    var $boats      = $('#india .boats'),
+    var $boats      = $(panelID + ' .boats'),
         ratio       = 1050 / 1900,
         boat_ratio  = 322 / 1900,
         boat_height = (boat_ratio * window.innerWidth);
@@ -14,7 +14,7 @@ Pathways.Scene.India = function() {
     });
 
     var scene = new ScrollScene({
-            triggerElement: '#india',
+            triggerElement: panelID,
             duration:       Pathways.panel_height + (Pathways.panel_height / 2)
         })
         .on('enter', function() {

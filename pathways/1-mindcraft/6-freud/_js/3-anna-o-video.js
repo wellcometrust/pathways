@@ -1,20 +1,18 @@
 
-Pathways.Scene.AnnaOVideo = function() {
+Pathways.Scene.AnnaOVideo = function(panelID) {
+    
+    var video = Pathways.getPanelVideoElement(panelID);
 
     var scene = new ScrollScene({
-            triggerElement: '#anna-o-video',
+            triggerElement: panelID,
             duration:       Pathways.panel_height + 100
         })
-        .on('enter', function(e) {
-            if( _('#anna-o-video video') )
-                _('#anna-o-video video').play();
+        .on('enter', function(e){
+            Pathways.autoPlayVideoOnEnter(video);
         })
-        .on('leave', function(e) {
-            if( _('#anna-o-video video') ) {
-                _('#anna-o-video video').pause();
-                _('#anna-o-video video').currentTime = 0;
-            }
-        })
+        .on('leave', function(e){
+            Pathways.autoStopVideoOnLeave(video);
+        });
 
     Pathways.Scenes.push(scene);
 }

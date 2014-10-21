@@ -1,7 +1,7 @@
 
-Pathways.Scene.AnimalMagnetism = function() {
+Pathways.Scene.AnimalMagnetism = function(panelID) {
     
-    var $panel      = $('#animal-magnetism'),
+    var $panel      = $(panelID),
         $gallery    = $panel.find('[data-component="gallery"]'),
         height      = $panel.outerHeight();
     
@@ -18,7 +18,7 @@ Pathways.Scene.AnimalMagnetism = function() {
         .on('leave', function() {
             $gallery.css({ position: 'absolute', display: 'none' });
             setTimeout(function() { $gallery.removeClass('active'); }, 50);
-        })
+        });
 
     Pathways.Scenes.push(scene1);
 }

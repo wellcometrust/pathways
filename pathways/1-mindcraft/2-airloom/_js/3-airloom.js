@@ -1,13 +1,13 @@
 
-Pathways.Scene.Airloom = function() {
+Pathways.Scene.Airloom = function(panelID) {
 
-    var videoStr = '#airloom video';
+    var videoStr = panelID + ' video';
 
     var videoPlayOnEnter = Pathways.autoPlayVideoOnEnter(videoStr, 0.4);
     var videoStopOnLeave = Pathways.autoStopVideoOnLeave(videoStr, 0.4);
 
     var scene = new ScrollScene({
-            triggerElement: '#airloom',
+            triggerElement: panelID,
             duration:       Pathways.panel_height
         })
         .on('enter', videoPlayOnEnter)
