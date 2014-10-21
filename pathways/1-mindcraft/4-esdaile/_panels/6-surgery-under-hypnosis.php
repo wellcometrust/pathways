@@ -8,7 +8,5 @@
             <track src="/_assets/video/ChrisGreen_Pain_relief.vtt" kind="captions" srclang="en" label="English" />
         </video>
         <img alt="" src="/_assets/img/spacer.png">
-    </div>
-
-    <div class="mute"></div>    
+    </div> 
 </div>

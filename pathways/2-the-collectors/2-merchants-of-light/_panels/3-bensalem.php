@@ -7,8 +7,5 @@
             <source src="http://wellcome-pathways.s3.amazonaws.com/airloom_1080.webm">
         </video>
         <img alt="" src="/_assets/img/spacer.png">
-    </div>
-    
-    <div class="mute"></div>
-
+    </div>   
 </div>

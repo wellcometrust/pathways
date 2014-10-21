@@ -94,7 +94,6 @@ function Carousel(element)
         // Load the first image
         var imagesCopy = [].concat(images);
         var first = imagesCopy[0];
-        console.log(first);
 
         loadImage(first, function() {
             loadNavigation();

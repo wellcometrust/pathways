@@ -1,22 +1,17 @@
 
 Pathways.Scene.Airloom = function() {
 
+    var videoStr = '#airloom video';
+
+    var videoPlayOnEnter = Pathways.autoPlayVideoOnEnter(videoStr, 0.4);
+    var videoStopOnLeave = Pathways.autoStopVideoOnLeave(videoStr, 0.4);
+
     var scene = new ScrollScene({
             triggerElement: '#airloom',
             duration:       Pathways.panel_height
         })
-        .on('enter', function(e) {
-            if( _('#airloom video') ) {
-                _('#airloom video').currentTime = 0.4;
-                _('#airloom video').play();
-            }
-        })
-        .on('leave', function(e) {
-            if( _('#airloom video') ) {
-                _('#airloom video').pause();
-                _('#airloom video').currentTime = 0;
-            }
-        })
+        .on('enter', videoPlayOnEnter)
+        .on('leave', videoStopOnLeave)
 
     Pathways.Scenes.push(scene);
 }

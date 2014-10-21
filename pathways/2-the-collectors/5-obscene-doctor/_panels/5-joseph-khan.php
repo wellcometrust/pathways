@@ -6,8 +6,5 @@
         <video controls="true" preload="none">
             <source src="http://wellcome-pathways.s3.amazonaws.com/khaaaaaaaaaan.mp4">
         </video>
-    </div>
-    
-    <div class="mute"></div>
-
+    </div>    
 </div>

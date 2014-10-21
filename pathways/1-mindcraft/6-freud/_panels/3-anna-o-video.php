@@ -8,8 +8,5 @@
             <track src="/_assets/video/MikeJay_Freud.vtt" kind="captions" srclang="en" label="English" />
         </video>
         <img alt="" src="/_assets/img/spacer.png">
-    </div>
-
-    <div class="mute"></div>
-    
+    </div>    
 </div>

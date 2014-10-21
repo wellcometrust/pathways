@@ -55,7 +55,7 @@
                 Pathways.resizeSomeThings();
 
                 Pathways.loadVideo();
-                // Pathways.loadAudio();
+                //Pathways.loadAudio();
 
                 Pathways.hideAllTextTracks();
 
@@ -171,35 +171,7 @@
     }
 
 
-    Pathways.loadVideo = function() {
-        var _videos = doc.querySelectorAll('.bg-container.video');
-
-        for (var i = 0; i < _videos.length; i++) {
-            var _video = _videos[i],
-                sources = _video.getAttribute('data-src').replace(/\s+/g, ' ').split(' ');
-
-            if (sources && sources.length) {
-                var video = doc.createElement('video');
-
-                sources.forEach(function(e) {
-                    var source = doc.createElement('source');
-                    source.src = e;
-
-                    video.appendChild(source);
-                });
-
-                video.loop = true;
-                video.controls = true;
-
-                if (Pathways.level < 4) {
-                    video.preload = 'none';
-                }
-
-                _video.innerHTML = '';
-                _video.appendChild(video);
-            }
-        }
-
+    Pathways.loadVideo = function() {        
         /*
             Feature videos
 
@@ -220,9 +192,12 @@
 
     Pathways.hideAllTextTracks = function(videoSelector) {
         videoSelector = videoSelector || 'video';
+        console.log('hiding captions');
         $(videoSelector).each(function(index, video) {
             if (video) {
-                var tracks = video.textTracks;               
+                
+                var tracks = video.textTracks;   
+                console.log('video has tracks: ', tracks.length);            
                 if (tracks.length) {
                     for (var i = 0, j = tracks.length; i < j; i++) {
                         var track = tracks[i];
@@ -233,10 +208,13 @@
         })
     }
 
-    Pathways.autoPlayVideoOnEnter = function(videoStr) {
+    Pathways.autoPlayVideoOnEnter = function(videoStr, initTime) {
         var video = _(videoStr);
+        initTime = initTime || 0;
+
         return function(e) {
             if (video) {
+                if (video.readyState !== 0) video.currentTime = initTime;
                 video.play();
             }
         }
@@ -249,9 +227,21 @@
         return function(e) {
             if (video) {
                 video.pause();
-                if (video.readyState != 'HAVE_NOTHING') video.currentTime = initTime;
+                if (video.readyState !== 0) video.currentTime = initTime;
             }
         }
+    }
+
+    Pathways.initAudio = function(src, autoplay, loop) {
+        autoplay = autoplay || false;
+        loop = loop || true;
+
+        var audio = document.createElement('audio');
+        audio.src       = src;
+        audio.preload   = 'auto';
+        audio.autoplay  = autoplay;
+        audio.loop      = loop;
+        return audio;
     }
 
     Pathways.loadAudio = function() {

@@ -10,6 +10,6 @@
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
-    <div class="mute"></div>
+    
     
 </div>
