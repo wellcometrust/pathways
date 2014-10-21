@@ -24,7 +24,7 @@
 
         <div class="text">
             <span class="info-type">Quiz:</span>
-            <span class="info-title">Guess the tumour</span>
+            <span class="info-title">Guess the Tumour</span>
         </div>
     </div>
 
@@ -44,7 +44,7 @@
                  {
                     'image':    'q2-300h.jpg',
                     'title':    'How long did it take Esdaile to remove this whopping 103 pound tumour?',
-                    'answers':  ['10 seoncds', '1 hour', '6 and a half minutes', '6 hours'],
+                    'answers':  ['10 seconds', '1 hour', '6 and a half minutes', '6 hours'],
                     'correct':  3
                  },
                  {
@@ -81,12 +81,12 @@
                 <div class="quiz-header-image"></div>
 
                 <header class="quiz-start--header">
-                    <h1>The Esdaile Game</h1>
+                    <h1>Guess the Tumour</h1>
                 </header>
 
                 <div class="quiz-start--text">
-                    <p>The surgeon performed dozens of operations, many of which were documented.</p>
-                    <p>See if you can work out what went on in these pictures – but be quick, you’ve only got ten seconds for each one!</p>
+                    <p>James Esdaile performed dozens of operations, many of which were documented.</p>
+                    <p>See if you can work out what happened in these pictures – but be quick, you’ve only got ten seconds to guess each one!</p>
                 </div>
 
                 <span class="button">Start</span>
@@ -114,7 +114,7 @@
             <div class="quiz-finish">
 
                 <header class="quiz-finish--header">
-                    <h1>Not bad, muchacho. You got</h1>
+                    <h1>Your score</h1>
                 </header>
 
                 <div class="quiz-finish--score"></div>
@@ -122,10 +122,10 @@
                 <footer class="quiz-finish--footer clearfix">
                     <div class="button play-again">Play Again?</div>
 
-                    <div class="sm-links">
+                    <!--<div class="sm-links">
                         <a href="#" class="facebook"></a>
                         <a href="#" class="twitter"></a>
-                    </div>
+                    </div>-->
                 </footer>
             </div>
 
