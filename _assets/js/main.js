@@ -1,8 +1,6 @@
 
 'use strict';
 
-function _(str) { return document.querySelector(str); }
-
 // Global Nav
 (function($) {
     var $nav            = $('.global-navigation'),
@@ -104,8 +102,7 @@ if( window.innerWidth >= 768 ) {
     initCanvas();
 }
 
-
-Pathways.LoadScenes = function() {
+function onPathwayLoadComplete(pathways) {
 
     var $sequence       = $('.sequence'),
         controller      = new ScrollMagic();
@@ -113,21 +110,21 @@ Pathways.LoadScenes = function() {
 
     $('.black-strip').css({
         position:       'fixed',
-        'height':       Pathways.panel_height,
-        'transform':    'translate(0,'+Pathways.panel_height+'px)'
+        'height':       pathways.panel_height,
+        'transform':    'translate(0,'+pathways.panel_height+'px)'
     });
 
     window.addEventListener('resize', function() {
         $('.black-strip').css({
-            'height':       Pathways.panel_height,
-            'transform':    'translate(0,'+Pathways.panel_height+'px)'
+            'height':       pathways.panel_height,
+            'transform':    'translate(0,'+pathways.panel_height+'px)'
         });
     });
 
     function parallaxStart() {
         scrollY = window.pageYOffset;
 
-        if( scrollY > Pathways.panel_height ) {
+        if( scrollY > pathways.panel_height ) {
             $content.css('display', 'none');
             return;
         }
@@ -142,7 +139,7 @@ Pathways.LoadScenes = function() {
     function parallaxLady() {
         scrollY2 = window.pageYOffset;
 
-        if( scrollY2 > Pathways.panel_height )
+        if( scrollY2 > pathways.panel_height )
             return;
 
         $lady.css({
@@ -163,7 +160,7 @@ Pathways.LoadScenes = function() {
         var $start      = $('.start'),
             $content    = $start.find('.content').first(),
             scrollY     = 0,
-            unit        = 0.5 / (Pathways.panel_height / 2),
+            unit        = 0.5 / (pathways.panel_height / 2),
             hidden      = false;
 
         window.addEventListener('scroll', parallaxStart, false);
@@ -192,7 +189,7 @@ Pathways.LoadScenes = function() {
         scenes[idx++] = new ScrollScene({
                 triggerElement: $sequence,
                 triggerHook:    'top',
-                duration:       ($sequence.height() - Pathways.panel_height)
+                duration:       ($sequence.height() - pathways.panel_height)
             })
             .on('enter', function(e) {
                 if( e.scrollDirection == 'FORWARD') {
@@ -236,7 +233,7 @@ Pathways.LoadScenes = function() {
         // Panels
         scenes[idx++] = new ScrollScene({
                 triggerElement: $this,
-                duration:       (Pathways.panel_height / 4)
+                duration:       (pathways.panel_height / 4)
             })
             .on('enter', function() {
                 $bg.css('display', 'block');
@@ -268,7 +265,7 @@ Pathways.LoadScenes = function() {
         //     scenes[idx++] = new ScrollScene({
         //             triggerElement: $this,
         //             triggerHook:    'top',
-        //             duration:       Pathways.panel_height
+        //             duration:       pathways.panel_height
         //         })
         //         .on('enter', function() {
         //             $quiz.css({ position: 'fixed', display: 'block' });
@@ -318,11 +315,11 @@ Pathways.LoadScenes = function() {
 
         // Panel specific scene code if it has any
         var panelID         = $this.attr('id'),
-            handlerClass    = Pathways.Utils.toTitleCase(panelID);
+            handlerClass    = pathways.Utils.toTitleCase(panelID);
 
         // Check the handler exists, then load
-        if ( window.Pathways.Scene[handlerClass] != null ) {
-            window.Pathways.Scene[handlerClass]('#'+panelID);
+        if ( pathways.Scene[handlerClass] != null ) {
+            pathways.Scene[handlerClass]('#'+panelID);
         }
     });
 
@@ -330,8 +327,9 @@ Pathways.LoadScenes = function() {
         s.addTo(controller);
     });
 
-    Pathways.Scenes.forEach(function(s) {
+    pathways.Scenes.forEach(function(s) {
         s.addTo(controller);
     })
 }
 
+Pathways.init(onPathwayLoadComplete);

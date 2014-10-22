@@ -195,5 +195,7 @@ teaser:
 # 
 
 audio: 
-    global: '../../../_assets/audio/A_new_force_in_nature_background_V2.mp3'
+    # global: '../_assets/audio/A_new_force_in_nature_background_V2.mp3'
+    # global: '../_assets/audio/panel1.mp3'
+    global: 'http://wellcome-pathways.s3.amazonaws.com/paris_atmosphere.mp3'
 

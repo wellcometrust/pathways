@@ -9,13 +9,13 @@ Pathways.Scene.MesmersSalon = function(panelID) {
             offset:         100
         })
         .on('enter', function(e) {                          
-            Pathways.LoadPanelAudio(audio);                     
+            Pathways.loadPanelAudio(audio);                     
 
             _('.crop-zoom').style['position'] = 'fixed';
             TweenMax.to('.crop-zoom', 0.2, { opacity: 1 }); // Fade in
         })
         .on('leave', function(e) {
-            Pathways.UnloadPanelAudio(audio);
+            Pathways.unloadPanelAudio(audio);
 
             TweenMax.to('.crop-zoom', 0.2, { opacity: 0 }); // Fade out
             
