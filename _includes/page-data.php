@@ -119,7 +119,7 @@
             return $this->_getPathwayPath($this->pathwayId, $this->siteConfigData);  
         }   
 
-        private function getPathwayModules() {
+        public function getPathwayModules() {
             return $this->modules;
         }
         

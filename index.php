@@ -6,7 +6,11 @@
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
     include_once($docRoot.'/_includes/Spyc.php');
+    include_once($docRoot.'/_includes/parsedown.php');
+
+    $docs = file_get_contents($docRoot.'/tapestry/docs.md');
     
+    $parsedown = new Parsedown();
 
     $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
 
@@ -37,20 +41,20 @@
         }
 
         nav {
-            position:   absolute;
+            position:   fixed;
             top:        0;
+            bottom:     0;
             left:       0;
             background: #f0f0ec;
             width:      170px;
             padding:    20px 0 0 20px;
-            height:     100%;
         }
 
         main {
             float:              left;
             background-color:   #fff;
             width:              100%;
-            height:             100%;
+            min-height:         100%;
             padding:            0 0 0 170px;
         }
 
@@ -130,10 +134,36 @@
             font-weight: 200;
         }
 
-        .pathway {
+        .block {
             margin-bottom: 20px;
         }
+
+        .markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5 {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .markdown h1 { font-size: 28px; }
+        .markdown h2 { font-size: 24px; }
+        .markdown h3 { font-size: 20px; }
+        .markdown h4 { font-size: 18px; }
+        .markdown h5 { font-size: 16px; }
+
+        .markdown p {
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .markdown pre {
+            background-color: #f5f2f0;
+            margin-bottom: 15px;
+            padding: 1em;
+        }
+        :not(pre) > code {
+            background: #f5f2f0;
+        }
     </style>
+
+    <link rel="stylesheet" href="tapestry/css/prism.css">
 
 </head>
 <body>
@@ -145,7 +175,8 @@
         </header>
 
         <ul class="project-nav">
-            <li data-tab="pathways" class="selected">Pathways</li>
+            <li data-tab="documentation" class="selected">Documentation</li>
+            <li data-tab="pathways">Pathways</li>
             <li data-tab="patterns">Patterns</li>
         </ul>
     </nav>
@@ -153,6 +184,19 @@
     <main role="main">
 
         <div class="tabs">
+
+
+            <div class="tab" data-tab="documentation">
+                <header>
+                    <h1>Documentation</h1>
+                </header>
+                
+                <div class="content">
+                    <div class="markdown">
+                        <?php echo $parsedown->text($docs) ?>
+                    </div>
+                </div>
+            </div>
             
             <div class="tab" data-tab="pathways">
                 <header>
@@ -160,7 +204,7 @@
                 </header>
 
                 <div class="content">
-                    <div class="pathway">
+                    <div class="block">
                         <h2>Mindcraft</h2>
 
                         <ul>
@@ -177,7 +221,7 @@
                         <div><a href="tapestry/download.php?pathway=mindcraft">Download</a></div>
                     </div>
 
-                    <div class="pathway">
+                    <div class="block">
                         <h2>The Collectors</h2>
 
                         <ul>
@@ -202,7 +246,16 @@
                 </header>
 
                 <div class="content">
-                    <a href="pattern-portfolio/patterns.php">Pattern Portfolio</a>
+                    <div class="block">
+                        <h2>Panels</h2>
+                        <a href="pattern-portfolio/panels.php">Panels</a>
+                    </div>
+
+                    <div class="block">
+                        <h2>Patterns</h2>
+                        <a href="pattern-portfolio/patterns.php">Patterns</a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -243,6 +296,8 @@
             });
         };
     </script>
+
+    <script src="/tapestry/js/prism.js"></script>
 
 </body>
 </html>

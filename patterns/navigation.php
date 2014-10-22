@@ -1,4 +1,4 @@
-<?php    
+<?php
 
     $modules = $page->getPathwayModules();
     $pathwayPath = $page->getPathwayPath();

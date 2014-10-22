@@ -3,7 +3,7 @@ include '../tapestry/functions.php';
 
 $assets_dir     = str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) . "_assets";
 $files          = array();
-$handle         = opendir($patterns_dir);
+$handle         = opendir(str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) . '/patterns/panels');
 
 while (false !== ($file = readdir($handle))):
     if($file != 'index.php' && (stristr($file,'.html') || stristr($file,'.php'))):
@@ -92,6 +92,7 @@ $page = PageBuilder::getPage();
                 font-size: 14px;
             }
             .primer-section .primer-content {
+                position: relative;
                 margin-bottom: 1em;
             }
             .primer-section .primer-code {
@@ -166,7 +167,7 @@ $page = PageBuilder::getPage();
             <?php
                 // Return the included files as a string so that the output code also contains any included patterns within patterns.
                 ob_start();
-                include($patterns_dir.'/'.$file);
+                include($patterns_dir.'/panels/'.$file);
                 $inc = ob_get_clean();
 
                 $split = preg_split('/<!--[\n\s]*(.*)[\n\s]*-->/', $inc, -1, PREG_SPLIT_DELIM_CAPTURE);
