@@ -22,21 +22,6 @@ Pathways.Scene.OkeySisters = function(panelID) {
                 TweenMax.to('.black-strip', .2, { y: Pathways.panel_height }); // scroll down
         })
 
-    var scene1 = new ScrollScene({
-            triggerElement: $panel,
-            triggerHook:    'top',
-            duration:       (height - (height / 2) ),
-            offset:         300
-        })
-        .on('enter', function() {
-            $gallery.css({ position: 'fixed', display: 'block' });
-            setTimeout(function() { $gallery.addClass('active'); }, 50);
-        })
-        .on('leave', function() {
-            $gallery.css({ position: 'absolute', display: 'none' });
-            setTimeout(function() { $gallery.removeClass('active'); }, 50);
-        })
 
     Pathways.Scenes.push(scene);
-    Pathways.Scenes.push(scene1);
 }

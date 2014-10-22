@@ -14,14 +14,10 @@
     $pinterest_img =    urlencode($panel['share']['img']);
     $share_text =       urlencode($panel['share']['text']);
 
-    // echo 'p_id: '.$panel['id']."\n";
-    // echo 'plink: '.$panel_link."\n";
-    // echo 'u_p_link:'.$url_panel_link."\n";
-    // echo 'pin_img:'.$pinterest_img."\n";
-    // echo 'shr_txt:'.$share_text."\n";
+    $id = isset($panel['id']) ? $panel['id'] : '';
 ?>
  
-<div class="library-panel" data-panel="<?= isset($panel['id']) ? $panel['id'] : '' ?>" data-component="library-panel">
+<div class="library-panel" data-panel="<?= $id ?>" data-component="library-panel">
     <div class="handle"></div>
     <div class="body">        
         <?php if( isset($panel['links']) ): ?>
@@ -45,10 +41,10 @@
             <p>Share</p>
             
             <ul>
-                <li class="twitter"><a href="https://twitter.com/intent/tweet?url=<?= $url_panel_link ?>&via=WellcomeLibrary&text=<?= $share_text?>"><img src="/_assets/img/icons/icon-twitter-btn.gif" alt="share on twitter"></a></li>
-                <li class="facebook"><div class="fb-share-button" data-href="<?= $panel_link ?>" data-layout="button" data-width="75"></div></li>
-                <li class="pinterest"><a href="//www.pinterest.com/pin/create/button/?url=<?= $url_panel_link?>&media=<?= $pinterest_img?>&description=<?= $share_text?>" data-pin-config="none" data-pin-color="white" data-pin-height="28"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_28.png" /></a></li>
-                <li class="googleplus"><div class="g-plus" data-action="share" data-annotation="none" data-href="<?= $panel_link ?>" data-width="56"></div></li>
+                <li class="twitter"><a id="<?= 'twitter-'. $id ?>" href="https://twitter.com/intent/tweet?url=<?= $url_panel_link ?>&via=WellcomeLibrary&text=<?= $share_text?>"><img src="/_assets/img/icons/icon-twitter-btn.gif" alt="share on twitter"></a></li>
+                <li class="facebook"><div id="<?= 'facebook-'. $id ?>" class="fb-share-button" data-href="<?= $panel_link ?>" data-layout="button" data-width="75"></div></li>
+                <li class="pinterest"><a id="<?= 'pinterest-'. $id ?>" href="//www.pinterest.com/pin/create/button/?url=<?= $url_panel_link?>&media=<?= $pinterest_img?>&description=<?= $share_text?>" data-pin-config="none" data-pin-color="white" data-pin-height="28"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_28.png" /></a></li>
+                <li class="googleplus"><div id="<?= 'googleplus-'. $id ?>" class="g-plus" data-action="share" data-annotation="none" data-href="<?= $panel_link ?>" data-width="56"></div></li>
             </ul>  
            
         </div>

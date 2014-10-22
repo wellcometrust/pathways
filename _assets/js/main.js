@@ -66,7 +66,7 @@
 })($);
 
 
-var canvas, stage, exportRoot;
+var canvas, stage;
 
 // Canvas animations. Forget trying to pause/play on entering exiting the panel. Let it go, man. Just let it go...
 
@@ -85,7 +85,7 @@ function handleFileLoad(evt) {
 }
 
 function handleComplete() {
-    exportRoot = new lib.tree2();
+    var exportRoot = new lib.tree2();
 
     stage = new createjs.Stage(canvas);
     stage.addChild(exportRoot);
@@ -120,6 +120,11 @@ function onPathwayLoadComplete(pathways) {
             'transform':    'translate(0,'+pathways.panel_height+'px)'
         });
     });
+
+    function getValueFromConfig(rawConfig, name) {
+        if (rawConfig) var config = JSON.parse(rawConfig);
+        return (config && config[name]) || null;
+    }
 
     function parallaxStart() {
         scrollY = window.pageYOffset;
@@ -215,13 +220,15 @@ function onPathwayLoadComplete(pathways) {
 
     $('.sequence .panel').each(function() {
         var $this           = $(this),
+            panelID         = $this.attr('id'),
             height          = $this.outerHeight(),
             $bg             = $this.find('.bg-container'),
-            $library_panel  = $('[data-panel="'+ $this.attr('id') +'"]').first(),
+            $library_panel  = $('[data-panel="'+ panelID +'"]').first(),
             $gallery        = $this.find('[data-component="gallery"]'),
             $quiz           = $this.find('[data-component="quiz"]'),
-            $mute           = $this.find('.mute'),
-            
+            $panelAudio     = $this.find('[data-audio="panel"]'),
+            $panelVideo     = $this.find('[data-video="panel"]'),
+
             tween           = TweenMax.to( $bg, 1, { opacity: 1 });
 
         panel_count+=1; // for tracking first and last panels (when logic needs to differ because of the lack of cross-fading)
@@ -244,38 +251,42 @@ function onPathwayLoadComplete(pathways) {
             .setTween(tween)
 
         // Galleries
-        // if( $gallery.length ) {
-        //     scenes[idx++] = new ScrollScene({
-        //             triggerElement: $this,
-        //             triggerHook:    'top',
-        //             duration:       (height - (height / 4) )
-        //         })
-        //         .on('enter', function() {
-        //             $gallery.css({ position: 'fixed', display: 'block' });
-        //             setTimeout(function() { $gallery.addClass('active'); }, 50);
-        //         })
-        //         .on('leave', function() {
-        //             $gallery.css({ position: 'absolute', display: 'none' });
-        //             setTimeout(function() { $gallery.removeClass('active'); }, 50);
-        //         })
-        // }
+        if( $gallery.length ) {
+            var g_offset = getValueFromConfig($gallery.attr('data-config'), 'offset_height');
+            scenes[idx++] = new ScrollScene({
+                    triggerElement: $this,
+                    triggerHook:    'top',
+                    duration:       (height - (height / 4)),
+                    offset:         g_offset
+                })
+                .on('enter', function() {
+                    $gallery.css({ position: 'fixed', display: 'block' });
+                    setTimeout(function() { $gallery.addClass('active'); }, 50);
+                })
+                .on('leave', function() {
+                    $gallery.css({ position: 'absolute', display: 'none' });
+                    setTimeout(function() { $gallery.removeClass('active'); }, 50);
+                })
+        }
 
         // Quiz
-        // if( $quiz.length ) {
-        //     scenes[idx++] = new ScrollScene({
-        //             triggerElement: $this,
-        //             triggerHook:    'top',
-        //             duration:       pathways.panel_height
-        //         })
-        //         .on('enter', function() {
-        //             $quiz.css({ position: 'fixed', display: 'block' });
-        //             setTimeout(function() { $quiz.addClass('active'); }, 50);
-        //         })
-        //         .on('leave', function() {
-        //             $quiz.css({ position: 'absolute', display: 'none' });
-        //             setTimeout(function() { $quiz.removeClass('active'); }, 50);
-        //         })
-        // }
+        if( $quiz.length ) {
+            var q_offset = getValueFromConfig($quiz.attr('data-config'), 'offset_height');            
+            scenes[idx++] = new ScrollScene({
+                    triggerElement: $this,
+                    triggerHook:    'top',
+                    duration:       (height - (height * 0.6)),
+                    offset:         q_offset
+                })
+                .on('enter', function() {
+                    $quiz.css({ position: 'fixed', display: 'block' });
+                    setTimeout(function() { $quiz.addClass('active'); }, 50);
+                })
+                .on('leave', function() {
+                    $quiz.css({ position: 'absolute', display: 'none' });
+                    setTimeout(function() { $quiz.removeClass('active'); }, 50);
+                })
+        }
 
         // Library panels
         if( $library_panel.length ) {
@@ -295,27 +306,45 @@ function onPathwayLoadComplete(pathways) {
         }
 
 
-        // Below commented out as individual mutes no longer apply
-
-        // Mute
+        // Audio
         // 
-        // if( $mute.length ) {
-        //     scenes[idx++] = new ScrollScene({
-        //             triggerElement: $this,
-        //             duration:       (height - 200),
-        //             offset:         100
-        //         })
-        //         .on('enter', function() {
-        //             $mute.css({ position: 'fixed', display: 'block' });
-        //         })
-        //         .on('leave', function() {
-        //             $mute.css({ position: 'absolute', display: 'none' });
-        //         })
-        // }
+        if( $panelAudio.length ) {       
+            var $audio = $panelAudio.first();
+
+            scenes[idx++] = new ScrollScene({
+                    triggerElement: $this,
+                    duration:       height
+                })
+                .on('enter', function() {
+                    pathways.loadPanelAudio($audio[0]);
+                })
+                .on('leave', function() {
+                    pathways.unloadPanelAudio($audio[0]);                    
+                })
+        }
+
+        // Video
+        // 
+        if( $panelVideo.length ) {   
+            var $video = $panelVideo.first(),         
+                rawConfig = $video.attr('data-config'),
+                initTime = getValueFromConfig(rawConfig, 'initTime'),
+                muteGlobal = getValueFromConfig(rawConfig, 'muteGlobal')
+            
+            scenes[idx++] = new ScrollScene({
+                    triggerElement: $this,
+                    duration:       height
+                })
+                .on('enter', function() {
+                    pathways.autoPlayVideoOnEnter($video[0], initTime, muteGlobal);
+                })
+                .on('leave', function() {
+                    pathways.autoStopVideoOnLeave($video[0], initTime, muteGlobal);
+                })
+        }
 
         // Panel specific scene code if it has any
-        var panelID         = $this.attr('id'),
-            handlerClass    = pathways.Utils.toTitleCase(panelID);
+        var handlerClass    = pathways.Utils.toTitleCase(panelID);
 
         // Check the handler exists, then load
         if ( pathways.Scene[handlerClass] != null ) {

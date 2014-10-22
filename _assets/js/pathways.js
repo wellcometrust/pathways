@@ -4,8 +4,25 @@ function _(str) { return document.querySelector(str); }
 var Pathways = (function(w, _, $, undefined) {
     'use strict';
 
-    var doc = w.document;
-    var mod;
+
+    var doc = w.document,   
+
+    //cache vars
+        innerHeight = w.innerHeight, 
+        innerWidth = w.innerWidth, 
+
+        aspectRatio = 1900 / 1050,
+        supportsTouch = getSupportsTouch(),
+
+        mod;
+
+
+    w.addEventListener('resize', function() {
+        innerWidth = w.innerWidth;
+        innerHeight = w.innerHeight;
+    });
+
+
 
     function toTitleCase(str) {
         str = str.replace(/-/g, ' ').replace(/_/g, ' ');
@@ -19,8 +36,8 @@ var Pathways = (function(w, _, $, undefined) {
         var width = $elm.width(),
             height = $elm.height(),
 
-            top = (window.innerHeight / 2) - (height / 2),
-            left = (window.innerWidth / 2) - (width / 2);
+            top = (innerHeight / 2) - (height / 2),
+            left = (innerWidth / 2) - (width / 2);
 
         $elm.css({
             position: 'absolute',
@@ -33,7 +50,7 @@ var Pathways = (function(w, _, $, undefined) {
 
 
     function getOrientation() {
-        return (w.innerWidth / w.innerHeight) > 1.2 ? 'landscape' : 'portrait'
+        return (innerWidth / innerHeight) > 1.2 ? 'landscape' : 'portrait'
     }
 
     function getSupportsTouch() {
@@ -41,7 +58,7 @@ var Pathways = (function(w, _, $, undefined) {
     }
 
     function getPanelHeight() {
-        return w.innerHeight < 550 ? 550 : w.innerHeight;
+        return innerHeight < 550 ? 550 : innerHeight;
     }
 
 
@@ -126,7 +143,7 @@ var Pathways = (function(w, _, $, undefined) {
         el.style['height'] = height + offset + 'px';
     }
 
-    function resizeAllTheThings(startPanel, panels, aspectRatio, supportsTouch, panelHeight) {
+    function resizeAllTheThings(startPanel, panels, panelHeight) {
 
         if (startPanel) setHeight(startPanel, panelHeight);            
 
@@ -145,9 +162,9 @@ var Pathways = (function(w, _, $, undefined) {
         }
     }
 
-    function resizeSomeThings(panels, aspectRatio, supportsTouch, panelHeight) {
+    function resizeSomeThings(panels, panelHeight) {
         
-        var new_height = w.innerWidth / aspectRatio,
+        var new_height = innerWidth / aspectRatio,
             panel_height = supportsTouch ? 550 : panelHeight;
         
         if (w.innerWidth < 768) {
@@ -200,14 +217,10 @@ var Pathways = (function(w, _, $, undefined) {
     function setPathwaysMuted(value){        
         mod.muted = value;
 
-        var $body = $('body');
+        $('video, audio').each(function() {                
+            this.muted = mod.muted;
+        });
 
-        $body.find('video').each(function() {                
-            this.muted = mod.muted;
-        });
-        $body.find('audio').each(function() {            
-            this.muted = mod.muted;
-        });
     }
     
 
@@ -292,7 +305,7 @@ var Pathways = (function(w, _, $, undefined) {
         if (toAudio && (typeof toAudio !== 'undefined')) {
             $(toAudio).stop(false, true);
             toAudio.volume = 0;
-            toAudio.muted = mod.muted;            
+            toAudio.muted = mod.muted;           
             toAudio.play();
             $(toAudio).animate({volume: 1}, { duration: delay, complete: function() {                
                  if (!onlyFrom && callback) {                 
@@ -321,13 +334,13 @@ var Pathways = (function(w, _, $, undefined) {
         }
     }
 
-    function initPanelAudio(panels, audioSelector){
+    function initPanelAudio(panels, selector){
 
         var tracks = [];
 
         for (var i = 0; i < panels.length; i++) {
             var _panel = panels[i].panel;            
-            var _track = _panel.querySelector(audioSelector);           
+            var _track = _panel.querySelector(selector);           
             if (_track) { 
                 tracks.push(tracks);
             }
@@ -336,8 +349,8 @@ var Pathways = (function(w, _, $, undefined) {
         return tracks;
     }
 
-    function initGlobalAudio() {        
-        var _audio = document.querySelector('[data-audio-global]');
+    function initGlobalAudio(selector) {        
+        var _audio = document.querySelector(selector);
         if (_audio) {            
             crossFade(null, _audio);
         }
@@ -360,7 +373,7 @@ var Pathways = (function(w, _, $, undefined) {
         initTime = initTime || 0;
         var fadeAudio = getCrossFadeAudio(stopGlobalAudio, this.globalAudio); 
         
-        if (video) {
+        if (video) {            
             if (video.readyState !== 0) video.currentTime = initTime; 
             crossFade(fadeAudio, video);
         }
@@ -388,6 +401,7 @@ var Pathways = (function(w, _, $, undefined) {
         return $(panelID + ' audio').first()[0];        
     }
 
+
     function init(onLoadComplete) {
 
         // Get the enhancement level
@@ -403,18 +417,18 @@ var Pathways = (function(w, _, $, undefined) {
 
         // Progressive loading. Some things need to happen before window load
         if (this.level >= 3) {
-            resizeAllTheThings(startPanel, this.panels, this.aspect_ratio, this.supports_touch, this.panel_height);
+            resizeAllTheThings(startPanel, this.panels, this.panel_height);
         }
 
         w.addEventListener('resize', (function() {
 
-            this.panel_height = w.innerHeight < 550 ? 550 : w.innerHeight;
+            this.panel_height = getPanelHeight();
             this.level = getEnhancementLevel();
 
-            resizeSomeThings(this.panels, this.aspect_ratio, this.supports_touch, this.panel_height);
+            resizeSomeThings(this.panels, this.panel_height);
 
             if (this.level > 3) {
-                resizeAllTheThings(startPanel, this.panels, this.aspect_ratio, this.supports_touch, this.panel_height);
+                resizeAllTheThings(startPanel, this.panels, this.panel_height);
             }
 
         }).bind(this));
@@ -433,15 +447,15 @@ var Pathways = (function(w, _, $, undefined) {
             }
 
             // For things that need resizing all the time, even on touch devices.
-            resizeSomeThings(this.panels, this.aspect_ratio, this.supports_touch, this.panel_height);
+            resizeSomeThings(this.panels, this.panel_height);
 
             this.muteButton = initMuteButton('.mute');
 
             this.panelVideos = initPanelVideo(this.panels, 'video');
             hideCaptions(this.panelVideos);
 
-            this.globalAudio = initGlobalAudio();
-            this.panelAudio = initPanelAudio(this.panels, 'audio');
+            this.globalAudio = initGlobalAudio('[data-audio="global"]');
+            this.panelAudio = initPanelAudio(this.panels, '[data-audio="panel"]');
 
         }).bind(this));
 
@@ -453,8 +467,9 @@ var Pathways = (function(w, _, $, undefined) {
 
         orientation: getOrientation(), // pretty crude but it'll do
         panel_height: getPanelHeight(), // 550px minimum panel height
-        supports_touch: getSupportsTouch(), // is it a touch device?
-        aspect_ratio: 1900 / 1050,
+        supports_touch: supportsTouch, // is it a touch device?        
+        aspect_ratio: aspectRatio,
+
         level: 0,
 
         panels: [],

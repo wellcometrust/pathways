@@ -65,7 +65,7 @@
 
         if( isset($globalAudio) ) {
             //echo '<div class="global-audio" data-audio="'.$globalAudio.'"></div>';
-            echo '<audio data-audio-global src="'.$globalAudio.'" loop></audio>';
+            // echo '<audio data-audio-global src="'.$globalAudio.'" loop></audio>';
         }
     ?>
 

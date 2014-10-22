@@ -21,4 +21,6 @@
 
     </div>
 
+    <audio src="http://wellcome-pathways.s3.amazonaws.com/paris_atmosphere.mp3" loop data-audio="global"></audio>
+
 </div>

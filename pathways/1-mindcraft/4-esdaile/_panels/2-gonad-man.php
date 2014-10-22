@@ -15,7 +15,7 @@
         <p>Many more operations followed, from tooth extractions to amputations. Esdaile was given a hospital ward in Kolkata to develop his new technique.</p>
     </div>
 
-    <div class="info-box with-text" data-component="quiz">
+    <div class="info-box with-text" data-component="quiz" data-config='{ "offset_height": 400 }'>
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
