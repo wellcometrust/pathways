@@ -28,7 +28,7 @@ if( !function_exists('export') ) {
         // get the pathway directory
         //$d          = dir($docRoot . '/' . $dirPath);
         $d          = dir($docRoot . $dirPath);
-        echo $docRoot . $dirPath . "    " .is_dir( $d );
+        echo is_dir( $d );
         
         // add the intro and credits
         $intro = file_get_contents(getHostRoot(). $dirPath . 'intro.php');
