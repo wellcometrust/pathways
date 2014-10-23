@@ -28,7 +28,8 @@ if( !function_exists('export') ) {
         // get the pathway directory
         //$d          = dir($docRoot . '/' . $dirPath);
         $d          = dir($docRoot . $dirPath);
-
+        echo is_dir( $d );
+        
         // add the intro and credits
         $intro = file_get_contents(getHostRoot(). $dirPath . 'intro.php');
         $zip->addFromString('intro.html', $intro);
@@ -42,7 +43,7 @@ if( !function_exists('export') ) {
             // only get the numbered modules
             echo "\n".preg_match('/^\d/', $file);
             echo "\n".is_dir( $childFolderStr );
-            
+
             if( preg_match('/^\d/', $file) && is_dir( $childFolderStr ) ) {
                 // get the file and load the contents into a string
                 echo "\n".'getting page contents:' getHostRoot() . $dirPath . $file . '/index.php';
