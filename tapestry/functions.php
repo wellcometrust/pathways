@@ -39,24 +39,23 @@ if( !function_exists('export') ) {
         // Find the pathway modules
         while ($file = $d->read()) {
             $childFolderStr = $docRoot . $dirPath . $file;
-            echo $childFolderStr;
+
             // only get the numbered modules
             if( preg_match('/^\d/', $file) && is_dir( $childFolderStr ) ) {
                 // get the file and load the contents into a string
                 $page = file_get_contents(getHostRoot() . $dirPath . $file . '/index.php');
-                echo $page;
+
                 // create a file from the string and add straight to the zip file.
-                //$zip->addFromString($file.'.html', $page);
+                $zip->addFromString($file.'.html', $page);
             }
         }
 
-        //$zip->close();
+        $zip->close();
 
         $filename = $pathway . '.zip';
 
-
         // output the zip file to the browser
-        /*header("Pragma: public");
+        header("Pragma: public");
         header("Expires: 0");
         header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
         header("Cache-Control: private",false);
@@ -64,6 +63,6 @@ if( !function_exists('export') ) {
         header('Content-Length: ' . filesize($zipName));
         header("Content-Disposition: attachment; filename=\"$filename\";" );
         readfile($zipName);
-        unlink($zipName);*/
+        unlink($zipName);
     }
 }
