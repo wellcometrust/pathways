@@ -40,6 +40,9 @@ if( !function_exists('export') ) {
         while ($file = $d->read()) {
             $childFolderStr = $docRoot . $dirPath . $file;            
             // only get the numbered modules
+            echo "\n".preg_match('/^\d/', $file);
+            echo "\n".is_dir( $childFolderStr );
+            
             if( preg_match('/^\d/', $file) && is_dir( $childFolderStr ) ) {
                 // get the file and load the contents into a string
                 echo "\n".'getting page contents:' getHostRoot() . $dirPath . $file . '/index.php';
