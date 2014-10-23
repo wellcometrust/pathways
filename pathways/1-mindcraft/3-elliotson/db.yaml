@@ -110,11 +110,5 @@ teaser:
     title: 'Mind over matter'
 
 
-# 
-# Audio info
-# 
-
-audio: 
-    global: 'http://wellcome-pathways.s3.amazonaws.com/paris_atmosphere.mp3'
 
 

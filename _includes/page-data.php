@@ -23,7 +23,7 @@
 
         public $siteConfigSrc = '/_includes/config.yaml';
         public $moduleDataSrc = 'db.yaml';
-        public $mediaUrl = 'http://wellcome-pathways.s3.amazonaws.com/';
+        public $mediaUrl = 'http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/';
 
         function __construct($pathwayId = '', $moduleId = '') {
             

@@ -24,4 +24,6 @@
         
     </div>
 
+    <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/05-dark-forces.mp3" loop data-audio="global"></audio>
+
 </div>

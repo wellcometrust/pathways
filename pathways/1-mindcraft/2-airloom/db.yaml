@@ -74,10 +74,4 @@ teaser:
     link: '3-elliotson/'
     title: 'Who controls who?'
 
-# 
-# Audio info
-# 
-
-audio: 
-    global: 'http://wellcome-pathways.s3.amazonaws.com/asylum.mp3'
 

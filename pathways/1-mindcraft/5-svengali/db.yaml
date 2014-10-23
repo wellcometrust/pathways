@@ -95,10 +95,3 @@ teaser:
     link: '6-freud/'
     title: 'Secrets of the mind revealed'
 
-
-# 
-# Audio info
-# 
-
-audio: 
-    global: 'http://wellcome-pathways.s3.amazonaws.com/paris_atmosphere.mp3'

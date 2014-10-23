@@ -60,13 +60,4 @@
 
     </main>
 
-    <?php
-        $globalAudio = $page->getAudioByPanelId('global');
-
-        if( isset($globalAudio) ) {
-            //echo '<div class="global-audio" data-audio="'.$globalAudio.'"></div>';
-            // echo '<audio data-audio-global src="'.$globalAudio.'" loop></audio>';
-        }
-    ?>
-
 <?php include_once($page->docRoot.'/_includes/footer.php'); ?>

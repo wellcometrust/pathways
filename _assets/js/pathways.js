@@ -221,15 +221,12 @@ var Pathways = (function(w, _, $, undefined) {
             this.muted = mod.muted;
         });
 
-    }
-    
+    }    
 
 
-
-
-    function initPanelVideo(panels, videoSelector) {  
+    function initPanelVideo(panels, videoSelector, context) {  
         
-        var videos = [];
+        var videos = [];        
 
         for (var i = 0; i < panels.length; i++) {
             var _panel = panels[i].panel;
@@ -237,18 +234,17 @@ var Pathways = (function(w, _, $, undefined) {
 
             if (_video) {
                 
-                _video.addEventListener('volumechange', function(e){                    
-                    if (_video.muted !== mod.muted) {
-                        setPathwaysMuted(_video.muted);
-                        updateButtonView();
-                    }
+                _video.addEventListener('volumechange', function(e){                                     
+                    if (this.muted == context.muted) return;
+                    setPathwaysMuted(this.muted);
+                    updateButtonView();                    
                 });
 
                 _video.addEventListener('error', function(e){                    
                     console.log('error');
                 });
 
-                if (!mod.supports_touch) {            
+                if (!context.supports_touch) {            
                     _video.setAttribute('preload', 'true');
                 } else {
                     _video.setAttribute('preload', 'false');
@@ -263,17 +259,15 @@ var Pathways = (function(w, _, $, undefined) {
         
     }
 
-    function hideCaptions(videos) {        
-        
-        var video;
-
-        for (var i = 0; i < videos.length; i++) {
-            video = videos[i];
+    function hideCaptions(videos) {   
+        var video;        
+        for (var i = 0, l = videos.length; i < l; i++) {
+            video = videos[i];            
             if (video) {                
                 var tracks = video.textTracks;            
                 if (tracks.length) {
-                    for (var i = 0, j = tracks.length; i < j; i++) {
-                        var track = tracks[i];
+                    for (var j = 0, m = tracks.length; j < m; j++) {
+                        var track = tracks[j];                       
                         if (track) track.mode = 'hidden';
                     }                   
                 }
@@ -451,7 +445,7 @@ var Pathways = (function(w, _, $, undefined) {
 
             this.muteButton = initMuteButton('.mute');
 
-            this.panelVideos = initPanelVideo(this.panels, 'video');
+            this.panelVideos = initPanelVideo(this.panels, 'video', this);
             hideCaptions(this.panelVideos);
 
             this.globalAudio = initGlobalAudio('[data-audio="global"]');

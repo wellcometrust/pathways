@@ -5,7 +5,6 @@ Pathways.Scene.OkeySisters = function(panelID) {
     $('#thomas-wakley .main-content').css({ 'bottom': 'auto', 'top': (Pathways.panel_height / 3) });
 
     var $panel      = $(panelID),
-        $gallery    = $panel.find('[data-component="gallery"]'),
         height      = $panel.outerHeight();
 
     var scene = new ScrollScene({

@@ -19,4 +19,6 @@
         </p>
     </div>
 
+    <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/04-mind-over-matter.mp3" loop data-audio="global"></audio>
+
 </div>

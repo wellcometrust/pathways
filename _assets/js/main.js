@@ -252,7 +252,7 @@ function onPathwayLoadComplete(pathways) {
 
         // Galleries
         if( $gallery.length ) {
-            var g_offset = getValueFromConfig($gallery.attr('data-config'), 'offset_height');
+            var g_offset = getValueFromConfig($gallery.attr('data-config'), 'offset_height') || 0;
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
                     triggerHook:    'top',
@@ -271,7 +271,7 @@ function onPathwayLoadComplete(pathways) {
 
         // Quiz
         if( $quiz.length ) {
-            var q_offset = getValueFromConfig($quiz.attr('data-config'), 'offset_height');            
+            var q_offset = getValueFromConfig($quiz.attr('data-config'), 'offset_height') || 0;            
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
                     triggerHook:    'top',
@@ -328,8 +328,8 @@ function onPathwayLoadComplete(pathways) {
         if( $panelVideo.length ) {   
             var $video = $panelVideo.first(),         
                 rawConfig = $video.attr('data-config'),
-                initTime = getValueFromConfig(rawConfig, 'initTime'),
-                muteGlobal = getValueFromConfig(rawConfig, 'muteGlobal')
+                initTime = getValueFromConfig(rawConfig, 'initTime') || 0,
+                muteGlobal = getValueFromConfig(rawConfig, 'muteGlobal') || true;
             
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,

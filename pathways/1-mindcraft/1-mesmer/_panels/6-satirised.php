@@ -3,8 +3,8 @@
 
     <div class="bg-container">
         <video preload="none" poster="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-5.jpg" data-video="panel" data-config='{ "muteGlobal" : false, "initTime" : 5 }'>
-            <source src="http://wellcome-pathways.s3.amazonaws.com/hysteria.m4v">
-            <source src="http://wellcome-pathways.s3.amazonaws.com/hysteria.webm">
+            <source src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/video/hysteria.m4v">
+            <source src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/video/hysteria.webm">
         </video>
         <img alt="" src="/_assets/img/spacer.png">
     </div>
@@ -13,5 +13,8 @@
         <p>Mesmer’s therapy, and the mass hysteria it provoked, were widely satirised.</p>
         <p>But Mesmer insisted that his theory should be assessed by the highest scientific authorities.</p>
     </div>
+
+    <!-- <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/01-printing-room-background.mp3" loop data-audio="panel"></audio> -->
+    
     
 </div>

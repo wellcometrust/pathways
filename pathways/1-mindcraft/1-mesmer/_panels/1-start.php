@@ -21,6 +21,6 @@
 
     </div>
 
-    <audio src="http://wellcome-pathways.s3.amazonaws.com/paris_atmosphere.mp3" loop data-audio="global"></audio>
+    <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/01-a-new-force-in-nature-background.mp3" loop data-audio="global"></audio>
 
 </div>

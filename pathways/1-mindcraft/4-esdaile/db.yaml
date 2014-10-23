@@ -104,10 +104,3 @@ teaser:
     link: '5-svengali/'
     title: 'Dark forces'
 
-
-# 
-# Audio info
-# 
-
-audio: 
-    global: 'http://wellcome-pathways.s3.amazonaws.com/paris_atmosphere.mp3'

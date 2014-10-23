@@ -88,4 +88,6 @@
         }
     </script>
 
+    <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/02-prison-background.mp3" loop data-audio="panel"></audio>
+
 </div>

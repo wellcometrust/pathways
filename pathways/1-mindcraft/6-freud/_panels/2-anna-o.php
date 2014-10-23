@@ -20,4 +20,6 @@
         <p>Freud and Breuer concluded that the mind had the power to cause physical illnesses – and to heal them.</p>
     </div>
 
+    <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/06-anna-o-background.mp3" loop data-audio="panel"></audio>
+
 </div>

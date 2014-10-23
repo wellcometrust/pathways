@@ -12,6 +12,6 @@
         <p>Mesmer’s salons became overwhelmed with patients. When he could no longer accommodate them, he magnetised a tree in the street outside and crowds of people connected themselves to it using cords.</p>
     </div>
 
-    <audio src="http://wellcome-pathways.s3.amazonaws.com/mesmers_salon.mp3" loop data-audio="panel"></audio>
+    <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/01-loom-tree-exterior.mp3" loop data-audio="panel"></audio>
 
 </div>

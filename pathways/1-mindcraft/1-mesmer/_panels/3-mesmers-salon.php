@@ -43,6 +43,6 @@
         }
     </script>
 
-    <audio src="http://wellcome-pathways.s3.amazonaws.com/mesmers_salon.mp3" loop data-audio="panel"></audio>
+    <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/01-mesmers-salon-background.mp3" loop data-audio="panel"></audio>
 
 </div>
