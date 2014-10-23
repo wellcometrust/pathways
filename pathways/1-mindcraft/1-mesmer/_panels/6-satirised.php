@@ -3,7 +3,7 @@
 
     <div class="bg-container">
         <video preload="none" poster="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-5.jpg" data-video="panel" data-config='{ "muteGlobal" : false, "initTime" : 5 }'>
-            <source src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/video/hysteria.m4v">
+            <source src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/video/hysteria.mp4">
             <source src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/video/hysteria.webm">
         </video>
         <img alt="" src="/_assets/img/spacer.png">
