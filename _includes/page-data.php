@@ -2,6 +2,18 @@
     
     include_once(PageBuilder::getDocRoot().'/_includes/Spyc.php');
 
+    function truncate($string, $length=100, $append="") {
+        $string = trim($string);
+
+        if(strlen($string) > $length) {
+            $string = wordwrap($string, $length);
+            $string = explode("\n", $string, 2);
+            $string = $string[0] . $append;
+        }
+
+        return $string;
+    }
+    
     class PageBuilder {
 
         private $defaultTitle = 'Pathways';
@@ -97,6 +109,11 @@
 
         public function getModuleId() {
             return $this->_getModulePageInfo($this->moduleId, $this->moduleData, 'module_id');
+        }
+
+        public function getGARoot() {
+            $spacer = ' - ';
+            return $this->pathwayId . $spacer . $this->moduleId . $spacer;
         }
         
 

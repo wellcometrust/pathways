@@ -3,11 +3,15 @@
     $teaser =   $page->getTeaserData();
     $module =   $page->getModuleId();
     $path =     $page->getPathwayPath();
+    $gaRoot =   $page->getGARoot();
 
     $teaser_bg      = isset($teaser['image']) ? $teaser['image']  : '';
     $teaser_link    = $path.(isset($teaser['link'])  ? $teaser['link']   : '');
     $teaser_title   = isset($teaser['title']) ? $teaser['title']  : '';
-?>
+
+    
+
+?>  
 
 <div class="fork">
 
@@ -24,7 +28,7 @@
         </div>
     </a>
 
-    <div class="further-reading" data-component="toggle-section" data-toggle-section-target=".library-layer .gap" data-toggle-section-anchor=".library-layer">
+    <div class="further-reading" data-component="toggle-section" data-toggle-section-target=".library-layer .gap" data-toggle-section-anchor=".library-layer" data-ga="<?= $gaRoot . 'l3 show library layer' ?>">
         <div class="further-reading-container">
             <span>Further reading from</span>
             <img src="/_assets/img/logo-black.svg" alt="wellcome library">

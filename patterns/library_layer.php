@@ -1,5 +1,12 @@
 <?php        
     $library = $page->getModuleData('library_layer');
+    $pathwayID = $page->getPathwayId();
+    $moduleID = $page->getModuleId();
+    $gaRoot = $page->getGARoot();
+
+    $libPrefix = 'l3 wl';    
+    $extPrefix = 'l3 ex';
+    
 ?>
 
 <div class="library-layer">
@@ -24,25 +31,34 @@
                 <div>
                     <ul class="player-items clearfix">
                         <?php if( isset($library['See_in_the_Wellcome_Library']) ): ?>
-                            <?php foreach( $library['See_in_the_Wellcome_Library'] as $data ): ?>
+                            <?php foreach( $library['See_in_the_Wellcome_Library'] as $data ): 
+                                
+                                $lTitle     = isset( $data['title'] ) ? $data['title'] : '';
+                                $lAuthor    = isset( $data['author'] ) ? $data['author'] : '';
+                                $lLink      = isset( $data['link'] ) ? $data['link'] : '';
+                                $lType      = isset( $data['type'] ) ? $data['type'] : '';
+                                $lDate      = isset( $data['date'] ) ? $data['date'] : '';
+
+                                $gaLibId = $gaRoot . $libPrefix . ' ' . truncate($lTitle, 40);
+                                ?>
                                 <li>
-                                    <div class="player-item clearfix<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>" data-component="player-overlay" data-embed="<?php echo isset($data['link']) ? $data['link'] : '' ?>">
+                                    <div class="player-item clearfix <?= $lType ?>" data-component="player-overlay" data-embed="<?= $lLink  ?>" data-ga="<?= $gaLibId ?>">
                                         <div class="player-item--thumb"></div>
 
                                         <div class="player-item--content">
                                             <header class="player-item--header">
-                                                <h1><?php echo isset( $data['title'] ) ? $data['title'] : '' ?></h1>
+                                                <h1><?= $lTitle ?></h1>
                                             </header>
-
-                                            <div class="player-item--body">                                                
-                                                <cite><?php echo isset( $data['author'] ) ? $data['author'] : '' ?><?php echo isset( $data['date'] ) ? ', '. $data['date'] : '' ?></cite>
+                                           
+                                            <div class="player-item--body">                                               
+                                                <cite><?php if($lAuthor != ''){ echo $lAuthor . ' ,'; } ?><?= $lDate ?></cite>
                                             </div>
 
-                                            <footer class="player-item--footer">
-                                                <?php if( isset( $data['link'] ) && $data['link'] != '' ): ?>
-                                                <span>View</span>
-                                                <?php endif ?>
+                                            <?php if( $lLink != '' ): ?>
+                                            <footer class="player-item--footer">                                                
+                                                <span>View</span>                                                
                                             </footer>
+                                            <?php endif ?>
                                         </div>
                                     </div>
                                 </li>
@@ -65,18 +81,27 @@
                 <div>
                     <ul class="related-items clearfix">
 
-                        <?php foreach ($library['See_Elsewhere'] as $data): ?>
+                        <?php foreach ($library['See_Elsewhere'] as $data):  
+                                
+                                $eTitle     = isset( $data['title'] ) ? $data['title'] : '';
+                                $eAuthor    = isset( $data['author'] ) ? $data['author'] : '';
+                                $eLink      = isset( $data['link'] ) ? $data['link'] : '';
+                                $eType      = isset( $data['type'] ) ? $data['type'] : '';
+                                $eDate      = isset( $data['date'] ) ? $data['date'] : '';
+
+                                $gaExtId = $gaRoot . $extPrefix . ' ' . truncate($eTitle, 40);
+                                ?>
                             <li>
-                                <a href="<?php echo isset($data['link'] ) ? ' '.$data['link'] : '' ?>" rel="external" class="related-item<?php echo isset($data['type'] ) ? ' '.$data['type'] : '' ?>">
+                                <a href="<?= $lLink  ?>" rel="external" class="related-item <?= $lType ?>" data-ga="<?= $gaExtId ?>">
                                     <header class="related-item--header">
-                                        <h1><?php echo isset( $data['title'] ) ? $data['title'] : '' ?></h1>
+                                        <h1> <?= $eTitle ?></h1>
                                     </header>
 
                                     <div class="related-item--body">
-                                        <cite><?php echo isset( $data['author'] ) ? $data['author'] : '' ?><?php echo isset( $data['date'] ) ? ', '. $data['date'] : '' ?></cite>
+                                        <cite><?php if($eAuthor != ''){ echo $eAuthor . ' ,'; } ?><?= $eDate ?></cite>
                                     </div>
 
-                                    <?php if( isset( $data['link'] ) && $data['link'] != '' ): ?>
+                                    <?php if( $lLink != '' ): ?>
                                     <footer class="related-item--footer">
                                         <span>View</span>
                                     </footer>
