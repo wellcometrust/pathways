@@ -4,7 +4,7 @@
 
 Pathways.Gallery = function() {
 
-    $('body').on('click', '[data-component="gallery"]', function(e) {
+    $('[data-component="gallery"]').on('click', function(e) {
 
         var $overlay    = $('<div class="overlay"></div>'),
             $close      = $('<div class="close"></div>'),
@@ -143,8 +143,6 @@ function Carousel(element)
                 h           = img.naturalHeight,
                 ratio       = (h / w),
                 newWidth    = window.innerHeight / ratio;
-
-            console.log(w, newWidth);
 
             // store the width and ratio for resize recalculations
             widths.push(newWidth);
