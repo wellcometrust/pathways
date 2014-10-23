@@ -38,13 +38,13 @@ if( !function_exists('export') ) {
 
         // Find the pathway modules
         while ($file = $d->read()) {
-            $childFolderStr = $docRoot . $dirPath . $file;
-            echo $childFolderStr;
+            $childFolderStr = $docRoot . $dirPath . $file;            
             // only get the numbered modules
             if( preg_match('/^\d/', $file) && is_dir( $childFolderStr ) ) {
                 // get the file and load the contents into a string
+                echo "\n".'getting page contents:' getHostRoot() . $dirPath . $file . '/index.php';
                 $page = file_get_contents(getHostRoot() . $dirPath . $file . '/index.php');
-                echo $page;
+                echo "\n".$page;
                 // create a file from the string and add straight to the zip file.
                 //$zip->addFromString($file.'.html', $page);
             }
