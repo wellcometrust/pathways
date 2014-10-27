@@ -48,6 +48,10 @@
         </div>
 
         <?php
+            /* Survey */
+            // Comment out this line to remove the survey when no longer required
+            $page->renderPattern('survey');   
+
             /* Teaser */
             $page->renderPattern('fork');            
 

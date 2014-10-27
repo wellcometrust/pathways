@@ -1,0 +1,49 @@
+.survey {	
+	
+	background:				#171717;
+	position:				relative;
+	width:					100%;
+	
+	a { 
+		display: 			block;
+		color: 				#c5c5c5; 
+		font-family:		"Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+		font-weight: 		normal;
+		font-style: 		normal;
+		font-size: 			0.766rem;
+		text-transform: 	uppercase;
+		letter-spacing: 	0.1rem;
+		text-decoration:	none;
+		padding:			1rem;
+		text-align:			center;
+		
+		&:after {
+			content: 		"";
+			display:		block;
+			width: 			37px; 
+			height:			37px;
+			margin:			-0.4rem auto -0.9rem auto;
+			background: 	url(/_assets/img/icons/icon-arrow-right-circle-white.svg) 50% 50% no-repeat;
+			@include 		transform(scale(0.4, 0.4));						
+		}
+	}
+
+}
+
+@media screen and (min-width: 48em) {
+
+	.survey {	
+
+		a { 					
+			text-align:			left;
+
+
+			&:after {
+				position:		absolute;
+				margin:			0;
+				left: 			20rem;
+				top:			0.3rem;
+			}
+		}
+	}
+}
