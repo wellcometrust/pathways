@@ -4,6 +4,25 @@
     <script src="<?= $page->getAsset('build/js/production.js') ?>"></script>
     <script id="embedWellcomePlayer" src="/wellcomeplayer/js/embed.js"></script>
 
+    <script>
+      $("a[rel$='external']").each(function(index) {
+        gaLabel = $(this).attr('data-ga');
+        linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
+        $(this).attr("onClick", linkOnClick);
+      });
+      $("a[data-component$='player-overlay']").each(function(index) {
+        gaLabel = $(this).attr('data-ga');
+        linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
+        $(this).attr("onClick", linkOnClick);
+      });
+      $("a[data-component$='library-panel']").each(function(index) {
+        gaLabel = $(this).attr('data-ga');
+        linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
+        $(this).attr("onClick", linkOnClick);
+      });
+    </script>
+
+
     <!-- Facebook API -->
     <div id="fb-root"></div>
 	<script>(function(d, s, id) {
