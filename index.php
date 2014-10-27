@@ -208,7 +208,7 @@
                         <h2>Mindcraft</h2>
 
                         <ul>
-                            <li><a href="<?php echo $path ?>intro.php">Intro</a></li>
+                            <li><a href="<?php echo $path ?>index.php">Intro</a></li>
                             <li><a href="<?php echo $path ?>1-mesmer/index.php">Mesmer</a></li>
                             <li><a href="<?php echo $path ?>2-airloom/index.php">Airloom</a></li>
                             <li><a href="<?php echo $path ?>3-elliotson/index.php">Elliotson</a></li>
@@ -225,7 +225,7 @@
                         <h2>The Collectors</h2>
 
                         <ul>
-                            <li><a href="<?php echo $path2 ?>intro.php">Intro</a></li>
+                            <li><a href="<?php echo $path2 ?>index.php">Intro</a></li>
                             <li><a href="<?php echo $path2 ?>1-curious-gardener/index.php">The Curious Gardener</a></li>
                             <li><a href="<?php echo $path2 ?>2-merchants-of-light/index.php">Merchants of Light</a></li>
                             <li><a href="<?php echo $path2 ?>3-death-collector/index.php">The Death Collector</a></li>

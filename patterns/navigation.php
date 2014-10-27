@@ -18,7 +18,7 @@
 
             <ul class="clearfix">
                 <li<?= $currentModule['id'] == '' ? ' class="active"' : '' ?>>
-                    <a href="<?= $pathwayPath ?>intro.php">
+                    <a href="<?= $pathwayPath ?>index.php">
                         <span>Intro</span>
                         <img src="<?= $level ?>_assets/navigation/intro.jpg">
                     </a>

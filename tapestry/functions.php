@@ -27,7 +27,7 @@ if( !function_exists('export') ) {
         $d          = dir($docRoot . '/' . $dirPath);
 
         // add the intro and credits
-        $intro = file_get_contents('http://'.$_SERVER['SERVER_NAME'] . $dirPath . '/intro.php');
+        $intro = file_get_contents('http://'.$_SERVER['SERVER_NAME'] . $dirPath . '/index.php');
         $zip->addFromString('intro.html', $intro);
 
         $credits = file_get_contents('http://'.$_SERVER['SERVER_NAME'] . $dirPath . '/credits.php');

@@ -14,7 +14,7 @@
         <nav>
             <ul class="clearfix">
                 <li>
-                    <a href="<?php echo $pathwayPath ?>intro.php">
+                    <a href="<?php echo $pathwayPath ?>index.php">
                         <span>Intro</span>
                         <div class="image">
                             <img src="/_assets/img/spacer.png">

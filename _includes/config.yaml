@@ -7,7 +7,7 @@ site:
 
             modules:
                 -   id: intro
-                    path: 'intro.php'
+                    path: 'index.php'
                     title: 'Mindcraft: A century of madness, murder and mental healing'
                     title_postfix: ' | Wellcome Collection'
                     description: 'Mindcraft: A century of madness, murder and mental healing.'
@@ -92,7 +92,7 @@ site:
             path: '/pathways/2-the-collectors/'
             modules:
                 -   id: intro
-                    path: 'intro.php'
+                    path: 'index.php'
                     title: 'The Collectors'
                     title_postfix: ' | Wellcome Collection'
                     description: 'The Collectors.'
