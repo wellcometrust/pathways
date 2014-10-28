@@ -214,8 +214,8 @@
         private function _setModuleIndexes($modules) { 
             if (isset($modules)) {
                 $count = 1;
-                foreach($modules as &$m ) {   
-                    if ($m['panels']) $m['index'] = $count++;                                      
+                foreach($modules as &$m ) {                      
+                    if ( isset($m['panels'])) $m['index'] = $count++;                                      
                 }          
                 return $modules; 
             } else {

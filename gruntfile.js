@@ -29,8 +29,8 @@ module.exports = function(grunt) {
                 dest: '_assets/build/js/production.js',
             },
             panels: {
-                src:    [ 'pathways/**/**/_scss/*.scss' ], // The panel specific CSS
-                dest:   '_assets/scss/panels.scss'
+                src: ['pathways/**/**/_scss/*.scss'], // The panel specific CSS
+                dest: '_assets/scss/panels.scss'
             }
         },
 
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
                 files: {
                     '_assets/build/css/main.css': '_assets/scss/main.scss'
                 }
-            } 
+            }
         },
 
         watch: {
@@ -74,8 +74,20 @@ module.exports = function(grunt) {
             grunt: {
                 files: ['gruntfile.js'],
                 tasks: ['default']
-            } 
-        }
+            }
+        },
+
+        php2html: {          
+            options: {
+                htmlhint : {'doctype-first': false}
+            },  
+            mindcraft: {
+                files: [
+                    {expand: true, cwd: '', src: ['pathways/**/*.php'], dest: '../export', ext: '.html' }
+                ],
+            }
+            
+        },
 
     });
 
@@ -85,10 +97,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
+    grunt.loadNpmTasks('grunt-php2html');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
     grunt.registerTask('css', ['concat', 'sass']);
     grunt.registerTask('js', ['concat', 'uglify']);
 
     grunt.registerTask('default', ['css', 'js']);
+
+    grunt.registerTask('export', ['php2html:mindcraft']);
 
 };
