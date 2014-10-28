@@ -27,17 +27,27 @@
     <div class="body">        
         <?php if( isset($panel['links']) ): ?>
         <ul>
-            <?php foreach ($panel['links'] as $link): 
-            $shortTitle = truncate($link['title'], 40);
+            <?php foreach ($panel['links'] as $key=>$link): 
+
+            $lTitle     = isset( $link['title'] ) ? $link['title'] : '';
+            
+            $pLink      = isset( $link['player_url'] ) ? $link['player_url'] : '';
+            $dLink      = isset( $link['download_url'] ) ? $link['download_url'] : '';
+            $eLink      = isset( $link['external_url'] ) ? $link['external_url'] : '';
+
+            $lHref      = str_replace('/package/', '/player/', $pLink);
+
+            $shortTitle = $key.'-'.truncate($lTitle, 40);
+
             ?>
             <li>
-                <span><?= $link['title'] ?></span>
+                <span><?= $lTitle ?></span>
 
-                <?php if( isset( $link['player_url'] ) && $link['player_url'] != '' ): ?>
-                <a href="#" data-component="player-overlay" data-embed="<?= $link['player_url'] ?>" data-ga="<?= $gaData . 'l2 share ' . $shortTitle . ' - view' ?>">View</a>
+                <?php if( $pLink != '' ): ?>
+                <a href="<?= $lHref ?>" data-component="player-overlay" data-embed="<?= $pLink ?>" data-ga="<?= $gaData . 'l2 share ' . $shortTitle . ' - view' ?>">View</a>
                 <?php endif ?>
-                <?php if( isset( $link['download_url'] ) ): ?><a href="<?= $link['download_url'] ?>" rel="external" data-ga="<?= $gaData . 'l2 share ' . $shortTitle . ' - download' ?>">Download hi-res image</a><?php endif ?>
-                <?php if( isset( $link['external_url'] ) ): ?><a href="<?= $link['external_url'] ?>" rel="external"data-ga="<?= $gaData . 'l2 share ' . $shortTitle . ' - view external' ?>">View on external website</a><?php endif ?>
+                <?php if( $dLink != '' ): ?><a href="<?= $dLink ?>" rel="external" data-ga="<?= $gaData . 'l2 share ' . $shortTitle . ' - download' ?>">Download hi-res image</a><?php endif ?>
+                <?php if( $eLink != '' ): ?><a href="<?= $eLink ?>" rel="external"data-ga="<?= $gaData . 'l2 share ' . $shortTitle . ' - view external' ?>">View on external website</a><?php endif ?>
             </li>
             <?php endforeach ?>
         </ul>

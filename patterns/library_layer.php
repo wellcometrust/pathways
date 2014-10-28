@@ -40,9 +40,11 @@
                                 $lDate      = isset( $data['date'] ) ? $data['date'] : '';
 
                                 $gaLibId = $gaRoot . $libPrefix . ' ' . truncate($lTitle, 40);
+                                $lHref = str_replace('/package/', '/player/', $lLink);
+                                
                                 ?>
                                 <li>
-                                    <div class="player-item clearfix <?= $lType ?>" data-component="player-overlay" data-embed="<?= $lLink  ?>" data-ga="<?= $gaLibId ?>">
+                                    <a href="<?= $lHref ?>" class="player-item clearfix <?= $lType ?>" data-component="player-overlay" data-embed="<?= $lLink  ?>" data-ga="<?= $gaLibId ?>">
                                         <div class="player-item--thumb"></div>
 
                                         <div class="player-item--content">
@@ -60,7 +62,7 @@
                                             </footer>
                                             <?php endif ?>
                                         </div>
-                                    </div>
+                                    </a>
                                 </li>
                             <?php endforeach ?>
                         <?php endif ?>
@@ -92,7 +94,7 @@
                                 $gaExtId = $gaRoot . $extPrefix . ' ' . truncate($eTitle, 40);
                                 ?>
                             <li>
-                                <a href="<?= $lLink  ?>" rel="external" class="related-item <?= $lType ?>" data-ga="<?= $gaExtId ?>">
+                                <a href="<?= $eLink  ?>" rel="external" class="related-item <?= $eType ?>" data-ga="<?= $gaExtId ?>">
                                     <header class="related-item--header">
                                         <h1> <?= $eTitle ?></h1>
                                     </header>
@@ -101,7 +103,7 @@
                                         <cite><?php if($eAuthor != ''){ echo $eAuthor . ' ,'; } ?><?= $eDate ?></cite>
                                     </div>
 
-                                    <?php if( $lLink != '' ): ?>
+                                    <?php if( $eLink != '' ): ?>
                                     <footer class="related-item--footer">
                                         <span>View</span>
                                     </footer>

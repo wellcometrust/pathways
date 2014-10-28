@@ -86,26 +86,23 @@ Pathways.PlayerOverlay = function(elem) {
             }
 
             function initOverlay($el, sel) {
-                
-                $el.on('transitionend', function() {                     
-                    if($(rootSel).hasClass(activeClass)) {    // fading in complete
-                        initPlayer(sel);
-                    } else {                        // fading out complete
-                        $(this).remove();
-                    }                     
-                });
                
                 $el.on('click', function() {   
                     $(rootSel).removeClass(activeClass);
                     isFullScreen = false;
                     window.embedScriptIncluded = false;
+                    
+                    setTimeout(function(){
+                        $el.remove();
+                    }, 1000); // give css transition time 
                 });
 
                 setTimeout(function() {
                     // prevent scrolling
-                    $(rootSel).addClass(activeClass);                 
-                }, 10); // delay before adding class to ensure transition event will fire
-                    
+                    $(rootSel).addClass(activeClass);   
+                    initPlayer(sel);              
+                }, 50); // delay before adding class to ensure transition event will fire
+                
             }
 
 

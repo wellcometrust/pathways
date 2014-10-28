@@ -2,8 +2,8 @@
 .mute {
     display:    none;
     position:   fixed;
-    top:        40px;
-    right:      40px;
+    top:        35px;
+    right:      20px;
     background: url(/_assets/img/icons/icon-speaker-circle-white.svg) 0 0 no-repeat;
     background-size: 100%;
     width:      40px;
@@ -13,5 +13,12 @@
     &.active {
         background: url(/_assets/img/icons/icon-speakermuted-circle-white.svg) 0 0 no-repeat;
         background-size: 100%;
+    }
+}
+
+@media screen and (min-width: 48em) {
+    .mute {
+        top:        40px;
+        right:      40px;
     }
 }

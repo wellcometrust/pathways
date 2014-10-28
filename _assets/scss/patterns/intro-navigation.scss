@@ -105,11 +105,11 @@
         }
 
         a {
-            padding: 1rem;
+            padding: 0.7rem 0.5rem 0.5rem 0.5rem;
 
             span {
                 display:    block;
-                padding:    0.6em 0;
+                padding:    0.4em 0;
                 height:     48px;
             }
 
@@ -124,6 +124,20 @@
     .intro-navigation--the-collectors {
         a {
             color: #030303;
+        }
+    }
+}
+
+@media screen and (min-width: 72em) {
+    .intro-navigation {
+
+        a {
+            padding: 1rem;
+
+            span {
+                padding: 0.6em 0;
+                height:  48px;
+            }
         }
     }
 }

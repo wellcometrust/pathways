@@ -83,7 +83,9 @@ var Pathways = (function(w, _, sys, $, undefined) {
         panelVideos,
         panelTracks,
 
+        startPanel,
         panels,
+        ratioedPanels,
 
         scenesLoaded = false,
         componentsLoaded = false,
@@ -166,6 +168,18 @@ var Pathways = (function(w, _, sys, $, undefined) {
         return panels;
     }
 
+    function initRatioedPanels(panels) {
+        var rPanels = [];
+        for (var i = 0; i < panels.length; i++) {
+            var preserveRatio = panels[i].config.background.preserve_ratio;
+            
+            if (preserveRatio) {
+                rPanels.push(panels[i]);                
+            }
+        }
+        return rPanels;
+    }
+
 
     function loadComponents(context, height) {
         var loaded = [],
@@ -199,9 +213,9 @@ var Pathways = (function(w, _, sys, $, undefined) {
          $(el).css('height', '');
     }
 
-    function unsizeAllPanels(panels) {
+    function unsizePanels(panels) {
 
-        //if (startPanel) unSetElementHeight(startPanel);            
+        if (startPanel) unSetElementHeight(startPanel); 
 
         for (var i = 0; i < panels.length; i++) {
             var _panel = panels[i].elem,
@@ -209,7 +223,16 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
             unSetElementHeight(_panel); 
             unSetElementHeight(_bg);
-            unTranslatePanelElem(_bg);
+
+            var preserveRatio = panels[i].config.background.preserve_ratio;
+            
+            if (preserveRatio) {   
+                $(_panel).children().each(function(index, child){
+                    unSetElementHeight(child);
+                    unTranslatePanelElem(child);
+                });
+            }
+            
         }
     }
 
@@ -226,8 +249,6 @@ var Pathways = (function(w, _, sys, $, undefined) {
             offset = config ? ((sys.supportsTouch || !config.offset_height) ? 0 : config.offset_height) : 0,
             setHeight = currentHeight < panelHeight ? panelHeight : currentHeight;
 
-            console.log('>>', currentHeight, panelHeight, panelHeightDecreased)
-        
         if (setHeight !== currentHeight || offset) {
             setElementHeight(_panel, (setHeight + offset));
         }
@@ -256,24 +277,19 @@ var Pathways = (function(w, _, sys, $, undefined) {
         }
     }
 
-    function resizeAllPanels(startPanel, panels) {
+    function resizePanels(startPanel, panels) {
         
         if (startPanel) setElementHeight(startPanel, mod.panelHeight);            
 
         for (var i = 0; i < panels.length; i++) {
-            resizePanel(panels[i], mod.panelHeight);
-        }
-    }
-
-    function resizeRatioedPanels(panels) {
-        
-        for (var i = 0; i < panels.length; i++) {
             var preserveRatio = panels[i].config.background.preserve_ratio;
-            
-            if (preserveRatio) {
-                console.log('pre')
-                resizePanel(panels[i], mod.panelHeight);                
-                translatePanelElem(panels[i].bg, mod.panelHeight);
+            resizePanel(panels[i], mod.panelHeight);
+            if (preserveRatio) {   
+                $(panels[i].elem).children().each(function(index, child){
+                    var newHeight = sys.innerWidth / sys.aspectRatio;
+                    setElementHeight(child, newHeight);
+                    translatePanelElem(child, mod.panelHeight);
+                });
             }
         }
     }
@@ -497,21 +513,13 @@ var Pathways = (function(w, _, sys, $, undefined) {
         panelTracks = initPanelAudioTracks(panels, '[data-audio="panel"]');
     }
 
-    function resizeAll(startPanel, panels) {                 
-        // For things that need resizing all the time, even on touch devices.
-        
+    function resizeAll() {                       
         if (sys.level < mod.MIN_COMPONENT_LEVEL) {
-            unsizeAllPanels(panels);
-        } else {
-            resizeRatioedPanels(panels);
-        }
-
-        if (sys.level >= mod.MIN_SCROLL_LEVEL) {
-            console.log('resizeAll', mod.panelHeight);
-            //
-            //resizeAllPanels(startPanel, panels);
-        } else {
-            //unsizeAllPanels(startPanel, panels);
+            unsizePanels(panels);
+        } else if (sys.level >= mod.MIN_COMPONENT_LEVEL && sys.level < mod.MIN_SCROLL_LEVEL){
+            resizePanels(null, ratioedPanels);
+        } else if (sys.level >= mod.MIN_SCROLL_LEVEL) {
+            resizePanels(startPanel, panels);
         }
     }
 
@@ -520,13 +528,13 @@ var Pathways = (function(w, _, sys, $, undefined) {
         // If it's a non-touch device, load the scenes.
         if (!scenesLoaded){
             if (sys.level >= mod.MIN_SCROLL_LEVEL) {
-                //sceneController = onLoadComplete(mod);
+                sceneController = onLoadComplete(mod);
                 scenesLoaded = true;
             } 
         } else {
             if (sys.level < mod.MIN_SCROLL_LEVEL) {
-                //sceneController.destroy(true);
-                //scenesLoaded = false;
+                sceneController.destroy(true);
+                scenesLoaded = false;
             }
         }
 
@@ -546,14 +554,16 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
     function init(onLoadComplete) {
 
-        var startPanel = $('.start').get(0);
-        panels = initPanels('.panel');       
+        startPanel = $('.start').get(0);
+        panels = initPanels('.panel');
+        ratioedPanels = initRatioedPanels(panels);        
 
-        resizeAll(startPanel, panels);
+        mod.panelHeight = calcPanelHeight(mod.panelHeight); 
+        resizeAll();
 
         w.addEventListener('resize', function(){
             mod.panelHeight = calcPanelHeight(mod.panelHeight);            
-            resizeAll(startPanel, panels);
+            resizeAll();
             loadAll(onLoadComplete);
         });
 
@@ -561,7 +571,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         w.addEventListener('load', function() {
 
             mod.panelHeight = calcPanelHeight(mod.panelHeight);
-            resizeAll(startPanel, panels);
+            resizeAll();
             loadAll(onLoadComplete);
 
             initSoundControls();    

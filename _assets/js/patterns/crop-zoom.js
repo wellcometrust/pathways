@@ -112,26 +112,4 @@ Pathways.CropZoom = function() {
         });
     });
 
-    function positionCrop() {
-        if (Capabilities.level < Pathways.MIN_COMPONENT_LEVEL) return;
-        
-        var newHeight = parseInt((window.innerWidth / Capabilities.aspectRatio), 10),
-            panelHeight = Pathways.panelHeight,
-            $cropZoom = $('.crop-zoom');
-        
-        if( panelHeight > newHeight ) {
-            $cropZoom.css('height', newHeight);
-            Pathways.translatePanelElem($cropZoom.get(0), Pathways.panelHeight);
-            // $('.crop-zoom').css({
-            //     'height':       newHeight,
-            //     'transform':    'translate(0, '+ ( (panelHeight - newHeight) / 2 ) +'px)'
-            // });
-        }
-    }
-
-    
-    positionCrop();
-    window.addEventListener('resize', positionCrop);
-    
-
 }

@@ -90,8 +90,9 @@
             }
 
             li {
-                float: left;
-                width: 50%;
+                display: inline-block;
+                vertical-align: top;
+                width: 49%;
             }
         }
 
@@ -132,13 +133,13 @@
     .library-layer {
         .in-the-player {
             li {
-                width: 33.3%;
+                width: 33%;
             }
         }
 
         .related-resources {
             li {
-                width: 33.3%;
+                width: 33%;
             }
         }
     }
