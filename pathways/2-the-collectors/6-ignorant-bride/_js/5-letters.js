@@ -3,7 +3,7 @@ Pathways.Scene.Letters = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#letters',
-            duration:       Pathways.panel_height
+            duration:       Pathways.panelHeight
         })
         .on('enter', function(e) {
             if( _('#letters audio') ) {

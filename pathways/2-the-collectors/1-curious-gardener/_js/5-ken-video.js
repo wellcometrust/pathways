@@ -6,7 +6,7 @@ Pathways.Scene.KenVideo = function() {
 
     var scene = new ScrollScene({
             triggerElement: $panel,
-            duration:       Pathways.panel_height + 100
+            duration:       Pathways.panelHeight + 100
         })
         .on('enter', function(e) {
             video.play();

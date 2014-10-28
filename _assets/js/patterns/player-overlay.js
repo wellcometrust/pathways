@@ -1,10 +1,9 @@
-Pathways.PlayerOverlay = function(panel_height, elem) {
+Pathways.PlayerOverlay = function(elem) {
 
     var $element = $(elem),
 
         defaultPanelOffset = 180,
         fullScreenPanelOffset = 0,
-        minPanelHeight = 550,
 
         rootSel = 'body',
         playerSel = '.wellcomePlayer',
@@ -14,16 +13,12 @@ Pathways.PlayerOverlay = function(panel_height, elem) {
 
         closeTmpl = '<div class="close"></div>',
         overlayTmpl = '<div class="overlay"></div>',
-        iframeTmpl = '<iframe/>';
-        
+        iframeTmpl = '<iframe/>';        
 
-    function getPanelHeight() {
-        return window.innerHeight < minPanelHeight ? minPanelHeight : window.innerHeight;
-    }
 
     function getHeightWithOffset(offset) {
         offset = offset || 0;
-        return getPanelHeight() - offset;
+        return Pathways.panelHeight - offset;
     }
 
     function getWidthWithOffset(offset) {

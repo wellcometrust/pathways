@@ -172,7 +172,7 @@ In here is where ScrollMagic scenes are created and added to a global `Pathways.
 
 	var scene1 = new ScrollScene({
             triggerElement: '#india',
-            duration:       Pathways.panel_height
+            duration:       Pathways.panelHeight
         })
         .on('enter', function() {
             // enter action here

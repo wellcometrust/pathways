@@ -1,8 +1,8 @@
 
 Pathways.Scene.OkeySisters = function(panelID) {
 
-    $('#okey-sisters .main-content, #okey-sisters .secondary-content').css({ 'bottom': 'auto', 'top': Pathways.panel_height });
-    $('#thomas-wakley .main-content').css({ 'bottom': 'auto', 'top': (Pathways.panel_height / 3) });
+    $('#okey-sisters .main-content, #okey-sisters .secondary-content').css({ 'bottom': 'auto', 'top': Pathways.panelHeight });
+    $('#thomas-wakley .main-content').css({ 'bottom': 'auto', 'top': (Pathways.panelHeight / 3) });
 
     var $panel      = $(panelID),
         height      = $panel.outerHeight();
@@ -10,7 +10,7 @@ Pathways.Scene.OkeySisters = function(panelID) {
     var scene = new ScrollScene({
             triggerElement: panelID,
             triggerHook:    'top',
-            duration:       Pathways.panel_height
+            duration:       Pathways.panelHeight
         })
         .on('enter', function(e) {
             if( e.scrollDirection == 'FORWARD' )
@@ -18,7 +18,7 @@ Pathways.Scene.OkeySisters = function(panelID) {
         })
         .on('leave', function(e) {
             if( e.scrollDirection == 'REVERSE' )
-                TweenMax.to('.black-strip', .2, { y: Pathways.panel_height }); // scroll down
+                TweenMax.to('.black-strip', .2, { y: Pathways.panelHeight }); // scroll down
         })
 
 

@@ -4,6 +4,7 @@ Pathways.CropZoom = function() {
     var $elm    = $('.crop-zoom'),
         url     = '';
     
+        
     $elm.css({
         position:   'absolute',
         opacity:    Modernizr.touch ? 1 : 0,
@@ -73,7 +74,7 @@ Pathways.CropZoom = function() {
                 $text.addClass('show');
             });
 
-            $image_crop.css( { top: 0, left: 0, 'transform': 'translate(0, '+(Pathways.panel_height / 4)+'px)', opacity: 0 } );
+            $image_crop.css( { top: 0, left: 0, 'transform': 'translate(0, '+(Pathways.panelHeight / 4)+'px)', opacity: 0 } );
 
             // prevent scrolling
             $('body').addClass('modal-open');
@@ -111,22 +112,26 @@ Pathways.CropZoom = function() {
         });
     });
 
-    var new_height      = window.innerWidth / Pathways.aspect_ratio,
-        p_height        = Modernizr.touch ? 550 : window.innerHeight;
-
     function positionCrop() {
-        new_height = window.innerWidth / Pathways.aspect_ratio;
-        if( p_height - new_height ) {
-            $('.crop-zoom').css({
-                'height':       new_height,
-                'transform':    'translate(0, '+ ( (p_height - new_height) / 2 ) +'px)'
-            });
+        if (Capabilities.level < Pathways.MIN_COMPONENT_LEVEL) return;
+        
+        var newHeight = parseInt((window.innerWidth / Capabilities.aspectRatio), 10),
+            panelHeight = Pathways.panelHeight,
+            $cropZoom = $('.crop-zoom');
+        
+        if( panelHeight > newHeight ) {
+            $cropZoom.css('height', newHeight);
+            Pathways.translatePanelElem($cropZoom.get(0), Pathways.panelHeight);
+            // $('.crop-zoom').css({
+            //     'height':       newHeight,
+            //     'transform':    'translate(0, '+ ( (panelHeight - newHeight) / 2 ) +'px)'
+            // });
         }
     }
 
-    if( window.innerWidth >= 768 ) {
-        positionCrop();
-        window.addEventListener('resize', positionCrop);
-    }
+    
+    positionCrop();
+    window.addEventListener('resize', positionCrop);
+    
 
 }

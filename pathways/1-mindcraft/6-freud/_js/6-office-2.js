@@ -5,7 +5,7 @@ Pathways.Scene.Office2 = function(panelID) {
 
     var scene = new ScrollScene({
             triggerElement: panelID,
-            duration:       Pathways.panel_height + (Pathways.panel_height / 2)
+            duration:       Pathways.panelHeight + (Pathways.panelHeight / 2)
         })
         .on('enter', function() {            
             $img.css('transition', 'transform 14s ease');

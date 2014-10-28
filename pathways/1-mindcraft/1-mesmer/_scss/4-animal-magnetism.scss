@@ -8,19 +8,11 @@
 
     .info-box {
         position:   absolute; 
-        top:        20px;
+        bottom:     60px;
         right:      60px;
     }
 }
 
-.no-touch {
-    #animal-magnetism {
-        .info-box {
-            top:        120px;
-            right:      100px;
-        }
-    }
-}
 
 @media all and (min-width: 48rem) {
     .touch {
@@ -30,4 +22,16 @@
             }
         }
     }
+}
+
+@media all and (min-width: 60rem) {
+
+    #animal-magnetism {    
+
+        .info-box {            
+            bottom:     auto;
+            top:        20px;
+        }
+    }
+
 }

@@ -46,7 +46,7 @@ if( window.innerWidth >= 768 ) {
 
     var scene1 = new ScrollScene({
             triggerElement: panelID,
-            duration:       Pathways.panel_height
+            duration:       Pathways.panelHeight
         })
         .on('enter', function(e) {
             
@@ -58,7 +58,7 @@ if( window.innerWidth >= 768 ) {
         .on('leave', function(e) {
             
             if( e.scrollDirection == 'REVERSE' ) {
-                TweenMax.to(panelID + ' .black-strip', .2, { y: Pathways.panel_height }); // scroll down
+                TweenMax.to(panelID + ' .black-strip', .2, { y: Pathways.panelHeight }); // scroll down
                 createjs.Ticker.removeEventListener("tick", stage);
             }
         });

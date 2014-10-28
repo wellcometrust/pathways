@@ -15,7 +15,7 @@ Pathways.Scene.India = function(panelID) {
 
     var scene = new ScrollScene({
             triggerElement: panelID,
-            duration:       Pathways.panel_height + (Pathways.panel_height / 2)
+            duration:       Pathways.panelHeight * 0.5
         })
         .on('enter', function() {
             $boats.css('transition', 'transform 120s linear');

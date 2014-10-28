@@ -2,7 +2,7 @@
 Pathways.Scene.JosephKhan = function() {
     var scene = new ScrollScene({
             triggerElement: '#joseph-khan',
-            duration:       Pathways.panel_height + 100
+            duration:       Pathways.panelHeight + 100
         })
         .on('enter', function(e) {
             var ci_vid = _('#joseph-khan video');

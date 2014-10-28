@@ -102,24 +102,26 @@ if( window.innerWidth >= 768 ) {
     initCanvas();
 }
 
+
+
+
 function onPathwayLoadComplete(pathways) {
 
     var $sequence       = $('.sequence'),
-        controller      = new ScrollMagic();
+        controller      = new ScrollMagic(),
+        $blackStrip     = $('.black-strip');
 
-
-    $('.black-strip').css({
-        position:       'fixed',
-        'height':       pathways.panel_height,
-        'transform':    'translate(0,'+pathways.panel_height+'px)'
-    });
-
-    window.addEventListener('resize', function() {
-        $('.black-strip').css({
-            'height':       pathways.panel_height,
-            'transform':    'translate(0,'+pathways.panel_height+'px)'
+    
+    function resizeBlackStrip(e) {
+        $blackStrip.css({
+            position:       'fixed',
+            'height':       pathways.panelHeight,
+            'transform':    'translate(0,'+pathways.panelHeight+'px)'
         });
-    });
+    }
+
+    resizeBlackStrip();
+    window.addEventListener('resize', resizeBlackStrip);
 
     function getValueFromConfig(rawConfig, name) {
         if (rawConfig) var config = JSON.parse(rawConfig);
@@ -129,7 +131,7 @@ function onPathwayLoadComplete(pathways) {
     function parallaxStart() {
         scrollY = window.pageYOffset;
 
-        if( scrollY > pathways.panel_height ) {
+        if( scrollY > pathways.panelHeight ) {
             $content.css('display', 'none');
             return;
         }
@@ -144,7 +146,7 @@ function onPathwayLoadComplete(pathways) {
     function parallaxLady() {
         scrollY2 = window.pageYOffset;
 
-        if( scrollY2 > pathways.panel_height )
+        if( scrollY2 > pathways.panelHeight )
             return;
 
         $lady.css({
@@ -165,7 +167,7 @@ function onPathwayLoadComplete(pathways) {
         var $start      = $('.start'),
             $content    = $start.find('.content').first(),
             scrollY     = 0,
-            unit        = 0.5 / (pathways.panel_height / 2),
+            unit        = 0.5 / (pathways.panelHeight / 2),
             hidden      = false;
 
         window.addEventListener('scroll', parallaxStart, false);
@@ -194,7 +196,7 @@ function onPathwayLoadComplete(pathways) {
         scenes[idx++] = new ScrollScene({
                 triggerElement: $sequence,
                 triggerHook:    'top',
-                duration:       ($sequence.height() - pathways.panel_height)
+                duration:       ($sequence.height() - pathways.panelHeight)
             })
             .on('enter', function(e) {
                 if( e.scrollDirection == 'FORWARD') {
@@ -237,10 +239,12 @@ function onPathwayLoadComplete(pathways) {
             I can't entirely explain why we need to set the bg to block on both enter and leave. But it fixes
             a layering issue when loading the page during or after a sequence. SCIENCE!
         */
-        // Panels
+        // Panels       
         scenes[idx++] = new ScrollScene({
                 triggerElement: $this,
-                duration:       (pathways.panel_height / 4)
+                duration:       function() {            
+                                    return pathways.panelHeight / 4;
+                                }
             })
             .on('enter', function() {
                 $bg.css('display', 'block');
@@ -359,6 +363,8 @@ function onPathwayLoadComplete(pathways) {
     pathways.Scenes.forEach(function(s) {
         s.addTo(controller);
     })
+
+    return controller;
 }
 
 Pathways.init(onPathwayLoadComplete);

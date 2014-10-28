@@ -3,7 +3,7 @@ Pathways.Scene.MesmersSalon = function(panelID) {
 
     var scene = new ScrollScene({
             triggerElement: panelID,
-            duration:       (Pathways.panel_height - 100),
+            duration:       (Pathways.panelHeight - 100),
             offset:         100
         })
         .on('enter', function(e) {       

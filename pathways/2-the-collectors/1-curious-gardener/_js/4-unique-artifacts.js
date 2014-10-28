@@ -7,7 +7,7 @@ Pathways.Scene.UniqueArtifacts = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#unique-artifacts',
-            duration:       (Pathways.panel_height - 100),
+            duration:       (Pathways.panelHeight - 100),
             offset:         100
         })
         .on('enter', function(e) {
@@ -24,13 +24,13 @@ Pathways.Scene.UniqueArtifacts = function() {
 
     var scene2 = new ScrollScene({
             triggerElement: '#unique-artifacts',
-            duration:       (Pathways.panel_height - 100)
+            duration:       (Pathways.panelHeight - 100)
         })
         .setTween(bg_tween)
 
     var scene3 = new ScrollScene({
             triggerElement: '#unique-artifacts',
-            duration:       (Pathways.panel_height - 100)
+            duration:       (Pathways.panelHeight - 100)
         })
         .setTween(crop_tween)
 

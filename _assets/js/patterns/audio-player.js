@@ -1,5 +1,5 @@
 
-Pathways.AudioPlayer = function() {
+Pathways.AudioPlayer = function(elem) {
     var self            = this,
         $player         = $('.audio-player'),
         $progress_bar   = $player.find('.progressed'),

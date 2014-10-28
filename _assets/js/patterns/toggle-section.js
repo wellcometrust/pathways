@@ -1,7 +1,7 @@
-Pathways.ToggleSection = function(panel_height, elem) {
+Pathways.ToggleSection = function(elem) {
 	
 	var $element			= $(elem),
-		$target             = $($element.attr('data-toggle-section-target')),
+		$target             = $($element.attr('data-toggle-section-target')), // TODO
 		$scrollAnchor       = $($element.attr('data-toggle-section-anchor')),
         height              = $target.height();
 

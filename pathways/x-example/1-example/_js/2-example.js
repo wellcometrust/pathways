@@ -1,9 +1,9 @@
 
-Pathways.Scene.Example = function(panel_height) {
+Pathways.Scene.Example = function(panel_height, panelID) {
 
     var scene = new ScrollScene({
-            triggerElement: '#example',
-            duration:       panel_height,
+            triggerElement: panelID,
+            duration:       Pathways.panelHeight,
             offset:         0
         })
         .on('enter', function(e) {

@@ -1,28 +1,120 @@
 function _(str) { return document.querySelector(str); }
 
 
-var Pathways = (function(w, _, $, undefined) {
-    'use strict';
+var Capabilities = (function(w, $, undefined) {
 
+    var mod = {
+            aspectRatio: 1900 / 1050,
+            supportsTouch: false,   
+            innerHeight:  0, 
+            innerWidth: 0, 
+            orientation: 'landscape',   
+            level: 0,
+            
+            calcSupportsTouch: function () {
+                return ('ontouchstart' in w) || (w.DocumentTouch && document instanceof DocumentTouch)
+            },
+            calcOrientation: function() {
+                return (this.innerWidth / this.innerHeight) > 1.2 ? 'landscape' : 'portrait'
+            },
+            calcAspectRatio: function() {
+                return (this.orientation === 'landscape') ? (1900 / 1050) : (1050 / 1900);
+            },
+             /*
+                Do a few checks on screen size and touch abilities to allocate a level to the current device. This will be used to determine
+                what gets loaded when.
+
+                Need to further refine the levels.
+            */
+            getEnhancementLevel: function() {
+                // small screen
+                var level = 0;
+
+                // small to mid screens
+                if (w.innerWidth >= 480)
+                    level = 1;
+
+                // ~ iPad portrait (mid screens) or Nexus 7 ()
+                if (w.innerWidth >= 768 && this.supportsTouch)
+                    level = 2;
+
+                // ~ Nexus 7 landscape (mid screens)
+                if (w.innerWidth >= 960 && this.supportsTouch)
+                    level = 3;
+
+                // Desktop
+                if (w.innerWidth >= 768 && !this.supportsTouch)
+                    level = 4;
+
+
+                return level;
+            },            
+            getDisplaySettings: function() {
+                this.innerWidth = w.innerWidth;
+                this.innerHeight = w.innerHeight;  
+
+                this.orientation = this.calcOrientation();
+                this.supportsTouch = this.calcSupportsTouch();
+                this.level = this.getEnhancementLevel();  
+            },
+            init: function() {                
+                w.addEventListener('resize', (this.getDisplaySettings).bind(this), false);                
+            }
+        }
+    
+    mod.getDisplaySettings();
+    mod.init();
+
+    return mod;
+
+}(this, jQuery));
+
+var Pathways = (function(w, _, sys, $, undefined) {
+    
+    'use strict';
 
     var doc = w.document,   
 
-    //cache vars
-        innerHeight = w.innerHeight, 
-        innerWidth = w.innerWidth, 
+        isMuted = false,
+        minHeight = 550,
+        muteButton,
+        globalAudio,
 
-        aspectRatio = 1900 / 1050,
-        supportsTouch = getSupportsTouch(),
+        panelVideos,
+        panelTracks,
 
-        mod;
+        panels,
 
+        scenesLoaded = false,
+        componentsLoaded = false,
 
-    w.addEventListener('resize', function() {
-        innerWidth = w.innerWidth;
-        innerHeight = w.innerHeight;
-    });
+        sceneController,
 
+        panelHeightDecreased = false,
 
+        mod = {
+            MIN_COMPONENT_LEVEL: 2,
+            MIN_SCROLL_LEVEL: 4,
+            panelHeight: calcPanelHeight(minHeight),
+            getPanelHeight: function() {
+                return this.panelHeight;
+            }
+        };
+
+    function calcPanelHeight(oldHeight) {
+        var newHeight = sys.innerHeight < minHeight ? minHeight : sys.innerHeight;
+        
+        if (oldHeight > newHeight) {
+            panelHeightDecreased = true;
+        } else {
+            panelHeightDecreased = false;
+        }
+       
+        
+        return newHeight;
+    }
+
+    
 
     function toTitleCase(str) {
         str = str.replace(/-/g, ' ').replace(/_/g, ' ');
@@ -36,8 +128,8 @@ var Pathways = (function(w, _, $, undefined) {
         var width = $elm.width(),
             height = $elm.height(),
 
-            top = (innerHeight / 2) - (height / 2),
-            left = (innerWidth / 2) - (width / 2);
+            top = (sys.innerHeight / 2) - (height / 2),
+            left = (sys.innerWidth / 2) - (width / 2);
 
         $elm.css({
             position: 'absolute',
@@ -46,154 +138,149 @@ var Pathways = (function(w, _, $, undefined) {
         });
     }
 
+    
 
+    function initPanel(panel) {
+        
+        var $panel = $(panel),
+            data = $panel.attr('data-config'),
+            bg = $panel.find('.bg-container').get(0),
+            configData = {};
 
+        if (data) configData = JSON.parse(data);
 
-    function getOrientation() {
-        return (innerWidth / innerHeight) > 1.2 ? 'landscape' : 'portrait'
-    }
-
-    function getSupportsTouch() {
-        return ('ontouchstart' in w) || (w.DocumentTouch && document instanceof DocumentTouch)
-    }
-
-    function getPanelHeight() {
-        return innerHeight < 550 ? 550 : innerHeight;
-    }
-
-
-    /*
-        Do a few checks on screen size and touch abilities to allocate a level to the current device. This will be used to determine
-        what gets loaded when.
-
-        Need to further refine the levels.
-    */
-    function getEnhancementLevel() {
-        // small screen
-        var level = 0;
-
-        // small to mid screens
-        if (w.innerWidth >= 480)
-            level = 1;
-
-        // ~ iPad portrait (mid screens)
-        if (w.innerWidth >= 760)
-            level = 2;
-
-        // ~ Nexus 7 landscape (mid screens)
-        if (w.innerWidth >= 960)
-            level = 3;
-
-        if (w.innerWidth >= 1020 && !getSupportsTouch())
-            level = 4;
-
-        return level;
+        return {
+            elem: panel,
+            config: configData,
+            bg: bg
+        };
     }
 
     function initPanels(panelSelector) {
-        var _panels = doc.querySelectorAll(panelSelector),
-            length = _panels.length,
-            panels = [],
-            data, _panel, configData;
+        var $panels = $(panelSelector),
+            panels = [];
 
-        for (var i = 0; i < length; i++) {
-            _panel = _panels[i];
-            data = _panel.getAttribute('data-config');
-
-            if (!data)
-                continue;
-
-            configData = JSON.parse(data);
-
-            panels.push({
-                panel: _panel,
-                config: configData
-            });
-        };
-
+        $panels.each(function(index, panel) {
+            panels.push(initPanel(panel));
+        });
         return panels;
     }
 
-    
+
     function loadComponents(context, height) {
         var loaded = [],
-            _components = doc.querySelectorAll('[data-component]');
+            $components = $('[data-component]');
 
-        for (var i = 0; i < _components.length; i++) {
-            var _component = _components[i],
-                handler = _component.getAttribute('data-component');
+        $components.each(function(index, component) {
+
+            var handler = $(component).attr('data-component');
 
             if (handler) {
                 var handlerClass = toTitleCase(handler);
 
                 // Check the handler exists and it hasn't already been loaded
                 if (context[handlerClass] != null && (loaded.indexOf(handlerClass) == -1 || context[handlerClass].alwaysLoad == true)) {
-                    context[handlerClass](context.panel_height, _component);
+                    context[handlerClass](component);
                     loaded.push(handlerClass);
                 }
 
                 if (context[handlerClass] == null)
                     console.warn('Could not load the necessary component: ' + handlerClass);
             }
-        };
+        });
     }
 
-    function setHeight(el, height, offset) {
-        offset = offset || 0;
-        el.style['height'] = height + offset + 'px';
+
+    function setElementHeight(el, height) {        
+        $(el).css('height', parseInt(height,10) + 'px');
     }
 
-    function resizeAllTheThings(startPanel, panels, panelHeight) {
+    function unSetElementHeight(el) {
+         $(el).css('height', '');
+    }
 
-        if (startPanel) setHeight(startPanel, panelHeight);            
+    function unsizeAllPanels(panels) {
+
+        //if (startPanel) unSetElementHeight(startPanel);            
 
         for (var i = 0; i < panels.length; i++) {
-            var _panel = panels[i].panel,
-                config = panels[i].config,
-                _bg = _panel.querySelector('.bg-container'),
-                height = _panel.offsetHeight,
-                offset = (supportsTouch || !config.offset_height) ? 0 : config.offset_height;
+            var _panel = panels[i].elem,
+                _bg = panels[i].bg;
 
-            if (height < panelHeight || offset) {
-                setHeight(_panel, panelHeight, parseInt(offset));
+            unSetElementHeight(_panel); 
+            unSetElementHeight(_bg);
+            unTranslatePanelElem(_bg);
+        }
+    }
+
+    function resizePanel(panel, panelHeight) {
+        
+        var _panel = panel.elem;
+
+        unSetElementHeight(_panel);        
+
+        var config = panel.config,
+            _bg = panel.bg,
+
+            currentHeight = _panel.offsetHeight,
+            offset = config ? ((sys.supportsTouch || !config.offset_height) ? 0 : config.offset_height) : 0,
+            setHeight = currentHeight < panelHeight ? panelHeight : currentHeight;
+
+            console.log('>>', currentHeight, panelHeight, panelHeightDecreased)
+        
+        if (setHeight !== currentHeight || offset) {
+            setElementHeight(_panel, (setHeight + offset));
+        }
+
+        if (_bg) setElementHeight(_bg, panelHeight);
+    }
+
+    function translatePanelElem(_el, currentHeight) {
+
+        var newHeight = sys.innerWidth / sys.aspectRatio,                        
+            prefixes = ['-moz-', '-webkit-', ''],
+            y = parseInt(((currentHeight - newHeight) / 2),10);
+
+        if (currentHeight > newHeight) {                
+            for (var p = 0; p < prefixes.length; p++) {
+                _el.style[prefixes[p] + 'transform'] = 'translate(0, ' + y + 'px)';
             }
+        }   
+    }
 
-            setHeight(_bg, panelHeight);
+    function unTranslatePanelElem(_el) {
+        var prefixes = ['-moz-', '-webkit-', ''];
+
+        for (var p = 0; p < prefixes.length; p++) {
+            _el.style[prefixes[p] + 'transform'] = '';
         }
     }
 
-    function resizeSomeThings(panels, panelHeight) {
+    function resizeAllPanels(startPanel, panels) {
         
-        var new_height = innerWidth / aspectRatio,
-            panel_height = supportsTouch ? 550 : panelHeight;
-        
-        if (w.innerWidth < 768) {
-            return;
-        }
+        if (startPanel) setElementHeight(startPanel, mod.panelHeight);            
 
         for (var i = 0; i < panels.length; i++) {
-            var _panel = panels[i].panel,
-            _preserve_ratio = panels[i].config.background.preserve_ratio;
+            resizePanel(panels[i], mod.panelHeight);
+        }
+    }
+
+    function resizeRatioedPanels(panels) {
+        
+        for (var i = 0; i < panels.length; i++) {
+            var preserveRatio = panels[i].config.background.preserve_ratio;
             
-            if (_preserve_ratio) {
-                
-                var _container = _panel.querySelector('.bg-container'),
-                
-                prefixes = ['-moz-', '-webkit-', ''],
-                y = ((panel_height - new_height) / 2);
-
-                if (panel_height > new_height) {                
-                    for (var p = 0; p < prefixes.length; p++) {
-                        _container.style[prefixes[p] + 'transform'] = 'translate(0, ' + y + 'px)';
-                    }
-                }       
+            if (preserveRatio) {
+                console.log('pre')
+                resizePanel(panels[i], mod.panelHeight);                
+                translatePanelElem(panels[i].bg, mod.panelHeight);
             }
         }
-
     }
 
     function initMuteButton(muteSelector) {
         var $btn = $(muteSelector); 
+        $btn.css('display', 'block');
 
         $btn.on('click', function(e) { 
 
@@ -215,27 +302,27 @@ var Pathways = (function(w, _, $, undefined) {
 
 
     function setPathwaysMuted(value){        
-        mod.muted = value;
+        isMuted = value;
 
         $('video, audio').each(function() {                
-            this.muted = mod.muted;
+            this.muted = isMuted;
         });
 
     }    
 
 
-    function initPanelVideo(panels, videoSelector, context) {  
+    function initPanelVideo(panels, videoSelector) {  
         
         var videos = [];        
 
         for (var i = 0; i < panels.length; i++) {
-            var _panel = panels[i].panel;
+            var _panel = panels[i].elem;
             var _video = _panel.querySelector(videoSelector);
 
             if (_video) {
                 
                 _video.addEventListener('volumechange', function(e){                                     
-                    if (this.muted == context.muted) return;
+                    if (this.muted == isMuted) return;
                     setPathwaysMuted(this.muted);
                     updateButtonView();                    
                 });
@@ -244,7 +331,7 @@ var Pathways = (function(w, _, $, undefined) {
                     console.log('error');
                 });
 
-                if (!context.supports_touch) {            
+                if (!sys.supportsTouch) {            
                     _video.setAttribute('preload', 'true');
                 } else {
                     _video.setAttribute('preload', 'false');
@@ -299,7 +386,7 @@ var Pathways = (function(w, _, $, undefined) {
         if (toAudio && (typeof toAudio !== 'undefined')) {
             $(toAudio).stop(false, true);
             toAudio.volume = 0;
-            toAudio.muted = mod.muted;           
+            toAudio.muted = isMuted;           
             toAudio.play();
             $(toAudio).animate({volume: 1}, { duration: delay, complete: function() {                
                  if (!onlyFrom && callback) {                 
@@ -312,28 +399,28 @@ var Pathways = (function(w, _, $, undefined) {
 
     // Cross fade between panel audio and global audio
     function loadPanelAudio(panel_audio) {
-        crossFade(this.globalAudio, panel_audio);    
+        crossFade(globalAudio, panel_audio);    
     }
 
     function unloadPanelAudio(panel_audio) {
-        crossFade(panel_audio, this.globalAudio);    
+        crossFade(panel_audio, globalAudio);    
     }
     
 
     function updateButtonView() {
-        if(mod.muted) {
-            mod.muteButton.addClass('active'); 
+        if(isMuted) {
+            muteButton.addClass('active'); 
         } else {
-            mod.muteButton.removeClass('active'); 
+            muteButton.removeClass('active'); 
         }
     }
 
-    function initPanelAudio(panels, selector){
+    function initPanelAudioTracks(panels, selector){
 
         var tracks = [];
 
         for (var i = 0; i < panels.length; i++) {
-            var _panel = panels[i].panel;            
+            var _panel = panels[i].elem;            
             var _track = _panel.querySelector(selector);           
             if (_track) { 
                 tracks.push(tracks);
@@ -344,12 +431,12 @@ var Pathways = (function(w, _, $, undefined) {
     }
 
     function initGlobalAudio(selector) {        
-        var _audio = document.querySelector(selector);
-        if (_audio) {            
-            crossFade(null, _audio);
+        var audio = $(selector).get(0);
+        if (audio) {            
+            crossFade(null, audio);
         }
 
-        return _audio;
+        return audio;
     }
 
 
@@ -365,7 +452,7 @@ var Pathways = (function(w, _, $, undefined) {
 
     function autoPlayVideoOnEnter(video, initTime, stopGlobalAudio) {        
         initTime = initTime || 0;
-        var fadeAudio = getCrossFadeAudio(stopGlobalAudio, this.globalAudio); 
+        var fadeAudio = getCrossFadeAudio(stopGlobalAudio, globalAudio); 
         
         if (video) {            
             if (video.readyState !== 0) video.currentTime = initTime; 
@@ -376,7 +463,7 @@ var Pathways = (function(w, _, $, undefined) {
 
     function autoStopVideoOnLeave(video, initTime, restartGlobalAudio) {       
         initTime = initTime || 0;
-        var fadeAudio = getCrossFadeAudio(restartGlobalAudio, this.globalAudio);  
+        var fadeAudio = getCrossFadeAudio(restartGlobalAudio, globalAudio);  
         
         if (video) {          
             
@@ -396,98 +483,107 @@ var Pathways = (function(w, _, $, undefined) {
     }
 
 
-    function init(onLoadComplete) {
+    function initSoundControls() {
+        muteButton = initMuteButton('.mute');
+    }
 
-        // Get the enhancement level
+    function initVideo(panels) {
+        panelVideos = initPanelVideo(panels, 'video');
+        hideCaptions(panelVideos);
+    }
+
+    function initAudio(panels) {
+        globalAudio = initGlobalAudio('[data-audio="global"]');
+        panelTracks = initPanelAudioTracks(panels, '[data-audio="panel"]');
+    }
+
+    function resizeAll(startPanel, panels) {                 
+        // For things that need resizing all the time, even on touch devices.
         
-        this.panels = initPanels('.panel');        
-
-        if (this.supports_touch && this.orientation == 'portrait')
-            this.panel_height = 550;
-
-        var startPanel = doc.querySelector('.start');
-
-        this.level = getEnhancementLevel();
-
-        // Progressive loading. Some things need to happen before window load
-        if (this.level >= 3) {
-            resizeAllTheThings(startPanel, this.panels, this.panel_height);
+        if (sys.level < mod.MIN_COMPONENT_LEVEL) {
+            unsizeAllPanels(panels);
+        } else {
+            resizeRatioedPanels(panels);
         }
 
-        w.addEventListener('resize', (function() {
+        if (sys.level >= mod.MIN_SCROLL_LEVEL) {
+            console.log('resizeAll', mod.panelHeight);
+            //
+            //resizeAllPanels(startPanel, panels);
+        } else {
+            //unsizeAllPanels(startPanel, panels);
+        }
+    }
 
-            this.panel_height = getPanelHeight();
-            this.level = getEnhancementLevel();
-
-            resizeSomeThings(this.panels, this.panel_height);
-
-            if (this.level > 3) {
-                resizeAllTheThings(startPanel, this.panels, this.panel_height);
+    function loadAll(onLoadComplete) {
+        console.log('start level: ', sys.level, ': ' ,scenesLoaded, componentsLoaded);
+        // If it's a non-touch device, load the scenes.
+        if (!scenesLoaded){
+            if (sys.level >= mod.MIN_SCROLL_LEVEL) {
+                //sceneController = onLoadComplete(mod);
+                scenesLoaded = true;
+            } 
+        } else {
+            if (sys.level < mod.MIN_SCROLL_LEVEL) {
+                //sceneController.destroy(true);
+                //scenesLoaded = false;
             }
+        }
 
-        }).bind(this));
+        // If it's iPad width or larger, load the components
+        if (!componentsLoaded) {
+            if( sys.level >= mod.MIN_COMPONENT_LEVEL) {
+                loadComponents(mod);
+                componentsLoaded = true;
+            } 
+        } else {
+            if (sys.level < mod.MIN_COMPONENT_LEVEL) {
+                // unload components
+            }
+        }
+        console.log('end level: ', sys.level, ': ' ,scenesLoaded, componentsLoaded);
+    }
+
+    function init(onLoadComplete) {
+
+        var startPanel = $('.start').get(0);
+        panels = initPanels('.panel');       
+
+        resizeAll(startPanel, panels);
+
+        w.addEventListener('resize', function(){
+            mod.panelHeight = calcPanelHeight(mod.panelHeight);            
+            resizeAll(startPanel, panels);
+            loadAll(onLoadComplete);
+        });
 
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
-        w.addEventListener('load', (function() {
+        w.addEventListener('load', function() {
 
-            // If it's a non-touch device, load the scenes.
-            if (this.level > 3) {
-                onLoadComplete(this);
-            }
+            mod.panelHeight = calcPanelHeight(mod.panelHeight);
+            resizeAll(startPanel, panels);
+            loadAll(onLoadComplete);
 
-            // If it's iPad width or larger, load the components
-            if (this.level > 2) {
-                loadComponents(this);
-            }
-
-            // For things that need resizing all the time, even on touch devices.
-            resizeSomeThings(this.panels, this.panel_height);
-
-            this.muteButton = initMuteButton('.mute');
-
-            this.panelVideos = initPanelVideo(this.panels, 'video', this);
-            hideCaptions(this.panelVideos);
-
-            this.globalAudio = initGlobalAudio('[data-audio="global"]');
-            this.panelAudio = initPanelAudio(this.panels, '[data-audio="panel"]');
-
-        }).bind(this));
+            initSoundControls();    
+            initAudio(panels);
+            initVideo(panels);
+            
+        });
 
     }
 
-    
+    mod.init = init;
 
-    mod = {
+    mod.getPanelAudioElement = getPanelAudioElement;
+    mod.getPanelVideoElement = getPanelVideoElement;
 
-        orientation: getOrientation(), // pretty crude but it'll do
-        panel_height: getPanelHeight(), // 550px minimum panel height
-        supports_touch: supportsTouch, // is it a touch device?        
-        aspect_ratio: aspectRatio,
+    mod.autoPlayVideoOnEnter = autoPlayVideoOnEnter;
+    mod.autoStopVideoOnLeave = autoStopVideoOnLeave;
 
-        level: 0,
+    mod.loadPanelAudio = loadPanelAudio;
+    mod.unloadPanelAudio = unloadPanelAudio;
 
-        panels: [],
-
-        muted: false,
-        muteButton: null,
-
-        globalAudio: null,
-        panelAudio: null,
-
-        panelVideos: null,
-
-        init: init,
-
-        getPanelAudioElement: getPanelAudioElement,
-        getPanelVideoElement: getPanelVideoElement,
-
-        autoPlayVideoOnEnter: autoPlayVideoOnEnter,
-        autoStopVideoOnLeave: autoStopVideoOnLeave,
-
-        loadPanelAudio: loadPanelAudio,
-        unloadPanelAudio: unloadPanelAudio
-
-    }
+    mod.translatePanelElem = translatePanelElem;
 
     mod.Scene = {};
     mod.Scenes = [];
@@ -499,4 +595,6 @@ var Pathways = (function(w, _, $, undefined) {
 
     return mod;
 
-})(this, _, jQuery);
+}(this, _, Capabilities, jQuery));
+
+console.log(Pathways);

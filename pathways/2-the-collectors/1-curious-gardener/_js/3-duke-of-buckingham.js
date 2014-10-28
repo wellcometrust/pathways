@@ -6,13 +6,13 @@ Pathways.Scene.DukeOfBuckingham = function() {
     var scene = new ScrollScene({
             triggerElement: '#duke-of-buckingham',
             triggerHook:    'top',
-            duration:       Pathways.panel_height,
+            duration:       Pathways.panelHeight,
         })
         .on('enter', function(e) {
             if( e.scrollDirection == 'FORWARD' )
                 startY = window.scrollY;
             else
-                startY = window.scrollY - (Pathways.panel_height - 100);
+                startY = window.scrollY - (Pathways.panelHeight - 100);
         })
         .on('progress', function(e) {
             $('.pence').css('transform', 'translate(0, '+ (window.scrollY - startY) +'px)');
