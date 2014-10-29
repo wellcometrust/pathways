@@ -1,10 +1,14 @@
 
 Pathways.Scene.India = function(panelID) {
 
-    var $boats      = $(panelID + ' .boats'),
+    var $panel      = $(panelID),
+        $boats      = $panel.find('.boats'),
         ratio       = 1050 / 1900,
         boat_ratio  = 322 / 1900,
-        boat_height = (boat_ratio * window.innerWidth);
+        boat_height = (boat_ratio * window.innerWidth),
+        offsetHeight = $(panelID).find('.main-content').outerHeight() + 100;
+
+        var height  = $panel.outerHeight();
 
     $boats.css({ bottom: 0, height: boat_height });
 
@@ -15,13 +19,15 @@ Pathways.Scene.India = function(panelID) {
 
     var scene = new ScrollScene({
             triggerElement: panelID,
-            duration:       Pathways.panelHeight * 0.5
+            duration:       function() { return $panel.outerHeight() + (Pathways.panelHeight / 4); }
         })
-        .on('enter', function() {
+        .on('enter', function() {            
+            console.log(' >> enter boats');
             $boats.css('transition', 'transform 120s linear');
             $boats.css('transform', 'translate('+window.innerWidth+'px,0)');
         })
-        .on('leave', function() {
+        .on('leave', function() {      
+        console.log(' >> exit boats');      
             $boats.css('transition', 'none');
             $boats.css('transform', 'translate(-600px,0)');
         })

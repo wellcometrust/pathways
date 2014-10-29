@@ -205,55 +205,13 @@ var Pathways = (function(w, _, sys, $, undefined) {
     }
 
 
+
     function setElementHeight(el, height) {        
         $(el).css('height', parseInt(height,10) + 'px');
     }
 
     function unSetElementHeight(el) {
          $(el).css('height', '');
-    }
-
-    function unsizePanels(panels) {
-
-        if (startPanel) unSetElementHeight(startPanel); 
-
-        for (var i = 0; i < panels.length; i++) {
-            var _panel = panels[i].elem,
-                _bg = panels[i].bg;
-
-            unSetElementHeight(_panel); 
-            unSetElementHeight(_bg);
-
-            var preserveRatio = panels[i].config.background.preserve_ratio;
-            
-            if (preserveRatio) {   
-                $(_panel).children().each(function(index, child){
-                    unSetElementHeight(child);
-                    unTranslatePanelElem(child);
-                });
-            }
-            
-        }
-    }
-
-    function resizePanel(panel, panelHeight) {
-        
-        var _panel = panel.elem;
-
-        unSetElementHeight(_panel);        
-
-        var config = panel.config,
-            _bg = panel.bg,
-
-            currentHeight = _panel.offsetHeight,
-            offset = config ? ((sys.supportsTouch || !config.offset_height) ? 0 : config.offset_height) : 0,
-            setHeight = currentHeight < panelHeight ? panelHeight : currentHeight;
-
-        if (setHeight !== currentHeight || offset) {
-            setElementHeight(_panel, (setHeight + offset));
-        }
-
-        if (_bg) setElementHeight(_bg, panelHeight);
     }
 
     function translatePanelElem(_el, currentHeight) {
@@ -277,29 +235,101 @@ var Pathways = (function(w, _, sys, $, undefined) {
         }
     }
 
+    function unsizePanels(panels) {        
+        if (startPanel) unSetElementHeight(startPanel); 
+
+        for (var i = 0; i < panels.length; i++) {
+            var _panel = panels[i].elem,
+                _bg = panels[i].bg;
+
+            $(_panel).removeAttr('style');
+            $(_bg).removeAttr('style');
+
+            //unSetElementHeight(_panel); 
+            //unSetElementHeight(_bg);
+
+            var preserveRatio = panels[i].config.background.preserve_ratio;
+            
+            if (preserveRatio) {   
+                $(_panel).children().each(function(index, child){
+                    $(child).removeAttr('style');
+                    //unSetElementHeight(child);
+                    //unTranslatePanelElem(child);
+                });
+            }            
+        }
+    }
+
+    function resizePanel(panel, panelHeight) {
+        console.log('resizePanel');
+        var _panel = panel.elem;
+
+        unSetElementHeight(_panel);        
+
+        var config = panel.config,
+            _bg = panel.bg,
+
+            currentHeight = _panel.offsetHeight,
+            offset = config ? ((sys.supportsTouch || !config.offset_height) ? 0 : config.offset_height) : 0,
+            largerHeight = currentHeight < panelHeight ? panelHeight : currentHeight;
+
+        if (largerHeight !== currentHeight || offset) {
+            setElementHeight(_panel, (largerHeight + offset));
+        }
+
+        if (_bg) setElementHeight(_bg, panelHeight);
+    }
+
+    function resizePanelChild(index, child) {
+        var newHeight = sys.innerWidth / sys.aspectRatio;
+        setElementHeight(child, newHeight);
+        translatePanelElem(child, mod.panelHeight);
+    }
+
     function resizePanels(startPanel, panels) {
         
         if (startPanel) setElementHeight(startPanel, mod.panelHeight);            
 
         for (var i = 0; i < panels.length; i++) {
-            var preserveRatio = panels[i].config.background.preserve_ratio;
             resizePanel(panels[i], mod.panelHeight);
+            
+            var preserveRatio = panels[i].config.background.preserve_ratio;
             if (preserveRatio) {   
-                $(panels[i].elem).children().each(function(index, child){
-                    var newHeight = sys.innerWidth / sys.aspectRatio;
-                    setElementHeight(child, newHeight);
-                    translatePanelElem(child, mod.panelHeight);
-                });
+                $(panels[i].elem).children().each(resizePanelChild);
             }
         }
     }
 
+    function removeScrollSceneStyling() {
+
+        if (startPanel) $(startPanel).removeAttr('style');
+        $('.comic-panel').removeAttr('style');
+
+        for (var i = 0; i < panels.length; i++) {
+            var panel           = panels[i],
+                $bg             = $(panel.bg),
+                $panel          = $(panel.elem),
+                panelID         = $panel.attr('id'),               
+                $library_panel  = $panel.find('[data-panel="'+ panelID +'"]').first(),
+                $gallery        = $panel.find('[data-component="gallery"]'),
+                $quiz           = $panel.find('[data-component="quiz"]');
+
+            $bg.removeAttr('style');
+            $library_panel.removeAttr('style');
+            $gallery.removeAttr('style');
+            $quiz.removeAttr('style');
+
+        }
+    }
+
+
+
     function initMuteButton(muteSelector) {
         var $btn = $(muteSelector); 
         $btn.css('display', 'block');
-
+        $btn.unbind('click');
         $btn.on('click', function(e) { 
-
+            console.log('click');
             // active == muted
             if( $(this).hasClass('active') ) {
                 setPathwaysMuted(false);                
@@ -347,10 +377,12 @@ var Pathways = (function(w, _, sys, $, undefined) {
                     console.log('error');
                 });
 
-                if (!sys.supportsTouch) {            
-                    _video.setAttribute('preload', 'true');
+                if (!sys.level >= mod.MIN_SCROLL_LEVEL) {            
+                    _video.setAttribute('preload', 'auto');
                 } else {
-                    _video.setAttribute('preload', 'false');
+                    _video.setAttribute('preload', 'metadata');
+                    _video.controls = true;
+                    
                 }
 
                 videos.push(_video);
@@ -500,6 +532,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
 
     function initSoundControls() {
+        console.log('init sound controls');
         muteButton = initMuteButton('.mute');
     }
 
@@ -513,27 +546,45 @@ var Pathways = (function(w, _, sys, $, undefined) {
         panelTracks = initPanelAudioTracks(panels, '[data-audio="panel"]');
     }
 
+    var panelsUnsized = false;
     function resizeAll() {                       
         if (sys.level < mod.MIN_COMPONENT_LEVEL) {
             unsizePanels(panels);
+            panelsUnsized = true;
         } else if (sys.level >= mod.MIN_COMPONENT_LEVEL && sys.level < mod.MIN_SCROLL_LEVEL){
             resizePanels(null, ratioedPanels);
+            panelsUnsized = false;
         } else if (sys.level >= mod.MIN_SCROLL_LEVEL) {
             resizePanels(startPanel, panels);
+            panelsUnsized = false;
         }
     }
 
-    function loadAll(onLoadComplete) {
+    function loadAll(onScrollLoad, onScrollUnload) {
         console.log('start level: ', sys.level, ': ' ,scenesLoaded, componentsLoaded);
         // If it's a non-touch device, load the scenes.
         if (!scenesLoaded){
             if (sys.level >= mod.MIN_SCROLL_LEVEL) {
-                sceneController = onLoadComplete(mod);
+                sceneController = onScrollLoad(mod);
+
+                initSoundControls();    
+                initAudio(panels);
+
                 scenesLoaded = true;
             } 
         } else {
             if (sys.level < mod.MIN_SCROLL_LEVEL) {
+                console.log('unloading scrolllevel');                
                 sceneController.destroy(true);
+                removeScrollSceneStyling();
+                onScrollUnload(mod);
+
+                $('audio').each(function() {  
+                    console.log('muting: ', this);              
+                    this.muted = true;
+                });
+                muteButton.hide();
+
                 scenesLoaded = false;
             }
         }
@@ -552,7 +603,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         console.log('end level: ', sys.level, ': ' ,scenesLoaded, componentsLoaded);
     }
 
-    function init(onLoadComplete) {
+    function init(onScrollLoad, onScrollUnload) {
 
         startPanel = $('.start').get(0);
         panels = initPanels('.panel');
@@ -564,7 +615,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         w.addEventListener('resize', function(){
             mod.panelHeight = calcPanelHeight(mod.panelHeight);            
             resizeAll();
-            loadAll(onLoadComplete);
+            loadAll(onScrollLoad, onScrollUnload);
         });
 
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
@@ -572,10 +623,9 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
             mod.panelHeight = calcPanelHeight(mod.panelHeight);
             resizeAll();
-            loadAll(onLoadComplete);
+            loadAll(onScrollLoad, onScrollUnload);
 
-            initSoundControls();    
-            initAudio(panels);
+            
             initVideo(panels);
             
         });
@@ -606,5 +656,3 @@ var Pathways = (function(w, _, sys, $, undefined) {
     return mod;
 
 }(this, _, Capabilities, jQuery));
-
-console.log(Pathways);

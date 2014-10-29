@@ -1,5 +1,5 @@
 
-<div id="fred-breuer" class="panel" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="fred-breuer" class="panel" data-config='{ "offset_height": 450, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

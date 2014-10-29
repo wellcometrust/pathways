@@ -1,15 +1,18 @@
 
 Pathways.Scene.Office2 = function(panelID) {
 
-    var $img = $(panelID).find('.large-screen').first();
+    var $panel = $(panelID), 
+        $img = $panel.find('.large-screen').first();
 
     var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       Pathways.panelHeight + (Pathways.panelHeight / 2)
+            triggerElement: panelID, 
+            duration:       function () { return $panel.outerHeight() + (Pathways.panelHeight * 0.5); }, 
+            offset:         100
         })
-        .on('enter', function() {            
+        .on('enter', function() {     
+            console.log('enter couch')       
             $img.css('transition', 'transform 14s ease');
-            $img.css('transform', 'translate(-80%, -40%) scale(1.8, 1.8)');
+            $img.css('transform', 'translate(-80%, -10%) scale(1.8, 1.8)');
         })
         .on('leave', function() {
             $img.css('transition', 'none');

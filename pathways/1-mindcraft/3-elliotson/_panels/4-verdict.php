@@ -1,5 +1,5 @@
 
-<div id="verdict" class="panel" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="verdict" class="panel" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

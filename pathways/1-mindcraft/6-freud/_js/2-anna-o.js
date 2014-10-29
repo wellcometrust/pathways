@@ -9,6 +9,7 @@ Pathways.Scene.AnnaO = function(panelID) {
     ];
 
     var counter = 0;
+    var $panel = $(panelID);
 
     $(panelID + ' .fragmented').each(function() {
         var $this = $(this);
@@ -28,9 +29,9 @@ Pathways.Scene.AnnaO = function(panelID) {
         var tween = TweenMax.to( $(this), 1, { x: 0, y: -3 } );
 
         var scene = new ScrollScene({
-                triggerElement: '#anna-o',
+                triggerElement: panelID,
                 triggerHook:    'top',
-                duration:       $('#anna-o').height() - 320,
+                duration:       function() { return $panel.height() - 400; },
                 offset:         50,
             })
             .setTween(tween);

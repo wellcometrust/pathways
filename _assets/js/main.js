@@ -104,11 +104,69 @@ if( window.innerWidth >= 768 ) {
 
 
 
+var $parallaxContent = $('.start').find('.content').first();
+var $parallaxLady = $('.start').find('.falling-lady').first();
 
-function onPathwayLoadComplete(pathways) {
+function parallaxContentLoad() {
+    var scrollY     = window.pageYOffset,       
+        unit        = 0.5 / (Pathways.panelHeight / 2);
+
+    if ($parallaxContent) {
+        if( scrollY > Pathways.panelHeight ) {
+            $parallaxContent.css('display', 'none');
+            return;
+        }
+
+        $parallaxContent.css({
+            'display': 'block',
+            'opacity':  1 - (unit * scrollY),
+            'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 2) +'px,0)' : 'translate(0,'+ (scrollY / 2) +'px)'
+        });
+    }   
+}
+
+function parallaxContentUnload() {
+    $parallaxContent.removeAttr('style');
+}
+
+function parallaxLadyLoad() {
+    var scrollY     = window.pageYOffset,
+        $parallaxLady       = $('.falling-lady').first();
+
+    if ($parallaxLady) {
+        if( scrollY > Pathways.panelHeight )
+            return;
+
+        $parallaxLady.css({
+            'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY * 0.7) +'px,0)' : 'translate(0,'+ (scrollY * 0.7) +'px)'
+        });
+    }   
+}
+
+function parallaxLadyUnload() {
+    $parallaxLady.removeAttr('style');
+}
+
+function onScrollUnload(pathways) {
+
+    if( $parallaxContent ) { 
+        parallaxContentUnload();
+        window.removeEventListener('scroll', parallaxContentLoad, false);
+    }
+
+    if( $parallaxLady ) {
+        parallaxLadyUnload();
+        window.addEventListener('scroll', parallaxLadyLoad, false);
+    }
+}
+
+
+function onScrollLoad(pathways) {
+
+    console.log(' >> onScrollLoad');
 
     var $sequence       = $('.sequence'),
-        controller      = new ScrollMagic(),
+        controller      = new ScrollMagic({refreshInterval: 500 }),
         $blackStrip     = $('.black-strip');
 
     
@@ -128,31 +186,7 @@ function onPathwayLoadComplete(pathways) {
         return (config && config[name]) || null;
     }
 
-    function parallaxStart() {
-        scrollY = window.pageYOffset;
-
-        if( scrollY > pathways.panelHeight ) {
-            $content.css('display', 'none');
-            return;
-        }
-
-        $content.css({
-            'display': 'block',
-            'opacity':  1 - (unit * scrollY),
-            'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 2) +'px,0)' : 'translate(0,'+ (scrollY / 2) +'px)'
-        });
-    }
-
-    function parallaxLady() {
-        scrollY2 = window.pageYOffset;
-
-        if( scrollY2 > pathways.panelHeight )
-            return;
-
-        $lady.css({
-            'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY * 0.7) +'px,0)' : 'translate(0,'+ (scrollY * 0.7) +'px)'
-        });
-    }
+    
 
     /**************
         Scenes
@@ -163,24 +197,14 @@ function onPathwayLoadComplete(pathways) {
 
     // Start panel
 
-    if( _('.start') ) {
-        var $start      = $('.start'),
-            $content    = $start.find('.content').first(),
-            scrollY     = 0,
-            unit        = 0.5 / (pathways.panelHeight / 2),
-            hidden      = false;
-
-        window.addEventListener('scroll', parallaxStart, false);
+    if( $parallaxContent ) { 
+        window.addEventListener('scroll', parallaxContentLoad, false);
     }
 
 
     // Svengali
-    if( _('.falling-lady') ) {
-
-        var $lady       = $('.falling-lady').first(),
-            scrollY2    = 0;
-
-        window.addEventListener('scroll', parallaxLady, false);
+    if( $parallaxLady ) {
+        window.addEventListener('scroll', parallaxLadyLoad, false);
     }
 
 
@@ -196,19 +220,20 @@ function onPathwayLoadComplete(pathways) {
         scenes[idx++] = new ScrollScene({
                 triggerElement: $sequence,
                 triggerHook:    'top',
-                duration:       ($sequence.height() - pathways.panelHeight)
+                duration:       function() { return ($sequence.height() - Pathways.panelHeight); }
             })
-            .on('enter', function(e) {
+            .on('enter', function(e) {                
+                $bgs.css({ display: 'block' } );   // To fix layering when reloading             
                 if( e.scrollDirection == 'FORWARD') {
                     $bgs.css({ position: 'fixed', display: 'none', opacity: 0 } );
                     $first_panel.find('.bg-container').css({ display: 'block', opacity: 1 });
                 }
                 if( e.scrollDirection == 'REVERSE') {
-                    $bgs.css({ position: 'fixed' } );
+                    $bgs.css({ position: 'fixed' } );  
                 }
             })
-            .on('leave', function(e) {
-                $sequence.find('.bg-container').css({ position: 'absolute', display: 'block' } );
+            .on('leave', function(e) {               
+                $bgs.css({ position: 'absolute', display: 'block' } );
             })
      }
 
@@ -220,10 +245,11 @@ function onPathwayLoadComplete(pathways) {
     var panel_total = document.querySelectorAll('.sequence .panel').length,
         panel_count = 0;
 
+
+
     $('.sequence .panel').each(function() {
         var $this           = $(this),
             panelID         = $this.attr('id'),
-            height          = $this.outerHeight(),
             $bg             = $this.find('.bg-container'),
             $library_panel  = $('[data-panel="'+ panelID +'"]').first(),
             $gallery        = $this.find('[data-component="gallery"]'),
@@ -235,6 +261,22 @@ function onPathwayLoadComplete(pathways) {
 
         panel_count+=1; // for tracking first and last panels (when logic needs to differ because of the lack of cross-fading)
 
+        function getMediaDuration() {
+            return $this.outerHeight();
+        }
+
+        function getTweenDuration() {
+            return pathways.panelHeight / 4;
+        }
+
+        function getComponentDuration(offset) {
+            return function () { return (($this.outerHeight() * 0.75) - offset); }
+        }
+
+        function getLibPanelDuration() {
+            var h = $this.outerHeight();
+            return (panel_count == panel_total) ? (h * 0.75) : (h - 300)
+        }
         /*
             I can't entirely explain why we need to set the bg to block on both enter and leave. But it fixes
             a layering issue when loading the page during or after a sequence. SCIENCE!
@@ -242,14 +284,12 @@ function onPathwayLoadComplete(pathways) {
         // Panels       
         scenes[idx++] = new ScrollScene({
                 triggerElement: $this,
-                duration:       function() {            
-                                    return pathways.panelHeight / 4;
-                                }
+                duration: getTweenDuration
             })
-            .on('enter', function() {
+            .on('enter', function() {                
                 $bg.css('display', 'block');
             })
-            .on('leave', function() {
+            .on('leave', function() {                
                 $bg.css('display', 'block');
             })
             .setTween(tween)
@@ -260,7 +300,7 @@ function onPathwayLoadComplete(pathways) {
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
                     triggerHook:    'top',
-                    duration:       (height - (height / 4)),
+                    duration:       getComponentDuration(g_offset),
                     offset:         g_offset
                 })
                 .on('enter', function() {
@@ -279,7 +319,7 @@ function onPathwayLoadComplete(pathways) {
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
                     triggerHook:    'top',
-                    duration:       (height - (height * 0.6)),
+                    duration:       getComponentDuration(q_offset),
                     offset:         q_offset
                 })
                 .on('enter', function() {
@@ -298,7 +338,7 @@ function onPathwayLoadComplete(pathways) {
 
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
-                    duration:       (panel_count == panel_total) ? height - (height / 2) : (height - 300),
+                    duration:       getLibPanelDuration,
                     offset:         100
                 })
                 .on('enter', function() {
@@ -317,7 +357,7 @@ function onPathwayLoadComplete(pathways) {
 
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
-                    duration:       height
+                    duration:       getMediaDuration
                 })
                 .on('enter', function() {
                     pathways.loadPanelAudio($audio[0]);
@@ -337,7 +377,7 @@ function onPathwayLoadComplete(pathways) {
             
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
-                    duration:       height
+                    duration:       getMediaDuration
                 })
                 .on('enter', function() {
                     pathways.autoPlayVideoOnEnter($video[0], initTime, muteGlobal);
@@ -367,4 +407,4 @@ function onPathwayLoadComplete(pathways) {
     return controller;
 }
 
-Pathways.init(onPathwayLoadComplete);
+Pathways.init(onScrollLoad, onScrollUnload);

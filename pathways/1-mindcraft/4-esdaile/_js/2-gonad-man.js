@@ -8,7 +8,7 @@ Pathways.Scene.GonadMan = function(panelID) {
     var scene1 = new ScrollScene({
             triggerElement: panelID,
             triggerHook:    'top',
-            duration: (height * 0.8)
+            duration: function () { return $panel.outerHeight() + (Pathways.panelHeight * 0.5); }            
         })
         .on('enter', function() {
             $panel.addClass('active');

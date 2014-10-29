@@ -161,7 +161,8 @@
 
         .info-box {            
             bottom:     auto;
-            top:        20px;
+            top:        90px;
+            right:      60px;
         }
     }
 
@@ -243,7 +244,7 @@
     .info-box {
         position:   absolute;
         top:        60px;
-        right:      90px;
+        right:      60px;
     }
     
 }
@@ -480,8 +481,9 @@
 
             .info-box {
                 position:   absolute;
-                top:        20px;
+                bottom:     20%;
                 right:      100px;
+                top:        auto;
             }
         }
     }
@@ -507,7 +509,7 @@
         #gonad-man {
             .info-box {
                 position:   absolute;
-                top:        51%;
+                top:        66%;
                 right:      100px;
             }
         }
@@ -696,9 +698,13 @@
 .comic-strip { min-height: 600px; }
 
 #trilby {
-
+    
     .bg-container {
         background-image: url(/pathways/1-mindcraft/_assets/5-svengali/svengali-2.jpg);
+
+        .large-screen {
+            display:none;
+        }
     }
 
     img {
@@ -753,6 +759,13 @@
 @media all and (min-width: 48rem) {
 
     #trilby {
+
+        .bg-container {
+            
+            .large-screen {
+                display:block;
+            }
+        }
 
         .inner {
             max-width: 1024px;
@@ -913,16 +926,12 @@
         }
 
         .comic-panel--8 {
-            width:          50%;
-            margin-top:     14px;
-            -webkit-transform: translateX(38px);
-               -moz-transform: translateX(38px);
-                    transform: translateX(38px);
+            width:          47%;
+            margin-top:     20px;
         }
 
         .comic-panel--9 {
             width:          43%;
-            margin-top:     -140px;
             margin-left:    4%;
 
             .panel-text {
@@ -934,8 +943,8 @@
 
         .comic-panel--10 {
             width:          45%;
-            margin-top:     49px;
-            margin-left:    5%;
+            margin-top:     -70px;
+            margin-left:    2%;
 
             .panel-text {
                 font-style: italic;
@@ -944,8 +953,8 @@
 
         .comic-panel--11 {
             width:          33%;
-            margin-left:    14%;
-            margin-top:     -65px;
+            margin-left:    4%;
+            margin-top:     40px;
 
             .panel-text {
                 left: 10px;
@@ -982,16 +991,22 @@
 
 @media all and (min-width: 62.5rem) {
     #trilby {
+        .comic-panel--8 {
+            margin-left:5%;
+        }
+
         .comic-panel--9 {
             margin-top: -105px;
         }
 
         .comic-panel--10 {
-            margin-left: 3%;
+            margin-top: 50px; 
+            margin-left: 5%;
         }
 
         .comic-panel--11 {
             margin-top: -25px;
+            margin-left: 14%;
         }
     }
 }
@@ -1382,14 +1397,6 @@
     header {
         h1 {
             font-size: 1.618rem;
-        }
-    }
-}
-
-.no-touch {
-    #office-2 {
-        img {
-            display: block;
         }
     }
 }
