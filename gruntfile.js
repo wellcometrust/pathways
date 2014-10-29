@@ -77,17 +77,28 @@ module.exports = function(grunt) {
             }
         },
 
-        php2html: {          
-            options: {
-                htmlhint : {'doctype-first': false}
-            },  
+        php2html: {      
+
             mindcraft: {
+                options: {
+                    htmlhint : {'doctype-first': false},
+                    docroot: '/'
+                }, 
                 files: [
-                    {expand: true, cwd: '', src: ['pathways/**/*.php'], dest: '../export', ext: '.html' }
+                    {expand: true, cwd: '', src: ['pathways/1-mindcraft/**/*.php'], dest: '../export', ext: '.html' }
                 ],
             }
             
         },
+
+        copy: {
+            mindcraft: {
+                files: [
+                    {expand: true, cwd:'pathways/1-mindcraft', src: ['_assets/**'], dest: '../export'},
+                    {expand: true, cwd:'pathways/1-mindcraft', src: ['!**/*.php'], dest: '../export'},
+                ]
+            }
+        }
 
     });
 
@@ -106,6 +117,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['css', 'js']);
 
-    grunt.registerTask('export', ['php2html:mindcraft']);
+    grunt.registerTask('export', ['php2html:mindcraft', 'copy:mindcraft']);
 
 };
