@@ -547,7 +547,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
     }
 
     var panelsUnsized = false;
-    function resizeAll() {                       
+    function resizeCheck() {                       
         if (sys.level < mod.MIN_COMPONENT_LEVEL) {
             unsizePanels(panels);
             panelsUnsized = true;
@@ -560,10 +560,11 @@ var Pathways = (function(w, _, sys, $, undefined) {
         }
     }
 
-    function loadAll(onScrollLoad, onScrollUnload) {
-        console.log('start level: ', sys.level, ': ' ,scenesLoaded, componentsLoaded);
-        // If it's a non-touch device, load the scenes.
+    function loadCheck(onScrollLoad, onScrollUnload) {        
+        mod.panelHeight = calcPanelHeight(mod.panelHeight); 
+
         if (!scenesLoaded){
+            // If it's a non-touch device, load the scenes.
             if (sys.level >= mod.MIN_SCROLL_LEVEL) {
                 sceneController = onScrollLoad(mod);
 
@@ -579,8 +580,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
                 removeScrollSceneStyling();
                 onScrollUnload(mod);
 
-                $('audio').each(function() {  
-                    console.log('muting: ', this);              
+                $('audio, video').each(function() {                                
                     this.muted = true;
                 });
                 muteButton.hide();
@@ -600,7 +600,6 @@ var Pathways = (function(w, _, sys, $, undefined) {
                 // unload components
             }
         }
-        console.log('end level: ', sys.level, ': ' ,scenesLoaded, componentsLoaded);
     }
 
     function init(onScrollLoad, onScrollUnload) {
@@ -609,22 +608,18 @@ var Pathways = (function(w, _, sys, $, undefined) {
         panels = initPanels('.panel');
         ratioedPanels = initRatioedPanels(panels);        
 
-        mod.panelHeight = calcPanelHeight(mod.panelHeight); 
-        resizeAll();
+        resizeCheck();
 
-        w.addEventListener('resize', function(){
-            mod.panelHeight = calcPanelHeight(mod.panelHeight);            
-            resizeAll();
-            loadAll(onScrollLoad, onScrollUnload);
+        w.addEventListener('resize', function(){                     
+            resizeCheck();
+            loadCheck(onScrollLoad, onScrollUnload);
         });
 
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
         w.addEventListener('load', function() {
-
-            mod.panelHeight = calcPanelHeight(mod.panelHeight);
-            resizeAll();
-            loadAll(onScrollLoad, onScrollUnload);
-
+            
+            resizeCheck();
+            loadCheck(onScrollLoad, onScrollUnload);
             
             initVideo(panels);
             

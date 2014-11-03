@@ -33,12 +33,15 @@
             <?php            
                 $panels = $page->getModuleData('info_panels');
 
-                foreach ($panels as $key => $ip) {                   
+                foreach ($panels as $key => $ip) {   
+                    
+                    $share = isset($ip['share']) ? $ip['share'] : NULL;
+
                     if (isset($ip['links'])) {  
                         $panel = array(
                             'id'    => $key,
                             'links' => $ip['links'],
-                            'share' => $ip['share']
+                            'share' => $share
                         );
                         $page->renderPattern('library_panel', $panel);
                     }

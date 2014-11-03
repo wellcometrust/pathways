@@ -208,7 +208,7 @@
 @media all and (min-width: 48em) and (max-width: 80em) {
     #satirised {
         .main-content {
-            max-width: 320px;
+            max-width: 25%;
         }
     }
 }
@@ -391,6 +391,17 @@
 
 @media screen and (min-width: 48rem) {
     #verdict {
+        
+        .main-content {
+            @include clearfix;
+        }
+
+        .inner {
+            float:          right;
+            width:          70%;
+            margin-right:   20px;
+        }
+
         header {
             margin-bottom:  4rem;
         }
@@ -418,19 +429,6 @@
     }
 }
 
-@media screen and (min-width: 52rem) {
-    #verdict {
-        .main-content {
-            @include clearfix;
-        }
-
-        .inner {
-            float:          right;
-            width:          70%;
-            margin-right:   20px;
-        }
-    }
-}
 
 @media screen and (min-width: 52rem) and (min-height: 48rem) {
     #verdict {
@@ -479,11 +477,9 @@
                 @include transform-origin(50% 0%);
             }
 
-            .info-box {
-                position:   absolute;
-                bottom:     20%;
-                right:      100px;
-                top:        auto;
+            .info-box {                           
+                right:      6%;
+                top:        48%;
             }
         }
     }
@@ -507,10 +503,8 @@
 @media all and (min-width: 64rem) {
     .touch {
         #gonad-man {
-            .info-box {
-                position:   absolute;
+            .info-box {                
                 top:        66%;
-                right:      100px;
             }
         }
     }
@@ -1210,7 +1204,7 @@
         }
 
         .text-panel--1 {
-            width: 45%;
+            width: 30%;
         }
 
         .comic-row--4 {
@@ -1260,7 +1254,7 @@
         }
 
         .outro {
-            margin: 7rem 0;
+            margin: 7rem .5rem;
 
             p {
                 font-size: 2.005rem;
@@ -1268,6 +1262,16 @@
         }
     }
 
+}
+
+@media all and (min-width: 60rem) {
+    #bompard {
+       
+        .text-panel--1 {
+            width: 45%;
+        }
+        
+    }
 }
 
 .start-freud {
@@ -1390,13 +1394,19 @@
 
 
 #office-2 {
-    .large-screen {
-        display: none;
-    }
-
+     
     header {
         h1 {
             font-size: 1.618rem;
+            text-shadow: 1px 1px 1px #030303;  
+        }
+    }
+}
+
+.no-touch {
+    #office-2 {
+        img {
+            display: block;
         }
     }
 }

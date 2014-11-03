@@ -149,7 +149,7 @@
         }
 
         .text-panel--1 {
-            width: 45%;
+            width: 30%;
         }
 
         .comic-row--4 {
@@ -199,7 +199,7 @@
         }
 
         .outro {
-            margin: 7rem 0;
+            margin: 7rem .5rem;
 
             p {
                 font-size: 2.005rem;
@@ -207,4 +207,14 @@
         }
     }
 
+}
+
+@media all and (min-width: 60rem) {
+    #bompard {
+       
+        .text-panel--1 {
+            width: 45%;
+        }
+        
+    }
 }

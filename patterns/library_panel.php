@@ -16,8 +16,11 @@
     $panel_link =       $hostRoot.$pathwayPath.$modulePath.'#'.$id;
     $url_panel_link =   urlencode($panel_link);
 
-    $pinterest_img =    urlencode($panel['share']['img']);
-    $share_text =       urlencode($panel['share']['text']);
+    if (isset($panel['share'])) {
+        $share = $panel['share'];
+        $pinterest_img =    urlencode($share['img']);
+        $share_text =       urlencode($share['text']);
+    } 
 
     
 ?>
@@ -53,7 +56,7 @@
         </ul>
         <?php endif ?>
 
-        <?php if( isset($panel['share']) ): ?>
+        <?php if( isset($share) ): ?>
         <div class="share-me">
             <p>Share</p>
             

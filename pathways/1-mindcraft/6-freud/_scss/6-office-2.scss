@@ -1,12 +1,18 @@
 
 #office-2 {
-    .large-screen {
-        display: none;
-    }
-
+     
     header {
         h1 {
             font-size: 1.618rem;
+            text-shadow: 1px 1px 1px #030303;  
+        }
+    }
+}
+
+.no-touch {
+    #office-2 {
+        img {
+            display: block;
         }
     }
 }

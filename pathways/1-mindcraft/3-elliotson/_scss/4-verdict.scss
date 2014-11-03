@@ -13,6 +13,17 @@
 
 @media screen and (min-width: 48rem) {
     #verdict {
+        
+        .main-content {
+            @include clearfix;
+        }
+
+        .inner {
+            float:          right;
+            width:          70%;
+            margin-right:   20px;
+        }
+
         header {
             margin-bottom:  4rem;
         }
@@ -40,19 +51,6 @@
     }
 }
 
-@media screen and (min-width: 52rem) {
-    #verdict {
-        .main-content {
-            @include clearfix;
-        }
-
-        .inner {
-            float:          right;
-            width:          70%;
-            margin-right:   20px;
-        }
-    }
-}
 
 @media screen and (min-width: 52rem) and (min-height: 48rem) {
     #verdict {

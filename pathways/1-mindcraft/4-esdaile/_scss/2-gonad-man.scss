@@ -27,11 +27,9 @@
                 @include transform-origin(50% 0%);
             }
 
-            .info-box {
-                position:   absolute;
-                bottom:     20%;
-                right:      100px;
-                top:        auto;
+            .info-box {                           
+                right:      6%;
+                top:        48%;
             }
         }
     }
@@ -55,10 +53,8 @@
 @media all and (min-width: 64rem) {
     .touch {
         #gonad-man {
-            .info-box {
-                position:   absolute;
+            .info-box {                
                 top:        66%;
-                right:      100px;
             }
         }
     }
