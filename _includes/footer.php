@@ -1,7 +1,7 @@
     
     <script src="<?= $page->getAsset('build/js/libs.min.js') ?>"></script>
     <script src="/_assets/animations/magnetised-trees/tree2.js"></script>
-    <script src="<?= $page->getAsset('build/js/production.js') ?>"></script>
+    <script src="<?= $page->getAsset('build/js/production.min.js') ?>"></script>
     <script id="embedWellcomePlayer" src="/wellcomeplayer/js/embed.js"></script>
 
     <script>

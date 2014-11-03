@@ -260,8 +260,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         }
     }
 
-    function resizePanel(panel, panelHeight) {
-        console.log('resizePanel');
+    function resizePanel(panel, panelHeight) {        
         var _panel = panel.elem;
 
         unSetElementHeight(_panel);        
@@ -329,7 +328,6 @@ var Pathways = (function(w, _, sys, $, undefined) {
         $btn.css('display', 'block');
         $btn.unbind('click');
         $btn.on('click', function(e) { 
-            console.log('click');
             // active == muted
             if( $(this).hasClass('active') ) {
                 setPathwaysMuted(false);                
@@ -374,7 +372,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
                 });
 
                 _video.addEventListener('error', function(e){                    
-                    console.log('error');
+                    console.warn('Video loading error for ', _video.src);
                 });
 
                 if (!sys.level >= mod.MIN_SCROLL_LEVEL) {            
@@ -532,7 +530,6 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
 
     function initSoundControls() {
-        console.log('init sound controls');
         muteButton = initMuteButton('.mute');
     }
 
@@ -574,8 +571,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
                 scenesLoaded = true;
             } 
         } else {
-            if (sys.level < mod.MIN_SCROLL_LEVEL) {
-                console.log('unloading scrolllevel');                
+            if (sys.level < mod.MIN_SCROLL_LEVEL) {              
                 sceneController.destroy(true);
                 removeScrollSceneStyling();
                 onScrollUnload(mod);

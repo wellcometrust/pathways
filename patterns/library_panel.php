@@ -50,7 +50,7 @@
                 <a href="<?= $lHref ?>" data-component="player-overlay" data-embed="<?= $pLink ?>" data-ga="<?= $gaData . 'l2 share ' . $shortTitle . ' - view' ?>">View</a>
                 <?php endif ?>
                 <?php if( $dLink != '' ): ?><a href="<?= $dLink ?>" rel="external" data-ga="<?= $gaData . 'l2 share ' . $shortTitle . ' - download' ?>">Download hi-res image</a><?php endif ?>
-                <?php if( $eLink != '' ): ?><a href="<?= $eLink ?>" rel="external"data-ga="<?= $gaData . 'l2 share ' . $shortTitle . ' - view external' ?>">View on external website</a><?php endif ?>
+                <?php if( $eLink != '' ): ?><a href="<?= $eLink ?>" rel="external" data-ga="<?= $gaData . 'l2 share ' . $shortTitle . ' - view external' ?>">View on external website</a><?php endif ?>
             </li>
             <?php endforeach ?>
         </ul>
@@ -61,7 +61,7 @@
             <p>Share</p>
             
             <ul>
-                <li class="twitter" data-ga="<?= $gaData . 'l2 share twitter' ?>"><a href="https://twitter.com/intent/tweet?url=<?= $url_panel_link ?>&via=WellcomeLibrary&text=<?= $share_text?>"><img src="/_assets/img/icons/icon-twitter-btn.gif" alt="share on twitter"></a></li>
+                <li class="twitter" data-ga="<?= $gaData . 'l2 share twitter' ?>"><a href="https://twitter.com/intent/tweet?url=<?= $url_panel_link ?>&via=ExploreWellcome&text=<?= $share_text?>"><img src="/_assets/img/icons/icon-twitter-btn.gif" alt="share on twitter"></a></li>
                 <li class="facebook" data-ga="<?= $gaData . 'l2 share facebook' ?>"><div class="fb-share-button" data-href="<?= $panel_link ?>" data-layout="button" data-width="75"></div></li>
                 <li class="pinterest" data-ga="<?= $gaData . 'l2 share pinterest' ?>"><a href="//www.pinterest.com/pin/create/button/?url=<?= $url_panel_link?>&media=<?= $pinterest_img?>&description=<?= $share_text?>" data-pin-config="none" data-pin-color="white" data-pin-height="28"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_28.png" /></a></li>
                 <li class="googleplus" data-ga="<?= $gaData . 'l2 share googleplus' ?>"><div class="g-plus" data-action="share" data-annotation="none" data-href="<?= $panel_link ?>" data-width="56"></div></li>

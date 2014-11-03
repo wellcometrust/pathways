@@ -163,8 +163,6 @@ function onScrollUnload(pathways) {
 
 function onScrollLoad(pathways) {
 
-    console.log(' >> onScrollLoad');
-
     var $sequence       = $('.sequence'),
         controller      = new ScrollMagic({refreshInterval: 500 }),
         $blackStrip     = $('.black-strip');

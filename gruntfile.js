@@ -77,26 +77,42 @@ module.exports = function(grunt) {
             }
         },
 
-        php2html: {      
-
-            mindcraft: {
-                options: {
-                    htmlhint : {'doctype-first': false},
-                    docroot: '/'
-                }, 
-                files: [
-                    {expand: true, cwd: '', src: ['pathways/1-mindcraft/**/*.php'], dest: '../export', ext: '.html' }
-                ],
+        php2html: {
+            options: {
+                docroot: '/',
+                htmlhint: {                    
+                    'attr-lowercase': false,   // <svg> viewBox incorrectly throws error    
+                    'tag-pair': false      // <source> incorrectly throws error               
+                },
+            },
+            mindcraft: {                
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['pathways/1-mindcraft/index.php', 'pathways/1-mindcraft/credits.php', 'pathways/1-mindcraft/**/index.php'],
+                    dest: '../export',
+                    ext: '.html'
+                }],
             }
-            
+
         },
 
         copy: {
+            default: {
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['_assets/**', '!_assets/scss/**', '!_assets/js/**', '_assets/js/lib/modernizr-2.8.3.custom.min.js', 'wellcomeplayer/**', 'player-config.js'],
+                    dest: '../export'
+                }]
+            },
             mindcraft: {
-                files: [
-                    {expand: true, cwd:'pathways/1-mindcraft', src: ['_assets/**'], dest: '../export'},
-                    {expand: true, cwd:'pathways/1-mindcraft', src: ['!**/*.php'], dest: '../export'},
-                ]
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['pathways/1-mindcraft/_assets/**'],
+                    dest: '../export'
+                }]
             }
         }
 
@@ -117,6 +133,9 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['css', 'js']);
 
-    grunt.registerTask('export', ['php2html:mindcraft', 'copy:mindcraft']);
+    grunt.registerTask('export', 'Exporting pathways', function(arg) {
+        if (arg) grunt.log.writeln(arg); // TODO - use arg to export specific pathway
+        grunt.task.run(['php2html:mindcraft', 'copy:default', 'copy:mindcraft']);
+    });
 
 };
