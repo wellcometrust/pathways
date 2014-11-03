@@ -38,7 +38,9 @@ Pathways.PlayerOverlay = function(elem) {
             var initHeight = getHeightWithOffset(defaultPanelOffset),
                 initWidth = getWidthWithOffset(defaultPanelOffset),
 
-                playerTmpl = '<div class="wellcomePlayer" data-no-load="true" data-config="/player-config.js" data-uri="' + embedData + '" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:' + initWidth + 'px; height:' + initHeight + 'px; background-color: #000"></div>',
+                // Excluding the following line for now to enable player until CORS enabled
+                // data-config="/player-config.js" 
+                playerTmpl = '<div class="wellcomePlayer" data-no-load="true" data-uri="' + embedData + '" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:' + initWidth + 'px; height:' + initHeight + 'px; background-color: #000"></div>',
         
                 $player,
                 $overlay,

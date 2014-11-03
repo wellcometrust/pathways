@@ -3,6 +3,8 @@ module.exports = function(grunt) {
     // 1. All configuration goes here 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        
+        exportRoot: '../export',
 
         concat: {
             libs: {
@@ -80,20 +82,29 @@ module.exports = function(grunt) {
         php2html: {
             options: {
                 docroot: '/',
-                htmlhint: {                    
-                    'attr-lowercase': false,   // <svg> viewBox incorrectly throws error    
-                    'tag-pair': false      // <source> incorrectly throws error               
+                htmlhint: {
+                    'attr-lowercase': false, // <svg> viewBox incorrectly throws error    
+                    'tag-pair': false // <source> incorrectly throws error               
                 },
             },
-            mindcraft: {                
+            mindcraft: {
                 files: [{
                     expand: true,
                     cwd: '',
                     src: ['pathways/1-mindcraft/index.php', 'pathways/1-mindcraft/credits.php', 'pathways/1-mindcraft/**/index.php'],
-                    dest: '../export',
+                    dest: '<%= exportRoot %>',
                     ext: '.html'
                 }],
-            }
+            },
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['pathways/*/index.php', 'pathways/*/credits.php', 'pathways/*/**/index.php'],
+                    dest: '<%= exportRoot %>',
+                    ext: '.html'
+                }],
+            },
 
         },
 
@@ -103,7 +114,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: '',
                     src: ['_assets/**', '!_assets/scss/**', '!_assets/js/**', '_assets/js/lib/modernizr-2.8.3.custom.min.js', 'wellcomeplayer/**', 'player-config.js'],
-                    dest: '../export'
+                    dest: '<%= exportRoot %>'
                 }]
             },
             mindcraft: {
@@ -111,7 +122,15 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: '',
                     src: ['pathways/1-mindcraft/_assets/**'],
-                    dest: '../export'
+                    dest: '<%= exportRoot %>'
+                }]
+            },
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['pathways/*/_assets/**'],
+                    dest: '<%= exportRoot %>'
                 }]
             }
         }
@@ -134,8 +153,16 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['css', 'js']);
 
     grunt.registerTask('export', 'Exporting pathways', function(arg) {
-        if (arg) grunt.log.writeln(arg); // TODO - use arg to export specific pathway
-        grunt.task.run(['php2html:mindcraft', 'copy:default', 'copy:mindcraft']);
+        if (arg) {
+            grunt.log.writeln('Exporting ', arg); // TODO - use arg to export specific pathway
+            function runPath(name) {
+                grunt.task.run(['php2html:' + name, 'copy:default', 'copy:' + name]);
+            }
+            runPath(arg);
+        } else {
+            grunt.log.writeln('Exporting all');
+            grunt.task.run(['php2html:all', 'copy:default', 'copy:all']);            
+        }
     });
 
 };
