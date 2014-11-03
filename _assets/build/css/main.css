@@ -1802,7 +1802,7 @@ iframe {
     left: 0; } }
 @media all and (min-width: 48em) and (max-width: 80em) {
   #satirised .main-content {
-    max-width: 320px; } }
+    max-width: 25%; } }
 #committee-investigates-intro .main-content {
   top: 35%;
   bottom: auto; }
@@ -1894,6 +1894,14 @@ iframe {
   font-style: italic; }
 
 @media screen and (min-width: 48rem) {
+  #verdict .main-content:after {
+    content: "";
+    display: table;
+    clear: both; }
+  #verdict .inner {
+    float: right;
+    width: 70%;
+    margin-right: 20px; }
   #verdict header {
     margin-bottom: 4rem; }
   #verdict blockquote p {
@@ -1910,15 +1918,6 @@ iframe {
   .no-touch #verdict .main-content {
     padding: 0 1.618rem;
     bottom: 30%; } }
-@media screen and (min-width: 52rem) {
-  #verdict .main-content:after {
-    content: "";
-    display: table;
-    clear: both; }
-  #verdict .inner {
-    float: right;
-    width: 70%;
-    margin-right: 20px; } }
 @media screen and (min-width: 52rem) and (min-height: 48rem) {
   #verdict blockquote p {
     font-size: 1.618rem; }
@@ -1949,10 +1948,8 @@ iframe {
     -o-transform-origin: 50% 0%;
     transform-origin: 50% 0%; }
   .touch #gonad-man .info-box {
-    position: absolute;
-    bottom: 20%;
-    right: 100px;
-    top: auto; }
+    right: 6%;
+    top: 48%; }
 
   .no-touch #gonad-man img {
     -webkit-transform: scale(2.3, 2.3);
@@ -1981,9 +1978,7 @@ iframe {
     transition: all 14s ease; } }
 @media all and (min-width: 64rem) {
   .touch #gonad-man .info-box {
-    position: absolute;
-    top: 66%;
-    right: 100px; } }
+    top: 66%; } }
 #fakir .bg-container {
   background-image: url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-3.jpg);
   background-position: 50% 100%; }
@@ -2392,7 +2387,7 @@ iframe {
     margin-top: 1em;
     margin-right: 3%; }
   #bompard .text-panel--1 {
-    width: 45%; }
+    width: 30%; }
   #bompard .comic-row--4 {
     margin-top: 1em; }
     #bompard .comic-row--4 .comic-column:nth-child(1) {
@@ -2418,9 +2413,12 @@ iframe {
   #bompard .comic-column .comic-panel {
     float: none; }
   #bompard .outro {
-    margin: 7rem 0; }
+    margin: 7rem .5rem; }
     #bompard .outro p {
       font-size: 2.005rem; } }
+@media all and (min-width: 60rem) {
+  #bompard .text-panel--1 {
+    width: 45%; } }
 .start-freud .bg-container {
   background-image: url(/pathways/1-mindcraft/_assets/6-freud/freud-1.jpg); }
 
@@ -2480,10 +2478,12 @@ iframe {
     display: none; }
   .no-touch #office .bg-container .large-screen {
     display: block; } }
-#office-2 .large-screen {
-  display: none; }
 #office-2 header h1 {
-  font-size: 1.618rem; }
+  font-size: 1.618rem;
+  text-shadow: 1px 1px 1px #030303; }
+
+.no-touch #office-2 img {
+  display: block; }
 
 @media all and (min-width: 48rem) {
   #office-2 .large-screen {

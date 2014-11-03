@@ -260,8 +260,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         }
     }
 
-    function resizePanel(panel, panelHeight) {
-        console.log('resizePanel');
+    function resizePanel(panel, panelHeight) {        
         var _panel = panel.elem;
 
         unSetElementHeight(_panel);        
@@ -329,7 +328,6 @@ var Pathways = (function(w, _, sys, $, undefined) {
         $btn.css('display', 'block');
         $btn.unbind('click');
         $btn.on('click', function(e) { 
-            console.log('click');
             // active == muted
             if( $(this).hasClass('active') ) {
                 setPathwaysMuted(false);                
@@ -374,7 +372,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
                 });
 
                 _video.addEventListener('error', function(e){                    
-                    console.log('error');
+                    console.warn('Video loading error for ', _video.src);
                 });
 
                 if (!sys.level >= mod.MIN_SCROLL_LEVEL) {            
@@ -532,7 +530,6 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
 
     function initSoundControls() {
-        console.log('init sound controls');
         muteButton = initMuteButton('.mute');
     }
 
@@ -547,7 +544,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
     }
 
     var panelsUnsized = false;
-    function resizeAll() {                       
+    function resizeCheck() {                       
         if (sys.level < mod.MIN_COMPONENT_LEVEL) {
             unsizePanels(panels);
             panelsUnsized = true;
@@ -560,10 +557,11 @@ var Pathways = (function(w, _, sys, $, undefined) {
         }
     }
 
-    function loadAll(onScrollLoad, onScrollUnload) {
-        console.log('start level: ', sys.level, ': ' ,scenesLoaded, componentsLoaded);
-        // If it's a non-touch device, load the scenes.
+    function loadCheck(onScrollLoad, onScrollUnload) {        
+        mod.panelHeight = calcPanelHeight(mod.panelHeight); 
+
         if (!scenesLoaded){
+            // If it's a non-touch device, load the scenes.
             if (sys.level >= mod.MIN_SCROLL_LEVEL) {
                 sceneController = onScrollLoad(mod);
 
@@ -573,14 +571,12 @@ var Pathways = (function(w, _, sys, $, undefined) {
                 scenesLoaded = true;
             } 
         } else {
-            if (sys.level < mod.MIN_SCROLL_LEVEL) {
-                console.log('unloading scrolllevel');                
+            if (sys.level < mod.MIN_SCROLL_LEVEL) {              
                 sceneController.destroy(true);
                 removeScrollSceneStyling();
                 onScrollUnload(mod);
 
-                $('audio').each(function() {  
-                    console.log('muting: ', this);              
+                $('audio, video').each(function() {                                
                     this.muted = true;
                 });
                 muteButton.hide();
@@ -600,34 +596,30 @@ var Pathways = (function(w, _, sys, $, undefined) {
                 // unload components
             }
         }
-        console.log('end level: ', sys.level, ': ' ,scenesLoaded, componentsLoaded);
     }
 
-    function init(onScrollLoad, onScrollUnload) {
+    function init(onLoadComplete, onScrollLoad, onScrollUnload) {
 
         startPanel = $('.start').get(0);
         panels = initPanels('.panel');
         ratioedPanels = initRatioedPanels(panels);        
 
-        mod.panelHeight = calcPanelHeight(mod.panelHeight); 
-        resizeAll();
+        resizeCheck();
 
-        w.addEventListener('resize', function(){
-            mod.panelHeight = calcPanelHeight(mod.panelHeight);            
-            resizeAll();
-            loadAll(onScrollLoad, onScrollUnload);
+        w.addEventListener('resize', function(){                     
+            resizeCheck();
+            loadCheck(onScrollLoad, onScrollUnload);
         });
 
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
         w.addEventListener('load', function() {
-
-            mod.panelHeight = calcPanelHeight(mod.panelHeight);
-            resizeAll();
-            loadAll(onScrollLoad, onScrollUnload);
-
+            
+            resizeCheck();
+            loadCheck(onScrollLoad, onScrollUnload);
             
             initVideo(panels);
-            
+
+            onLoadComplete(mod);            
         });
 
     }
@@ -820,8 +812,6 @@ function onScrollUnload(pathways) {
 
 
 function onScrollLoad(pathways) {
-
-    console.log(' >> onScrollLoad');
 
     var $sequence       = $('.sequence'),
         controller      = new ScrollMagic({refreshInterval: 500 }),
@@ -1065,7 +1055,29 @@ function onScrollLoad(pathways) {
     return controller;
 }
 
-Pathways.init(onScrollLoad, onScrollUnload);
+function onPathwaysLoad(pathways) {
+
+    function initScript(d, s, id, a) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); 
+        js.id = id;
+        js.async = 1;
+        js.src = a;
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+
+    window.___gcfg = {
+        parsetags: 'onload'
+      };
+      
+    initScript(document, 'script', 'facebook-jssdk', "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=1494497634145827&version=v2.0");
+    initScript(document, 'script', 'pth-ga-api', "//apis.google.com/js/platform.js");
+    initScript(document, 'script', 'pth-pin-api', "//assets.pinterest.com/js/pinit.js");
+    initScript(document, 'script', 'pth-twt-api', "//platform.twitter.com/widgets.js");
+}
+
+Pathways.init(onPathwaysLoad, onScrollLoad, onScrollUnload);
 
 
 Pathways.AudioPlayer = function(elem) {
@@ -2000,7 +2012,9 @@ Pathways.PlayerOverlay = function(elem) {
             var initHeight = getHeightWithOffset(defaultPanelOffset),
                 initWidth = getWidthWithOffset(defaultPanelOffset),
 
-                playerTmpl = '<div class="wellcomePlayer" data-no-load="true" data-config="/player-config.js" data-uri="' + embedData + '" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:' + initWidth + 'px; height:' + initHeight + 'px; background-color: #000"></div>',
+                // Excluding the following line for now to enable player until CORS enabled
+                // data-config="/player-config.js" 
+                playerTmpl = '<div class="wellcomePlayer" data-no-load="true" data-uri="' + embedData + '" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:' + initWidth + 'px; height:' + initHeight + 'px; background-color: #000"></div>',
         
                 $player,
                 $overlay,
@@ -2590,13 +2604,11 @@ Pathways.Scene.India = function(panelID) {
             triggerElement: panelID,
             duration:       function() { return $panel.outerHeight() + (Pathways.panelHeight / 4); }
         })
-        .on('enter', function() {            
-            console.log(' >> enter boats');
+        .on('enter', function() {     
             $boats.css('transition', 'transform 120s linear');
             $boats.css('transform', 'translate('+window.innerWidth+'px,0)');
         })
-        .on('leave', function() {      
-        console.log(' >> exit boats');      
+        .on('leave', function() {
             $boats.css('transition', 'none');
             $boats.css('transform', 'translate(-600px,0)');
         })
