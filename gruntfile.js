@@ -96,6 +96,15 @@ module.exports = function(grunt) {
                     ext: '.html'
                 }],
             },
+            collectors: {
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['pathways/2-collectors/index.php', 'pathways/2-collectors/credits.php', 'pathways/2-collectors/**/index.php'],
+                    dest: '<%= exportRoot %>',
+                    ext: '.html'
+                }],
+            },
             all: {
                 files: [{
                     expand: true,
@@ -122,6 +131,14 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: '',
                     src: ['pathways/1-mindcraft/_assets/**'],
+                    dest: '<%= exportRoot %>'
+                }]
+            }, 
+            collectors: {
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['pathways/2-collectors/_assets/**'],
                     dest: '<%= exportRoot %>'
                 }]
             },
