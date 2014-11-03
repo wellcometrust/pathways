@@ -97,3 +97,17 @@ This makes up most of the JS for any given module's chapter. You can see get an 
 
 ### Quizes
 
+
+## Exporting
+
+### Uses:
+
+    - Grunt CLI with
+        - [HTML 2 PHP](https://github.com/bezoerb/grunt-php2html) (requires php-cgi: see page for details)
+        - [Grunt contrib copy](https://github.com/gruntjs/grunt-contrib-copy)
+    
+
+To export all pathways, simply ensure that the required node modules are installed (running npm install and follow any node module directions). Then running 'grunt export' will copy all necessary asset files to a sibling 'export' directory, and convert each php file to an html file. Currently, the build file structure is preserved for simplicity, so it may be necessary to modify paths if assets are required in different locations.
+
+To export only mindcraft, run 'grunt export:mindcraft'. Other pathways are incomplete and as such not yet configured.
+
