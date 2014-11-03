@@ -405,4 +405,26 @@ function onScrollLoad(pathways) {
     return controller;
 }
 
-Pathways.init(onScrollLoad, onScrollUnload);
+function onPathwaysLoad(pathways) {
+
+    function initScript(d, s, id, a) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); 
+        js.id = id;
+        js.async = 1;
+        js.src = a;
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+
+    window.___gcfg = {
+        parsetags: 'onload'
+      };
+      
+    initScript(document, 'script', 'facebook-jssdk', "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=1494497634145827&version=v2.0");
+    initScript(document, 'script', 'pth-ga-api', "//apis.google.com/js/platform.js");
+    initScript(document, 'script', 'pth-pin-api', "//assets.pinterest.com/js/pinit.js");
+    initScript(document, 'script', 'pth-twt-api', "//platform.twitter.com/widgets.js");
+}
+
+Pathways.init(onPathwaysLoad, onScrollLoad, onScrollUnload);

@@ -598,7 +598,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         }
     }
 
-    function init(onScrollLoad, onScrollUnload) {
+    function init(onLoadComplete, onScrollLoad, onScrollUnload) {
 
         startPanel = $('.start').get(0);
         panels = initPanels('.panel');
@@ -618,7 +618,8 @@ var Pathways = (function(w, _, sys, $, undefined) {
             loadCheck(onScrollLoad, onScrollUnload);
             
             initVideo(panels);
-            
+
+            onLoadComplete(mod);            
         });
 
     }
