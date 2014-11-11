@@ -639,7 +639,7 @@
             linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
             $(this).attr("onClick", linkOnClick);
         });
-        $("div[class$='library-panel']").each(function(index) {
+        $("div[class$='handle']").each(function(index) {
             gaLabel = $(this).attr('data-ga');
             linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
             $(this).attr("onClick", linkOnClick);
@@ -650,7 +650,6 @@
             $(this).attr("onClick", linkOnClick);
         });
     </script>
-
 
 
     <!-- Facebook API -->

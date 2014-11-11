@@ -265,8 +265,7 @@
         <div class="info-panels">
 
 
-<div class="library-panel" data-panel="mesmers-salon" data-component="library-panel" data-ga="mindcraft - mesmer - mesmers-salon - l2 share open">
-    <div class="handle"></div>
+<div class="library-panel" data-panel="mesmers-salon" data-component="library-panel" data-ga="mindcraft - mesmer - mesmers-salon - l2 share open">    <div class="handle" data-ga="mindcraft - mesmer - mesmers-salon - l2 share open"></div>
     <div class="body">
                 <ul>
                         <li>
@@ -291,7 +290,7 @@
 
 </div>
 <div class="library-panel" data-panel="animal-magnetism" data-component="library-panel" data-ga="mindcraft - mesmer - animal-magnetism - l2 share open">
-    <div class="handle"></div>
+    <div class="handle" data-ga="mindcraft - mesmer - animal-magnetism - l2 share open"></div>
     <div class="body">
                 <ul>
                         <li>
@@ -316,7 +315,7 @@
 
 </div>
 <div class="library-panel" data-panel="magnetised-trees" data-component="library-panel" data-ga="mindcraft - mesmer - magnetised-trees - l2 share open">
-    <div class="handle"></div>
+    <div class="handle" data-ga="mindcraft - mesmer - magnetised-trees - l2 share open"></div>
     <div class="body">
                 <ul>
                         <li>
@@ -341,7 +340,7 @@
 
 </div>
 <div class="library-panel" data-panel="satirised" data-component="library-panel" data-ga="mindcraft - mesmer - satirised - l2 share open">
-    <div class="handle"></div>
+    <div class="handle" data-ga="mindcraft - mesmer - satirised - l2 share open"></div>
     <div class="body">
                 <ul>
                         <li>
@@ -673,7 +672,7 @@
          linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
          $(this).attr("onClick", linkOnClick);
       });
-      $("div[class$='library-panel']").each(function(index) {
+      $("div[class$='handle']").each(function(index) {
           gaLabel = $(this).attr('data-ga');
           linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
           $(this).attr("onClick", linkOnClick);
