@@ -103,34 +103,34 @@
 
     <script>
         $("a[rel$='external']").each(function(index) {
-            gaLabel = $(this).attr('data-ga');
-            linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
-            $(this).attr("onClick", linkOnClick);
+            gaLabel1 = $(this).attr('data-ga');
+            linkOnClick1 = "ga('send', 'event', 'link', 'click', gaLabel1);"
+            $(this).attr("onClick", linkOnClick1);
         });
         $("a[data-component$='player-overlay']").each(function(index) {
-            gaLabel = $(this).attr('data-ga');
-            linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
-            $(this).attr("onClick", linkOnClick);
+            gaLabel2 = $(this).attr('data-ga');
+            linkOnClick2 = "ga('send', 'event', 'link', 'click', gaLabel2);"
+            $(this).attr("onClick", linkOnClick2);
         });
         $("a[data-component$='library-panel']").each(function(index) {
-            gaLabel = $(this).attr('data-ga');
-            linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
-            $(this).attr("onClick", linkOnClick);
+            gaLabel3 = $(this).attr('data-ga');
+            linkOnClick3 = "ga('send', 'event', 'link', 'click', gaLabel3);"
+            $(this).attr("onClick", linkOnClick3);
         });
         $("circle[class$='inner']").each(function(index) {
-            gaLabel = $(this).attr('data-ga');
-            linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
-            $(this).attr("onClick", linkOnClick);
+            gaLabel4 = $(this).attr('data-ga');
+            linkOnClick4 = "ga('send', 'event', 'link', 'click', gaLabel4);"
+            $(this).attr("onClick", linkOnClick4);
         });
-        $("div[class$='library-panel']").each(function(index) {
-            gaLabel = $(this).attr('data-ga');
-            linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
-            $(this).attr("onClick", linkOnClick);
+        $("div[class$='handle']").each(function(index) {
+            gaLabel5 = $(this).attr('data-ga');
+            linkOnClick5 = "ga('send', 'event', 'link', 'click', gaLabel5);"
+            $(this).attr("onClick", linkOnClick5);
         });
         $("div[class$='further-reading']").each(function(index) {
-            gaLabel = $(this).attr('data-ga');
-            linkOnClick = "ga('send', 'event', 'link', 'click', gaLabel);"
-            $(this).attr("onClick", linkOnClick);
+            gaLabel6 = $(this).attr('data-ga');
+            linkOnClick6 = "ga('send', 'event', 'link', 'click', gaLabel6);"
+            $(this).attr("onClick", linkOnClick6);
         });
     </script>
 
