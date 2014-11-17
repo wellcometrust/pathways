@@ -46,7 +46,7 @@ Pathways.Gallery = function() {
 
     });
 
-}
+};
 
 function Carousel(element)
 {
@@ -84,7 +84,7 @@ function Carousel(element)
         // - Load the navigation
         // - Load rest of the images sequentially in the onload event of the previous one.
         // - Update the container and local variables on each load, keeping the carousel in the correct place.
-        
+
         // Create the container
         $container = $('<ul/>');
         $container.height( window.innerHeight );
@@ -112,7 +112,7 @@ function Carousel(element)
 
         $(window).on("load resize orientationchange", function() {
             setPaneDimensions();
-        })
+        });
     };
 
     /*
@@ -163,8 +163,8 @@ function Carousel(element)
 
             if( callback )
                 callback.call();
-        }
-    }
+        };
+    };
 
     /*
      * Takes an array of image objects and recursively sets up a callback chain to load in images sequentially
@@ -176,12 +176,12 @@ function Carousel(element)
                 pane_count   = $panes.length;
                 setPaneDimensions();
 
-                images.shift()
+                images.shift();
 
                 loadImages(images);
             });
         }
-    }
+    };
 
     /*
      * load the navigation into the carousel
@@ -207,13 +207,13 @@ function Carousel(element)
         $element.append($next);
 
         new Hammer($prev[0]).on("tap", function() {
-           self.prev(); 
+           self.prev();
         });
 
         new Hammer($next[0]).on("tap", function() {
-           self.next(); 
+           self.next();
         });
-    }
+    };
 
     /**
      * set the pane dimensions and scale the container
@@ -223,7 +223,7 @@ function Carousel(element)
             wH          = window.innerHeight;
 
         widths  = [];
-        
+
         for (var i = 0; i < $panes.length; i++) {
             var newWidth = wH / ratios[i];
 
@@ -232,8 +232,8 @@ function Carousel(element)
             widths.push(newWidth);
 
             total_width += newWidth;
-        };
-        
+        }
+
         $container.width(total_width);
         total_offset = (window.innerWidth / 2);
 
@@ -246,7 +246,7 @@ function Carousel(element)
         $next.height( wH );
 
         self.showPane(current_pane, false);
-    };
+    }
 
 
     /**
@@ -262,7 +262,7 @@ function Carousel(element)
 
         for (var i = 0; i < index; i++) {
             offset -= widths[i];
-        };
+        }
 
         offset += (total_offset - (widths[index] / 2));
 
@@ -284,7 +284,7 @@ function Carousel(element)
         }
     };
 
-    /* 
+    /*
      * Move the whole list of panels by x. Animation optional.
      */
     function setContainerOffset(x, animate) {
@@ -317,16 +317,16 @@ function Carousel(element)
 
                 for (var i = 0; i < current_pane; i++) {
                     pane_offset -= widths[i];
-                };
+                }
 
                 pane_offset += (total_offset - (widths[current_pane] / 2));
 
                 var drag_offset = ((100/440)*ev.gesture.deltaX) / pane_count;
 
                 // slow down at the first and last pane
-                if((current_pane == 0 && ev.gesture.direction == "right") ||
+                if((current_pane === 0 && ev.gesture.direction == "right") ||
                     (current_pane == pane_count-1 && ev.gesture.direction == "left")) {
-                    drag_offset *= .4;
+                    drag_offset *= 0.4;
                 }
 
                 setContainerOffset(ev.gesture.deltaX + pane_offset);

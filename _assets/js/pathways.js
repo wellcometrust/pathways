@@ -5,17 +5,17 @@ var Capabilities = (function(w, $, undefined) {
 
     var mod = {
             aspectRatio: 1900 / 1050,
-            supportsTouch: false,   
-            innerHeight:  0, 
-            innerWidth: 0, 
-            orientation: 'landscape',   
+            supportsTouch: false,
+            innerHeight:  0,
+            innerWidth: 0,
+            orientation: 'landscape',
             level: 0,
-            
+
             calcSupportsTouch: function () {
-                return ('ontouchstart' in w) || (w.DocumentTouch && document instanceof DocumentTouch)
+                return ('ontouchstart' in w) || (w.DocumentTouch && document instanceof DocumentTouch);
             },
             calcOrientation: function() {
-                return (this.innerWidth / this.innerHeight) > 1.2 ? 'landscape' : 'portrait'
+                return (this.innerWidth / this.innerHeight) > 1.2 ? 'landscape' : 'portrait';
             },
             calcAspectRatio: function() {
                 return (this.orientation === 'landscape') ? (1900 / 1050) : (1050 / 1900);
@@ -48,20 +48,20 @@ var Capabilities = (function(w, $, undefined) {
 
 
                 return level;
-            },            
+            },
             getDisplaySettings: function() {
                 this.innerWidth = w.innerWidth;
-                this.innerHeight = w.innerHeight;  
+                this.innerHeight = w.innerHeight;
 
                 this.orientation = this.calcOrientation();
                 this.supportsTouch = this.calcSupportsTouch();
-                this.level = this.getEnhancementLevel();  
+                this.level = this.getEnhancementLevel();
             },
-            init: function() {                
-                w.addEventListener('resize', (this.getDisplaySettings).bind(this), false);                
+            init: function() {
+                w.addEventListener('resize', (this.getDisplaySettings).bind(this), false);
             }
-        }
-    
+        };
+
     mod.getDisplaySettings();
     mod.init();
 
@@ -70,10 +70,10 @@ var Capabilities = (function(w, $, undefined) {
 }(this, jQuery));
 
 var Pathways = (function(w, _, sys, $, undefined) {
-    
+
     'use strict';
 
-    var doc = w.document,   
+    var doc = w.document,
 
         isMuted = false,
         minHeight = 550,
@@ -105,18 +105,18 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
     function calcPanelHeight(oldHeight) {
         var newHeight = sys.innerHeight < minHeight ? minHeight : sys.innerHeight;
-        
+
         if (oldHeight > newHeight) {
             panelHeightDecreased = true;
         } else {
             panelHeightDecreased = false;
         }
-       
-        
+
+
         return newHeight;
     }
 
-    
+
 
     function toTitleCase(str) {
         str = str.replace(/-/g, ' ').replace(/_/g, ' ');
@@ -125,7 +125,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         });
         return str.replace(/\W/g, '');
     }
-    
+
     function positionCenter($elm) {
         var width = $elm.width(),
             height = $elm.height(),
@@ -140,10 +140,10 @@ var Pathways = (function(w, _, sys, $, undefined) {
         });
     }
 
-    
+
 
     function initPanel(panel) {
-        
+
         var $panel = $(panel),
             data = $panel.attr('data-config'),
             bg = $panel.find('.bg-container').get(0),
@@ -172,9 +172,9 @@ var Pathways = (function(w, _, sys, $, undefined) {
         var rPanels = [];
         for (var i = 0; i < panels.length; i++) {
             var preserveRatio = panels[i].config.background.preserve_ratio;
-            
+
             if (preserveRatio) {
-                rPanels.push(panels[i]);                
+                rPanels.push(panels[i]);
             }
         }
         return rPanels;
@@ -206,7 +206,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
 
 
-    function setElementHeight(el, height) {        
+    function setElementHeight(el, height) {
         $(el).css('height', parseInt(height,10) + 'px');
     }
 
@@ -216,15 +216,15 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
     function translatePanelElem(_el, currentHeight) {
 
-        var newHeight = sys.innerWidth / sys.aspectRatio,                        
+        var newHeight = sys.innerWidth / sys.aspectRatio,
             prefixes = ['-moz-', '-webkit-', ''],
             y = parseInt(((currentHeight - newHeight) / 2),10);
 
-        if (currentHeight > newHeight) {                
+        if (currentHeight > newHeight) {
             for (var p = 0; p < prefixes.length; p++) {
                 _el.style[prefixes[p] + 'transform'] = 'translate(0, ' + y + 'px)';
             }
-        }   
+        }
     }
 
     function unTranslatePanelElem(_el) {
@@ -235,8 +235,8 @@ var Pathways = (function(w, _, sys, $, undefined) {
         }
     }
 
-    function unsizePanels(panels) {        
-        if (startPanel) unSetElementHeight(startPanel); 
+    function unsizePanels(panels) {
+        if (startPanel) unSetElementHeight(startPanel);
 
         for (var i = 0; i < panels.length; i++) {
             var _panel = panels[i].elem,
@@ -245,25 +245,25 @@ var Pathways = (function(w, _, sys, $, undefined) {
             $(_panel).removeAttr('style');
             $(_bg).removeAttr('style');
 
-            //unSetElementHeight(_panel); 
+            //unSetElementHeight(_panel);
             //unSetElementHeight(_bg);
 
             var preserveRatio = panels[i].config.background.preserve_ratio;
-            
-            if (preserveRatio) {   
+
+            if (preserveRatio) {
                 $(_panel).children().each(function(index, child){
                     $(child).removeAttr('style');
                     //unSetElementHeight(child);
                     //unTranslatePanelElem(child);
                 });
-            }            
+            }
         }
     }
 
-    function resizePanel(panel, panelHeight) {        
+    function resizePanel(panel, panelHeight) {
         var _panel = panel.elem;
 
-        unSetElementHeight(_panel);        
+        unSetElementHeight(_panel);
 
         var config = panel.config,
             _bg = panel.bg,
@@ -286,14 +286,14 @@ var Pathways = (function(w, _, sys, $, undefined) {
     }
 
     function resizePanels(startPanel, panels) {
-        
-        if (startPanel) setElementHeight(startPanel, mod.panelHeight);            
+
+        if (startPanel) setElementHeight(startPanel, mod.panelHeight);
 
         for (var i = 0; i < panels.length; i++) {
             resizePanel(panels[i], mod.panelHeight);
-            
+
             var preserveRatio = panels[i].config.background.preserve_ratio;
-            if (preserveRatio) {   
+            if (preserveRatio) {
                 $(panels[i].elem).children().each(resizePanelChild);
             }
         }
@@ -308,7 +308,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
             var panel           = panels[i],
                 $bg             = $(panel.bg),
                 $panel          = $(panel.elem),
-                panelID         = $panel.attr('id'),               
+                panelID         = $panel.attr('id'),
                 $library_panel  = $panel.find('[data-panel="'+ panelID +'"]').first(),
                 $gallery        = $panel.find('[data-component="gallery"]'),
                 $quiz           = $panel.find('[data-component="quiz"]');
@@ -324,15 +324,15 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
 
     function initMuteButton(muteSelector) {
-        var $btn = $(muteSelector); 
+        var $btn = $(muteSelector);
         $btn.css('display', 'block');
         $btn.unbind('click');
-        $btn.on('click', function(e) { 
+        $btn.on('click', function(e) {
             // active == muted
             if( $(this).hasClass('active') ) {
-                setPathwaysMuted(false);                
+                setPathwaysMuted(false);
             } else {
-                setPathwaysMuted(true);         
+                setPathwaysMuted(true);
             }
 
             updateButtonView();
@@ -345,64 +345,64 @@ var Pathways = (function(w, _, sys, $, undefined) {
     }
 
 
-    function setPathwaysMuted(value){        
+    function setPathwaysMuted(value){
         isMuted = value;
 
-        $('video, audio').each(function() {                
+        $('video, audio').each(function() {
             this.muted = isMuted;
         });
 
-    }    
+    }
 
 
-    function initPanelVideo(panels, videoSelector) {  
-        
-        var videos = [];        
+    function initPanelVideo(panels, videoSelector) {
+
+        var videos = [];
 
         for (var i = 0; i < panels.length; i++) {
             var _panel = panels[i].elem;
             var _video = _panel.querySelector(videoSelector);
 
             if (_video) {
-                
-                _video.addEventListener('volumechange', function(e){                                     
+
+                _video.addEventListener('volumechange', function(e){
                     if (this.muted == isMuted) return;
                     setPathwaysMuted(this.muted);
-                    updateButtonView();                    
+                    updateButtonView();
                 });
 
-                _video.addEventListener('error', function(e){                    
+                _video.addEventListener('error', function(e){
                     console.warn('Video loading error for ', _video.src);
                 });
 
-                if (!sys.level >= mod.MIN_SCROLL_LEVEL) {            
+                if (!sys.level >= mod.MIN_SCROLL_LEVEL) {
                     _video.setAttribute('preload', 'auto');
                 } else {
                     _video.setAttribute('preload', 'metadata');
                     _video.controls = true;
-                    
+
                 }
 
                 videos.push(_video);
             }
-            
+
         }
-        
+
         return videos;
-        
+
     }
 
-    function hideCaptions(videos) {   
-        var video;        
+    function hideCaptions(videos) {
+        var video;
         for (var i = 0, l = videos.length; i < l; i++) {
-            video = videos[i];            
-            if (video) {                
-                var tracks = video.textTracks;            
+            video = videos[i];
+            if (video) {
+                var tracks = video.textTracks;
                 if (tracks.length) {
                     for (var j = 0, m = tracks.length; j < m; j++) {
-                        var track = tracks[j];                       
+                        var track = tracks[j];
                         if (track) track.mode = 'hidden';
-                    }                   
+                    }
                 }
             }
         }
@@ -419,9 +419,9 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
         if (fromAudio && (typeof fromAudio !== 'undefined')) {
             $(fromAudio).stop(false, true);
-            $(fromAudio).animate({volume: 0}, { duration: delay, complete: function() {                 
-                this.pause(); 
-                if (onlyFrom && callback) {  
+            $(fromAudio).animate({volume: 0}, { duration: delay, complete: function() {
+                this.pause();
+                if (onlyFrom && callback) {
                     callback();
                     callback = null;
                 }
@@ -432,10 +432,10 @@ var Pathways = (function(w, _, sys, $, undefined) {
         if (toAudio && (typeof toAudio !== 'undefined')) {
             $(toAudio).stop(false, true);
             toAudio.volume = 0;
-            toAudio.muted = isMuted;           
+            toAudio.muted = isMuted;
             toAudio.play();
-            $(toAudio).animate({volume: 1}, { duration: delay, complete: function() {                
-                 if (!onlyFrom && callback) {                 
+            $(toAudio).animate({volume: 1}, { duration: delay, complete: function() {
+                 if (!onlyFrom && callback) {
                     callback();
                     callback = null;
                 }
@@ -445,19 +445,19 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
     // Cross fade between panel audio and global audio
     function loadPanelAudio(panel_audio) {
-        crossFade(globalAudio, panel_audio);    
+        crossFade(globalAudio, panel_audio);
     }
 
     function unloadPanelAudio(panel_audio) {
-        crossFade(panel_audio, globalAudio);    
+        crossFade(panel_audio, globalAudio);
     }
-    
+
 
     function updateButtonView() {
         if(isMuted) {
-            muteButton.addClass('active'); 
+            muteButton.addClass('active');
         } else {
-            muteButton.removeClass('active'); 
+            muteButton.removeClass('active');
         }
     }
 
@@ -466,9 +466,9 @@ var Pathways = (function(w, _, sys, $, undefined) {
         var tracks = [];
 
         for (var i = 0; i < panels.length; i++) {
-            var _panel = panels[i].elem;            
-            var _track = _panel.querySelector(selector);           
-            if (_track) { 
+            var _panel = panels[i].elem;
+            var _track = _panel.querySelector(selector);
+            if (_track) {
                 tracks.push(tracks);
             }
         }
@@ -476,9 +476,9 @@ var Pathways = (function(w, _, sys, $, undefined) {
         return tracks;
     }
 
-    function initGlobalAudio(selector) {        
+    function initGlobalAudio(selector) {
         var audio = $(selector).get(0);
-        if (audio) {            
+        if (audio) {
             crossFade(null, audio);
         }
 
@@ -496,36 +496,36 @@ var Pathways = (function(w, _, sys, $, undefined) {
         return audio;
     }
 
-    function autoPlayVideoOnEnter(video, initTime, stopGlobalAudio) {        
+    function autoPlayVideoOnEnter(video, initTime, stopGlobalAudio) {
         initTime = initTime || 0;
-        var fadeAudio = getCrossFadeAudio(stopGlobalAudio, globalAudio); 
-        
-        if (video) {            
-            if (video.readyState !== 0) video.currentTime = initTime; 
+        var fadeAudio = getCrossFadeAudio(stopGlobalAudio, globalAudio);
+
+        if (video) {
+            if (video.readyState !== 0) video.currentTime = initTime;
             crossFade(fadeAudio, video);
         }
-        
+
     }
 
-    function autoStopVideoOnLeave(video, initTime, restartGlobalAudio) {       
+    function autoStopVideoOnLeave(video, initTime, restartGlobalAudio) {
         initTime = initTime || 0;
-        var fadeAudio = getCrossFadeAudio(restartGlobalAudio, globalAudio);  
-        
-        if (video) {          
-            
-            crossFade(video, fadeAudio, function() {  
+        var fadeAudio = getCrossFadeAudio(restartGlobalAudio, globalAudio);
+
+        if (video) {
+
+            crossFade(video, fadeAudio, function() {
                 if (video.readyState !== 0) video.currentTime = initTime;
             });
         }
-        
+
     }
 
-    function getPanelVideoElement(panelID) {       
+    function getPanelVideoElement(panelID) {
         return _(panelID + ' video');
     }
 
     function getPanelAudioElement(panelID) {
-        return $(panelID + ' audio').first()[0];        
+        return $(panelID + ' audio').first()[0];
     }
 
 
@@ -544,7 +544,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
     }
 
     var panelsUnsized = false;
-    function resizeCheck() {                       
+    function resizeCheck() {
         if (sys.level < mod.MIN_COMPONENT_LEVEL) {
             unsizePanels(panels);
             panelsUnsized = true;
@@ -557,26 +557,26 @@ var Pathways = (function(w, _, sys, $, undefined) {
         }
     }
 
-    function loadCheck(onScrollLoad, onScrollUnload) {        
-        mod.panelHeight = calcPanelHeight(mod.panelHeight); 
+    function loadCheck(onScrollLoad, onScrollUnload) {
+        mod.panelHeight = calcPanelHeight(mod.panelHeight);
 
         if (!scenesLoaded){
             // If it's a non-touch device, load the scenes.
             if (sys.level >= mod.MIN_SCROLL_LEVEL) {
                 sceneController = onScrollLoad(mod);
 
-                initSoundControls();    
+                initSoundControls();
                 initAudio(panels);
 
                 scenesLoaded = true;
-            } 
+            }
         } else {
-            if (sys.level < mod.MIN_SCROLL_LEVEL) {              
+            if (sys.level < mod.MIN_SCROLL_LEVEL) {
                 sceneController.destroy(true);
                 removeScrollSceneStyling();
                 onScrollUnload(mod);
 
-                $('audio, video').each(function() {                                
+                $('audio, video').each(function() {
                     this.muted = true;
                 });
                 muteButton.hide();
@@ -590,7 +590,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
             if( sys.level >= mod.MIN_COMPONENT_LEVEL) {
                 loadComponents(mod);
                 componentsLoaded = true;
-            } 
+            }
         } else {
             if (sys.level < mod.MIN_COMPONENT_LEVEL) {
                 // unload components
@@ -602,24 +602,24 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
         startPanel = $('.start').get(0);
         panels = initPanels('.panel');
-        ratioedPanels = initRatioedPanels(panels);        
+        ratioedPanels = initRatioedPanels(panels);
 
         resizeCheck();
 
-        w.addEventListener('resize', function(){                     
+        w.addEventListener('resize', function(){
             resizeCheck();
             loadCheck(onScrollLoad, onScrollUnload);
         });
 
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
         w.addEventListener('load', function() {
-            
+
             resizeCheck();
             loadCheck(onScrollLoad, onScrollUnload);
-            
+
             initVideo(panels);
 
-            onLoadComplete(mod);            
+            onLoadComplete(mod);
         });
 
     }
@@ -640,10 +640,12 @@ var Pathways = (function(w, _, sys, $, undefined) {
     mod.Scene = {};
     mod.Scenes = [];
 
+    mod.components = {};
+
     mod.Utils = {
         toTitleCase: toTitleCase,
         positionCenter: positionCenter
-    }
+    };
 
     return mod;
 

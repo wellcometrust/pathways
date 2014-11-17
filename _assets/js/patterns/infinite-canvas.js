@@ -1,11 +1,11 @@
 
 Pathways.InfiniteCanvas = function() {
-    
+
     $('.infinite-canvas').each(function() {
         var infiniteCanvas = new InfiniteCanvas( this );
         infiniteCanvas.init();
-    })
-}
+    });
+};
 
 function InfiniteCanvas(element) {
     var self            = this,
@@ -61,7 +61,7 @@ function InfiniteCanvas(element) {
         });
 
         this.loadImages();
-    }
+    };
 
     this.loadImages = function() {
         console.log('running');
@@ -80,8 +80,8 @@ function InfiniteCanvas(element) {
             });
 
             $element.append($img);
-        };
-    }
+        }
+    };
 
     // Try to position the text in the middle of the screen, but also keep the canvas within bounds.
     function centerText($elm) {
@@ -272,4 +272,4 @@ var canvasDB = [
     { id: '298', pos: [6333,3705] },
     { id: '303', pos: [119,3818] },
     { id: '306', pos: [7079,3876] },
-]
+];

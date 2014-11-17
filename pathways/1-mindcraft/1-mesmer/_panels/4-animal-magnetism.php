@@ -6,13 +6,13 @@
     </div>
 
     <div class="main-content center">
-        
+
         <div class="inner">
             <header>
                 <h1>Animal Magnetism</h1>
             </header>
 
-            <p>Mesmer claimed that animal magnetism was a superfine fluid that permeated all living things. He had learned how to control and direct it by the power of his mind. By making stroking movements, or ‘passes’, over the bodies of his patients he could remove the blockages in the magnetic fluid that were causing their illnesses.</p>                        
+            <p>Mesmer claimed that animal magnetism was a superfine fluid that permeated all living things. He had learned how to control and direct it by the power of his mind. By making stroking movements, or ‘passes’, over the bodies of his patients he could remove the blockages in the magnetic fluid that were causing their illnesses.</p>
         </div>
 
     </div>
@@ -67,11 +67,10 @@
                     image: 'V0011096',
                     text: '7/7: Another baquet and a description of how Animal Magnetism works.'
                 },
-            ]
-        }
+            ]};
     </script>
 
     <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/01-animal-magnetism-background.mp3" loop data-audio="global"></audio>
-    
+
 
 </div>
