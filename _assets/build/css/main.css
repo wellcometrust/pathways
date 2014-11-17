@@ -4,7 +4,6 @@
   font-family: 'Comic Neue';
   font-weight: 600;
   src: url("/_assets/fonts/ComicNeue-Bold.woff") format("woff"); }
-
 /* Reset */
 * {
   margin: 0;
@@ -979,7 +978,7 @@ iframe {
         height: 15px;
         border-radius: 10px; }
       .quiz .answers li.correct {
-        background: white url(/_assets/img/icons/icon-tick-green.svg) 95% 50% no-repeat;
+        background: #fff url(/_assets/img/icons/icon-tick-green.svg) 95% 50% no-repeat;
         background-size: 10%;
         border: 2px solid #A6D470;
         line-height: 26px; }
@@ -987,7 +986,7 @@ iframe {
           top: 5px;
           left: 5px; }
       .quiz .answers li.wrong {
-        background: white url(/_assets/img/icons/icon-cross-red.svg) 95% 50% no-repeat;
+        background: #fff url(/_assets/img/icons/icon-cross-red.svg) 95% 50% no-repeat;
         background-size: 10%;
         border: 2px solid #FC341E;
         line-height: 26px; }
@@ -1321,13 +1320,13 @@ iframe {
       text-decoration: none;
       text-transform: uppercase; }
   .player-item.book .player-item--thumb {
-    background: #dbdbdb url("/_assets/img/icons/icon-book-white.svg") 50% 50% no-repeat;
+    background: #DBDBDB url("/_assets/img/icons/icon-book-white.svg") 50% 50% no-repeat;
     background-size: 40%; }
   .player-item.document .player-item--thumb {
-    background: #dbdbdb url("/_assets/img/icons/icon-document-white.svg") 50% 50% no-repeat;
+    background: #DBDBDB url("/_assets/img/icons/icon-document-white.svg") 50% 50% no-repeat;
     background-size: 40%; }
   .player-item.image .player-item--thumb {
-    background: #dbdbdb url("/_assets/img/icons/icon-picture-white.svg") 50% 50% no-repeat;
+    background: #DBDBDB url("/_assets/img/icons/icon-picture-white.svg") 50% 50% no-repeat;
     background-size: 40%; }
 
 /** 650px */
@@ -1466,159 +1465,117 @@ iframe {
 @-webkit-keyframes info-box-animation-inner {
   0% {
     -webkit-transform: scale(0.9); }
-
   35% {
     -webkit-transform: scale(0.9); }
-
   45% {
     -webkit-transform: scale(1.1); }
-
   80% {
     -webkit-transform: scale(0.9); }
-
   100% {
     -webkit-transform: scale(0.9); } }
-
 @-moz-keyframes info-box-animation-inner {
   0% {
     -moz-transform: scale(0.9); }
-
   35% {
     -moz-transform: scale(0.9); }
-
   45% {
     -moz-transform: scale(1.1); }
-
   80% {
     -moz-transform: scale(0.9); }
-
   100% {
     -moz-transform: scale(0.9); } }
-
 @keyframes info-box-animation-inner {
   0% {
     transform: scale(0.9); }
-
   35% {
     transform: scale(0.9); }
-
   45% {
     transform: scale(1.1); }
-
   80% {
     transform: scale(0.9); }
-
   100% {
     transform: scale(0.9); } }
-
 @-webkit-keyframes info-box-animation-outer {
   0% {
     -webkit-transform: scale(0.8);
     opacity: 0; }
-
   30% {
     -webkit-transform: scale(0.8);
     opacity: 0; }
-
   45% {
     opacity: 1; }
-
   80% {
     -webkit-transform: scale(1.1);
     opacity: 0; }
-
   100% {
     -webkit-transform: scale(1.1);
     opacity: 0; } }
-
 @-moz-keyframes info-box-animation-outer {
   0% {
     -moz-transform: scale(0.8);
     opacity: 0; }
-
   30% {
     -moz-transform: scale(0.8);
     opacity: 0; }
-
   45% {
     opacity: 1; }
-
   80% {
     -moz-transform: scale(1.1);
     opacity: 0; }
-
   100% {
     -moz-transform: scale(1.1);
     opacity: 0; } }
-
 @keyframes info-box-animation-outer {
   0% {
     transform: scale(0.8);
     opacity: 0; }
-
   30% {
     transform: scale(0.8);
     opacity: 0; }
-
   45% {
     opacity: 1; }
-
   80% {
     transform: scale(1.1);
     opacity: 0; }
-
   100% {
     transform: scale(1.1);
     opacity: 0; } }
-
 @-webkit-keyframes nav-reveal {
   0% {
     opacity: 0;
     -webkit-transform: translate(0, 50px); }
-
   100% {
     opacity: 1;
     -webkit-transform: translate(0, 0); } }
-
 @-moz-keyframes nav-reveal {
   0% {
     opacity: 0;
     -moz-transform: translate(0, 50px); }
-
   100% {
     opacity: 1;
     -moz-transform: translate(0, 0); } }
-
 @keyframes nav-reveal {
   0% {
     opacity: 0;
     transform: translate(0, 50px); }
-
   100% {
     opacity: 1;
     transform: translate(0, 0); } }
-
 @-webkit-keyframes boats {
   0% {
     -webkit-transform: translate(-640px, 0); }
-
   100% {
     -webkit-transform: translate(1024px, 0); } }
-
 @-moz-keyframes boats {
   0% {
     -moz-transform: translate(-640px, 0); }
-
   100% {
     -moz-transform: translate(1024px, 0); } }
-
 @keyframes boats {
   0% {
     transform: translate(-640px, 0); }
-
   100% {
     transform: translate(1024px, 0); } }
-
 .spinner {
   margin: 0;
   width: 70px;
@@ -1655,33 +1612,25 @@ iframe {
 @-webkit-keyframes bouncedelay {
   0%, 80%, 100% {
     -webkit-transform: scale(0); }
-
   40% {
     -webkit-transform: scale(1); } }
-
 @-moz-keyframes bouncedelay {
   0%, 80%, 100% {
     -moz-transform: scale(0); }
-
   40% {
     -moz-transform: scale(1); } }
-
 @-ms-keyframes bouncedelay {
   0%, 80%, 100% {
     -ms-transform: scale(0); }
-
   40% {
     -ms-transform: scale(1); } }
-
 @keyframes bouncedelay {
   0%, 80%, 100% {
     transform: scale(0);
     -webkit-transform: scale(0); }
-
   40% {
     transform: scale(1);
     -webkit-transform: scale(1); } }
-
 .start-mesmer .bg-container {
   background-image: url(/pathways/1-mindcraft/_assets/1-mesmer/mesmer-1.jpg); }
 
@@ -2056,31 +2005,23 @@ iframe {
 @-webkit-keyframes lady {
   0% {
     -webkit-transform: translate(0, 0); }
-
   100% {
     -webkit-transform: translate(0, 500px); } }
-
 @-moz-keyframes lady {
   0% {
     -moz-transform: translate(0, 0); }
-
   100% {
     -moz-transform: translate(0, 500px); } }
-
 @-ms-keyframes lady {
   0% {
     -ms-transform: translate(0, 0); }
-
   100% {
     -ms-transform: translate(0, 500px); } }
-
 @keyframes lady {
   0% {
     transform: translate(0, 0); }
-
   100% {
     transform: translate(0, 500px); } }
-
 .comic-strip {
   min-height: 600px; }
 
@@ -3226,3 +3167,5 @@ iframe {
       #credits .inner li span {
         display: inline-block;
         width: 200px; } }
+
+/*# sourceMappingURL=main.css.map */
