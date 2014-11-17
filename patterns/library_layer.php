@@ -1,16 +1,16 @@
-<?php        
+<?php
     $library = $page->getModuleData('library_layer');
     $pathwayID = $page->getPathwayId();
     $moduleID = $page->getModuleId();
     $gaRoot = $page->getGARoot();
 
-    $libPrefix = 'l3 wl';    
+    $libPrefix = 'l3 wl';
     $extPrefix = 'l3 ex';
-    
+
 ?>
 
 <div class="library-layer">
-    
+
     <div class="gap">
 
         <div class="controls clearfix" data-component="toggle-section" data-toggle-section-target=".library-layer .gap" data-toggle-section-anchor=".library-layer">
@@ -31,8 +31,8 @@
                 <div>
                     <ul class="player-items clearfix">
                         <?php if( isset($library['See_in_the_Wellcome_Library']) ): ?>
-                            <?php foreach( $library['See_in_the_Wellcome_Library'] as $data ): 
-                                
+                            <?php foreach( $library['See_in_the_Wellcome_Library'] as $data ):
+
                                 $lTitle     = isset( $data['title'] ) ? $data['title'] : '';
                                 $lAuthor    = isset( $data['author'] ) ? $data['author'] : '';
                                 $lLink      = isset( $data['link'] ) ? $data['link'] : '';
@@ -41,7 +41,7 @@
 
                                 $gaLibId = $gaRoot . $libPrefix . ' ' . truncate($lTitle, 40);
                                 $lHref = str_replace('/package/', '/player/', $lLink);
-                                
+
                                 ?>
                                 <li>
                                     <a href="<?= $lHref ?>" class="player-item clearfix <?= $lType ?>" data-component="player-overlay" data-embed="<?= $lLink  ?>" data-ga="<?= $gaLibId ?>">
@@ -51,14 +51,14 @@
                                             <header class="player-item--header">
                                                 <h1><?= $lTitle ?></h1>
                                             </header>
-                                           
-                                            <div class="player-item--body">                                               
-                                                <cite><?php if($lAuthor != ''){ echo $lAuthor . ' ,'; } ?><?= $lDate ?></cite>
+
+                                            <div class="player-item--body">
+                                                <cite><?php if($lAuthor != ''){ echo $lAuthor . ', '; } ?><?= $lDate ?></cite>
                                             </div>
 
                                             <?php if( $lLink != '' ): ?>
-                                            <footer class="player-item--footer">                                                
-                                                <span>View</span>                                                
+                                            <footer class="player-item--footer">
+                                                <span>View</span>
                                             </footer>
                                             <?php endif ?>
                                         </div>
@@ -74,7 +74,7 @@
         <?php if( isset($library['See_Elsewhere']) ): ?>
 
         <div class="related-resources">
-            
+
             <div class="inner">
                 <header class="related-resources--header">
                     <h1>See elsewhere</h1>
@@ -83,8 +83,8 @@
                 <div>
                     <ul class="related-items clearfix">
 
-                        <?php foreach ($library['See_Elsewhere'] as $data):  
-                                
+                        <?php foreach ($library['See_Elsewhere'] as $data):
+
                                 $eTitle     = isset( $data['title'] ) ? $data['title'] : '';
                                 $eAuthor    = isset( $data['author'] ) ? $data['author'] : '';
                                 $eLink      = isset( $data['link'] ) ? $data['link'] : '';
@@ -100,7 +100,7 @@
                                     </header>
 
                                     <div class="related-item--body">
-                                        <cite><?php if($eAuthor != ''){ echo $eAuthor . ' ,'; } ?><?= $eDate ?></cite>
+                                        <cite><?php if($eAuthor != ''){ echo $eAuthor . ', '; } ?><?= $eDate ?></cite>
                                     </div>
 
                                     <?php if( $eLink != '' ): ?>
