@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html lang="en"> 
+<html lang="en">
 <head>
-    <meta charset="utf-8"> 
+    <meta charset="utf-8">
     <title><?= $page->getPageTitle()?></title>
 
     <meta name="description" content="<?= $page->getDescription()?>">
@@ -17,7 +17,7 @@
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-54268163-2', 'auto');
+	  ga('create', 'UA-54268163-1', 'auto');
 	  ga('send', 'pageview');
 
 	</script>
