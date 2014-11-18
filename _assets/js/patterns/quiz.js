@@ -1,7 +1,9 @@
 
-Pathways.Quiz = function() {
+Pathways.components.quiz = function(element, data) {
 
-    $('body').on('click', '[data-component="quiz"]', function(e) {
+    if(typeof data === 'undefined') return console.warn('Quiz component not provided data');
+
+    $(element).on('click', function(e) {
         // setup overlay
         var $overlay    = $('<div class="overlay"></div>'),
             $close      = $('<div class="close"></div>');
@@ -14,7 +16,7 @@ Pathways.Quiz = function() {
         $overlay.show();
         $overlay.css({
             'background-color': 'rgba(0,0,0,0.9)',
-            'background-image': 'url('+quiz_db['images'] + '/' + 'bg.jpg)'
+            'background-image': 'url('+data.images + '/' + 'bg.jpg)'
         });
 
         // prevent scrolling
@@ -32,7 +34,7 @@ Pathways.Quiz = function() {
 
             Pathways.Utils.positionCenter($quizContainer);
 
-            var quiz = new Quiz($quizContainer);
+            var quiz = new Quiz($quizContainer, data);
 
             $overlay.append( $close );
         }, 800);
@@ -51,15 +53,15 @@ Pathways.Quiz = function() {
         });
 
     });
-}
+};
 
-function Quiz(element) {
+function Quiz(element, data) {
     var $quiz           = $(element),
         paused          = false,
         level           = 1,
-        imagesLocation  = quiz_db['images'],
-        questions       = quiz_db['questions'],
-        answers         = quiz_db['questions'][level]['answers'],
+        imagesLocation  = data.images,
+        questions       = data.questions,
+        answers         = data.questions[level].answers,
         totalQuestions  = questions.length,
         score           = 0,
 
@@ -95,7 +97,7 @@ function Quiz(element) {
             if( !paused )
                 self.validate(e);
         });
-    }
+    };
 
     this.start = function() {
 
@@ -107,27 +109,27 @@ function Quiz(element) {
 
         // Load the level
         this.loadLevel();
-    }
+    };
 
     this.getCurrentQuestion = function() {
         return questions[(level-1)];
-    }
+    };
 
     this.loadLevel = function(l) {
         // image
         var self        = this,
             question    = this.getCurrentQuestion(),
-            $image      = $('<img/>').attr('src', imagesLocation + '/' + question['image']),
+            $image      = $('<img/>').attr('src', imagesLocation + '/' + question.image),
             str         = '<ul>';
 
         $quiz.find('.image').html($image);
 
         // question
-        $quiz.find('.question').html(question['title']);
+        $quiz.find('.question').html(question.title);
 
         // answers
-        for (var i = 0; i < question['answers'].length; i++) {
-            str += '<li>' + question['answers'][i] + '</li>';
+        for (var i = 0; i < question.answers.length; i++) {
+            str += '<li>' + question.answers[i] + '</li>';
         }
 
         str += '</ul>';
@@ -141,7 +143,7 @@ function Quiz(element) {
         timeoutWaitID = setTimeout(function() {
             self.startTimer();
         }, (timerWait * 1000));
-    }
+    };
 
     this.validate = function(e) {
         var self        = this,
@@ -150,7 +152,7 @@ function Quiz(element) {
 
         this.stopTimer();
 
-        if( $quiz.find('li').index($(e.currentTarget)) == (question['correct'] - 1) )
+        if( $quiz.find('li').index($(e.currentTarget)) == (question.correct - 1) )
             correct = true;
 
         if( correct ) {
@@ -166,8 +168,8 @@ function Quiz(element) {
             paused = false;
             self.stopTimer();
             self.nextQuestion($(e.currentTarget));
-        }, 2000)
-    }
+        }, 2000);
+    };
 
     this.nextQuestion = function($elm) {
         level++;
@@ -176,15 +178,15 @@ function Quiz(element) {
             this.loadLevel();
         else
             this.finishGame();
-    }
+    };
 
     this.showCorrect = function($elm) {
         $elm.addClass('correct');
-    }
+    };
 
     this.showError = function($elm) {
         $elm.addClass('wrong');
-    }
+    };
 
     this.revealAnswers = function() {
         var self        = this,
@@ -192,22 +194,22 @@ function Quiz(element) {
             count       = 1;
 
         $quiz.find('.answers li').each(function() {
-            if(count == question['correct'])
+            if(count == question.correct)
                 self.showCorrect($(this));
             else
                 self.showError($(this));
 
             count++;
-        })
-    }
+        });
+    };
 
     this.updateScore = function() {
         $score.html(score);
-    }
+    };
 
     this.updateQuestionsRemaining = function() {
         $remaining.html('<em>'+level+'</em> of <span>'+totalQuestions+'</span>');
-    }
+    };
 
     this.startTimer = function() {
         var self    = this,
@@ -245,14 +247,14 @@ function Quiz(element) {
                 }, 2000);
             }
         }, 1000);
-    }
+    };
 
     this.stopTimer = function() {
         clearInterval(timerID);
         clearTimeout(timeoutWaitID);
-        
+
         $timer.fadeOut(100);
-    }
+    };
 
 
     this.finishGame = function() {
@@ -263,14 +265,14 @@ function Quiz(element) {
         $timer.css('display', 'none');
 
         $quiz_finish.find('.quiz-finish--score').html('<span>'+score+'</span> out of ' + totalQuestions);
-        
+
         $quiz.find('.quiz-playground').hide();
         $quiz_finish.show();
 
         $quiz_finish.on('click', '.play-again', function() {
             self.restart();
         });
-    }
+    };
 
     this.restart = function() {
         this.stopTimer();
@@ -281,7 +283,7 @@ function Quiz(element) {
         $quiz.find('.quiz-finish').hide();
 
         this.start();
-    }
+    };
 
     this.init();
 }

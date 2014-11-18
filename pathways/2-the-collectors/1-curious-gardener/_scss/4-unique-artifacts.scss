@@ -1,51 +1,39 @@
-
 #unique-artifacts {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/_assets/1-curious-gardener/m1-curious-gardener-4.jpg);
     }
 }
 
-.touch {
-    #unique-artifacts {
-
-    }
-}
-
-.no-touch {
-    #unique-artifacts {
-        
-    }
-}
-
 @media screen and (min-width: 48em) {
-    #unique-artifacts {
-           
-    }
 
-    .tap-target.top {
-        top:    36%;
-        right:  44%;
-    }
+/**
+    Crop zoom
+**/
 
-    .tap-target.middle {
-        top:    86%;
-        left:   56%;
-    }
-
-    .tap-target.right {
-        top:    80%;
-        right:  6%;
-    }
-
-    .touch {
-        #unique-artifacts {
-
+    .crop-zoom {
+        .tap-target.croc {
+            top: 46%;
+            left: 14%;
         }
-    }
-
-    .no-touch {
-        #unique-artifacts {
-
+        .tap-target.person {
+            top: 74%;
+            left: 39%;
+        }
+        .tap-target.bird {
+            top: 26%;
+            left: 74%;
+        }
+        .tap-target.cabinet {
+            top: 56%;
+            left: 74%;
+        }
+        .tap-target.books {
+            top: 56%;
+            left: 7%;
+        }
+        .tap-target.window {
+            top: 56%;
+            left: 84%;
         }
     }
 }

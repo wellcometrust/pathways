@@ -1,10 +1,10 @@
 
-Pathways.Scene.DukeOfBuckingham = function() {
+Pathways.Scene.DukeOfBuckingham = function(panelID) {
 
     var startY;
 
     var scene = new ScrollScene({
-            triggerElement: '#duke-of-buckingham',
+            triggerElement: panelID,
             triggerHook:    'top',
             duration:       Pathways.panelHeight,
         })
@@ -16,9 +16,7 @@ Pathways.Scene.DukeOfBuckingham = function() {
         })
         .on('progress', function(e) {
             $('.pence').css('transform', 'translate(0, '+ (window.scrollY - startY) +'px)');
-        })
-
-    Pathways.Scenes.push(scene);
+        });
 
     // Keep the clipping mask the correct height in relation to the 'cover' background.
     var ratio = 1900 / 1050,
@@ -43,4 +41,6 @@ Pathways.Scene.DukeOfBuckingham = function() {
     window.addEventListener('resize', function() {
         resizeClip();
     });
-}
+
+    return scene;
+};

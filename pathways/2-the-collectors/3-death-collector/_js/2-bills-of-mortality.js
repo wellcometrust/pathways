@@ -17,5 +17,5 @@ Pathways.Scene.BillsOfMortality = function() {
             }
         });
 
-    Pathways.Scenes.push(scene1);
-}
+    return scene1;
+};

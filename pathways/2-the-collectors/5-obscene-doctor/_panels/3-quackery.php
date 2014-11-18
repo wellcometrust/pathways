@@ -4,16 +4,16 @@
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
-    
+
     <div class="main-content left">
 
         <div class="inner">
             <p>The Museum, and its educational focus, initially found favour with publications like the Lancet and Medical Times. However, the establishment turned against Kahn when he started selling quack remedies. The Lancet then labelled the Museum ‘a den of obscenity… determinedly arranged for the purposes of depraving the minds of the ignorant and unwary’.</p>
-        </div>                    
+        </div>
 
     </div>
 
-    <div class="info-box with-text" data-component="gallery">
+    <div class="info-box with-text" id="quacks-of-the-18th-century" data-component="gallery">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
@@ -30,44 +30,5 @@
             <span class="info-title">Quacks of the 18<sup>th</sup> Century</span>
         </div>
     </div>
-
-
-    <script>
-        var imageDB = {
-            location: 'galleries/quacks-of-the-18th-century/',
-            images: [
-                {
-                    image: 'L0018661a',
-                },
-                {
-                    image: 'M0013726',
-                },
-                {
-                    image: 'V0007356a',
-                },
-                {
-                    image: 'V0010929a',
-                },
-                {
-                    image: 'V0011005',
-                },
-                {
-                    image: 'V0016170',
-                },
-                {
-                    image: 'V0016171',
-                },
-                {
-                    image: 'V0016188a',
-                },
-                {
-                    image: 'V0016215',
-                },
-                {
-                    image: 'V0016230a',
-                }
-            ]
-        }
-    </script>
 
 </div>

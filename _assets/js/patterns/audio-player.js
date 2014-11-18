@@ -1,7 +1,7 @@
 
-Pathways.AudioPlayer = function(elem) {
+Pathways.components.audioPlayer = function(element, data) {
     var self            = this,
-        $player         = $('.audio-player'),
+        $player         = $(element),
         $progress_bar   = $player.find('.progressed'),
         $time_left      = $player.find('.time-left span'),
         playing         = false;
@@ -24,7 +24,7 @@ Pathways.AudioPlayer = function(elem) {
 
     track.addEventListener('timeupdate', function () {
         var remaining = parseInt(track.duration - track.currentTime);
-        
+
         $progress_bar.css('width', (track.currentTime * (100 / track.duration) + '%' ));
         $time_left.html( self.secondsToMinutes(remaining) );
     });
@@ -37,5 +37,5 @@ Pathways.AudioPlayer = function(elem) {
             remainder = '0' + remainder;
 
         return mins + '.' + remainder;
-    }
-}
+    };
+};

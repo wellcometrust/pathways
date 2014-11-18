@@ -1,12 +1,12 @@
 
-Pathways.Modal = function() {
+Pathways.components.modal = function(element, data) {
 
-    $('.modal').on('click', function() {
+    $(element).find('.modal').on('click', function() {
         var modal = new Modal( $(this) );
         modal.init();
     });
 
-}
+};
 
 function Modal(elm) {
 
@@ -17,6 +17,7 @@ function Modal(elm) {
         $close;
 
     this.init = function() {
+        console.log('init');
         var img         = new Image(),
             $overlay    = $('<div class="overlay"></div>'),
             $image_crop = $(img).css('opacity', 0),
@@ -36,7 +37,7 @@ function Modal(elm) {
 
             $overlay.append( $image_crop );
             $image_crop.animate({'opacity': 1}, 500);
-        }
+        };
 
         $overlay.append( $close );
         $('body').append( $overlay );
@@ -44,7 +45,8 @@ function Modal(elm) {
         //
         $overlay.css( {
             'height':           window.outerHeight,
-            'background-color': 'rgba(0,0,0,0.9)'
+            'background-color': 'rgba(0,0,0,0.9)',
+            opacity: 1
         });
 
         $close.on('click', function() {
@@ -53,5 +55,5 @@ function Modal(elm) {
                 $overlay.remove();
             }, 600);
         });
-    }
+    };
 }

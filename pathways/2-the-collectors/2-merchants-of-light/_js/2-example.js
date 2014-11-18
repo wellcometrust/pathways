@@ -11,7 +11,7 @@ Pathways.Scene.Example = function() {
         })
         .on('leave', function(e) {
             //
-        })
+        });
 
-    Pathways.Scenes.push(scene);
-}
+    return scene;
+};

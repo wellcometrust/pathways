@@ -1,6 +1,8 @@
 
 Pathways.Scene.Trilby = function(panelID) {
 
+    var scenes = [];
+
     $('.comic-panel').css('opacity', 0);
 
     $('.comic-panel').each(function() {
@@ -15,7 +17,8 @@ Pathways.Scene.Trilby = function(panelID) {
             })
             .setTween(tween);
 
-        Pathways.Scenes.push(scene);
+        scenes.push(scene);
     });
-    
-}
+
+    return scenes;
+};

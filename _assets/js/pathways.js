@@ -1,66 +1,68 @@
-function _(str) { return document.querySelector(str); }
+function _(str) {
+    return document.querySelector(str);
+}
 
 
-var Capabilities = (function(w, $, undefined) {
+var capabilities = (function(w, $, undefined) {
 
     var mod = {
-            aspectRatio: 1900 / 1050,
-            supportsTouch: false,
-            innerHeight:  0,
-            innerWidth: 0,
-            orientation: 'landscape',
-            level: 0,
+        aspectRatio: 1900 / 1050,
+        supportsTouch: false,
+        innerHeight: 0,
+        innerWidth: 0,
+        orientation: 'landscape',
+        level: 0,
 
-            calcSupportsTouch: function () {
-                return ('ontouchstart' in w) || (w.DocumentTouch && document instanceof DocumentTouch);
-            },
-            calcOrientation: function() {
-                return (this.innerWidth / this.innerHeight) > 1.2 ? 'landscape' : 'portrait';
-            },
-            calcAspectRatio: function() {
-                return (this.orientation === 'landscape') ? (1900 / 1050) : (1050 / 1900);
-            },
-             /*
+        calcSupportsTouch: function() {
+            return ('ontouchstart' in w) || (w.DocumentTouch && document instanceof DocumentTouch);
+        },
+        calcOrientation: function() {
+            return (this.innerWidth / this.innerHeight) > 1.2 ? 'landscape' : 'portrait';
+        },
+        calcAspectRatio: function() {
+            return (this.orientation === 'landscape') ? (1900 / 1050) : (1050 / 1900);
+        },
+        /*
                 Do a few checks on screen size and touch abilities to allocate a level to the current device. This will be used to determine
                 what gets loaded when.
 
                 Need to further refine the levels.
             */
-            getEnhancementLevel: function() {
-                // small screen
-                var level = 0;
+        getEnhancementLevel: function() {
+            // small screen
+            var level = 0;
 
-                // small to mid screens
-                if (w.innerWidth >= 480)
-                    level = 1;
+            // small to mid screens
+            if (w.innerWidth >= 480)
+                level = 1;
 
-                // ~ iPad portrait (mid screens) or Nexus 7 ()
-                if (w.innerWidth >= 768 && this.supportsTouch)
-                    level = 2;
+            // ~ iPad portrait (mid screens) or Nexus 7 ()
+            if (w.innerWidth >= 768 && this.supportsTouch)
+                level = 2;
 
-                // ~ Nexus 7 landscape (mid screens)
-                if (w.innerWidth >= 960 && this.supportsTouch)
-                    level = 3;
+            // ~ Nexus 7 landscape (mid screens)
+            if (w.innerWidth >= 960 && this.supportsTouch)
+                level = 3;
 
-                // Desktop
-                if (w.innerWidth >= 768 && !this.supportsTouch)
-                    level = 4;
+            // Desktop
+            if (w.innerWidth >= 768 && !this.supportsTouch)
+                level = 4;
 
 
-                return level;
-            },
-            getDisplaySettings: function() {
-                this.innerWidth = w.innerWidth;
-                this.innerHeight = w.innerHeight;
+            return level;
+        },
+        getDisplaySettings: function() {
+            this.innerWidth = w.innerWidth;
+            this.innerHeight = w.innerHeight;
 
-                this.orientation = this.calcOrientation();
-                this.supportsTouch = this.calcSupportsTouch();
-                this.level = this.getEnhancementLevel();
-            },
-            init: function() {
-                w.addEventListener('resize', (this.getDisplaySettings).bind(this), false);
-            }
-        };
+            this.orientation = this.calcOrientation();
+            this.supportsTouch = this.calcSupportsTouch();
+            this.level = this.getEnhancementLevel();
+        },
+        init: function() {
+            w.addEventListener('resize', (this.getDisplaySettings).bind(this), false);
+        }
+    };
 
     mod.getDisplaySettings();
     mod.init();
@@ -68,6 +70,8 @@ var Capabilities = (function(w, $, undefined) {
     return mod;
 
 }(this, jQuery));
+
+
 
 var Pathways = (function(w, _, sys, $, undefined) {
 
@@ -116,9 +120,15 @@ var Pathways = (function(w, _, sys, $, undefined) {
         return newHeight;
     }
 
-
+    function camelCase(str) {
+        str = str || '';
+        return str.toLowerCase().replace(/-(.)/g, function(match, group1) {
+            return group1.toUpperCase();
+        });
+    }
 
     function toTitleCase(str) {
+        str = str || '';
         str = str.replace(/-/g, ' ').replace(/_/g, ' ');
         str = str.replace(/\w\S*/g, function(txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1);
@@ -182,43 +192,40 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
 
     function loadComponents(context, height) {
-        var loaded = [],
-            $components = $('[data-component]');
+        var $components = $('[data-component]');
 
         $components.each(function(index, component) {
 
-            var handler = $(component).attr('data-component');
+            var $component = $(component),
+                handlerName = $component.attr('data-component'),
+                id = camelCase($component.attr('id')),
+                handlerClass = camelCase(handlerName),
+                method = context[handlerClass],
+                data;
 
-            if (handler) {
-                var handlerClass = toTitleCase(handler);
+            if (typeof method === 'undefined') return console.warn('Could not load the necessary component: ' + handlerClass);
 
-                // Check the handler exists and it hasn't already been loaded
-                if (context[handlerClass] != null && (loaded.indexOf(handlerClass) == -1 || context[handlerClass].alwaysLoad == true)) {
-                    context[handlerClass](component);
-                    loaded.push(handlerClass);
-                }
+            if (id && method[id] && method[id].data) data = method[id].data;
 
-                if (context[handlerClass] == null)
-                    console.warn('Could not load the necessary component: ' + handlerClass);
-            }
+            method(component, data);
         });
     }
 
 
 
     function setElementHeight(el, height) {
-        $(el).css('height', parseInt(height,10) + 'px');
+        $(el).css('height', parseInt(height, 10) + 'px');
     }
 
     function unSetElementHeight(el) {
-         $(el).css('height', '');
+        $(el).css('height', '');
     }
 
     function translatePanelElem(_el, currentHeight) {
 
         var newHeight = sys.innerWidth / sys.aspectRatio,
             prefixes = ['-moz-', '-webkit-', ''],
-            y = parseInt(((currentHeight - newHeight) / 2),10);
+            y = parseInt(((currentHeight - newHeight) / 2), 10);
 
         if (currentHeight > newHeight) {
             for (var p = 0; p < prefixes.length; p++) {
@@ -251,7 +258,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
             var preserveRatio = panels[i].config.background.preserve_ratio;
 
             if (preserveRatio) {
-                $(_panel).children().each(function(index, child){
+                $(_panel).children().each(function(index, child) {
                     $(child).removeAttr('style');
                     //unSetElementHeight(child);
                     //unTranslatePanelElem(child);
@@ -305,13 +312,13 @@ var Pathways = (function(w, _, sys, $, undefined) {
         $('.comic-panel').removeAttr('style');
 
         for (var i = 0; i < panels.length; i++) {
-            var panel           = panels[i],
-                $bg             = $(panel.bg),
-                $panel          = $(panel.elem),
-                panelID         = $panel.attr('id'),
-                $library_panel  = $panel.find('[data-panel="'+ panelID +'"]').first(),
-                $gallery        = $panel.find('[data-component="gallery"]'),
-                $quiz           = $panel.find('[data-component="quiz"]');
+            var panel = panels[i],
+                $bg = $(panel.bg),
+                $panel = $(panel.elem),
+                panelID = $panel.attr('id'),
+                $library_panel = $panel.find('[data-panel="' + panelID + '"]').first(),
+                $gallery = $panel.find('[data-component="gallery"]'),
+                $quiz = $panel.find('[data-component="quiz"]');
 
             $bg.removeAttr('style');
             $library_panel.removeAttr('style');
@@ -329,7 +336,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         $btn.unbind('click');
         $btn.on('click', function(e) {
             // active == muted
-            if( $(this).hasClass('active') ) {
+            if ($(this).hasClass('active')) {
                 setPathwaysMuted(false);
             } else {
                 setPathwaysMuted(true);
@@ -345,7 +352,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
     }
 
 
-    function setPathwaysMuted(value){
+    function setPathwaysMuted(value) {
         isMuted = value;
 
         $('video, audio').each(function() {
@@ -365,22 +372,21 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
             if (_video) {
 
-                _video.addEventListener('volumechange', function(e){
+                _video.addEventListener('volumechange', function(e) {
                     if (this.muted == isMuted) return;
                     setPathwaysMuted(this.muted);
                     updateButtonView();
                 });
 
-                _video.addEventListener('error', function(e){
+                _video.addEventListener('error', function(e) {
                     console.warn('Video loading error for ', _video.src);
                 });
 
-                if (!sys.level >= mod.MIN_SCROLL_LEVEL) {
+                if (sys.level >= mod.MIN_SCROLL_LEVEL) {
                     _video.setAttribute('preload', 'auto');
                 } else {
                     _video.setAttribute('preload', 'metadata');
                     _video.controls = true;
-
                 }
 
                 videos.push(_video);
@@ -408,7 +414,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         }
     }
 
-    function crossFade(fromAudio, toAudio, callback){
+    function crossFade(fromAudio, toAudio, callback) {
         var delay = 1000;
         var onlyFrom = (fromAudio && !toAudio);
 
@@ -419,13 +425,18 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
         if (fromAudio && (typeof fromAudio !== 'undefined')) {
             $(fromAudio).stop(false, true);
-            $(fromAudio).animate({volume: 0}, { duration: delay, complete: function() {
-                this.pause();
-                if (onlyFrom && callback) {
-                    callback();
-                    callback = null;
+            $(fromAudio).animate({
+                volume: 0
+            }, {
+                duration: delay,
+                complete: function() {
+                    this.pause();
+                    if (onlyFrom && callback) {
+                        callback();
+                        callback = null;
+                    }
                 }
-            }});
+            });
         }
 
         // fade in
@@ -434,12 +445,17 @@ var Pathways = (function(w, _, sys, $, undefined) {
             toAudio.volume = 0;
             toAudio.muted = isMuted;
             toAudio.play();
-            $(toAudio).animate({volume: 1}, { duration: delay, complete: function() {
-                 if (!onlyFrom && callback) {
-                    callback();
-                    callback = null;
+            $(toAudio).animate({
+                volume: 1
+            }, {
+                duration: delay,
+                complete: function() {
+                    if (!onlyFrom && callback) {
+                        callback();
+                        callback = null;
+                    }
                 }
-            }});
+            });
         }
     }
 
@@ -454,14 +470,14 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
 
     function updateButtonView() {
-        if(isMuted) {
+        if (isMuted) {
             muteButton.addClass('active');
         } else {
             muteButton.removeClass('active');
         }
     }
 
-    function initPanelAudioTracks(panels, selector){
+    function initPanelAudioTracks(panels, selector) {
 
         var tracks = [];
 
@@ -544,11 +560,12 @@ var Pathways = (function(w, _, sys, $, undefined) {
     }
 
     var panelsUnsized = false;
+
     function resizeCheck() {
         if (sys.level < mod.MIN_COMPONENT_LEVEL) {
             unsizePanels(panels);
             panelsUnsized = true;
-        } else if (sys.level >= mod.MIN_COMPONENT_LEVEL && sys.level < mod.MIN_SCROLL_LEVEL){
+        } else if (sys.level >= mod.MIN_COMPONENT_LEVEL && sys.level < mod.MIN_SCROLL_LEVEL) {
             resizePanels(null, ratioedPanels);
             panelsUnsized = false;
         } else if (sys.level >= mod.MIN_SCROLL_LEVEL) {
@@ -560,7 +577,19 @@ var Pathways = (function(w, _, sys, $, undefined) {
     function loadCheck(onScrollLoad, onScrollUnload) {
         mod.panelHeight = calcPanelHeight(mod.panelHeight);
 
-        if (!scenesLoaded){
+        // If it's iPad width or larger, load the components
+        if (!componentsLoaded) {
+            if (sys.level >= mod.MIN_COMPONENT_LEVEL) {
+                loadComponents(mod.components);
+                componentsLoaded = true;
+            }
+        } else {
+            if (sys.level < mod.MIN_COMPONENT_LEVEL) {
+                // unload components
+            }
+        }
+
+        if (!scenesLoaded) {
             // If it's a non-touch device, load the scenes.
             if (sys.level >= mod.MIN_SCROLL_LEVEL) {
                 sceneController = onScrollLoad(mod);
@@ -585,17 +614,6 @@ var Pathways = (function(w, _, sys, $, undefined) {
             }
         }
 
-        // If it's iPad width or larger, load the components
-        if (!componentsLoaded) {
-            if( sys.level >= mod.MIN_COMPONENT_LEVEL) {
-                loadComponents(mod);
-                componentsLoaded = true;
-            }
-        } else {
-            if (sys.level < mod.MIN_COMPONENT_LEVEL) {
-                // unload components
-            }
-        }
     }
 
     function init(onLoadComplete, onScrollLoad, onScrollUnload) {
@@ -606,7 +624,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
         resizeCheck();
 
-        w.addEventListener('resize', function(){
+        w.addEventListener('resize', function() {
             resizeCheck();
             loadCheck(onScrollLoad, onScrollUnload);
         });
@@ -638,8 +656,6 @@ var Pathways = (function(w, _, sys, $, undefined) {
     mod.translatePanelElem = translatePanelElem;
 
     mod.Scene = {};
-    mod.Scenes = [];
-
     mod.components = {};
 
     mod.Utils = {
@@ -649,4 +665,4 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
     return mod;
 
-}(this, _, Capabilities, jQuery));
+}(this, _, capabilities, jQuery));

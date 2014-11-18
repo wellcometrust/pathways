@@ -4,16 +4,16 @@
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
-    
+
     <div class="main-content left">
 
         <div class="inner">
             <p>Taken to court by The Society for the Suppression of Vice, Kahn was successfully prosecuted under the 1857 Obscene Publications Act, which made it illegal to publish texts on venereal disease and sexual health aimed at a general audience.</p>
-        </div>                    
+        </div>
 
     </div>
 
-    <div class="info-box with-text" data-component="gallery">
+    <div class="info-box with-text" id="indecent-sexual-images" data-component="gallery">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
@@ -30,43 +30,5 @@
             <span class="info-title">Indecent sexual images</span>
         </div>
     </div>
-
-    <script>
-        var imageDB = {
-            location: 'galleries/indecent-sexual-images/',
-            images: [
-                {
-                    image: 'L0038201',
-                },
-                {
-                    image: 'L0038202',
-                },
-                {
-                    image: 'L0038205',
-                },
-                {
-                    image: 'L0038206',
-                },
-                {
-                    image: 'L0038209',
-                },
-                {
-                    image: 'L0060656',
-                },
-                {
-                    image: 'L0074250',
-                },
-                {
-                    image: 'V0009962',
-                },
-                {
-                    image: 'V0009971',
-                },
-                {
-                    image: 'V0010253',
-                }
-            ]
-        }
-    </script>
 
 </div>

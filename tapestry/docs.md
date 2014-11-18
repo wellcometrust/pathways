@@ -5,7 +5,7 @@ A 'Pathway' is a collection of, usually, around 5 or 6 stories/modules. Each mod
 
 A full Pathway is defined by an Introduction page, an assumed 6 stories/modules and then a credits page
 
-A story/module is defined by an introductory start panel, followed a sequence of 1 or more panels which ‘fix’ to the screen and cross fade between each other and trigger actions, then end with the library layer and teaser for the next module. 
+A story/module is defined by an introductory start panel, followed a sequence of 1 or more panels which ‘fix’ to the screen and cross fade between each other and trigger actions, then end with the library layer and teaser for the next module.
 
 This is the intended structure for all Pathways current and future and the system is built to reflect this. Any deviations may require potentially significant rewriting of parts of the code and are out of scope of the project.
 
@@ -27,7 +27,7 @@ Within the body tags, the general structure is
 
 	<main role=“main”>
 
-		// Start panel here… 
+		// Start panel here…
 
 		// Begin the cross fading sequence.
 		<div class=“sequence”>
@@ -168,7 +168,7 @@ Will look for a function called MesmersSalon (CamelCase + no dashes), which you 
 
 	Pathways.Scene.MesmersSalon = function() {}
 
-In here is where ScrollMagic scenes are created and added to a global `Pathways.Scenes` array which get called after the page has loaded. As an example:
+In here is where ScrollMagic scenes are created and returned in a function which get called after the page has loaded. As an example:
 
 	var scene1 = new ScrollScene({
             triggerElement: '#india',
@@ -181,7 +181,26 @@ In here is where ScrollMagic scenes are created and added to a global `Pathways.
             // leave action
         })
 
-    Pathways.Scenes.push(scene1);
+    return scene1;
+
+or
+    var scenes = [];
+
+    $(panelID + ' .subelement').each(function(index, el){
+        var scene1 = new ScrollScene({
+            triggerElement: el,
+            duration:       Pathways.panelHeight
+        })
+        .on('enter', function() {
+            // enter action here
+        })
+        .on('leave', function() {
+            // leave action
+        });
+        scenes.push(scene);
+    });
+
+    return scenes;
 
 Multiple scenes can be created and added in a similar fashion.
 

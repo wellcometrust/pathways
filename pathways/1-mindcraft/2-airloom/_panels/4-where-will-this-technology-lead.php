@@ -13,12 +13,12 @@
             </header>
 
             <p>Matthews was confined in Bedlam as an incurable lunatic, but his delusions captured the disturbing power of the latest discoveries in electricity and chemistry.</p>
-            <p>Recent experiments on animals and humans had shown that electric currents could animate living tissue and even dead bodies.</p>        
+            <p>Recent experiments on animals and humans had shown that electric currents could animate living tissue and even dead bodies.</p>
             <p>The Air Loom posed an important question: will these new technologies one day be able to control the mind as well as the body?</p>
         </div>
     </div>
 
-    <div class="info-box with-text" data-component="gallery" data-ga="mindcraft - airloom - where-will-this-technology-lead - l2 gallery open">
+    <div class="info-box with-text" id="aldinis-experiments" data-component="gallery" data-ga="mindcraft - airloom - where-will-this-technology-lead - l2 gallery open">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
@@ -35,58 +35,6 @@
             <span class="info-title">Aldini’s electric experiments</span>
         </div>
     </div>
-
-    <script>
-        var imageDB = {
-            location: 'galleries/aldinis-experiments/',
-            images: [
-                {
-                    image: 'L0001964',
-                    text: '1/11: Animal electricity produced on frog legs.'
-                },
-                {
-                    image: 'L0011096',
-                    text: '2/11: Galvanism experiments on people&hellip;'
-                },
-                {
-                    image: 'L0023892',
-                    text: '3/11: &hellip;and animals.'
-                },
-                {
-                    image: 'L0023893',
-                    text: '4/11: And animals’ heads.'
-                },
-                {
-                    image: 'L0023894',
-                    text: '5/11: Human dissection without heads&hellip;'
-                },
-                {
-                    image: 'L0023895',
-                    text: '6/11: &hellip;and with.'
-                },
-                {
-                    image: 'L0023897',
-                    text: '7/11: Galvanism experiment with dog.'
-                },
-                {
-                    image: 'L0023898',
-                    text: '8/11: More frogs’ legs.'
-                },
-                {
-                    image: 'L0023899',
-                    text: '9/11: Galvanic apparatus.'
-                },
-                {
-                    image: 'L0029687',
-                    text: '10/11: Frogs’ legs experiment - how to. Part I'
-                },
-                {
-                    image: 'L0029689',
-                    text: '11/11: Frogs’ legs experiment - how to. Part II'
-                },
-            ]
-        }
-    </script>
 
     <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/02-prison-background.mp3" loop data-audio="panel"></audio>
 

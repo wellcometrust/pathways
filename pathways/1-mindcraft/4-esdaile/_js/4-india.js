@@ -21,14 +21,14 @@ Pathways.Scene.India = function(panelID) {
             triggerElement: panelID,
             duration:       function() { return $panel.outerHeight() + (Pathways.panelHeight / 4); }
         })
-        .on('enter', function() {     
+        .on('enter', function() {
             $boats.css('transition', 'transform 120s linear');
             $boats.css('transform', 'translate('+window.innerWidth+'px,0)');
         })
         .on('leave', function() {
             $boats.css('transition', 'none');
             $boats.css('transform', 'translate(-600px,0)');
-        })
+        });
 
-    Pathways.Scenes.push(scene);
-}
+    return scene;
+};

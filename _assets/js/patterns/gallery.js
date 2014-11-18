@@ -1,25 +1,31 @@
 /*
     Carousel pattern initiator followed by the component.
 */
+Pathways.components.gallery = function(element, data) {
+    var $elem = $(element),
+        $panel = $elem.closest('.panel'),
+        panelId = $panel.attr('id');
 
-Pathways.Gallery = function() {
+    $(element).on('click', function(e) {
 
-    $('[data-component="gallery"]').on('click', function(e) {
+        var $overlay = $('<div class="overlay"></div>'),
+            $close = $('<div class="close"></div>'),
+            $loading = $('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
 
-        var $overlay    = $('<div class="overlay"></div>'),
-            $close      = $('<div class="close"></div>'),
-            $loading    = $('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+        $overlay.css('height', window.innerHeight);
 
-        $overlay.css('height', window.innerHeight );
-
-        $('body').append( $overlay );
+        $('body').append($overlay);
 
         $overlay.show();
         $overlay.css('background-color', 'rgba(0,0,0,0.8)');
 
         $overlay.append($loading);
 
-        $loading.css({ position: 'absolute', top: ((window.innerHeight / 2) - 12), left: ((window.innerWidth / 2) - 35) });
+        $loading.css({
+            position: 'absolute',
+            top: ((window.innerHeight / 2) - 12),
+            left: ((window.innerWidth / 2) - 35)
+        });
 
         // prevent scrolling
         $('body').addClass('modal-open');
@@ -29,10 +35,10 @@ Pathways.Gallery = function() {
             var $div = $('<div class="carousel"></div>');
             $overlay.append($div);
 
-            var carousel = new Carousel(".carousel");
+            var carousel = new Carousel(".carousel", data);
             carousel.init();
 
-            $overlay.append( $close );
+            $overlay.append($close);
         }, 800);
 
         $close.on('click', function() {
@@ -48,28 +54,29 @@ Pathways.Gallery = function() {
 
 };
 
-function Carousel(element)
-{
-    var self            = this,
-        _element        = document.querySelector(element),
-        $element        = $(element),
-        $prev           = null,
-        $next           = null,
+function Carousel(element, data) {
 
-        $container      = null,
-        $panes          = null,
+    if (typeof data === 'undefined') return console.warn('No gallery data provided');
 
-        // TODO: Remove hardcoded images variable
-        images          = imageDB.images,
-        location        = imageDB.location,
+    var self = this,
+        _element = document.querySelector(element),
+        $element = $(element),
+        $prev = null,
+        $next = null,
 
-        widths          = [],
-        ratios          = [],
+        $container = null,
+        $panes = null,
 
-        pane_width      = 0,
-        pane_count      = 0,
-        current_pane    = 0,
-        total_offset    = (window.innerWidth / 2);
+        images = data.images,
+        location = data.location,
+
+        widths = [],
+        ratios = [],
+
+        pane_width = 0,
+        pane_count = 0,
+        current_pane = 0,
+        total_offset = (window.innerWidth / 2);
 
 
     /**
@@ -87,7 +94,7 @@ function Carousel(element)
 
         // Create the container
         $container = $('<ul/>');
-        $container.height( window.innerHeight );
+        $container.height(window.innerHeight);
 
         $element.append($container);
 
@@ -98,10 +105,10 @@ function Carousel(element)
         loadImage(first, function() {
             loadNavigation();
 
-            $panes       = $element.find('li');
-            pane_count   = $panes.length;
+            $panes = $element.find('li');
+            pane_count = $panes.length;
 
-            $container.css( 'transform', 'translate('+ (total_offset - (widths[0] / 2)) +'px,0)');
+            $container.css('transform', 'translate(' + (total_offset - (widths[0] / 2)) + 'px,0)');
             setPaneDimensions();
 
             imagesCopy.shift();
@@ -132,17 +139,17 @@ function Carousel(element)
             $li.append($img);
 
             // add potential text
-            if( obj.text ) {
-                var $child = $('<div>'+obj.text+'</div>').addClass('text');
+            if (obj.text) {
+                var $child = $('<div>' + obj.text + '</div>').addClass('text');
 
                 $li.append($child);
             }
 
             // what is the ratio of the image?
-            var w           = img.naturalWidth,
-                h           = img.naturalHeight,
-                ratio       = (h / w),
-                newWidth    = window.innerHeight / ratio;
+            var w = img.naturalWidth,
+                h = img.naturalHeight,
+                ratio = (h / w),
+                newWidth = window.innerHeight / ratio;
 
             // store the width and ratio for resize recalculations
             widths.push(newWidth);
@@ -161,7 +168,7 @@ function Carousel(element)
 
             $container.width(total);
 
-            if( callback )
+            if (callback)
                 callback.call();
         };
     };
@@ -170,10 +177,10 @@ function Carousel(element)
      * Takes an array of image objects and recursively sets up a callback chain to load in images sequentially
      */
     var loadImages = function(images) {
-        if( images.length ) {
+        if (images.length) {
             loadImage(images[0], function() {
-                $panes       = $element.find('li');
-                pane_count   = $panes.length;
+                $panes = $element.find('li');
+                pane_count = $panes.length;
                 setPaneDimensions();
 
                 images.shift();
@@ -187,31 +194,31 @@ function Carousel(element)
      * load the navigation into the carousel
      */
     var loadNavigation = function() {
-        $prev   = $('<div/>'),
-        $next   = $('<div/>');
+        $prev = $('<div/>'),
+            $next = $('<div/>');
 
         $prev.addClass('prev disabled');
         $next.addClass('next');
 
         $prev.css({
-            'left':     0,
-            'height':   window.innerHeight + 'px',
+            'left': 0,
+            'height': window.innerHeight + 'px',
         });
 
         $next.css({
-            'right':    0,
-            'height':   window.innerHeight + 'px',
+            'right': 0,
+            'height': window.innerHeight + 'px',
         });
 
         $element.append($prev);
         $element.append($next);
 
         new Hammer($prev[0]).on("tap", function() {
-           self.prev();
+            self.prev();
         });
 
         new Hammer($next[0]).on("tap", function() {
-           self.next();
+            self.next();
         });
     };
 
@@ -220,9 +227,9 @@ function Carousel(element)
      */
     function setPaneDimensions() {
         var total_width = 0,
-            wH          = window.innerHeight;
+            wH = window.innerHeight;
 
-        widths  = [];
+        widths = [];
 
         for (var i = 0; i < $panes.length; i++) {
             var newWidth = wH / ratios[i];
@@ -242,8 +249,8 @@ function Carousel(element)
         // Set the container and navigation links to the height of the screen.
         $container.css('height', wH);
 
-        $prev.height( wH );
-        $next.height( wH );
+        $prev.height(wH);
+        $next.height(wH);
 
         self.showPane(current_pane, false);
     }
@@ -253,12 +260,12 @@ function Carousel(element)
      * show pane by index
      */
     this.showPane = function(index, animate) {
-        var offset  = 0,
-            count   = 0;
+        var offset = 0,
+            count = 0;
 
         // between the bounds
-        index           = Math.max(0, Math.min(index, pane_count-1));
-        current_pane    = index;
+        index = Math.max(0, Math.min(index, pane_count - 1));
+        current_pane = index;
 
         for (var i = 0; i < index; i++) {
             offset -= widths[i];
@@ -271,13 +278,13 @@ function Carousel(element)
 
         setContainerOffset(offset, animate);
 
-        if( index > 0 )
+        if (index > 0)
             $prev.removeClass('disabled');
         else {
             $prev.addClass('disabled');
         }
 
-        if( index >= (pane_count - 1) )
+        if (index >= (pane_count - 1))
             $next.addClass('disabled');
         else {
             $next.removeClass('disabled');
@@ -290,30 +297,34 @@ function Carousel(element)
     function setContainerOffset(x, animate) {
         $container.removeClass("animate");
 
-        if(animate) {
+        if (animate) {
             $container.addClass("animate");
         }
 
-        if( Modernizr.csstransforms3d )
-            $container.css("transform", "translate3d("+ x +"px,0,0)");
+        if (Modernizr.csstransforms3d)
+            $container.css("transform", "translate3d(" + x + "px,0,0)");
         else
-            $container.css("transform", "translate("+ x +"px,0)");
+            $container.css("transform", "translate(" + x + "px,0)");
     }
 
-    this.next = function() { return this.showPane(current_pane+1, true); };
-    this.prev = function() { return this.showPane(current_pane-1, true); };
+    this.next = function() {
+        return this.showPane(current_pane + 1, true);
+    };
+    this.prev = function() {
+        return this.showPane(current_pane - 1, true);
+    };
 
 
     function handleHammer(ev) {
         // disable browser scrolling
         ev.gesture.preventDefault();
 
-        switch(ev.type) {
+        switch (ev.type) {
             case 'dragright':
             case 'dragleft':
                 // stick to the finger
                 var pane_offset = 0,
-                    count       = 0;
+                    count = 0;
 
                 for (var i = 0; i < current_pane; i++) {
                     pane_offset -= widths[i];
@@ -321,11 +332,11 @@ function Carousel(element)
 
                 pane_offset += (total_offset - (widths[current_pane] / 2));
 
-                var drag_offset = ((100/440)*ev.gesture.deltaX) / pane_count;
+                var drag_offset = ((100 / 440) * ev.gesture.deltaX) / pane_count;
 
                 // slow down at the first and last pane
-                if((current_pane === 0 && ev.gesture.direction == "right") ||
-                    (current_pane == pane_count-1 && ev.gesture.direction == "left")) {
+                if ((current_pane === 0 && ev.gesture.direction == "right") ||
+                    (current_pane == pane_count - 1 && ev.gesture.direction == "left")) {
                     drag_offset *= 0.4;
                 }
 
@@ -344,19 +355,20 @@ function Carousel(element)
 
             case 'release':
                 // more then 30% moved, navigate
-                if(Math.abs(ev.gesture.deltaX) > ( (pane_width / 10) * 3 )) {
-                    if(ev.gesture.direction == 'right') {
+                if (Math.abs(ev.gesture.deltaX) > ((pane_width / 10) * 3)) {
+                    if (ev.gesture.direction == 'right') {
                         self.prev();
                     } else {
                         self.next();
                     }
-                }
-                else {
+                } else {
                     self.showPane(current_pane, true);
                 }
                 break;
         }
     }
 
-    new Hammer($element[0], { drag_lock_to_axis: true }).on("release dragleft dragright swipeleft swiperight", handleHammer);
+    new Hammer($element[0], {
+        drag_lock_to_axis: true
+    }).on("release dragleft dragright swipeleft swiperight", handleHammer);
 }

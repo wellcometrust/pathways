@@ -1,7 +1,7 @@
 
 Pathways.Scene.MagnetisedTrees = function(panelID) {
-    
-    
+
+
 
 // Canvas animations. Forget trying to pause/play on entering exiting the panel. Let it go, man. Just let it go...
 
@@ -49,19 +49,19 @@ if( window.innerWidth >= 768 ) {
             duration:       Pathways.panelHeight
         })
         .on('enter', function(e) {
-            
+
             if( e.scrollDirection == 'FORWARD' ) {
-                TweenMax.to(panelID + ' .black-strip', .4, { y: 0 }); // Scroll up
+                TweenMax.to(panelID + ' .black-strip', 0.4, { y: 0 }); // Scroll up
                 createjs.Ticker.addEventListener("tick", stage);
             }
         })
         .on('leave', function(e) {
-            
+
             if( e.scrollDirection == 'REVERSE' ) {
-                TweenMax.to(panelID + ' .black-strip', .2, { y: Pathways.panelHeight }); // scroll down
+                TweenMax.to(panelID + ' .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
                 createjs.Ticker.removeEventListener("tick", stage);
             }
         });
 
-    Pathways.Scenes.push(scene1);
-}
+    return scene1;
+};

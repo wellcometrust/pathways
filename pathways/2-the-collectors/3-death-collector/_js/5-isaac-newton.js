@@ -7,14 +7,14 @@ Pathways.Scene.IsaacNewton = function() {
         })
         .on('enter', function(e) {
             if( e.scrollDirection == 'FORWARD' ) {
-                TweenMax.to('#isaac-newton .black-strip', .4, { y: 0 }); // Scroll up
+                TweenMax.to('#isaac-newton .black-strip', 0.4, { y: 0 }); // Scroll up
             }
         })
         .on('leave', function(e) {
             if( e.scrollDirection == 'REVERSE' ) {
-                TweenMax.to('#isaac-newton .black-strip', .2, { y: Pathways.panelHeight }); // scroll down
+                TweenMax.to('#isaac-newton .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
             }
         });
 
-    Pathways.Scenes.push(scene1);
-}
+    return scene1;
+};

@@ -14,5 +14,5 @@ Pathways.Scene.JosephKhan = function() {
             ci_vid.currentTime = 0;
         });
 
-    Pathways.Scenes.push(scene);
-}
+    return scene;
+};

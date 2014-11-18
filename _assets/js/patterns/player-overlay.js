@@ -1,4 +1,4 @@
-Pathways.PlayerOverlay = function(elem) {
+Pathways.components.playerOverlay = function(elem) {
 
     var $element = $(elem),
 
@@ -7,13 +7,13 @@ Pathways.PlayerOverlay = function(elem) {
 
         rootSel = 'body',
         playerSel = '.wellcomePlayer',
-        
+
         activeClass = 'modal-open',
         overlayFullscreenClass = 'overlay-fullscreen',
 
         closeTmpl = '<div class="close"></div>',
         overlayTmpl = '<div class="overlay"></div>',
-        iframeTmpl = '<iframe/>';        
+        iframeTmpl = '<iframe/>';
 
 
     function getHeightWithOffset(offset) {
@@ -29,7 +29,7 @@ Pathways.PlayerOverlay = function(elem) {
 
     $element.on('click', function(e) {
 
-        var $this = $(this),      
+        var $this = $(this),
             embedData = $this.data('embed'),
             isFullScreen = false;
 
@@ -39,9 +39,9 @@ Pathways.PlayerOverlay = function(elem) {
                 initWidth = getWidthWithOffset(defaultPanelOffset),
 
                 // Excluding the following line for now to enable player until CORS enabled
-                // data-config="/player-config.js" 
+                // data-config="/player-config.js"
                 playerTmpl = '<div class="wellcomePlayer" data-no-load="true" data-uri="' + embedData + '" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:' + initWidth + 'px; height:' + initHeight + 'px; background-color: #000"></div>',
-        
+
                 $player,
                 $overlay,
                 $close;
@@ -73,7 +73,7 @@ Pathways.PlayerOverlay = function(elem) {
             function createOverlay(tmpl, $rootEl, $closeEl) {
                 var $el = $(tmpl);
                 $el.append($closeEl);
-                $rootEl.append($el);          
+                $rootEl.append($el);
                 return $el;
             }
 
@@ -83,28 +83,28 @@ Pathways.PlayerOverlay = function(elem) {
                 return $el;
             }
 
-            function initPlayer(sel){                
-                window.initPlayers($(sel));  
+            function initPlayer(sel){
+                window.initPlayers($(sel));
             }
 
             function initOverlay($el, sel) {
-               
-                $el.on('click', function() {   
+
+                $el.on('click', function() {
                     $(rootSel).removeClass(activeClass);
                     isFullScreen = false;
                     window.embedScriptIncluded = false;
-                    
+
                     setTimeout(function(){
                         $el.remove();
-                    }, 1000); // give css transition time 
+                    }, 1000); // give css transition time
                 });
 
                 setTimeout(function() {
                     // prevent scrolling
-                    $(rootSel).addClass(activeClass);   
-                    initPlayer(sel);              
+                    $(rootSel).addClass(activeClass);
+                    initPlayer(sel);
                 }, 50); // delay before adding class to ensure transition event will fire
-                
+
             }
 
 
@@ -112,16 +112,16 @@ Pathways.PlayerOverlay = function(elem) {
 
                 $(window).resize(resizePlayer);
 
-                $(document).bind('onToggleFullScreen', function(event, goFullScreen) {                    
+                $(document).bind('onToggleFullScreen', function(event, goFullScreen) {
 
                     if (goFullScreen) {
-                        isFullScreen = true;                       
+                        isFullScreen = true;
                         $overlay.addClass(overlayFullscreenClass);
                     } else {
                         isFullScreen = false;
                         $overlay.removeClass(overlayFullscreenClass);
                     }
-                    
+
                     resizePlayer();
                 });
 
@@ -137,7 +137,7 @@ Pathways.PlayerOverlay = function(elem) {
                 $close = $(closeTmpl);
                 $overlay = createOverlay(overlayTmpl, $root, $close);
                 $player = createPlayer(playerTmpl, $overlay);
-                
+
                 addDocListeners();
 
                 initOverlay($overlay, playerSel);
@@ -151,6 +151,4 @@ Pathways.PlayerOverlay = function(elem) {
         }
     });
 
-}
-
-Pathways.PlayerOverlay.alwaysLoad = true;
+};

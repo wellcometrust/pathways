@@ -1,8 +1,9 @@
 
-'use strict';
-
 // Global Nav
-(function($) {
+(function(window, $, setTimeout) {
+
+    'use strict';
+
     var $nav            = $('.global-navigation'),
         $nav_handle     = $nav.find('.handle'),
         state           = 'open',
@@ -30,7 +31,7 @@
     window.addEventListener('resize', function() {
         navHeight = $nav.outerHeight();
         $nav.css('transform', 'translate(0, '+ -(navHeight - handleHeight) +'px)');
-    })
+    });
 
     setTimeout(function() {
         $nav_handle.trigger('click');
@@ -63,7 +64,7 @@
         e.preventDefault();
     });
 
-})($);
+})(window, $, window.setTimeout);
 
 
 var canvas, stage;
@@ -108,7 +109,7 @@ var $parallaxContent = $('.start').find('.content').first();
 var $parallaxLady = $('.start').find('.falling-lady').first();
 
 function parallaxContentLoad() {
-    var scrollY     = window.pageYOffset,       
+    var scrollY     = window.pageYOffset,
         unit        = 0.5 / (Pathways.panelHeight / 2);
 
     if ($parallaxContent) {
@@ -122,7 +123,7 @@ function parallaxContentLoad() {
             'opacity':  1 - (unit * scrollY),
             'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY / 2) +'px,0)' : 'translate(0,'+ (scrollY / 2) +'px)'
         });
-    }   
+    }
 }
 
 function parallaxContentUnload() {
@@ -140,7 +141,7 @@ function parallaxLadyLoad() {
         $parallaxLady.css({
             'transform': Modernizr.csstransforms3d ? 'translate3d(0,'+ (scrollY * 0.7) +'px,0)' : 'translate(0,'+ (scrollY * 0.7) +'px)'
         });
-    }   
+    }
 }
 
 function parallaxLadyUnload() {
@@ -149,7 +150,7 @@ function parallaxLadyUnload() {
 
 function onScrollUnload(pathways) {
 
-    if( $parallaxContent ) { 
+    if( $parallaxContent ) {
         parallaxContentUnload();
         window.removeEventListener('scroll', parallaxContentLoad, false);
     }
@@ -167,7 +168,7 @@ function onScrollLoad(pathways) {
         controller      = new ScrollMagic({refreshInterval: 500 }),
         $blackStrip     = $('.black-strip');
 
-    
+
     function resizeBlackStrip(e) {
         $blackStrip.css({
             position:       'fixed',
@@ -180,22 +181,23 @@ function onScrollLoad(pathways) {
     window.addEventListener('resize', resizeBlackStrip);
 
     function getValueFromConfig(rawConfig, name) {
-        if (rawConfig) var config = JSON.parse(rawConfig);
+        var config;
+        if (rawConfig) config = JSON.parse(rawConfig);
         return (config && config[name]) || null;
     }
 
-    
+
 
     /**************
         Scenes
     **************/
 
-    var scenes  = new Array(),
+    var scenes  = [],
         idx     = 0;
 
     // Start panel
 
-    if( $parallaxContent ) { 
+    if( $parallaxContent ) {
         window.addEventListener('scroll', parallaxContentLoad, false);
     }
 
@@ -220,19 +222,19 @@ function onScrollLoad(pathways) {
                 triggerHook:    'top',
                 duration:       function() { return ($sequence.height() - Pathways.panelHeight); }
             })
-            .on('enter', function(e) {                
-                $bgs.css({ display: 'block' } );   // To fix layering when reloading             
+            .on('enter', function(e) {
+                $bgs.css({ display: 'block' } );   // To fix layering when reloading
                 if( e.scrollDirection == 'FORWARD') {
                     $bgs.css({ position: 'fixed', display: 'none', opacity: 0 } );
                     $first_panel.find('.bg-container').css({ display: 'block', opacity: 1 });
                 }
                 if( e.scrollDirection == 'REVERSE') {
-                    $bgs.css({ position: 'fixed' } );  
+                    $bgs.css({ position: 'fixed' } );
                 }
             })
-            .on('leave', function(e) {               
+            .on('leave', function(e) {
                 $bgs.css({ position: 'absolute', display: 'block' } );
-            })
+            });
      }
 
     // Panels & Components
@@ -242,8 +244,6 @@ function onScrollLoad(pathways) {
 
     var panel_total = document.querySelectorAll('.sequence .panel').length,
         panel_count = 0;
-
-
 
     $('.sequence .panel').each(function() {
         var $this           = $(this),
@@ -268,29 +268,29 @@ function onScrollLoad(pathways) {
         }
 
         function getComponentDuration(offset) {
-            return function () { return (($this.outerHeight() * 0.75) - offset); }
+            return function () { return (($this.outerHeight() * 0.75) - offset); };
         }
 
         function getLibPanelDuration() {
             var h = $this.outerHeight();
-            return (panel_count == panel_total) ? (h * 0.75) : (h - 300)
+            return (panel_count == panel_total) ? (h * 0.75) : (h - 300);
         }
         /*
             I can't entirely explain why we need to set the bg to block on both enter and leave. But it fixes
             a layering issue when loading the page during or after a sequence. SCIENCE!
         */
-        // Panels       
+        // Panels
         scenes[idx++] = new ScrollScene({
                 triggerElement: $this,
                 duration: getTweenDuration
             })
-            .on('enter', function() {                
+            .on('enter', function() {
                 $bg.css('display', 'block');
             })
-            .on('leave', function() {                
+            .on('leave', function() {
                 $bg.css('display', 'block');
             })
-            .setTween(tween)
+            .setTween(tween);
 
         // Galleries
         if( $gallery.length ) {
@@ -308,12 +308,12 @@ function onScrollLoad(pathways) {
                 .on('leave', function() {
                     $gallery.css({ position: 'absolute', display: 'none' });
                     setTimeout(function() { $gallery.removeClass('active'); }, 50);
-                })
+                });
         }
 
         // Quiz
         if( $quiz.length ) {
-            var q_offset = getValueFromConfig($quiz.attr('data-config'), 'offset_height') || 0;            
+            var q_offset = getValueFromConfig($quiz.attr('data-config'), 'offset_height') || 0;
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
                     triggerHook:    'top',
@@ -327,7 +327,7 @@ function onScrollLoad(pathways) {
                 .on('leave', function() {
                     $quiz.css({ position: 'absolute', display: 'none' });
                     setTimeout(function() { $quiz.removeClass('active'); }, 50);
-                })
+                });
         }
 
         // Library panels
@@ -344,13 +344,13 @@ function onScrollLoad(pathways) {
                 })
                 .on('leave', function() {
                     $library_panel.css({ position: 'absolute', display: 'none' });
-                })
+                });
         }
 
 
         // Audio
-        // 
-        if( $panelAudio.length ) {       
+        //
+        if( $panelAudio.length ) {
             var $audio = $panelAudio.first();
 
             scenes[idx++] = new ScrollScene({
@@ -361,18 +361,18 @@ function onScrollLoad(pathways) {
                     pathways.loadPanelAudio($audio[0]);
                 })
                 .on('leave', function() {
-                    pathways.unloadPanelAudio($audio[0]);                    
-                })
+                    pathways.unloadPanelAudio($audio[0]);
+                });
         }
 
         // Video
-        // 
-        if( $panelVideo.length ) {   
-            var $video = $panelVideo.first(),         
+        //
+        if( $panelVideo.length ) {
+            var $video = $panelVideo.first(),
                 rawConfig = $video.attr('data-config'),
                 initTime = getValueFromConfig(rawConfig, 'initTime') || 0,
                 muteGlobal = getValueFromConfig(rawConfig, 'muteGlobal') || true;
-            
+
             scenes[idx++] = new ScrollScene({
                     triggerElement: $this,
                     duration:       getMediaDuration
@@ -382,25 +382,20 @@ function onScrollLoad(pathways) {
                 })
                 .on('leave', function() {
                     pathways.autoStopVideoOnLeave($video[0], initTime, muteGlobal);
-                })
+                });
         }
 
         // Panel specific scene code if it has any
-        var handlerClass    = pathways.Utils.toTitleCase(panelID);
+        var handlerClass = pathways.Utils.toTitleCase(panelID),
+            panelMethod = pathways.Scene[handlerClass];
 
         // Check the handler exists, then load
-        if ( pathways.Scene[handlerClass] != null ) {
-            pathways.Scene[handlerClass]('#'+panelID);
+        if (typeof panelMethod !== 'undefined' ) {
+            controller.addScene(panelMethod('#'+panelID));
         }
     });
 
-    scenes.forEach(function(s) {
-        s.addTo(controller);
-    });
-
-    pathways.Scenes.forEach(function(s) {
-        s.addTo(controller);
-    })
+    controller.addScene(scenes);
 
     return controller;
 }
@@ -410,7 +405,7 @@ function onPathwaysLoad(pathways) {
     function initScript(d, s, id, a) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
-        js = d.createElement(s); 
+        js = d.createElement(s);
         js.id = id;
         js.async = 1;
         js.src = a;
@@ -420,7 +415,7 @@ function onPathwaysLoad(pathways) {
     window.___gcfg = {
         parsetags: 'onload'
       };
-      
+
     initScript(document, 'script', 'facebook-jssdk', "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=1494497634145827&version=v2.0");
     initScript(document, 'script', 'pth-ga-api', "//apis.google.com/js/platform.js");
     initScript(document, 'script', 'pth-pin-api', "//assets.pinterest.com/js/pinit.js");

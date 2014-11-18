@@ -14,7 +14,7 @@ Pathways.Scene.Letters = function() {
             if( _('#letters audio') ) {
                 _('#letters audio').pause();
             }
-        })
+        });
 
-    Pathways.Scenes.push(scene);
-}
+    return scene;
+};

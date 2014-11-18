@@ -10,6 +10,7 @@ Pathways.Scene.AnnaO = function(panelID) {
 
     var counter = 0;
     var $panel = $(panelID);
+    var scenes = [];
 
     $(panelID + ' .fragmented').each(function() {
         var $this = $(this);
@@ -23,7 +24,7 @@ Pathways.Scene.AnnaO = function(panelID) {
             $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
 
         counter++;
-    })
+    });
 
     $(panelID + ' .fragmented').each(function() {
         var tween = TweenMax.to( $(this), 1, { x: 0, y: -3 } );
@@ -36,7 +37,8 @@ Pathways.Scene.AnnaO = function(panelID) {
             })
             .setTween(tween);
 
-        Pathways.Scenes.push(scene);
+        scenes.push(scene);
     });
 
-}
+    return scenes;
+};

@@ -1,7 +1,7 @@
 
-Pathways.Scene.KenVideo = function() {
+Pathways.Scene.KenVideo = function(panelID) {
 
-    var $panel  = $('#ken-video'),
+    var $panel  = $(panelID),
         video   = $panel.find('video').get(0);
 
     var scene = new ScrollScene({
@@ -16,5 +16,5 @@ Pathways.Scene.KenVideo = function() {
             video.currentTime = 0;
         });
 
-    Pathways.Scenes.push(scene);
-}
+    return scene;
+};

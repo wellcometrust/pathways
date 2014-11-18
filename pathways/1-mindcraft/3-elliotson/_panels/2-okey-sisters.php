@@ -11,7 +11,7 @@
 
         <p>The Okey sisters were extraordinarily susceptible, slipping rapidly into trance states where they manifested quite different personalities. Elliotson could make them fall into stupor merely by waving a finger.</p>
         <p>Touching magnetised metals or even water sent them into a trance in which they spontaneously mirrored each other’s actions.</p>
-       
+
         <p>Elliotson’s demonstrations were crowded with doctors and dignitaries. The Okey sisters seemed to enjoy the attention – especially in their disinhibited trance states, when they teased the gentlemen and sat in their laps.</p>
         <p>The medical journal <i>The Lancet</i> had been reporting the demonstrations with interest. But its editor, Thomas Wakley, suspected deception. He requested a private demonstration at his house, where he took control.</p>
     </div>
@@ -21,7 +21,7 @@
         <img alt="" src="/pathways/1-mindcraft/_assets/3-elliotson/demonstration2.jpg">
     </div>
 
-    <div class="info-box with-text" data-component="gallery" data-config='{ "offset_height": 400 }' data-ga="mindcraft - elliotson - okey-sisters - l2 gallery open">
+    <div class="info-box with-text" id="hypnotised-women" data-component="gallery" data-config='{ "offset_height": 400 }' data-ga="mindcraft - elliotson - okey-sisters - l2 gallery open">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
@@ -38,37 +38,5 @@
             <span class="info-title">Hypnotised women</span>
         </div>
     </div>
-
-    <script>
-        var imageDB = {
-            location: 'galleries/hypnotised-women/',
-            images: [
-                {
-                    image: 'L0000476',
-                    text: '1/6: Most images of mesmerism and hypnotism show men treating women in manipulative or exploitative ways.'
-                },
-                {
-                    image: 'L0034228',
-                    text: '2/6: A corrupt old man tries to seduce a woman by urging her to take a hypnotic draught.'
-                },
-                {
-                    image: 'L0034922',
-                    text: '3/6: A mesmeric physician taking advantage of his female patient.'
-                },
-                {
-                    image: 'V0006760',
-                    text: '4/6: Jean-Martin Charcot demonstrates hysteria in a hypnotised subject at the Salpêtrière hospital in Paris, 1888.'
-                },
-                {
-                    image: 'V0011793',
-                    text: '5/6: An exotic doctor magnetises a young woman; her husband looks on.'
-                },
-                {
-                    image: 'V0016621',
-                    text: '6/6: A female patient being hypnotised in front of a group of four men.'
-                },
-            ]
-        }
-    </script>
 
 </div>

@@ -4,7 +4,7 @@
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
-    
+
     <div class="main-content center fixed">
 
         <div class="inner">
@@ -14,12 +14,12 @@
         <div class="inner">
             <p>Stopes’s reading formed the basis for Married Love, a book published in 1918 after being rejected by many publishers. In it, Stopes addresses the ‘infinitely complex’ problems of marital sex with ‘sympathy and scientific research’. Drawing on first hand observations, Stopes aimed to provide information that might save ‘average, healthy, mating creatures…years of heartache and groping in the dark’.</p>
             <p>Despite being condemned by churches, the medical establishment and the press, Married Love sold 2000 copies within a fortnight and was reprinted six times by the end of the year.</p>
-        </div>                    
+        </div>
 
     </div>
 
 
-    <div class="info-box with-text" data-component="gallery">
+    <div class="info-box with-text" id="made-a-film" data-component="gallery">
         <img alt="" class="stub" src="/pathways/2-the-collectors/_assets/6-ignorant-bride/ticket-stub.jpg">
 
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
@@ -38,34 +38,5 @@
             <span class="info-title">They even made a film!</span>
         </div>
     </div>
-
-    <script>
-        var imageDB = {
-            location: 'mesmer/gallery/',
-            images: [
-                {
-                    image: 'V0016530',
-                },
-                {
-                    image: 'L0023349',
-                },
-                {
-                    image: 'L0023350',
-                },
-                {
-                    image: 'L0023351',
-                },
-                {
-                    image: 'L0023352',
-                },
-                {
-                    image: 'M0006352',
-                },
-                {
-                    image: 'V0011096',
-                },
-            ]
-        }
-    </script>
 
 </div>

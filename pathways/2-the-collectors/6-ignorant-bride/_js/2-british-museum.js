@@ -7,7 +7,7 @@ Pathways.Scene.BritishMuseum = function() {
         })
         .on('enter', function(e) {
             $('#british-museum').addClass('active');
-        })
+        });
 
-    Pathways.Scenes.push(scene);
-}
+    return scene;
+};

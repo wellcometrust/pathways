@@ -7,7 +7,7 @@ Pathways.Scene.GrauntRecords = function() {
         })
         .on('enter', function(e) {
             $('#graunt-records').addClass('active');
-        })
+        });
 
-    Pathways.Scenes.push(scene);
-}
+    return scene;
+};
