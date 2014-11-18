@@ -592,7 +592,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         if (!scenesLoaded) {
             // If it's a non-touch device, load the scenes.
             if (sys.level >= mod.MIN_SCROLL_LEVEL) {
-                sceneController = onScrollLoad(mod);
+                sceneController = onScrollLoad();
 
                 initSoundControls();
                 initAudio(panels);
@@ -603,7 +603,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
             if (sys.level < mod.MIN_SCROLL_LEVEL) {
                 sceneController.destroy(true);
                 removeScrollSceneStyling();
-                onScrollUnload(mod);
+                onScrollUnload();
 
                 $('audio, video').each(function() {
                     this.muted = true;
@@ -637,7 +637,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
             initVideo(panels);
 
-            onLoadComplete(mod);
+            onLoadComplete();
         });
 
     }

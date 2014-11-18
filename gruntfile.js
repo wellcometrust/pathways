@@ -1,9 +1,9 @@
 module.exports = function(grunt) {
 
-    // 1. All configuration goes here 
+    // 1. All configuration goes here
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        
+
         exportRoot: '../export',
 
         concat: {
@@ -23,7 +23,8 @@ module.exports = function(grunt) {
             },
             app_files: {
                 src: [
-                    '_assets/js/pathways.js', // Start with the Pathways Core file.
+                    '_assets/animations/**/*.js', // Any animation files
+                    '_assets/js/pathways.js', // The Pathways Core file.
                     '_assets/js/main.js', // Then the main file.
                     '_assets/js/patterns/*.js', // Then the patterns
                     'pathways/**/**/_js/*.js' // And finally the scenes
@@ -83,8 +84,8 @@ module.exports = function(grunt) {
             options: {
                 docroot: '/',
                 htmlhint: {
-                    'attr-lowercase': false, // <svg> viewBox incorrectly throws error    
-                    'tag-pair': false // <source> incorrectly throws error               
+                    'attr-lowercase': false, // <svg> viewBox incorrectly throws error
+                    'tag-pair': false // <source> incorrectly throws error
                 },
             },
             mindcraft: {
@@ -133,7 +134,7 @@ module.exports = function(grunt) {
                     src: ['pathways/1-mindcraft/_assets/**'],
                     dest: '<%= exportRoot %>'
                 }]
-            }, 
+            },
             collectors: {
                 files: [{
                     expand: true,
@@ -178,7 +179,7 @@ module.exports = function(grunt) {
             runPath(arg);
         } else {
             grunt.log.writeln('Exporting all');
-            grunt.task.run(['php2html:all', 'copy:default', 'copy:all']);            
+            grunt.task.run(['php2html:all', 'copy:default', 'copy:all']);
         }
     });
 
