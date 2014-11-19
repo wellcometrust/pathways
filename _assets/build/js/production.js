@@ -958,7 +958,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
     return function(id) {
         var canvas = doc.getElementById(id), a = anim[id];
 
-        if (!canvas) return console.warn('No canvas with id \''+ id +'\' found');
+        if (!canvas) return;
         if (!a) return console.warn('No animation properties with id \''+ id +'\' found');
 
         function initCanvas() {
@@ -1117,7 +1117,7 @@ Pathways.initAnimation('magnetisedTrees');
             Sequence
          **************/
 
-        if ($sequence) {
+        if ($sequence.length) {
             var $bgs = $sequence.find('.bg-container'),
                 $first_panel = $sequence.find('.panel').first(),
                 $last_panel = $sequence.find('.panel').last();
@@ -2974,25 +2974,29 @@ window.TheCollectors = {};
 
 $(function() {
     //Initialise the interface object with the Data object
+
+    if ($('#radial').length === 0) return;
+
     var SCREEN_MODE;
     if ($(window).width() > 480) {
         SCREEN_MODE = TheCollectors.SCREEN_MODE_DESKTOP;
     } else {
         SCREEN_MODE = TheCollectors.SCREEN_MODE_MOBILE;
     }
+
     TheCollectors.Interface.Init(SCREEN_MODE);
 
 
     $(window).resize(function() {
         if (($(window).width() > 480) && (SCREEN_MODE == TheCollectors.SCREEN_MODE_MOBILE)) {
             SCREEN_MODE = TheCollectors.SCREEN_MODE_DESKTOP;
-            TheCollectors.Interface.changeScreenMode(SCREEN_MODE)
+            TheCollectors.Interface.changeScreenMode(SCREEN_MODE);
             return;
         }
 
         if (($(window).width() < 480) && (SCREEN_MODE == TheCollectors.SCREEN_MODE_DESKTOP)) {
             SCREEN_MODE = TheCollectors.SCREEN_MODE_MOBILE;
-            TheCollectors.Interface.changeScreenMode(SCREEN_MODE)
+            TheCollectors.Interface.changeScreenMode(SCREEN_MODE);
             return;
         }
 
@@ -3006,20 +3010,21 @@ TheCollectors.SCREEN_MODE_DESKTOP = 'desktop';
 
 TheCollectors.getData = function(SCREEN_MODE) {
     if (SCREEN_MODE == TheCollectors.SCREEN_MODE_DESKTOP) {
-        return TheCollectors.data
+        return TheCollectors.data;
     } else if (SCREEN_MODE == TheCollectors.SCREEN_MODE_MOBILE) {
-        var dataToReturn = []
+        var dataToReturn = [];
         for (var i = 0; i < TheCollectors.data.length; i++) {
             if (TheCollectors.data[i].mobileData) dataToReturn.push(TheCollectors.data[i]);
         }
         return dataToReturn;
     }
-    console.log('NO DATA FOUND')
+    console.log('NO DATA FOUND');
     return 'NO DATA FOUND';
 
-}
+};
 
-TheCollectors.assetRoot = '/_assets/img/infographics/death-collector/'
+TheCollectors.assetRoot = '/_assets/img/infographics/death-collector/';
+
 TheCollectors.data = [{
 
         name: "Abortive, and stilborn",
@@ -5473,13 +5478,13 @@ TheCollectors.Interface = function() {
         updateInfoBoxValues();
 
 
-    }
+    };
 
     var getInitialData = function(SCREEN_MODE) {
         DATA = TheCollectors.getData(SCREEN_MODE);
         axis = DATA.length;
         maxVal = Number(Math.sqrt(2500 * DATA.length / Math.PI));
-    }
+    };
 
     var currentData = [];
 
@@ -5508,7 +5513,7 @@ TheCollectors.Interface = function() {
     var updateInfoBoxValues = function() {
         dom.infoBoxYear.text(dom.yearSelector[0].value);
         if (SELECTED_ITEM > -1) dom.infoBoxDeaths.text(DATA[SELECTED_ITEM].data[dom.yearSelector[0].value - 1629].value);
-    }
+    };
     var loadData = function() {
         sdat = [];
         keys = [];
@@ -5562,11 +5567,11 @@ TheCollectors.Interface = function() {
             if (i > DATA.length / 2 - 1) {
                 angle = i / axis * 360 - 90 + 360 / axis / 2.8;
             }
-            var radiusForTextToStart
+            var radiusForTextToStart;
             if (SCREEN_MODE == TheCollectors.SCREEN_MODE_DESKTOP) {
-                radiusForTextToStart = 20
+                radiusForTextToStart = 20;
             } else {
-                radiusForTextToStart = 5
+                radiusForTextToStart = 5;
             }
             return 'rotate( ' + angle + ')translate(' + radius(radiusForTextToStart) + ')';
         }).attr('class', 'line-ticks');
@@ -5574,9 +5579,9 @@ TheCollectors.Interface = function() {
             return keys[i];
         }).attr('text-anchor', 'right').attr('fill', '#e5254e').attr('font-size', function() {
             if (SCREEN_MODE == TheCollectors.SCREEN_MODE_DESKTOP) {
-                return 14
+                return 14;
             } else {
-                return 30
+                return 30;
             }
         }).attr('class', 'label').attr('transform', function(d, i) {
             labelWidth[i] = $(this)[0].getBBox().width;
@@ -5602,11 +5607,11 @@ TheCollectors.Interface = function() {
             return DATA[i]["ValueLabelPos_" + SCREEN_MODE].y;
         }).attr('font-size', function() {
             if (SCREEN_MODE == TheCollectors.SCREEN_MODE_DESKTOP) {
-                return 16
+                return 16;
             } else {
-                return 30
+                return 30;
             }
-        })
+        });
     };
     var drawBars = function() {
         var groups, bar;
@@ -5661,7 +5666,7 @@ TheCollectors.Interface = function() {
 
                     oldRadius[s] = k(t);
 
-                    return bar.outerRadius(k(t))(a);;
+                    return bar.outerRadius(k(t))(a);
                 };
             }).each('end', function() {
                 oldRadius[s] = newRadius[s];
@@ -5684,6 +5689,7 @@ TheCollectors.Interface = function() {
         });
     };
     var updateData = function() {
+        var yearIndex;
         if ((dom.yearSelector, dom.yearSelector[0].value > 1636) && (dom.yearSelector, dom.yearSelector[0].value < 1647)) {
 
             if (!NO_DATA_YEAR) {
@@ -5693,7 +5699,7 @@ TheCollectors.Interface = function() {
                     dom.infoBox.fadeTo(200, 0);
             }
             NO_DATA_YEAR = true;
-            var yearIndex = 1636 - 1629;
+            yearIndex = 1636 - 1629;
         } else {
 
             if (NO_DATA_YEAR) {
@@ -5703,7 +5709,7 @@ TheCollectors.Interface = function() {
                 dom.noData.fadeTo(400, 0);
             }
             NO_DATA_YEAR = false;
-            var yearIndex = dom.yearSelector[0].value - 1629;
+            yearIndex = dom.yearSelector[0].value - 1629;
 
         }
         currentData = [];
@@ -5774,7 +5780,7 @@ TheCollectors.Interface = function() {
                 updateDisplayInfo(0);
             }
         });
-    }
+    };
 
 
     var eventListeners = function() {
@@ -5787,14 +5793,16 @@ TheCollectors.Interface = function() {
 
         });
         viz.selectAll('#radial svg g.series path, #radial svg g.series2 path').on('mouseover', function(a, index) {
+            var id;
             if (index >= DATA.length) {
-                var id = index - DATA.length;
+                id = index - DATA.length;
             }
             d3.select(valueHolders[0][id]).attr('class', "value-label-holders opacity-transition display-opacity-1");
         });
         viz.selectAll('#radial svg g.series path, #radial svg g.series2 path').on('mouseout', function(a, index) {
+            var id;
             if (index >= DATA.length) {
-                var id = index - DATA.length;
+                id = index - DATA.length;
             }
             if (id == SELECTED_ITEM) return;
             d3.select(valueHolders[0][id]).attr('class', "value-label-holders opacity-transition display-opacity-0");
@@ -5804,9 +5812,9 @@ TheCollectors.Interface = function() {
     var updateDisplayInfo = function(index) {
         var paths = viz.selectAll('#radial svg g.series path');
         var labels = viz.selectAll('.line-ticks .label');
-        id = index;
+        var id = index;
         if (index >= DATA.length) {
-            var id = index - DATA.length;
+            id = index - DATA.length;
         }
 
         d3.select(valueHolders[0][id]).attr('class', "value-label-holders opacity-transition display-opacity-1");
@@ -5848,9 +5856,9 @@ TheCollectors.Interface = function() {
         var ar = TheCollectors.assetRoot;
         if (SELECTED_ITEM > -1) {
             dom.infoBox.fadeOut('fast', function() {
-                dom.infoBoxImg.css('opacity', 0)
+                dom.infoBoxImg.css('opacity', 0);
                 dom.infoBoxImg.bind('load', function() {
-                    dom.infoBoxImg.css('opacity', 1)
+                    dom.infoBoxImg.css('opacity', 1);
                 });
                 dom.infoBoxImg.attr('src', ar + 'death_reason_' + (DATA[SELECTED_ITEM].imgID + 1) + '.jpg');
                 dom.infoBoxImg.attr('srcset', ar + 'death_reason_' + (DATA[SELECTED_ITEM].imgID + 1) + '.jpg 1x, ' +
@@ -6492,7 +6500,7 @@ Pathways.Scene.GrauntRecords = function(panelID) {
     var scene = new ScrollScene({
             triggerElement: panelID,
             triggerHook: 'top',
-            duration:       Pathways.panelHeight,
+            duration:     Pathways.panelHeight,
         })
         .on('enter', function() {
             $panel.addClass('active');

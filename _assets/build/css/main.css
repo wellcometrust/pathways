@@ -3548,7 +3548,9 @@ iframe {
   height: 47px; }
   .intro .logo a, .intro .logo img {
     display: block;
-    width: 100%; }
+    width: 135px;
+    height: 45px;
+    line-height: 1; }
 .intro .inner {
   position: relative;
   max-width: 960px;
