@@ -1,12 +1,16 @@
 
-Pathways.Scene.GrauntRecords = function() {
+Pathways.Scene.GrauntRecords = function(panelID) {
+
+    var $panel = $(panelID);
 
     var scene = new ScrollScene({
-            triggerElement: '#graunt-records',
+            triggerElement: panelID,
             duration:       Pathways.panelHeight
         })
-        .on('enter', function(e) {
-            $('#graunt-records').addClass('active');
+        .on('enter', function() {
+            $panel.addClass('active');
+        }).on('leave', function() {
+            $panel.removeClass('active');
         });
 
     return scene;
