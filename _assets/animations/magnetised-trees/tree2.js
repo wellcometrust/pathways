@@ -1,3 +1,10 @@
+var createjs = createjs||{},
+	animations = animations||{};
+	animations.magnetisedTrees = {
+		lib: {},
+		images: {}
+	};
+
 (function (lib, img, cjs) {
 
 var p; // shortcut to reference prototypes
@@ -206,5 +213,4 @@ p.nominalBounds = null;
 }).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(0,0,86.5,377.3);
 
-})(lib = lib||{}, images = images||{}, createjs = createjs||{});
-var lib, images, createjs;
+})(animations.magnetisedTrees.lib, animations.magnetisedTrees.images, createjs);
