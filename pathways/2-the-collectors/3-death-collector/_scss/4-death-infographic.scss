@@ -1,4 +1,11 @@
-
 #death-infographic {
-    
+    // TODO: make this transition nicer
+    .info-box, .input-container {
+        display: none;
+    }
+    &.active {
+        .info-box, .input-container {
+            display: block;
+        }
+    }
 }

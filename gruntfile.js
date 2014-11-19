@@ -13,6 +13,8 @@ module.exports = function(grunt) {
                     '_assets/js/lib/hammer.min.js',
                     '_assets/js/lib/greensock/TweenMax.min.js',
                     '_assets/js/lib/jquery.scrollmagic.js',
+                    '_assets/js/lib/d3.min.js',
+                    '_assets/js/lib/simple-slider.min.js',
 
                     '_assets/js/lib/createjs/easeljs-0.7.1.min.js',
                     '_assets/js/lib/createjs/tweenjs-0.5.1.min.js',
@@ -27,6 +29,7 @@ module.exports = function(grunt) {
                     '_assets/js/pathways.js', // The Pathways Core file.
                     '_assets/js/main.js', // Then the main file.
                     '_assets/js/patterns/*.js', // Then the patterns
+                    '_assets/js/infographics/*.js', // Then any infographics
                     'pathways/**/**/_js/*.js' // And finally the scenes
                 ],
                 dest: '_assets/build/js/production.js',
@@ -39,8 +42,8 @@ module.exports = function(grunt) {
 
         uglify: {
             libs: {
-                src: '_assets/build/js/libs.js',
-                dest: '_assets/build/js/libs.min.js'
+                //src: '_assets/build/js/libs.js',
+                //dest: '_assets/build/js/libs.min.js'
             },
             app_files: {
                 src: '_assets/build/js/production.js',
