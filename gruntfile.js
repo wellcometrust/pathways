@@ -5,6 +5,12 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         exportRoot: '../export',
+        flattenReplacements: ['localhost%3A8888', 'localhost:8888'],
+        serverRoot: {
+            dhStaging: 'wellcome-pathways.ixomega.com',
+            clStaging: 'wellcome-pathways.clearleft.com',
+            wellcomelive: 'digitalstories.wellcomecollection.org'
+        },
 
         concat: {
             libs: {
@@ -42,8 +48,8 @@ module.exports = function(grunt) {
 
         uglify: {
             libs: {
-                //src: '_assets/build/js/libs.js',
-                //dest: '_assets/build/js/libs.min.js'
+                src: '_assets/build/js/libs.js',
+                dest: '_assets/build/js/libs.min.js'
             },
             app_files: {
                 src: '_assets/build/js/production.js',
@@ -104,7 +110,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['pathways/2-collectors/index.php', 'pathways/2-collectors/credits.php', 'pathways/2-collectors/**/index.php'],
+                    src: ['pathways/2-the-collectors/index.php', 'pathways/2-the-collectors/credits.php', 'pathways/2-the-collectors/**/index.php'],
                     dest: '<%= exportRoot %>',
                     ext: '.html'
                 }],
@@ -142,7 +148,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['pathways/2-collectors/_assets/**'],
+                    src: ['pathways/2-the-collectors/_assets/**'],
                     dest: '<%= exportRoot %>'
                 }]
             },
@@ -152,6 +158,21 @@ module.exports = function(grunt) {
                     cwd: '',
                     src: ['pathways/*/_assets/**'],
                     dest: '<%= exportRoot %>'
+                }]
+            }
+        },
+
+        replace: {
+            dist: {
+                overwrite: true,
+                src: ['<%= exportRoot %>/pathways/**/*.html'],
+                replacements: [{
+                    from: 'localhost%3A8888',
+                    to: '<%= serverRoot.wellcomelive %>'
+                },
+                {
+                    from: 'localhost:8888',
+                    to: '<%= serverRoot.wellcomelive %>'
                 }]
             }
         }
@@ -167,6 +188,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-php2html');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
+    grunt.loadNpmTasks('grunt-text-replace');
+
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
     grunt.registerTask('css', ['concat', 'sass']);
     grunt.registerTask('js', ['concat', 'uglify']);
@@ -177,12 +200,12 @@ module.exports = function(grunt) {
         if (arg) {
             grunt.log.writeln('Exporting ', arg); // TODO - use arg to export specific pathway
             function runPath(name) {
-                grunt.task.run(['php2html:' + name, 'copy:default', 'copy:' + name]);
+                grunt.task.run(['php2html:' + name, 'copy:default', 'copy:' + name, 'replace']);
             }
             runPath(arg);
         } else {
             grunt.log.writeln('Exporting all');
-            grunt.task.run(['php2html:all', 'copy:default', 'copy:all']);
+            grunt.task.run(['php2html:all', 'copy:default', 'copy:all', 'replace']);
         }
     });
 

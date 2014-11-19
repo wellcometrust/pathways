@@ -1,5 +1,5 @@
 <?php
-    
+
     include_once(PageBuilder::getDocRoot().'/_includes/Spyc.php');
 
     function truncate($string, $length=100, $append="") {
@@ -13,7 +13,7 @@
 
         return $string;
     }
-    
+
     class PageBuilder {
 
         private $defaultTitle = 'Pathways';
@@ -21,7 +21,7 @@
 
         private $title = 'Pathways';
         private $description = 'Wellcome Collection';
-        
+
         private $siteConfigData;
         private $moduleData;
 
@@ -38,12 +38,12 @@
         public $mediaUrl = 'http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/';
 
         function __construct($pathwayId = '', $moduleId = '') {
-            
+
             $this->pathwayId = $pathwayId;
             $this->moduleId = $moduleId;
 
             $this->docRoot = PageBuilder::getDocRoot();
-            $this->hostRoot = PageBuilder::getHostRoot();        
+            $this->hostRoot = PageBuilder::getHostRoot();
 
             $this->initVals();
        	}
@@ -51,16 +51,16 @@
 
     // Public methods
 
-        public function setModuleDataSrc($src) {                          
+        public function setModuleDataSrc($src) {
             if ($this->moduleDataSrc != $src) {
-                $this->moduleDataSrc = $src;                 
+                $this->moduleDataSrc = $src;
                 $this->initVals();
             }
         }
 
-        public function setSiteConfigSrc($src) {            
+        public function setSiteConfigSrc($src) {
             if ($this->siteConfigSrc != $src) {
-                $this->siteConfigSrc = $src;                
+                $this->siteConfigSrc = $src;
                 $this->initVals();
             }
         }
@@ -72,7 +72,7 @@
             }
         }
 
-        public function setPathwayId($id) {            
+        public function setPathwayId($id) {
             if ($this->pathwayId != $id) {
                 $this->pathwayId = $id;
                 $this->initVals();
@@ -80,7 +80,7 @@
         }
 
         private function initVals() {
-            
+
             $this->moduleData = spyc_load_file($this->moduleDataSrc);
             $this->siteConfigData = spyc_load_file($this->docRoot.$this->siteConfigSrc);
 
@@ -93,7 +93,7 @@
 
         public function getTitle() {
             return $this->getModule()['title'];
-        }    
+        }
 
         public function getPageTitle() {
             return $this->getModule()['title'] . $this->getModule()['title_postfix'];
@@ -102,10 +102,10 @@
         public function getDescription() {
             return $this->getModule()['description'];
         }
-       
+
         public function getPathwayId() {
             return $this->_getModulePageInfo($this->pathwayId, $this->moduleData, 'pathway_id');
-        }        
+        }
 
         public function getModuleId() {
             return $this->_getModulePageInfo($this->moduleId, $this->moduleData, 'module_id');
@@ -115,11 +115,11 @@
             $spacer = ' - ';
             return $this->pathwayId . $spacer . $this->moduleId . $spacer;
         }
-        
 
-        
+
+
         public function getAudio() {
-            return $this->_getModuleData('audio', $this->moduleData);           
+            return $this->_getModuleData('audio', $this->moduleData);
         }
 
         public function getTeaserData() {
@@ -132,18 +132,18 @@
 
 
 
-        public function getPathwayPath() {    
-            return $this->_getPathwayPath($this->pathwayId, $this->siteConfigData);  
-        }   
+        public function getPathwayPath() {
+            return $this->_getPathwayPath($this->pathwayId, $this->siteConfigData);
+        }
 
         public function getPathwayModules() {
             return $this->modules;
         }
-        
 
 
-        public function getModule() {   
-            if (empty($this->moduleId)) return [];   
+
+        public function getModule() {
+            if (empty($this->moduleId)) return [];
             return $this->_getModuleById($this->moduleId, $this->modules);
         }
 
@@ -158,7 +158,7 @@
             return '/_assets' . ( strpos($location, '/') != 0 ? '/' . $location : $location);
         }
 
-        
+
 
         public function getAudioByPanelId($id) {
             return $this->getAudio()[$id];
@@ -181,7 +181,7 @@
         private function _getModuleById($id, $modules) {
             foreach( $modules as $m ) {
                 if( $id == $m['id'] ) {
-                    $module = $m;             
+                    $module = $m;
                 }
             }
             return $module;
@@ -198,30 +198,30 @@
         private function _getModulePageInfo($id, $data, $item){
             if (empty($id) && !empty($data)) {
                 $id = $data['page_info'][$item];
-            }            
+            }
             return $id;
         }
 
         private function _getPathwayPath($pathwayId, $siteConfigData) {
-            return $siteConfigData['site']['pathways'][$pathwayId]['path'];  
+            return $siteConfigData['site']['pathways'][$pathwayId]['path'];
         }
 
         private function _getPathwayModules($pathwayId, $siteConfigData) {
-            $modules = $siteConfigData['site']['pathways'][$pathwayId]['modules'];       
+            $modules = $siteConfigData['site']['pathways'][$pathwayId]['modules'];
             return $this->_setModuleIndexes($modules);
         }
 
-        private function _setModuleIndexes($modules) { 
+        private function _setModuleIndexes($modules) {
             if (isset($modules)) {
                 $count = 1;
-                foreach($modules as &$m ) {                      
-                    if ( isset($m['panels'])) $m['index'] = $count++;                                      
-                }          
-                return $modules; 
+                foreach($modules as &$m ) {
+                    if ( isset($m['panels'])) $m['index'] = $count++;
+                }
+                return $modules;
             } else {
                 return [];
-            }           
-                 
+            }
+
         }
 
     // Static methods
@@ -231,12 +231,12 @@
             } else {
                 $root = $_SERVER['DOCUMENT_ROOT'];
             }
-            
+
             return $root;
         }
 
         public static function getHostRoot(){
-            return (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']; 
+            return 'http' . '://' . $_SERVER['HTTP_HOST'];
         }
 
         public static function getPage($pathwayId = '', $moduleId = '') {

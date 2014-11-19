@@ -72,7 +72,7 @@
     return function(id) {
         var canvas = doc.getElementById(id), a = anim[id];
 
-        if (!canvas) return console.warn('No canvas with id \''+ id +'\' found');
+        if (!canvas) return;
         if (!a) return console.warn('No animation properties with id \''+ id +'\' found');
 
         function initCanvas() {
@@ -231,7 +231,7 @@ Pathways.initAnimation('magnetisedTrees');
             Sequence
          **************/
 
-        if ($sequence) {
+        if ($sequence.length) {
             var $bgs = $sequence.find('.bg-container'),
                 $first_panel = $sequence.find('.panel').first(),
                 $last_panel = $sequence.find('.panel').last();
