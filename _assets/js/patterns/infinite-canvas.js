@@ -99,9 +99,8 @@ function InfiniteCanvas(element, data) {
 
         $element.append(items);
 
-        $element.on('click', '.image-panel', function(e) {
-            console.log('here 2');
-            $(this).toggleClass('active');
+        $('.infinite-canvas .image-panel .info-box').on('click', function(e) {
+            $(this).parent().toggleClass('active');
         });
     };
 
