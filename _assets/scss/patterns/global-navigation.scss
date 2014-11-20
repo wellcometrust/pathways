@@ -4,7 +4,7 @@
     nav {
         background-color: rgba(0,0,0,0.8);
     }
-    
+
     li {
         list-style: none;
         opacity:    0.5;
@@ -52,7 +52,7 @@
             @include            tablet-gothic;
         }
     }
-    
+
 }
 
 .js {
@@ -135,57 +135,7 @@
                 }
             }
         }
-    }
 
-    .global-navigation--the-collectors {
-        li:nth-child(1) {
-            .image {
-                background:         url($the-collectors-assets + '/navigation/intro.jpg') 0 0 no-repeat;
-                background-size:    100%;
-            }
-        }
-
-        li:nth-child(2) {
-            .image {
-                background:         url($the-collectors-assets + '/navigation/curious-gardener.jpg') 0 0 no-repeat;
-                background-size:    100%;
-            }
-        }
-
-        li:nth-child(3) {
-            .image {
-                background:         url($the-collectors-assets + '/navigation/merchants-of-light.jpg') 0 0 no-repeat;
-                background-size:    100%;
-            }
-        }
-
-        li:nth-child(4) {
-            .image {
-                background:         url($the-collectors-assets + '/navigation/death-collector.jpg') 0 0 no-repeat;
-                background-size:    100%;
-            }
-        }
-
-        li:nth-child(5) {
-            .image {
-                background:         url($the-collectors-assets + '/navigation/unceasing-seeker.jpg') 0 0 no-repeat;
-                background-size:    100%;
-            }
-        }
-
-        li:nth-child(6) {
-            .image {
-                background:         url($the-collectors-assets + '/navigation/obscene-doctor.jpg') 0 0 no-repeat;
-                background-size:    100%;
-            }
-        }
-
-        li:nth-child(7) {
-            .image {
-                background:         url($the-collectors-assets + '/navigation/ignorant-bride.jpg') 0 0 no-repeat;
-                background-size:    100%;
-            }
-        }
     }
 }
 

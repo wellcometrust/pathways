@@ -13,23 +13,17 @@
 
 ?>
 
-<div class="global-navigation global-navigation--<?= $pathwayId ?> active">
+<div class="intro-navigation intro-navigation--<?= $pathwayId ?> active">
     <div class="container clearfix">
         <nav>
 
             <ul class="clearfix">
-                <li<?= $currentModule['id'] == '' ? ' class="active"' : '' ?>>
-                    <a href="<?= $pathwayPath ?>index.php">
-                        <span>Intro</span>
-                        <img src="<?= $level ?>_assets/navigation/intro.jpg">
-                    </a>
-                </li>
 
             <?php
                 foreach( $modules as $m ):
                     if ( isset($m['panels']) ) {
             ?>
-                <li<?= $currentModule['id'] == $m['id'] ? ' class="active"' : '' ?>>
+                <li>
                     <a href="<?= $pathwayPath . $m['path'] ?>index.php">
                         <span><?= $m['index']  . '. ' . $m['title'] ?></span>
                         <img src="<?= $level ?>_assets/navigation/<?= $m['id'] ?>.jpg">
@@ -41,8 +35,5 @@
             ?>
             </ul>
         </nav>
-        <div class="handle closed">
-            <div class="current-section"><?= $currentModule['index'] ?></div>
-        </div>
     </div>
 </div>

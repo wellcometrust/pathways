@@ -36,62 +36,10 @@ include_once($docRoot.'/_includes/header.php');
                 </a>
             </div>
 
-            <div class="intro-navigation--the-collectors">
-                <div class="container clearfix">
-                    <nav>
-                        <ul class="clearfix">
-                            <li>
-                                <a class="section-link" href="1-curious-gardener/index.php">
-                                    <span>The Curious Gardener</span>
-                                    <div class="image">
-                                        <img alt="" src="/_assets/img/spacer.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="section-link" href="2-merchants-of-light/index.php">
-                                    <span>Merchants of Light</span>
-                                    <div class="image">
-                                        <img alt="" src="/_assets/img/spacer.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="section-link" href="3-death-collector/index.php">
-                                    <span>The Death Collector</span>
-                                    <div class="image">
-                                        <img alt="" src="/_assets/img/spacer.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="section-link" href="4-unceasing-seeker/index.php">
-                                    <span>The Unceasing Seeker</span>
-                                    <div class="image">
-                                        <img alt="" src="/_assets/img/spacer.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="section-link" href="5-obscene-doctor/index.php">
-                                    <span>The Obscene Doctor</span>
-                                    <div class="image">
-                                        <img alt="" src="/_assets/img/spacer.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="section-link" href="6-ignorant-bride/index.php">
-                                    <span>The Ignorant Bride</span>
-                                    <div class="image">
-                                        <img alt="" src="/_assets/img/spacer.png">
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+        <?php
+            /* Navigation */
+            $page->renderPattern('intro-navigation');
+        ?>
 
         </div>
 

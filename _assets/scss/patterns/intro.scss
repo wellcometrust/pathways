@@ -5,6 +5,7 @@
         position:               absolute;
         top:                    0;
         left:                   0;
+        bottom:                 0;
         background-position:    50% 50%;
         background-repeat:      no-repeat;
         background-size:        cover;
@@ -98,15 +99,15 @@
     }
 
     .intro-header {
-        color: #030303;
+        color: #fff;
     }
 
     .intro-body {
-        color: #030303;
+        color: #fff;
     }
 
     .intro-button {
-        color: #030303;
+        color: #fff;
     }
 }
 

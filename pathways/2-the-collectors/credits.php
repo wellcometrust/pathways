@@ -41,7 +41,7 @@
                     <li><span>Project Manager:</span> Jessica Jebari</li>
                 </ul>
 
-            <h3>Beakus <span>(Air Loom Animation)</span></h3>
+                <h3>Beakus <span>(Air Loom Animation)</span></h3>
 
                 <ul>
                     <li><span>Producer:</span> Laura Thomas</li>
@@ -52,9 +52,9 @@
         </div><!-- .credits -->
 
         <?php
-            $page->renderPattern('navigation'); 
+            $page->renderPattern('navigation');
         ?>
-        
+
     </main>
 
 <?php include_once($docRoot.'/_includes/footer.php') ?>
