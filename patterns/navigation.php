@@ -42,7 +42,11 @@
             </ul>
         </nav>
         <div class="handle closed">
-            <div class="current-section"><?= $currentModule['index'] ?></div>
+            <div class="current-section">
+                <?php if ( isset($currentModule['index']) ) {
+                echo $currentModule['index'];
+                } ?>
+            </div>
         </div>
     </div>
 </div>
