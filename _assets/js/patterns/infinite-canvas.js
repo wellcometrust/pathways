@@ -57,31 +57,52 @@ function InfiniteCanvas(element, data) {
         });
 
         window.addEventListener('resize', function() {
-            viewportWidth = window.innerWidth,
-                viewportHeight = window.innerHeight;
+            viewportWidth = window.innerWidth;
+            viewportHeight = window.innerHeight;
         });
 
         this.loadImages();
     };
 
     this.loadImages = function() {
-        console.log('running');
-        // for now load all the images in the DB
-        var images = data,
-            length = images.length;
+
+        var length = data.length,
+            items = [],
+            $item, $img, $box, $txt;
 
         for (var i = 0; i < length; i++) {
-            var $img = $('<img/>').addClass('image-panel');
 
-            $img.attr('src', '/_assets/img/infinite-canvas/infiniteCanvas_' + images[i].id + '.jpg');
+            $item = $('<div/>').addClass('image-panel');
 
-            $img.css({
-                left: images[i].pos[0],
-                top: images[i].pos[1]
-            });
+            $img = $('<img/>');
+            $img.attr('src', '/_assets/img/infinite-canvas/infiniteCanvas_' + data[i].id + '.jpg');
 
-            $element.append($img);
+            $svg = $('<svg class="info-box" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">'+
+                        '<circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>'+
+                        '<circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>'+
+                    '</svg>');
+
+            $box = $('<div/>').addClass('text');
+            $txt = $('<p/>').text(data[i].text);
+
+            $box.append($txt);
+
+            $item.append($img)
+                .append($box)
+                .append($svg)
+                .css({
+                    left: data[i].pos[0],
+                    top: data[i].pos[1]
+                });
+            items.push($item);
         }
+
+        $element.append(items);
+
+        $element.on('click', '.image-panel', function(e) {
+            console.log('here 2');
+            $(this).toggleClass('active');
+        });
     };
 
     // Try to position the text in the middle of the screen, but also keep the canvas within bounds.

@@ -307,13 +307,16 @@ Pathways.initAnimation('magnetisedTrees');
 
             function getComponentDuration(offset) {
                 return function() {
-                    return (($this.outerHeight() * 0.75) - offset);
+                    var val = ($this.outerHeight() * 0.75) - offset;
+                    return (val > 0 ? val : 0);
                 };
             }
 
             function getLibPanelDuration() {
-                var h = $this.outerHeight();
-                return (panel_count == panel_total) ? (h * 0.75) : (h - 300);
+                var h = $this.outerHeight(),
+                    val = (panel_count == panel_total) ? (h * 0.75) : (h - 300);
+
+                return (val > 0 ? val : 0);
             }
                 /*
                     I can't entirely explain why we need to set the bg to block on both enter and leave. But it fixes
