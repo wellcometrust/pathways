@@ -626,6 +626,14 @@
             gaLabel6 = $(this).data('ga');
             ga('send', 'event', 'link', 'click', gaLabel6);
         });
+        $("li[class$='twitter']").click(function() {
+            gaLabel7 = $(this).data('ga');
+            ga('send', 'event', 'link', 'click', gaLabel7);
+        });
+        $("li[class$='pinterest']").click(function() {
+            gaLabel8 = $(this).data('ga');
+            ga('send', 'event', 'link', 'click', gaLabel8);
+        });
     </script>
 
 
