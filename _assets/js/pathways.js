@@ -168,6 +168,10 @@ var Pathways = (function(w, _, sys, $, undefined) {
         };
     }
 
+    function isRatioPreserved(panel) {
+        return panel.config && panel.config.background && panel.config.background.preserve_ratio;
+    }
+
     function initPanels(panelSelector) {
         var $panels = $(panelSelector),
             panels = [];
@@ -181,9 +185,8 @@ var Pathways = (function(w, _, sys, $, undefined) {
     function initRatioedPanels(panels) {
         var rPanels = [];
         for (var i = 0; i < panels.length; i++) {
-            var preserveRatio = panels[i].config.background.preserve_ratio;
 
-            if (preserveRatio) {
+            if (isRatioPreserved(panels[i])) {
                 rPanels.push(panels[i]);
             }
         }
@@ -203,7 +206,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
                 method = context[handlerClass],
                 data;
 
-            if (typeof method === 'undefined') return console.warn('Could not load the necessary component: ' + handlerClass);
+            if (typeof method === 'undefined' || method === null) return console.warn('Could not load the necessary component: ' + handlerClass);
 
             if (id && method[id] && method[id].data) data = method[id].data;
 
@@ -245,6 +248,10 @@ var Pathways = (function(w, _, sys, $, undefined) {
     function unsizePanels(panels) {
         if (startPanel) unSetElementHeight(startPanel);
 
+        var unsizePanel = function(index, child) {
+            $(child).removeAttr('style');
+        };
+
         for (var i = 0; i < panels.length; i++) {
             var _panel = panels[i].elem,
                 _bg = panels[i].bg;
@@ -255,14 +262,9 @@ var Pathways = (function(w, _, sys, $, undefined) {
             //unSetElementHeight(_panel);
             //unSetElementHeight(_bg);
 
-            var preserveRatio = panels[i].config.background.preserve_ratio;
 
-            if (preserveRatio) {
-                $(_panel).children().each(function(index, child) {
-                    $(child).removeAttr('style');
-                    //unSetElementHeight(child);
-                    //unTranslatePanelElem(child);
-                });
+            if (isRatioPreserved(panels[i])) {
+                $(_panel).children().each(unsizePanel);
             }
         }
     }
@@ -299,8 +301,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         for (var i = 0; i < panels.length; i++) {
             resizePanel(panels[i], mod.panelHeight);
 
-            var preserveRatio = panels[i].config.background.preserve_ratio;
-            if (preserveRatio) {
+            if (isRatioPreserved(panels[i])) {
                 $(panels[i].elem).children().each(resizePanelChild);
             }
         }
@@ -366,21 +367,24 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
         var videos = [];
 
+        var volumeChangeHandler = function() {
+            if (this.muted == isMuted) return;
+            setPathwaysMuted(this.muted);
+            updateButtonView();
+        };
+        var errorHandler = function(){
+            console.warn('Video loading error for ', _video.src);
+        };
+
         for (var i = 0; i < panels.length; i++) {
             var _panel = panels[i].elem;
             var _video = _panel.querySelector(videoSelector);
 
             if (_video) {
 
-                _video.addEventListener('volumechange', function(e) {
-                    if (this.muted == isMuted) return;
-                    setPathwaysMuted(this.muted);
-                    updateButtonView();
-                });
+                _video.addEventListener('volumechange', volumeChangeHandler);
 
-                _video.addEventListener('error', function(e) {
-                    console.warn('Video loading error for ', _video.src);
-                });
+                _video.addEventListener('error', errorHandler);
 
                 if (sys.level >= mod.MIN_SCROLL_LEVEL) {
                     _video.setAttribute('preload', 'auto');

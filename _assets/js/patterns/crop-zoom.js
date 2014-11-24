@@ -1,34 +1,17 @@
 Pathways.components.cropZoom = function(element, data) {
-
     var $elem = $(element),
-        $elm = $elem.find('.crop-zoom'),
-        db = data,
-        url = '';
+        db = data;
 
-    if (typeof db === 'undefined') console.warn('No data supplied to cropZoom component for' + $elem.attr('id'));
+    if (typeof db === 'undefined' || db === null) return console.warn('No data supplied to cropZoom component for ' + $elem.attr('id'));
 
-    $elm.css({
-        position: 'absolute',
-        opacity: Modernizr.touch ? 1 : 0,
-        width: window.innerWidth,
-        'z-index': 10
-    });
-
-    window.addEventListener('resize', function() {
-        $elm.css({
-            'width': window.innerWidth
-        });
-    });
-
-    // Tap targets
-    $elm.find('.tap-target').each(function() {
+    $elem.find('.tap-target').each(function() {
         var $target = $(this),
             key = $target.data('crop'),
             query = db[key];
 
-        if (typeof query === 'undefined') return console.warn('No related info was found for this tap target');
+        if (typeof query === 'undefined' || query === null) return console.warn('No related info was found for this tap target');
 
-        var image = url + query.image,
+        var image = query.image,
             title = query.title ? query.title : '',
             text = query.text ? query.text : '',
             position = query.position ? query.position : '',
@@ -81,7 +64,7 @@ Pathways.components.cropZoom = function(element, data) {
             $image_crop.css({
                 top: 0,
                 left: 0,
-                'transform': 'translate(0, ' + (Pathways.panelHeight / 4) + 'px)',
+                'transform': 'translate(0, ' + (Pathways.panelHeight) + 'px)',
                 opacity: 0
             });
 
@@ -92,33 +75,23 @@ Pathways.components.cropZoom = function(element, data) {
             setTimeout(function() {
                 $image_crop.addClass('animate');
 
-                if (window.innerHeight > window.innerWidth)
-                    $image_crop.css({
-                        'transform': 'translate(0, ' + ((window.innerHeight - $image_crop.height()) / 2) + 'px)',
-                        opacity: 1
-                    });
-                else
-                    $image_crop.css({
-                        'transform': 'translate(0, 0)',
-                        opacity: 1
-                    });
+                $image_crop.css({
+                    'transform': 'translate(0, ' + ((window.innerHeight - $image_crop.height()) / 2) + 'px)',
+                    opacity: 1
+                });
+
             }, 50);
 
-            $image_crop.on('click', function() {
+            var closeCropZoom = function() {
                 $overlay.css('opacity', 0);
                 $('body').removeClass('modal-open');
                 setTimeout(function() {
                     $overlay.remove();
                 }, 600);
-            });
+            };
 
-            $close.on('click', function() {
-                $overlay.css('opacity', 0);
-                $('body').removeClass('modal-open');
-                setTimeout(function() {
-                    $overlay.remove();
-                }, 600);
-            });
+            $image_crop.on('click', closeCropZoom);
+            $close.on('click', closeCropZoom);
 
             window.addEventListener('resize', function() {
                 $overlay.css('height', window.innerHeight);

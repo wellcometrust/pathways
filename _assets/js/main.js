@@ -449,11 +449,13 @@ Pathways.initAnimation('magnetisedTrees');
 
             // Panel specific scene code if it has any
             var handlerClass = p.Utils.toTitleCase(panelID),
-                panelMethod = p.Scene[handlerClass];
+                panelMethod = p.Scene[handlerClass],
+                panelScene;
 
             // Check the handler exists, then load
             if (typeof panelMethod !== 'undefined') {
-                controller.addScene(panelMethod('#' + panelID));
+                panelScene = panelMethod('#' + panelID);
+                controller.addScene(panelScene);
             }
         });
 
