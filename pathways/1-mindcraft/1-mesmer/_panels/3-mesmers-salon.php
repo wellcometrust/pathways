@@ -6,19 +6,19 @@
     </div>
 
     <div class="crop-zoom">
-        <svg class="info-box tap-target rod" data-crop="rod" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;" data-ga="mindcraft - mesmer - mesmers-salon - l2 image zoom magnetised rods">
+        <svg class="info-box tap-target rod" data-crop="rod" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
             <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
-            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
+            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff" data-ga="mindcraft - mesmer - mesmers-salon - l2 image zoom magnetised rods"></circle>
         </svg>
 
-        <svg class="info-box tap-target woman" data-crop="woman" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;" data-ga="mindcraft - mesmer - mesmers-salon - l2 image zoom patients form circles">
+        <svg class="info-box tap-target woman" data-crop="woman" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
             <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
-            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
+            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff" data-ga="mindcraft - mesmer - mesmers-salon - l2 image zoom patients form circles"></circle>
         </svg>
 
-        <svg class="info-box tap-target mesmer" data-crop="mesmer" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;" data-ga="mindcraft - mesmer - mesmers-salon - l2 image zoom with wand">
+        <svg class="info-box tap-target mesmer" data-crop="mesmer" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
             <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
-            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
+            <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff" data-ga="mindcraft - mesmer - mesmers-salon - l2 image zoom with wand"></circle>
         </svg>
     </div>
 

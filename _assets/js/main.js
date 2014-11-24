@@ -51,14 +51,7 @@
         }
     });
 
-    // Open links marked with rel="external" in a new window/tab
-    $('.library-panel').on('click', '[rel="external"]', function(e) {
-        var $this = $(this);
 
-        w.open($this.attr('href'));
-
-        e.preventDefault();
-    });
 
 }(window, $));
 

@@ -94,7 +94,7 @@
                                 $gaExtId = $gaRoot . $extPrefix . ' ' . truncate($eTitle, 40);
                                 ?>
                             <li>
-                                <a href="<?= $eLink  ?>" rel="external" class="related-item <?= $eType ?>" data-ga="<?= $gaExtId ?>">
+                                <a href="<?= $eLink  ?>" rel="external" target="_blank" class="related-item <?= $eType ?>" data-ga="<?= $gaExtId ?>">
                                     <header class="related-item--header">
                                         <h1> <?= $eTitle ?></h1>
                                     </header>
