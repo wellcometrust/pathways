@@ -63,10 +63,11 @@
     "use strict";
 
     return function(id) {
-        var canvas = doc.getElementById(id), a = anim[id];
+        var canvas = doc.getElementById(id),
+            a = anim[id];
 
         if (!canvas) return;
-        if (!a) return console.warn('No animation properties with id \''+ id +'\' found');
+        if (!a) return console.warn('No animation properties with id \'' + id + '\' found');
 
         function initCanvas() {
             var lib = a.lib;
@@ -178,7 +179,9 @@ Pathways.initAnimation('magnetisedTrees');
     function onScrollLoad() {
 
         var $sequence = $('.sequence'),
-            controller = new Sm({ refreshInterval: 500}),
+            controller = new Sm({
+                refreshInterval: 500
+            }),
             $blackStrip = $('.black-strip');
 
         function resizeBlackStrip(e) {
@@ -307,24 +310,32 @@ Pathways.initAnimation('magnetisedTrees');
 
             function getLibPanelDuration() {
                 var h = $this.outerHeight(),
-                    val = (panel_count == panel_total) ? (h * 0.75) : (h - 300);
+                    val = parseInt((panel_count == panel_total) ? (h * 0.75) : (h - 300), 10);
 
                 return (val > 0 ? val : 0);
             }
-                /*
-                    I can't entirely explain why we need to set the bg to block on both enter and leave. But it fixes
-                    a layering issue when loading the page during or after a sequence. SCIENCE!
-                */
-                // Panels
+
+            function getPinDuration() {
+                return parseInt($this.outerHeight() + (p.panelHeight * 0.75), 10);
+            }
+
+            // Controls layering
             scenes[idx++] = new Ss({
                     triggerElement: $this,
-                    duration: getTweenDuration
+                    triggerHook: 'bottom',
+                    duration: getPinDuration
                 })
                 .on('enter', function() {
                     $bg.css('display', 'block');
                 })
                 .on('leave', function() {
-                    $bg.css('display', 'block');
+                    $bg.css('display', 'none');
+                });
+
+            // Panels Opacity transition
+            scenes[idx++] = new Ss({
+                    triggerElement: $this,
+                    duration: getTweenDuration
                 })
                 .setTween(tween);
 
