@@ -286,6 +286,7 @@ Pathways.initAnimation('magnetisedTrees');
                 $quiz = $this.find('[data-component="quiz"]'),
                 $panelAudio = $this.find('[data-audio="panel"]'),
                 $panelVideo = $this.find('[data-video="panel"]'),
+                $slidingPanels = $this.find('.sliding-panel'),
 
                 tween = Tm.to($bg, 1, {
                     opacity: 1
@@ -458,8 +459,44 @@ Pathways.initAnimation('magnetisedTrees');
                     });
             }
 
+
+
+            //Sliding panels
+            //
+            if ($slidingPanels.length) {
+                var slideStart = $this.find('.sliding-panels').data('sliding-offset'),
+                    offset = slideStart ? slideStart : 0;
+
+                console.log(slideStart);
+
+                $slidingPanels.css({
+                    'opacity': 0
+                });
+
+                var translations = [-100, 100];
+
+
+                $slidingPanels.each(function(index) {
+                    var $this = $(this);
+
+                    $this.css('transform', 'translate(' + translations[((index + offset) % 2)] + 'px,0)');
+
+                    var tween = TweenMax.to($this, 1, {
+                            x: 0,
+                            opacity: 1
+                        });
+
+                    scenes[idx++] = new Ss({
+                            triggerElement: $this,
+                            duration: 200,
+                            offset: offset
+                        })
+                        .setTween(tween);
+                });
+            }
+
             // Panel specific scene code if it has any
-            var handlerClass = p.Utils.toTitleCase(panelID),
+            var handlerClass = p.utils.toTitleCase(panelID),
                 panelMethod = p.Scene[handlerClass],
                 panelScene;
 

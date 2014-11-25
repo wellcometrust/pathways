@@ -1,79 +1,29 @@
-
 #john-tradescant {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/_assets/1-curious-gardener/m1-curious-gardener-2.jpg);
     }
 }
-
 .touch {
-    #john-tradescant {
-
-    }
+    #john-tradescant {}
 }
-
 .no-touch {
-    #john-tradescant {
-
-    }
+    #john-tradescant {}
 }
-
-
 @media screen and (min-width: 48em) {
     #john-tradescant {
         .main-content {
-            color:          #030303;
-
+            color: #030303;
             .inner:first-child {
-                margin:         6rem auto;
-                border-top:     1px solid #030303;
-                border-bottom:  1px solid #030303;
+                margin: 6rem auto;
+                border-top: 1px solid #030303;
+                border-bottom: 1px solid #030303;
             }
         }
     }
-
     .touch {
-        #john-tradescant {
-
-        }
+        #john-tradescant {}
     }
-
     .no-touch {
-        #john-tradescant {
-
-        }
-    }
-
-    .sliding-panels {
-        @include    clearfix;
-        max-width:  960px;
-        margin:     0 auto;
-        padding-top: 20px;
-
-        .sliding-panel {
-            width:              40%;
-            background-color:   #ccc;
-            border:             4px solid #fff;
-            box-shadow:         1px 1px 2px #444;
-            margin-bottom:      20px;
-            .info-box {
-                position:   absolute;
-                top:        0;
-                left:       0;
-            }
-            img {
-                float:      left;
-                width:     100%;
-            }
-        }
-        .sliding-panel:nth-of-type(2n+1) {
-            clear:          left;
-            float:          left;
-            margin-left:    7.5%;
-        }
-        .sliding-panel:nth-of-type(2n+2) {
-            clear:          right;
-            float:          right;
-            margin-right:   7.5%;
-        }
+        #john-tradescant {}
     }
 }

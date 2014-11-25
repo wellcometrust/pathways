@@ -1,78 +1,24 @@
-
 #kahns-anatomical-museum {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/m5-obscene-doctor-2.jpg);
     }
 }
-
 .touch {
-    #kahns-anatomical-museum {
-
-    }
+    #kahns-anatomical-museum {}
 }
-
 .no-touch {
-    #kahns-anatomical-museum {
-        
-    }
+    #kahns-anatomical-museum {}
 }
-
 @media screen and (min-width: 48em) {
     #kahns-anatomical-museum {
         .inner {
             max-width: 1024px;
         }
     }
-
     .touch {
-        #kahns-anatomical-museum {
-
-        }
+        #kahns-anatomical-museum {}
     }
-
     .no-touch {
-        #kahns-anatomical-museum {
-
-        }
-    }
-
-    .obscene-panels {
-        @include        clearfix;
-        max-width:      960px;
-        margin:         0 auto;
-        padding-top:    20px;
-
-        .text-panel {
-            float:          left;
-            width:          40%;
-            margin-left:    7.5%;
-        }
-
-        .image-panel {
-            position:           relative;
-            width:              40%;
-            background-color:   #ccc;
-            border:             4px solid #fff;
-            box-shadow:         1px 1px 2px #444;
-            margin-bottom:      20px;
-            .info-box {
-                position:   absolute;
-                top:        0;
-                left:       0;
-            }
-            img {
-                float:      left;
-            }
-        }
-        .image-panel:nth-of-type(2n+1) {
-            clear:          left;
-            float:          left;
-            margin-left:    7.5%;
-        }
-        .image-panel:nth-of-type(2n+2) {
-            clear:          right;
-            float:          right;
-            margin-right:   7.5%;
-        }
+        #kahns-anatomical-museum {}
     }
 }

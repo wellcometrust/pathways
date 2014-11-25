@@ -1,44 +1,37 @@
-Pathways.components.playerOverlay = function(elem) {
+var Pathways = Pathways || {};
+Pathways.components = Pathways.components || {};
+Pathways.components.core = Pathways.components.core || {};
 
-    var $element = $(elem),
+(function(w, doc, mod, overlay, $, utils) {
 
-        defaultPanelOffset = 180,
-        fullScreenPanelOffset = 0,
+    mod.playerOverlay = function(elem) {
 
-        rootSel = 'body',
-        playerSel = '.wellcomePlayer',
+        var $element = $(elem),
 
-        activeClass = 'modal-open',
-        overlayFullscreenClass = 'overlay-fullscreen',
+            defaultPanelOffset = 180,
+            fullScreenPanelOffset = 0,
 
-        closeTmpl = '<div class="close"></div>',
-        overlayTmpl = '<div class="overlay"></div>',
-        iframeTmpl = '<iframe/>';
+            playerSel = '.wellcomePlayer',
+            overlayFullscreenClass = 'overlay-fullscreen',
+            iframeTmpl = '<iframe/>',
 
-
-    function getHeightWithOffset(offset) {
-        offset = offset || 0;
-        return Pathways.panelHeight - offset;
-    }
-
-    function getWidthWithOffset(offset) {
-        offset = offset || 0;
-        return window.innerWidth - offset;
-    }
+            getHeightWithOffset = utils.getHeightWithOffset,
+            getWidthWithOffset = utils.getWidthWithOffset;
 
 
-    $element.on('click', function(e) {
 
-        var $this = $(this),
-            embedData = $this.data('embed'),
-            isFullScreen = false;
+        $element.on('click', function(e) {
 
-        if (embedData) {
+            var $this = $(this),
+                embedData = $this.data('embed'),
+                isFullScreen = false;
+
+            if (!embedData) return console.warn('No data provided to video overlay');
 
             var initHeight = getHeightWithOffset(defaultPanelOffset),
                 initWidth = getWidthWithOffset(defaultPanelOffset),
 
-                // Excluding the following line for now to enable player until CORS enabled
+                // Excluding the following attribute for now to enable player until CORS enabled
                 // data-config="/player-config.js"
                 playerTmpl = '<div class="wellcomePlayer" data-no-load="true" data-uri="' + embedData + '" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:' + initWidth + 'px; height:' + initHeight + 'px; background-color: #000"></div>',
 
@@ -56,25 +49,15 @@ Pathways.components.playerOverlay = function(elem) {
 
             function resizePlayerToDimensions(width, height) {
 
-                $overlay.css('height', getHeightWithOffset(0));
-
                 $player.css('width', width);
                 $player.css('height', height);
 
-                Pathways.Utils.positionCenter($player);
+                utils.positionCenter($player);
             }
 
             function resizePlayer() {
                 var offset = getOffset();
                 resizePlayerToDimensions(getWidthWithOffset(offset), getHeightWithOffset(offset));
-            }
-
-
-            function createOverlay(tmpl, $rootEl, $closeEl) {
-                var $el = $(tmpl);
-                $el.append($closeEl);
-                $rootEl.append($el);
-                return $el;
             }
 
             function createPlayer(tmpl, $rootEl) {
@@ -83,37 +66,15 @@ Pathways.components.playerOverlay = function(elem) {
                 return $el;
             }
 
-            function initPlayer(sel){
-                window.initPlayers($(sel));
+            function initPlayer(sel) {
+                w.initPlayers($(sel));
             }
-
-            function initOverlay($el, sel) {
-
-                $el.on('click', function() {
-                    $(rootSel).removeClass(activeClass);
-                    isFullScreen = false;
-                    window.embedScriptIncluded = false;
-
-                    setTimeout(function(){
-                        $el.remove();
-                    }, 1000); // give css transition time
-                });
-
-                setTimeout(function() {
-                    // prevent scrolling
-                    $(rootSel).addClass(activeClass);
-                    initPlayer(sel);
-                }, 50); // delay before adding class to ensure transition event will fire
-
-            }
-
 
             function addDocListeners() {
 
-                $(window).resize(resizePlayer);
+                $(w).resize(resizePlayer);
 
-                $(document).bind('onToggleFullScreen', function(event, goFullScreen) {
-
+                $(w).on('onToggleFullScreen', function(event, goFullScreen) {
                     if (goFullScreen) {
                         isFullScreen = true;
                         $overlay.addClass(overlayFullscreenClass);
@@ -127,20 +88,22 @@ Pathways.components.playerOverlay = function(elem) {
 
                 // test currentViewUri event
                 //$(document).bind("onCurrentViewUri", function(event, uri) {
-                    //console.log('download uri: ' + uri);
+                //console.log('download uri: ' + uri);
                 //});
             }
 
             function init() {
-                var $root = $(rootSel);
 
-                $close = $(closeTmpl);
-                $overlay = createOverlay(overlayTmpl, $root, $close);
+                $overlay = overlay.getOverlay(function() {
+                    initPlayer(playerSel);
+                }, function() {
+                    isFullScreen = false;
+                    w.embedScriptIncluded = false;
+                });
+
                 $player = createPlayer(playerTmpl, $overlay);
 
                 addDocListeners();
-
-                initOverlay($overlay, playerSel);
             }
 
             init();
@@ -148,7 +111,8 @@ Pathways.components.playerOverlay = function(elem) {
 
             e.preventDefault();
             return false;
-        }
-    });
 
-};
+        });
+
+    };
+}(window, document, Pathways.components, Pathways.components.core.overlay, jQuery, Pathways.utils));

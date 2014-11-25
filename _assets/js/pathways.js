@@ -2,10 +2,12 @@ function _(str) {
     return document.querySelector(str);
 }
 
+var Pathways = {};
 
-var capabilities = (function(w, $, undefined) {
 
-    var mod = {
+(function(w, exports, $, undefined) {
+
+    var capabilities = {
         aspectRatio: 1900 / 1050,
         supportsTouch: false,
         innerHeight: 0,
@@ -64,16 +66,16 @@ var capabilities = (function(w, $, undefined) {
         }
     };
 
-    mod.getDisplaySettings();
-    mod.init();
+    capabilities.getDisplaySettings();
+    capabilities.init();
 
-    return mod;
+    exports.capabilities = capabilities;
 
-}(this, jQuery));
+}(window, Pathways, jQuery));
 
 
 
-var Pathways = (function(w, _, sys, $, undefined) {
+(function(w, _, mod, sys, $, undefined) {
 
     'use strict';
 
@@ -96,16 +98,16 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
         sceneController,
 
-        panelHeightDecreased = false,
+        panelHeightDecreased = false;
 
-        mod = {
-            MIN_COMPONENT_LEVEL: 2,
-            MIN_SCROLL_LEVEL: 4,
-            panelHeight: calcPanelHeight(minHeight),
-            getPanelHeight: function() {
-                return this.panelHeight;
-            }
-        };
+
+    mod.MIN_COMPONENT_LEVEL = 2;
+    mod.MIN_SCROLL_LEVEL = 4;
+    mod.panelHeight = calcPanelHeight(minHeight);
+    mod.getPanelHeight = function() {
+        return this.panelHeight;
+    };
+
 
     function calcPanelHeight(oldHeight) {
         var newHeight = sys.innerHeight < minHeight ? minHeight : sys.innerHeight;
@@ -148,6 +150,16 @@ var Pathways = (function(w, _, sys, $, undefined) {
             top: top,
             left: left
         });
+    }
+
+    function getHeightWithOffset(offset) {
+        offset = offset || 0;
+        return mod.panelHeight - offset;
+    }
+
+    function getWidthWithOffset(offset) {
+        offset = offset || 0;
+        return w.innerWidth - offset;
     }
 
 
@@ -317,14 +329,16 @@ var Pathways = (function(w, _, sys, $, undefined) {
                 $bg = $(panel.bg),
                 $panel = $(panel.elem),
                 panelID = $panel.attr('id'),
-                $library_panel = $panel.find('[data-panel="' + panelID + '"]').first(),
+                $libraryPanel = $panel.find('[data-panel="' + panelID + '"]').first(),
                 $gallery = $panel.find('[data-component="gallery"]'),
-                $quiz = $panel.find('[data-component="quiz"]');
+                $quiz = $panel.find('[data-component="quiz"]'),
+                $slidingPanels = $panel.find('.sliding-panel');
 
-            $bg.removeAttr('style');
-            $library_panel.removeAttr('style');
-            $gallery.removeAttr('style');
-            $quiz.removeAttr('style');
+            if ($bg.length) $bg.removeAttr('style');
+            if ($libraryPanel.length) $libraryPanel.removeAttr('style');
+            if ($gallery.length) $gallery.removeAttr('style');
+            if ($quiz.length) $quiz.removeAttr('style');
+            if ($slidingPanels.length) $slidingPanels.removeAttr('style');
 
         }
     }
@@ -372,7 +386,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
             setPathwaysMuted(this.muted);
             updateButtonView();
         };
-        var errorHandler = function(){
+        var errorHandler = function() {
             console.warn('Video loading error for ', _video.src);
         };
 
@@ -662,11 +676,13 @@ var Pathways = (function(w, _, sys, $, undefined) {
     mod.Scene = {};
     mod.components = {};
 
-    mod.Utils = {
+    mod.utils = {
         toTitleCase: toTitleCase,
-        positionCenter: positionCenter
+        positionCenter: positionCenter,
+        getHeightWithOffset: getHeightWithOffset,
+        getWidthWithOffset: getWidthWithOffset
     };
 
     return mod;
 
-}(this, _, capabilities, jQuery));
+}(this, _, Pathways, Pathways.capabilities, jQuery));

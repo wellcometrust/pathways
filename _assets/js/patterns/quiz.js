@@ -32,7 +32,7 @@ Pathways.components.quiz = function(element, data) {
             $quizContainer.append( $content );
             $overlay.append( $quizContainer );
 
-            Pathways.Utils.positionCenter($quizContainer);
+            Pathways.utils.positionCenter($quizContainer);
 
             var quiz = new Quiz($quizContainer, data);
 
