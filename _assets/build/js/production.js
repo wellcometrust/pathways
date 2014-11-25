@@ -219,10 +219,12 @@ function _(str) {
     return document.querySelector(str);
 }
 
+var Pathways = {};
 
-var capabilities = (function(w, $, undefined) {
 
-    var mod = {
+(function(w, exports, $, undefined) {
+
+    var capabilities = {
         aspectRatio: 1900 / 1050,
         supportsTouch: false,
         innerHeight: 0,
@@ -281,16 +283,16 @@ var capabilities = (function(w, $, undefined) {
         }
     };
 
-    mod.getDisplaySettings();
-    mod.init();
+    capabilities.getDisplaySettings();
+    capabilities.init();
 
-    return mod;
+    exports.capabilities = capabilities;
 
-}(this, jQuery));
+}(window, Pathways, jQuery));
 
 
 
-var Pathways = (function(w, _, sys, $, undefined) {
+(function(w, _, mod, sys, $, undefined) {
 
     'use strict';
 
@@ -313,16 +315,16 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
         sceneController,
 
-        panelHeightDecreased = false,
+        panelHeightDecreased = false;
 
-        mod = {
-            MIN_COMPONENT_LEVEL: 2,
-            MIN_SCROLL_LEVEL: 4,
-            panelHeight: calcPanelHeight(minHeight),
-            getPanelHeight: function() {
-                return this.panelHeight;
-            }
-        };
+
+    mod.MIN_COMPONENT_LEVEL = 2;
+    mod.MIN_SCROLL_LEVEL = 4;
+    mod.panelHeight = calcPanelHeight(minHeight);
+    mod.getPanelHeight = function() {
+        return this.panelHeight;
+    };
+
 
     function calcPanelHeight(oldHeight) {
         var newHeight = sys.innerHeight < minHeight ? minHeight : sys.innerHeight;
@@ -367,6 +369,16 @@ var Pathways = (function(w, _, sys, $, undefined) {
         });
     }
 
+    function getHeightWithOffset(offset) {
+        offset = offset || 0;
+        return mod.panelHeight - offset;
+    }
+
+    function getWidthWithOffset(offset) {
+        offset = offset || 0;
+        return w.innerWidth - offset;
+    }
+
 
 
     function initPanel(panel) {
@@ -385,6 +397,10 @@ var Pathways = (function(w, _, sys, $, undefined) {
         };
     }
 
+    function isRatioPreserved(panel) {
+        return panel.config && panel.config.background && panel.config.background.preserve_ratio;
+    }
+
     function initPanels(panelSelector) {
         var $panels = $(panelSelector),
             panels = [];
@@ -398,9 +414,8 @@ var Pathways = (function(w, _, sys, $, undefined) {
     function initRatioedPanels(panels) {
         var rPanels = [];
         for (var i = 0; i < panels.length; i++) {
-            var preserveRatio = panels[i].config.background.preserve_ratio;
 
-            if (preserveRatio) {
+            if (isRatioPreserved(panels[i])) {
                 rPanels.push(panels[i]);
             }
         }
@@ -420,7 +435,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
                 method = context[handlerClass],
                 data;
 
-            if (typeof method === 'undefined') return console.warn('Could not load the necessary component: ' + handlerClass);
+            if (typeof method === 'undefined' || method === null) return console.warn('Could not load the necessary component: ' + handlerClass);
 
             if (id && method[id] && method[id].data) data = method[id].data;
 
@@ -462,6 +477,10 @@ var Pathways = (function(w, _, sys, $, undefined) {
     function unsizePanels(panels) {
         if (startPanel) unSetElementHeight(startPanel);
 
+        var unsizePanel = function(index, child) {
+            $(child).removeAttr('style');
+        };
+
         for (var i = 0; i < panels.length; i++) {
             var _panel = panels[i].elem,
                 _bg = panels[i].bg;
@@ -472,14 +491,9 @@ var Pathways = (function(w, _, sys, $, undefined) {
             //unSetElementHeight(_panel);
             //unSetElementHeight(_bg);
 
-            var preserveRatio = panels[i].config.background.preserve_ratio;
 
-            if (preserveRatio) {
-                $(_panel).children().each(function(index, child) {
-                    $(child).removeAttr('style');
-                    //unSetElementHeight(child);
-                    //unTranslatePanelElem(child);
-                });
+            if (isRatioPreserved(panels[i])) {
+                $(_panel).children().each(unsizePanel);
             }
         }
     }
@@ -516,8 +530,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         for (var i = 0; i < panels.length; i++) {
             resizePanel(panels[i], mod.panelHeight);
 
-            var preserveRatio = panels[i].config.background.preserve_ratio;
-            if (preserveRatio) {
+            if (isRatioPreserved(panels[i])) {
                 $(panels[i].elem).children().each(resizePanelChild);
             }
         }
@@ -533,14 +546,16 @@ var Pathways = (function(w, _, sys, $, undefined) {
                 $bg = $(panel.bg),
                 $panel = $(panel.elem),
                 panelID = $panel.attr('id'),
-                $library_panel = $panel.find('[data-panel="' + panelID + '"]').first(),
+                $libraryPanel = $panel.find('[data-panel="' + panelID + '"]').first(),
                 $gallery = $panel.find('[data-component="gallery"]'),
-                $quiz = $panel.find('[data-component="quiz"]');
+                $quiz = $panel.find('[data-component="quiz"]'),
+                $slidingPanels = $panel.find('.sliding-panel');
 
-            $bg.removeAttr('style');
-            $library_panel.removeAttr('style');
-            $gallery.removeAttr('style');
-            $quiz.removeAttr('style');
+            if ($bg.length) $bg.removeAttr('style');
+            if ($libraryPanel.length) $libraryPanel.removeAttr('style');
+            if ($gallery.length) $gallery.removeAttr('style');
+            if ($quiz.length) $quiz.removeAttr('style');
+            if ($slidingPanels.length) $slidingPanels.removeAttr('style');
 
         }
     }
@@ -583,21 +598,24 @@ var Pathways = (function(w, _, sys, $, undefined) {
 
         var videos = [];
 
+        var volumeChangeHandler = function() {
+            if (this.muted == isMuted) return;
+            setPathwaysMuted(this.muted);
+            updateButtonView();
+        };
+        var errorHandler = function() {
+            console.warn('Video loading error for ', _video.src);
+        };
+
         for (var i = 0; i < panels.length; i++) {
             var _panel = panels[i].elem;
             var _video = _panel.querySelector(videoSelector);
 
             if (_video) {
 
-                _video.addEventListener('volumechange', function(e) {
-                    if (this.muted == isMuted) return;
-                    setPathwaysMuted(this.muted);
-                    updateButtonView();
-                });
+                _video.addEventListener('volumechange', volumeChangeHandler);
 
-                _video.addEventListener('error', function(e) {
-                    console.warn('Video loading error for ', _video.src);
-                });
+                _video.addEventListener('error', errorHandler);
 
                 if (sys.level >= mod.MIN_SCROLL_LEVEL) {
                     _video.setAttribute('preload', 'auto');
@@ -875,14 +893,16 @@ var Pathways = (function(w, _, sys, $, undefined) {
     mod.Scene = {};
     mod.components = {};
 
-    mod.Utils = {
+    mod.utils = {
         toTitleCase: toTitleCase,
-        positionCenter: positionCenter
+        positionCenter: positionCenter,
+        getHeightWithOffset: getHeightWithOffset,
+        getWidthWithOffset: getWidthWithOffset
     };
 
     return mod;
 
-}(this, _, capabilities, jQuery));
+}(this, _, Pathways, Pathways.capabilities, jQuery));
 
 // Global Nav
 (function(w, $) {
@@ -937,14 +957,7 @@ var Pathways = (function(w, _, sys, $, undefined) {
         }
     });
 
-    // Open links marked with rel="external" in a new window/tab
-    $('.library-panel').on('click', '[rel="external"]', function(e) {
-        var $this = $(this);
 
-        w.open($this.attr('href'));
-
-        e.preventDefault();
-    });
 
 }(window, $));
 
@@ -956,10 +969,11 @@ var Pathways = (function(w, _, sys, $, undefined) {
     "use strict";
 
     return function(id) {
-        var canvas = doc.getElementById(id), a = anim[id];
+        var canvas = doc.getElementById(id),
+            a = anim[id];
 
         if (!canvas) return;
-        if (!a) return console.warn('No animation properties with id \''+ id +'\' found');
+        if (!a) return console.warn('No animation properties with id \'' + id + '\' found');
 
         function initCanvas() {
             var lib = a.lib;
@@ -1071,7 +1085,9 @@ Pathways.initAnimation('magnetisedTrees');
     function onScrollLoad() {
 
         var $sequence = $('.sequence'),
-            controller = new Sm({ refreshInterval: 500}),
+            controller = new Sm({
+                refreshInterval: 500
+            }),
             $blackStrip = $('.black-strip');
 
         function resizeBlackStrip(e) {
@@ -1176,6 +1192,7 @@ Pathways.initAnimation('magnetisedTrees');
                 $quiz = $this.find('[data-component="quiz"]'),
                 $panelAudio = $this.find('[data-audio="panel"]'),
                 $panelVideo = $this.find('[data-video="panel"]'),
+                $slidingPanels = $this.find('.sliding-panel'),
 
                 tween = Tm.to($bg, 1, {
                     opacity: 1
@@ -1200,24 +1217,32 @@ Pathways.initAnimation('magnetisedTrees');
 
             function getLibPanelDuration() {
                 var h = $this.outerHeight(),
-                    val = (panel_count == panel_total) ? (h * 0.75) : (h - 300);
+                    val = parseInt((panel_count == panel_total) ? (h * 0.75) : (h - 300), 10);
 
                 return (val > 0 ? val : 0);
             }
-                /*
-                    I can't entirely explain why we need to set the bg to block on both enter and leave. But it fixes
-                    a layering issue when loading the page during or after a sequence. SCIENCE!
-                */
-                // Panels
+
+            function getPinDuration() {
+                return parseInt($this.outerHeight() + (p.panelHeight * 0.75), 10);
+            }
+
+            // Controls layering
             scenes[idx++] = new Ss({
                     triggerElement: $this,
-                    duration: getTweenDuration
+                    triggerHook: 'bottom',
+                    duration: getPinDuration
                 })
                 .on('enter', function() {
                     $bg.css('display', 'block');
                 })
                 .on('leave', function() {
-                    $bg.css('display', 'block');
+                    $bg.css('display', 'none');
+                });
+
+            // Panels Opacity transition
+            scenes[idx++] = new Ss({
+                    triggerElement: $this,
+                    duration: getTweenDuration
                 })
                 .setTween(tween);
 
@@ -1340,13 +1365,51 @@ Pathways.initAnimation('magnetisedTrees');
                     });
             }
 
+
+
+            //Sliding panels
+            //
+            if ($slidingPanels.length) {
+                var slideStart = $this.find('.sliding-panels').data('sliding-offset'),
+                    offset = slideStart ? slideStart : 0;
+
+                console.log(slideStart);
+
+                $slidingPanels.css({
+                    'opacity': 0
+                });
+
+                var translations = [-100, 100];
+
+
+                $slidingPanels.each(function(index) {
+                    var $this = $(this);
+
+                    $this.css('transform', 'translate(' + translations[((index + offset) % 2)] + 'px,0)');
+
+                    var tween = TweenMax.to($this, 1, {
+                            x: 0,
+                            opacity: 1
+                        });
+
+                    scenes[idx++] = new Ss({
+                            triggerElement: $this,
+                            duration: 200,
+                            offset: offset
+                        })
+                        .setTween(tween);
+                });
+            }
+
             // Panel specific scene code if it has any
-            var handlerClass = p.Utils.toTitleCase(panelID),
-                panelMethod = p.Scene[handlerClass];
+            var handlerClass = p.utils.toTitleCase(panelID),
+                panelMethod = p.Scene[handlerClass],
+                panelScene;
 
             // Check the handler exists, then load
             if (typeof panelMethod !== 'undefined') {
-                controller.addScene(panelMethod('#' + panelID));
+                panelScene = panelMethod('#' + panelID);
+                controller.addScene(panelScene);
             }
         });
 
@@ -1380,6 +1443,89 @@ Pathways.initAnimation('magnetisedTrees');
     Pathways.init(onPathwaysLoad, onScrollLoad, onScrollUnload);
 
 }(window, jQuery, Pathways, ScrollMagic, ScrollScene, Modernizr, TweenMax));
+
+var Pathways = Pathways || {};
+Pathways.components = Pathways.components || {};
+Pathways.components.core = Pathways.components.core || {};
+
+(function(w, exports, utils, $) {
+
+    function OverlayCtrl() {
+        var rootSel = 'body',
+            activeClass = 'modal-open',
+            closeTmpl = '<div class="close"></div>',
+            overlayTmpl = '<div class="overlay"></div>',
+
+            $root = $(rootSel);
+
+        function addDocListeners(resizeHandler) {
+            $(w).on('resize', resizeHandler);
+        }
+
+        function removeDocListeners(resizeHandler) {
+            $(w).off('resize', resizeHandler);
+        }
+
+        function getResizeHandler($overlay) {
+            return function() {
+                $overlay.css('height', utils.getHeightWithOffset(0));
+            };
+
+        }
+
+        function create(tmpl, $root, $close) {
+            var $el = $(tmpl);
+            $el.append($close);
+            $root.append($el);
+            return $el;
+        }
+
+        function init($el, onInitHandler, onClickHandler) {
+
+            var resizeHandler = getResizeHandler($el);
+            //addDocListeners(resizeHandler);
+
+            $el.on('click', function() {
+                $root.removeClass(activeClass);
+
+                if (typeof onClickHandler !== 'undefined') onClickHandler();
+
+                w.setTimeout(function() {
+                    $el.remove();
+                    // removeDocListeners(resizeHandler);
+                }, 1000); // give css transition time
+            });
+
+            w.setTimeout(function() {
+                // prevent scrolling
+                $root.addClass(activeClass);
+
+                if (typeof onInitHandler !== 'undefined') onInitHandler();
+                //resizeHandler();
+
+            }, 50); // delay before adding class to ensure transition event will fire
+
+
+        }
+
+        this.get = function(onInitHandler, onClickHandler) {
+            this.$overlay = create(overlayTmpl, $root, $(closeTmpl));
+            init(this.$overlay, onInitHandler, onClickHandler);
+            return this.$overlay;
+        };
+
+    }
+
+    exports.overlay = {
+        OverlayCtrl: OverlayCtrl,
+        getOverlay: function(onInitHandler, onClickHandler) {
+            var ctrl = new OverlayCtrl();
+            var $overlay = ctrl.get(onInitHandler, onClickHandler);
+            return $overlay;
+        }
+    };
+
+}(window, Pathways.components.core, Pathways.utils, jQuery));
 
 
 Pathways.components.audioPlayer = function(element, data) {
@@ -1424,36 +1570,19 @@ Pathways.components.audioPlayer = function(element, data) {
 };
 
 Pathways.components.cropZoom = function(element, data) {
-
     var $elem = $(element),
-        $elm = $elem.find('.crop-zoom'),
-        db = data,
-        url = '';
+        db = data;
 
-    if (typeof db === 'undefined') console.warn('No data supplied to cropZoom component for' + $elem.attr('id'));
+    if (typeof db === 'undefined' || db === null) return console.warn('No data supplied to cropZoom component for ' + $elem.attr('id'));
 
-    $elm.css({
-        position: 'absolute',
-        opacity: Modernizr.touch ? 1 : 0,
-        width: window.innerWidth,
-        'z-index': 10
-    });
-
-    window.addEventListener('resize', function() {
-        $elm.css({
-            'width': window.innerWidth
-        });
-    });
-
-    // Tap targets
-    $elm.find('.tap-target').each(function() {
+    $elem.find('.tap-target').each(function() {
         var $target = $(this),
             key = $target.data('crop'),
             query = db[key];
 
-        if (typeof query === 'undefined') return console.warn('No related info was found for this tap target');
+        if (typeof query === 'undefined' || query === null) return console.warn('No related info was found for this tap target');
 
-        var image = url + query.image,
+        var image = query.image,
             title = query.title ? query.title : '',
             text = query.text ? query.text : '',
             position = query.position ? query.position : '',
@@ -1506,7 +1635,7 @@ Pathways.components.cropZoom = function(element, data) {
             $image_crop.css({
                 top: 0,
                 left: 0,
-                'transform': 'translate(0, ' + (Pathways.panelHeight / 4) + 'px)',
+                'transform': 'translate(0, ' + (Pathways.panelHeight) + 'px)',
                 opacity: 0
             });
 
@@ -1517,33 +1646,23 @@ Pathways.components.cropZoom = function(element, data) {
             setTimeout(function() {
                 $image_crop.addClass('animate');
 
-                if (window.innerHeight > window.innerWidth)
-                    $image_crop.css({
-                        'transform': 'translate(0, ' + ((window.innerHeight - $image_crop.height()) / 2) + 'px)',
-                        opacity: 1
-                    });
-                else
-                    $image_crop.css({
-                        'transform': 'translate(0, 0)',
-                        opacity: 1
-                    });
+                $image_crop.css({
+                    'transform': 'translate(0, ' + ((window.innerHeight - $image_crop.height()) / 2) + 'px)',
+                    opacity: 1
+                });
+
             }, 50);
 
-            $image_crop.on('click', function() {
+            var closeCropZoom = function() {
                 $overlay.css('opacity', 0);
                 $('body').removeClass('modal-open');
                 setTimeout(function() {
                     $overlay.remove();
                 }, 600);
-            });
+            };
 
-            $close.on('click', function() {
-                $overlay.css('opacity', 0);
-                $('body').removeClass('modal-open');
-                setTimeout(function() {
-                    $overlay.remove();
-                }, 600);
-            });
+            $image_crop.on('click', closeCropZoom);
+            $close.on('click', closeCropZoom);
 
             window.addEventListener('resize', function() {
                 $overlay.css('height', window.innerHeight);
@@ -2164,107 +2283,86 @@ Pathways.components.libraryPanel = function(element, data) {
     });
 };
 
+//var Pathways = Pathways || {};
+//Pathways.components = Pathways.components || {};
+//Pathways.components.core = Pathways.components.core || {};
 
-Pathways.components.modal = function(element, data) {
 
-    $(element).find('.modal').on('click', function() {
-        var modal = new Modal( $(this) );
-        modal.init();
-    });
+(function(mod, overlay, $) {
 
-};
+    function Modal(elm) {
 
-function Modal(elm) {
+        var self = this,
+            $elm = elm,
+            baseClass = 'modal-img',
+            hiddenClass = 'modal-img-hidden',
+            shownClass = 'modal-img-shown',
+            $overlay,
+            $img;
 
-    var self = this,
-        $elm = elm,
-        $overlay,
-        $image_crop,
-        $close;
+        this.init = function() {
 
-    this.init = function() {
-        console.log('init');
-        var img         = new Image(),
-            $overlay    = $('<div class="overlay"></div>'),
-            $image_crop = $(img).css('opacity', 0),
-            $close      = $('<div class="close"></div>');
+            var img = new Image(),
+                $overlay = overlay.getOverlay(),
+                $img = $(img).addClass(baseClass + ' ' + hiddenClass);
 
-        img.src = $elm.attr('data-image');
+            img.src = $elm.attr('data-image');
 
-        img.onload = function() {
+            img.onload = function() {
+                $overlay.append($img);
+                $img.removeClass(hiddenClass).addClass(shownClass);
+            };
 
-            var width   = this.width,
-                height  = this.height,
-
-                top     = (window.innerHeight / 2) - (height / 2),
-                left    = (window.innerWidth / 2) - (width / 2);
-
-            $image_crop.css({ position: 'absolute', top: top, left: left });
-
-            $overlay.append( $image_crop );
-            $image_crop.animate({'opacity': 1}, 500);
         };
+    }
 
-        $overlay.append( $close );
-        $('body').append( $overlay );
+    mod.modal = function(element, data) {
 
-        //
-        $overlay.css( {
-            'height':           window.outerHeight,
-            'background-color': 'rgba(0,0,0,0.9)',
-            opacity: 1
+        $(element).find('.modal').on('click', function() {
+            var modal = new Modal($(this));
+            modal.init();
         });
 
-        $close.on('click', function() {
-            $overlay.css('opacity', 0);
-            setTimeout(function() {
-                $overlay.remove();
-            }, 600);
-        });
     };
-}
-
-Pathways.components.playerOverlay = function(elem) {
-
-    var $element = $(elem),
-
-        defaultPanelOffset = 180,
-        fullScreenPanelOffset = 0,
-
-        rootSel = 'body',
-        playerSel = '.wellcomePlayer',
-
-        activeClass = 'modal-open',
-        overlayFullscreenClass = 'overlay-fullscreen',
-
-        closeTmpl = '<div class="close"></div>',
-        overlayTmpl = '<div class="overlay"></div>',
-        iframeTmpl = '<iframe/>';
 
 
-    function getHeightWithOffset(offset) {
-        offset = offset || 0;
-        return Pathways.panelHeight - offset;
-    }
 
-    function getWidthWithOffset(offset) {
-        offset = offset || 0;
-        return window.innerWidth - offset;
-    }
+}(Pathways.components, Pathways.components.core.overlay, jQuery));
+
+var Pathways = Pathways || {};
+Pathways.components = Pathways.components || {};
+Pathways.components.core = Pathways.components.core || {};
+
+(function(w, doc, mod, overlay, $, utils) {
+
+    mod.playerOverlay = function(elem) {
+
+        var $element = $(elem),
+
+            defaultPanelOffset = 180,
+            fullScreenPanelOffset = 0,
+
+            playerSel = '.wellcomePlayer',
+            overlayFullscreenClass = 'overlay-fullscreen',
+            iframeTmpl = '<iframe/>',
+
+            getHeightWithOffset = utils.getHeightWithOffset,
+            getWidthWithOffset = utils.getWidthWithOffset;
 
 
-    $element.on('click', function(e) {
 
-        var $this = $(this),
-            embedData = $this.data('embed'),
-            isFullScreen = false;
+        $element.on('click', function(e) {
 
-        if (embedData) {
+            var $this = $(this),
+                embedData = $this.data('embed'),
+                isFullScreen = false;
+
+            if (!embedData) return console.warn('No data provided to video overlay');
 
             var initHeight = getHeightWithOffset(defaultPanelOffset),
                 initWidth = getWidthWithOffset(defaultPanelOffset),
 
-                // Excluding the following line for now to enable player until CORS enabled
+                // Excluding the following attribute for now to enable player until CORS enabled
                 // data-config="/player-config.js"
                 playerTmpl = '<div class="wellcomePlayer" data-no-load="true" data-uri="' + embedData + '" data-assetsequenceindex="0" data-assetindex="0" data-zoom="-0.6441,0,2.2881,1.4411" data-config="/service/playerconfig" style="width:' + initWidth + 'px; height:' + initHeight + 'px; background-color: #000"></div>',
 
@@ -2282,25 +2380,15 @@ Pathways.components.playerOverlay = function(elem) {
 
             function resizePlayerToDimensions(width, height) {
 
-                $overlay.css('height', getHeightWithOffset(0));
-
                 $player.css('width', width);
                 $player.css('height', height);
 
-                Pathways.Utils.positionCenter($player);
+                utils.positionCenter($player);
             }
 
             function resizePlayer() {
                 var offset = getOffset();
                 resizePlayerToDimensions(getWidthWithOffset(offset), getHeightWithOffset(offset));
-            }
-
-
-            function createOverlay(tmpl, $rootEl, $closeEl) {
-                var $el = $(tmpl);
-                $el.append($closeEl);
-                $rootEl.append($el);
-                return $el;
             }
 
             function createPlayer(tmpl, $rootEl) {
@@ -2309,37 +2397,15 @@ Pathways.components.playerOverlay = function(elem) {
                 return $el;
             }
 
-            function initPlayer(sel){
-                window.initPlayers($(sel));
+            function initPlayer(sel) {
+                w.initPlayers($(sel));
             }
-
-            function initOverlay($el, sel) {
-
-                $el.on('click', function() {
-                    $(rootSel).removeClass(activeClass);
-                    isFullScreen = false;
-                    window.embedScriptIncluded = false;
-
-                    setTimeout(function(){
-                        $el.remove();
-                    }, 1000); // give css transition time
-                });
-
-                setTimeout(function() {
-                    // prevent scrolling
-                    $(rootSel).addClass(activeClass);
-                    initPlayer(sel);
-                }, 50); // delay before adding class to ensure transition event will fire
-
-            }
-
 
             function addDocListeners() {
 
-                $(window).resize(resizePlayer);
+                $(w).resize(resizePlayer);
 
-                $(document).bind('onToggleFullScreen', function(event, goFullScreen) {
-
+                $(w).on('onToggleFullScreen', function(event, goFullScreen) {
                     if (goFullScreen) {
                         isFullScreen = true;
                         $overlay.addClass(overlayFullscreenClass);
@@ -2353,20 +2419,22 @@ Pathways.components.playerOverlay = function(elem) {
 
                 // test currentViewUri event
                 //$(document).bind("onCurrentViewUri", function(event, uri) {
-                    //console.log('download uri: ' + uri);
+                //console.log('download uri: ' + uri);
                 //});
             }
 
             function init() {
-                var $root = $(rootSel);
 
-                $close = $(closeTmpl);
-                $overlay = createOverlay(overlayTmpl, $root, $close);
+                $overlay = overlay.getOverlay(function() {
+                    initPlayer(playerSel);
+                }, function() {
+                    isFullScreen = false;
+                    w.embedScriptIncluded = false;
+                });
+
                 $player = createPlayer(playerTmpl, $overlay);
 
                 addDocListeners();
-
-                initOverlay($overlay, playerSel);
             }
 
             init();
@@ -2374,10 +2442,11 @@ Pathways.components.playerOverlay = function(elem) {
 
             e.preventDefault();
             return false;
-        }
-    });
 
-};
+        });
+
+    };
+}(window, document, Pathways.components, Pathways.components.core.overlay, jQuery, Pathways.utils));
 
 
 Pathways.components.quiz = function(element, data) {
@@ -2413,7 +2482,7 @@ Pathways.components.quiz = function(element, data) {
             $quizContainer.append( $content );
             $overlay.append( $quizContainer );
 
-            Pathways.Utils.positionCenter($quizContainer);
+            Pathways.utils.positionCenter($quizContainer);
 
             var quiz = new Quiz($quizContainer, data);
 
@@ -5604,34 +5673,6 @@ TheCollectors.Interface = function() {
     return self;
 }();
 
-Pathways.Scene.MesmersSalon = function(panelID) {
-    //TODO: remove absolute selector for .crop-zoom
-    //TODO: add to component-level activator
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration: (Pathways.panelHeight - 100),
-            offset: 100
-        })
-        .on('enter', function(e) {
-            _('.crop-zoom').style.position = 'fixed';
-            TweenMax.to('.crop-zoom', 0.2, {
-                opacity: 1
-            }); // Fade in
-        })
-        .on('leave', function(e) {
-            TweenMax.to('.crop-zoom', 0.2, {
-                opacity: 0
-            }); // Fade out
-
-            setTimeout(function() {
-                _('.crop-zoom').style.position = 'absolute';
-            }, 200);
-        });
-
-     return scene;
-};
-
 Pathways.components.cropZoom.mesmersSalon = {
     data: {
         'rod': {
@@ -6013,42 +6054,6 @@ Pathways.Scene.Office2 = function(panelID) {
     return scene;
 };
 
-Pathways.Scene.JohnTradescant = function() {
-
-    $('.sliding-panel').css({
-        'opacity': 0
-    });
-
-    var translate_array = [-100, 100, -100, 100, -100, 100, -100, 100, -100, 100, -100, 100],
-        count = 0,
-        scenes = [];
-
-    $('.sliding-panel').each(function() {
-        var $this = $(this);
-
-        $this.css('transform', 'translate(' + translate_array[count] + 'px,0)');
-
-        var tween = TweenMax.to($this, 1, {
-                x: 0,
-                opacity: 1
-            }),
-            offset = $this.data('offset') ? $this.data('offset') : 0;
-
-        var scene = new ScrollScene({
-                triggerElement: $this,
-                duration: 200,
-                offset: offset
-            })
-            .setTween(tween);
-
-        scenes.push(scene);
-
-        count++;
-    });
-
-    return scenes;
-};
-
 
 Pathways.Scene.DukeOfBuckingham = function(panelID) {
 
@@ -6096,62 +6101,37 @@ Pathways.Scene.DukeOfBuckingham = function(panelID) {
     return scene;
 };
 
-Pathways.Scene.UniqueArtifacts = function(panelID) {
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration: (Pathways.panelHeight - 100),
-            offset: 100
-        })
-        .on('enter', function(e) {
-            _('.crop-zoom').style['position'] = 'fixed';
-            TweenMax.to('.crop-zoom', 0.2, {
-                opacity: 1
-            }); // Fade in
-        })
-        .on('leave', function(e) {
-            TweenMax.to('.crop-zoom', 0.2, {
-                opacity: 0
-            }); // Fade out
-
-            setTimeout(function() {
-                _('.crop-zoom').style['position'] = 'absolute';
-            }, 200);
-        });
-
-    return scene;
-};
 
 Pathways.components.cropZoom.uniqueArtifacts = {
     data: {
         'croc': {
-            'image': '/pathways/1-mindcraft/_assets/1-mesmer/rod-crop.jpg',
+            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/crocodile.jpg',
             'title': '',
             'text': 'Tradescant was attracted by large or exotic items. His requests to British ships included pleas for ‘the biggest that canbe gotten’ and ‘any thing that is strang’.',
             'position': 'right'
         },
         'person': {
-            'image': '/pathways/1-mindcraft/_assets/1-mesmer/woman-crop.jpg',
+            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/people.jpg',
             'text': 'Royal apothecary John Parkinson described his friend, and self-made man, John Tradescant as ‘that worthy, curious, and diligent searcher and preserver of all natures rarities and varieties’.',
             'position': 'left'
         },
         'bird': {
-            'image': '/pathways/1-mindcraft/_assets/1-mesmer/mesmer-crop.jpg',
+            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/birds.jpg',
             'text': 'One of Tradescant’s earliest documented collecting experiences occurred on a 16-week sea voyage to the Russian city of Archangel. When a strange bird, ‘whose like I yet never sawe’, flew onto the ship’s deck, it was caught and given to Tradescant.',
-            'position': 'left'
+            'position': 'right'
         },
         'cabinet': {
-            'image': '/pathways/1-mindcraft/_assets/1-mesmer/rod-crop.jpg',
+            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/cabinet.jpg',
             'text': 'Tradescant’s rarities were ultimately acquired, in disputed circumstances, by the lawyer and alchemist Elias Ashmole. Ashmole later left the collection to the University of Oxford, where it formed the basis of the Ashmolean Museum.',
-            'position': 'left'
+            'position': 'right'
         },
         'books': {
-            'image': '/pathways/1-mindcraft/_assets/1-mesmer/woman-crop.jpg',
+            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/books.jpg',
             'text': 'New World explorer John Smith bequeathed half his library of books to Tradescant.',
             'position': 'left'
         },
         'window': {
-            'image': '/pathways/1-mindcraft/_assets/1-mesmer/mesmer-crop.jpg',
+            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/window.jpg',
             'text': 'After establishing what would become Britain’s first museum, Tradescant clocked up another first. He became the initial Keeper of the Oxford Physic Garden, England’s first botanic garden.',
             'position': 'left'
         }
