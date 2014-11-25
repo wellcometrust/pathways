@@ -21,11 +21,15 @@ page_info:
 info_panels:
 
     khans-anatomical-museum:
-        -   title: ''
+        share:
+            img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
+            text: 'Dummy Title'
 
-            see_in_Wellcome_Library_url: ''
-            download_hi_res_url: ''
-            external_url: ''
+        links:
+            -   title: 'Dummy Title'
+                player_url: 'http://wellcomelibrary.org/package/b12025665'
+                download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
+
 
 
 
@@ -72,9 +76,9 @@ library_layer:
 
 
 
-# 
+#
 # Teaser/Fork info
-# 
+#
 
 teaser:
     image: 'teaser-ignorant-bride.jpg'

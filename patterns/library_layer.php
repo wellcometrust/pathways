@@ -42,6 +42,7 @@
                                 $gaLibId = $gaRoot . $libPrefix . ' ' . truncate($lTitle, 40);
                                 $lHref = str_replace('/package/', '/player/', $lLink);
 
+                                if( $lHref != '' ):
                                 ?>
                                 <li>
                                     <a href="<?= $lHref ?>" class="player-item clearfix <?= $lType ?>" data-component="player-overlay" data-embed="<?= $lLink  ?>" data-ga="<?= $gaLibId ?>">
@@ -64,6 +65,7 @@
                                         </div>
                                     </a>
                                 </li>
+                                <?php endif ?>
                             <?php endforeach ?>
                         <?php endif ?>
                     </ul>
@@ -92,6 +94,8 @@
                                 $eDate      = isset( $data['date'] ) ? $data['date'] : '';
 
                                 $gaExtId = $gaRoot . $extPrefix . ' ' . truncate($eTitle, 40);
+
+                                if( $eLink != '' ):
                                 ?>
                             <li>
                                 <a href="<?= $eLink  ?>" rel="external" target="_blank" class="related-item <?= $eType ?>" data-ga="<?= $gaExtId ?>">
@@ -110,6 +114,7 @@
                                     <?php endif ?>
                                 </a>
                             </li>
+                            <?php endif ?>
                         <?php endforeach ?>
                     </ul>
                 </div>
