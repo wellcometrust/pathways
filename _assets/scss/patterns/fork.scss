@@ -30,7 +30,7 @@
         position: relative;
         padding: 1rem 0;
         z-index: 1;
-        
+
         h1 {
             font-size: 1.618rem;
             margin-top: 0.8rem;
@@ -54,9 +54,9 @@
             display: block;
         }
 
-        img {
-            display: block;
+        object {
             width: 90px;
+            height: 34px;
         }
 
         .show-more {
@@ -85,7 +85,7 @@
                 margin-top: 0;
             }
         }
-        
+
         .teaser-icon {
             position: absolute;
             top: 0;
