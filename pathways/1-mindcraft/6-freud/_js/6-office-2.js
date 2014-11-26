@@ -1,5 +1,5 @@
 
-Pathways.Scene.Office2 = function(panelID) {
+Pathways.scrollScenes.Office2 = function(panelID) {
 
     var $panel = $(panelID),
         $img = $panel.find('.large-screen').first();

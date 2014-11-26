@@ -1,5 +1,5 @@
 
-Pathways.Scene.Example = function() {
+Pathways.scrollScenes.Example = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#example',

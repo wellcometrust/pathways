@@ -1,4 +1,4 @@
-Pathways.Scene.DeathInfographic = function(panelID) {
+Pathways.scrollScenes.DeathInfographic = function(panelID) {
 
     var $infoBox = $(panelID + ' .info-box'),
         $inputContainer = $(panelID + ' .input-container');

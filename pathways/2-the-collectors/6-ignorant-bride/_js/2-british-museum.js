@@ -1,5 +1,5 @@
 
-Pathways.Scene.BritishMuseum = function() {
+Pathways.scrollScenes.BritishMuseum = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#british-museum',

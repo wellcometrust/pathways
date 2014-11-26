@@ -1,5 +1,5 @@
 
-Pathways.Scene.AnnaO = function(panelID) {
+Pathways.scrollScenes.AnnaO = function(panelID) {
 
     var positions = [
         { x: -57,   y: -107 },

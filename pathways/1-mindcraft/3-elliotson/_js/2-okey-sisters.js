@@ -1,4 +1,4 @@
-Pathways.Scene.OkeySisters = function(panelID) {
+Pathways.scrollScenes.OkeySisters = function(panelID) {
 
     $('#okey-sisters .main-content, #okey-sisters .secondary-content').css({
         'bottom': 'auto',

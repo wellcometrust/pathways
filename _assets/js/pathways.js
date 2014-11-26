@@ -3,8 +3,13 @@ function _(str) {
 }
 
 var Pathways = {};
+Pathways.MIN_COMPONENT_LEVEL = 2;
+Pathways.MIN_SCROLL_LEVEL = 4;
 
 
+/***
+ *   System capabilities
+ */
 (function(w, exports, $, undefined) {
 
     var capabilities = {
@@ -69,26 +74,334 @@ var Pathways = {};
     capabilities.getDisplaySettings();
     capabilities.init();
 
-    exports.capabilities = capabilities;
+    exports.system = capabilities;
 
 }(window, Pathways, jQuery));
 
 
 
-(function(w, _, mod, sys, $, undefined) {
+/***
+ *   Audio: mixer
+ */
+Pathways.audio = {};
+(function(w, exports, $) {
+
+    var model,
+        isMuted;
+
+    function init(_model) {
+        model = _model;
+    }
+
+    function mute(value) {
+        isMuted = value;
+
+        $('video, audio').each(function() {
+            this.muted = isMuted;
+        });
+    }
+
+    function disable() {
+        $('video, audio').each(function() {
+            this.muted = true;
+        });
+    }
+
+    function getIsMuted() {
+        return isMuted;
+    }
+
+    function crossfade(fromAudio, toAudio, callback) {
+        var delay = 1000;
+        var onlyFrom = (fromAudio && !toAudio);
+
+        if (fromAudio === toAudio) {
+            if (callback) w.setTimeout(callback, delay);
+            return;
+        }
+
+        if (fromAudio && (typeof fromAudio !== 'undefined')) {
+            $(fromAudio).stop(false, true);
+            $(fromAudio).animate({
+                volume: 0
+            }, {
+                duration: delay,
+                complete: function() {
+                    this.pause();
+                    if (onlyFrom && callback) {
+                        callback();
+                        callback = null;
+                    }
+                }
+            });
+        }
+
+        // fade in
+        if (toAudio && (typeof toAudio !== 'undefined')) {
+            $(toAudio).stop(false, true);
+            toAudio.volume = 0;
+            toAudio.muted = isMuted;
+            toAudio.play();
+            $(toAudio).animate({
+                volume: 1
+            }, {
+                duration: delay,
+                complete: function() {
+                    if (!onlyFrom && callback) {
+                        callback();
+                        callback = null;
+                    }
+                }
+            });
+        }
+    }
+
+    function loadPanelAudio(panelAudio) {
+        crossfade(model.globalAudio(), panelAudio);
+    }
+
+    function unloadPanelAudio(panelAudio) {
+        crossfade(panelAudio, model.globalAudio());
+    }
+
+    exports.mixer = {
+        init: init,
+        crossfade: crossfade,
+        mute: mute,
+        disable: disable,
+        isMuted: getIsMuted,
+        loadPanelAudio: loadPanelAudio,
+        unloadPanelAudio: unloadPanelAudio
+    };
+
+}(window, Pathways.audio, jQuery));
+
+
+/***
+ *   Audio: model
+ */
+(function(w, exports, mixer, $) {
+
+    var globalAudio,
+        panelTracks;
+
+    function initPanelAudio(panels, selector) {
+
+        var tracks = [];
+
+        for (var i = 0; i < panels.length; i++) {
+            var _panel = panels[i].elem;
+            var _track = _panel.querySelector(selector);
+            if (_track) {
+                tracks.push(tracks);
+            }
+        }
+
+        return tracks;
+    }
+
+    function initGlobalAudio(selector) {
+        var audio = $(selector).get(0);
+        if (audio) {
+            mixer.crossfade(null, audio);
+        }
+
+        return audio;
+    }
+
+    function init(panels) {
+        globalAudio = initGlobalAudio('[data-audio="global"]');
+        panelTracks = initPanelAudio(panels, '[data-audio="panel"]');
+    }
+
+    exports.model = {
+        init: init,
+        globalAudio: function() { return globalAudio; },
+        panelTracks: function() { return panelTracks; }
+    };
+
+}(window, Pathways.audio, Pathways.audio.mixer, jQuery));
+
+/***
+ *   Audio: view
+ */
+(function(w, exports, mixer, $) {
+
+    var $muteButton;
+
+    function create(muteSelector) {
+        var $btn = $(muteSelector);
+        $btn.css('display', 'block');
+        $btn.off('click');
+        $btn.on('click', function(e) {
+            // active == muted
+            if ($(this).hasClass('active')) {
+                mixer.mute(false);
+            } else {
+                mixer.mute(true);
+            }
+
+            update();
+
+            e.preventDefault();
+            return false;
+        });
+
+        return $btn;
+    }
+
+    function init() {
+        $muteButton = create('.mute');
+    }
+
+    function update() {
+        if (mixer.isMuted()) {
+            $muteButton.addClass('active');
+        } else {
+            $muteButton.removeClass('active');
+        }
+    }
+
+    function hide() {
+        $muteButton.hide();
+    }
+
+    exports.view = {
+        init: init,
+        hide: hide,
+        update: update
+    };
+
+}(window, Pathways.audio, Pathways.audio.mixer, jQuery));
+
+
+
+
+/***
+    Video
+*/
+(function(w, exports, sys, audio, $) {
+
+    var panelVideos;
+
+    function initPanelVideo(panels, videoSelector) {
+
+        var videos = [];
+
+        var volumeChangeHandler = function() {
+            if (this.muted == audio.mixer.isMuted()) return;
+            audio.mixer.mute(this.muted);
+            audio.view.update();
+        };
+        var errorHandler = function() {
+            console.warn('Video loading error for ', _video.src);
+        };
+
+        for (var i = 0; i < panels.length; i++) {
+            var _panel = panels[i].elem;
+            var _video = _panel.querySelector(videoSelector);
+
+            if (_video) {
+
+                _video.addEventListener('volumechange', volumeChangeHandler);
+
+                _video.addEventListener('error', errorHandler);
+
+                if (sys.level >= exports.MIN_SCROLL_LEVEL) {
+                    _video.setAttribute('preload', 'auto');
+                } else {
+                    _video.setAttribute('preload', 'metadata');
+                    _video.controls = true;
+                }
+
+                videos.push(_video);
+            }
+
+        }
+
+        return videos;
+
+    }
+
+    function hideCaptions(videos) {
+        var video;
+        for (var i = 0, l = videos.length; i < l; i++) {
+            video = videos[i];
+            if (video) {
+                var tracks = video.textTracks;
+                if (tracks.length) {
+                    for (var j = 0, m = tracks.length; j < m; j++) {
+                        var track = tracks[j];
+                        if (track) track.mode = 'hidden';
+                    }
+                }
+            }
+        }
+    }
+
+
+    function getCrossFadeAudio(value, gAudio) {
+        var audio = null;
+        if (value || (typeof value == 'undefined')) {
+            audio = gAudio;
+        }
+        return audio;
+    }
+
+    function autoPlayVideoOnEnter(video, initTime, stopGlobalAudio) {
+        initTime = initTime || 0;
+        var fadeAudio = getCrossFadeAudio(stopGlobalAudio, audio.model.globalAudio());
+
+        if (video) {
+            if (video.readyState !== 0) video.currentTime = initTime;
+            audio.mixer.crossfade(fadeAudio, video);
+        }
+
+    }
+
+    function autoStopVideoOnLeave(video, initTime, restartGlobalAudio) {
+        initTime = initTime || 0;
+        var fadeAudio = getCrossFadeAudio(restartGlobalAudio, audio.model.globalAudio());
+
+        if (video) {
+
+            audio.mixer.crossfade(video, fadeAudio, function() {
+                if (video.readyState !== 0) video.currentTime = initTime;
+            });
+        }
+
+    }
+
+    function getPanelVideoElement(panelID) {
+        return _(panelID + ' video');
+    }
+
+
+
+
+    function initVideo(panels) {
+        panelVideos = initPanelVideo(panels, 'video');
+        hideCaptions(panelVideos);
+    }
+
+    exports.video = {
+        init: initVideo,
+        autoPlayVideoOnEnter: autoPlayVideoOnEnter,
+        autoStopVideoOnLeave: autoStopVideoOnLeave
+    };
+
+}(window, Pathways, Pathways.system, Pathways.audio, jQuery));
+
+/***
+    Pathways main
+*/
+(function(w, _, mod, sys, audio, video, $, undefined) {
 
     'use strict';
 
     var doc = w.document,
 
-        isMuted = false,
         minHeight = 550,
-        muteButton,
-        globalAudio,
-
-        panelVideos,
-        panelTracks,
-
         startPanel,
         panels,
         ratioedPanels,
@@ -101,26 +414,13 @@ var Pathways = {};
         panelHeightDecreased = false;
 
 
-    mod.MIN_COMPONENT_LEVEL = 2;
-    mod.MIN_SCROLL_LEVEL = 4;
+
     mod.panelHeight = calcPanelHeight(minHeight);
     mod.getPanelHeight = function() {
         return this.panelHeight;
     };
 
 
-    function calcPanelHeight(oldHeight) {
-        var newHeight = sys.innerHeight < minHeight ? minHeight : sys.innerHeight;
-
-        if (oldHeight > newHeight) {
-            panelHeightDecreased = true;
-        } else {
-            panelHeightDecreased = false;
-        }
-
-
-        return newHeight;
-    }
 
     function camelCase(str) {
         str = str || '';
@@ -161,6 +461,24 @@ var Pathways = {};
         offset = offset || 0;
         return w.innerWidth - offset;
     }
+
+
+
+
+    function calcPanelHeight(oldHeight) {
+        var newHeight = sys.innerHeight < minHeight ? minHeight : sys.innerHeight;
+
+        if (oldHeight > newHeight) {
+            panelHeightDecreased = true;
+        } else {
+            panelHeightDecreased = false;
+        }
+
+
+        return newHeight;
+    }
+
+
 
 
 
@@ -344,239 +662,6 @@ var Pathways = {};
     }
 
 
-
-    function initMuteButton(muteSelector) {
-        var $btn = $(muteSelector);
-        $btn.css('display', 'block');
-        $btn.unbind('click');
-        $btn.on('click', function(e) {
-            // active == muted
-            if ($(this).hasClass('active')) {
-                setPathwaysMuted(false);
-            } else {
-                setPathwaysMuted(true);
-            }
-
-            updateButtonView();
-
-            e.preventDefault();
-            return false;
-        });
-
-        return $btn;
-    }
-
-
-    function setPathwaysMuted(value) {
-        isMuted = value;
-
-        $('video, audio').each(function() {
-            this.muted = isMuted;
-        });
-
-    }
-
-
-    function initPanelVideo(panels, videoSelector) {
-
-        var videos = [];
-
-        var volumeChangeHandler = function() {
-            if (this.muted == isMuted) return;
-            setPathwaysMuted(this.muted);
-            updateButtonView();
-        };
-        var errorHandler = function() {
-            console.warn('Video loading error for ', _video.src);
-        };
-
-        for (var i = 0; i < panels.length; i++) {
-            var _panel = panels[i].elem;
-            var _video = _panel.querySelector(videoSelector);
-
-            if (_video) {
-
-                _video.addEventListener('volumechange', volumeChangeHandler);
-
-                _video.addEventListener('error', errorHandler);
-
-                if (sys.level >= mod.MIN_SCROLL_LEVEL) {
-                    _video.setAttribute('preload', 'auto');
-                } else {
-                    _video.setAttribute('preload', 'metadata');
-                    _video.controls = true;
-                }
-
-                videos.push(_video);
-            }
-
-        }
-
-        return videos;
-
-    }
-
-    function hideCaptions(videos) {
-        var video;
-        for (var i = 0, l = videos.length; i < l; i++) {
-            video = videos[i];
-            if (video) {
-                var tracks = video.textTracks;
-                if (tracks.length) {
-                    for (var j = 0, m = tracks.length; j < m; j++) {
-                        var track = tracks[j];
-                        if (track) track.mode = 'hidden';
-                    }
-                }
-            }
-        }
-    }
-
-    function crossFade(fromAudio, toAudio, callback) {
-        var delay = 1000;
-        var onlyFrom = (fromAudio && !toAudio);
-
-        if (fromAudio === toAudio) {
-            if (callback) w.setTimeout(callback, delay);
-            return;
-        }
-
-        if (fromAudio && (typeof fromAudio !== 'undefined')) {
-            $(fromAudio).stop(false, true);
-            $(fromAudio).animate({
-                volume: 0
-            }, {
-                duration: delay,
-                complete: function() {
-                    this.pause();
-                    if (onlyFrom && callback) {
-                        callback();
-                        callback = null;
-                    }
-                }
-            });
-        }
-
-        // fade in
-        if (toAudio && (typeof toAudio !== 'undefined')) {
-            $(toAudio).stop(false, true);
-            toAudio.volume = 0;
-            toAudio.muted = isMuted;
-            toAudio.play();
-            $(toAudio).animate({
-                volume: 1
-            }, {
-                duration: delay,
-                complete: function() {
-                    if (!onlyFrom && callback) {
-                        callback();
-                        callback = null;
-                    }
-                }
-            });
-        }
-    }
-
-    // Cross fade between panel audio and global audio
-    function loadPanelAudio(panel_audio) {
-        crossFade(globalAudio, panel_audio);
-    }
-
-    function unloadPanelAudio(panel_audio) {
-        crossFade(panel_audio, globalAudio);
-    }
-
-
-    function updateButtonView() {
-        if (isMuted) {
-            muteButton.addClass('active');
-        } else {
-            muteButton.removeClass('active');
-        }
-    }
-
-    function initPanelAudioTracks(panels, selector) {
-
-        var tracks = [];
-
-        for (var i = 0; i < panels.length; i++) {
-            var _panel = panels[i].elem;
-            var _track = _panel.querySelector(selector);
-            if (_track) {
-                tracks.push(tracks);
-            }
-        }
-
-        return tracks;
-    }
-
-    function initGlobalAudio(selector) {
-        var audio = $(selector).get(0);
-        if (audio) {
-            crossFade(null, audio);
-        }
-
-        return audio;
-    }
-
-
-
-
-    function getCrossFadeAudio(value, gAudio) {
-        var audio = null;
-        if (value || (typeof value == 'undefined')) {
-            audio = gAudio;
-        }
-        return audio;
-    }
-
-    function autoPlayVideoOnEnter(video, initTime, stopGlobalAudio) {
-        initTime = initTime || 0;
-        var fadeAudio = getCrossFadeAudio(stopGlobalAudio, globalAudio);
-
-        if (video) {
-            if (video.readyState !== 0) video.currentTime = initTime;
-            crossFade(fadeAudio, video);
-        }
-
-    }
-
-    function autoStopVideoOnLeave(video, initTime, restartGlobalAudio) {
-        initTime = initTime || 0;
-        var fadeAudio = getCrossFadeAudio(restartGlobalAudio, globalAudio);
-
-        if (video) {
-
-            crossFade(video, fadeAudio, function() {
-                if (video.readyState !== 0) video.currentTime = initTime;
-            });
-        }
-
-    }
-
-    function getPanelVideoElement(panelID) {
-        return _(panelID + ' video');
-    }
-
-    function getPanelAudioElement(panelID) {
-        return $(panelID + ' audio').first()[0];
-    }
-
-
-    function initSoundControls() {
-        muteButton = initMuteButton('.mute');
-    }
-
-    function initVideo(panels) {
-        panelVideos = initPanelVideo(panels, 'video');
-        hideCaptions(panelVideos);
-    }
-
-    function initAudio(panels) {
-        globalAudio = initGlobalAudio('[data-audio="global"]');
-        panelTracks = initPanelAudioTracks(panels, '[data-audio="panel"]');
-    }
-
     var panelsUnsized = false;
 
     function resizeCheck() {
@@ -612,8 +697,10 @@ var Pathways = {};
             if (sys.level >= mod.MIN_SCROLL_LEVEL) {
                 sceneController = onScrollLoad();
 
-                initSoundControls();
-                initAudio(panels);
+                audio.model.init(panels);
+                audio.mixer.init(audio.model);
+                audio.view.init();
+
 
                 scenesLoaded = true;
             }
@@ -623,10 +710,8 @@ var Pathways = {};
                 removeScrollSceneStyling();
                 onScrollUnload();
 
-                $('audio, video').each(function() {
-                    this.muted = true;
-                });
-                muteButton.hide();
+                audio.mixer.disable();
+                audio.view.hide();
 
                 scenesLoaded = false;
             }
@@ -653,7 +738,7 @@ var Pathways = {};
             resizeCheck();
             loadCheck(onScrollLoad, onScrollUnload);
 
-            initVideo(panels);
+            video.init(panels);
 
             onLoadComplete();
         });
@@ -662,27 +747,17 @@ var Pathways = {};
 
     mod.init = init;
 
-    mod.getPanelAudioElement = getPanelAudioElement;
-    mod.getPanelVideoElement = getPanelVideoElement;
-
-    mod.autoPlayVideoOnEnter = autoPlayVideoOnEnter;
-    mod.autoStopVideoOnLeave = autoStopVideoOnLeave;
-
-    mod.loadPanelAudio = loadPanelAudio;
-    mod.unloadPanelAudio = unloadPanelAudio;
-
     mod.translatePanelElem = translatePanelElem;
 
-    mod.Scene = {};
+    mod.scrollScenes = {};
     mod.components = {};
 
     mod.utils = {
+        camelCase: camelCase,
         toTitleCase: toTitleCase,
         positionCenter: positionCenter,
         getHeightWithOffset: getHeightWithOffset,
         getWidthWithOffset: getWidthWithOffset
     };
 
-    return mod;
-
-}(this, _, Pathways, Pathways.capabilities, jQuery));
+}(this, _, Pathways, Pathways.system, Pathways.audio, Pathways.video, jQuery));

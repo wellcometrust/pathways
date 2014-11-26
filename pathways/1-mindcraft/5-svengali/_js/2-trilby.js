@@ -1,5 +1,5 @@
 
-Pathways.Scene.Trilby = function(panelID) {
+Pathways.scrollScenes.Trilby = function(panelID) {
 
     var scenes = [];
 

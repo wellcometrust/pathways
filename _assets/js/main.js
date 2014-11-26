@@ -425,17 +425,17 @@ Pathways.initAnimation('magnetisedTrees');
             // Audio
             //
             if ($panelAudio.length) {
-                var $audio = $panelAudio.first();
+                var audio = $panelAudio.first()[0];
 
                 scenes[idx++] = new Ss({
                         triggerElement: $this,
                         duration: getMediaDuration
                     })
                     .on('enter', function() {
-                        p.loadPanelAudio($audio[0]);
+                        p.audio.mixer.loadPanelAudio(audio);
                     })
                     .on('leave', function() {
-                        p.unloadPanelAudio($audio[0]);
+                        p.audio.mixer.unloadPanelAudio(audio);
                     });
             }
 
@@ -452,10 +452,10 @@ Pathways.initAnimation('magnetisedTrees');
                         duration: getMediaDuration
                     })
                     .on('enter', function() {
-                        p.autoPlayVideoOnEnter($video[0], initTime, muteGlobal);
+                        p.video.autoPlayVideoOnEnter($video[0], initTime, muteGlobal);
                     })
                     .on('leave', function() {
-                        p.autoStopVideoOnLeave($video[0], initTime, muteGlobal);
+                        p.video.autoStopVideoOnLeave($video[0], initTime, muteGlobal);
                     });
             }
 
@@ -466,8 +466,6 @@ Pathways.initAnimation('magnetisedTrees');
             if ($slidingPanels.length) {
                 var slideStart = $this.find('.sliding-panels').data('sliding-offset'),
                     offset = slideStart ? slideStart : 0;
-
-                console.log(slideStart);
 
                 $slidingPanels.css({
                     'opacity': 0
@@ -497,7 +495,7 @@ Pathways.initAnimation('magnetisedTrees');
 
             // Panel specific scene code if it has any
             var handlerClass = p.utils.toTitleCase(panelID),
-                panelMethod = p.Scene[handlerClass],
+                panelMethod = p.scrollScenes[handlerClass],
                 panelScene;
 
             // Check the handler exists, then load

@@ -1,4 +1,4 @@
-Pathways.Scene.GonadMan = function(panelID) {
+Pathways.scrollScenes.GonadMan = function(panelID) {
 
     var $panel = $(panelID),
         $quiz = $panel.find('[data-component="quiz"]'),

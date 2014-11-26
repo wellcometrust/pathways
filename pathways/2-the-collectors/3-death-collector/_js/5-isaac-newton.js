@@ -1,5 +1,5 @@
 
-Pathways.Scene.IsaacNewton = function() {
+Pathways.scrollScenes.IsaacNewton = function() {
 
     var scene1 = new ScrollScene({
             triggerElement: '#isaac-newton',

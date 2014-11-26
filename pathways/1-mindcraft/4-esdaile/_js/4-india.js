@@ -1,5 +1,5 @@
 
-Pathways.Scene.India = function(panelID) {
+Pathways.scrollScenes.India = function(panelID) {
 
     var $panel      = $(panelID),
         $boats      = $panel.find('.boats'),

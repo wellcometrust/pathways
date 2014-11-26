@@ -1,5 +1,5 @@
 
-Pathways.Scene.DukeOfBuckingham = function(panelID) {
+Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
 
     var startY;
 

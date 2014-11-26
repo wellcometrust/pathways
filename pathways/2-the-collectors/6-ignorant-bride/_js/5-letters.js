@@ -1,5 +1,5 @@
 
-Pathways.Scene.Letters = function() {
+Pathways.scrollScenes.Letters = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#letters',

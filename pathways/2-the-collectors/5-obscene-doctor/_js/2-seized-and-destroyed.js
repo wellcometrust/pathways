@@ -1,5 +1,5 @@
 
-Pathways.Scene.SeizedAndDestroyed = function() {
+Pathways.scrollScenes.SeizedAndDestroyed = function() {
 
     var $panel = $('#seized-and-destroyed'),
         vector = { x: -10, y: -5 },

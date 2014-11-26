@@ -1,5 +1,5 @@
 
-Pathways.Scene.GrauntRecords = function(panelID) {
+Pathways.scrollScenes.GrauntRecords = function(panelID) {
 
     var $panel = $(panelID);
 

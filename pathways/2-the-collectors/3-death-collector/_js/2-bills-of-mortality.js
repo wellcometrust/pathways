@@ -1,5 +1,5 @@
 
-Pathways.Scene.BillsOfMortality = function() {
+Pathways.scrollScenes.BillsOfMortality = function() {
 
     var scene1 = new ScrollScene({
             triggerElement: '#bills-of-mortality',

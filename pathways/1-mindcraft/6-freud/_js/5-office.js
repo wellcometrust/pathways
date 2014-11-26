@@ -1,5 +1,5 @@
 
-Pathways.Scene.Office = function(panelID) {
+Pathways.scrollScenes.Office = function(panelID) {
 
     var scene = new ScrollScene({
             triggerElement: panelID,

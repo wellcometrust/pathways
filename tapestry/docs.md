@@ -160,13 +160,13 @@ To run an abitrary animation, just add the code to a scene event:
 
 ### Adding Scenes
 
-The Pathways JS engine looks for scene code added to the `Pathways.Scene` object based on a panel’s id. So
+The Pathways JS engine looks for scene code added to the `Pathways.scrollScenes` object based on a panel’s id. So
 
 	<div id="mesmers-salon" class="panel”>
 
 Will look for a function called MesmersSalon (CamelCase + no dashes), which you can create with
 
-	Pathways.Scene.MesmersSalon = function() {}
+	Pathways.scrollScenes.MesmersSalon = function() {}
 
 In here is where ScrollMagic scenes are created and returned in a function which get called after the page has loaded. As an example:
 

@@ -1,5 +1,5 @@
 
-Pathways.Scene.MagnetisedTrees = function(panelID) {
+Pathways.scrollScenes.MagnetisedTrees = function(panelID) {
 
     var stage = animations.magnetisedTrees.stage;
     var scene1 = new ScrollScene({

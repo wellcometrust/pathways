@@ -21,5 +21,9 @@
 	  ga('send', 'pageview');
 
 	</script>
+
+    <script src="//use.typekit.net/fhj6ovs.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
 </head>
 <body>

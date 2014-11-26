@@ -1,5 +1,5 @@
 
-Pathways.Scene.JosephKhan = function() {
+Pathways.scrollScenes.JosephKhan = function() {
     var scene = new ScrollScene({
             triggerElement: '#joseph-khan',
             duration:       Pathways.panelHeight + 100

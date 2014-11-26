@@ -1,5 +1,5 @@
 
-Pathways.Scene.KenVideo = function(panelID) {
+Pathways.scrollScenes.KenVideo = function(panelID) {
 
     var $panel  = $(panelID),
         video   = $panel.find('video').get(0);

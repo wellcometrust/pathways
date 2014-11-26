@@ -1,5 +1,5 @@
 
-Pathways.Scene.Example = function(panel_height, panelID) {
+Pathways.scrollScenes.Example = function(panel_height, panelID) {
 
     var scene = new ScrollScene({
             triggerElement: panelID,
