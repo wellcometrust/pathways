@@ -1,0 +1,39 @@
+#cookieconsent {
+    position: absolute;
+    top: 0;
+    z-index: 50000;
+    width: 100%;
+    background: #000;
+    background: rgba(0, 0, 0, 0.8);
+    color: #ddd;
+    font-size: 0.75rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1em;
+    line-height: 1.25;
+    a {
+        margin-top: 1em;
+        display: block;
+        color: #fff;
+    }
+    &.visible {
+        display: block;
+    }
+    &.hidden {
+        display: none;
+    }
+}
+@media screen and (min-width: 32em) {
+    #cookieconsent {
+        p {
+            width: 90%;
+            padding-right:1em;
+            float: left;
+        }
+        a {
+            margin: 0;
+            float: right;
+            width: 10%;
+            text-align: right;
+        }
+    }
+}

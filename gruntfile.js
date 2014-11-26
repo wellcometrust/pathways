@@ -19,6 +19,8 @@ module.exports = function(grunt) {
                     '_assets/js/lib/hammer.min.js',
                     '_assets/js/lib/greensock/TweenMax.min.js',
                     '_assets/js/lib/jquery.scrollmagic.js',
+                    '_assets/js/lib/cookies.js',
+                    '_assets/js/lib/cookiewarning.js',
                     '_assets/js/lib/d3.min.js',
                     '_assets/js/lib/simple-slider.min.js',
 
@@ -170,8 +172,7 @@ module.exports = function(grunt) {
                 replacements: [{
                     from: 'localhost%3A8888',
                     to: '<%= serverRoot.wellcomelive %>'
-                },
-                {
+                }, {
                     from: 'localhost:8888',
                     to: '<%= serverRoot.wellcomelive %>'
                 }]
@@ -198,11 +199,11 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['css', 'js']);
 
     grunt.registerTask('export', 'Exporting pathways', function(arg) {
+        function runPath(name) {
+            grunt.task.run(['php2html:' + name, 'copy:default', 'copy:' + name, 'replace']);
+        }
         if (arg) {
             grunt.log.writeln('Exporting ', arg); // TODO - use arg to export specific pathway
-            function runPath(name) {
-                grunt.task.run(['php2html:' + name, 'copy:default', 'copy:' + name, 'replace']);
-            }
             runPath(arg);
         } else {
             grunt.log.writeln('Exporting all');

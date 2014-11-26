@@ -12,6 +12,10 @@ $page = PageBuilder::getPage('mindcraft', 'intro');
 include_once($docRoot.'/_includes/header.php');
 
 ?>
+    <div id="cookieconsent">
+        <p>We use cookies on this website. By continuing to use this site without changing your cookie settings, you agree that you are happy to accept our cookies and for us to access these on your device.</p>
+        <a id="cookies-accept" href="#">Continue</a>
+    </div>
 
     <main role="main">
 
