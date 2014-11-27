@@ -2,7 +2,7 @@
 .comic-strip { min-height: 600px; }
 
 #trilby {
-    
+
     .bg-container {
         background-image: url(/pathways/1-mindcraft/_assets/5-svengali/svengali-2.jpg);
 
@@ -65,7 +65,7 @@
     #trilby {
 
         .bg-container {
-            
+
             .large-screen {
                 display:block;
             }
@@ -127,7 +127,7 @@
                 font-size:      1rem;
                 line-height:    1;
             }
-            
+
             span {
                 font-size: 1.618rem;
             }
@@ -206,7 +206,7 @@
 
         .comic-panel--7 {
             width:          40%;
-            margin-top:     -240px;
+            margin-top:     -230px;
             margin-left:    7%;
 
             .panel-number {
@@ -231,12 +231,14 @@
 
         .comic-panel--8 {
             width:          47%;
+            margin-left:    5%;
             margin-top:     20px;
         }
 
         .comic-panel--9 {
             width:          43%;
             margin-left:    4%;
+            margin-top:     -100px;
 
             .panel-text {
                 left:   10px;
@@ -247,8 +249,8 @@
 
         .comic-panel--10 {
             width:          45%;
-            margin-top:     -70px;
-            margin-left:    2%;
+            margin-top:     45px;
+            margin-left:    5%;
 
             .panel-text {
                 font-style: italic;
@@ -257,8 +259,7 @@
 
         .comic-panel--11 {
             width:          33%;
-            margin-left:    4%;
-            margin-top:     40px;
+            margin-left:    14%;
 
             .panel-text {
                 left: 10px;
@@ -295,22 +296,13 @@
 
 @media all and (min-width: 62.5rem) {
     #trilby {
-        .comic-panel--8 {
-            margin-left:5%;
-        }
 
         .comic-panel--9 {
-            margin-top: -105px;
-        }
-
-        .comic-panel--10 {
-            margin-top: 50px; 
-            margin-left: 5%;
+            margin-top: -70px;
         }
 
         .comic-panel--11 {
-            margin-top: -25px;
-            margin-left: 14%;
+            margin-top: 25px;
         }
     }
 }
