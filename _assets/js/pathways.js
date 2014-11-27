@@ -86,7 +86,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
 (function(w, exports, cookies) {
 
-    var expiry = 365,
+    var expiry = Infinity,
         path = '/',
         cookieDefs = {
             mute: {
