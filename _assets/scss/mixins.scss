@@ -2,27 +2,27 @@
 // Fonts
 
 @mixin abril-regular {
-    font-family:        "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-family:        "abril text", Georgia, 'Times New Roman', Times, serif;
     font-weight:        normal;
     font-style:         normal;
 }
 
 
 @mixin abril-italic {
-    font-family:        "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
+    font-family:        "abril text", Georgia, 'Times New Roman', Times, serif;
     font-weight:        normal;
     font-style:         italic;
 }
 
 
 @mixin abril-display {
-    font-family:        "Abril Display Regular", Didot, 'Times New Roman', Times, serif;
+    font-family:        "abril-display", Didot, 'Times New Roman', Times, serif;
     font-weight:        normal;
     font-style:         normal;
 }
 
 @mixin tablet-gothic {
-    font-family:    "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-family:    "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight:    normal;
     font-style:     normal;
 }
