@@ -80,7 +80,7 @@ module.exports = function(grunt) {
                 tasks: ['css']
             },
             js: {
-                files: ['_assets/js/*.js', '_assets/js/patterns/*.js', 'pathways/**/**/_js/*.js'],
+                files: ['_assets/js/*.js', '_assets/js/patterns/*.js', 'pathways/**/**/_js/*.js', '_assets/js/lib/*.js'],
                 tasks: ['js'],
                 options: {
                     spawn: false,

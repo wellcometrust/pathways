@@ -79,27 +79,86 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 }(window, Pathways, jQuery));
 
 
+/****
+ *
+ * Cookie manager
+ */
 
+(function(w, exports, cookies) {
+
+    var expiry = 365,
+        path = '/',
+        cookieDefs = {
+            mute: {
+                id: '_wt_pathways_muted',
+                set: 'muteOnLoad',
+                unset: 'noMuteOnLoad'
+            },
+        };
+
+    function getCookieDef(id) {
+        if (!cookieDefs[id]) console.warn('Pathways Cookie Manager -- no cookie definition found for \''+id+'\'');
+        return cookieDefs[id];
+    }
+
+    function getCookieOrDefaultValActual(id) {
+        var cookieDef = getCookieDef(id),
+            cookieName = cookieDef.id;
+
+        return cookies.hasItem(cookieName) ? cookies.getItem(cookieName) : cookieDef.unset;
+    }
+
+    function getCookieOrDefaultValBool(id) {
+        var cookieDef = getCookieDef(id),
+            cookieRaw = getCookieOrDefaultValActual(id),
+            val = (cookieRaw === cookieDef.set);
+
+        return val;
+    }
+
+    function setCookieFromBool(id, isTrue) {
+        var cookieDef = getCookieDef(id),
+            cookieName = cookieDef.id;
+
+        if (cookies.consent === 'agreed') {
+            var cookieVal = (isTrue) ? cookieDef.set : cookieDef.unset;
+            cookies.setItem(cookieName, cookieVal, expiry, path);
+        }
+    }
+
+    exports.cookieManager = {
+        getCookieOrDefaultValActual: getCookieOrDefaultValActual,
+        getCookieOrDefaultValBool: getCookieOrDefaultValBool,
+        setCookieFromBool: setCookieFromBool
+    };
+
+}(window, Pathways, docCookies));
 
 /***
  *   Audio: mixer
  */
 Pathways.audio = {};
-(function(w, exports, $) {
+(function(w, exports, $, cookies) {
 
     var model,
         isMuted;
 
     function init(_model) {
         model = _model;
+        mute(cookies.getCookieOrDefaultValBool('mute'));
     }
 
-    function mute(value) {
-        isMuted = value;
+    function mute(doMute) {
+
+        if (doMute === isMuted) return;
+
+        isMuted = doMute;
 
         $('video, audio').each(function() {
             this.muted = isMuted;
         });
+
+        cookies.setCookieFromBool('mute', doMute);
     }
 
     function disable() {
@@ -175,7 +234,7 @@ Pathways.audio = {};
         unloadPanelAudio: unloadPanelAudio
     };
 
-}(window, Pathways.audio, jQuery));
+}(window, Pathways.audio, jQuery, Pathways.cookieManager));
 
 
 /***
@@ -204,6 +263,8 @@ Pathways.audio = {};
     function initGlobalAudio(selector) {
         var audio = $(selector).get(0);
         if (audio) {
+            //console.log()
+            //audio.muted = mixer.isMuted();
             mixer.crossfade(null, audio);
         }
 
@@ -217,8 +278,12 @@ Pathways.audio = {};
 
     exports.model = {
         init: init,
-        globalAudio: function() { return globalAudio; },
-        panelTracks: function() { return panelTracks; }
+        globalAudio: function() {
+            return globalAudio;
+        },
+        panelTracks: function() {
+            return panelTracks;
+        }
     };
 
 }(window, Pathways.audio, Pathways.audio.mixer, jQuery));
@@ -253,6 +318,7 @@ Pathways.audio = {};
 
     function init() {
         $muteButton = create('.mute');
+        update();
     }
 
     function update() {
