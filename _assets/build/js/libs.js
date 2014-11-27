@@ -2596,7 +2596,7 @@ var docCookies = {
         _cookieWarningID = '#cookieconsent',
         acceptID = 'cookies-accept',
         rejectID = 'cookies-reject',
-        numDays = 365,
+        expiry = Infinity,
         _onComplete = noop;
 
     function noop(value) {}
@@ -2621,7 +2621,7 @@ var docCookies = {
     }
 
     function setState(value) {
-        docCookies.setItem(cookieName, value, numDays, '/');
+        docCookies.setItem(cookieName, value, expiry, '/');
         callComplete(value);
     }
 

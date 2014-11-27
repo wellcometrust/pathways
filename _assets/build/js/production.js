@@ -303,7 +303,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
 (function(w, exports, cookies) {
 
-    var expiry = 365,
+    var expiry = Infinity,
         path = '/',
         cookieDefs = {
             mute: {
@@ -2405,19 +2405,26 @@ Pathways.components.infographic = function(element, data) {
 
 Pathways.components.libraryPanel = function(element, data) {
 
+    function closePanel($panel) {
+        $panel.css('transform', 'translate(' + ($panel.outerWidth()) + 'px, ' + ($panel.outerHeight() - 60) + 'px)');
+        $panel.removeClass('active');
+    }
+
+    function openPanel($panel) {
+        $panel.css('transform', 'translate(38px, 38px)');
+        $panel.addClass('active');
+    }
+
     $(element).on('click', '.handle', function() {
-        var $self = $(this),
-            $panel = $self.parent();
+        var $panel = $(this).parent();
 
         if ($panel.hasClass('active')) {
-            $panel.css('transform', 'translate(' + ($panel.outerWidth()) + 'px, ' + ($panel.outerHeight() - 60) + 'px)');
-            $panel.removeClass('active');
+            closePanel($panel);
         } else {
-            $panel.css('transform', 'translate(38px, 38px)');
-            $panel.addClass('active');
+            openPanel($panel);
 
             $(window).one('scroll', function() {
-                $self.trigger('click');
+                closePanel($panel);
             });
         }
     });

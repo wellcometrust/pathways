@@ -32,7 +32,7 @@ table {
 
 body {
   background-color: #000;
-  font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+  font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: normal;
   font-size: 100%;
@@ -40,12 +40,12 @@ body {
   line-height: 1.4; }
 
 h1 {
-  font-family: "Abril Display Regular", Didot, 'Times New Roman', Times, serif;
+  font-family: "abril-display", Didot, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: normal; }
 
 h2, h3, h4, h5, h6 {
-  font-family: "Abril Display Regular", Didot, 'Times New Roman', Times, serif;
+  font-family: "abril-display", Didot, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: normal;
   margin-bottom: 1em; }
@@ -54,7 +54,7 @@ a img {
   border: 0px none; }
 
 em, i {
-  font-family: "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
+  font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: italic; }
 
@@ -112,7 +112,7 @@ iframe {
 .global-navigation a {
   display: block;
   color: #fff;
-  font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+  font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: normal;
   font-size: 0.7rem;
@@ -139,7 +139,7 @@ iframe {
     border-radius: 1px;
     margin: 10px 0 0 6px;
     padding: 6px 3px 0px 3px;
-    font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
     font-style: normal; }
 
@@ -210,7 +210,7 @@ iframe {
   .intro-navigation a {
     display: block;
     color: #fff;
-    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
     font-weight: normal;
     font-style: normal;
     font-size: 0.7rem;
@@ -311,7 +311,7 @@ iframe {
       height: 48px; } }
 .intro-navigation--the-collectors a {
   color: #fff;
-  font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+  font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: normal; }
 
@@ -321,11 +321,11 @@ iframe {
 /** Library layer */
 .library-layer {
   position: relative;
-  font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+  font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
   font-weight: normal;
   font-style: normal; }
   .library-layer h1 {
-    font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
     font-style: normal; }
   .library-layer li {
@@ -454,7 +454,7 @@ iframe {
     left: 95px;
     top: 26px;
     color: #fff;
-    font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
     font-style: normal;
     width: 150px; }
@@ -529,7 +529,7 @@ iframe {
 .start .scene-set {
   display: block;
   color: #fff;
-  font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+  font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
   font-weight: normal;
   font-style: normal;
   font-size: 0.8rem;
@@ -545,7 +545,7 @@ iframe {
   margin: 0.3rem 0 0 0; }
 .start .intro-text {
   color: #fff;
-  font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+  font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: normal;
   font-size: 1rem;
@@ -674,7 +674,7 @@ iframe {
     display: block;
     position: relative;
     color: #5cb8b2;
-    font-family: "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
+    font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
     font-weight: normal;
     font-style: italic;
     width: 46px;
@@ -704,7 +704,7 @@ iframe {
       .library-panel .body li span {
         display: block; }
       .library-panel .body li a {
-        font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+        font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
         font-weight: normal;
         font-style: normal;
         font-size: 0.8rem;
@@ -726,7 +726,7 @@ iframe {
       -o-transform: translate(-38px, -38px);
       transform: translate(-38px, -38px); }
   .library-panel .share-me p {
-    font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
     font-style: normal;
     font-size: 0.8rem;
@@ -759,7 +759,7 @@ iframe {
 .quiz {
   width: 960px;
   margin: 0 auto;
-  font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+  font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
   font-weight: normal;
   font-style: normal; }
   .quiz .content {
@@ -767,7 +767,7 @@ iframe {
     margin: 0 auto; }
   .quiz .button {
     color: #030303;
-    font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
     font-style: normal;
     background-color: #fff;
@@ -785,7 +785,7 @@ iframe {
     top: -5px;
     left: -50px;
     color: #fff;
-    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
     font-weight: normal;
     font-style: normal; }
     .quiz .quiz-icon i {
@@ -812,7 +812,7 @@ iframe {
       text-align: center;
       margin: 0.8rem 0; }
       .quiz .quiz-start .quiz-start--header h1 {
-        font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+        font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
         font-weight: normal;
         font-style: normal; }
     .quiz .quiz-start .quiz-start--text {
@@ -841,7 +841,7 @@ iframe {
     line-height: 1; }
     .quiz .remaining em {
       color: #60B9B1;
-      font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+      font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
       font-weight: normal;
       font-style: normal;
       font-size: 1.1rem;
@@ -924,7 +924,7 @@ iframe {
     display: none; }
   .quiz .quiz-finish--header h1 {
     color: #fff;
-    font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
     font-style: normal;
     font-size: 1.2rem;
@@ -1047,7 +1047,7 @@ iframe {
   .audio-player .time-left {
     display: block;
     color: #fff;
-    font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
     font-style: normal;
     font-size: 0.75rem;
@@ -1370,12 +1370,12 @@ iframe {
     padding-bottom: 0.5em; }
     .tweet .header .time {
       color: #999;
-      font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+      font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
       font-weight: normal;
       font-style: normal;
       font-size: 0.8rem; }
     .tweet .header .username {
-      font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+      font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
       font-weight: normal;
       font-style: normal;
       font-size: 0.9rem; }
@@ -2345,7 +2345,7 @@ iframe {
   background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/elliotson-4.jpg);
   background-position: 30% 0; }
 #verdict blockquote p {
-  font-family: "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
+  font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: italic; }
 
@@ -2361,7 +2361,7 @@ iframe {
   #verdict header {
     margin-bottom: 4rem; }
   #verdict blockquote p {
-    font-family: "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
+    font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
     font-weight: normal;
     font-style: italic;
     font-size: 1.239rem;
@@ -2549,7 +2549,7 @@ iframe {
   top: 0;
   left: 0;
   color: #030303;
-  font-family: "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
+  font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: italic;
   background-color: #fff;
@@ -2582,7 +2582,7 @@ iframe {
       padding-left: 220px; }
       #trilby .trilby-header header span {
         display: block;
-        font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+        font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
         font-weight: normal;
         font-style: normal;
         font-size: 0.7rem;
@@ -2653,7 +2653,7 @@ iframe {
     margin-top: 49px; }
   #trilby .comic-panel--7 {
     width: 40%;
-    margin-top: -240px;
+    margin-top: -230px;
     margin-left: 7%; }
     #trilby .comic-panel--7 .panel-number {
       left: auto;
@@ -2670,24 +2670,25 @@ iframe {
     padding: 2em 0; }
   #trilby .comic-panel--8 {
     width: 47%;
+    margin-left: 5%;
     margin-top: 20px; }
   #trilby .comic-panel--9 {
     width: 43%;
-    margin-left: 4%; }
+    margin-left: 4%;
+    margin-top: -100px; }
     #trilby .comic-panel--9 .panel-text {
       left: 10px;
       right: auto;
       width: 260px; }
   #trilby .comic-panel--10 {
     width: 45%;
-    margin-top: -70px;
-    margin-left: 2%; }
+    margin-top: 45px;
+    margin-left: 5%; }
     #trilby .comic-panel--10 .panel-text {
       font-style: italic; }
   #trilby .comic-panel--11 {
     width: 33%;
-    margin-left: 4%;
-    margin-top: 40px; }
+    margin-left: 14%; }
     #trilby .comic-panel--11 .panel-text {
       left: 10px; }
   #trilby .comic-quote {
@@ -2698,7 +2699,7 @@ iframe {
     #trilby .comic-quote .info-box {
       position: absolute; }
     #trilby .comic-quote p {
-      font-family: "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
+      font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
       font-weight: normal;
       font-style: italic;
       background-color: rgba(0, 0, 0, 0.9);
@@ -2708,16 +2709,10 @@ iframe {
     #trilby .comic-quote.active p {
       display: block; } }
 @media all and (min-width: 62.5rem) {
-  #trilby .comic-panel--8 {
-    margin-left: 5%; }
   #trilby .comic-panel--9 {
-    margin-top: -105px; }
-  #trilby .comic-panel--10 {
-    margin-top: 50px;
-    margin-left: 5%; }
+    margin-top: -70px; }
   #trilby .comic-panel--11 {
-    margin-top: -25px;
-    margin-left: 14%; } }
+    margin-top: 25px; } }
 @media all and (min-width: 84rem) {
   #trilby .comic-panel span {
     font-size: 2.005rem; }
@@ -2754,7 +2749,7 @@ iframe {
   top: 0;
   left: 0;
   color: #030303;
-  font-family: "Abril Text Italic", Georgia, 'Times New Roman', Times, serif;
+  font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: italic;
   background-color: #fff;
@@ -3310,7 +3305,7 @@ iframe {
       background-position: 50% 50%; }
   .panel .main-content {
     color: #fff;
-    font-family: "Abril Text Regular", Georgia, 'Times New Roman', Times, serif;
+    font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
     font-weight: normal;
     font-style: normal;
     font-size: 0.9rem;
@@ -3426,14 +3421,14 @@ iframe {
       font-size: 1.618rem;
       margin-top: 0.8rem; }
   .fork .teaser-text {
-    font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
     font-style: normal;
     font-size: 0.766rem;
     text-transform: uppercase;
     letter-spacing: 0.2rem; }
   .fork .further-reading {
-    font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
     font-style: normal;
     cursor: pointer;
@@ -3536,7 +3531,7 @@ iframe {
 .intro .intro-button {
   display: inline-block;
   color: #fff;
-  font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+  font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
   font-weight: normal;
   font-style: normal;
   text-decoration: none;
@@ -3606,7 +3601,7 @@ iframe {
     margin: 1em 0 .5em; }
   #credits li {
     list-style: none;
-    font-family: "Tablet Gothic Regular", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
     font-style: normal;
     margin-bottom: 0.618rem; }

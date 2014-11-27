@@ -7,7 +7,6 @@
     <meta name="description" content="The Collectors.">
     <meta name="viewport" content="initial-scale=1,width=device-width">
 
-    <link rel="stylesheet" href="//f.fontdeck.com/s/css/VWVFQa58PbJBMqY5yx0LaLm3Wok/localhost/44200.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="/_assets/build/css/main.css">
 
     <script src="/_assets/js/lib/modernizr-2.8.3.custom.min.js"></script>
@@ -22,7 +21,7 @@
 
 	</script>
 
-    <script src="//use.typekit.net/fhj6ovs.js"></script>
+    <script src="//use.typekit.net/nlx6tdo.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
 
 </head>
@@ -113,17 +112,12 @@
     <script id="embedWellcomePlayer" src="http://wellcomelibrary.org/spas/player/build/wellcomeplayer/js/embed.js"></script>
 
     <script>
-        var selectors = ["a[rel$='external']", "a[data-component$='library-panel']",
-            "div[class$='handle']", "circle[class$='inner']",
-            "a[data-component$='player-overlay']", "div[class$='further-reading']",
-            "li[class$='twitter']", "li[class$='pinterest']"];
 
-        var gaCLickHandler = function(){
+        $("[data-ga]").click(function(){
             var gaLabel = $(this).data('ga');
+            console.log('ga click:', gaLabel);
             if (gaLabel) ga('send', 'event', 'link', 'click', gaLabel);
-        };
-
-        selectors.forEach(function(selector){ $(selector).click(gaCLickHandler);});
+        });
 
     </script>
 
