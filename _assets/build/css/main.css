@@ -66,6 +66,37 @@ iframe {
   display: table;
   clear: both; }
 
+#cookieconsent {
+  position: absolute;
+  top: 0;
+  z-index: 50000;
+  width: 100%;
+  background: #000;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ddd;
+  font-size: 0.75rem;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 1em;
+  line-height: 1.25; }
+  #cookieconsent a {
+    margin-top: 1em;
+    display: block;
+    color: #fff; }
+  #cookieconsent.visible {
+    display: block; }
+  #cookieconsent.hidden {
+    display: none; }
+
+@media screen and (min-width: 32em) {
+  #cookieconsent p {
+    width: 90%;
+    padding-right: 1em;
+    float: left; }
+  #cookieconsent a {
+    margin: 0;
+    float: right;
+    width: 10%;
+    text-align: right; } }
 .global-navigation nav {
   background-color: rgba(0, 0, 0, 0.8); }
 .global-navigation li {
