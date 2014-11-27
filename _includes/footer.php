@@ -4,17 +4,12 @@
     <script id="embedWellcomePlayer" src="http://wellcomelibrary.org/spas/player/build/wellcomeplayer/js/embed.js"></script>
 
     <script>
-        var selectors = ["a[rel$='external']", "a[data-component$='library-panel']",
-            "div[class$='handle']", "circle[class$='inner']",
-            "a[data-component$='player-overlay']", "div[class$='further-reading']",
-            "li[class$='twitter']", "li[class$='pinterest']"];
 
-        var gaCLickHandler = function(){
+        $("[data-ga]").click(function(){
             var gaLabel = $(this).data('ga');
+            console.log('ga click:', gaLabel);
             if (gaLabel) ga('send', 'event', 'link', 'click', gaLabel);
-        };
-
-        selectors.forEach(function(selector){ $(selector).click(gaCLickHandler);});
+        });
 
     </script>
 
