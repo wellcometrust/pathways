@@ -6,7 +6,7 @@
     $pathwayId = $page->getPathwayId();
 
     $level = '';
-
+    $count = 0;
     if (stripos($currentModule['path'], '/') != 0) {
         $level = '../';
     }
@@ -28,6 +28,7 @@
             <?php
                 foreach( $modules as $m ):
                     if ( isset($m['panels']) ) {
+                        $count++;
             ?>
                 <li<?= $currentModule['id'] == $m['id'] ? ' class="active"' : '' ?>>
                     <a href="<?= $pathwayPath . $m['path'] ?>index.php">
@@ -44,7 +45,7 @@
         <div class="handle closed">
             <div class="current-section">
                 <?php if ( isset($currentModule['index']) ) {
-                echo $currentModule['index'];
+                echo $currentModule['index'] . '<small>&#8201;/'. $count . '</small>';
                 } ?>
             </div>
         </div>
