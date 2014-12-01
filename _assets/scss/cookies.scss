@@ -11,8 +11,6 @@
     padding: 1em;
     line-height: 1.25;
     a {
-        margin-top: 1em;
-        display: block;
         color: #fff;
     }
     &.visible {
@@ -20,6 +18,10 @@
     }
     &.hidden {
         display: none;
+    }
+    #cookies-accept {
+        margin-top: 1em;
+        display: block;
     }
 }
 @media screen and (min-width: 32em) {
@@ -29,7 +31,7 @@
             padding-right:1em;
             float: left;
         }
-        a {
+        #cookies-accept {
             margin: 0;
             float: right;
             width: 10%;
