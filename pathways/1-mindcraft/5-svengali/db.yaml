@@ -19,7 +19,7 @@ info_panels:
     trilby:
         share:
             img: 'http://www.victorianweb.org/victorian/art/illustration/dumaurier/trilby/84.jpg'
-            text: 'Au clair de la lune. Scanned image by Philip V. Allingham'
+            text: 'George Du Maurier’s illustrations for Trilby, from #Mindcraft'
 
         links:
             -   title: 'George Du Maurier’s illustrations for Trilby in the 1894 Harper’s New Monthly Magazine. Scanned image and text by Philip V. Allingham'
@@ -28,7 +28,7 @@ info_panels:
     bompard:
         share:
             img: 'http://upload.wikimedia.org/wikipedia/commons/7/7c/Gabrielle_Bomp%C3%A9tard.jpg'
-            text: 'Poster for the song "Gabrielle Bompétard"'
+            text: 'Poster for the song "Gabrielle Bompétard", from #Mindcraft'
 
         links:
             -   title: 'Illustrations from Le Petit Parisien and Supplément Illustré du Petit Journal, 1890'

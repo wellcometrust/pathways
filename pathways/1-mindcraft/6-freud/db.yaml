@@ -23,7 +23,7 @@ info_panels:
     anna-o:
         share:
             img: 'http://upload.wikimedia.org/wikipedia/commons/c/cf/Anna_O.jpg'
-            text: '‘Anna O.’ (Bertha Pappenheim)'
+            text: '‘Anna O.’ (Bertha Pappenheim), from #Mindcraft'
 
         links:
             -   title: '‘Anna O.’ (Bertha Pappenheim)'
@@ -32,16 +32,18 @@ info_panels:
     fred-breuer:
         share:
             img: 'http://upload.wikimedia.org/wikipedia/commons/0/00/Pappenheim_1882.jpg'
-            text: Bertha Pappenheim (1882)'
+            text: 'Bertha Pappenheim (1882), from #Mindcraft'
 
         links:
             -   title: 'Bertha Pappenheim (1882)'
                 external_url: 'http://commons.wikimedia.org/wiki/File:Pappenheim_1882.jpg'
 
     office:        
+        share: 
+            text: 'Sigmund Freud’s office at the Freud Museum, London, from #Mindcraft'
 
         links:
-            -   title: 'Sigmund Freud’s office at Freud Museum, London'
+            -   title: 'Sigmund Freud’s office at the Freud Museum, London'
 
 
 # Library Layer

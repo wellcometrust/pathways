@@ -37,7 +37,7 @@ info_panels:
     mesmers-salon:
         share:
             img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
-            text: 'Mesmeric therapy'
+            text: 'Mesmeric therapy, from #Mindcraft'
 
         links:
             -   title: Mesmeric therapy
@@ -47,7 +47,7 @@ info_panels:
     animal-magnetism:
         share:
             img: http://wellcomelibrary.org/actual/b11757280/0/ba2ccaf1-308f-4afb-934f-448cc71cf50b/jp2'
-            text: 'A goat-headed man caresses a sleeping ewe-headed woman'
+            text: 'A goat-headed man caresses a sleeping ewe-headed woman, from #Mindcraft'
 
         links:
             -   title: 'A goat-headed man caresses a sleeping ewe-headed woman, in a satire of the notion of animal magnetism'
@@ -57,7 +57,7 @@ info_panels:
     magnetised-trees:
         share:
             img: 'http://wellcomelibrary.org/actual/b21269439/0/49ce972f-ff89-4656-9452-63f1be60c2e2/jp2'
-            text: 'Patients mesmerised by rods linked to a tree'
+            text: 'Patients mesmerised by rods linked to a tree, from #Mindcraft'
 
         links:
             -   title: 'Patients mesmerised by rods linked to a tree'
@@ -68,7 +68,7 @@ info_panels:
     satirised:
         share:
             img: 'http://thecambridgeroom.files.wordpress.com/2011/12/18th.jpg'
-            text: '18th-century marbling studio'
+            text: 'An 18th-century marbling studio, from #Mindcraft'
 
         links:
             -   title: 18th-century marbling studio
@@ -115,7 +115,7 @@ info_panels:
 
 library_layer:
 
-	See_in_the_Wellcome_Library:
+    See_in_the_Wellcome_Library:
         -   type: book
             title: 'The Commission&rsquo;s report on Animal Magnetism'
             author: Benjamin Franklin
@@ -140,7 +140,7 @@ library_layer:
             date: 1783
             link: 'http://wellcomelibrary.org/package/b19582079'
 
-	See_Elsewhere:
+    See_Elsewhere:
         -   type: book
             title: 'Mesmer and animal magnetism: a chapter in the history of medicine'
             author: Frank A Pattie
