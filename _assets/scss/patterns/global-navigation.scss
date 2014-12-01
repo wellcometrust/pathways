@@ -35,22 +35,48 @@
     .handle {
         float:              left;
         background-color:   rgba(0,0,0,0.8);
-        width:              42px;
-        height:             46px;
-        border-radius:      0 0 2px 2px;
+        width:              56px;
+        height:             43px;
+        border-radius:      0 0 3px 3px;
         margin-left:        8px;
 
         .current-section {
             color:              #fff;
-            width:              30px;
+            width:              44px;
             height:             30px;
             text-align:         center;
             background-color:   $mind-pink;
+            background:         $mind-pink url(/_assets/img/icons/icon-simple-triangle.svg) 0 0 no-repeat;
+            background-size:    100%;
             border-radius:      1px;
-            margin:             10px 0 0 6px;
+            margin:             6px 0 0 6px;
             padding:            6px 3px 0px 3px;
             @include            tablet-gothic;
+            position:           relative;
+            font-weight:        bold;
+
+            .curr {
+                font-size:  1.25em;
+                display:    inline-block;
+                width:      13px;
+                @include transform(translate(-6px, -6px));
+            }
+            .total {
+                font-size:  0.8em;
+                opacity:    0.7;
+                display:    inline-block;
+                width:      10px;
+                @include transform(translate(8px, -3px));
+            }
+            .slash {
+                position:   absolute;
+                right:      0;
+                bottom:     0;
+                width:      30px;
+                height:     30px;
+            }
         }
+
     }
 
 }
@@ -130,7 +156,7 @@
                 @include transition(all 0.2s ease);
 
                 &:hover {
-                    background-color:   #fff;
+                    background-color:   rgba(255, 255, 255, 0.8);
                     color:              $mind-pink;
                 }
             }

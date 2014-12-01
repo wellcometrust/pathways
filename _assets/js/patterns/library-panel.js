@@ -33,6 +33,7 @@ Pathways.components.libraryPanel = function(element, data) {
             openPanel($panel);
             $(window).one('scroll', function() {
                 closePanel($panel);
+                toggleActiveGA($this, gaData, reC, repO);
             });
             toggleActiveGA($this, gaData, reO, repC);
         }
