@@ -20,17 +20,32 @@ page_info:
 
 info_panels:
 
-    khans-anatomical-museum:
+    quackery:
         share:
-            img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
-            text: 'Dummy Title'
+            img: 'http://wellcomelibrary.org/actual/b11627086/0/b6a5c4c2-ac9c-4ba9-96d7-8f918da4a874/jp2'
+            text: "A quack doctor selling his remedies on the streets of London"
+        links:
+            -   title: "A quack doctor selling his remedies on the streets of London - despite objections"
+                player_url: http://wellcomelibrary.org/package/b11627086
+                download_url: 'http://wellcomelibrary.org/actual/b11627086/0/b6a5c4c2-ac9c-4ba9-96d7-8f918da4a874/jp2?download=true'
+
+    obscene-publications-act:
+        share:
+            img: 'http://legalaidwatch.files.wordpress.com/2013/11/courtroom_1_lg.jpg'
+            text: "A Victorian courtroom scene"
 
         links:
-            -   title: 'Dummy Title'
-                player_url: 'http://wellcomelibrary.org/package/b12025665'
-                download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
+            -   title: "A Victorian courtroom scene ? Sheffield Libraries, Archives and Information (Licensed under Creative Commons)"
+                external_url: 'http://legalaidwatch.wordpress.com/2013/11/20/this-week-in-legal-aid-2/'
 
-
+    seized-and-destroyed:
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21370199/0/0bd2f95d-0f3a-46a4-9f0c-641e30d6c547/jp2'
+            text: "A quack in the right place"
+        links:
+            -   title: "A quack in the right place"
+                player_url: 'http://wellcomelibrary.org/package/b21370199'
+                download_url: 'http://wellcomelibrary.org/actual/b21370199/0/0bd2f95d-0f3a-46a4-9f0c-641e30d6c547/jp2?download=true'
 
 
 # Library Layer
@@ -61,18 +76,53 @@ library_layer:
 
     See_in_the_Wellcome_Library:
 
-        -   type: ''
-            title: ''
-            author: ''
-            date: 2014
-            link: ''
+        -   type: 'book'
+            title: "Handbook of Dr Kahn's Museum"
+            author: "G. Kahn"
+            date: 1863
+            link: 'http://wellcomelibrary.org/package/b20663754'
+        -   type: 'book'
+            title: "The heteradelph, or, double-bodied boy"
+            author: 'Joseph Kahn'
+            date: 186-?
+            link: 'http://wellcomelibrary.org/package/b20663778'
+        -   type: 'book'
+            title: "A descriptive catalogue of Rackstrow's Museum"
+            author: 'Benjamin Rackstrow'
+            date: 1782
+            link: 'http://wellcomelibrary.org/package/b20663742'
+        -   type: 'book'
+            title: "Anatomical and Physiological Descripton of the Late Signor Sarti?s new Florentine Venus"
+            author: "W. Mawhinney"
+            date: 1854?
+            link: 'http://wellcomelibrary.org/package/b20663602'
+        -   type: 'book'
+            title: "Signore Sarti?s Florentine Anatomical Models"
+            author: "s.n."
+            date: 1850
+            link: 'http://wellcomelibrary.org/package/b20663614'
+        -   type: 'book'
+            title: 'A Catechism of Anatomy'
+            author: 'William Pinnock'
+            date: 1826
+            link: 'http://wellcomelibrary.org/package/b20663626'
 
     See_Elsewhere:
-        -   type: ''
-            title: ''
-            author: ''
-            date: 2014
-            link: ''
+        -   type: 'book'
+            title: "Anatomy as Spectacle: Public exhibitions of the body from 1700 to the present"
+            author: 'Elizabeth Stephens'
+            date: 2013
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Anatomy_as_Spectacle/9781846318740'
+        -   type: 'book'
+            title: "Ephemeral Bodies: Wax sculpture and the human figure"
+            author: 'Roberta Panzanelli'
+            date: 2008
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Ephemeral_Bodies/9780892368778'
+        -   type: 'book'
+            title: "Quacks: Fakers and charlatans in medicine"
+            author: 'Roy Porter'
+            date: 2003
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Quacks/9780752425900'
 
 
 

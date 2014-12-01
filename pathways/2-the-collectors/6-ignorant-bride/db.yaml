@@ -21,15 +21,18 @@ info_panels:
 
     british-museum:
         share:
-            img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
-            text: 'Dummy Title'
+            img: 'http://wellcomelibrary.org/actual/b11962884/0/76fb56bd-5619-4321-afea-9675e80e0635/jp2'
+            text: "The British Museum: the King's Library, with readers"
 
         links:
-            -   title: 'Dummy Title'
-                player_url: 'http://wellcomelibrary.org/package/b12025665'
-                download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
+            -   title: "The British Museum: the King's Library, with readers"
+                player_url: 'http://wellcomelibrary.org/package/b11962884'
+                download_url: 'http://wellcomelibrary.org/actual/b11962884/0/76fb56bd-5619-4321-afea-9675e80e0635/jp2?download=true'
 
 
+    married-love:
+        links:
+            -   title: "Ruth and Ernest, 1936"
 
 
 # Library Layer
@@ -60,18 +63,38 @@ library_layer:
 
     See_in_the_Wellcome_Library:
 
-        -   type: ''
-            title: ''
-            author: ''
-            date: 2014
-            link: ''
+        -   type: 'book'
+            title: 'Sexual physiology and hygiene'
+            author: "R. T. Thrall"
+            date: 1891
+            link: 'http://wellcomelibrary.org/package/b20442658'
+        -   type: 'book'
+            title: 'What a Young Husband Ought to Know'
+            author: 'Sylvanus Stall'
+            date: 1897
+            link: 'http://wellcomelibrary.org/package/b20442671'
+        -   type: 'book'
+            title: 'What it means to marry'
+            author: 'Mary Scharlieb'
+            date: 1914
+            link: 'http://wellcomelibrary.org/package/b21231692'
 
     See_Elsewhere:
-        -   type: ''
-            title: ''
-            author: ''
-            date: 2014
-            link: ''
+        -   type: 'book'
+            title: "Married Love: A new contribution to the solution of sex difficulties"
+            author: 'Marie Stopes'
+            date: 1918
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Married_Love/9780199536542'
+        -   type: 'book'
+            title: 'The Public Lives of Charlotte and Marie Stopes'
+            author: 'Stephanie Green'
+            date: 2013
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/The_Public_Lives_of_Charlotte_and_Marie_Stopes/9781848932388'
+        -   type: 'book'
+            title: "The Facts of Life: The creation of sexual knowledge in Britain, 1650?1950"
+            author: 'Lesley Hall and Roy Porter'
+            date: 1995
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/The_Facts_of_Life/9780300062212'
 
 
 

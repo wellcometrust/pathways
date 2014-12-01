@@ -18,15 +18,15 @@ page_info:
 
 info_panels:
 
-    bensalem-intro:
-        share:
-            img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
-            text: 'Dummy Title'
+    # bensalem-intro:
+    #     share:
+    #         img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
+    #         text: 'Dummy Title'
 
-        links:
-            -   title: 'Dummy Title'
-                player_url: 'http://wellcomelibrary.org/package/b12025665'
-                download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
+    #     links:
+    #         -   title: 'Dummy Title'
+    #             player_url: 'http://wellcomelibrary.org/package/b12025665'
+    #             download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
 
 
 # Library Layer
@@ -57,18 +57,28 @@ library_layer:
 
     See_in_the_Wellcome_Library:
 
-        -   type: ''
-            title: ''
-            author: ''
-            date: 2014
-            link: ''
+        -   type: 'book'
+            title: 'A Journal of a Voyage to the South Seas'
+            author: 'Sydney Parkinson'
+            date: 1773
+            link: 'http://wellcomelibrary.org/package/b20663699'
+        -   type: 'book'
+            title: 'Some Yeares Travels into Divers Parts of Asia and Afrique'
+            author: 'Thomas Herbert'
+            date: 1638
+            link: 'http://wellcomelibrary.org/package/b20663705'
 
     See_Elsewhere:
-        -   type: ''
-            title: ''
-            author: ''
-            date: 2014
-            link: ''
+        -   type: 'book'
+            title: "Francis Bacon?s ?The New Atlantis?: New interdisciplinary essays"
+            author: 'Bronwen Price'
+            date: 2003
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Francis_Bacons_The_New_Atlantis/9780719060526'
+        -   type: 'book'
+            title: 'Realistic Utopias: The ideal imaginary societies of the Renaissance, 1516?1630'
+            author: "Miriam Eliav-Feldon"
+            date: 1982
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Realistic_Utopias/9780198218890'
 
 
 #

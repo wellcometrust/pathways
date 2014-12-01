@@ -18,15 +18,15 @@ page_info:
 
 info_panels:
 
-    wellcome-collection:
-        share:
-            img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
-            text: 'Dummy Title'
+    # wellcome-collection:
+    #     share:
+    #         img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
+    #         text: 'Dummy Title'
 
-        links:
-            -   title: 'Dummy Title'
-                player_url: 'http://wellcomelibrary.org/package/b12025665'
-                download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
+    #     links:
+    #         -   title: 'Dummy Title'
+    #             player_url: 'http://wellcomelibrary.org/package/b12025665'
+    #             download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
 
 
 
@@ -59,19 +59,59 @@ library_layer:
 
     See_in_the_Wellcome_Library:
 
-        -   type: ''
-            title: ''
-            author: ''
-            date: 2014
-            link: ''
+        -   type: 'book'
+            title: 'Beskrivelse over Finnmarkens Lapper'
+            author: 'Knud Leem'
+            date: 1767
+            link: 'http://wellcomelibrary.org/package/b21231643'
+        -   type: 'book'
+            title: 'The Wellcome Museum of Medical Science'
+            author: "Wellcome Foundation Ltd."
+            date: 1950s
+            link: 'http://wellcomelibrary.org/package/b20456803'
+        -   type: 'book'
+            title: "The Wellcome Museum of Medical Science 1914?1964"
+            author: "Wellcome Foundation Ltd."
+            date: 1964
+            link: 'http://wellcomelibrary.org/package/b20456815'
+        -   type: 'video'
+            title: 'Looking Around'
+            author: 'Wellcome Film Unit'
+            date: 1952
+            link: 'http://wellcomelibrary.org/package/b1663570x'
+        -   type: 'video'
+            title: "The Story of The Wellcome Foundation Ltd."
+            author: 'Wellcome Film Unit'
+            date: 1955
+            link: 'http://wellcomelibrary.org/package/b16659090'
+
 
     See_Elsewhere:
-        -   type: ''
-            title: ''
-            author: ''
-            date: 2014
-            link: ''
-
+        -   type: 'book'
+            title: "An Infinity of Things: How Sir Henry Wellcome collected the world"
+            author: 'Frances Larson'
+            date: 2009
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/An_Infinity_of_Things/9780199554461'
+        -   type: 'book'
+            title: 'Henry Wellcome'
+            author: 'Robert Rhodes James'
+            date: 1995
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Henry_Wellcome/9780340606179'
+        -   type: 'book'
+            title: "Medicine Man: The forgotten museum of Henry Wellcome"
+            author: 'Ken Arnold and Danielle Olsen'
+            date: 2003
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Medicine_Man/9780714127941'
+        -   type: 'book'
+            title: "Cures & Curiosities: Inside the Wellcome Library"
+            author: 'Sebastian Faulkes and Tony Gould'
+            date: 2007
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Cures_and_Curiosities/9781846680335'
+        -   type: 'book'
+            title: "Wellcome Institute for the History of Medicine: A short history"
+            author: 'John Symons'
+            date: 1993
+            link: 'http://www.amazon.co.uk/Wellcome-Institute-History-Medicine-history/dp/1869835344'
 
 
 #

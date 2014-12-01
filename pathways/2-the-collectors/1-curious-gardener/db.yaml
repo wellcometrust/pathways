@@ -21,18 +21,39 @@ page_info:
 # Info Panels
 info_panels:
 
-    john-tradescant:
+    # john-tradescant:
+    #     share:
+    #         img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
+    #         text: 'Dummy Title'
+
+    #     links:
+    #         -   title: "Smilax Hortensis (kidney bean)"
+    #             player_url: http://wellcomelibrary.org/package/b20723143
+    #             download_url: http://wellcomelibrary.org/actual/b20723143/0/f87d84f4-d665-4102-b90f-7b76c4f70b5d/jp2?download=true
+
+
+
+    duke-of-buckingham:
         share:
-            img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
-            text: 'Dummy Title'
+            img: 'http://wellcomelibrary.org/actual/b11730535/0/ec83b56d-cd64-4065-8730-3a3262c5b043/jp2'
+            text: "John Tradescant I's house at South Lambeth"
 
         links:
-            -   title: 'Dummy Title'
-                player_url: 'http://wellcomelibrary.org/package/b12025665'
-                download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
+            -   title: "John Tradescant I's house at South Lambeth"
+                player_url: http://wellcomelibrary.org/package/b11730535
+                download_url: 'http://wellcomelibrary.org/actual/b11730535/0/ec83b56d-cd64-4065-8730-3a3262c5b043/jp2?download=true'
 
 
+    unique-artifacts:
+        share:
+            img: 'http://wellcomelibrary.org/actual/b21369975/0/268be7ab-8bb7-4411-9db9-aa436c33211e/jp2'
+            text: "Natural history museum of Ferrante Imperato of Naples"
 
+
+        links:
+            -   title: "Natural history museum of Ferrante Imperato of Naples"
+                player_url: 'http://wellcomelibrary.org/package/b21369975'
+                download_url: 'http://wellcomelibrary.org/actual/b21369975/0/268be7ab-8bb7-4411-9db9-aa436c33211e/jp2?download=true'
 
 # Library Layer
 #
@@ -62,18 +83,49 @@ library_layer:
 
     See_in_the_Wellcome_Library:
 
-        -   type: ''
-            title: ''
-            author: ''
-            date: 2014
-            link: ''
+        -   type: 'book'
+            title: 'Musaeum Tradescantianum'
+            author: 'John Tradescant'
+            date: 1656
+            link: 'http://wellcomelibrary.org/package/b20649691'
+        -   type: 'book'
+            title: 'De Historia Stirpium'
+            author: 'Leonhart Fuchs'
+            date: 1542
+            link: 'http://wellcomelibrary.org/package/b20723143'
+        -   type: 'book'
+            title: 'De Indiae utriusque re naturali et medica libri quatuordecim '
+            author: 'Willem Piso'
+            date: 1658
+            link: 'http://wellcomelibrary.org/package/b20663730'
+        -   type: 'book'
+            title: 'A letter to William Watson upon the early cultivation of botany in England'
+            author: 'Andrew Coltee Ducarel'
+            date: 1773
+            link: 'http://wellcomelibrary.org/package/b20663663'
+
 
     See_Elsewhere:
-        -   type: ''
-            title: ''
-            author: ''
-            date: 2014
-            link: ''
+        -   type: 'book'
+            title: 'Strange Blooms: The curious lives and adventures of the John Tradescants '
+            author: 'Jennifer Potter'
+            date: 2006
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Strange_Blooms/9781843543350'
+        -   type: 'book'
+            title: 'Earthly Joys '
+            author: 'Philippa Gregory'
+            date: 1998
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Earthly_Joys/9780007228478'
+        -   type: 'book'
+            title: 'Ashmolean: Britiain?s first museum '
+            author: 'Christopher Brown'
+            date: 2009
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Ashmolean/9781854442437'
+        -   type: 'book'
+            title: 'Curiosities and Texts: The culture of collecting in early modern England'
+            author: 'Marjorie Swann'
+            date: 2001
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Curiosities_and_Texts/9780812236101'
 
 
 #

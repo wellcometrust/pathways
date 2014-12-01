@@ -22,15 +22,34 @@ info_panels:
 
     bills-of-mortality:
         share:
-            img: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2'
-            text: 'Dummy Title'
+            img: 'http://wellcomelibrary.org/actual/b21370059/0/eb984856-501a-4dd5-abed-14be9c05d994/jp2'
+            text: 'Map of London and Westminster before the Fire of London'
 
         links:
-            -   title: 'Dummy Title'
-                player_url: 'http://wellcomelibrary.org/package/b12025665'
-                download_url: 'http://wellcomelibrary.org/actual/b12025665/0/c5bc1d78-5e02-44e5-9818-e57b32db4389/jp2?download=true'
+            -   title: 'Map of London and Westminster before the Fire of London'
+                player_url: 'http://wellcomelibrary.org/package/b21370059'
+                download_url: 'http://wellcomelibrary.org/actual/b21370059/0/eb984856-501a-4dd5-abed-14be9c05d994/jp2?download=true'
+
+    graunt-records:
+        share:
+            img: 'http://wellcomelibrary.org/actual/b11846574/0/efcb4438-d7b2-400e-af5d-55a5fc2f7cfe/jp2'
+            text: 'A man writing; representing the faculty of memory'
+
+        links:
+            -   title: 'A man writing; representing the faculty of memory'
+                player_url: 'http://wellcomelibrary.org/package/b11846574'
+                download_url: 'http://wellcomelibrary.org/actual/b11846574/0/efcb4438-d7b2-400e-af5d-55a5fc2f7cfe/jp2?download=true'
 
 
+    isaac-newton:
+        share:
+            img: 'http://wellcomelibrary.org/actual/b15436263/0/20403db7-26a2-4aa6-ae14-b4cac28f96c4/jp2'
+            text: 'Francis Bacon and William Brouncker flanking a bust of King Charles II set on a pedestal'
+
+        links:
+            -   title: 'Francis Bacon and William Brouncker flanking a bust of King Charles II set on a pedestal'
+                player_url: 'http://wellcomelibrary.org/package/b15436263'
+                download_url: 'http://wellcomelibrary.org/actual/b15436263/0/20403db7-26a2-4aa6-ae14-b4cac28f96c4/jp2?download=true'
 # Library Layer
 #
 # A resource example:
@@ -59,18 +78,68 @@ library_layer:
 
     See_in_the_Wellcome_Library:
 
-        -   type: ''
-            title: ''
-            author: ''
-            date: 2014
-            link: ''
+        -   type: 'book'
+            title: 'Natural and Political Observations made upon the Bills of mortality'
+            author: 'John Graunt'
+            date: 1676
+            link: 'http://wellcomelibrary.org/package/b20663729'
+        -   type: 'book'
+            title: 'A treatise on man and the development of his faculties'
+            author: 'Adolphe Quetelet'
+            date: 1842
+            link: 'http://wellcomelibrary.org/package/b2123162x'
+        -   type: 'book'
+            title: 'London?s Dreadful Visitation'
+            author: "Company of Parish-Clerks of London"
+            date: 1665
+            link: 'http://wellcomelibrary.org/package/b20663717'
+        -   type: 'book'
+            title: 'The first City of London Medical Officer of Health Report'
+            author: 'John Simon'
+            date: 1849
+            link: 'http://wellcomelibrary.org/package/b1824404x'
+        -   type: 'book'
+            title: 'Notes on Matters Affecting the Health, Efficiency, and Hospital of the British Army'
+            author: 'Florence Nightingale'
+            date: 1858
+            link: 'http://wellcomelibrary.org/package/b20387118'
+        -   type: 'book'
+            title: 'The Effects of the Principal Arts, Trades and Professions'
+            author: 'C. Turner Thackrah'
+            date: 1831
+            link: 'http://wellcomelibrary.org/package/b20663821'
 
     See_Elsewhere:
-        -   type: ''
-            title: ''
-            author: ''
+        -   type: 'book'
+            title: 'Medical London'
+            author: 'Richard Barnett'
+            date: 2008
+            link: 'http://bookshop.blackwell.co.uk/jsp/id/Medical_London/9780955876103'
+        -   type: 'document'
+            title: 'John Graunt on Causes of Death in the City of London'
+            author: 'John Graunt'
+            date: 2009
+            link: 'http://www.jstor.org/stable/25487673'
+        -   type: 'document'
+            title: "John Graunt, Francis Bacon, and the Royal Society: The reception of statistics"
+            author: 'Robert Kargon'
+            date: 1963
+            link: 'http://jhmas.oxfordjournals.org/content/XVIII/4/337.long'
+        -   type: 'document'
+            title: 'New Light on Graunt'
+            author: 'Philip Kreager'
             date: 2014
-            link: ''
+            link: 'http://www.jstor.org/stable/2174531'
+        -   type: 'document'
+            title: 'Lessons from John Graunt'
+            author: "Kenneth J. Rothman"
+            date: 1996
+            link: 'http://ac.els-cdn.com/S0140673696915627/1-s2.0-S0140673696915627-main.pdf?_tid=081dc430-3430-11e4-804f-00000aab0f26&acdnat=1409834342_b18eeacfa755d003'
+        -   type: 'document'
+            title: "A Corner of History: John Graunt, 1620?1674"
+            author: "Ernst L. Wynder"
+            date: 1975
+            link: 'http://ac.els-cdn.com/0091743575900572/1-s2.0-0091743575900572-main.pdf?_tid=63280778-3430-11e4-ac73-00000aab0f01&acdnat=1409834495_3dbaf8c99bc87fe0'
 
 
 
