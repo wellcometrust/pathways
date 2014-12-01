@@ -28,7 +28,7 @@
         </div>
     </a>
 
-    <div class="further-reading" data-component="toggle-section" data-toggle-section-target=".library-layer .gap" data-toggle-section-anchor=".library-layer" data-ga="<?= $gaRoot . 'l3 show library layer' ?>">
+    <div class="further-reading" data-component="toggle-section" data-toggle-section-target=".library-layer .gap" data-toggle-section-anchor=".library-layer" data-ga="<?= $gaRoot . 'l3 open library layer' ?>">
         <div class="further-reading-container">
             <span>Further reading from</span>
             <object type="image/svg+xml" data="/_assets/img/logo-black.svg">Wellcome Library</object>

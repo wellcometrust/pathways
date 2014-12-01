@@ -17,16 +17,16 @@
     $url_panel_link =   urlencode($panel_link);
 
     if (isset($panel['share'])) {
-        $share = $panel['share'];
-        $pinterest_img =    urlencode($share['img']);
-        $share_text =       urlencode($share['text']);
+        $share =            $panel['share'];
+        $pinterest_img =    isset($share['img']) ? urlencode($share['img']) : '';
+        $share_text =       isset($share['text']) ? urlencode($share['text']) : '';
     }
 
 
 ?>
 
 <div class="library-panel" data-panel="<?= $id ?>" data-component="library-panel">
-    <div class="handle" data-ga="<?= $gaData . 'l2 share open' ?>"></div>
+    <div class="handle" data-ga="<?= $gaData . 'l2 open share' ?>"></div>
     <div class="body">
         <?php if( isset($panel['links']) ): ?>
         <ul>

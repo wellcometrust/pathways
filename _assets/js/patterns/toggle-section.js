@@ -1,27 +1,44 @@
-Pathways.components.toggleSection = function(element, data) {
+(function(w, exports, gaState, $) {
 
-	var $element			= $(element),
-		$target             = $($element.attr('data-toggle-section-target')),
-		$scrollAnchor       = $($element.attr('data-toggle-section-anchor')),
-        height              = $target.height();
+    var reO = /l3 open library/g,
+        reC = /l3 close library/g,
+        repO = 'l3 open library',
+        repC = 'l3 close library';
 
-    $target.css({ 'height': 0, 'transition': 'height 0.4s ease' });
+    exports.toggleSection = function(element, data) {
 
-    $element.on('click', function toggleOpen() {
+        var $element = $(element),
+            targetSel = $element.attr('data-toggle-section-target'),
+            $target = $(targetSel),
+            $scrollAnchor = $($element.attr('data-toggle-section-anchor')),
+            $related = $('[data-toggle-section-target="'+targetSel+'"]'),
+            height = $target.height();
 
-    	$target.toggleClass('open');
+        $target.css({
+            'height': 0,
+            'transition': 'height 0.4s ease'
+        });
 
-    	if($target.hasClass('open')) {
-    		$target.css('height', height);
+        $element.on('click', function toggleOpen() {
 
-    		$('html, body').animate({
-                scrollTop: $scrollAnchor.offset().top - 100
-            }, 400);
-    	} else {
-    		$target.css('height', 0);
-    	}
+            if (!$target.hasClass('open')) {
+                $target.css('height', height);
 
-        return false;
-    });
+                $('html, body').animate({
+                    scrollTop: $scrollAnchor.offset().top - 100
+                }, 400);
+                gaState.toggleActiveGA($related, reO, repC);
 
-};
+            } else {
+                $target.css('height', 0);
+                gaState.toggleActiveGA($related, reC, repO);
+            }
+
+            $target.toggleClass('open');
+
+            return false;
+        });
+
+    };
+
+}(window, Pathways.components, Pathways.components.core.gaState, jQuery));
