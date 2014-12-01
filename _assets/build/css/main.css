@@ -79,20 +79,21 @@ iframe {
   padding: 1em;
   line-height: 1.25; }
   #cookieconsent a {
-    margin-top: 1em;
-    display: block;
     color: #fff; }
   #cookieconsent.visible {
     display: block; }
   #cookieconsent.hidden {
     display: none; }
+  #cookieconsent #cookies-accept {
+    margin-top: 1em;
+    display: block; }
 
 @media screen and (min-width: 32em) {
   #cookieconsent p {
     width: 90%;
     padding-right: 1em;
     float: left; }
-  #cookieconsent a {
+  #cookieconsent #cookies-accept {
     margin: 0;
     float: right;
     width: 10%;
@@ -126,22 +127,49 @@ iframe {
 .global-navigation .handle {
   float: left;
   background-color: rgba(0, 0, 0, 0.8);
-  width: 42px;
-  height: 46px;
-  border-radius: 0 0 2px 2px;
+  width: 56px;
+  height: 43px;
+  border-radius: 0 0 3px 3px;
   margin-left: 8px; }
   .global-navigation .handle .current-section {
     color: #fff;
-    width: 30px;
+    width: 44px;
     height: 30px;
     text-align: center;
     background-color: #e0008d;
+    background: #e0008d url(/_assets/img/icons/icon-simple-triangle.svg) 0 0 no-repeat;
+    background-size: 100%;
     border-radius: 1px;
-    margin: 10px 0 0 6px;
+    margin: 6px 0 0 6px;
     padding: 6px 3px 0px 3px;
     font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
     font-weight: normal;
-    font-style: normal; }
+    font-style: normal;
+    position: relative;
+    font-weight: bold; }
+    .global-navigation .handle .current-section .curr {
+      font-size: 1.25em;
+      display: inline-block;
+      width: 13px;
+      -webkit-transform: translate(-6px, -6px);
+      -moz-transform: translate(-6px, -6px);
+      -o-transform: translate(-6px, -6px);
+      transform: translate(-6px, -6px); }
+    .global-navigation .handle .current-section .total {
+      font-size: 0.8em;
+      opacity: 0.7;
+      display: inline-block;
+      width: 10px;
+      -webkit-transform: translate(8px, -3px);
+      -moz-transform: translate(8px, -3px);
+      -o-transform: translate(8px, -3px);
+      transform: translate(8px, -3px); }
+    .global-navigation .handle .current-section .slash {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 30px;
+      height: 30px; }
 
 .js .global-navigation {
   position: fixed;
@@ -192,7 +220,7 @@ iframe {
       -o-transition: all 0.2s ease;
       transition: all 0.2s ease; }
       .global-navigation .handle .current-section:hover {
-        background-color: #fff;
+        background-color: rgba(255, 255, 255, 0.8);
         color: #e0008d; } }
 @media screen and (min-width: 72em) {
   .global-navigation a {
@@ -2726,16 +2754,10 @@ iframe {
     margin-top: 52px; }
   #trilby .comic-panel:nth-child(8) {
     width: 40%; }
-  #trilby .comic-panel--8 {
-    width: 50%;
-    -webkit-transform: translateX(50px);
-    -moz-transform: translateX(50px);
-    transform: translateX(50px); }
   #trilby .comic-panel:nth-child(10) {
-    width: 45%;
-    margin-top: -150px; }
+    margin-top: -130px; }
   #trilby .comic-panel--11 {
-    margin-top: -40px; }
+    margin-top: -20px; }
   #trilby .comic-quote {
     right: -300px; } }
 #bompard .bg-container {
@@ -3474,7 +3496,7 @@ iframe {
     background-size: 22%;
     padding: 0; }
     .fork .further-reading .further-reading-container {
-      padding: 8rem 0;
+      padding: 6rem 0;
       text-align: right;
       width: 50%; }
       .fork .further-reading .further-reading-container img {
