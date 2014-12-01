@@ -1590,6 +1590,25 @@ Pathways.components.core = Pathways.components.core || {};
 
 (function(w, exports, utils, $) {
 
+    function toggleActiveGA($el, re1, re2) {
+        var gaData = $el.data('ga');
+        if (!gaData) return;
+        var newStr = gaData.replace(re1, re2);
+        $el.data('ga', newStr);
+    }
+
+    exports.gaState = {
+        toggleActiveGA: toggleActiveGA
+    };
+
+}(window, Pathways.components.core, Pathways.utils, jQuery));
+
+var Pathways = Pathways || {};
+Pathways.components = Pathways.components || {};
+Pathways.components.core = Pathways.components.core || {};
+
+(function(w, exports, utils, $) {
+
     function OverlayCtrl() {
         var rootSel = 'body',
             activeClass = 'modal-open',
@@ -2403,47 +2422,48 @@ Pathways.components.infographic = function(element, data) {
 
 };
 
-Pathways.components.libraryPanel = function(element, data) {
-    var reO = /l2 share open/g,
-        reC = /l2 share close/g,
-        repO = 'l2 share open',
-        repC = 'l2 share close';
+(function(w, exports, gaState, $) {
 
-    function closePanel($panel) {
-        $panel.css('transform', 'translate(' + ($panel.outerWidth()) + 'px, ' + ($panel.outerHeight() - 60) + 'px)');
-        $panel.removeClass('active');
-    }
+    var reO = /l2 open share/g,
+        reC = /l2 close share/g,
+        repO = 'l2 open share',
+        repC = 'l2 close share';
 
-    function openPanel($panel) {
-        $panel.css('transform', 'translate(38px, 38px)');
-        $panel.addClass('active');
-    }
+    exports.libraryPanel = function(element, data) {
 
-    function toggleActiveGA($el, str, re1, re2) {
-        var newstr2 = str.replace(re1, re2);
-        $el.data('ga', newstr2);
-    }
 
-    $(element).on('click', '.handle', function() {
-        var $this = $(this);
-        var $panel = $this.parent();
-        var gaData = $this.data('ga');
-        //console.log(gaData);
-
-        if ($panel.hasClass('active')) {
-            closePanel($panel);
-            toggleActiveGA($this, gaData, reC, repO);
-
-        } else {
-            openPanel($panel);
-            $(window).one('scroll', function() {
-                closePanel($panel);
-                toggleActiveGA($this, gaData, reC, repO);
-            });
-            toggleActiveGA($this, gaData, reO, repC);
+        function closePanel($panel) {
+            $panel.css('transform', 'translate(' + ($panel.outerWidth()) + 'px, ' + ($panel.outerHeight() - 60) + 'px)');
+            $panel.removeClass('active');
         }
-    });
-};
+
+        function openPanel($panel) {
+            $panel.css('transform', 'translate(38px, 38px)');
+            $panel.addClass('active');
+        }
+
+        $(element).on('click', '.handle', function() {
+            var $this = $(this);
+            var $panel = $this.parent();
+
+            //console.log(gaData);
+
+            if ($panel.hasClass('active')) {
+                closePanel($panel);
+                gaState.toggleActiveGA($this, reC, repO);
+
+            } else {
+                openPanel($panel);
+                $(window).one('scroll', function() {
+                    closePanel($panel);
+                    gaState.toggleActiveGA($this, reC, repO);
+                });
+                gaState.toggleActiveGA($this, reO, repC);
+            }
+        });
+    };
+
+}(window, Pathways.components, Pathways.components.core.gaState, jQuery));
 
 //var Pathways = Pathways || {};
 //Pathways.components = Pathways.components || {};
@@ -2900,33 +2920,50 @@ function Quiz(element, data) {
     this.init();
 }
 
-Pathways.components.toggleSection = function(element, data) {
+(function(w, exports, gaState, $) {
 
-	var $element			= $(element),
-		$target             = $($element.attr('data-toggle-section-target')),
-		$scrollAnchor       = $($element.attr('data-toggle-section-anchor')),
-        height              = $target.height();
+    var reO = /l3 open library/g,
+        reC = /l3 close library/g,
+        repO = 'l3 open library',
+        repC = 'l3 close library';
 
-    $target.css({ 'height': 0, 'transition': 'height 0.4s ease' });
+    exports.toggleSection = function(element, data) {
 
-    $element.on('click', function toggleOpen() {
+        var $element = $(element),
+            targetSel = $element.attr('data-toggle-section-target'),
+            $target = $(targetSel),
+            $scrollAnchor = $($element.attr('data-toggle-section-anchor')),
+            $related = $('[data-toggle-section-target="'+targetSel+'"]'),
+            height = $target.height();
 
-    	$target.toggleClass('open');
+        $target.css({
+            'height': 0,
+            'transition': 'height 0.4s ease'
+        });
 
-    	if($target.hasClass('open')) {
-    		$target.css('height', height);
+        $element.on('click', function toggleOpen() {
 
-    		$('html, body').animate({
-                scrollTop: $scrollAnchor.offset().top - 100
-            }, 400);
-    	} else {
-    		$target.css('height', 0);
-    	}
+            if (!$target.hasClass('open')) {
+                $target.css('height', height);
 
-        return false;
-    });
+                $('html, body').animate({
+                    scrollTop: $scrollAnchor.offset().top - 100
+                }, 400);
+                gaState.toggleActiveGA($related, reO, repC);
 
-};
+            } else {
+                $target.css('height', 0);
+                gaState.toggleActiveGA($related, reC, repO);
+            }
+
+            $target.toggleClass('open');
+
+            return false;
+        });
+
+    };
+
+}(window, Pathways.components, Pathways.components.core.gaState, jQuery));
 
 window.TheCollectors = {};
 
