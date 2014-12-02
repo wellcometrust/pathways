@@ -8,6 +8,8 @@
     <meta name="viewport" content="initial-scale=1,width=device-width">
 
     <link rel="stylesheet" type="text/css" href="<?= $page->getAsset('build/css/main.css') ?>">
+    <script src="//use.typekit.net/nlx6tdo.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
 
     <script src="/_assets/js/lib/modernizr-2.8.3.custom.min.js"></script>
     <script>
@@ -21,8 +23,8 @@
 
 	</script>
 
-    <script src="//use.typekit.net/nlx6tdo.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
+
 
 </head>
+<?php flush(); ?>
 <body>

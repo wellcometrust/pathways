@@ -1,5 +1,10 @@
 module.exports = function(grunt) {
 
+    // 0. Load all grunt tasks matching the `grunt-*` pattern from package.json
+    require('load-grunt-tasks')(grunt);
+
+    var globalConfig = {};
+
     // 1. All configuration goes here
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -11,6 +16,7 @@ module.exports = function(grunt) {
             clStaging: 'wellcome-pathways.clearleft.com',
             wellcomelive: 'digitalstories.wellcomecollection.org'
         },
+        globalConfig: globalConfig,
 
         concat: {
             libs: {
@@ -100,20 +106,11 @@ module.exports = function(grunt) {
                     'tag-pair': false // <source> incorrectly throws error
                 },
             },
-            mindcraft: {
+            pathway: {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['pathways/1-mindcraft/index.php', 'pathways/1-mindcraft/credits.php', 'pathways/1-mindcraft/**/index.php'],
-                    dest: '<%= exportRoot %>',
-                    ext: '.html'
-                }],
-            },
-            collectors: {
-                files: [{
-                    expand: true,
-                    cwd: '',
-                    src: ['pathways/2-the-collectors/index.php', 'pathways/2-the-collectors/credits.php', 'pathways/2-the-collectors/**/index.php'],
+                    src: ['pathways/<%= globalConfig.path %>/index.php', 'pathways/<%= globalConfig.path %>/credits.php', 'pathways/<%= globalConfig.path %>/**/index.php'],
                     dest: '<%= exportRoot %>',
                     ext: '.html'
                 }],
@@ -122,7 +119,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['pathways/*/index.php', 'pathways/*/credits.php', 'pathways/*/**/index.php'],
+                    src: ['pathways/*/index.php', '!pathways/x-example/**', '!pathways/x-example/index.php', 'pathways/*/credits.php', '!pathways/x-example/credits.php', 'pathways/*/**/index.php', '!pathways/x-example/**/index.php'],
                     dest: '<%= exportRoot %>',
                     ext: '.html'
                 }],
@@ -135,31 +132,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['_assets/**', '!_assets/scss/**', '!_assets/js/**', '_assets/js/lib/modernizr-2.8.3.custom.min.js', 'wellcomeplayer/**', 'player-config.js'],
-                    dest: '<%= exportRoot %>'
-                }]
-            },
-            mindcraft: {
-                files: [{
-                    expand: true,
-                    cwd: '',
-                    src: ['pathways/1-mindcraft/_assets/**'],
-                    dest: '<%= exportRoot %>'
-                }]
-            },
-            collectors: {
-                files: [{
-                    expand: true,
-                    cwd: '',
-                    src: ['pathways/2-the-collectors/_assets/**'],
-                    dest: '<%= exportRoot %>'
-                }]
-            },
-            all: {
-                files: [{
-                    expand: true,
-                    cwd: '',
-                    src: ['pathways/*/_assets/**'],
+                    src: ['_assets/**', '!_assets/scss/**', '!_assets/js/**', '!_assets/img/**', '_assets/js/lib/modernizr-2.8.3.custom.min.js', 'wellcomeplayer/**', 'player-config.js'],
                     dest: '<%= exportRoot %>'
                 }]
             }
@@ -177,37 +150,63 @@ module.exports = function(grunt) {
                     to: '<%= serverRoot.wellcomelive %>'
                 }]
             }
+        },
+
+        imagemin: {
+            options: { // Target options
+                optimizationLevel: 5,
+                svgoPlugins: [{
+                    removeViewBox: false
+                }],
+                progressive: true
+            },
+            core: {
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['_assets/img/**/*.{png,jpg,gif,svg}'],
+                    dest: '<%= exportRoot %>'
+                }]
+            },
+            pathway: {
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['pathways/<%= globalConfig.path %>/_assets/**/*.{png,jpg,gif,svg}'],
+                    dest: '<%= exportRoot %>'
+                }]
+            },
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['pathways/*/_assets/**/*.{png,jpg,gif,svg}', '!pathways/x-example/**'],
+                    dest: '<%= exportRoot %>'
+                }]
+            }
         }
+
 
     });
 
-    // 3. Where we tell Grunt we plan to use this plug-in.
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.loadNpmTasks('grunt-php2html');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-
-    grunt.loadNpmTasks('grunt-text-replace');
-
-    // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
+    // 3. Where we tell Grunt what to do when we type "grunt" into the terminal.
     grunt.registerTask('css', ['concat', 'sass']);
     grunt.registerTask('js', ['concat', 'uglify']);
 
     grunt.registerTask('default', ['css', 'js']);
 
     grunt.registerTask('export', 'Exporting pathways', function(arg) {
-        function runPath(name) {
-            grunt.task.run(['php2html:' + name, 'copy:default', 'copy:' + name, 'replace']);
+        function runPath(path) {
+            globalConfig.path = path;
+            grunt.task.run(['php2html:pathway', 'copy:default', 'replace', 'imagemin:core', 'imagemin:pathway']);
         }
         if (arg) {
             grunt.log.writeln('Exporting ', arg); // TODO - use arg to export specific pathway
             runPath(arg);
         } else {
             grunt.log.writeln('Exporting all');
-            grunt.task.run(['php2html:all', 'copy:default', 'copy:all', 'replace']);
+            runPath('*');
         }
     });
 

@@ -142,6 +142,7 @@ Pathways.initAnimation('magnetisedTrees');
 
     function parallaxContentUnload() {
         $parallaxContent.removeAttr('style');
+        w.removeEventListener('scroll', parallaxContentLoad);
     }
 
     function parallaxLadyLoad() {
@@ -160,18 +161,17 @@ Pathways.initAnimation('magnetisedTrees');
 
     function parallaxLadyUnload() {
         $parallaxLady.removeAttr('style');
+        w.removeEventListener('scroll', parallaxLadyLoad);
     }
 
     function onScrollUnload() {
 
         if ($parallaxContent) {
             parallaxContentUnload();
-            w.removeEventListener('scroll', parallaxContentLoad, false);
         }
 
         if ($parallaxLady) {
             parallaxLadyUnload();
-            w.addEventListener('scroll', parallaxLadyLoad, false);
         }
     }
 
@@ -192,8 +192,10 @@ Pathways.initAnimation('magnetisedTrees');
             });
         }
 
-        resizeBlackStrip();
-        w.addEventListener('resize', resizeBlackStrip);
+        if ($blackStrip) {
+            resizeBlackStrip();
+            w.addEventListener('resize', resizeBlackStrip);
+        }
 
         function getValueFromConfig(rawConfig, name) {
             var config;
@@ -422,40 +424,27 @@ Pathways.initAnimation('magnetisedTrees');
             }
 
 
-            // Audio
+            // Audio & Video
             //
-            if ($panelAudio.length) {
-                var audio = $panelAudio.first()[0];
-
-                scenes[idx++] = new Ss({
-                        triggerElement: $this,
-                        duration: getMediaDuration
-                    })
-                    .on('enter', function() {
-                        p.audio.mixer.loadPanelAudio(audio);
-                    })
-                    .on('leave', function() {
-                        p.audio.mixer.unloadPanelAudio(audio);
-                    });
-            }
-
-            // Video
-            //
-            if ($panelVideo.length) {
+            if ($panelVideo.length || $panelAudio.length) {
                 var $video = $panelVideo.first(),
+                    audio = $panelAudio.first()[0],
                     rawConfig = $video.attr('data-config'),
                     initTime = getValueFromConfig(rawConfig, 'initTime') || 0,
                     muteGlobal = getValueFromConfig(rawConfig, 'muteGlobal') || true;
 
                 scenes[idx++] = new Ss({
                         triggerElement: $this,
-                        duration: getMediaDuration
+                        duration: getMediaDuration,
+                        loglevel: 3
                     })
                     .on('enter', function() {
-                        p.video.autoPlayVideoOnEnter($video[0], initTime, muteGlobal);
+                        if ($video) p.video.autoPlayVideoOnEnter($video[0], initTime, muteGlobal);
+                        if (audio) p.audio.mixer.loadPanelAudio(audio);
                     })
                     .on('leave', function() {
-                        p.video.autoStopVideoOnLeave($video[0], initTime, muteGlobal);
+                        if ($video) p.video.autoStopVideoOnLeave($video[0], initTime, muteGlobal);
+                        if (audio) p.audio.mixer.unloadPanelAudio(audio);
                     });
             }
 
@@ -532,6 +521,6 @@ Pathways.initAnimation('magnetisedTrees');
         initScript(document, 'script', 'pth-twt-api', "//platform.twitter.com/widgets.js");
     }
 
-    Pathways.init(onPathwaysLoad, onScrollLoad, onScrollUnload);
+    p.init(onPathwaysLoad, onScrollLoad, onScrollUnload);
 
 }(window, jQuery, Pathways, ScrollMagic, ScrollScene, Modernizr, TweenMax));
