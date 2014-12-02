@@ -800,8 +800,7 @@ Pathways.audio = {};
         });
 
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
-        w.addEventListener('load', function() {
-
+        $(function(){
             resizeCheck();
             loadCheck(onScrollLoad, onScrollUnload);
 
@@ -809,7 +808,6 @@ Pathways.audio = {};
 
             onLoadComplete();
         });
-
     }
 
     mod.init = init;
