@@ -16,7 +16,7 @@ include_once($docRoot.'/_includes/header.php');
                 <img alt="" src="/_assets/img/spacer.png">
             </div>
 
-            <div class="logo"><a href="http://www.wellcomecollection.org/"><img alt="Wellcome Collection" title="Wellcome Collection" src="/_assets/img/logo.png" /></a></div>
+            <div class="logo logo-top"><a href="http://www.wellcomecollection.org/"><img alt="Wellcome Collection" title="Wellcome Collection" src="/_assets/img/logo.png" /></a></div>
 
             <div class="inner">
                 <header class="intro-header">

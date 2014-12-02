@@ -1,4 +1,4 @@
-(function(w, exports, gaState, $) {
+(function(w, exports, ga, $) {
 
     var reO = /l2 open share/g,
         reC = /l2 close share/g,
@@ -26,17 +26,17 @@
 
             if ($panel.hasClass('active')) {
                 closePanel($panel);
-                gaState.toggleActiveGA($this, reC, repO);
+                ga.toggleActiveGA($this, reC, repO);
 
             } else {
                 openPanel($panel);
                 $(window).one('scroll', function() {
                     closePanel($panel);
-                    gaState.toggleActiveGA($this, reC, repO);
+                    ga.toggleActiveGA($this, reC, repO);
                 });
-                gaState.toggleActiveGA($this, reO, repC);
+                ga.toggleActiveGA($this, reO, repC);
             }
         });
     };
 
-}(window, Pathways.components, Pathways.components.core.gaState, jQuery));
+}(window, Pathways.components, Pathways.components.core.ga, jQuery));

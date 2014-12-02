@@ -2,7 +2,7 @@ var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
 Pathways.components.core = Pathways.components.core || {};
 
-(function(w, exports, utils, $) {
+(function(w, exports, $) {
 
     function toggleActiveGA($el, re1, re2) {
         var gaData = $el.data('ga');
@@ -11,8 +11,8 @@ Pathways.components.core = Pathways.components.core || {};
         $el.data('ga', newStr);
     }
 
-    exports.gaState = {
+    exports.ga = {
         toggleActiveGA: toggleActiveGA
     };
 
-}(window, Pathways.components.core, Pathways.utils, jQuery));
+}(window, Pathways.components.core, jQuery));

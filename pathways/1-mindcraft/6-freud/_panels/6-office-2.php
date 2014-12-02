@@ -1,8 +1,9 @@
 
 <div id="office-2" class="panel" data-config='{ "offset_height": 500, "background": { "type": "image", "preserve_ratio": false } }'>
 
-    <div class="bg-container">       
+    <div class="bg-container">
         <img alt="" class="large-screen" src="/pathways/1-mindcraft/_assets/6-freud/freud-4.jpg">
+        <div class="logo logo-bottom"><a href="http://www.wellcomecollection.org/"><img alt="Wellcome Collection" title="Wellcome Collection" src="/_assets/img/logo.png" /></a></div>
     </div>
 
     <div class="main-content title align-center">

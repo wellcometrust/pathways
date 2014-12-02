@@ -3,8 +3,9 @@
 
     <div class="bg-container">
         <img alt="" class="letter" src="/pathways/2-the-collectors/_assets/6-ignorant-bride/letter-1.jpg">
+        <div class="logo logo-bottom"><a href="http://www.wellcomecollection.org/"><img alt="Wellcome Collection" title="Wellcome Collection" src="/_assets/img/logo.png" /></a></div>
     </div>
-    
+
     <audio class="audio-player" src="/_assets/audio/Riding.mp3"></audio>
 
     <div class="mute"></div>

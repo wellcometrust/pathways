@@ -1,4 +1,4 @@
-(function(w, exports, gaState, $) {
+(function(w, exports, ga, $) {
 
     var reO = /l3 open library/g,
         reC = /l3 close library/g,
@@ -27,11 +27,11 @@
                 $('html, body').animate({
                     scrollTop: $scrollAnchor.offset().top - 100
                 }, 400);
-                gaState.toggleActiveGA($related, reO, repC);
+                ga.toggleActiveGA($related, reO, repC);
 
             } else {
                 $target.css('height', 0);
-                gaState.toggleActiveGA($related, reC, repO);
+                ga.toggleActiveGA($related, reC, repO);
             }
 
             $target.toggleClass('open');
@@ -41,4 +41,4 @@
 
     };
 
-}(window, Pathways.components, Pathways.components.core.gaState, jQuery));
+}(window, Pathways.components, Pathways.components.core.ga, jQuery));
