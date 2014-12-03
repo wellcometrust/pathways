@@ -60,6 +60,7 @@
     -webkit-transform: $args;
        -moz-transform: $args;
          -o-transform: $args;
+         -ms-transform: $args;
             transform: $args;
 }
 

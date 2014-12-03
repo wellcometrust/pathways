@@ -8,7 +8,7 @@
 
     @include transform( translate(100%, 88%) );
     @include transition( all 0.5s ease );
-    
+
     .handle {
         display:            block;
         position:           relative;
@@ -37,21 +37,21 @@
         @include transition( all 0.3s ease );
 
         li {
-            list-style: none; 
+            list-style: none;
 
             span {
                 display: block;
             }
-            
+
             a {
                 @include    tablet-gothic;
-                font-size:  0.8rem;  
+                font-size:  0.8rem;
                 color:      #333;
-            
+
                 &:hover {
                     color: #fff;
                 }
-            }   
+            }
         }
     }
 
@@ -71,14 +71,14 @@
     .share-me {
         p {
             @include            tablet-gothic;
-            font-size:          0.8rem;  
+            font-size:          0.8rem;
             color:              #333;
             text-decoration:    none;
         }
         ul {
             width:              100%;
             min-height:         50px;
-            display:            block; 
+            display:            block;
             li {
                 float:          left;
                 margin:         5px 5px 0 0;
@@ -92,12 +92,12 @@
             // Below required to force fb share btn to render in ie
             .facebook {
                 padding-top:        8px;
-                span { 
-                    height:         20px !important; 
-                    width:          56px !important; 
-                    &>iframe { 
-                        height:     1000px !important; 
-                        width:      75px !important; 
+                span {
+                    height:         20px !important;
+                    width:          56px !important;
+                    &>iframe {
+                        height:     1000px !important;
+                        width:      75px !important;
                     }
                 }
             }

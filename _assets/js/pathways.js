@@ -801,12 +801,11 @@ Pathways.audio = {};
 
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
         $(function(){
+            onLoadComplete();
             resizeCheck();
             loadCheck(onScrollLoad, onScrollUnload);
 
             video.init(panels);
-
-            onLoadComplete();
         });
     }
 

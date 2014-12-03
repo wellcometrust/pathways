@@ -62,7 +62,7 @@
 (Pathways.initAnimation = function(w, doc, anim, cjs, Mod) {
     "use strict";
 
-    return function(id) {
+    return function(id, callback) {
         var canvas = doc.getElementById(id),
             a = anim[id];
 
@@ -100,6 +100,8 @@
             if (Mod.touch) {
                 cjs.Ticker.addEventListener("tick", stage);
             }
+
+            if (callback) callback(stage);
         }
 
         if (w.innerWidth >= 768) {
@@ -109,7 +111,7 @@
 
 
 }(window, document, animations, createjs, Modernizr));
-Pathways.initAnimation('magnetisedTrees');
+
 
 
 
@@ -180,7 +182,7 @@ Pathways.initAnimation('magnetisedTrees');
 
         var $sequence = $('.sequence'),
             controller = new Sm({
-                refreshInterval: 500
+                //refreshInterval: 500
             }),
             $blackStrip = $('.black-strip');
 
@@ -192,7 +194,7 @@ Pathways.initAnimation('magnetisedTrees');
             });
         }
 
-        if ($blackStrip) {
+        if ($blackStrip.length) {
             resizeBlackStrip();
             w.addEventListener('resize', resizeBlackStrip);
         }
@@ -435,8 +437,7 @@ Pathways.initAnimation('magnetisedTrees');
 
                 scenes[idx++] = new Ss({
                         triggerElement: $this,
-                        duration: getMediaDuration,
-                        loglevel: 3
+                        duration: getMediaDuration
                     })
                     .on('enter', function() {
                         if ($video) p.video.autoPlayVideoOnEnter($video[0], initTime, muteGlobal);
@@ -484,13 +485,30 @@ Pathways.initAnimation('magnetisedTrees');
 
             // Panel specific scene code if it has any
             var handlerClass = p.utils.toTitleCase(panelID),
+                animationClass = p.utils.camelCase(panelID),
+                animationDefs = animations[animationClass],
                 panelMethod = p.scrollScenes[handlerClass],
-                panelScene;
+                panelScene, fn;
 
             // Check the handler exists, then load
             if (typeof panelMethod !== 'undefined') {
-                panelScene = panelMethod('#' + panelID);
-                controller.addScene(panelScene);
+                fn = function(stage) {
+                    panelScene = panelMethod('#' + panelID, stage);
+                    if (panelScene) controller.addScene(panelScene);
+                };
+
+                console.log('init ', animationClass);
+                if (animationDefs && !animationDefs.stage) {
+                    p.initAnimation(animationClass, fn);
+                } else {
+                    fn();
+                }
+
+
+            } else {
+                if (animationDefs && !animationDefs.stage) {
+                    p.initAnimation(animationClass);
+                }
             }
         });
 
@@ -500,6 +518,11 @@ Pathways.initAnimation('magnetisedTrees');
     }
 
     function onPathwaysLoad() {
+
+        if (animations['magnetisedTrees']) {
+            p.initAnimation('magnetisedTrees');
+        }
+
 
         function initScript(d, s, id, a) {
             var js, fjs = d.getElementsByTagName(s)[0];
