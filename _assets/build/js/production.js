@@ -1017,16 +1017,13 @@ Pathways.audio = {};
         });
 
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
-        w.addEventListener('load', function() {
-
+        $(function(){
+            onLoadComplete();
             resizeCheck();
             loadCheck(onScrollLoad, onScrollUnload);
 
             video.init(panels);
-
-            onLoadComplete();
         });
-
     }
 
     mod.init = init;
@@ -1110,7 +1107,7 @@ Pathways.audio = {};
 (Pathways.initAnimation = function(w, doc, anim, cjs, Mod) {
     "use strict";
 
-    return function(id) {
+    return function(id, callback) {
         var canvas = doc.getElementById(id),
             a = anim[id];
 
@@ -1148,6 +1145,8 @@ Pathways.audio = {};
             if (Mod.touch) {
                 cjs.Ticker.addEventListener("tick", stage);
             }
+
+            if (callback) callback(stage);
         }
 
         if (w.innerWidth >= 768) {
@@ -1157,7 +1156,7 @@ Pathways.audio = {};
 
 
 }(window, document, animations, createjs, Modernizr));
-Pathways.initAnimation('magnetisedTrees');
+
 
 
 
@@ -1190,6 +1189,7 @@ Pathways.initAnimation('magnetisedTrees');
 
     function parallaxContentUnload() {
         $parallaxContent.removeAttr('style');
+        w.removeEventListener('scroll', parallaxContentLoad);
     }
 
     function parallaxLadyLoad() {
@@ -1208,18 +1208,17 @@ Pathways.initAnimation('magnetisedTrees');
 
     function parallaxLadyUnload() {
         $parallaxLady.removeAttr('style');
+        w.removeEventListener('scroll', parallaxLadyLoad);
     }
 
     function onScrollUnload() {
 
         if ($parallaxContent) {
             parallaxContentUnload();
-            w.removeEventListener('scroll', parallaxContentLoad, false);
         }
 
         if ($parallaxLady) {
             parallaxLadyUnload();
-            w.addEventListener('scroll', parallaxLadyLoad, false);
         }
     }
 
@@ -1228,7 +1227,7 @@ Pathways.initAnimation('magnetisedTrees');
 
         var $sequence = $('.sequence'),
             controller = new Sm({
-                refreshInterval: 500
+                //refreshInterval: 500
             }),
             $blackStrip = $('.black-strip');
 
@@ -1240,8 +1239,10 @@ Pathways.initAnimation('magnetisedTrees');
             });
         }
 
-        resizeBlackStrip();
-        w.addEventListener('resize', resizeBlackStrip);
+        if ($blackStrip.length) {
+            resizeBlackStrip();
+            w.addEventListener('resize', resizeBlackStrip);
+        }
 
         function getValueFromConfig(rawConfig, name) {
             var config;
@@ -1470,27 +1471,11 @@ Pathways.initAnimation('magnetisedTrees');
             }
 
 
-            // Audio
+            // Audio & Video
             //
-            if ($panelAudio.length) {
-                var audio = $panelAudio.first()[0];
-
-                scenes[idx++] = new Ss({
-                        triggerElement: $this,
-                        duration: getMediaDuration
-                    })
-                    .on('enter', function() {
-                        p.audio.mixer.loadPanelAudio(audio);
-                    })
-                    .on('leave', function() {
-                        p.audio.mixer.unloadPanelAudio(audio);
-                    });
-            }
-
-            // Video
-            //
-            if ($panelVideo.length) {
+            if ($panelVideo.length || $panelAudio.length) {
                 var $video = $panelVideo.first(),
+                    audio = $panelAudio.first()[0],
                     rawConfig = $video.attr('data-config'),
                     initTime = getValueFromConfig(rawConfig, 'initTime') || 0,
                     muteGlobal = getValueFromConfig(rawConfig, 'muteGlobal') || true;
@@ -1500,10 +1485,12 @@ Pathways.initAnimation('magnetisedTrees');
                         duration: getMediaDuration
                     })
                     .on('enter', function() {
-                        p.video.autoPlayVideoOnEnter($video[0], initTime, muteGlobal);
+                        if ($video) p.video.autoPlayVideoOnEnter($video[0], initTime, muteGlobal);
+                        if (audio) p.audio.mixer.loadPanelAudio(audio);
                     })
                     .on('leave', function() {
-                        p.video.autoStopVideoOnLeave($video[0], initTime, muteGlobal);
+                        if ($video) p.video.autoStopVideoOnLeave($video[0], initTime, muteGlobal);
+                        if (audio) p.audio.mixer.unloadPanelAudio(audio);
                     });
             }
 
@@ -1543,13 +1530,30 @@ Pathways.initAnimation('magnetisedTrees');
 
             // Panel specific scene code if it has any
             var handlerClass = p.utils.toTitleCase(panelID),
+                animationClass = p.utils.camelCase(panelID),
+                animationDefs = animations[animationClass],
                 panelMethod = p.scrollScenes[handlerClass],
-                panelScene;
+                panelScene, fn;
 
             // Check the handler exists, then load
             if (typeof panelMethod !== 'undefined') {
-                panelScene = panelMethod('#' + panelID);
-                controller.addScene(panelScene);
+                fn = function(stage) {
+                    panelScene = panelMethod('#' + panelID, stage);
+                    if (panelScene) controller.addScene(panelScene);
+                };
+
+                console.log('init ', animationClass);
+                if (animationDefs && !animationDefs.stage) {
+                    p.initAnimation(animationClass, fn);
+                } else {
+                    fn();
+                }
+
+
+            } else {
+                if (animationDefs && !animationDefs.stage) {
+                    p.initAnimation(animationClass);
+                }
             }
         });
 
@@ -1559,6 +1563,11 @@ Pathways.initAnimation('magnetisedTrees');
     }
 
     function onPathwaysLoad() {
+
+        if (animations['magnetisedTrees']) {
+            p.initAnimation('magnetisedTrees');
+        }
+
 
         function initScript(d, s, id, a) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -1580,7 +1589,7 @@ Pathways.initAnimation('magnetisedTrees');
         initScript(document, 'script', 'pth-twt-api', "//platform.twitter.com/widgets.js");
     }
 
-    Pathways.init(onPathwaysLoad, onScrollLoad, onScrollUnload);
+    p.init(onPathwaysLoad, onScrollLoad, onScrollUnload);
 
 }(window, jQuery, Pathways, ScrollMagic, ScrollScene, Modernizr, TweenMax));
 
@@ -1588,7 +1597,7 @@ var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
 Pathways.components.core = Pathways.components.core || {};
 
-(function(w, exports, utils, $) {
+(function(w, exports, $) {
 
     function toggleActiveGA($el, re1, re2) {
         var gaData = $el.data('ga');
@@ -1597,11 +1606,11 @@ Pathways.components.core = Pathways.components.core || {};
         $el.data('ga', newStr);
     }
 
-    exports.gaState = {
+    exports.ga = {
         toggleActiveGA: toggleActiveGA
     };
 
-}(window, Pathways.components.core, Pathways.utils, jQuery));
+}(window, Pathways.components.core, jQuery));
 
 var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
@@ -2422,7 +2431,7 @@ Pathways.components.infographic = function(element, data) {
 
 };
 
-(function(w, exports, gaState, $) {
+(function(w, exports, ga, $) {
 
     var reO = /l2 open share/g,
         reC = /l2 close share/g,
@@ -2450,20 +2459,20 @@ Pathways.components.infographic = function(element, data) {
 
             if ($panel.hasClass('active')) {
                 closePanel($panel);
-                gaState.toggleActiveGA($this, reC, repO);
+                ga.toggleActiveGA($this, reC, repO);
 
             } else {
                 openPanel($panel);
                 $(window).one('scroll', function() {
                     closePanel($panel);
-                    gaState.toggleActiveGA($this, reC, repO);
+                    ga.toggleActiveGA($this, reC, repO);
                 });
-                gaState.toggleActiveGA($this, reO, repC);
+                ga.toggleActiveGA($this, reO, repC);
             }
         });
     };
 
-}(window, Pathways.components, Pathways.components.core.gaState, jQuery));
+}(window, Pathways.components, Pathways.components.core.ga, jQuery));
 
 //var Pathways = Pathways || {};
 //Pathways.components = Pathways.components || {};
@@ -2920,7 +2929,7 @@ function Quiz(element, data) {
     this.init();
 }
 
-(function(w, exports, gaState, $) {
+(function(w, exports, ga, $) {
 
     var reO = /l3 open library/g,
         reC = /l3 close library/g,
@@ -2949,11 +2958,11 @@ function Quiz(element, data) {
                 $('html, body').animate({
                     scrollTop: $scrollAnchor.offset().top - 100
                 }, 400);
-                gaState.toggleActiveGA($related, reO, repC);
+                ga.toggleActiveGA($related, reO, repC);
 
             } else {
                 $target.css('height', 0);
-                gaState.toggleActiveGA($related, reC, repO);
+                ga.toggleActiveGA($related, reC, repO);
             }
 
             $target.toggleClass('open');
@@ -2963,7 +2972,7 @@ function Quiz(element, data) {
 
     };
 
-}(window, Pathways.components, Pathways.components.core.gaState, jQuery));
+}(window, Pathways.components, Pathways.components.core.ga, jQuery));
 
 window.TheCollectors = {};
 
@@ -5926,6 +5935,8 @@ Pathways.components.gallery.toolsOfMesmerism = {
 Pathways.scrollScenes.MagnetisedTrees = function(panelID) {
 
     var stage = animations.magnetisedTrees.stage;
+    if (!stage) return console.warn('animation stage not inited', animations);
+
     var scene1 = new ScrollScene({
             triggerElement: panelID,
             duration:       Pathways.panelHeight
