@@ -202,7 +202,8 @@ module.exports = function(grunt) {
             grunt.task.run(['php2html:pathway', 'copy:default', 'replace', 'imagemin:core', 'imagemin:pathway']);
         }
         if (arg) {
-            grunt.log.writeln('Exporting ', arg); // TODO - use arg to export specific pathway
+            grunt.log.writeln('Exporting ', arg);
+            if (arg === 'all') arg = '*';
             runPath(arg);
         } else {
             grunt.log.writeln('Exporting all');

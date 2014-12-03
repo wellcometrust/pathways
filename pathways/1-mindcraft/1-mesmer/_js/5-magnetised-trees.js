@@ -2,7 +2,6 @@
 Pathways.scrollScenes.MagnetisedTrees = function(panelID) {
 
     var stage = animations.magnetisedTrees.stage;
-    console.log('stage', stage);
     if (!stage) return console.warn('animation stage not inited', animations);
 
     var scene1 = new ScrollScene({

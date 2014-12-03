@@ -1,3 +1,4 @@
+<?php header("X-UA-Compatible: IE=edge"); ?>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
 
     <meta name="description" content="<?= $page->getDescription()?>">
     <meta name="viewport" content="initial-scale=1,width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <link rel="stylesheet" type="text/css" href="<?= $page->getAsset('build/css/main.css') ?>">
     <script src="//use.typekit.net/nlx6tdo.js"></script>
