@@ -46,6 +46,7 @@
 }
 @media screen and (min-width: 48em) {
     .sliding-panels {
+        min-height: 600px;
         .text-panel {
             width: 40%;
             margin-left: 7.5%;

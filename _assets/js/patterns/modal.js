@@ -1,33 +1,35 @@
-//var Pathways = Pathways || {};
-//Pathways.components = Pathways.components || {};
-//Pathways.components.core = Pathways.components.core || {};
-
-
 (function(mod, overlay, $) {
 
     function Modal(elm) {
 
         var self = this,
             $elm = elm,
-            baseClass = 'modal-img',
-            hiddenClass = 'modal-img-hidden',
-            shownClass = 'modal-img-shown',
+            baseClass = 'modal-box',
+            hiddenClass = 'modal-box-hidden',
+            shownClass = 'modal-box-shown',
             $overlay,
             $img;
 
         this.init = function() {
 
             var img = new Image(),
-                $overlay = overlay.getOverlay(),
-                $img = $(img).addClass(baseClass + ' ' + hiddenClass);
+                ctrl = overlay.getCtrl(),
+                $overlay = ctrl.$overlay,
+                $img = $(img),
+                $container = $('<div/>').addClass(baseClass + ' ' + hiddenClass),
+                caption = $elm.attr('data-caption'),
+                $caption = caption ? $('<p>' + $elm.attr('data-caption') + '</p>').addClass('text') : '';
 
             img.src = $elm.attr('data-image');
 
-            img.onload = function() {
-                $overlay.append($img);
-                $img.removeClass(hiddenClass).addClass(shownClass);
-            };
+            $container.on('click', ctrl.closeHandler);
 
+            img.onload = function() {
+                $overlay.append($container);
+                $container.append($img);
+                $container.append($caption);
+                $container.removeClass(hiddenClass).addClass(shownClass);
+            };
         };
     }
 

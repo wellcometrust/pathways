@@ -1,10 +1,6 @@
-var Pathways = Pathways || {};
-Pathways.components = Pathways.components || {};
-Pathways.components.core = Pathways.components.core || {};
+(function(w, doc, exports, overlay, $, utils) {
 
-(function(w, doc, mod, overlay, $, utils) {
-
-    mod.playerOverlay = function(elem) {
+    exports.playerOverlay = function(elem) {
 
         var $element = $(elem),
 
@@ -17,7 +13,6 @@ Pathways.components.core = Pathways.components.core || {};
 
             getHeightWithOffset = utils.getHeightWithOffset,
             getWidthWithOffset = utils.getWidthWithOffset;
-
 
 
         $element.on('click', function(e) {

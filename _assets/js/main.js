@@ -62,7 +62,7 @@
 (Pathways.initAnimation = function(w, doc, anim, cjs, Mod) {
     "use strict";
 
-    return function(id, callback) {
+    return function(id) {
         var canvas = doc.getElementById(id),
             a = anim[id];
 
@@ -76,6 +76,9 @@
             loader.addEventListener("fileload", handleFileLoad);
             loader.addEventListener("complete", handleComplete);
             loader.loadManifest(lib.properties.manifest);
+            a.start = function(){};
+            a.stop = function(){};
+
         }
 
         function handleFileLoad(evt) {
@@ -97,11 +100,14 @@
 
             cjs.Ticker.setFPS(lib.properties.fps);
 
-            if (Mod.touch) {
+            a.start = function() {
                 cjs.Ticker.addEventListener("tick", stage);
-            }
+            };
+            a.stop = function() {
+                cjs.Ticker.removeEventListener("tick", stage);
+            };
 
-            if (callback) callback(stage);
+
         }
 
         if (w.innerWidth >= 768) {
@@ -130,7 +136,7 @@
 
         if ($parallaxContent) {
             if (scrollY > p.panelHeight) {
-                $parallaxContent.css('display', 'none');
+                $parallaxContent.removeAttr('style');
                 return;
             }
 
@@ -470,9 +476,9 @@
                     $this.css('transform', 'translate(' + translations[((index + offset) % 2)] + 'px,0)');
 
                     var tween = TweenMax.to($this, 1, {
-                            x: 0,
-                            opacity: 1
-                        });
+                        x: 0,
+                        opacity: 1
+                    });
 
                     scenes[idx++] = new Ss({
                             triggerElement: $this,
@@ -486,29 +492,17 @@
             // Panel specific scene code if it has any
             var handlerClass = p.utils.toTitleCase(panelID),
                 animationClass = p.utils.camelCase(panelID),
-                animationDefs = animations[animationClass],
+                animation = animations[animationClass],
                 panelMethod = p.scrollScenes[handlerClass],
                 panelScene, fn;
 
             // Check the handler exists, then load
             if (typeof panelMethod !== 'undefined') {
-                fn = function(stage) {
-                    panelScene = panelMethod('#' + panelID, stage);
-                    if (panelScene) controller.addScene(panelScene);
-                };
-
-                console.log('init ', animationClass);
-                if (animationDefs && !animationDefs.stage) {
-                    p.initAnimation(animationClass, fn);
-                } else {
-                    fn();
+                panelScene = panelMethod('#' + panelID, animation);
+                if (panelScene) {
+                    controller.addScene(panelScene);
                 }
 
-
-            } else {
-                if (animationDefs && !animationDefs.stage) {
-                    p.initAnimation(animationClass);
-                }
             }
         });
 
@@ -519,7 +513,7 @@
 
     function onPathwaysLoad() {
 
-        if (animations['magnetisedTrees']) {
+        if (animations.magnetisedTrees) {
             p.initAnimation('magnetisedTrees');
         }
 

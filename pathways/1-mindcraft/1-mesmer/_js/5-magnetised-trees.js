@@ -1,25 +1,29 @@
+Pathways.scrollScenes.MagnetisedTrees = function(panelID, animation) {
 
-Pathways.scrollScenes.MagnetisedTrees = function(panelID) {
+    if (!animation) return console.warn('animation not inited for \'' + panelID + '\'');
 
-    var stage = animations.magnetisedTrees.stage;
-    if (!stage) return console.warn('animation stage not inited', animations);
 
     var scene1 = new ScrollScene({
             triggerElement: panelID,
-            duration:       Pathways.panelHeight
+            duration: Pathways.panelHeight
         })
         .on('enter', function(e) {
-
-            if( e.scrollDirection == 'FORWARD' ) {
-                TweenMax.to(panelID + ' .black-strip', 0.4, { y: 0 }); // Scroll up
-                createjs.Ticker.addEventListener("tick", stage);
+            console.log('evetre');
+            if (e.scrollDirection == 'FORWARD') {
+                TweenMax.to(panelID + ' .black-strip', 0.4, {
+                    y: 0
+                }); // Scroll up
+                animation.start();
             }
         })
         .on('leave', function(e) {
 
-            if( e.scrollDirection == 'REVERSE' ) {
-                TweenMax.to(panelID + ' .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
-                createjs.Ticker.removeEventListener("tick", stage);
+            if (e.scrollDirection == 'REVERSE') {
+                TweenMax.to(panelID + ' .black-strip', 0.2, {
+                    y: Pathways.panelHeight
+                }); // scroll down
+                animation.stop();
+
             }
         });
 

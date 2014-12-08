@@ -65,14 +65,6 @@
     }
 
     .text {
-        position:           absolute;
-        left:               5px;
-        right:              5px;
-        bottom:             5px;
-        color:              #fff;
-
-        border-left:        3px solid rgba(92,184,178,1);
-        background-color:   rgba(0,0,0,0.7);
-        padding:            0.8rem 0.6rem;
+        @include caption-styling;
     }
 }

@@ -4,7 +4,7 @@
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
-    
+
     <div class="main-content center fixed">
 
         <div class="inner">
@@ -12,45 +12,63 @@
         </div>
 
         <div class="sliding-panels" data-scene="john-tradescant" data-component="modal">
-            
+
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.1.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.1-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.1-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.2.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.2-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.2-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.3.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.3-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.3-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.4.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.4-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.4-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.5.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.5-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.5-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.6.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.6-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.6-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
@@ -63,45 +81,63 @@
         </div>
 
         <div class="sliding-panels" data-scene="john-tradescant" data-component="modal">
-            
+
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.1.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.1-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.1-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.2.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.2-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.2-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.3.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.3-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.3-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.4.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.4-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.4-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.5.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.5-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.5-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
             <div class="sliding-panel">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.6.jpg">
-                <svg class="info-box modal" data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.6-large.jpg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
+                <svg class="info-box modal"
+                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.6-large.jpg"
+                    data-caption="Dummy text"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
