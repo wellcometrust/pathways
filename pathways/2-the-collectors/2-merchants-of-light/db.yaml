@@ -70,12 +70,12 @@ library_layer:
 
     See_Elsewhere:
         -   type: 'book'
-            title: "Francis Bacon?s ?The New Atlantis?: New interdisciplinary essays"
+            title: "Francis Bacon’s “The New Atlantis”: New interdisciplinary essays"
             author: 'Bronwen Price'
             date: 2003
             link: 'http://bookshop.blackwell.co.uk/jsp/id/Francis_Bacons_The_New_Atlantis/9780719060526'
         -   type: 'book'
-            title: 'Realistic Utopias: The ideal imaginary societies of the Renaissance, 1516?1630'
+            title: 'Realistic Utopias: The ideal imaginary societies of the Renaissance, 1516–1630'
             author: "Miriam Eliav-Feldon"
             date: 1982
             link: 'http://bookshop.blackwell.co.uk/jsp/id/Realistic_Utopias/9780198218890'

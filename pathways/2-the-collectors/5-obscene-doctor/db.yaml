@@ -35,7 +35,7 @@ info_panels:
             text: "A Victorian courtroom scene"
 
         links:
-            -   title: "A Victorian courtroom scene ? Sheffield Libraries, Archives and Information (Licensed under Creative Commons)"
+            -   title: "A Victorian courtroom scene &copy; Sheffield Libraries, Archives and Information (Licensed under Creative Commons)"
                 external_url: 'http://legalaidwatch.wordpress.com/2013/11/20/this-week-in-legal-aid-2/'
 
     seized-and-destroyed:
@@ -77,7 +77,7 @@ library_layer:
     See_in_the_Wellcome_Library:
 
         -   type: 'book'
-            title: "Handbook of Dr Kahn's Museum"
+            title: "Handbook of Dr Kahn’s Museum"
             author: "G. Kahn"
             date: 1863
             link: 'http://wellcomelibrary.org/package/b20663754'
@@ -87,17 +87,17 @@ library_layer:
             date: 186-?
             link: 'http://wellcomelibrary.org/package/b20663778'
         -   type: 'book'
-            title: "A descriptive catalogue of Rackstrow's Museum"
+            title: "A descriptive catalogue of Rackstrow’s Museum"
             author: 'Benjamin Rackstrow'
             date: 1782
             link: 'http://wellcomelibrary.org/package/b20663742'
         -   type: 'book'
-            title: "Anatomical and Physiological Descripton of the Late Signor Sarti?s new Florentine Venus"
+            title: "Anatomical and Physiological Descripton of the Late Signor Sarti’s new Florentine Venus"
             author: "W. Mawhinney"
             date: 1854?
             link: 'http://wellcomelibrary.org/package/b20663602'
         -   type: 'book'
-            title: "Signore Sarti?s Florentine Anatomical Models"
+            title: "Signore Sarti’s Florentine Anatomical Models"
             author: "s.n."
             date: 1850
             link: 'http://wellcomelibrary.org/package/b20663614'

@@ -89,7 +89,7 @@ library_layer:
             date: 1842
             link: 'http://wellcomelibrary.org/package/b2123162x'
         -   type: 'book'
-            title: 'London?s Dreadful Visitation'
+            title: 'London’s Dreadful Visitation'
             author: "Company of Parish-Clerks of London"
             date: 1665
             link: 'http://wellcomelibrary.org/package/b20663717'
@@ -136,7 +136,7 @@ library_layer:
             date: 1996
             link: 'http://ac.els-cdn.com/S0140673696915627/1-s2.0-S0140673696915627-main.pdf?_tid=081dc430-3430-11e4-804f-00000aab0f26&acdnat=1409834342_b18eeacfa755d003'
         -   type: 'document'
-            title: "A Corner of History: John Graunt, 1620?1674"
+            title: "A Corner of History: John Graunt, 1620–1674"
             author: "Ernst L. Wynder"
             date: 1975
             link: 'http://ac.els-cdn.com/0091743575900572/1-s2.0-0091743575900572-main.pdf?_tid=63280778-3430-11e4-ac73-00000aab0f01&acdnat=1409834495_3dbaf8c99bc87fe0'

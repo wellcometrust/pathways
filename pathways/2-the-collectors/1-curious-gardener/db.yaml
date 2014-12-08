@@ -36,10 +36,10 @@ info_panels:
     duke-of-buckingham:
         share:
             img: 'http://wellcomelibrary.org/actual/b11730535/0/ec83b56d-cd64-4065-8730-3a3262c5b043/jp2'
-            text: "John Tradescant I's house at South Lambeth"
+            text: "John Tradescant I’s house at South Lambeth"
 
         links:
-            -   title: "John Tradescant I's house at South Lambeth"
+            -   title: "John Tradescant I’s house at South Lambeth"
                 player_url: http://wellcomelibrary.org/package/b11730535
                 download_url: 'http://wellcomelibrary.org/actual/b11730535/0/ec83b56d-cd64-4065-8730-3a3262c5b043/jp2?download=true'
 
@@ -117,7 +117,7 @@ library_layer:
             date: 1998
             link: 'http://bookshop.blackwell.co.uk/jsp/id/Earthly_Joys/9780007228478'
         -   type: 'book'
-            title: 'Ashmolean: Britiain?s first museum '
+            title: 'Ashmolean: Britiain’s first museum '
             author: 'Christopher Brown'
             date: 2009
             link: 'http://bookshop.blackwell.co.uk/jsp/id/Ashmolean/9781854442437'

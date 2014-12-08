@@ -70,7 +70,7 @@ library_layer:
             date: 1950s
             link: 'http://wellcomelibrary.org/package/b20456803'
         -   type: 'book'
-            title: "The Wellcome Museum of Medical Science 1914?1964"
+            title: "The Wellcome Museum of Medical Science 1914–1964"
             author: "Wellcome Foundation Ltd."
             date: 1964
             link: 'http://wellcomelibrary.org/package/b20456815'
