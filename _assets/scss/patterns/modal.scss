@@ -1,12 +1,12 @@
 .modal-box {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-        opacity: 1;
-        @include transition( opacity 0.4s ease);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    opacity: 1;
+    @include transition( opacity 0.4s ease);
     img {
         max-width: 96%;
         max-height: 96%;
@@ -20,6 +20,16 @@
     }
     .text {
         @include caption-styling;
+        .download {
+            @include tablet-gothic;
+            font-size: 0.8rem;
+            color: #aaa;
+            display: block;
+            padding-top: 0.3rem;
+            &:hover {
+                color: #fff;
+            }
+        }
     }
     &.modal-box-hidden {
         opacity: 0;

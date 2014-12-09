@@ -95,7 +95,7 @@ site:
                     path: 'index.php'
                     title: 'The Collectors'
                     title_postfix: ' | Wellcome Collection'
-                    description: 'The Collectors.'
+                    description: 'The Collectors'
 
                 -   id: credits
                     path: 'credits.php'
@@ -107,6 +107,7 @@ site:
                     path: '1-curious-gardener/'
                     title: The Curious Gardener
                     title_postfix: ' | Wellcome Collection'
+                    description: 'In 1634, anyone who spent a day at John Tradescant’s house and garden in south Lambeth could discover more curiosities than a man might see in a lifetime of travel.'
                     panels:
                         - id: john-tradescent
                         - id: duke-of-buckingham
@@ -117,6 +118,7 @@ site:
                     path: '2-merchants-of-light/'
                     title: Merchants of Light
                     title_postfix: ' | Wellcome Collection'
+                    description: 'While John Tradescant had been securing the most alluring and intriguing treasures from cooperative ships in the British fleet, lawyer and philosopher Francis Bacon developed a vision of a world where evidence and knowledge were collected through more ordered voyages of exploration.'
                     panels:
                         - id: bensalem-intro
                         - id: bensalem
@@ -126,6 +128,7 @@ site:
                     path: '3-death-collector/'
                     title: The Death Collector
                     title_postfix: ' | Wellcome Collection'
+                    description: 'At a time when plague periodically decimated London’s population, haberdasher John Graunt applied his knowledge of book-keeping to collect, analyse and interpret data relating to the City’s deaths.'
                     panels:
                         - id: bills-of-mortality
                         - id: gaunt-records
@@ -136,6 +139,7 @@ site:
                     path: '4-unceasing-seeker/'
                     title: The Unceasing Seeker
                     title_postfix: ' | Wellcome Collection'
+                    description: 'Like John Tradescant and John Graunt before him, Henry Solomon Wellcome came from humble beginnings and began collecting to support his business. By the end of his life, his collection was thought to consist of five times as many items as the Louvre.'
                     panels:
                         - id: wellcome-collection
 
@@ -143,6 +147,7 @@ site:
                     path: '5-obscene-doctor/'
                     title: The Obscene Doctor
                     title_postfix: ' | Wellcome Collection'
+                    description: 'Whether paying a shilling to peek at an Italian anatomical model in a grocer’s shop on the Strand, or visiting a public museum, Londoners were avid consumers of anatomy collections in the eighteenth and early nineteenth century. '
                     panels:
                         - id: khans-anatomical-museum
                         - id: quackery
@@ -154,6 +159,7 @@ site:
                     path: '6-ignorant-bride/'
                     title: The Ignorant Bride
                     title_postfix: ' | Wellcome Collection'
+                    description: 'Brilliant young paleobotanist Marie Stopes was so ignorant about the workings of the human body that she claimed not to realise her own marriage was unconsummated.'
                     panels:
                         - id: british-museum
                         - id: married-love

@@ -1,6 +1,6 @@
 (function(mod, overlay, $) {
 
-    function Modal(elm) {
+    function Modal(elm, data) {
 
         var self = this,
             $elm = elm,
@@ -17,10 +17,13 @@
                 $overlay = ctrl.$overlay,
                 $img = $(img),
                 $container = $('<div/>').addClass(baseClass + ' ' + hiddenClass),
-                caption = $elm.attr('data-caption'),
-                $caption = caption ? $('<p>' + $elm.attr('data-caption') + '</p>').addClass('text') : '';
+                caption = $elm.data('caption'),
+                download = $elm.data('download'),
+                $caption = caption ? $('<p>' + caption + '</p>').addClass('text') : '';
+                $download = download ? $('<a>Download</a>').attr('href', download).addClass('download') : '';
 
             img.src = $elm.attr('data-image');
+            $caption.append($download);
 
             $container.on('click', ctrl.closeHandler);
 
@@ -36,7 +39,7 @@
     mod.modal = function(element, data) {
 
         $(element).find('.modal').on('click', function() {
-            var modal = new Modal($(this));
+            var modal = new Modal($(this), data);
             modal.init();
         });
 
