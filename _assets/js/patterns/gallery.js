@@ -126,27 +126,15 @@
                 }
 
                 // what is the ratio of the image?
-                var w = img.naturalWidth,
-                    h = img.naturalHeight,
-                    ratio = (h / w),
-                    newWidth = w.innerHeight / ratio;
+                var wth = img.naturalWidth,
+                    hgt = img.naturalHeight,
+                    ratio = (hgt / wth);
 
-                // store the width and ratio for resize recalculations
-                widths.push(newWidth);
+                // store the ratio for resize recalculations
                 ratios.push(ratio);
-
-                // set the panel to the image's width
-                $li.width(newWidth);
 
                 // Add it to the container
                 $container.append($li);
-
-                // calculate and set the width of the whole container
-                var total = widths.reduce(function(a, b) {
-                    return a + b;
-                });
-
-                $container.width(total);
 
                 if (callback)
                     callback.call();
@@ -174,8 +162,8 @@
          * load the navigation into the carousel
          */
         var loadNavigation = function() {
-            $prev = $('<div/>'),
-                $next = $('<div/>');
+            $prev = $('<div/>');
+            $next = $('<div/>');
 
             $prev.addClass('prev disabled');
             $next.addClass('next');
@@ -213,6 +201,17 @@
 
             for (var i = 0; i < $panes.length; i++) {
                 var newWidth = wH / ratios[i];
+
+                if (newWidth >= w.innerWidth) {
+                    var $img = $($panes[i]).find('img');
+                    newWidth = w.innerWidth;
+
+                    $img.css({
+                        'height': 'auto',
+                        'width': '100%',
+                        'margin': 'auto 0'
+                    });
+                }
 
                 $panes[i].style['width'] = newWidth + 'px';
 
