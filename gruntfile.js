@@ -86,7 +86,7 @@ module.exports = function(grunt) {
                 tasks: ['css']
             },
             js: {
-                files: ['_assets/js/*.js', '_assets/js/patterns/*.js', 'pathways/**/**/_js/*.js', '_assets/js/lib/*.js'],
+                files: ['_assets/js/*.js', '_assets/js/core/*.js', '_assets/js/patterns/*.js', 'pathways/**/**/_js/*.js', '_assets/js/lib/*.js'],
                 tasks: ['js'],
                 options: {
                     spawn: false,
@@ -154,10 +154,11 @@ module.exports = function(grunt) {
 
         imagemin: {
             options: { // Target options
-                optimizationLevel: 5,
-                svgoPlugins: [{
-                    removeViewBox: false
-                }],
+                optimizationLevel: 3,
+                svgoPlugins: [
+                { removeViewBox: false },
+                { removeUselessStrokeAndFill: false },
+                { removeEmptyAttrs: false }],
                 progressive: true
             },
             core: {
