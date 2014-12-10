@@ -1107,7 +1107,7 @@ Pathways.audio = {};
 (Pathways.initAnimation = function(w, doc, anim, cjs, Mod) {
     "use strict";
 
-    return function(id, callback) {
+    return function(id) {
         var canvas = doc.getElementById(id),
             a = anim[id];
 
@@ -1121,6 +1121,9 @@ Pathways.audio = {};
             loader.addEventListener("fileload", handleFileLoad);
             loader.addEventListener("complete", handleComplete);
             loader.loadManifest(lib.properties.manifest);
+            a.start = function(){};
+            a.stop = function(){};
+
         }
 
         function handleFileLoad(evt) {
@@ -1142,11 +1145,14 @@ Pathways.audio = {};
 
             cjs.Ticker.setFPS(lib.properties.fps);
 
-            if (Mod.touch) {
+            a.start = function() {
                 cjs.Ticker.addEventListener("tick", stage);
-            }
+            };
+            a.stop = function() {
+                cjs.Ticker.removeEventListener("tick", stage);
+            };
 
-            if (callback) callback(stage);
+
         }
 
         if (w.innerWidth >= 768) {
@@ -1175,7 +1181,7 @@ Pathways.audio = {};
 
         if ($parallaxContent) {
             if (scrollY > p.panelHeight) {
-                $parallaxContent.css('display', 'none');
+                $parallaxContent.removeAttr('style');
                 return;
             }
 
@@ -1515,9 +1521,9 @@ Pathways.audio = {};
                     $this.css('transform', 'translate(' + translations[((index + offset) % 2)] + 'px,0)');
 
                     var tween = TweenMax.to($this, 1, {
-                            x: 0,
-                            opacity: 1
-                        });
+                        x: 0,
+                        opacity: 1
+                    });
 
                     scenes[idx++] = new Ss({
                             triggerElement: $this,
@@ -1531,29 +1537,17 @@ Pathways.audio = {};
             // Panel specific scene code if it has any
             var handlerClass = p.utils.toTitleCase(panelID),
                 animationClass = p.utils.camelCase(panelID),
-                animationDefs = animations[animationClass],
+                animation = animations[animationClass],
                 panelMethod = p.scrollScenes[handlerClass],
                 panelScene, fn;
 
             // Check the handler exists, then load
             if (typeof panelMethod !== 'undefined') {
-                fn = function(stage) {
-                    panelScene = panelMethod('#' + panelID, stage);
-                    if (panelScene) controller.addScene(panelScene);
-                };
-
-                console.log('init ', animationClass);
-                if (animationDefs && !animationDefs.stage) {
-                    p.initAnimation(animationClass, fn);
-                } else {
-                    fn();
+                panelScene = panelMethod('#' + panelID, animation);
+                if (panelScene) {
+                    controller.addScene(panelScene);
                 }
 
-
-            } else {
-                if (animationDefs && !animationDefs.stage) {
-                    p.initAnimation(animationClass);
-                }
             }
         });
 
@@ -1564,7 +1558,7 @@ Pathways.audio = {};
 
     function onPathwaysLoad() {
 
-        if (animations['magnetisedTrees']) {
+        if (animations.magnetisedTrees) {
             p.initAnimation('magnetisedTrees');
         }
 
@@ -1618,7 +1612,8 @@ Pathways.components.core = Pathways.components.core || {};
 
 (function(w, exports, utils, $) {
 
-    function OverlayCtrl() {
+    function OverlayCtrl(onInitCallback, onCloseCallback) {
+
         var rootSel = 'body',
             activeClass = 'modal-open',
             closeTmpl = '<div class="close"></div>',
@@ -1626,20 +1621,6 @@ Pathways.components.core = Pathways.components.core || {};
 
             $root = $(rootSel);
 
-        function addDocListeners(resizeHandler) {
-            $(w).on('resize', resizeHandler);
-        }
-
-        function removeDocListeners(resizeHandler) {
-            $(w).off('resize', resizeHandler);
-        }
-
-        function getResizeHandler($overlay) {
-            return function() {
-                $overlay.css('height', utils.getHeightWithOffset(0));
-            };
-
-        }
 
         function create(tmpl, $root, $close) {
             var $el = $(tmpl);
@@ -1648,48 +1629,51 @@ Pathways.components.core = Pathways.components.core || {};
             return $el;
         }
 
-        function init($el, onInitHandler, onClickHandler) {
-
-            var resizeHandler = getResizeHandler($el);
-            //addDocListeners(resizeHandler);
-
-            $el.on('click', function() {
+        function getCloseHandler($el, onCloseCb) {
+            return function() {
                 $root.removeClass(activeClass);
-
-                if (typeof onClickHandler !== 'undefined') onClickHandler();
-
+                if (typeof onCloseCb !== 'undefined') onCloseCb();
                 w.setTimeout(function() {
                     $el.remove();
-                    // removeDocListeners(resizeHandler);
                 }, 1000); // give css transition time
-            });
+            };
+        }
+
+        function getClickHandler($el, $close, onCloseHandler) {
+            return function(e) {
+                if (e.target == $el[0] || e.target == $close[0]) { // only if we've clicked on overlay or close btn
+                    onCloseHandler();
+                }
+            };
+        }
+
+        function init($el, onInitHandler, onClickHandler) {
+            $el.on('click', onClickHandler);
 
             w.setTimeout(function() {
                 // prevent scrolling
                 $root.addClass(activeClass);
-
                 if (typeof onInitHandler !== 'undefined') onInitHandler();
-                //resizeHandler();
 
             }, 50); // delay before adding class to ensure transition event will fire
-
-
         }
 
-        this.get = function(onInitHandler, onClickHandler) {
-            this.$overlay = create(overlayTmpl, $root, $(closeTmpl));
-            init(this.$overlay, onInitHandler, onClickHandler);
-            return this.$overlay;
-        };
+        this.$close = $(closeTmpl);
+        this.$overlay = create(overlayTmpl, $root, this.$close);
+        this.closeHandler = getCloseHandler(this.$overlay, onCloseCallback);
+        var clickHandler = getClickHandler(this.$overlay, this.$close, this.closeHandler);
+
+        init(this.$overlay, onInitCallback, clickHandler);
 
     }
 
     exports.overlay = {
         OverlayCtrl: OverlayCtrl,
         getOverlay: function(onInitHandler, onClickHandler) {
-            var ctrl = new OverlayCtrl();
-            var $overlay = ctrl.get(onInitHandler, onClickHandler);
-            return $overlay;
+            return new OverlayCtrl(onInitHandler, onClickHandler).$overlay;
+        },
+        getCtrl: function(onInitHandler, onClickHandler) {
+            return new OverlayCtrl(onInitHandler, onClickHandler);
         }
     };
 
@@ -1737,485 +1721,451 @@ Pathways.components.audioPlayer = function(element, data) {
     };
 };
 
-Pathways.components.cropZoom = function(element, data) {
-    var $elem = $(element),
-        db = data;
+(function(w, doc, exports, overlay, $, utils) {
 
-    if (typeof db === 'undefined' || db === null) return console.warn('No data supplied to cropZoom component for ' + $elem.attr('id'));
+    exports.cropZoom = function(element, data) {
+        var $elem = $(element),
+            db = data;
 
-    $elem.find('.tap-target').each(function() {
-        var $target = $(this),
-            key = $target.data('crop'),
-            query = db[key];
+        if (typeof db === 'undefined' || db === null) return console.warn('No data supplied to cropZoom component for ' + $elem.attr('id'));
 
-        if (typeof query === 'undefined' || query === null) return console.warn('No related info was found for this tap target');
+        $elem.find('.tap-target').each(function() {
+            var $target = $(this),
+                key = $target.data('crop'),
+                query = db[key];
 
-        var image = query.image,
-            title = query.title ? query.title : '',
-            text = query.text ? query.text : '',
-            position = query.position ? query.position : '',
-            img = new Image(),
-            content;
+            if (typeof query === 'undefined' || query === null) return console.warn('No related info was found for this tap target');
 
-        img.src = image;
+            var image = query.image,
+                title = query.title ? query.title : '',
+                text = query.text ? query.text : '',
+                position = query.position ? query.position : '',
+                img = new Image(),
+                content;
 
-        // Create the text content
-        content = title !== '' ? '<h2>' + title + '</h2>' : '';
-        content += '<p>' + text + '</p>';
+            img.src = image;
 
-        // Set up the tap on the target.
-        Hammer($target.get(0)).on('tap', function(e) {
-            e.gesture.preventDefault();
+            // Create the text content
+            content = title !== '' ? '<h2>' + title + '</h2>' : '';
+            content += '<p>' + text + '</p>';
 
-            var $overlay = $('<div class="overlay"></div>'),
-                $popup = $('<div class="popup"></div>'),
-                $image_crop = $(img).addClass('image-crop'),
-                $text = $('<div class="text"></div>'),
-                $close = $('<div class="close"></div>');
+            // Set up the tap on the target.
+            Hammer($target.get(0)).on('tap', function(e) {
+                e.gesture.preventDefault();
 
-            // Add in the elements
-            $text.html(content);
-            $popup.append($image_crop);
-            $popup.append($text);
+                var ctrl = overlay.getCtrl();
 
-            $overlay.append($popup);
-            $overlay.append($close);
-            $('body').append($overlay);
+                var $overlay = ctrl.$overlay,
+                    $popup = $('<div class="popup"></div>'),
+                    $imageCrop = $(img).addClass('image-crop'),
+                    $text = $('<div class="text"></div>');
 
-            $overlay.css('height', window.outerHeight);
+                // Add in the elements
+                $text.html(content);
+                $popup.append($imageCrop);
+                $popup.append($text);
 
-            $overlay.css('background-color', 'rgba(0,0,0,0.9)');
+                $overlay.append($popup);
 
-            // Set an event so that after the image transitions in, show the text
-            $image_crop.get(0).addEventListener('transitionend', function() {
-                $text.css({
-                    top: (window.innerHeight - $text.outerHeight() - 15)
+                // Set an event so that after the image transitions in, show the text
+                $imageCrop.get(0).addEventListener('transitionend', function() {
+                    $text.css({
+                        top: (window.innerHeight - $text.outerHeight() - 15)
+                    });
+
+                    if (position == 'right')
+                        $text.css('right', 40);
+                    else
+                        $text.css('left', 40);
+
+                    $text.addClass('show');
                 });
 
-                if (position == 'right')
-                    $text.css('right', 40);
-                else
-                    $text.css('left', 40);
-
-                $text.addClass('show');
-            });
-
-            $image_crop.css({
-                top: 0,
-                left: 0,
-                'transform': 'translate(0, ' + (Pathways.panelHeight) + 'px)',
-                opacity: 0
-            });
-
-            // prevent scrolling
-            $('body').addClass('modal-open');
-
-            // Animate in the text
-            setTimeout(function() {
-                $image_crop.addClass('animate');
-
-                $image_crop.css({
-                    'transform': 'translate(0, ' + ((window.innerHeight - $image_crop.height()) / 2) + 'px)',
-                    opacity: 1
+                $imageCrop.css({
+                    top: 0,
+                    left: 0,
+                    'transform': 'translate(0, ' + (Pathways.panelHeight) + 'px)',
+                    opacity: 0
                 });
 
-            }, 50);
-
-            var closeCropZoom = function() {
-                $overlay.css('opacity', 0);
-                $('body').removeClass('modal-open');
+                // Animate in the text
                 setTimeout(function() {
-                    $overlay.remove();
-                }, 600);
-            };
+                    $imageCrop.addClass('animate');
 
-            $image_crop.on('click', closeCropZoom);
-            $close.on('click', closeCropZoom);
+                    $imageCrop.css({
+                        'transform': 'translate(0, ' + ((window.innerHeight - $imageCrop.height()) / 2) + 'px)',
+                        opacity: 1
+                    });
 
-            window.addEventListener('resize', function() {
-                $overlay.css('height', window.innerHeight);
-                $text.css({
-                    top: (window.innerHeight - $text.outerHeight() - 15)
+                }, 50);
+
+                $imageCrop.on('click', ctrl.closeHandler);
+
+                window.addEventListener('resize', function() {
+                    $text.css({
+                        top: (window.innerHeight - $text.outerHeight() - 15)
+                    });
                 });
             });
         });
-    });
-};
+    };
+
+}(window, document, Pathways.components, Pathways.components.core.overlay, jQuery, Pathways.utils));
 
 /*
     Carousel pattern initiator followed by the component.
 */
-Pathways.components.gallery = function(element, data) {
-    var $elem = $(element),
-        $panel = $elem.closest('.panel'),
-        panelId = $panel.attr('id');
+(function(w, doc, exports, overlay, utils, $, _Hammer, Mod) {
 
-    $(element).on('click', function(e) {
+    exports.gallery = function(element, data) {
+        var $elem = $(element),
+            $panel = $elem.closest('.panel'),
+            panelId = $panel.attr('id');
 
-        var $overlay = $('<div class="overlay"></div>'),
-            $close = $('<div class="close"></div>'),
-            $loading = $('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+        $(element).on('click', function(e) {
 
-        $overlay.css('height', window.innerHeight);
+            var $overlay,
+                $div = $('<div class="carousel"></div>'),
+                $loading = $('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
 
-        $('body').append($overlay);
+            $loading.css({
+                position: 'absolute',
+                top: ((w.innerHeight / 2) - 12),
+                left: ((w.innerWidth / 2) - 35)
+            });
 
-        $overlay.show();
-        $overlay.css('background-color', 'rgba(0,0,0,0.8)');
+            $overlay = overlay.getOverlay(function() {
+                var carousel = new Carousel(".carousel", data);
+                carousel.init();
+            });
 
-        $overlay.append($loading);
-
-        $loading.css({
-            position: 'absolute',
-            top: ((window.innerHeight / 2) - 12),
-            left: ((window.innerWidth / 2) - 35)
-        });
-
-        // prevent scrolling
-        $('body').addClass('modal-open');
-
-        setTimeout(function() {
-            // Load the carousel
-            var $div = $('<div class="carousel"></div>');
+            $overlay.append($loading);
             $overlay.append($div);
 
-            var carousel = new Carousel(".carousel", data);
-            carousel.init();
-
-            $overlay.append($close);
-        }, 800);
-
-        $close.on('click', function() {
-            $overlay.css('opacity', 0);
-            $('body').removeClass('modal-open');
-
-            setTimeout(function() {
-                $overlay.remove();
-            }, 800);
         });
 
-    });
-
-};
-
-function Carousel(element, data) {
-
-    if (typeof data === 'undefined') return console.warn('No gallery data provided');
-
-    var self = this,
-        _element = document.querySelector(element),
-        $element = $(element),
-        $prev = null,
-        $next = null,
-
-        $container = null,
-        $panes = null,
-
-        images = data.images,
-        location = data.location,
-
-        widths = [],
-        ratios = [],
-
-        pane_width = 0,
-        pane_count = 0,
-        current_pane = 0,
-        total_offset = (window.innerWidth / 2);
-
-
-    /**
-     * initial
-     */
-    this.init = function() {
-
-        // Steps to loading the carousel:
-        // - Set up the carousel container
-        // - Load the first image.
-        // - On load, calculate dimensions of the image, update the container, set local width vars, move the container so the image is in the centre.
-        // - Load the navigation
-        // - Load rest of the images sequentially in the onload event of the previous one.
-        // - Update the container and local variables on each load, keeping the carousel in the correct place.
-
-        // Create the container
-        $container = $('<ul/>');
-        $container.height(window.innerHeight);
-
-        $element.append($container);
-
-        // Load the first image
-        var imagesCopy = [].concat(images);
-        var first = imagesCopy[0];
-
-        loadImage(first, function() {
-            loadNavigation();
-
-            $panes = $element.find('li');
-            pane_count = $panes.length;
-
-            $container.css('transform', 'translate(' + (total_offset - (widths[0] / 2)) + 'px,0)');
-            setPaneDimensions();
-
-            imagesCopy.shift();
-
-            // load the rest of the images
-            loadImages(imagesCopy);
-        });
-
-        $(window).on("load resize orientationchange", function() {
-            setPaneDimensions();
-        });
     };
 
-    /*
-     * Load an image and take a function to call once the image has finished asynchronously loading
-     */
-    var loadImage = function(obj, callback) {
-        var img = new Image(),
-            $li = $('<li/>'),
-            $img;
 
-        img.src = '/_assets/img/' + location + obj.image + '.jpg';
 
-        img.onload = function() {
-            $img = $(img);
-            $img.css('height', '100%');
+    function Carousel(element, data) {
 
-            $li.append($img);
+        if (typeof data === 'undefined') return console.warn('No gallery data provided');
 
-            // add potential text
-            if (obj.text) {
-                var $child = $('<div>' + obj.text + '</div>').addClass('text');
+        var self = this,
+            _element = doc.querySelector(element),
+            $element = $(element),
+            $prev = null,
+            $next = null,
 
-                $li.append($child);
-            }
+            $container = null,
+            $panes = null,
 
-            // what is the ratio of the image?
-            var w = img.naturalWidth,
-                h = img.naturalHeight,
-                ratio = (h / w),
-                newWidth = window.innerHeight / ratio;
+            images = data.images,
+            location = data.location,
 
-            // store the width and ratio for resize recalculations
-            widths.push(newWidth);
-            ratios.push(ratio);
+            widths = [],
+            ratios = [],
 
-            // set the panel to the image's width
-            $li.width(newWidth);
+            pane_width = 0,
+            pane_count = 0,
+            current_pane = 0,
+            total_offset = (w.innerWidth / 2);
 
-            // Add it to the container
-            $container.append($li);
 
-            // calculate and set the width of the whole container
-            var total = widths.reduce(function(a, b) {
-                return a + b;
-            });
+        /**
+         * initial
+         */
+        this.init = function() {
 
-            $container.width(total);
+            // Steps to loading the carousel:
+            // - Set up the carousel container
+            // - Load the first image.
+            // - On load, calculate dimensions of the image, update the container, set local width vars, move the container so the image is in the centre.
+            // - Load the navigation
+            // - Load rest of the images sequentially in the onload event of the previous one.
+            // - Update the container and local variables on each load, keeping the carousel in the correct place.
 
-            if (callback)
-                callback.call();
-        };
-    };
+            // Create the container
+            $container = $('<ul/>');
+            $container.height(w.innerHeight);
 
-    /*
-     * Takes an array of image objects and recursively sets up a callback chain to load in images sequentially
-     */
-    var loadImages = function(images) {
-        if (images.length) {
-            loadImage(images[0], function() {
+            $element.append($container);
+
+            // Load the first image
+            var imagesCopy = [].concat(images);
+            var first = imagesCopy[0];
+
+            loadImage(first, function() {
+                loadNavigation();
+
                 $panes = $element.find('li');
                 pane_count = $panes.length;
+
+                $container.css('transform', 'translate(' + (total_offset - (widths[0] / 2)) + 'px,0)');
                 setPaneDimensions();
 
-                images.shift();
+                imagesCopy.shift();
 
-                loadImages(images);
+                // load the rest of the images
+                loadImages(imagesCopy);
             });
-        }
-    };
 
-    /*
-     * load the navigation into the carousel
-     */
-    var loadNavigation = function() {
-        $prev = $('<div/>'),
+            $(w).on("load resize orientationchange", function() {
+                setPaneDimensions();
+            });
+        };
+
+        /*
+         * Load an image and take a function to call once the image has finished asynchronously loading
+         */
+        var loadImage = function(obj, callback) {
+            var img = new Image(),
+                $li = $('<li/>'),
+                $img;
+
+            img.src = '/_assets/img/' + location + obj.image + '.jpg';
+
+            img.onload = function() {
+                $img = $(img);
+                $img.css('height', '100%');
+
+                $li.append($img);
+
+                // add potential text
+                if (obj.text) {
+                    var $child = $('<div>' + obj.text + '</div>').addClass('text');
+
+                    $li.append($child);
+                }
+
+                // what is the ratio of the image?
+                var wth = img.naturalWidth,
+                    hgt = img.naturalHeight,
+                    ratio = (hgt / wth);
+
+                // store the ratio for resize recalculations
+                ratios.push(ratio);
+
+                // Add it to the container
+                $container.append($li);
+
+                if (callback)
+                    callback.call();
+            };
+        };
+
+        /*
+         * Takes an array of image objects and recursively sets up a callback chain to load in images sequentially
+         */
+        var loadImages = function(images) {
+            if (images.length) {
+                loadImage(images[0], function() {
+                    $panes = $element.find('li');
+                    pane_count = $panes.length;
+                    setPaneDimensions();
+
+                    images.shift();
+
+                    loadImages(images);
+                });
+            }
+        };
+
+        /*
+         * load the navigation into the carousel
+         */
+        var loadNavigation = function() {
+            $prev = $('<div/>');
             $next = $('<div/>');
 
-        $prev.addClass('prev disabled');
-        $next.addClass('next');
+            $prev.addClass('prev disabled');
+            $next.addClass('next');
 
-        $prev.css({
-            'left': 0,
-            'height': window.innerHeight + 'px',
-        });
+            $prev.css({
+                'left': 0,
+                'height': w.innerHeight + 'px',
+            });
 
-        $next.css({
-            'right': 0,
-            'height': window.innerHeight + 'px',
-        });
+            $next.css({
+                'right': 0,
+                'height': w.innerHeight + 'px',
+            });
 
-        $element.append($prev);
-        $element.append($next);
+            $element.append($prev);
+            $element.append($next);
 
-        new Hammer($prev[0]).on("tap", function() {
-            self.prev();
-        });
-
-        new Hammer($next[0]).on("tap", function() {
-            self.next();
-        });
-    };
-
-    /**
-     * set the pane dimensions and scale the container
-     */
-    function setPaneDimensions() {
-        var total_width = 0,
-            wH = window.innerHeight;
-
-        widths = [];
-
-        for (var i = 0; i < $panes.length; i++) {
-            var newWidth = wH / ratios[i];
-
-            $panes[i].style['width'] = newWidth + 'px';
-
-            widths.push(newWidth);
-
-            total_width += newWidth;
-        }
-
-        $container.width(total_width);
-        total_offset = (window.innerWidth / 2);
-
-        pane_width = parseInt(total_width / $panes.length);
-
-        // Set the container and navigation links to the height of the screen.
-        $container.css('height', wH);
-
-        $prev.height(wH);
-        $next.height(wH);
-
-        self.showPane(current_pane, false);
-    }
-
-
-    /**
-     * show pane by index
-     */
-    this.showPane = function(index, animate) {
-        var offset = 0,
-            count = 0;
-
-        // between the bounds
-        index = Math.max(0, Math.min(index, pane_count - 1));
-        current_pane = index;
-
-        for (var i = 0; i < index; i++) {
-            offset -= widths[i];
-        }
-
-        offset += (total_offset - (widths[index] / 2));
-
-        $panes.css('opacity', 0.4);
-        $panes.get(current_pane).style['opacity'] = 1;
-
-        setContainerOffset(offset, animate);
-
-        if (index > 0)
-            $prev.removeClass('disabled');
-        else {
-            $prev.addClass('disabled');
-        }
-
-        if (index >= (pane_count - 1))
-            $next.addClass('disabled');
-        else {
-            $next.removeClass('disabled');
-        }
-    };
-
-    /*
-     * Move the whole list of panels by x. Animation optional.
-     */
-    function setContainerOffset(x, animate) {
-        $container.removeClass("animate");
-
-        if (animate) {
-            $container.addClass("animate");
-        }
-
-        if (Modernizr.csstransforms3d)
-            $container.css("transform", "translate3d(" + x + "px,0,0)");
-        else
-            $container.css("transform", "translate(" + x + "px,0)");
-    }
-
-    this.next = function() {
-        return this.showPane(current_pane + 1, true);
-    };
-    this.prev = function() {
-        return this.showPane(current_pane - 1, true);
-    };
-
-
-    function handleHammer(ev) {
-        // disable browser scrolling
-        ev.gesture.preventDefault();
-
-        switch (ev.type) {
-            case 'dragright':
-            case 'dragleft':
-                // stick to the finger
-                var pane_offset = 0,
-                    count = 0;
-
-                for (var i = 0; i < current_pane; i++) {
-                    pane_offset -= widths[i];
-                }
-
-                pane_offset += (total_offset - (widths[current_pane] / 2));
-
-                var drag_offset = ((100 / 440) * ev.gesture.deltaX) / pane_count;
-
-                // slow down at the first and last pane
-                if ((current_pane === 0 && ev.gesture.direction == "right") ||
-                    (current_pane == pane_count - 1 && ev.gesture.direction == "left")) {
-                    drag_offset *= 0.4;
-                }
-
-                setContainerOffset(ev.gesture.deltaX + pane_offset);
-                break;
-
-            case 'swipeleft':
-                self.next();
-                ev.gesture.stopDetect();
-                break;
-
-            case 'swiperight':
+            new _Hammer($prev[0]).on("tap", function() {
                 self.prev();
-                ev.gesture.stopDetect();
-                break;
+            });
 
-            case 'release':
-                // more then 30% moved, navigate
-                if (Math.abs(ev.gesture.deltaX) > ((pane_width / 10) * 3)) {
-                    if (ev.gesture.direction == 'right') {
-                        self.prev();
-                    } else {
-                        self.next();
-                    }
-                } else {
-                    self.showPane(current_pane, true);
+            new _Hammer($next[0]).on("tap", function() {
+                self.next();
+            });
+        };
+
+        /**
+         * set the pane dimensions and scale the container
+         */
+        function setPaneDimensions() {
+            var total_width = 0,
+                wH = w.innerHeight;
+
+            widths = [];
+
+            for (var i = 0; i < $panes.length; i++) {
+                var newWidth = wH / ratios[i];
+
+                if (newWidth >= w.innerWidth) {
+                    var $img = $($panes[i]).find('img');
+                    newWidth = w.innerWidth;
+
+                    $img.css({
+                        'height': 'auto',
+                        'width': '100%',
+                        'margin': 'auto 0'
+                    });
                 }
-                break;
-        }
-    }
 
-    new Hammer($element[0], {
-        drag_lock_to_axis: true
-    }).on("release dragleft dragright swipeleft swiperight", handleHammer);
-}
+                $panes[i].style['width'] = newWidth + 'px';
+
+                widths.push(newWidth);
+
+                total_width += newWidth;
+            }
+
+            $container.width(total_width);
+            total_offset = (w.innerWidth / 2);
+
+            pane_width = parseInt(total_width / $panes.length);
+
+            // Set the container and navigation links to the height of the screen.
+            $container.css('height', wH);
+
+            $prev.height(wH);
+            $next.height(wH);
+
+            self.showPane(current_pane, false);
+        }
+
+
+        /**
+         * show pane by index
+         */
+        this.showPane = function(index, animate) {
+            var offset = 0,
+                count = 0;
+
+            // between the bounds
+            index = Math.max(0, Math.min(index, pane_count - 1));
+            current_pane = index;
+
+            for (var i = 0; i < index; i++) {
+                offset -= widths[i];
+            }
+
+            offset += (total_offset - (widths[index] / 2));
+
+            $panes.css('opacity', 0.4);
+            $panes.get(current_pane).style['opacity'] = 1;
+
+            setContainerOffset(offset, animate);
+
+            if (index > 0)
+                $prev.removeClass('disabled');
+            else {
+                $prev.addClass('disabled');
+            }
+
+            if (index >= (pane_count - 1))
+                $next.addClass('disabled');
+            else {
+                $next.removeClass('disabled');
+            }
+        };
+
+        /*
+         * Move the whole list of panels by x. Animation optional.
+         */
+        function setContainerOffset(x, animate) {
+            $container.removeClass("animate");
+
+            if (animate) {
+                $container.addClass("animate");
+            }
+
+            if (Mod.csstransforms3d)
+                $container.css("transform", "translate3d(" + x + "px,0,0)");
+            else
+                $container.css("transform", "translate(" + x + "px,0)");
+        }
+
+        this.next = function() {
+            return this.showPane(current_pane + 1, true);
+        };
+        this.prev = function() {
+            return this.showPane(current_pane - 1, true);
+        };
+
+
+        function handleHammer(ev) {
+            // disable browser scrolling
+            ev.gesture.preventDefault();
+
+            switch (ev.type) {
+                case 'dragright':
+                case 'dragleft':
+                    // stick to the finger
+                    var pane_offset = 0,
+                        count = 0;
+
+                    for (var i = 0; i < current_pane; i++) {
+                        pane_offset -= widths[i];
+                    }
+
+                    pane_offset += (total_offset - (widths[current_pane] / 2));
+
+                    var drag_offset = ((100 / 440) * ev.gesture.deltaX) / pane_count;
+
+                    // slow down at the first and last pane
+                    if ((current_pane === 0 && ev.gesture.direction == "right") ||
+                        (current_pane == pane_count - 1 && ev.gesture.direction == "left")) {
+                        drag_offset *= 0.4;
+                    }
+
+                    setContainerOffset(ev.gesture.deltaX + pane_offset);
+                    break;
+
+                case 'swipeleft':
+                    self.next();
+                    ev.gesture.stopDetect();
+                    break;
+
+                case 'swiperight':
+                    self.prev();
+                    ev.gesture.stopDetect();
+                    break;
+
+                case 'release':
+                    // more then 30% moved, navigate
+                    if (Math.abs(ev.gesture.deltaX) > ((pane_width / 10) * 3)) {
+                        if (ev.gesture.direction == 'right') {
+                            self.prev();
+                        } else {
+                            self.next();
+                        }
+                    } else {
+                        self.showPane(current_pane, true);
+                    }
+                    break;
+            }
+        }
+
+        new _Hammer($element[0], {
+            drag_lock_to_axis: true
+        }).on("release dragleft dragright swipeleft swiperight", handleHammer);
+    }
+}(window, document, Pathways.components, Pathways.components.core.overlay, Pathways.utils, jQuery, Hammer, Modernizr));
 
 Pathways.components.infiniteCanvas = function(element, data) {
 
@@ -2474,43 +2424,48 @@ Pathways.components.infographic = function(element, data) {
 
 }(window, Pathways.components, Pathways.components.core.ga, jQuery));
 
-//var Pathways = Pathways || {};
-//Pathways.components = Pathways.components || {};
-//Pathways.components.core = Pathways.components.core || {};
-
-
 (function(mod, overlay, $) {
 
-    function Modal(elm) {
+    function Modal(elm, data) {
 
         var self = this,
             $elm = elm,
-            baseClass = 'modal-img',
-            hiddenClass = 'modal-img-hidden',
-            shownClass = 'modal-img-shown',
+            baseClass = 'modal-box',
+            hiddenClass = 'modal-box-hidden',
+            shownClass = 'modal-box-shown',
             $overlay,
             $img;
 
         this.init = function() {
 
             var img = new Image(),
-                $overlay = overlay.getOverlay(),
-                $img = $(img).addClass(baseClass + ' ' + hiddenClass);
+                ctrl = overlay.getCtrl(),
+                $overlay = ctrl.$overlay,
+                $img = $(img),
+                $container = $('<div/>').addClass(baseClass + ' ' + hiddenClass),
+                caption = $elm.data('caption'),
+                download = $elm.data('download'),
+                $caption = caption ? $('<p>' + caption + '</p>').addClass('text') : '';
+                $download = download ? $('<a>Download</a>').attr('href', download).addClass('download') : '';
 
             img.src = $elm.attr('data-image');
+            $caption.append($download);
+
+            $container.on('click', ctrl.closeHandler);
 
             img.onload = function() {
-                $overlay.append($img);
-                $img.removeClass(hiddenClass).addClass(shownClass);
+                $overlay.append($container);
+                $container.append($img);
+                $container.append($caption);
+                $container.removeClass(hiddenClass).addClass(shownClass);
             };
-
         };
     }
 
     mod.modal = function(element, data) {
 
         $(element).find('.modal').on('click', function() {
-            var modal = new Modal($(this));
+            var modal = new Modal($(this), data);
             modal.init();
         });
 
@@ -2520,13 +2475,9 @@ Pathways.components.infographic = function(element, data) {
 
 }(Pathways.components, Pathways.components.core.overlay, jQuery));
 
-var Pathways = Pathways || {};
-Pathways.components = Pathways.components || {};
-Pathways.components.core = Pathways.components.core || {};
+(function(w, doc, exports, overlay, $, utils) {
 
-(function(w, doc, mod, overlay, $, utils) {
-
-    mod.playerOverlay = function(elem) {
+    exports.playerOverlay = function(elem) {
 
         var $element = $(elem),
 
@@ -2539,7 +2490,6 @@ Pathways.components.core = Pathways.components.core || {};
 
             getHeightWithOffset = utils.getHeightWithOffset,
             getWidthWithOffset = utils.getWidthWithOffset;
-
 
 
         $element.on('click', function(e) {
@@ -5931,28 +5881,32 @@ Pathways.components.gallery.toolsOfMesmerism = {
     }
 };
 
+Pathways.scrollScenes.MagnetisedTrees = function(panelID, animation) {
 
-Pathways.scrollScenes.MagnetisedTrees = function(panelID) {
+    if (!animation) return console.warn('animation not inited for \'' + panelID + '\'');
 
-    var stage = animations.magnetisedTrees.stage;
-    if (!stage) return console.warn('animation stage not inited', animations);
 
     var scene1 = new ScrollScene({
             triggerElement: panelID,
-            duration:       Pathways.panelHeight
+            duration: Pathways.panelHeight
         })
         .on('enter', function(e) {
-
-            if( e.scrollDirection == 'FORWARD' ) {
-                TweenMax.to(panelID + ' .black-strip', 0.4, { y: 0 }); // Scroll up
-                createjs.Ticker.addEventListener("tick", stage);
+            console.log('evetre');
+            if (e.scrollDirection == 'FORWARD') {
+                TweenMax.to(panelID + ' .black-strip', 0.4, {
+                    y: 0
+                }); // Scroll up
+                animation.start();
             }
         })
         .on('leave', function(e) {
 
-            if( e.scrollDirection == 'REVERSE' ) {
-                TweenMax.to(panelID + ' .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
-                createjs.Ticker.removeEventListener("tick", stage);
+            if (e.scrollDirection == 'REVERSE') {
+                TweenMax.to(panelID + ' .black-strip', 0.2, {
+                    y: Pathways.panelHeight
+                }); // scroll down
+                animation.stop();
+
             }
         });
 
@@ -6918,24 +6872,34 @@ Pathways.components.gallery.quacksOfThe18thCentury = {
         location: 'galleries/quacks-of-the-18th-century/',
         images: [{
             image: 'L0018661a',
+            text: 'Quacks and travelling medicine vendors were a common sight in the 17th and 18th century.'
         }, {
             image: 'M0013726',
+            text: 'They were selling snake oil but sometimes antidotes to snake poison, like this vendor.'
         }, {
             image: 'V0007356a',
+            text: 'Some of them were women: Anne Manning, a quack doctor, outside her cottage with Betty Upton.'
         }, {
             image: 'V0010929a',
+            text: 'Doctor Kill’em-or-Cure’em irresponsibly dispensing his potions.'
         }, {
             image: 'V0011005',
+            text: 'A sailor with a bandaged eye consulting a quack doctor.'
         }, {
             image: 'V0016170',
+            text: 'Doctor Bossy selling his wares on stage with assistants at Covent Garden, London.'
         }, {
             image: 'V0016171',
+            text: 'Doctor Botherum, perhaps based on Doctor Bossy, selling his goods to a raucous crowd.'
         }, {
             image: 'V0016188a',
+            text: 'Doctor Rock using his horse-drawn carriage as a stage to present his remedies to a crowd.'
         }, {
             image: 'V0016215',
+            text: 'This vendor puts on a real show, assisted by an elaborately dressed man and an owl.'
         }, {
             image: 'V0016230a',
+            text: 'The colourful quack troupe including a donkey, a monkey and a fool blowing a trumpet.'
         }]
     }
 };
@@ -6945,24 +6909,34 @@ Pathways.components.gallery.indecentSexualImages = {
         location: 'galleries/indecent-sexual-images/',
         images: [{
             image: 'L0038201',
+            text: 'Coloured illustration of scrotum diseased with Syphilis.'
         }, {
             image: 'L0038202',
+            text: 'Coloured illustration of labia diseased with Syphilis ‘Sclerosis of the Right Labium Majus’.'
         }, {
             image: 'L0038205',
+            text: 'Skin of the scrotum and perineum area diseased with Syphilis.'
         }, {
             image: 'L0038206',
+            text: 'Female breast diseased with Syphilis.'
         }, {
             image: 'L0038209',
+            text: 'Male pubis and penis diseased with Syphilis. Paraphimosis from Venereal Ulcer on the Foreskin. Inflammatory Edema. Suppurative Adenitis in both groins.'
         }, {
             image: 'L0060656',
+            text: 'Syphilitic frambesia (‘raspberry’).'
         }, {
             image: 'L0074250',
+            text: 'Combycomata, female perineum.'
         }, {
             image: 'V0009962',
+            text: 'Female genitalia showing severely diseased tissue and hypertrophy of the clitoris.'
         }, {
             image: 'V0009971',
+            text: 'Female genitalia showing severely diseased tissue caused by syphilis: extensive sores and abcesses are seen extending up the abdomen and torso.'
         }, {
             image: 'V0010253',
+            text: 'A section of leg with a swelling on the shin below the knee; and male genitalia with a lump on the testicles.'
         }]
     }
 };
@@ -7002,21 +6976,28 @@ Pathways.scrollScenes.BritishMuseum = function() {
 
 Pathways.components.gallery.madeAFilm = {
     data: {
-        location: 'galleries/tools-of-mesmerism/',
+        location: 'galleries/they-even-made-a-film/',
         images: [{
-            image: 'V0016530',
+            image: '01_Maisie_Dick_in_love',
+            text: 'Maisie’s Marriage was produced in the summer of 1923. It follows the story of Maisie Burrows, the eldest of ten children, and her beau, fireman Dick Reading.'
         }, {
-            image: 'L0023349',
+            image: '02_Drudgery',
+            text: 'Despite being very much in love with Dick, Maisie refuses his marriage proposal; she doesn’t want a life of drudgery, with too many children and not enough money.'
         }, {
-            image: 'L0023350',
+            image: '03_Jump',
+            text: 'Maisie is thrown out of her home and attempts suicide. She ends up as a maid in the household of a happily married couple who have three children.'
         }, {
-            image: 'L0023351',
+            image: '04_wedding',
+            text: 'When her new home catches fire, Maisie is rescued by Dick and finally agrees to marry him.'
         }, {
-            image: 'L0023352',
+            image: '05_credits',
+            text: 'The film was promoted as being written by Marie Stopes, though it was actually authored by her co-writer Walter Summers.'
         }, {
-            image: 'M0006352',
+            image: '06_Marie Stopes',
+            text: 'The association with Stopes – along with the original title of Married Love – was guaranteed to generate a lot of publicity. Five years after she had published her first book, Married Love was still selling hundreds of thousands of copies a year, and Stopes had also written two other successful books.'
         }, {
-            image: 'V0011096',
+            image: '07_Film_poster_crop',
+            text: 'The Stopes name also caused problems. While a reviewer described the film as nothing more than ‘a straightforward human story of sentimental rather than sexual appeal’, the British Board of Film Censors was concerned about ‘the title, taken in conjunction with the name of the book and the authoress referred to’. It felt the production was ‘propaganda on a subject unsuitable for discussion in a Cinema Theatre.'
         }, ]
     }
 };
