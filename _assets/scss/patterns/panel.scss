@@ -109,6 +109,12 @@
                     max-width: 500px;
                     margin: 0 auto;
                 }
+                .inner-img {
+                    margin: 0 0 0 50%;
+                    img {
+                        @include transform(translateX(-50%));
+                    }
+                }
             }
             &.title {
                 width: 100%;

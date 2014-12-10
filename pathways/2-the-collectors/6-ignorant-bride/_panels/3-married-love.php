@@ -7,7 +7,7 @@
 
     <div class="main-content center fixed">
 
-        <div class="inner">
+        <div class="inner-img">
             <img alt="" src="/pathways/2-the-collectors/_assets/6-ignorant-bride/married-love.png">
         </div>
 
