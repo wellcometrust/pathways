@@ -41,11 +41,11 @@ module.exports = function(grunt) {
                 src: [
                     '_assets/animations/**/*.js', // Any animation files
                     '_assets/js/pathways.js', // The Pathways Core file.
-                    '_assets/js/main.js', // Then the main file.
                     '_assets/js/core/*.js', // Then the pattern core files
                     '_assets/js/patterns/*.js', // Then the patterns
                     '_assets/js/infographics/*.js', // Then any infographics
-                    'pathways/**/**/_js/*.js' // And finally the scenes
+                    'pathways/**/**/_js/*.js', // And finally the scenes
+                    '_assets/js/main.js' // Then the main file.
                 ],
                 dest: '_assets/build/js/production.js',
             },

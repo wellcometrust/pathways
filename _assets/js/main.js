@@ -76,8 +76,8 @@
             loader.addEventListener("fileload", handleFileLoad);
             loader.addEventListener("complete", handleComplete);
             loader.loadManifest(lib.properties.manifest);
-            a.start = function(){};
-            a.stop = function(){};
+            a.start = function() {};
+            a.stop = function() {};
 
         }
 
@@ -541,3 +541,10 @@
     p.init(onPathwaysLoad, onScrollLoad, onScrollUnload);
 
 }(window, jQuery, Pathways, ScrollMagic, ScrollScene, Modernizr, TweenMax));
+
+// Init global ga tracking
+(function(ga, $) {
+
+    ga.init('[data-ga]');
+
+}(Pathways.components.core.ga, jQuery));

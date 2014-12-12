@@ -12,7 +12,6 @@
                 <p>Many of Henry Wellcome’s earliest acquisitions were books full of design ideas he and his staff could apply to the pharmaceutical products and marketing materials of Burroughs Wellcome & Co. He also collected containers that might provide visual inspiration for the company’s packaging, and decorated his business offices with hunting trophies, works of art and literature.</p>
                 <div class="controls">
                     <div class="navigation">
-                        <a href="#" class="prev">&lt; previous</a>
                         <a href="#" class="next">next &gt;</a>
                     </div>
                 </div>
@@ -67,7 +66,6 @@
                 <div class="controls">
                     <div class="navigation">
                         <a href="#" class="prev">&lt; previous</a>
-                        <a href="#" class="next">next &gt;</a>
                     </div>
                 </div>
             </div>
