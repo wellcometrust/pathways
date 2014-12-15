@@ -1,9 +1,7 @@
 (function(w, exports, ga, $) {
 
-    var reO = /l3 open library/g,
-        reC = /l3 close library/g,
-        repO = 'l3 open library',
-        repC = 'l3 close library';
+    var repOpen = 'l3 open library',
+        repClose = 'l3 close library';
 
     exports.toggleSection = function(element, data) {
 
@@ -27,11 +25,11 @@
                 $('html, body').animate({
                     scrollTop: $scrollAnchor.offset().top - 100
                 }, 400);
-                ga.toggleActiveGA($related, reO, repC);
+                ga.setState($related, repOpen, repClose);
 
             } else {
                 $target.css('height', 0);
-                ga.toggleActiveGA($related, reC, repO);
+                ga.setState($related, repClose, repOpen);
             }
 
             $target.toggleClass('open');

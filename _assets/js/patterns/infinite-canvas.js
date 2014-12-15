@@ -60,10 +60,8 @@
 
         this.loadImages = function(images) {
 
-            var reO = /l2 open infinite canvas/g,
-                reC = /l2 close infinite canvas/g,
-                repO = 'l2 open infinite canvas',
-                repC = 'l2 close infinite canvas';
+            var repOpen = 'l2 open infinite canvas',
+                repClose = 'l2 close infinite canvas';
 
             var length = images.length,
                 items = [],
@@ -73,9 +71,9 @@
                         var $this = $(this);
                         ga.send($this.data('ga'));
                         if ($root.hasClass('active')) {
-                            ga.toggleActiveGA($this, reC, repO);
+                            ga.setState($this, repClose, repOpen);
                         } else {
-                            ga.toggleActiveGA($this, reO, repC);
+                            ga.setState($this, repOpen, repClose);
                         }
                         $root.toggleClass('active');
                     };

@@ -7,8 +7,9 @@ Pathways.components.core = Pathways.components.core || {};
     var baseSelector = '';
     var attrSelector = '';
 
-    function toggleActiveGA($el, re1, re2) {
+    function setState($el, re1, re2) {
         var gaData = $el.data(baseSelector);
+
         if (!gaData) return;
         var newStr = gaData.replace(re1, re2);
         $el.data(baseSelector, newStr);
@@ -33,7 +34,7 @@ Pathways.components.core = Pathways.components.core || {};
     }
 
     exports.ga = {
-        toggleActiveGA: toggleActiveGA,
+        setState: setState,
         send: send,
         init: init,
         update: update

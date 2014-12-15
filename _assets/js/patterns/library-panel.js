@@ -1,9 +1,7 @@
 (function(w, exports, ga, $) {
 
-    var reO = /l2 open share/g,
-        reC = /l2 close share/g,
-        repO = 'l2 open share',
-        repC = 'l2 close share';
+    var repOpen = 'l2 open share',
+        repClose = 'l2 close share';
 
     exports.libraryPanel = function(element, data) {
 
@@ -26,15 +24,15 @@
 
             if ($panel.hasClass('active')) {
                 closePanel($panel);
-                ga.toggleActiveGA($this, reC, repO);
+                ga.setState($this, repClose, repOpen);
 
             } else {
                 openPanel($panel);
                 $(window).one('scroll', function() {
                     closePanel($panel);
-                    ga.toggleActiveGA($this, reC, repO);
+                    ga.setState($this, repClose, repOpen);
                 });
-                ga.toggleActiveGA($this, reO, repC);
+                ga.setState($this, repOpen, repClose);
             }
         });
     };
