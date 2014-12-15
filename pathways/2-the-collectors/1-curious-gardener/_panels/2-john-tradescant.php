@@ -197,17 +197,6 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
-                <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/3.3.jpg">
-                <svg class="info-box modal"
-                    data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/3.3-large.jpg"
-                    data-caption="Henry VIII’s hawking glove, © Ashmolean Museum, University of Oxford"
-                    data-ga="the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 3.3"
-                    version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
-                    <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
-                    <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
-                </svg>
-            </div>
 
 
         </div>
