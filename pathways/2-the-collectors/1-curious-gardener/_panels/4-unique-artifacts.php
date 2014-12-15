@@ -4,7 +4,7 @@
     <div class="bg-container">
 
         <div class="crop-zoom">
-            <div class="crop-zoom-inner">
+            <div class="vertical-center">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/m1-curious-gardener-4.jpg">
                 <div class="tap-targets">
                     <svg class="info-box tap-target croc" data-crop="croc" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;" data-ga="the-collectors - curious-gardener - unique-artifacts - l2 image zoom croc">

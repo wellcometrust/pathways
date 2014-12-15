@@ -4,7 +4,7 @@
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
-    
+
     <div class="content">
         <p class="scene-set">John Tradescant’s Thames-side home, 1634</p>
 
