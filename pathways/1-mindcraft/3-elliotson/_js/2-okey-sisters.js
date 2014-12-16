@@ -6,7 +6,7 @@ Pathways.scrollScenes.OkeySisters = function(panelID) {
     });
     $('#thomas-wakley .main-content').css({
         'bottom': 'auto',
-        'top': (Pathways.panelHeight / 3)
+        'top': parseInt((Pathways.panelHeight / 3),10)
     });
 
     var $panel = $(panelID),

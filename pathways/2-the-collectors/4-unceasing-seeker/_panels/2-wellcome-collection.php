@@ -1,5 +1,5 @@
 
-<div id="wellcome-collection" class="panel" data-component="infinite-canvas" data-config='{ "offset_height": 150, "background": { "type": "image", "preserve_ratio": false } }' data-offset-height="0">
+<div id="wellcome-collection" class="panel" data-component="infinite-canvas" data-config='{ "offset_height": 150 }'>
 
     <div class="bg-container">
 
