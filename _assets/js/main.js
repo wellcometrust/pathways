@@ -436,22 +436,25 @@
             //
             if ($panelVideo.length || $panelAudio.length) {
                 var $video = $panelVideo.first(),
-                    audio = $panelAudio.first()[0],
-                    rawConfig = $video.attr('data-config'),
-                    initTime = getValueFromConfig(rawConfig, 'initTime') || 0,
-                    muteGlobal = getValueFromConfig(rawConfig, 'muteGlobal') || true;
+                    $audio = $panelAudio.first(),
+                    video = $video.get(0),
+                    audio = $audio.get(0),
+                    rawVideoConfig = $video.attr('data-config'),
+                    rawAudioConfig = $audio.attr('data-config'),
+                    videoConfig = rawVideoConfig ? JSON.parse(rawVideoConfig) : {},
+                    audioConfig = rawAudioConfig ? JSON.parse(rawAudioConfig) : {};
 
                 scenes[idx++] = new Ss({
                         triggerElement: $this,
                         duration: getMediaDuration
                     })
                     .on('enter', function() {
-                        if ($video) p.video.autoPlayVideoOnEnter($video[0], initTime, muteGlobal);
-                        if (audio) p.audio.mixer.loadPanelAudio(audio);
+                        if ($video) p.media.ctrl.playMediaOnVideoChannel(video, videoConfig);
+                        if (audio) p.media.ctrl.playMediaOnPanelChannel(audio, audioConfig);
                     })
                     .on('leave', function() {
-                        if ($video) p.video.autoStopVideoOnLeave($video[0], initTime, muteGlobal);
-                        if (audio) p.audio.mixer.unloadPanelAudio(audio);
+                        if ($video) p.media.ctrl.stopVideoChannel(videoConfig);
+                        if (audio) p.media.ctrl.stopPanelChannel(audioConfig);
                     });
             }
 
@@ -491,7 +494,7 @@
 
             // Panel specific scene code if it has any
             var handlerClass = p.utils.toTitleCase(panelID),
-                animationClass = p.utils.camelCase(panelID),
+                animationClass = p.utils.toCamelCase(panelID),
                 animation = animations[animationClass],
                 panelMethod = p.scrollScenes[handlerClass],
                 panelScene, fn;

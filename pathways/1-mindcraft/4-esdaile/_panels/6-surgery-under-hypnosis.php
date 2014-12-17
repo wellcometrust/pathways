@@ -2,11 +2,11 @@
 <div id="surgery-under-hypnosis" class="panel talking-head" data-config='{ "offset_height": 250, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <video controls="true" preload="none" data-video="panel" data-config='{ "muteGlobal" : true }'>
+        <video controls="true" preload="none" data-video="panel">
             <source src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/video/ChrisGreen_Pain_relief.mp4">
             <source src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/video/ChrisGreen_Pain_relief.webm">
             <track src="/_assets/video/ChrisGreen_Pain_relief.vtt" kind="captions" srclang="en" label="English" />
         </video>
         <img alt="" src="/_assets/img/spacer.png">
-    </div> 
+    </div>
 </div>

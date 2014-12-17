@@ -1,4 +1,4 @@
-(function(w, doc, exports, overlay, $, utils) {
+(function(exports, w, doc, overlay, $, utils) {
 
     exports.playerOverlay = function(elem) {
 
@@ -108,6 +108,6 @@
             return false;
 
         });
-
     };
-}(window, document, Pathways.components, Pathways.components.core.overlay, jQuery, Pathways.utils));
+
+}(Pathways.components, window, document, Pathways.components.core.overlay, jQuery, Pathways.utils));

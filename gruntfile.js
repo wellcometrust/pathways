@@ -40,7 +40,29 @@ module.exports = function(grunt) {
             app_files: {
                 src: [
                     '_assets/animations/**/*.js', // Any animation files
-                    '_assets/js/pathways.js', // The Pathways Core file.
+
+                    '_assets/js/pathways/index.js', // Pathways Core files.
+
+                    '_assets/js/pathways/system/index.js', // Pathways Core files.
+                    '_assets/js/pathways/utils/index.js', // Pathways Core files.
+                    '_assets/js/pathways/cookies/index.js', // Pathways Core files.
+
+                    '_assets/js/pathways/media/index.js', // Pathways Core files.
+                    '_assets/js/pathways/media/model.js', // Pathways Core files.
+                    '_assets/js/pathways/media/mixer/index.js', // Pathways Core files.
+
+                    '_assets/js/pathways/media/channels/index.js', // Pathways Core files.
+                    '_assets/js/pathways/media/channels/track.js', // Pathways Core files.
+                    '_assets/js/pathways/media/channels/ctrl.js', // Pathways Core files.
+
+                    '_assets/js/pathways/media/ctrl.js', // Pathways Core files.
+                    '_assets/js/pathways/media/view.js', // Pathways Core files.
+
+                    '_assets/js/pathways/media/video/index.js', // Pathways Core files.
+
+                    '_assets/js/pathways/main.js', // Pathways Core files.
+
+                    '_assets/js/pathways.js', // The Pathways Main file.
                     '_assets/js/core/*.js', // Then the pattern core files
                     '_assets/js/patterns/*.js', // Then the patterns
                     '_assets/js/infographics/*.js', // Then any infographics
@@ -86,7 +108,7 @@ module.exports = function(grunt) {
                 tasks: ['css']
             },
             js: {
-                files: ['_assets/js/*.js', '_assets/js/core/*.js', '_assets/js/patterns/*.js', 'pathways/**/**/_js/*.js', '_assets/js/lib/*.js'],
+                files: ['_assets/js/*.js', '_assets/js/core/*.js', '_assets/js/patterns/*.js', 'pathways/**/**/_js/*.js', '_assets/js/lib/*.js', '_assets/js/pathways/**/*.js'],
                 tasks: ['js'],
                 options: {
                     spawn: false,

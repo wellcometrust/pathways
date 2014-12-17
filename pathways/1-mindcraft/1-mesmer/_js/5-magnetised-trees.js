@@ -8,7 +8,6 @@ Pathways.scrollScenes.MagnetisedTrees = function(panelID, animation) {
             duration: Pathways.panelHeight
         })
         .on('enter', function(e) {
-            console.log('evetre');
             if (e.scrollDirection == 'FORWARD') {
                 TweenMax.to(panelID + ' .black-strip', 0.4, {
                     y: 0

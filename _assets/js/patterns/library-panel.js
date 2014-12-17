@@ -1,10 +1,9 @@
-(function(w, exports, ga, $) {
+(function(exports, w, ga, $) {
 
     var repOpen = 'l2 open share',
         repClose = 'l2 close share';
 
     exports.libraryPanel = function(element, data) {
-
 
         function closePanel($panel) {
             $panel.css('transform', 'translate(' + ($panel.outerWidth()) + 'px, ' + ($panel.outerHeight() - 60) + 'px)');
@@ -37,4 +36,4 @@
         });
     };
 
-}(window, Pathways.components, Pathways.components.core.ga, jQuery));
+}(Pathways.components, window, Pathways.components.core.ga, jQuery));
