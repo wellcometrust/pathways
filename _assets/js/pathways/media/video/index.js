@@ -2,14 +2,13 @@ console.log('include media/video/index');
 /***
     Video
 */
-(function(exports, p, sys, view, ctrl, $) {
+(function(exports, p, sys, vol, $) {
 
     var panelVideos;
 
     function volumeChangeHandler (e) {
-        if (this.muted == ctrl.isMuted()) return;
-        ctrl.mute(this.muted);
-        view.update();
+        if (this.muted == vol.isMuted()) return;
+        vol.mute(this.muted);
     }
 
     function errorHandler (e) {
@@ -71,5 +70,5 @@ console.log('include media/video/index');
         init: initVideo
     };
 
-}(Pathways, Pathways, Pathways.system, Pathways.media.view, Pathways.media.ctrl, jQuery));
+}(Pathways, Pathways, Pathways.system, Pathways.media.vol, jQuery));
 

@@ -1,0 +1,145 @@
+console.log('include core audio-player');
+
+(function(exports, viewControl, vol, volViews, utils, $) {
+
+    var fallbackDuration = 600;
+
+
+    function getPlay(audio, linkedView, timeUpdate, viewCtrl) {
+        return function play() {
+            if (!audio.paused) return;
+            vol.addView(linkedView);
+            audio.addEventListener('timeupdate', timeUpdate);
+            audio.muted = vol.isMuted();
+            audio.play();
+            viewCtrl.update(audio.paused, audio.duration, audio.currentTime);
+        };
+    }
+
+    function getPause(audio, linkedView, timeUpdate, viewCtrl) {
+        return function pause() {
+            if (audio.paused) return;
+            vol.removeView(linkedView);
+            audio.pause();
+            audio.removeEventListener('timeupdate', timeUpdate);
+            viewCtrl.update(audio.paused, audio.duration, audio.currentTime);
+        };
+    }
+
+    function getTimeUpdate(viewCtrl) {
+        return function(e) {
+            viewCtrl.update(this.paused, this.duration, this.currentTime);
+        };
+    }
+
+    function getPlayerCtrl(audio) {
+        var viewCtrl = viewControl.getViewCtrl({}),
+            linkedView = volViews.getLinkedMediaView(audio),
+            timeUpdate = getTimeUpdate(viewCtrl);
+
+        var playerCtrl = Object.create(viewCtrl, {
+            play: {
+                value: getPlay(audio, linkedView, timeUpdate, viewCtrl)
+            },
+            pause: {
+                value: getPause(audio, linkedView, timeUpdate, viewCtrl)
+            }
+        });
+        return playerCtrl;
+    }
+
+
+
+
+
+
+
+    var playerViewProto = {
+        update: function(isPaused, duration, currentTime) {
+            // console.log('updating', isPaused, duration, currentTime);
+            if (!this.isEnabled) return;
+
+            duration = getDuration(duration, currentTime);
+
+            var remaining = parseInt((duration - currentTime), 10) || 0,
+                currentPercent = (currentTime * (100 / duration)) || 0;
+
+            if (isPaused) {
+                this.$controls.removeClass('active');
+            } else {
+                this.$controls.addClass('active');
+            }
+
+            if (currentPercent !== void 0 && remaining !== void 0) {
+                this.$progress.css('width', currentPercent + '%');
+                this.$timeLeft.html(secondsToMinutes(remaining));
+            }
+
+        },
+        enable: function() {
+            this.isEnabled = true;
+            this.$controls.show();
+            this.$view.on('click', '.controls', this.toggleViewState);
+        },
+        disable: function() {
+            this.isEnabled = false;
+            this.$controls.hide();
+            this.$view.off('click', '.controls', this.toggleViewState);
+        }
+    };
+
+
+    function getDuration(duration, currentTime) {
+        return (duration === Infinity || isNaN(duration)) ?
+            ((currentTime === Infinity || isNaN(currentTime)) ?
+                fallbackDuration : currentTime) :
+            duration || 0;
+    }
+
+    function secondsToMinutes(seconds, sep) {
+        sep = sep || ':';
+        var mins = Math.floor(seconds / 60),
+            remainder = seconds % 60;
+
+        if (remainder < 10)
+            remainder = '0' + remainder;
+
+        return mins + sep + remainder;
+    }
+
+    function getToggleViewState(ctrl) {
+        return function toggleViewState(e) {
+            // console.log('toggling', !$(this).hasClass('active'));
+            if (!$(this).hasClass('active')) {
+                ctrl.play();
+            } else {
+                ctrl.pause();
+            }
+        };
+    }
+
+    function getPlayerView(element, ctrl) {
+        var $view = $(element),
+            $progress = $view.find('.progressed'),
+            $timeLeft = $view.find('.time-left span'),
+            $controls = $view.find('.controls'),
+            playerView;
+
+        playerView = Object.create(playerViewProto);
+        playerView.isEnabled = false;
+        playerView.$view = $view;
+        playerView.$progress = $progress;
+        playerView.$timeLeft = $timeLeft;
+        playerView.$controls = $controls;
+        playerView.toggleViewState = getToggleViewState(ctrl);
+        // console.log(playerView);
+        return playerView;
+
+    }
+
+    exports.audioPlayer = {
+        getPlayerCtrl: getPlayerCtrl,
+        getPlayerView: getPlayerView
+    };
+
+}(Pathways.components.core, Pathways.core.view, Pathways.media.vol, Pathways.media.vol.views, Pathways.utils, jQuery));

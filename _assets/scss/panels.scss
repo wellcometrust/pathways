@@ -1885,13 +1885,13 @@
         .info-box {
             position:   absolute;
             bottom:     80px;
-            left:       6%
+            left:       6%;
         }
     }
 
     .touch {
         #quackery {
-            
+
         }
     }
 
@@ -1904,6 +1904,7 @@
         }
     }
 }
+
 
 #obscene-publications-act {
     .bg-container {
@@ -2259,14 +2260,20 @@
 
 .no-touch {
     #letters {
-        
+
     }
 }
 
 @media screen and (min-width: 48em) {
     #letters {
-           
+        .info-box {
+            position:   absolute;
+            top:        80px;
+            right:      100px;
+        }
     }
+
+
 
     .touch {
         #letters {

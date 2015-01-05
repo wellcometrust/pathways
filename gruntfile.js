@@ -45,15 +45,23 @@ module.exports = function(grunt) {
 
                     '_assets/js/pathways/system/index.js', // Pathways Core files.
                     '_assets/js/pathways/utils/index.js', // Pathways Core files.
+                    '_assets/js/pathways/core/index.js', // Pathways Core files.
+                    '_assets/js/pathways/core/*.js', // Pathways Core files.
                     '_assets/js/pathways/cookies/index.js', // Pathways Core files.
 
                     '_assets/js/pathways/media/index.js', // Pathways Core files.
                     '_assets/js/pathways/media/model.js', // Pathways Core files.
+
+                    '_assets/js/pathways/media/vol/index.js', // Pathways Core files.
+                    '_assets/js/pathways/media/vol/views/index.js', // Pathways Core files.
+                    '_assets/js/pathways/media/vol/views/*.js', // Pathways Core files.
+
                     '_assets/js/pathways/media/mixer/index.js', // Pathways Core files.
 
                     '_assets/js/pathways/media/channels/index.js', // Pathways Core files.
                     '_assets/js/pathways/media/channels/track.js', // Pathways Core files.
                     '_assets/js/pathways/media/channels/ctrl.js', // Pathways Core files.
+
 
                     '_assets/js/pathways/media/ctrl.js', // Pathways Core files.
                     '_assets/js/pathways/media/view.js', // Pathways Core files.
@@ -63,6 +71,7 @@ module.exports = function(grunt) {
                     '_assets/js/pathways/main.js', // Pathways Core files.
 
                     '_assets/js/pathways.js', // The Pathways Main file.
+                    '_assets/js/core/image-loader.js', // Then the pattern core files
                     '_assets/js/core/*.js', // Then the pattern core files
                     '_assets/js/patterns/*.js', // Then the patterns
                     '_assets/js/infographics/*.js', // Then any infographics

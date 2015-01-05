@@ -2,7 +2,7 @@ var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
 Pathways.components.core = Pathways.components.core || {};
 
-(function(w, exports, utils, $) {
+(function(exports, w, utils, $) {
 
     function OverlayCtrl(onInitCallback, onCloseCallback) {
 
@@ -69,4 +69,4 @@ Pathways.components.core = Pathways.components.core || {};
         }
     };
 
-}(window, Pathways.components.core, Pathways.utils, jQuery));
+}(Pathways.components.core, window, Pathways.utils, jQuery));

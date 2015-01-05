@@ -2,7 +2,7 @@ console.log('include media/mixer/index');
 /***
  *   Media audio mixer
  */
-(function(exports, w, model, $){
+(function(exports, w, vol, $){
 
     function fadeOut(media, delay, callback) {
         delay = delay || 1000;
@@ -28,7 +28,7 @@ console.log('include media/mixer/index');
         if (media && (typeof media !== 'undefined')) {
             $(media).stop(false, true);
             media.volume = 0;
-            media.muted = model.getIsMuted();
+            media.muted = vol.isMuted();
             media.play();
             $(media).animate({
                 volume: 1
@@ -67,4 +67,4 @@ console.log('include media/mixer/index');
     };
 
 
-}(Pathways.media, window, Pathways.media.model, jQuery));
+}(Pathways.media, window, Pathways.media.vol, jQuery));

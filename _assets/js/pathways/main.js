@@ -10,7 +10,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 /***
     Pathways main
 */
-(function(exports, w, _, sys, utils, media, video, $, undefined) {
+(function(exports, w, _, sys, utils, media, vol, video, $, undefined) {
 
     'use strict';
 
@@ -279,8 +279,10 @@ Pathways.MIN_SCROLL_LEVEL = 4;
                 sceneController = onScrollLoad();
 
                 media.model.init(panels);
-                media.ctrl.init(media.model);
-                media.view.init();
+                media.ctrl.init();
+
+
+                vol.enable();
                 media.ctrl.playMediaOnGlobalChannel(media.model.globalAudio());
 
                 scenesLoaded = true;
@@ -292,7 +294,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
                 onScrollUnload();
 
                 media.ctrl.disable();
-                media.view.hide();
+                vol.disable();
 
                 scenesLoaded = false;
             }
@@ -316,11 +318,19 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
         $(function() {
             console.log('doc ready');
+
+            vol.setStateFromCookies();
+
+            vol.addView(vol.views.getMuteButtonView('.mute'));
+            vol.addView(vol.views.getGlobalView('video, audio'));
+
             onLoadComplete();
             resizeCheck();
             loadCheck(onScrollLoad, onScrollUnload);
 
             video.init(panels);
+
+
         });
     }
 
@@ -332,4 +342,4 @@ Pathways.MIN_SCROLL_LEVEL = 4;
     utils.getHeightWithOffset = getHeightWithOffset;
     utils.getWidthWithOffset = getWidthWithOffset;
 
-}(Pathways, this, _, Pathways.system, Pathways.utils, Pathways.media, Pathways.video, jQuery));
+}(Pathways, this, _, Pathways.system, Pathways.utils, Pathways.media, Pathways.media.vol, Pathways.video, jQuery));

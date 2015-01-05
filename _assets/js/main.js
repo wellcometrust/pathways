@@ -293,6 +293,7 @@
                 $bg = $this.find('.bg-container'),
                 $library_panel = $('[data-panel="' + panelID + '"]').first(),
                 $gallery = $this.find('[data-component="gallery"]'),
+                $letterGallery = $this.find('[data-component="letter-gallery"]'),
                 $quiz = $this.find('[data-component="quiz"]'),
                 $panelAudio = $this.find('[data-audio="panel"]'),
                 $panelVideo = $this.find('[data-video="panel"]'),
@@ -375,6 +376,35 @@
                         });
                         setTimeout(function() {
                             $gallery.removeClass('active');
+                        }, 50);
+                    });
+            }
+
+            // Letter Galleries
+            if ($letterGallery.length) {
+                var lg_offset = getValueFromConfig($letterGallery.attr('data-config'), 'offset_height') || 0;
+                scenes[idx++] = new Ss({
+                        triggerElement: $this,
+                        triggerHook: 'top',
+                        duration: getComponentDuration(lg_offset),
+                        offset: lg_offset
+                    })
+                    .on('enter', function() {
+                        $letterGallery.css({
+                            position: 'fixed',
+                            display: 'block'
+                        });
+                        setTimeout(function() {
+                            $letterGallery.addClass('active');
+                        }, 50);
+                    })
+                    .on('leave', function() {
+                        $letterGallery.css({
+                            position: 'absolute',
+                            display: 'none'
+                        });
+                        setTimeout(function() {
+                            $letterGallery.removeClass('active');
                         }, 50);
                     });
             }

@@ -7,7 +7,7 @@ console.log('include media/channels/index');
         return media.src || media.currentSrc;
     }
 
-    function setState(media, config) {
+    function setMediaState(media, config) {
         if (!(media && config)) return;
         var initTime = config.initTime;
 
@@ -72,7 +72,7 @@ console.log('include media/channels/index');
 
             console.log('>> playing:', getSrc(media));
 
-            setState(media, config);
+            setMediaState(media, config);
             mixer.fadeIn(media, 1000);
 
             this.channel.setState(this.channel.getState('activePlaying'));
@@ -99,7 +99,7 @@ console.log('include media/channels/index');
 
             console.log('>> crossfading:', getSrc(currentMedia), getSrc(media));
             mixer.crossfade(currentMedia, media, 1000, function() {
-                setState(currentMedia, currentConfig);
+                setMediaState(currentMedia, currentConfig);
             });
 
             this.channel.currentMedia = media;
@@ -112,7 +112,7 @@ console.log('include media/channels/index');
 
             console.log('>> stopping:', getSrc(media));
             mixer.fadeOut(media, 1000, function() {
-                setState(media, config);
+                setMediaState(media, config);
             });
 
             this.channel.currentMedia = null;

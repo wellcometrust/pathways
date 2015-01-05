@@ -31,14 +31,20 @@
         position:           absolute;
         right:              0;
         top:                2px;
-        background:         url('/_assets/img/icons/play-white.svg') 0 0 no-repeat;
+        background:         url('/_assets/img/icons/icon-cross-circle-black.svg') 0 0 no-repeat;
         background-size:    100%;
         width:              32px;
         height:             32px;
 
         &.active {
-            background:         url('/_assets/img/icons/pause-white.svg') 0 0 no-repeat;
+            background:         url('/_assets/img/icons/icon-arrow-right-circle-black.svg') 0 0 no-repeat;
             background-size:    100%;
         }
     }
+}
+
+.audio-player-gallery {
+    position: absolute;
+    top:0; right:0;
+    z-index:10;
 }

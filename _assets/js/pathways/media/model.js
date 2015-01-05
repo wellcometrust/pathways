@@ -2,9 +2,7 @@ console.log('include media/model');
 (function(exports, $) {
 
     var globalAudio,
-        panelTracks,
-        isMuted = false;
-
+        panelTracks;
 
     function initPanelAudio(panels, selector) {
 
@@ -33,12 +31,6 @@ console.log('include media/model');
 
     exports.model = {
         init: init,
-        getIsMuted: function() {
-            return isMuted;
-        },
-        setMuted: function(value) {
-            isMuted = value;
-        },
         globalAudio: function() {
             return globalAudio;
         },

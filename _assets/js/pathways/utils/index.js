@@ -56,11 +56,20 @@ console.log('include utils/index');
         });
     }
 
+    function removeItemFromArray(item, array) {
+        var i = array.indexOf(item);
+        if (i != -1) {
+            array.splice(i, 1);
+        }
+    }
+
+
     exports.utils = {
         toCamelCase: toCamelCase,
         toTitleCase: toTitleCase,
         positionCenter: positionCenter,
-        extend: extend
+        extend: extend,
+        removeItemFromArray: removeItemFromArray
     };
 
 }(Pathways, Pathways.system, jQuery));
