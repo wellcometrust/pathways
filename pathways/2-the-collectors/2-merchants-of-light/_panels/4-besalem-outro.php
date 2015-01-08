@@ -2,7 +2,7 @@
 <div id="bensalem-outro" class="panel" data-config='{ "offset_height": 150, "background": "none" }'>
 
     <div class="bg-container"></div>
-    
+
     <div class="main-content center">
 
         <div class="inner">
@@ -10,5 +10,7 @@
         </div>
 
     </div>
+
+    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/02-bensalem-outro.mp3" loop data-audio="panel"></audio>
 
 </div>

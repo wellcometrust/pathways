@@ -1,0 +1,51 @@
+.carousel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    overflow: hidden;
+    width: 100%;
+    @include transform( translate3d(0, 0, 0) scale3d(1, 1, 1));
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    z-index: 50;
+
+    ul {
+        overflow: hidden;
+        @include transform( translate3d(0%, 0, 0) scale3d(1, 1, 1));
+        -webkit-transform-style: preserve-3d;
+        -webkit-backface-visibility: hidden;
+        &.animate {
+            @include transition( all 0.3s);
+        }
+    }
+    li {
+        position: relative;
+        float: left;
+        overflow: hidden;
+        height: 100%;
+        @include transform( translate3d(0, 0, 0));
+        -webkit-transform-style: preserve-3d;
+        @include transition( opacity 0.3s);
+    }
+    .prev {
+        position: absolute;
+        top: 0;
+        width: 46px;
+        background: url(/_assets/img/icons/icon-arrow-left-circle-white-black-bg.svg) 50% 50% no-repeat;
+        background-size: 95%;
+        &.disabled {
+            opacity: 0.2;
+        }
+    }
+    .next {
+        position: absolute;
+        top: 0;
+        width: 46px;
+        background: url(/_assets/img/icons/icon-arrow-right-circle-white-black-bg.svg) 50% 50% no-repeat;
+        background-size: 95%;
+        &.disabled {
+            opacity: 0.2;
+        }
+    }
+}

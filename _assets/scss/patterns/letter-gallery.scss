@@ -1,0 +1,113 @@
+.carousel-letter-gallery {
+    .letter-pane {
+        position: relative;
+        padding: 15px;
+    }
+    .letter-images {
+        float: left;
+        max-width: 40%;
+        position: relative;
+        border-right: 3px solid rgba(92, 184, 178, 1);
+        div {
+            @include transition( opacity 0.5s);
+        }
+        .highlight-image {
+            position: absolute;
+            top: 0;
+        }
+        img {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+    .highlight-hidden {
+        opacity: 0;
+    }
+    .highlight-active {
+        opacity: 1;
+    }
+    .set-highlight {
+        cursor: pointer;
+        background: url('/_assets/img/icons/icon-white-black-text.svg') 0 0 no-repeat;
+        background-size: 100%;
+        width: 32px;
+        height: 32px;
+        float: left;
+        top: 2px;
+        left: 5px;
+        position: relative;
+        opacity: 0.5;
+    }
+    .unset-highlight {
+        opacity: 1;
+    }
+    .letter-info {
+        float: left;
+        margin-left: -3px;
+        border-left: 3px solid rgba(92, 184, 178, 1);
+        max-width: 60%;
+        padding: 10px 15px;
+    }
+    .letter-text {
+        @include transition( color 0.5s);
+        float: left;
+        clear: left;
+        color: #ddd;
+        padding-bottom: 30px;
+        .audio-transcript {
+            @include transition( color 0.5s);
+            color: #ddd;
+        }
+        em {
+            font-style: normal;
+            text-decoration: underline;
+        }
+        p {
+            text-indent: 2em;
+        }
+        p.no-indent {
+            text-indent: 0;
+        }
+        .short-letter {
+            float: left;
+            width: 50%;
+            line-height: 2;
+        }
+        .medium-letter {
+            float: left;
+            width: 75%;
+            line-height: 1.5;
+        }
+        .long-letter {
+            float: left;
+            width: 100%;
+            line-height: 1.25;
+        }
+        .page-numbers {
+            position: absolute;
+            bottom: 20px;
+            color: #ccc;
+            font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+            font-weight: normal;
+            font-style: normal;
+            font-size: 0.75rem;
+            height: 18px;
+        }
+    }
+    .letter-text-highlight-active {
+        color: #aaa;
+        .audio-transcript {
+            color: #fff;
+        }
+    }
+}
+.audio-player-gallery {
+    float: left;
+    width: 200px;
+    margin-bottom: 30px;
+}
+.close-carousel-letter-gallery {
+    top: 20px;
+    right: 20px;
+}

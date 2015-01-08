@@ -9,324 +9,283 @@ console.log('include carousel');
 
     var doc = w.document;
 
-    function Carousel($element, data, getPaneView) {
+    function getCarouselCtrl($element, data, _paneCtrlFactory) {
 
         if (typeof data === 'undefined') return console.warn('No Carousel data provided');
-        getPaneView = getPaneView || getDefaultPaneView;
-
-        var self = this,
-            $prev = null,
-            $next = null,
-
-            $container = null,
-            $panes = null,
 
 
+        var navCtrl = null,
+            containerCtrl = null,
+            paneCtrl = null,
 
-            paneDataList = data.panes || data.images,
-            location = data.location,
+            paneCtrlFactory = _paneCtrlFactory,
 
+            currentIndex = 0;
 
-            widths = [],
-            ratios = [],
+        var ob = Object.create(getEventListener());
 
-            averagePaneWidth = 0,
-            paneCount = 0,
-            currentIndex = 0,
-            totalOffset = (w.innerWidth / 2),
-            totalWidth = 0;
+        function setPaneCtrlIndices(index, doAnimate) {
+            containerCtrl.setPaneIndex(index, doAnimate);
+            paneCtrl.setPaneIndex(index);
+            navCtrl.setPaneIndex(index);
+        }
 
+        ob.init = function init() {
+            containerCtrl = getContainerCtrl($element, this);
+            containerCtrl.create();
 
-        this.init = function() {
+            navCtrl = getNavigationCtrl($element, this);
 
-            createContainer();
+            paneCtrl = getPanesCtrl(containerCtrl.getElement(), this, data, paneCtrlFactory, function() {
+                // console.log('first loaded');
+                navCtrl.create();
+                ob.setPaneIndex(ob.getCurrentIndex(), false);
+            });
+            paneCtrl.create();
 
-            var imageLoader = imgLoader.getImageLoader(location);
-
-            createPanes(paneDataList, imageLoader);
-
-            $(w).on("load resize orientationchange", function() {
-                updateViewDimensions();
-                self.showPane(currentIndex, false);
+            $(w).on("resize orientationchange", function() {
+                ob.resize();
+                ob.reset(false);
             });
         };
-
-        function createContainer() {
-            $container = $('<ul/>');
-            $container.height(w.innerHeight);
-
-            $element.append($container);
-        }
-
-        function createNavigation() {
-            $prev = $('<div/>');
-            $next = $('<div/>');
-
-            $prev.addClass('prev disabled');
-            $next.addClass('next');
-
-            $prev.css({
-                'left': 0,
-                'height': w.innerHeight + 'px',
-            });
-
-            $next.css({
-                'right': 0,
-                'height': w.innerHeight + 'px',
-            });
-
-            $element.append($prev);
-            $element.append($next);
-
-            new Hamr($prev[0]).on("tap", function() {
-                self.prev();
-            });
-
-            new Hamr($next[0]).on("tap", function() {
-                self.next();
-            });
-        }
-
-        function createPanes(paneDataList, imageLoader) {
-            imageLoader.loadImages(paneDataList, onImageLoad);
-        }
-
-
-
-        function onImageLoad(img, data) {
-            $container.append(getPaneView(img, data));
-
-            addRatio(img);
-
-            $panes = $container.find('li');
-            paneCount = $panes.length;
-            if (paneCount === 1) { //TODO: more robust check for first image load
-                createNavigation();
-                $container.css('transform', 'translate(' + (totalOffset - (widths[0] / 2)) + 'px,0)');
-            }
-
-            updateViewDimensions();
-            self.showPane(currentIndex, false);
-        }
-
-        function getDefaultPaneView(img, data) {
-            var $li = $('<li/>'),
-                $img = $(img);
-
-            $li.append($img);
-
-            return $li;
-        }
-
-        function addRatio(img) {
-            // store the ratio for resize recalculations
-            ratios.push(img.naturalHeight / img.naturalWidth);
-        }
-
-
-
-        function updateViewDimensions() {
-
-            updatePaneDimensions();
-            // Set the container and navigation links to the height of the screen.
-            updateContainerDimension(totalWidth, w.innerHeight);
-
-            updateNavigationDimensions(w.innerHeight);
-        }
-
-
-        /**
-         * set the pane dimensions and scale the container
-         */
-        function updatePaneDimensions() {
-            var windowHeight = w.innerHeight,
-                windowWidth = w.innerWidth;
-
-            widths = [];
-            totalWidth = 0;
-
-            for (var i = 0; i < $panes.length; i++) {
-                var newWidth = parseInt((windowHeight / ratios[i]), 10),
-                    $pane = $($panes[i]);
-
-                if (newWidth >= windowWidth) {
-                    newWidth = windowWidth;
-                    $pane.addClass('full-width');
-                } else {
-                    $pane.addClass('full-height');
-                }
-
-                $pane.width(newWidth);
-
-                widths.push(newWidth);
-
-                totalWidth += newWidth;
-            }
-
-
-            totalOffset = (windowWidth / 2);
-
-            averagePaneWidth = parseInt((totalWidth / $panes.length), 10);
-        }
-
-        function updateContainerDimension(width, height) {
-            $container.width(width);
-            $container.height(height);
-        }
-
-        function updateNavigationDimensions(height) {
-            $prev.height(height);
-            $next.height(height);
-        }
-
-
-
-
-        function updateViewState(index, doAnimate) {
-            updatePaneState(index);
-            updateContainerOffset(index, doAnimate);
-            updateNavigationState(index);
-        }
-
-        function updatePaneState(index) {
-            $panes.css('opacity', 0.4);
-            $panes.get(index).style['opacity'] = 1;
-        }
-
-        /*
-         * Move the whole list of panels by x. Animation optional.
-         */
-        function updateContainerOffset(index, animate) {
-            var x = 0;
-
-            for (var i = 0; i < index; i++) {
-                x -= widths[i];
-            }
-
-            x += (totalOffset - (widths[index] / 2));
-
-            $container.removeClass("animate");
-
-            if (animate) {
-                $container.addClass("animate");
-            }
-
-            if (Mod.csstransforms3d)
-                $container.css("transform", "translate3d(" + x + "px,0,0)");
-            else
-                $container.css("transform", "translate(" + x + "px,0)");
-        }
-
-
-        function updateNavigationState(index) {
-            if (index > 0)
-                $prev.removeClass('disabled');
-            else {
-                $prev.addClass('disabled');
-            }
-
-            if (index >= (paneCount - 1))
-                $next.addClass('disabled');
-            else {
-                $next.removeClass('disabled');
-            }
-        }
-
-
-        function getNavigationView($element, ctrl) {
-            var $prev, $next;
-
-            return {
-                create: function createNavigation() {
-                    $prev = $('<div/>');
-                    $next = $('<div/>');
-
-                    $prev.addClass('prev disabled');
-                    $next.addClass('next');
-
-                    $prev.css({
-                        'left': 0,
-                        'height': w.innerHeight + 'px',
-                    });
-
-                    $next.css({
-                        'right': 0,
-                        'height': w.innerHeight + 'px',
-                    });
-
-                    $element.append($prev);
-                    $element.append($next);
-
-                    new Hamr($prev[0]).on("tap", function() {
-                        ctrl.prev();
-                    });
-
-                    new Hamr($next[0]).on("tap", function() {
-                        ctrl.next();
-                    });
-                },
-                update: function updateNavigationState(index) {
-                    if (index > 0)
-                        $prev.removeClass('disabled');
-                    else {
-                        $prev.addClass('disabled');
-                    }
-
-                    if (index >= (paneCount - 1))
-                        $next.addClass('disabled');
-                    else {
-                        $next.removeClass('disabled');
-                    }
-                },
-                updateDimensions: function updateNavigationDimensions(height) {
-                    $prev.height(height);
-                    $next.height(height);
-                }
-            };
-        }
-
-
-        /**
-         * show pane by index
-         */
-        this.showPane = function(index, doAnimate) {
+        ob.setPaneIndex = function setPaneIndex(index, doAnimate) {
             var count = 0;
 
             // between the bounds
-            index = Math.max(0, Math.min(index, paneCount - 1));
+            index = Math.max(0, Math.min(index, paneCtrl.getPaneCount() - 1));
+            setPaneCtrlIndices(index, doAnimate);
+
             currentIndex = index;
-
-            updateViewState(currentIndex, doAnimate);
-
+            this.emit('setPaneIndex', index, doAnimate);
         };
-        this.next = function() {
-            return this.showPane(currentIndex + 1, true);
+        ob.updateCtrls = function updateCtrls(doAnimate) {
+            setPaneCtrlIndices(currentIndex, doAnimate);
         };
-        this.prev = function() {
-            return this.showPane(currentIndex - 1, true);
+        ob.resize = function resize() {
+            paneCtrl.resize();
+            containerCtrl.resize(paneCtrl.getTotalWidth(), w.innerHeight);
+            navCtrl.resize(w.innerHeight);
+        };
+        ob.next = function next() {
+            return this.setPaneIndex(currentIndex + 1, true);
+        };
+        ob.prev = function prev() {
+            return this.setPaneIndex(currentIndex - 1, true);
+        };
+        ob.getCurrentIndex = function getCurrentIndex() {
+            return currentIndex;
+        };
+        ob.setFactory = function setFactory(factory) {
+            paneCtrlFactory = factory;
         };
 
+        ob.setOffset = function setOffset(x, animate) {
+            containerCtrl.updateOffset(x, animate);
+        };
+
+        ob.getOffsetAtIndex = function getOffsetAtIndex(index) {
+            return paneCtrl.getPanesOffsetAtIndex(index);
+        };
+        ob.getPaneCount = function getPaneCount() {
+            return paneCtrl.getPaneCount();
+        };
+        ob.getAveragePaneWidth = function getAveragePaneWidth() {
+            return paneCtrl.getAveragePaneWidth();
+        };
+        ob.reset = function reset(doAnim){
+            doAnim = (typeof doAnim === 'boolean') ? doAnim : true;
+            containerCtrl.updateOffset(paneCtrl.getPanesOffsetAtIndex(currentIndex), doAnim);
+        };
+
+        return ob;
+
+    }
+
+    function getPanesCtrl($container, ctrl, data, paneCtrlFactory, onFirst) {
+        var $panes = null,
+            paneDataList = data.panes || data.images,
+            location = data.location,
+
+            panes = [],
+            paneCount = 0,
+            totalOffset = (w.innerWidth / 2),
+            totalWidth = 0;
+
+        function addPane($pane) {
+            $container.append($pane);
+        }
+
+        return {
+            create: function() {
+
+                panes = paneDataList.map(function(paneData, index) {
+                    var pane = paneCtrlFactory(paneData, index, function onReady(pane) {
+                        if (typeof onFirst === 'function') onFirst.call();
+                        onFirst = null;
+                        ctrl.resize();
+                    }).create();
+
+                    addPane(pane.getPane());
+                    return pane;
+                });
+
+
+                paneCount = panes.length;
+            },
+            setPaneIndex: function(index) {
+                panes.forEach(function(pane) {
+                    pane.setIndex(index);
+                });
+            },
+            resize: function(height) {
+
+                panes.forEach(function(pane) {
+                    pane.resize();
+                });
+
+                totalWidth = panes.map(function(pane) {
+                    return pane.getWidth();
+                }).reduce(function(last, curr){
+                    return last + curr;
+                });
+
+                var windowWidth = w.innerWidth;
+
+                totalOffset = (windowWidth / 2);
+            },
+
+
+            getPaneCount: function() {
+                return paneCount;
+            },
+
+            getAveragePaneWidth: function() {
+                return parseInt((totalWidth / paneCount), 10);
+            },
+            getTotalWidth: function() {
+                return totalWidth;
+            },
+            getPanesOffsetAtIndex: function(index) {
+                var offset = 0;
+                for (var i = 0; i < index; i++) {
+                    offset -= panes[i].getWidth();
+                }
+                offset += (totalOffset - (panes[index].getWidth() / 2));
+                return offset;
+            }
+        };
+    }
+
+    function getContainerCtrl($element, ctrl) {
+        var $container;
+
+        return {
+            create: function() {
+                $container = $('<ul/>');
+                $container.height(w.innerHeight);
+
+                $element.append($container);
+            },
+            setPaneIndex: function(index, animate) {
+                this.updateOffset(ctrl.getOffsetAtIndex(index), animate);
+            },
+            updateOffset: function(x, animate) {
+                $container.removeClass("animate");
+
+                if (animate) {
+                    $container.addClass("animate");
+                }
+
+                if (Mod.csstransforms3d)
+                    $container.css("transform", "translate3d(" + x + "px,0,0)");
+                else
+                    $container.css("transform", "translate(" + x + "px,0)");
+            },
+            resize: function(width, height) {
+                $container.width(width);
+                $container.height(height);
+            },
+            getElement: function() {
+                return $container;
+            }
+        };
+    }
+
+
+    function getNavigationCtrl($element, ctrl) {
+        var $prev, $next;
+
+        return {
+            create: function create() {
+                $prev = $('<div/>');
+                $next = $('<div/>');
+
+                $prev.addClass('prev disabled');
+                $next.addClass('next');
+
+                $prev.css({
+                    'left': 0,
+                    'height': w.innerHeight + 'px',
+                });
+
+                $next.css({
+                    'right': 0,
+                    'height': w.innerHeight + 'px',
+                });
+
+                $element.append($prev);
+                $element.append($next);
+
+                new Hamr($prev[0]).on("tap", function() {
+                    // console.log('hammr prev');
+                    ctrl.prev();
+                });
+
+                new Hamr($next[0]).on("tap", function() {
+                    // console.log('hammr next');
+                    ctrl.next();
+                });
+            },
+            setPaneIndex: function setPaneIndex(index) {
+                if (index > 0)
+                    $prev.removeClass('disabled');
+                else {
+                    $prev.addClass('disabled');
+                }
+
+                if (index >= (ctrl.getPaneCount() - 1))
+                    $next.addClass('disabled');
+                else {
+                    $next.removeClass('disabled');
+                }
+            },
+            resize: function resize(height) {
+                $prev.height(height);
+                $next.height(height);
+            }
+        };
+    }
 
 
 
+
+    function initHammer(ctrl, $element) {
 
 
         function handleHammer(ev) {
             // disable browser scrolling
+            // console.log('hamr', ev.type);
             ev.gesture.preventDefault();
+
+            var currentIndex = ctrl.getCurrentIndex(),
+                paneCount = ctrl.getPaneCount(),
+                averagePaneWidth = ctrl.getAveragePaneWidth();
 
             switch (ev.type) {
                 case 'dragright':
                 case 'dragleft':
                     // stick to the finger
-                    var pane_offset = 0,
-                        count = 0;
-
-                    for (var i = 0; i < currentIndex; i++) {
-                        pane_offset -= widths[i];
-                    }
-
-                    pane_offset += (totalOffset - (widths[currentIndex] / 2));
+                    var x = ctrl.getOffsetAtIndex(currentIndex);
 
                     var drag_offset = ((100 / 440) * ev.gesture.deltaX) / paneCount;
 
@@ -336,16 +295,16 @@ console.log('include carousel');
                         drag_offset *= 0.4;
                     }
 
-                    updateContainerOffset(ev.gesture.deltaX + pane_offset);
+                    ctrl.setOffset(ev.gesture.deltaX + x);
                     break;
 
                 case 'swipeleft':
-                    self.next();
+                    ctrl.next();
                     ev.gesture.stopDetect();
                     break;
 
                 case 'swiperight':
-                    self.prev();
+                    ctrl.prev();
                     ev.gesture.stopDetect();
                     break;
 
@@ -353,12 +312,12 @@ console.log('include carousel');
                     // more then 30% moved, navigate
                     if (Math.abs(ev.gesture.deltaX) > ((averagePaneWidth / 10) * 3)) {
                         if (ev.gesture.direction == 'right') {
-                            self.prev();
+                            ctrl.prev();
                         } else {
-                            self.next();
+                            ctrl.next();
                         }
                     } else {
-                        self.showPane(currentIndex, true);
+                        ctrl.reset();
                     }
                     break;
             }
@@ -367,18 +326,19 @@ console.log('include carousel');
         new Hamr($element[0], {
             drag_lock_to_axis: true
         }).on("release dragleft dragright swipeleft swiperight", handleHammer);
-
     }
 
     exports.carousel = {
-        Carousel: Carousel,
-        getCarousel: function(element, data, getPaneView) {
+        //Carousel: Carousel,
+        getCarousel: function(element, data, paneCtrlFactory) {
 
-            var eve = getEventListener();
-            eve.addListener('update', function(index){ console.log('index', index); });
-            eve.emit('update', 3);
+            var ctrl = getCarouselCtrl(element, data, paneCtrlFactory);
 
-            return new Carousel(element, data, getPaneView);
+            initHammer(ctrl, element);
+
+            return ctrl;
+
+            // return new Carousel(element, data, getPaneCtrl);
         }
     };
 

@@ -11,31 +11,31 @@ console.log('include media/vol/index');
 
         for (i = 0; i < len; ++i) {
             listener = listeners[i];
-            listener.apply(null, args);
+            if (typeof listener === 'function') listener.apply(null, args);
         }
     }
 
     function getCtrlOb(listeners) {
         return {
-            enable: function enable() {
-                callEach(listeners, 'enable', _splice.call(arguments, 0));
-            },
-            addListener: function addListener(eName, listener) {
+            on: function addListener(eName, listener) {
+                if (!listeners) return console.warn('EventListener must be instantiated first');
                 listeners[eName] = listeners[eName] || [];
                 var eListeners = listeners[eName];
                 eListeners.push(listener);
-
                 return listener;
             },
-            removeListener: function removeListener(eName, listener) {
+            off: function removeListener(eName, listener) {
                 utils.removeItemFromArray(listener, listeners[eName]);
             },
             emit: function() {
                 var args = _splice.call(arguments, 0);
-                var eName = args[0];
+                var eName = args[0],
+                eListeners = listeners[eName];
+                if (!eListeners) return;
+
                 args = _splice.call(args, 1);
 
-                callEach(listeners[eName], args);
+                callEach(eListeners, args);
             }
         };
     }

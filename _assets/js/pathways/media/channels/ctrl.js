@@ -70,18 +70,14 @@ console.log('include media/channels/ctrl');
     }
 
     function resetChannels() {
-        var config = {
-            exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.component, CHANNEL_IDS.fx]
-        };
+        var channelIDs =[CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.component, CHANNEL_IDS.fx];
         // console.log('channel resetChannels');
         function setChannelAc(channelID) {
             // console.log('setting channel active', channelID);
             var channel = getChannelById(channelID);
             channel.resume();
         }
-        if (config.exclude && config.exclude.length > 0) {
-            config.exclude.forEach(setChannelAc);
-        }
+        channelIDs.forEach(setChannelAc);
     }
 
     function setChannelsInactive(config) {
@@ -102,6 +98,7 @@ console.log('include media/channels/ctrl');
         var channel = getChannelById(channelID);
 
         var excludeConfig = (config && config.exclude) ? config : channel.config;
+        config = config || channel.config;
 
         setChannelsInactive(excludeConfig);
         channel.play(media, config);

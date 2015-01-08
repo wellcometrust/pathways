@@ -203,4 +203,6 @@
 
     </div>
 
+    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-john-tradescant.mp3" loop data-audio="panel"></audio>
+
 </div>

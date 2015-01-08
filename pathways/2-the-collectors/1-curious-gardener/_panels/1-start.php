@@ -20,4 +20,6 @@
 
     </div>
 
+    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-tradescants-ark.mp3" loop data-audio="global"></audio>
+
 </div>

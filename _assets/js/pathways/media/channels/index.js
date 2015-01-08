@@ -1,6 +1,6 @@
 console.log('include media/channels/index');
 
-(function(exports, mixer, utils, $){
+(function(exports, mixer, utils, $) {
 
     function getSrc(media) {
         if (!media) return 'no media';
@@ -9,11 +9,11 @@ console.log('include media/channels/index');
 
     function setMediaState(media, config) {
         if (!(media && config)) return;
-        var initTime = config.initTime;
+        var initTime = +config.initTime;
+        if (isNaN(initTime)) return;
+        console.log('setting initTime', initTime, media.readyState);
+        if (media.readyState !== 0) media.currentTime = initTime;
 
-        if (initTime) {
-            if (media.readyState !== 0) media.currentTime = initTime;
-        }
     }
 
     function ChannelDefaultState(channel) {
@@ -175,7 +175,7 @@ console.log('include media/channels/index');
 
 
     exports.channels = {
-        Channel:Channel,
+        Channel: Channel,
         getChannel: getChannel = function(id, config) {
             return new Channel(id, config);
         }
@@ -183,5 +183,3 @@ console.log('include media/channels/index');
 
 
 }(Pathways.media, Pathways.media.mixer, Pathways.utils, jQuery));
-
-

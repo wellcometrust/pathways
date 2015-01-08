@@ -4,7 +4,7 @@
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
-    
+
     <div class="content">
         <p class="scene-set">Burroughs Wellcome &amp; Co. Offices, Snow Hill, 1888</p>
 
@@ -17,7 +17,10 @@
             <span class="scroll-down--text">Scroll down</span>
             <span class="scroll-down--arrow"></span>
         </p>
-        
+
     </div>
+
+    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/04-wellcome-collection.mp3" loop data-audio="global"></audio>
+
 
 </div>

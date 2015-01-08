@@ -1,50 +1,39 @@
-
 .audio-player {
-    position:       relative;
-    padding-right:  40px;
-
+    position: relative;
+    padding-right: 40px;
     .time-left {
-        display:    block;
-        color:      #fff;
-        @include    tablet-gothic;
-        font-size:  0.75rem;
+        display: block;
+        color: #fff;
+        @include tablet-gothic;
+        font-size: 0.75rem;
         text-transform: uppercase;
-        height:     18px;
+        height: 18px;
     }
-
     .progress-bar {
-        position:           relative;
-        background-color:   rgba(255,255,255,0.4);
-        width:              100%;
-        height:             2px;
+        position: relative;
+        background-color: rgba(255, 255, 255, 0.4);
+        width: 100%;
+        height: 2px;
     }
-
     .progressed {
-        position:           absolute;
-        top:                0;
-        left:               0;
-        background-color:   #fff;
-        height:             2px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        height: 2px;
     }
-
     .controls {
-        position:           absolute;
-        right:              0;
-        top:                2px;
-        background:         url('/_assets/img/icons/icon-cross-circle-black.svg') 0 0 no-repeat;
-        background-size:    100%;
-        width:              32px;
-        height:             32px;
-
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        top: 2px;
+        background: url('/_assets/img/icons/icon-white-black-play.svg') 0 0 no-repeat;
+        background-size: 100%;
+        width: 32px;
+        height: 32px;
         &.active {
-            background:         url('/_assets/img/icons/icon-arrow-right-circle-black.svg') 0 0 no-repeat;
-            background-size:    100%;
+            background: url('/_assets/img/icons/icon-white-black-pause.svg') 0 0 no-repeat;
+            background-size: 100%;
         }
     }
-}
-
-.audio-player-gallery {
-    position: absolute;
-    top:0; right:0;
-    z-index:10;
 }

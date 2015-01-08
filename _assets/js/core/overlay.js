@@ -2,9 +2,9 @@ var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
 Pathways.components.core = Pathways.components.core || {};
 
-(function(exports, w, utils, $) {
+(function(exports, w, getEventListener, utils, $) {
 
-    function OverlayCtrl(onInitCallback, onCloseCallback) {
+    function getOverlayCtrl() {
 
         var rootSel = 'body',
             activeClass = 'modal-open',
@@ -21,10 +21,10 @@ Pathways.components.core = Pathways.components.core || {};
             return $el;
         }
 
-        function getCloseHandler($el, onCloseCb) {
+        function getCloseHandler($el, ctrl) {
             return function() {
                 $root.removeClass(activeClass);
-                if (typeof onCloseCb !== 'undefined') onCloseCb();
+                ctrl.emit('close');
                 w.setTimeout(function() {
                     $el.remove();
                 }, 1000); // give css transition time
@@ -39,34 +39,45 @@ Pathways.components.core = Pathways.components.core || {};
             };
         }
 
-        function init($el, onInitHandler, onClickHandler) {
+        function init($el, ctrl, onClickHandler) {
             $el.on('click', onClickHandler);
 
             w.setTimeout(function() {
                 // prevent scrolling
                 $root.addClass(activeClass);
-                if (typeof onInitHandler !== 'undefined') onInitHandler();
 
+                ctrl.emit('init');
             }, 50); // delay before adding class to ensure transition event will fire
         }
 
-        this.$close = $(closeTmpl);
-        this.$overlay = create(overlayTmpl, $root, this.$close);
-        this.closeHandler = getCloseHandler(this.$overlay, onCloseCallback);
-        var clickHandler = getClickHandler(this.$overlay, this.$close, this.closeHandler);
 
-        init(this.$overlay, onInitCallback, clickHandler);
 
+        var ctrl = Object.create(getEventListener());
+        ctrl.$close = $(closeTmpl);
+        ctrl.$overlay = create(overlayTmpl, $root, ctrl.$close);
+        ctrl.closeHandler = getCloseHandler(ctrl.$overlay, ctrl);
+
+        var clickHandler = getClickHandler(ctrl.$overlay, ctrl.$close, ctrl.closeHandler);
+
+        init(ctrl.$overlay, ctrl, clickHandler);
+
+        return ctrl;
     }
 
     exports.overlay = {
-        OverlayCtrl: OverlayCtrl,
+        // OverlayCtrl: OverlayCtrl,
         getOverlay: function(onInitHandler, onClickHandler) {
-            return new OverlayCtrl(onInitHandler, onClickHandler).$overlay;
+            var overlay = getOverlayCtrl();
+            overlay.on('close', onClickHandler);
+            overlay.on('init', onInitHandler);
+            return overlay.$overlay;
         },
         getCtrl: function(onInitHandler, onClickHandler) {
-            return new OverlayCtrl(onInitHandler, onClickHandler);
+            var overlay = getOverlayCtrl();
+            overlay.on('close', onClickHandler);
+            overlay.on('init', onInitHandler);
+            return overlay;
         }
     };
 
-}(Pathways.components.core, window, Pathways.utils, jQuery));
+}(Pathways.components.core, window, Pathways.core.events.getEventListener, Pathways.utils, jQuery));

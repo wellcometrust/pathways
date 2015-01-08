@@ -31,4 +31,7 @@
         </div>
     </div>
 
+
+    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-obscene-publications-act.mp3" loop data-audio="panel"></audio>
+
 </div>

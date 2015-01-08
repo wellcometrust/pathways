@@ -281,6 +281,7 @@
         // Panels & Components
 
         $('[data-component="gallery"]').hide();
+        $('[data-component="letter-gallery"]').hide();
         $('[data-component="quiz"]').hide();
 
         var $panels = $('.sequence .panel'),
@@ -471,8 +472,8 @@
                     audio = $audio.get(0),
                     rawVideoConfig = $video.attr('data-config'),
                     rawAudioConfig = $audio.attr('data-config'),
-                    videoConfig = rawVideoConfig ? JSON.parse(rawVideoConfig) : {},
-                    audioConfig = rawAudioConfig ? JSON.parse(rawAudioConfig) : {};
+                    videoConfig = rawVideoConfig ? JSON.parse(rawVideoConfig) : null,
+                    audioConfig = rawAudioConfig ? JSON.parse(rawAudioConfig) : null;
 
                 scenes[idx++] = new Ss({
                         triggerElement: $this,

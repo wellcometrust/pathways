@@ -1,62 +1,188 @@
-
 console.log('include letter-gallery');
 
-(function(exports, w, overlay, getCarousel, audioPlayer, utils, $, _Hammer, Mod) {
+(function(exports, w, getOverlayCtrl, getCarousel, getImageLoader, audioPlayer, utils, $, _Hammer, Mod) {
 
-    function getAudioPlayerView() {
-        var $progress = $('<div class="progress-bar">')
-            .append('<div class="progressed">'),
+    function getAudioPlayerTemplate() {
+        var $tmpl = $('<div class="audio-player audio-player-gallery">' +
+            '<div class="time-left">Time: <span>0:00</span></div>' +
+            '<div class="progress-bar">' +
+            '<div class="progressed"></div>' +
+            '</div>' +
+            '<div class="controls"></div>' +
+            '</div>');
 
-            $timeLeft = $('<div>Time left <span>0:00</span></div>').addClass('time-left'),
-
-            $controls = $('<div class="controls"></div>'),
-
-            $player = $('<div>').addClass('audio-player audio-player-gallery')
-            .append($timeLeft)
-            .append($progress)
-            .append($controls);
-
-        return $player;
+        return $tmpl;
     }
 
-    function getPaneView(img, data) {
-        var $li = $('<li/>'),
-            $img = $(img);
+    function getTemplate() {
+        var $tmpl = $('<li><div class="letter-pane clearfix">' +
+            '<div class="letter-images">' +
+            '<div class="main-image"></div>' +
+            '<div class="highlight-image"></div>' +
+            '</div>' +
+            '<div class="letter-info">' +
+            '<div class="audio-player"></div>' +
+            '<div class="highlight-button"></div>' +
+            '<div class="letter-text"></div>' +
+            '</div>' +
+            '</div></li>');
 
-        $li.append($img);
+        return $tmpl;
+    }
 
-        var $player = getAudioPlayerView(),
-            audio = new Audio(data.audio);
+    function getPaneCtrlFac(carousel, overlay, imageLoader) {
+        var hiddenClass = 'highlight-hidden',
+            activeClass = 'highlight-active';
 
-        var playerCtrl = audioPlayer.getPlayerCtrl(audio),
-            playerView = audioPlayer.getPlayerView($player, playerCtrl);
+        function _paneCtrlFactory(data, index, onReady) {
 
-        playerCtrl.addView(playerView);
-        playerCtrl.enable();
+            var $pane,
+                ratio = 1,
+                width = w.innerWidth;
 
 
-        // add potential text
-        if (data.text) {
-            var $child = $('<div>' + data.text + '</div>').addClass('text');
-            $li.append($child);
+            function loadPlayer(src, $el) {
+                if (!src) return;
+
+                var $player = getAudioPlayerTemplate(),
+                    playerCtrl = audioPlayer.getAudioPlayer(src, $player);
+
+                carousel.on('setPaneIndex', function(newIndex) {
+                    // console.log('setPaneIndex playerCtrl', index, newIndex);
+                    if (index === newIndex) playerCtrl.enable();
+                    else {
+                        playerCtrl.disable();
+                    }
+                });
+
+                overlay.on('close', function() {
+                    console.log('close playerCtrl');
+                    playerCtrl.disable();
+                });
+
+                $el.replaceWith($player);
+
+            }
+
+            function initHighlightImgDiv(img, $el) {
+                $el.append($(img));
+                $el.addClass('highlight-hidden');
+            }
+
+            function initHighlightButton($btn, $text, $img) {
+                $btn.addClass('set-highlight');
+
+                $btn.click(function(e) {
+                    // console.log('highlight: ', $img);
+                    $btn.toggleClass('unset-highlight');
+
+                    if ($img.hasClass(activeClass)) {
+                        $img.removeClass(activeClass);
+                        $img.addClass('highlight-hidden');
+                        $text.removeClass('letter-text-highlight-active');
+                    } else {
+                        $img.removeClass('highlight-hidden');
+                        $img.addClass(activeClass);
+                        $text.addClass('letter-text-highlight-active');
+                    }
+                });
+
+            }
+
+            function loadComplete() {
+                // console.log('pane', index, 'load complete; ', typeof onReady);
+                if (typeof onReady === 'function') onReady.call(null, this);
+                onReady = null;
+                $pane.find('.letter-pane').show();
+            }
+
+            return {
+                create: function() {
+
+                    // console.log('create', index, data.audio);
+                    $tmpl = getTemplate();
+
+                    $pane = $tmpl;
+                    $pane.find('.letter-pane').hide();
+
+                    var $close = $('.overlay .close'),
+                        $txtdiv = $tmpl.find('.letter-text'),
+                        $mainimgdiv = $tmpl.find('.main-image'),
+                        $highlightimgdiv = $tmpl.find('.highlight-image'),
+                        $highlightbtndiv = $tmpl.find('.highlight-button'),
+                        $playerdiv = $tmpl.find('.audio-player'),
+                        highlightImgSrc,
+
+                        onMainImgLoaded = function(img) {
+                            $mainimgdiv.append($(img));
+                            if (data.audio) {
+                                highlightImgSrc = data.image + '-active';
+                                imageLoader.loadImage(highlightImgSrc, onHighlightImgLoaded);
+                            } else {
+                                loadComplete();
+                            }
+                        },
+                        onHighlightImgLoaded = function(img) {
+                            initHighlightImgDiv(img, $highlightimgdiv);
+                            initHighlightButton($highlightbtndiv, $txtdiv, $highlightimgdiv);
+                            loadComplete();
+                        };
+
+                    $txtdiv.load(data.textSrc);
+                    imageLoader.loadImage(data.image, onMainImgLoaded);
+
+                    loadPlayer(data.audio, $playerdiv);
+
+                    $close.addClass('close-carousel-letter-gallery');
+
+                    return this;
+                },
+                setIndex: function(newIndex) {
+                    // console.log('setIndex', index, newIndex);
+                    // if (newIndex === index) {
+                    //     $pane.css('display', 'block');
+                    // } else {
+                    //     $pane.css('opacity', 0.4);
+                    // }
+                    return this;
+                },
+                resize: function() {
+                    // console.log('resize', index);
+                    var newWidth = w.innerWidth;
+                    width = newWidth;
+                    $pane.width(newWidth);
+                    return this;
+                },
+                getPane: function() {
+                    return $pane;
+                },
+                getWidth: function() {
+                    return width;
+                }
+            };
+
         }
 
-        $li.append($player);
-
-        return $li;
+        return _paneCtrlFactory;
     }
 
     exports.letterGallery = function(element, data) {
         var $elem = $(element),
             $panel = $elem.closest('.panel'),
-            panelId = $panel.attr('id');
+            panelId = $panel.attr('id'),
+            location = data.location;
 
         $(element).on('click', function(e) {
 
-            var $overlay,
-                $div = $('<div class="carousel"></div>'),
-                $loading = $('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
-                carousel = getCarousel($div, data, getPaneView);
+            var overlay = getOverlayCtrl(),
+                $overlay = overlay.$overlay,
+                $div = $('<div class="carousel carousel-letter-gallery"></div>'),
+                $loading = $('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>'),
+                carousel = getCarousel($div, data),
+                imageLoader = getImageLoader(location),
+                paneCtrlFactory = getPaneCtrlFac(carousel, overlay, imageLoader);
+
+            carousel.setFactory(paneCtrlFactory);
 
             $loading.css({
                 position: 'absolute',
@@ -64,16 +190,17 @@ console.log('include letter-gallery');
                 left: ((w.innerWidth / 2) - 35)
             });
 
-            $overlay = overlay.getOverlay(function() {
+
+            $overlay.append($div);
+            $overlay.append($loading);
+
+            overlay.on('init', function() {
                 carousel.init();
             });
-
-            $overlay.append($loading);
-            $overlay.append($div);
 
         });
 
     };
 
 
-}(Pathways.components, window, Pathways.components.core.overlay, Pathways.components.core.carousel.getCarousel, Pathways.components.core.audioPlayer, Pathways.utils, jQuery, Hammer, Modernizr));
+}(Pathways.components, window, Pathways.components.core.overlay.getCtrl, Pathways.components.core.carousel.getCarousel, Pathways.components.core.imageLoader.getImageLoader, Pathways.components.core.audioPlayer, Pathways.utils, jQuery, Hammer, Modernizr));

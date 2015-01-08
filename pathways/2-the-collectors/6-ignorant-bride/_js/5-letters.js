@@ -1,17 +1,16 @@
-
 Pathways.scrollScenes.Letters = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#letters',
-            duration:       Pathways.panelHeight
+            duration: Pathways.panelHeight
         })
         .on('enter', function(e) {
-            if( _('#letters audio') ) {
+            if (_('#letters audio')) {
                 _('#letters audio').play();
             }
         })
         .on('leave', function() {
-            if( _('#letters audio') ) {
+            if (_('#letters audio')) {
                 _('#letters audio').pause();
             }
         });
@@ -23,32 +22,66 @@ Pathways.components.letterGallery.marieStopesLetters = {
     data: {
         location: 'galleries/marie-stopes-letters/',
         images: [{
+            image: '01-HorridVice-pp-01',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-01.html',
+        },{
+            image: '01-HorridVice-pp-02',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-02.html',
+        },{
+            image: '01-HorridVice-pp-03',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-03.html',
+         },{
+            image: '01-HorridVice-pp-04',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-04.html',
+        },{
+            image: '01-HorridVice-pp-05',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-05.html',
+        },{
+            image: '01-HorridVice-pp-06',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-06.html',
+        },{
+            image: '01-HorridVice-pp-07',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-07.html',
+        },{
             image: '01-HorridVice-pp-08-HIGHLIGHT',
-            text: 'Quacks and travelling medicine vendors were a common sight in the 17th and 18th century.',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-08-highlight.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/01-HorridVice-Extract.mp3',
         }, {
+            image: '02-HugeAppendage-Transcript-pp-01',
+            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-01.html'
+        }, {
+            image: '02-HugeAppendage-Transcript-pp-02',
+            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-02.html'
+        }, {
             image: '02-HugeAppendage-Transcript-pp-03-HIGHLIGHT',
-            text: 'They were selling snake oil but sometimes antidotes to snake poison, like this vendor.',
+            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-03-highlight.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/02-HugeAppendage-Extract.mp3',
         }, {
+            image: '02-HugeAppendage-Transcript-pp-04',
+            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-04.html'
+        },{
             image: '03-PositionsDuringPregnancy-pp-01-HIGHLIGHT',
-            text: 'Some of them were women: Anne Manning, a quack doctor, outside her cottage with Betty Upton.',
+            textSrc: '/_assets/text/marie-stopes-letters/03-letter-pp-01.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/03-PositionsDuringPregnancy-Extract.mp3',
         }, {
             image: '04-PleasureWithoutPregnancy-pp-01-HIGHLIGHT',
-            text: 'Doctor Kill’em-or-Cure’em irresponsibly dispensing his potions.',
+            textSrc: '/_assets/text/marie-stopes-letters/04-letter-pp-01-highlight.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/04-PleasureWithoutPregnancy-Extract.mp3',
         }, {
+            image: '04-PleasureWithoutPregnancy-pp-02-HIGHLIGHT',
+            textSrc: '/_assets/text/marie-stopes-letters/04-letter-pp-02-highlight.html',
+            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/04-PleasureWithoutPregnancy-Extract.mp3',
+        },{
             image: '05-LargeSexOrgans-pp-01-HIGHLIGHT',
-            text: 'A sailor with a bandaged eye consulting a quack doctor.',
+            textSrc: '/_assets/text/marie-stopes-letters/05-letter-pp-01.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/05-LargeSexOrgans-Extract.mp3',
         }, {
             image: '06-GoBackHome-pp-01-HIGHLIGHT',
-            text: 'Doctor Bossy selling his wares on stage with assistants at Covent Garden, London.',
+            textSrc: '/_assets/text/marie-stopes-letters/06-letter-pp-01.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/06-GoBackHome-Extract.mp3',
         }, {
             image: '07-FreeingTheCaptives-pp-01-HIGHLIGHT',
-            text: 'Doctor Botherum, perhaps based on Doctor Bossy, selling his goods to a raucous crowd.',
+            textSrc: '/_assets/text/marie-stopes-letters/07-letter-pp-01.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/07-FreeingTheCaptives.mp3',
         }]
     }

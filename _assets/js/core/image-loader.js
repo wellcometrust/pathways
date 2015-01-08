@@ -12,24 +12,28 @@ console.log('include image-loader');
 
             base = base || defaultBase;
             location = location || '';
+            var imageData,
+                imageSrc;
 
             function loadImages(images, callback) {
                 if (images.length) {
-                    loadImage(images[0], function(img, data) {
+                    imageData = images[0];
+                    imageSrc = imageData.image;
+                    loadImage(imageSrc, function(img, data) {
 
                         if (callback) callback.call(null, img, data);
 
                         images.shift();
 
                         loadImages(images, callback);
-                    });
+                    }, imageData);
                 }
             }
 
-            function loadImage(data, callback) {
+            function loadImage(src, callback, data) {
                 var img = new Image();
 
-                img.src = base + location + data.image + '.jpg';
+                img.src = base + location + src + '.jpg';
 
                 img.onload = function(e) {
 
