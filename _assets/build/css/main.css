@@ -42,12 +42,15 @@ body {
 h1 {
   font-family: "abril-display", Didot, 'Times New Roman', Times, serif;
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+  line-height: 1.1;
+  margin-bottom: 0.5em; }
 
 h2, h3, h4, h5, h6 {
   font-family: "abril-display", Didot, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: normal;
+  line-height: 1.1;
   margin-bottom: 1em; }
 
 a img {
@@ -747,8 +750,8 @@ iframe {
     margin: 0 0 15px -61px;
     line-height: 40px;
     cursor: default;
-    background: rgba(0, 0, 0, 0.8) url(/_assets/img/icons/icon-share-green.svg) 50% 50% no-repeat;
-    background-size: 20px;
+    background: rgba(0, 0, 0, 0.8) url(/_assets/img/icons/icon-green-info.svg) 50% 50% no-repeat;
+    background-size: 9px;
     z-index: 900; }
   .library-panel .body {
     color: #fff;
@@ -1098,15 +1101,22 @@ iframe {
     background-size: 95%; }
     .carousel .next.disabled {
       opacity: 0.2; }
-  .carousel .text {
-    position: absolute;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-    color: #fff;
-    border-left: 3px solid #5cb8b2;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 0.8rem 0.6rem; }
+
+.carousel-gallery .full-height img {
+  height: 100%; }
+.carousel-gallery .full-width img {
+  height: auto;
+  width: 100%;
+  margin: auto 0; }
+.carousel-gallery .text {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  color: #fff;
+  border-left: 3px solid #5cb8b2;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 0.8rem 0.6rem; }
 
 .audio-player {
   position: relative;
@@ -1132,15 +1142,16 @@ iframe {
     background-color: #fff;
     height: 2px; }
   .audio-player .controls {
+    cursor: pointer;
     position: absolute;
     right: 0;
     top: 2px;
-    background: url("/_assets/img/icons/play-white.svg") 0 0 no-repeat;
+    background: url("/_assets/img/icons/icon-white-black-play.svg") 0 0 no-repeat;
     background-size: 100%;
     width: 32px;
     height: 32px; }
     .audio-player .controls.active {
-      background: url("/_assets/img/icons/pause-white.svg") 0 0 no-repeat;
+      background: url("/_assets/img/icons/icon-white-black-pause.svg") 0 0 no-repeat;
       background-size: 100%; }
 
 .black-strip {
@@ -1154,7 +1165,7 @@ iframe {
     left: 0;
     width: 415px;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); } }
+    background-color: rgba(0, 0, 0, 0.7); } }
 .modal-open {
   overflow: hidden; }
 
@@ -1617,6 +1628,109 @@ iframe {
       margin-left: 7.5%; }
     .sliding-panels .sliding-panel:nth-of-type(2n+2) {
       margin-right: 7.5%; } }
+.carousel-letter-gallery .letter-pane {
+  position: relative;
+  padding: 15px; }
+.carousel-letter-gallery .letter-images {
+  float: left;
+  max-width: 40%;
+  position: relative;
+  border-right: 3px solid #5cb8b2; }
+  .carousel-letter-gallery .letter-images div {
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+    transition: opacity 0.5s; }
+  .carousel-letter-gallery .letter-images .highlight-image {
+    position: absolute;
+    top: 0; }
+  .carousel-letter-gallery .letter-images img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%; }
+.carousel-letter-gallery .highlight-hidden {
+  opacity: 0; }
+.carousel-letter-gallery .highlight-active {
+  opacity: 1; }
+.carousel-letter-gallery .set-highlight {
+  cursor: pointer;
+  background: url("/_assets/img/icons/icon-white-black-text.svg") 0 0 no-repeat;
+  background-size: 100%;
+  width: 32px;
+  height: 32px;
+  float: left;
+  top: 2px;
+  left: 5px;
+  position: relative;
+  opacity: 0.5; }
+.carousel-letter-gallery .unset-highlight {
+  opacity: 1; }
+.carousel-letter-gallery .letter-info {
+  float: left;
+  margin-left: -3px;
+  border-left: 3px solid #5cb8b2;
+  max-width: 60%;
+  padding: 10px 15px; }
+.carousel-letter-gallery .letter-text {
+  -webkit-transition: color 0.5s;
+  -moz-transition: color 0.5s;
+  -ms-transition: color 0.5s;
+  -o-transition: color 0.5s;
+  transition: color 0.5s;
+  float: left;
+  clear: left;
+  color: #ddd;
+  padding-bottom: 30px; }
+  .carousel-letter-gallery .letter-text .audio-transcript {
+    -webkit-transition: color 0.5s;
+    -moz-transition: color 0.5s;
+    -ms-transition: color 0.5s;
+    -o-transition: color 0.5s;
+    transition: color 0.5s;
+    color: #ddd; }
+  .carousel-letter-gallery .letter-text em {
+    font-style: normal;
+    text-decoration: underline; }
+  .carousel-letter-gallery .letter-text p {
+    text-indent: 2em; }
+  .carousel-letter-gallery .letter-text p.no-indent {
+    text-indent: 0; }
+  .carousel-letter-gallery .letter-text .short-letter {
+    float: left;
+    width: 50%;
+    line-height: 2; }
+  .carousel-letter-gallery .letter-text .medium-letter {
+    float: left;
+    width: 75%;
+    line-height: 1.5; }
+  .carousel-letter-gallery .letter-text .long-letter {
+    float: left;
+    width: 100%;
+    line-height: 1.25; }
+  .carousel-letter-gallery .letter-text .page-numbers {
+    position: absolute;
+    bottom: 20px;
+    color: #ccc;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 0.75rem;
+    height: 18px; }
+.carousel-letter-gallery .letter-text-highlight-active {
+  color: #aaa; }
+  .carousel-letter-gallery .letter-text-highlight-active .audio-transcript {
+    color: #fff; }
+
+.audio-player-gallery {
+  float: left;
+  width: 200px;
+  margin-bottom: 30px; }
+
+.close-carousel-letter-gallery {
+  top: 20px;
+  right: 20px; }
+
 @-webkit-keyframes info-box-animation-inner {
   0% {
     -webkit-transform: scale(0.9); }
@@ -3178,6 +3292,9 @@ iframe {
   .infinite-canvas .text-panel[data-chapter="5"] {
     top: 3114px;
     left: 6093px; } }
+#stewart-conn .bg-container {
+  background-image: url(/pathways/2-the-collectors/_assets/4-unceasing-seeker/m4-unceasing-seeker-2.jpg); }
+
 .start-obscene-doctor .bg-container {
   background-image: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/m5-obscene-doctor-1.jpg); }
 
@@ -3356,6 +3473,11 @@ iframe {
 #letters .bg-container {
   background-image: url(/pathways/2-the-collectors/_assets/6-ignorant-bride/m6-ignorant-bride-4.jpg); }
 
+@media screen and (min-width: 48em) {
+  #letters .info-box {
+    position: absolute;
+    top: 80px;
+    right: 100px; } }
 .start-example .bg-container {
   background-image: url(/_assets/img/spacer.png); }
 

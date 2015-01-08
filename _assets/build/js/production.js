@@ -215,19 +215,15 @@ p.nominalBounds = new cjs.Rectangle(0,0,86.5,377.3);
 
 })(animations.magnetisedTrees.lib, animations.magnetisedTrees.images, createjs);
 
-function _(str) {
-    return document.querySelector(str);
-}
-
-var Pathways = {};
-Pathways.MIN_COMPONENT_LEVEL = 2;
-Pathways.MIN_SCROLL_LEVEL = 4;
+console.log('include /index');
+Pathways = Pathways || {};
 
 
 /***
  *   System capabilities
  */
-(function(w, exports, $, undefined) {
+console.log('include system/index');
+(function(exports, w, $, undefined) {
 
     var capabilities = {
         aspectRatio: 1900 / 1050,
@@ -293,15 +289,188 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
     exports.system = capabilities;
 
-}(window, Pathways, jQuery));
+}(Pathways, window, jQuery));
 
+/***
+ *   Pathways utils
+ */
+console.log('include utils/index');
+(function(exports, sys, $, undefined) {
+
+    function toCamelCase(str) {
+        str = str || '';
+        return str.toLowerCase().replace(/-(.)/g, function(match, group1) {
+            return group1.toUpperCase();
+        });
+    }
+
+    function toTitleCase(str) {
+        str = str || '';
+        str = str.replace(/-/g, ' ').replace(/_/g, ' ');
+        str = str.replace(/\w\S*/g, function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1);
+        });
+        return str.replace(/\W/g, '');
+    }
+
+    function positionCenter($elm) {
+        var width = $elm.width(),
+            height = $elm.height(),
+
+            top = (sys.innerHeight / 2) - (height / 2),
+            left = (sys.innerWidth / 2) - (width / 2);
+
+        $elm.css({
+            position: 'absolute',
+            top: top,
+            left: left
+        });
+    }
+
+    function extend(base, sub) {
+        // Avoid instantiating the base class just to setup inheritance
+        // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+        // for a polyfill
+        // Also, do a recursive merge of two prototypes, so we don't overwrite
+        // the existing prototype, but still maintain the inheritance chain
+        // Thanks to @ccnokes
+        var origProto = sub.prototype;
+        sub.prototype = Object.create(base.prototype);
+        for (var key in origProto) {
+            sub.prototype[key] = origProto[key];
+        }
+        // Remember the constructor property was set wrong, let's fix it
+        sub.prototype.constructor = sub;
+        // In ECMAScript5+ (all modern browsers), you can make the constructor property
+        // non-enumerable if you define it like this instead
+        Object.defineProperty(sub.prototype, 'constructor', {
+            enumerable: false,
+            value: sub
+        });
+    }
+
+    function removeItemFromArray(item, array) {
+        var i = array.indexOf(item);
+        if (i != -1) {
+            array.splice(i, 1);
+        }
+    }
+
+
+    exports.utils = {
+        toCamelCase: toCamelCase,
+        toTitleCase: toTitleCase,
+        positionCenter: positionCenter,
+        extend: extend,
+        removeItemFromArray: removeItemFromArray
+    };
+
+}(Pathways, Pathways.system, jQuery));
+
+Pathways.core = {};
+
+console.log('include media/vol/index');
+(function(exports, utils, jQuery) {
+
+    exports.events = exports.events || {};
+    var _splice = Array.prototype.splice;
+
+    function callEach(listeners, args) {
+
+        var len = listeners.length,
+            i, listener;
+
+        for (i = 0; i < len; ++i) {
+            listener = listeners[i];
+            if (typeof listener === 'function') listener.apply(null, args);
+        }
+    }
+
+    function getCtrlOb(listeners) {
+        return {
+            on: function addListener(eName, listener) {
+                if (!listeners) return console.warn('EventListener must be instantiated first');
+                listeners[eName] = listeners[eName] || [];
+                var eListeners = listeners[eName];
+                eListeners.push(listener);
+                return listener;
+            },
+            off: function removeListener(eName, listener) {
+                utils.removeItemFromArray(listener, listeners[eName]);
+            },
+            emit: function() {
+                var args = _splice.call(arguments, 0);
+                var eName = args[0],
+                eListeners = listeners[eName];
+                if (!eListeners) return;
+
+                args = _splice.call(args, 1);
+
+                callEach(eListeners, args);
+            }
+        };
+    }
+
+    exports.events.getEventListener = function(model) {
+        return getCtrlOb([]);
+    };
+
+}(Pathways.core, Pathways.utils, jQuery));
+
+console.log('include viewCtrl');
+(function(exports, utils, jQuery) {
+
+    exports.view = exports.view || {};
+    var _splice = Array.prototype.splice;
+
+    function callEach(views, method, args) {
+
+        var len = views.length,
+            i, view;
+
+        for (i = 0; i < len; ++i) {
+            view = views[i];
+            if (view[method]) view[method].apply(view, args);
+        }
+    }
+
+    function getCtrlOb(views) {
+        return {
+            update: function update() {
+                callEach(views, 'update', _splice.call(arguments, 0));
+            },
+            disable : function disable() {
+                callEach(views, 'disable', _splice.call(arguments, 0));
+            },
+            enable: function enable() {
+                callEach(views, 'enable', _splice.call(arguments, 0));
+            },
+            addView: function addView(view) {
+                if (view.update) {
+                    views.push(view);
+                } else {
+                    console.warn('[Pathways CtrlWithViews] view must have update method');
+                }
+                return view;
+            },
+            removeView: function removeView(view) {
+                utils.removeItemFromArray(view, views);
+            }
+        };
+    }
+
+    exports.view.getViewCtrl = function(model) {
+        return getCtrlOb([]);
+    };
+
+}(Pathways.core, Pathways.utils, jQuery));
 
 /****
  *
  * Cookie manager
  */
-
-(function(w, exports, cookies) {
+console.log('include cookies/index');
+(function(exports, cookies) {
 
     var expiry = Infinity,
         path = '/',
@@ -314,7 +483,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         };
 
     function getCookieDef(id) {
-        if (!cookieDefs[id]) console.warn('Pathways Cookie Manager -- no cookie definition found for \''+id+'\'');
+        if (!cookieDefs[id]) console.warn('Pathways Cookie Manager -- no cookie definition found for \'' + id + '\'');
         return cookieDefs[id];
     }
 
@@ -349,115 +518,15 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         setCookieFromBool: setCookieFromBool
     };
 
-}(window, Pathways, docCookies));
+}(Pathways, docCookies));
 
-/***
- *   Audio: mixer
- */
-Pathways.audio = {};
-(function(w, exports, $, cookies) {
+console.log('include media/index');
 
-    var model,
-        isMuted;
-
-    function init(_model) {
-        model = _model;
-        mute(cookies.getCookieOrDefaultValBool('mute'));
-    }
-
-    function mute(doMute) {
-
-        if (doMute === isMuted) return;
-
-        isMuted = doMute;
-
-        $('video, audio').each(function() {
-            this.muted = isMuted;
-        });
-
-        cookies.setCookieFromBool('mute', doMute);
-    }
-
-    function disable() {
-        $('video, audio').each(function() {
-            this.muted = true;
-        });
-    }
-
-    function getIsMuted() {
-        return isMuted;
-    }
-
-    function crossfade(fromAudio, toAudio, callback) {
-        var delay = 1000;
-        var onlyFrom = (fromAudio && !toAudio);
-
-        if (fromAudio === toAudio) {
-            if (callback) w.setTimeout(callback, delay);
-            return;
-        }
-
-        if (fromAudio && (typeof fromAudio !== 'undefined')) {
-            $(fromAudio).stop(false, true);
-            $(fromAudio).animate({
-                volume: 0
-            }, {
-                duration: delay,
-                complete: function() {
-                    this.pause();
-                    if (onlyFrom && callback) {
-                        callback();
-                        callback = null;
-                    }
-                }
-            });
-        }
-
-        // fade in
-        if (toAudio && (typeof toAudio !== 'undefined')) {
-            $(toAudio).stop(false, true);
-            toAudio.volume = 0;
-            toAudio.muted = isMuted;
-            toAudio.play();
-            $(toAudio).animate({
-                volume: 1
-            }, {
-                duration: delay,
-                complete: function() {
-                    if (!onlyFrom && callback) {
-                        callback();
-                        callback = null;
-                    }
-                }
-            });
-        }
-    }
-
-    function loadPanelAudio(panelAudio) {
-        crossfade(model.globalAudio(), panelAudio);
-    }
-
-    function unloadPanelAudio(panelAudio) {
-        crossfade(panelAudio, model.globalAudio());
-    }
-
-    exports.mixer = {
-        init: init,
-        crossfade: crossfade,
-        mute: mute,
-        disable: disable,
-        isMuted: getIsMuted,
-        loadPanelAudio: loadPanelAudio,
-        unloadPanelAudio: unloadPanelAudio
-    };
-
-}(window, Pathways.audio, jQuery, Pathways.cookieManager));
+Pathways.media = {};
 
 
-/***
- *   Audio: model
- */
-(function(w, exports, mixer, $) {
+console.log('include media/model');
+(function(exports, $) {
 
     var globalAudio,
         panelTracks;
@@ -479,12 +548,6 @@ Pathways.audio = {};
 
     function initGlobalAudio(selector) {
         var audio = $(selector).get(0);
-        if (audio) {
-            //console.log()
-            //audio.muted = mixer.isMuted();
-            mixer.crossfade(null, audio);
-        }
-
         return audio;
     }
 
@@ -503,83 +566,670 @@ Pathways.audio = {};
         }
     };
 
-}(window, Pathways.audio, Pathways.audio.mixer, jQuery));
+}(Pathways.media, jQuery));
 
+console.log('include media/vol/index');
+(function(exports, view, cookies, utils, $) {
+
+    var model = {
+            isMuted: false,
+            currentVol: 1
+        },
+        viewCtrl = view.getViewCtrl(model);
+
+    exports.vol = Object.create(viewCtrl, {
+
+        setStateFromCookies: {
+            value: function setStateFromCookies() {
+                this.mute(cookies.getCookieOrDefaultValBool('mute'));
+            }
+        },
+        mute: {
+            value: function mute(doMute) {
+                if (doMute === model.isMuted) return;
+                model.isMuted = doMute;
+                this.update(doMute);
+            }
+        },
+        // disable: {
+        //     value: function disable() {
+        //         viewCtrl.disable();
+        //     }
+        // },
+        update: {
+            value: function update(doMute) {
+                viewCtrl.update(doMute);
+                cookies.setCookieFromBool('mute', doMute);
+            }
+        },
+        enable: {
+            value: function enable() {
+                viewCtrl.enable();
+                viewCtrl.update(model.isMuted);
+            }
+        },
+        isMuted: {
+            value: function isMuted() {
+                return model.isMuted;
+            }
+        }
+    });
+
+}(Pathways.media, Pathways.core.view, Pathways.cookieManager, Pathways.utils, jQuery));
+
+Pathways.media.vol.views = {};
+
+console.log('include media/vol/views/global');
 /***
- *   Audio: view
+ *   Audio: global vol view
  */
-(function(w, exports, mixer, $) {
+(function(exports, vol, $) {
 
-    var $muteButton;
+    function GlobalMuteView(globalMediaSelector) {
+        this.globalMediaSelector = globalMediaSelector;
+        this.isEnabled = false;
+    }
 
-    function create(muteSelector) {
+    GlobalMuteView.prototype = {
+        enable: function() {
+            this.isEnabled = true;
+            $(this.globalMediaSelector).each(function(e) {
+                this.pause();
+            });
+        },
+        update: function(isMuted) {
+            if (!this.isEnabled) return;
+            $(this.globalMediaSelector).each(function(e) {
+                this.muted = isMuted;
+            });
+        },
+        disable: function() {
+            this.isEnabled = false;
+            $(this.globalMediaSelector).each(function(e) {
+                this.pause();
+            });
+        }
+    };
+
+    exports.getGlobalView = function(globalMediaSelector) {
+        return new GlobalMuteView(globalMediaSelector);
+    };
+
+}(Pathways.media.vol.views, Pathways.media.vol, jQuery));
+
+console.log('include media/vol/views/mutebtn');
+/***
+ *   Audio: vol view
+ */
+(function(exports, vol, $) {
+
+    function getDomElement(muteSelector) {
         var $btn = $(muteSelector);
-        $btn.css('display', 'block');
-        $btn.off('click');
+        removeClickHandlers($btn);
+        return $btn;
+    }
+
+    function addClickHandler($btn, vol) {
         $btn.on('click', function(e) {
             // active == muted
             if ($(this).hasClass('active')) {
-                mixer.mute(false);
+                vol.mute(false);
             } else {
-                mixer.mute(true);
+                vol.mute(true);
             }
-
-            update();
 
             e.preventDefault();
             return false;
         });
-
-        return $btn;
     }
 
-    function init() {
-        $muteButton = create('.mute');
-        update();
+    function removeClickHandlers($btn) {
+        $btn.off('click');
     }
 
-    function update() {
-        if (mixer.isMuted()) {
-            $muteButton.addClass('active');
-        } else {
-            $muteButton.removeClass('active');
+    function MuteButtonView(muteSelector) {
+        this.isEnabled = false;
+        this.$btn = getDomElement(muteSelector);
+    }
+
+    MuteButtonView.prototype = {
+        enable: function() {
+            this.isEnabled = true;
+            addClickHandler(this.$btn, vol);
+            this.$btn.show();
+        },
+        disable: function() {
+            this.isEnabled = false;
+            removeClickHandlers(this.$btn);
+            this.$btn.hide();
+        },
+        update: function(isMuted) {
+            if (!this.isEnabled) return;
+            if (isMuted) {
+                this.$btn.addClass('active');
+            } else {
+                this.$btn.removeClass('active');
+            }
+        }
+    };
+
+    exports.MuteButtonView = MuteButtonView;
+    exports.getMuteButtonView = function (muteSelector) {
+        return new MuteButtonView(muteSelector);
+    };
+
+}(Pathways.media.vol.views, Pathways.media.vol, jQuery));
+
+console.log('include media/vol/views/unlinkedmedia');
+/***
+ *   Audio: vol view
+ */
+(function(exports, vol, utils, $) {
+
+    function LinkedMediaView(media) {
+        this.media = media;
+    }
+    LinkedMediaView.prototype = {
+        update: function(isMuted) {
+            this.media.muted = isMuted;
+        }
+    };
+
+    exports.LinkedMediaView = LinkedMediaView;
+    exports.getLinkedMediaView = function (src) {
+        return new LinkedMediaView(src);
+    };
+
+}(Pathways.media.vol.views, Pathways.media.vol, Pathways.utils, jQuery));
+
+console.log('include media/mixer/index');
+/***
+ *   Media audio mixer
+ */
+(function(exports, w, vol, $){
+
+    function fadeOut(media, delay, callback) {
+        delay = delay || 1000;
+        if (media && (typeof media !== 'undefined')) {
+            $(media).stop(false, true);
+            $(media).animate({
+                volume: 0
+            }, {
+                duration: delay,
+                complete: function() {
+                    this.pause();
+                    if (callback) {
+                        callback();
+                        callback = null;
+                    }
+                }
+            });
         }
     }
 
-    function hide() {
-        $muteButton.hide();
+    function fadeIn(media, delay, callback) {
+        delay = delay || 1000;
+        if (media && (typeof media !== 'undefined')) {
+            $(media).stop(false, true);
+            media.volume = 0;
+            media.muted = vol.isMuted();
+            media.play();
+            $(media).animate({
+                volume: 1
+            }, {
+                duration: delay,
+                complete: function() {
+                    if (callback) {
+                        callback();
+                        callback = null;
+                    }
+                }
+            });
+        }
     }
 
-    exports.view = {
-        init: init,
-        hide: hide,
-        update: update
+
+    function crossfade(fadeOutMedia, fadeInMedia, delay, fadeOutCompleteCallback, fadeInCompleteCallback) {
+        delay = delay || 1000;
+
+        if (fadeOutMedia === fadeInMedia) {
+            if (fadeOutCompleteCallback) w.setTimeout(fadeOutCompleteCallback, delay);
+            if (fadeInCompleteCallback) w.setTimeout(fadeInCompleteCallback, delay);
+            return;
+        }
+
+        fadeOut(fadeOutMedia, delay, fadeOutCompleteCallback);
+
+        fadeIn(fadeInMedia, delay, fadeInCompleteCallback);
+
+    }
+
+    exports.mixer = {
+        crossfade : crossfade,
+        fadeIn : fadeIn,
+        fadeOut : fadeOut
     };
 
-}(window, Pathways.audio, Pathways.audio.mixer, jQuery));
+
+}(Pathways.media, window, Pathways.media.vol, jQuery));
+
+console.log('include media/channels/index');
+
+(function(exports, mixer, utils, $) {
+
+    function getSrc(media) {
+        if (!media) return 'no media';
+        return media.src || media.currentSrc;
+    }
+
+    function setMediaState(media, config) {
+        if (!(media && config)) return;
+        var initTime = +config.initTime;
+        if (isNaN(initTime)) return;
+        console.log('setting initTime', initTime, media.readyState);
+        if (media.readyState !== 0) media.currentTime = initTime;
+
+    }
+
+    function ChannelDefaultState(channel) {
+        var self = this;
+        self.channel = channel;
+    }
+
+    ChannelDefaultState.prototype = {
+        play: function(media, config) {},
+        stop: function(config) {},
+        silence: function() {},
+        resume: function() {}
+    };
+
+
+    function ChannelInactiveStoppedState(channel) {
+        ChannelDefaultState.call(this, channel);
+    }
+
+    ChannelInactiveStoppedState.prototype = {
+        play: function(media, config) {
+            this.channel.setState(this.channel.getState('inactivePlaying'));
+        },
+        resume: function() {
+            this.channel.setState(this.channel.getState('activeStopped'));
+        }
+    };
+    utils.extend(ChannelDefaultState, ChannelInactiveStoppedState);
+
+
+    function ChannelInactivePlayingState(channel) {
+        ChannelDefaultState.call(this, channel);
+    }
+
+    ChannelInactivePlayingState.prototype = {
+        stop: function() {
+            this.channel.setState(this.channel.getState('inactiveStopped'));
+        },
+        resume: function() {
+            console.log('>> resuming:', getSrc(this.channel.currentMedia));
+            mixer.fadeIn(this.channel.currentMedia);
+            this.channel.setState(this.channel.getState('activePlaying'));
+        }
+    };
+    utils.extend(ChannelDefaultState, ChannelInactivePlayingState);
+
+
+    function ChannelActiveStoppedState(channel) {
+        ChannelDefaultState.call(this, channel);
+    }
+
+    ChannelActiveStoppedState.prototype = {
+        play: function(media, config) {
+            this.channel.currentMedia = media;
+            this.channel.currentConfig = config;
+
+            console.log('>> playing:', getSrc(media));
+
+            setMediaState(media, config);
+            mixer.fadeIn(media, 1000);
+
+            this.channel.setState(this.channel.getState('activePlaying'));
+        },
+        silence: function() {
+            this.channel.setState(this.channel.getState('inactiveStopped'));
+        }
+    };
+
+    utils.extend(ChannelDefaultState, ChannelActiveStoppedState);
 
 
 
 
+    function ChannelActivePlayingState(channel) {
+        ChannelDefaultState.call(this, channel);
+    }
+
+    ChannelActivePlayingState.prototype = {
+        play: function(media, config) {
+            var currentMedia = this.channel.currentMedia,
+                mediaNotTheSame = (currentMedia !== media),
+                currentConfig = this.channel.currentConfig;
+
+            console.log('>> crossfading:', getSrc(currentMedia), getSrc(media));
+            mixer.crossfade(currentMedia, media, 1000, function() {
+                setMediaState(currentMedia, currentConfig);
+            });
+
+            this.channel.currentMedia = media;
+
+        },
+        stop: function(config) {
+
+            var media = this.channel.currentMedia;
+            config = config || this.channel.currentConfig || {};
+
+            console.log('>> stopping:', getSrc(media));
+            mixer.fadeOut(media, 1000, function() {
+                setMediaState(media, config);
+            });
+
+            this.channel.currentMedia = null;
+            this.channel.currentConfig = null;
+
+            this.channel.setState(this.channel.getState('activeStopped'));
+        },
+        silence: function() {
+            console.log('>> silencing:', getSrc(this.channel.currentMedia));
+            mixer.fadeOut(this.channel.currentMedia);
+            this.channel.setState(this.channel.getState('inactivePlaying'));
+        }
+    };
+    utils.extend(ChannelDefaultState, ChannelActivePlayingState);
+
+
+
+    function Channel(id, config) {
+        var self = this;
+        self.id = id;
+        self.config = config || null;
+
+        self.addState('activeStopped', new ChannelActiveStoppedState(self));
+        self.addState('inactiveStopped', new ChannelInactiveStoppedState(self));
+        self.addState('activePlaying', new ChannelActivePlayingState(self));
+        self.addState('inactivePlaying', new ChannelInactivePlayingState(self));
+
+        self.setState(self.getState('activeStopped'));
+    }
+
+    Channel.prototype = {
+        addState: function(stateID, state) {
+            this.states = this.states || {};
+            this.states[stateID] = state;
+        },
+        setState: function(state) {
+            //console.log('setting state', state.constructor.name);
+            if (this.state === state) return;
+            this.state = state;
+        },
+        getState: function(stateID) {
+            return this.states[stateID];
+        },
+        silence: function() {
+            this.state.silence();
+        },
+        resume: function() {
+            this.state.resume();
+        },
+
+        play: function(media, config) {
+            console.debug('channel -', this.id, '- play', getSrc(media));
+            this.state.play(media, config);
+        },
+        stop: function(config) {
+            console.debug('channel -', this.id, '- stop', getSrc(this.currentMedia));
+            this.state.stop(config);
+        }
+    };
+
+
+    exports.channels = {
+        Channel: Channel,
+        getChannel: getChannel = function(id, config) {
+            return new Channel(id, config);
+        }
+    };
+
+
+}(Pathways.media, Pathways.media.mixer, Pathways.utils, jQuery));
+
+console.log('include media/channels/track');
+
+(function(exports) {
+
+    function Track(src, config) {
+        var self = this;
+        self.src = src;
+        self.config = config;
+    }
+
+    exports.track = {
+        Track: Track,
+        getTrack: function(src, config) {
+            return new Track(src, config);
+        }
+    };
+
+}(Pathways.media.channels));
+
+console.log('include media/channels/ctrl');
+(function(exports, getChannel) {
+
+    var CHANNEL_IDS = {
+            global: 'global',
+            video: 'video',
+            panel: 'panel',
+            component: 'component',
+            fx: 'fx',
+        },
+        modes = {
+            // basic: {
+            //     channels: {
+            //         global: getChannel(),
+            //         video: getChannel({ exclude: [CHANNEL_IDS.global]}),
+            //     }
+            // },
+            // component: {
+            //     channels: {
+            //         global: getChannel(),
+            //         video: getChannel({ exclude: [CHANNEL_IDS.global]}),
+            //         component : getChannel({ exclude: [CHANNEL_IDS.global, CHANNEL_IDS.video]}),
+            //     }
+            // },
+            scroll: {
+                channels: {
+                    global: getChannel(CHANNEL_IDS.global),
+                    video: getChannel(CHANNEL_IDS.video, {
+                        exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel]
+                    }),
+                    component: getChannel(CHANNEL_IDS.component, {
+                        exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.fx]
+                    }),
+                    panel: getChannel(CHANNEL_IDS.panel, {
+                        exclude: [CHANNEL_IDS.global]
+                    }),
+                    fx: getChannel(CHANNEL_IDS.fx)
+                }
+            }
+        },
+        mode;
+
+    function getMode() {
+        return {
+            channels: {
+                global: getChannel(CHANNEL_IDS.global),
+                video: getChannel(CHANNEL_IDS.video, {
+                    exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel]
+                }),
+                component: getChannel(CHANNEL_IDS.component, {
+                    exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.fx]
+                }),
+                panel: getChannel(CHANNEL_IDS.panel, {
+                    exclude: [CHANNEL_IDS.global]
+                }),
+                fx: getChannel(CHANNEL_IDS.fx)
+            }
+        };
+        //TODO: update for change in functionality level
+    }
+
+    function init() {
+        mode = getMode();
+    }
+
+    function getChannelById(channelID) {
+        var channel = mode.channels[channelID];
+        if (!channel) return console.warn('[Pathways Channel] [getChannelById] no channel found with id \'' + channelID + '\'');
+        return channel;
+    }
+
+    function resetChannels() {
+        var channelIDs =[CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.component, CHANNEL_IDS.fx];
+        // console.log('channel resetChannels');
+        function setChannelAc(channelID) {
+            // console.log('setting channel active', channelID);
+            var channel = getChannelById(channelID);
+            channel.resume();
+        }
+        channelIDs.forEach(setChannelAc);
+    }
+
+    function setChannelsInactive(config) {
+        if (!config || !config.exclude) return;
+        // console.log('channel setChannelsInactive', config.exclude);
+        function setChannelIn(channelID) {
+            // console.log('setting channel inactive', channelID);
+            var channel = getChannelById(channelID);
+            channel.silence();
+        }
+        if (config.exclude && config.exclude.length > 0) {
+            config.exclude.forEach(setChannelIn);
+        }
+    }
+
+    function playMediaWithChannel(media, channelID, config) {
+        if (!media) return;
+        var channel = getChannelById(channelID);
+
+        var excludeConfig = (config && config.exclude) ? config : channel.config;
+        config = config || channel.config;
+
+        setChannelsInactive(excludeConfig);
+        channel.play(media, config);
+    }
+
+    function stopChannel(channelID, config) {
+        var channel = getChannelById(channelID);
+        if (!channel.currentMedia) return;
+        channel.stop(config);
+        resetChannels();
+    }
+
+    function playMediaOnPanelChannel(media, config) {
+        playMediaWithChannel(media, CHANNEL_IDS.panel, config);
+    }
+
+    function stopPanelChannel(config) {
+        stopChannel(CHANNEL_IDS.panel, config);
+    }
+
+    function playMediaOnGlobalChannel(media, config) {
+        playMediaWithChannel(media, CHANNEL_IDS.global, config);
+    }
+
+    function stopGlobalChannel(config) {
+        stopChannel(CHANNEL_IDS.global, config);
+    }
+
+    function playMediaOnVideoChannel(media, config) {
+        playMediaWithChannel(media, CHANNEL_IDS.video, config);
+    }
+
+    function stopVideoChannel(config) {
+        stopChannel(CHANNEL_IDS.video, config);
+    }
+
+    exports.ctrl = {
+        init: init,
+        playMediaWithChannel: playMediaWithChannel,
+        stopChannel: stopChannel,
+        playMediaOnPanelChannel: playMediaOnPanelChannel,
+        stopPanelChannel: stopPanelChannel,
+        playMediaOnGlobalChannel: playMediaOnGlobalChannel,
+        stopGlobalChannel: stopGlobalChannel,
+        playMediaOnVideoChannel: playMediaOnVideoChannel,
+        stopVideoChannel: stopVideoChannel
+    };
+
+}(Pathways.media.channels, Pathways.media.channels.getChannel));
+
+console.log('include media/ctrl');
+(function(exports, model, vol, channelCtrl) {
+
+    function init() {
+
+        channelCtrl.init();
+
+    }
+
+
+    exports.ctrl = {
+
+        init: init,
+
+        playMediaWithChannel: channelCtrl.playMediaWithChannel,
+        stopChannel: channelCtrl.stopChannel,
+        playMediaOnPanelChannel: channelCtrl.playMediaOnPanelChannel,
+        stopPanelChannel: channelCtrl.stopPanelChannel,
+        playMediaOnGlobalChannel: channelCtrl.playMediaOnGlobalChannel,
+        stopGlobalChannel: channelCtrl.stopGlobalChannel,
+        playMediaOnVideoChannel: channelCtrl.playMediaOnVideoChannel,
+        stopVideoChannel: channelCtrl.stopVideoChannel,
+
+        disable: function() {
+            console.log('disabling media');
+        }
+
+    };
+
+}(Pathways.media, Pathways.media.model, Pathways.media.vol, Pathways.media.channels.ctrl, jQuery));
+
+ console.log('include media/view');
+/***
+ *   Audio: mute view
+ */
+(function(exports, ctrl, $) {
+
+
+
+}(Pathways.media, Pathways.media.ctrl, jQuery));
+
+console.log('include media/video/index');
 /***
     Video
 */
-(function(w, exports, sys, audio, $) {
+(function(exports, p, sys, vol, $) {
 
     var panelVideos;
+
+    function volumeChangeHandler (e) {
+        if (this.muted == vol.isMuted()) return;
+        vol.mute(this.muted);
+    }
+
+    function errorHandler (e) {
+        console.warn('Video loading error for ', (this.src || this.currentSrc));
+    }
 
     function initPanelVideo(panels, videoSelector) {
 
         var videos = [];
-
-        var volumeChangeHandler = function() {
-            if (this.muted == audio.mixer.isMuted()) return;
-            audio.mixer.mute(this.muted);
-            audio.view.update();
-        };
-        var errorHandler = function() {
-            console.warn('Video loading error for ', _video.src);
-        };
 
         for (var i = 0; i < panels.length; i++) {
             var _panel = panels[i].elem;
@@ -588,10 +1238,9 @@ Pathways.audio = {};
             if (_video) {
 
                 _video.addEventListener('volumechange', volumeChangeHandler);
-
                 _video.addEventListener('error', errorHandler);
 
-                if (sys.level >= exports.MIN_SCROLL_LEVEL) {
+                if (sys.level >= p.MIN_SCROLL_LEVEL) {
                     _video.setAttribute('preload', 'auto');
                 } else {
                     _video.setAttribute('preload', 'metadata');
@@ -624,62 +1273,31 @@ Pathways.audio = {};
     }
 
 
-    function getCrossFadeAudio(value, gAudio) {
-        var audio = null;
-        if (value || (typeof value == 'undefined')) {
-            audio = gAudio;
-        }
-        return audio;
-    }
-
-    function autoPlayVideoOnEnter(video, initTime, stopGlobalAudio) {
-        initTime = initTime || 0;
-        var fadeAudio = getCrossFadeAudio(stopGlobalAudio, audio.model.globalAudio());
-
-        if (video) {
-            if (video.readyState !== 0) video.currentTime = initTime;
-            audio.mixer.crossfade(fadeAudio, video);
-        }
-
-    }
-
-    function autoStopVideoOnLeave(video, initTime, restartGlobalAudio) {
-        initTime = initTime || 0;
-        var fadeAudio = getCrossFadeAudio(restartGlobalAudio, audio.model.globalAudio());
-
-        if (video) {
-
-            audio.mixer.crossfade(video, fadeAudio, function() {
-                if (video.readyState !== 0) video.currentTime = initTime;
-            });
-        }
-
-    }
-
-    function getPanelVideoElement(panelID) {
-        return _(panelID + ' video');
-    }
-
-
-
-
     function initVideo(panels) {
         panelVideos = initPanelVideo(panels, 'video');
         hideCaptions(panelVideos);
     }
 
     exports.video = {
-        init: initVideo,
-        autoPlayVideoOnEnter: autoPlayVideoOnEnter,
-        autoStopVideoOnLeave: autoStopVideoOnLeave
+        init: initVideo
     };
 
-}(window, Pathways, Pathways.system, Pathways.audio, jQuery));
+}(Pathways, Pathways, Pathways.system, Pathways.media.vol, jQuery));
+
+
+console.log('include main');
+
+function _(str) {
+    return document.querySelector(str);
+}
+
+Pathways.MIN_COMPONENT_LEVEL = 2;
+Pathways.MIN_SCROLL_LEVEL = 4;
 
 /***
     Pathways main
 */
-(function(w, _, mod, sys, audio, video, $, undefined) {
+(function(exports, w, _, sys, utils, media, vol, video, $, undefined) {
 
     'use strict';
 
@@ -698,55 +1316,23 @@ Pathways.audio = {};
         panelHeightDecreased = false;
 
 
-
-    mod.panelHeight = calcPanelHeight(minHeight);
-    mod.getPanelHeight = function() {
+    exports.panelHeight = calcPanelHeight(minHeight);
+    exports.getPanelHeight = function() {
         return this.panelHeight;
     };
 
 
 
-    function camelCase(str) {
-        str = str || '';
-        return str.toLowerCase().replace(/-(.)/g, function(match, group1) {
-            return group1.toUpperCase();
-        });
-    }
-
-    function toTitleCase(str) {
-        str = str || '';
-        str = str.replace(/-/g, ' ').replace(/_/g, ' ');
-        str = str.replace(/\w\S*/g, function(txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1);
-        });
-        return str.replace(/\W/g, '');
-    }
-
-    function positionCenter($elm) {
-        var width = $elm.width(),
-            height = $elm.height(),
-
-            top = (sys.innerHeight / 2) - (height / 2),
-            left = (sys.innerWidth / 2) - (width / 2);
-
-        $elm.css({
-            position: 'absolute',
-            top: top,
-            left: left
-        });
-    }
 
     function getHeightWithOffset(offset) {
         offset = offset || 0;
-        return mod.panelHeight - offset;
+        return exports.panelHeight - offset;
     }
 
     function getWidthWithOffset(offset) {
         offset = offset || 0;
         return w.innerWidth - offset;
     }
-
-
 
 
     function calcPanelHeight(oldHeight) {
@@ -815,8 +1401,8 @@ Pathways.audio = {};
 
             var $component = $(component),
                 handlerName = $component.attr('data-component'),
-                id = camelCase($component.attr('id')),
-                handlerClass = camelCase(handlerName),
+                id = utils.toCamelCase($component.attr('id')),
+                handlerClass = utils.toCamelCase(handlerName),
                 method = context[handlerClass],
                 data;
 
@@ -876,7 +1462,6 @@ Pathways.audio = {};
             //unSetElementHeight(_panel);
             //unSetElementHeight(_bg);
 
-
             if (isRatioPreserved(panels[i])) {
                 $(_panel).children().each(unsizePanel);
             }
@@ -905,15 +1490,15 @@ Pathways.audio = {};
     function resizePanelChild(index, child) {
         var newHeight = sys.innerWidth / sys.aspectRatio;
         setElementHeight(child, newHeight);
-        translatePanelElem(child, mod.panelHeight);
+        translatePanelElem(child, exports.panelHeight);
     }
 
     function resizePanels(startPanel, panels) {
 
-        if (startPanel) setElementHeight(startPanel, mod.panelHeight);
+        if (startPanel) setElementHeight(startPanel, exports.panelHeight);
 
         for (var i = 0; i < panels.length; i++) {
-            resizePanel(panels[i], mod.panelHeight);
+            resizePanel(panels[i], exports.panelHeight);
 
             if (isRatioPreserved(panels[i])) {
                 $(panels[i].elem).children().each(resizePanelChild);
@@ -945,70 +1530,71 @@ Pathways.audio = {};
         }
     }
 
-
     var panelsUnsized = false;
 
     function resizeCheck() {
-        if (sys.level < mod.MIN_COMPONENT_LEVEL) {
+        if (sys.level < exports.MIN_COMPONENT_LEVEL) {
             unsizePanels(panels);
             panelsUnsized = true;
-        } else if (sys.level >= mod.MIN_COMPONENT_LEVEL && sys.level < mod.MIN_SCROLL_LEVEL) {
+        } else if (sys.level >= exports.MIN_COMPONENT_LEVEL && sys.level < exports.MIN_SCROLL_LEVEL) {
             resizePanels(null, ratioedPanels);
             panelsUnsized = false;
-        } else if (sys.level >= mod.MIN_SCROLL_LEVEL) {
+        } else if (sys.level >= exports.MIN_SCROLL_LEVEL) {
             resizePanels(startPanel, panels);
             panelsUnsized = false;
         }
     }
 
     function loadCheck(onScrollLoad, onScrollUnload) {
-        mod.panelHeight = calcPanelHeight(mod.panelHeight);
+        exports.panelHeight = calcPanelHeight(exports.panelHeight);
 
         // If it's iPad width or larger, load the components
         if (!componentsLoaded) {
-            if (sys.level >= mod.MIN_COMPONENT_LEVEL) {
-                loadComponents(mod.components);
+            if (sys.level >= exports.MIN_COMPONENT_LEVEL) {
+                loadComponents(exports.components);
                 componentsLoaded = true;
             }
         } else {
-            if (sys.level < mod.MIN_COMPONENT_LEVEL) {
+            if (sys.level < exports.MIN_COMPONENT_LEVEL) {
                 // unload components
             }
         }
 
         if (!scenesLoaded) {
             // If it's a non-touch device, load the scenes.
-            if (sys.level >= mod.MIN_SCROLL_LEVEL) {
+            if (sys.level >= exports.MIN_SCROLL_LEVEL) {
                 sceneController = onScrollLoad();
 
-                audio.model.init(panels);
-                audio.mixer.init(audio.model);
-                audio.view.init();
+                media.model.init(panels);
+                media.ctrl.init();
 
+
+                vol.enable();
+                media.ctrl.playMediaOnGlobalChannel(media.model.globalAudio());
 
                 scenesLoaded = true;
             }
         } else {
-            if (sys.level < mod.MIN_SCROLL_LEVEL) {
+            if (sys.level < exports.MIN_SCROLL_LEVEL) {
                 sceneController.destroy(true);
                 removeScrollSceneStyling();
                 onScrollUnload();
 
-                audio.mixer.disable();
-                audio.view.hide();
+                media.ctrl.disable();
+                vol.disable();
 
                 scenesLoaded = false;
             }
         }
-
     }
+
+
 
     function init(onLoadComplete, onScrollLoad, onScrollUnload) {
 
         startPanel = $('.start').get(0);
         panels = initPanels('.panel');
         ratioedPanels = initRatioedPanels(panels);
-
         resizeCheck();
 
         w.addEventListener('resize', function() {
@@ -1017,31 +1603,639 @@ Pathways.audio = {};
         });
 
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
-        $(function(){
+        $(function() {
+            console.log('doc ready');
+
+            vol.setStateFromCookies();
+
+            vol.addView(vol.views.getMuteButtonView('.mute'));
+            vol.addView(vol.views.getGlobalView('video, audio'));
+
             onLoadComplete();
             resizeCheck();
             loadCheck(onScrollLoad, onScrollUnload);
 
             video.init(panels);
+
+
         });
     }
 
-    mod.init = init;
+    exports.init = init;
 
-    mod.translatePanelElem = translatePanelElem;
+    exports.scrollScenes = {};
+    exports.components = {};
 
-    mod.scrollScenes = {};
-    mod.components = {};
+    utils.getHeightWithOffset = getHeightWithOffset;
+    utils.getWidthWithOffset = getWidthWithOffset;
 
-    mod.utils = {
-        camelCase: camelCase,
-        toTitleCase: toTitleCase,
-        positionCenter: positionCenter,
-        getHeightWithOffset: getHeightWithOffset,
-        getWidthWithOffset: getWidthWithOffset
+}(Pathways, this, _, Pathways.system, Pathways.utils, Pathways.media, Pathways.media.vol, Pathways.video, jQuery));
+
+var Pathways = Pathways || {};
+Pathways.components = Pathways.components || {};
+Pathways.components.core = Pathways.components.core || {};
+console.log('include image-loader');
+
+(function(exports, w, $) {
+
+    var defaultBase = '/_assets/img/';
+
+    exports.imageLoader = {
+        getImageLoader: function(location, base) {
+
+            base = base || defaultBase;
+            location = location || '';
+            var imageData,
+                imageSrc;
+
+            function loadImages(images, callback) {
+                if (images.length) {
+                    imageData = images[0];
+                    imageSrc = imageData.image;
+                    loadImage(imageSrc, function(img, data) {
+
+                        if (callback) callback.call(null, img, data);
+
+                        images.shift();
+
+                        loadImages(images, callback);
+                    }, imageData);
+                }
+            }
+
+            function loadImage(src, callback, data) {
+                var img = new Image();
+
+                img.src = base + location + src + '.jpg';
+
+                img.onload = function(e) {
+
+                    if (callback) callback.call(self, this, data);
+                };
+            }
+
+            return {
+                loadImages: function(datalist, callback) {
+                    datalistCopy = [].concat(datalist);
+                    loadImages(datalistCopy, callback);
+                },
+                loadImage: loadImage
+            };
+
+        }
     };
 
-}(this, _, Pathways, Pathways.system, Pathways.audio, Pathways.video, jQuery));
+
+
+}(Pathways.components.core, window, jQuery));
+
+console.log('include core audio-player');
+
+(function(exports, viewControl, vol, volViews, utils, $) {
+
+    var fallbackDuration = 600;
+
+
+    function getPlay(audio, linkedView, timeUpdate) {
+        return function play() {
+            if (!audio.paused) return;
+            vol.addView(linkedView);
+            audio.addEventListener('timeupdate', timeUpdate);
+            audio.muted = vol.isMuted();
+            audio.play();
+            timeUpdate();
+        };
+    }
+
+    function getPause(audio, linkedView, timeUpdate) {
+        return function pause() {
+            if (audio.paused) return;
+            vol.removeView(linkedView);
+            audio.pause();
+            audio.removeEventListener('timeupdate', timeUpdate);
+            timeUpdate();
+        };
+    }
+
+    function getStop(audio, linkedView, timeUpdate) {
+        return function stop() {
+            vol.removeView(linkedView);
+            audio.pause();
+            audio.removeEventListener('timeupdate', timeUpdate);
+            audio.currentTime = 0;
+            timeUpdate();
+        };
+    }
+
+    function getTimeUpdate(audio, viewCtrl) {
+
+        return function(e) {
+            // console.log('timeupdate', audio.src);
+            if (audio.currentTime === audio.duration) audio.currentTime = 0;
+            viewCtrl.update(audio.paused, audio.duration, audio.currentTime);
+        };
+    }
+
+    function getPlayerCtrl(audio) {
+        var viewCtrl = viewControl.getViewCtrl({}),
+            linkedView = volViews.getLinkedMediaView(audio),
+            timeUpdate = getTimeUpdate(audio, viewCtrl),
+            stop = getStop(audio, linkedView, timeUpdate),
+            isEnabled = false;
+
+        audio.addEventListener('durationchange', timeUpdate);
+
+        var playerCtrl = Object.create(viewCtrl, {
+            play: {
+                value: getPlay(audio, linkedView, timeUpdate)
+            },
+            pause: {
+                value: getPause(audio, linkedView, timeUpdate)
+            },
+            stop: {
+                value: stop
+            },
+            enable: {
+                value: function() {
+                    if (isEnabled) return;
+                    viewCtrl.enable();
+                    stop();
+                    isEnabled = true;
+                }
+            },
+            disable: {
+                value: function() {
+                    if (!isEnabled) return;
+                    stop();
+                    viewCtrl.disable();
+                    isEnabled = false;
+                }
+            }
+        });
+        return playerCtrl;
+    }
+
+
+
+
+
+
+
+    var playerViewProto = {
+        update: function(isPaused, duration, currentTime) {
+            // console.log('updating', isPaused, duration, currentTime);
+            if (!this.isEnabled) return;
+
+            duration = getDuration(duration, currentTime);
+
+            var remaining = parseInt((duration - currentTime), 10) || 0,
+                currentPercent = (currentTime * (100 / duration)) || 0;
+
+            if (isPaused) {
+                this.$controls.removeClass('active');
+            } else {
+                this.$controls.addClass('active');
+            }
+
+            if (currentPercent !== void 0 && remaining !== void 0) {
+                this.$progress.css('width', currentPercent + '%');
+                this.$timeLeft.html(secondsToMinutes(remaining));
+            }
+
+        },
+        enable: function() {
+            this.isEnabled = true;
+            this.$controls.show();
+            this.$view.off('click', '.controls');
+            this.$view.on('click', '.controls', this.toggleViewState);
+        },
+        disable: function() {
+            this.isEnabled = false;
+            this.$controls.hide();
+            this.$view.off('click', '.controls', this.toggleViewState);
+        }
+    };
+
+
+    function getDuration(duration, currentTime) {
+        return (duration === Infinity || isNaN(duration)) ?
+            ((currentTime === Infinity || isNaN(currentTime)) ?
+                fallbackDuration : currentTime) :
+            duration || 0;
+    }
+
+    function secondsToMinutes(seconds, sep) {
+        sep = sep || ':';
+        var mins = Math.floor(seconds / 60),
+            remainder = seconds % 60;
+
+        if (remainder < 10)
+            remainder = '0' + remainder;
+
+        return mins + sep + remainder;
+    }
+
+    function getToggleViewState(playerView, ctrl) {
+        return function toggleViewState(e) {
+
+            if (!playerView.isEnabled) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (e.target === this) {
+                if (!$(this).hasClass('active')) {
+                    ctrl.play();
+                } else {
+                    ctrl.pause();
+                }
+            }
+
+            return false;
+        };
+    }
+
+    function getPlayerView(element, ctrl) {
+        var $view = $(element),
+            $progress = $view.find('.progressed'),
+            $timeLeft = $view.find('.time-left span'),
+            $controls = $view.find('.controls'),
+            playerView;
+
+        playerView = Object.create(playerViewProto);
+        playerView.isEnabled = false;
+        playerView.$view = $view;
+        playerView.$progress = $progress;
+        playerView.$timeLeft = $timeLeft;
+        playerView.$controls = $controls;
+        playerView.toggleViewState = getToggleViewState(playerView, ctrl);
+        // console.log(playerView);
+        return playerView;
+
+    }
+
+    exports.audioPlayer = {
+        getAudioPlayer: function(src, $view) {
+            var audio = new Audio(src);
+
+            var playerCtrl = getPlayerCtrl(audio),
+                playerView = getPlayerView($view, playerCtrl);
+
+            playerCtrl.addView(playerView);
+
+            return playerCtrl;
+        },
+        getPlayerCtrl: getPlayerCtrl,
+        getPlayerView: getPlayerView
+    };
+
+}(Pathways.components.core, Pathways.core.view, Pathways.media.vol, Pathways.media.vol.views, Pathways.utils, jQuery));
+
+var Pathways = Pathways || {};
+Pathways.components = Pathways.components || {};
+Pathways.components.core = Pathways.components.core || {};
+console.log('include carousel');
+
+
+(function(exports, w, getEventListener, imgLoader, Hamr, Mod, $) {
+    'use strict';
+
+    var doc = w.document;
+
+    function getCarouselCtrl($element, data, _paneCtrlFactory) {
+
+        if (typeof data === 'undefined') return console.warn('No Carousel data provided');
+
+
+        var navCtrl = null,
+            containerCtrl = null,
+            paneCtrl = null,
+
+            paneCtrlFactory = _paneCtrlFactory,
+
+            currentIndex = 0;
+
+        var ob = Object.create(getEventListener());
+
+        function setPaneCtrlIndices(index, doAnimate) {
+            containerCtrl.setPaneIndex(index, doAnimate);
+            paneCtrl.setPaneIndex(index);
+            navCtrl.setPaneIndex(index);
+        }
+
+        ob.init = function init() {
+            containerCtrl = getContainerCtrl($element, this);
+            containerCtrl.create();
+
+            navCtrl = getNavigationCtrl($element, this);
+
+            paneCtrl = getPanesCtrl(containerCtrl.getElement(), this, data, paneCtrlFactory, function() {
+                // console.log('first loaded');
+                navCtrl.create();
+                ob.setPaneIndex(ob.getCurrentIndex(), false);
+            });
+            paneCtrl.create();
+
+            $(w).on("resize orientationchange", function() {
+                ob.resize();
+                ob.reset(false);
+            });
+        };
+        ob.setPaneIndex = function setPaneIndex(index, doAnimate) {
+            var count = 0;
+
+            // between the bounds
+            index = Math.max(0, Math.min(index, paneCtrl.getPaneCount() - 1));
+            setPaneCtrlIndices(index, doAnimate);
+
+            currentIndex = index;
+            this.emit('setPaneIndex', index, doAnimate);
+        };
+        ob.updateCtrls = function updateCtrls(doAnimate) {
+            setPaneCtrlIndices(currentIndex, doAnimate);
+        };
+        ob.resize = function resize() {
+            paneCtrl.resize();
+            containerCtrl.resize(paneCtrl.getTotalWidth(), w.innerHeight);
+            navCtrl.resize(w.innerHeight);
+        };
+        ob.next = function next() {
+            return this.setPaneIndex(currentIndex + 1, true);
+        };
+        ob.prev = function prev() {
+            return this.setPaneIndex(currentIndex - 1, true);
+        };
+        ob.getCurrentIndex = function getCurrentIndex() {
+            return currentIndex;
+        };
+        ob.setFactory = function setFactory(factory) {
+            paneCtrlFactory = factory;
+        };
+
+        ob.setOffset = function setOffset(x, animate) {
+            containerCtrl.updateOffset(x, animate);
+        };
+
+        ob.getOffsetAtIndex = function getOffsetAtIndex(index) {
+            return paneCtrl.getPanesOffsetAtIndex(index);
+        };
+        ob.getPaneCount = function getPaneCount() {
+            return paneCtrl.getPaneCount();
+        };
+        ob.getAveragePaneWidth = function getAveragePaneWidth() {
+            return paneCtrl.getAveragePaneWidth();
+        };
+        ob.reset = function reset(doAnim){
+            doAnim = (typeof doAnim === 'boolean') ? doAnim : true;
+            containerCtrl.updateOffset(paneCtrl.getPanesOffsetAtIndex(currentIndex), doAnim);
+        };
+
+        return ob;
+
+    }
+
+    function getPanesCtrl($container, ctrl, data, paneCtrlFactory, onFirst) {
+        var $panes = null,
+            paneDataList = data.panes || data.images,
+            location = data.location,
+
+            panes = [],
+            paneCount = 0,
+            totalOffset = (w.innerWidth / 2),
+            totalWidth = 0;
+
+        function addPane($pane) {
+            $container.append($pane);
+        }
+
+        return {
+            create: function() {
+
+                panes = paneDataList.map(function(paneData, index) {
+                    var pane = paneCtrlFactory(paneData, index, function onReady(pane) {
+                        if (typeof onFirst === 'function') onFirst.call();
+                        onFirst = null;
+                        ctrl.resize();
+                    }).create();
+
+                    addPane(pane.getPane());
+                    return pane;
+                });
+
+
+                paneCount = panes.length;
+            },
+            setPaneIndex: function(index) {
+                panes.forEach(function(pane) {
+                    pane.setIndex(index);
+                });
+            },
+            resize: function(height) {
+
+                panes.forEach(function(pane) {
+                    pane.resize();
+                });
+
+                totalWidth = panes.map(function(pane) {
+                    return pane.getWidth();
+                }).reduce(function(last, curr){
+                    return last + curr;
+                });
+
+                var windowWidth = w.innerWidth;
+
+                totalOffset = (windowWidth / 2);
+            },
+
+
+            getPaneCount: function() {
+                return paneCount;
+            },
+
+            getAveragePaneWidth: function() {
+                return parseInt((totalWidth / paneCount), 10);
+            },
+            getTotalWidth: function() {
+                return totalWidth;
+            },
+            getPanesOffsetAtIndex: function(index) {
+                var offset = 0;
+                for (var i = 0; i < index; i++) {
+                    offset -= panes[i].getWidth();
+                }
+                offset += (totalOffset - (panes[index].getWidth() / 2));
+                return offset;
+            }
+        };
+    }
+
+    function getContainerCtrl($element, ctrl) {
+        var $container;
+
+        return {
+            create: function() {
+                $container = $('<ul/>');
+                $container.height(w.innerHeight);
+
+                $element.append($container);
+            },
+            setPaneIndex: function(index, animate) {
+                this.updateOffset(ctrl.getOffsetAtIndex(index), animate);
+            },
+            updateOffset: function(x, animate) {
+                $container.removeClass("animate");
+
+                if (animate) {
+                    $container.addClass("animate");
+                }
+
+                if (Mod.csstransforms3d)
+                    $container.css("transform", "translate3d(" + x + "px,0,0)");
+                else
+                    $container.css("transform", "translate(" + x + "px,0)");
+            },
+            resize: function(width, height) {
+                $container.width(width);
+                $container.height(height);
+            },
+            getElement: function() {
+                return $container;
+            }
+        };
+    }
+
+
+    function getNavigationCtrl($element, ctrl) {
+        var $prev, $next;
+
+        return {
+            create: function create() {
+                $prev = $('<div/>');
+                $next = $('<div/>');
+
+                $prev.addClass('prev disabled');
+                $next.addClass('next');
+
+                $prev.css({
+                    'left': 0,
+                    'height': w.innerHeight + 'px',
+                });
+
+                $next.css({
+                    'right': 0,
+                    'height': w.innerHeight + 'px',
+                });
+
+                $element.append($prev);
+                $element.append($next);
+
+                new Hamr($prev[0]).on("tap", function() {
+                    // console.log('hammr prev');
+                    ctrl.prev();
+                });
+
+                new Hamr($next[0]).on("tap", function() {
+                    // console.log('hammr next');
+                    ctrl.next();
+                });
+            },
+            setPaneIndex: function setPaneIndex(index) {
+                if (index > 0)
+                    $prev.removeClass('disabled');
+                else {
+                    $prev.addClass('disabled');
+                }
+
+                if (index >= (ctrl.getPaneCount() - 1))
+                    $next.addClass('disabled');
+                else {
+                    $next.removeClass('disabled');
+                }
+            },
+            resize: function resize(height) {
+                $prev.height(height);
+                $next.height(height);
+            }
+        };
+    }
+
+
+
+
+    function initHammer(ctrl, $element) {
+
+
+        function handleHammer(ev) {
+            // disable browser scrolling
+            // console.log('hamr', ev.type);
+            ev.gesture.preventDefault();
+
+            var currentIndex = ctrl.getCurrentIndex(),
+                paneCount = ctrl.getPaneCount(),
+                averagePaneWidth = ctrl.getAveragePaneWidth();
+
+            switch (ev.type) {
+                case 'dragright':
+                case 'dragleft':
+                    // stick to the finger
+                    var x = ctrl.getOffsetAtIndex(currentIndex);
+
+                    var drag_offset = ((100 / 440) * ev.gesture.deltaX) / paneCount;
+
+                    // slow down at the first and last pane
+                    if ((currentIndex === 0 && ev.gesture.direction == "right") ||
+                        (currentIndex == paneCount - 1 && ev.gesture.direction == "left")) {
+                        drag_offset *= 0.4;
+                    }
+
+                    ctrl.setOffset(ev.gesture.deltaX + x);
+                    break;
+
+                case 'swipeleft':
+                    ctrl.next();
+                    ev.gesture.stopDetect();
+                    break;
+
+                case 'swiperight':
+                    ctrl.prev();
+                    ev.gesture.stopDetect();
+                    break;
+
+                case 'release':
+                    // more then 30% moved, navigate
+                    if (Math.abs(ev.gesture.deltaX) > ((averagePaneWidth / 10) * 3)) {
+                        if (ev.gesture.direction == 'right') {
+                            ctrl.prev();
+                        } else {
+                            ctrl.next();
+                        }
+                    } else {
+                        ctrl.reset();
+                    }
+                    break;
+            }
+        }
+
+        new Hamr($element[0], {
+            drag_lock_to_axis: true
+        }).on("release dragleft dragright swipeleft swiperight", handleHammer);
+    }
+
+    exports.carousel = {
+        //Carousel: Carousel,
+        getCarousel: function(element, data, paneCtrlFactory) {
+
+            var ctrl = getCarouselCtrl(element, data, paneCtrlFactory);
+
+            initHammer(ctrl, element);
+
+            return ctrl;
+
+            // return new Carousel(element, data, getPaneCtrl);
+        }
+    };
+
+}(Pathways.components.core, window, Pathways.core.events.getEventListener, Pathways.components.core.imageLoader, Hammer, Modernizr, jQuery));
 
 var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
@@ -1052,8 +2246,9 @@ Pathways.components.core = Pathways.components.core || {};
     var baseSelector = '';
     var attrSelector = '';
 
-    function toggleActiveGA($el, re1, re2) {
+    function setState($el, re1, re2) {
         var gaData = $el.data(baseSelector);
+
         if (!gaData) return;
         var newStr = gaData.replace(re1, re2);
         $el.data(baseSelector, newStr);
@@ -1078,7 +2273,7 @@ Pathways.components.core = Pathways.components.core || {};
     }
 
     exports.ga = {
-        toggleActiveGA: toggleActiveGA,
+        setState: setState,
         send: send,
         init: init,
         update: update
@@ -1090,9 +2285,9 @@ var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
 Pathways.components.core = Pathways.components.core || {};
 
-(function(w, exports, utils, $) {
+(function(exports, w, getEventListener, utils, $) {
 
-    function OverlayCtrl(onInitCallback, onCloseCallback) {
+    function getOverlayCtrl() {
 
         var rootSel = 'body',
             activeClass = 'modal-open',
@@ -1109,10 +2304,10 @@ Pathways.components.core = Pathways.components.core || {};
             return $el;
         }
 
-        function getCloseHandler($el, onCloseCb) {
+        function getCloseHandler($el, ctrl) {
             return function() {
                 $root.removeClass(activeClass);
-                if (typeof onCloseCb !== 'undefined') onCloseCb();
+                ctrl.emit('close');
                 w.setTimeout(function() {
                     $el.remove();
                 }, 1000); // give css transition time
@@ -1127,79 +2322,65 @@ Pathways.components.core = Pathways.components.core || {};
             };
         }
 
-        function init($el, onInitHandler, onClickHandler) {
+        function init($el, ctrl, onClickHandler) {
             $el.on('click', onClickHandler);
 
             w.setTimeout(function() {
                 // prevent scrolling
                 $root.addClass(activeClass);
-                if (typeof onInitHandler !== 'undefined') onInitHandler();
 
+                ctrl.emit('init');
             }, 50); // delay before adding class to ensure transition event will fire
         }
 
-        this.$close = $(closeTmpl);
-        this.$overlay = create(overlayTmpl, $root, this.$close);
-        this.closeHandler = getCloseHandler(this.$overlay, onCloseCallback);
-        var clickHandler = getClickHandler(this.$overlay, this.$close, this.closeHandler);
 
-        init(this.$overlay, onInitCallback, clickHandler);
 
+        var ctrl = Object.create(getEventListener());
+        ctrl.$close = $(closeTmpl);
+        ctrl.$overlay = create(overlayTmpl, $root, ctrl.$close);
+        ctrl.closeHandler = getCloseHandler(ctrl.$overlay, ctrl);
+
+        var clickHandler = getClickHandler(ctrl.$overlay, ctrl.$close, ctrl.closeHandler);
+
+        init(ctrl.$overlay, ctrl, clickHandler);
+
+        return ctrl;
     }
 
     exports.overlay = {
-        OverlayCtrl: OverlayCtrl,
+        // OverlayCtrl: OverlayCtrl,
         getOverlay: function(onInitHandler, onClickHandler) {
-            return new OverlayCtrl(onInitHandler, onClickHandler).$overlay;
+            var overlay = getOverlayCtrl();
+            overlay.on('close', onClickHandler);
+            overlay.on('init', onInitHandler);
+            return overlay.$overlay;
         },
         getCtrl: function(onInitHandler, onClickHandler) {
-            return new OverlayCtrl(onInitHandler, onClickHandler);
+            var overlay = getOverlayCtrl();
+            overlay.on('close', onClickHandler);
+            overlay.on('init', onInitHandler);
+            return overlay;
         }
     };
 
-}(window, Pathways.components.core, Pathways.utils, jQuery));
+}(Pathways.components.core, window, Pathways.core.events.getEventListener, Pathways.utils, jQuery));
 
+console.log('include panel audio-player');
+(function(exports, audioPlayer, $) {
 
-Pathways.components.audioPlayer = function(element, data) {
-    var self            = this,
-        $player         = $(element),
-        $progress_bar   = $player.find('.progressed'),
-        $time_left      = $player.find('.time-left span'),
-        playing         = false;
+    exports.audioPlayer = function(element, data, src) {
 
-    var src     = $player.data('src'),
-        track   = new Audio(src);
+        src = src || $(element).data('src');
+        var audio = new Audio(src);
 
-    $player.on('click', '.controls', function() {
-        if( playing ) {
-            track.pause();
-            $(this).removeClass('active');
-            playing = false;
-        }
-        else {
-            track.play();
-            $(this).addClass('active');
-            playing = true;
-        }
-    });
+        var playerCtrl = audioPlayer.getPlayerCtrl(audio);
+        var playerView = audioPlayer.getPlayerView(element, playerCtrl);
+        playerCtrl.addView(playerView);
 
-    track.addEventListener('timeupdate', function () {
-        var remaining = parseInt(track.duration - track.currentTime);
-
-        $progress_bar.css('width', (track.currentTime * (100 / track.duration) + '%' ));
-        $time_left.html( self.secondsToMinutes(remaining) );
-    });
-
-    this.secondsToMinutes = function(seconds) {
-        var mins        = Math.floor( seconds / 60 ),
-            remainder   = seconds % 60;
-
-        if( remainder < 10 )
-            remainder = '0' + remainder;
-
-        return mins + '.' + remainder;
+        playerCtrl.enable();
     };
-};
+
+}(Pathways.components, Pathways.components.core.audioPlayer, jQuery));
 
 (function(w, doc, exports, overlay, $, utils) {
 
@@ -1295,18 +2476,95 @@ Pathways.components.audioPlayer = function(element, data) {
 /*
     Carousel pattern initiator followed by the component.
 */
-(function(w, doc, exports, overlay, utils, $, _Hammer, Mod) {
+console.log('include gallery');
+
+(function(exports, w, overlay, getCarousel, getImageLoader, utils, $, _Hammer, Mod) {
+
+    var doc = w.document;
+
+    function getPaneCtrlFactory(imageLoader) {
+        function _paneCtrlFactory(data, index, onReady) {
+
+            var $pane,
+                $img,
+                ratio = 1,
+                width = w.innerWidth;
+
+            function onImageLoad(img) {
+                $img = $(img);
+                ratio = img.naturalHeight / img.naturalWidth;
+                $pane.append($img);
+
+                // add potential text
+                if (data.text) {
+                    var $child = $('<div>' + data.text + '</div>').addClass('text');
+                    $pane.append($child);
+                }
+
+                if (typeof onReady === 'function') onReady.call(null, this);
+            }
+
+            return {
+                create: function() {
+                    // console.log('create', index);
+                    $pane = $('<li/>');
+                    imageLoader.loadImage(data.image, onImageLoad);
+                    return this;
+                },
+                setIndex: function(newIndex) {
+                    // console.log('setIndex', index, newIndex);
+                    if (newIndex === index) {
+                        $pane.css('opacity', 1);
+                    } else {
+                        $pane.css('opacity', 0.4);
+                    }
+                    return this;
+                },
+                resize: function() {
+                    // console.log('resize', index);
+                    var newWidth = parseInt((w.innerHeight / ratio), 10),
+                        windowWidth = w.innerWidth;
+
+                    if (newWidth >= windowWidth) {
+                        newWidth = windowWidth;
+                        $pane.removeClass('full-height');
+                        $pane.addClass('full-width');
+                    } else {
+                        $pane.removeClass('full-width');
+                        $pane.addClass('full-height');
+                    }
+
+                    width = newWidth;
+                    $pane.width(newWidth);
+                    return this;
+                },
+                getPane: function() {
+                    return $pane;
+                },
+                getWidth: function() {
+                    return width;
+                }
+            };
+
+        }
+
+        return _paneCtrlFactory;
+    }
 
     exports.gallery = function(element, data) {
         var $elem = $(element),
             $panel = $elem.closest('.panel'),
-            panelId = $panel.attr('id');
+            panelId = $panel.attr('id'),
+            location = data.location;
 
         $(element).on('click', function(e) {
 
             var $overlay,
-                $div = $('<div class="carousel"></div>'),
-                $loading = $('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+                $div = $('<div class="carousel carousel-gallery"></div>'),
+                $loading = $('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>'),
+                imageLoader = getImageLoader(location),
+                paneCtrlFac = getPaneCtrlFactory(imageLoader),
+                carousel = getCarousel($div, data, paneCtrlFac);
 
             $loading.css({
                 position: 'absolute',
@@ -1315,7 +2573,6 @@ Pathways.components.audioPlayer = function(element, data) {
             });
 
             $overlay = overlay.getOverlay(function() {
-                var carousel = new Carousel(".carousel", data);
                 carousel.init();
             });
 
@@ -1327,325 +2584,7 @@ Pathways.components.audioPlayer = function(element, data) {
     };
 
 
-
-    function Carousel(element, data) {
-
-        if (typeof data === 'undefined') return console.warn('No gallery data provided');
-
-        var self = this,
-            _element = doc.querySelector(element),
-            $element = $(element),
-            $prev = null,
-            $next = null,
-
-            $container = null,
-            $panes = null,
-
-            images = data.images,
-            location = data.location,
-
-            widths = [],
-            ratios = [],
-
-            pane_width = 0,
-            pane_count = 0,
-            current_pane = 0,
-            total_offset = (w.innerWidth / 2);
-
-
-        /**
-         * initial
-         */
-        this.init = function() {
-
-            // Steps to loading the carousel:
-            // - Set up the carousel container
-            // - Load the first image.
-            // - On load, calculate dimensions of the image, update the container, set local width vars, move the container so the image is in the centre.
-            // - Load the navigation
-            // - Load rest of the images sequentially in the onload event of the previous one.
-            // - Update the container and local variables on each load, keeping the carousel in the correct place.
-
-            // Create the container
-            $container = $('<ul/>');
-            $container.height(w.innerHeight);
-
-            $element.append($container);
-
-            // Load the first image
-            var imagesCopy = [].concat(images);
-            var first = imagesCopy[0];
-
-            loadImage(first, function() {
-                loadNavigation();
-
-                $panes = $element.find('li');
-                pane_count = $panes.length;
-
-                $container.css('transform', 'translate(' + (total_offset - (widths[0] / 2)) + 'px,0)');
-                setPaneDimensions();
-
-                imagesCopy.shift();
-
-                // load the rest of the images
-                loadImages(imagesCopy);
-            });
-
-            $(w).on("load resize orientationchange", function() {
-                setPaneDimensions();
-            });
-        };
-
-        /*
-         * Load an image and take a function to call once the image has finished asynchronously loading
-         */
-        var loadImage = function(obj, callback) {
-            var img = new Image(),
-                $li = $('<li/>'),
-                $img;
-
-            img.src = '/_assets/img/' + location + obj.image + '.jpg';
-
-            img.onload = function() {
-                $img = $(img);
-                $img.css('height', '100%');
-
-                $li.append($img);
-
-                // add potential text
-                if (obj.text) {
-                    var $child = $('<div>' + obj.text + '</div>').addClass('text');
-
-                    $li.append($child);
-                }
-
-                // what is the ratio of the image?
-                var wth = img.naturalWidth,
-                    hgt = img.naturalHeight,
-                    ratio = (hgt / wth);
-
-                // store the ratio for resize recalculations
-                ratios.push(ratio);
-
-                // Add it to the container
-                $container.append($li);
-
-                if (callback)
-                    callback.call();
-            };
-        };
-
-        /*
-         * Takes an array of image objects and recursively sets up a callback chain to load in images sequentially
-         */
-        var loadImages = function(images) {
-            if (images.length) {
-                loadImage(images[0], function() {
-                    $panes = $element.find('li');
-                    pane_count = $panes.length;
-                    setPaneDimensions();
-
-                    images.shift();
-
-                    loadImages(images);
-                });
-            }
-        };
-
-        /*
-         * load the navigation into the carousel
-         */
-        var loadNavigation = function() {
-            $prev = $('<div/>');
-            $next = $('<div/>');
-
-            $prev.addClass('prev disabled');
-            $next.addClass('next');
-
-            $prev.css({
-                'left': 0,
-                'height': w.innerHeight + 'px',
-            });
-
-            $next.css({
-                'right': 0,
-                'height': w.innerHeight + 'px',
-            });
-
-            $element.append($prev);
-            $element.append($next);
-
-            new _Hammer($prev[0]).on("tap", function() {
-                self.prev();
-            });
-
-            new _Hammer($next[0]).on("tap", function() {
-                self.next();
-            });
-        };
-
-        /**
-         * set the pane dimensions and scale the container
-         */
-        function setPaneDimensions() {
-            var total_width = 0,
-                wH = w.innerHeight;
-
-            widths = [];
-
-            for (var i = 0; i < $panes.length; i++) {
-                var newWidth = wH / ratios[i];
-
-                if (newWidth >= w.innerWidth) {
-                    var $img = $($panes[i]).find('img');
-                    newWidth = w.innerWidth;
-
-                    $img.css({
-                        'height': 'auto',
-                        'width': '100%',
-                        'margin': 'auto 0'
-                    });
-                }
-
-                $panes[i].style['width'] = newWidth + 'px';
-
-                widths.push(newWidth);
-
-                total_width += newWidth;
-            }
-
-            $container.width(total_width);
-            total_offset = (w.innerWidth / 2);
-
-            pane_width = parseInt(total_width / $panes.length);
-
-            // Set the container and navigation links to the height of the screen.
-            $container.css('height', wH);
-
-            $prev.height(wH);
-            $next.height(wH);
-
-            self.showPane(current_pane, false);
-        }
-
-
-        /**
-         * show pane by index
-         */
-        this.showPane = function(index, animate) {
-            var offset = 0,
-                count = 0;
-
-            // between the bounds
-            index = Math.max(0, Math.min(index, pane_count - 1));
-            current_pane = index;
-
-            for (var i = 0; i < index; i++) {
-                offset -= widths[i];
-            }
-
-            offset += (total_offset - (widths[index] / 2));
-
-            $panes.css('opacity', 0.4);
-            $panes.get(current_pane).style['opacity'] = 1;
-
-            setContainerOffset(offset, animate);
-
-            if (index > 0)
-                $prev.removeClass('disabled');
-            else {
-                $prev.addClass('disabled');
-            }
-
-            if (index >= (pane_count - 1))
-                $next.addClass('disabled');
-            else {
-                $next.removeClass('disabled');
-            }
-        };
-
-        /*
-         * Move the whole list of panels by x. Animation optional.
-         */
-        function setContainerOffset(x, animate) {
-            $container.removeClass("animate");
-
-            if (animate) {
-                $container.addClass("animate");
-            }
-
-            if (Mod.csstransforms3d)
-                $container.css("transform", "translate3d(" + x + "px,0,0)");
-            else
-                $container.css("transform", "translate(" + x + "px,0)");
-        }
-
-        this.next = function() {
-            return this.showPane(current_pane + 1, true);
-        };
-        this.prev = function() {
-            return this.showPane(current_pane - 1, true);
-        };
-
-
-        function handleHammer(ev) {
-            // disable browser scrolling
-            ev.gesture.preventDefault();
-
-            switch (ev.type) {
-                case 'dragright':
-                case 'dragleft':
-                    // stick to the finger
-                    var pane_offset = 0,
-                        count = 0;
-
-                    for (var i = 0; i < current_pane; i++) {
-                        pane_offset -= widths[i];
-                    }
-
-                    pane_offset += (total_offset - (widths[current_pane] / 2));
-
-                    var drag_offset = ((100 / 440) * ev.gesture.deltaX) / pane_count;
-
-                    // slow down at the first and last pane
-                    if ((current_pane === 0 && ev.gesture.direction == "right") ||
-                        (current_pane == pane_count - 1 && ev.gesture.direction == "left")) {
-                        drag_offset *= 0.4;
-                    }
-
-                    setContainerOffset(ev.gesture.deltaX + pane_offset);
-                    break;
-
-                case 'swipeleft':
-                    self.next();
-                    ev.gesture.stopDetect();
-                    break;
-
-                case 'swiperight':
-                    self.prev();
-                    ev.gesture.stopDetect();
-                    break;
-
-                case 'release':
-                    // more then 30% moved, navigate
-                    if (Math.abs(ev.gesture.deltaX) > ((pane_width / 10) * 3)) {
-                        if (ev.gesture.direction == 'right') {
-                            self.prev();
-                        } else {
-                            self.next();
-                        }
-                    } else {
-                        self.showPane(current_pane, true);
-                    }
-                    break;
-            }
-        }
-
-        new _Hammer($element[0], {
-            drag_lock_to_axis: true
-        }).on("release dragleft dragright swipeleft swiperight", handleHammer);
-    }
-}(window, document, Pathways.components, Pathways.components.core.overlay, Pathways.utils, jQuery, Hammer, Modernizr));
+}(Pathways.components, window, Pathways.components.core.overlay, Pathways.components.core.carousel.getCarousel, Pathways.components.core.imageLoader.getImageLoader, Pathways.utils, jQuery, Hammer, Modernizr));
 
 (function(w, exports, ga, Hammer, $) {
 
@@ -1709,10 +2648,8 @@ Pathways.components.audioPlayer = function(element, data) {
 
         this.loadImages = function(images) {
 
-            var reO = /l2 open infinite canvas/g,
-                reC = /l2 close infinite canvas/g,
-                repO = 'l2 open infinite canvas',
-                repC = 'l2 close infinite canvas';
+            var repOpen = 'l2 open infinite canvas',
+                repClose = 'l2 close infinite canvas';
 
             var length = images.length,
                 items = [],
@@ -1722,9 +2659,9 @@ Pathways.components.audioPlayer = function(element, data) {
                         var $this = $(this);
                         ga.send($this.data('ga'));
                         if ($root.hasClass('active')) {
-                            ga.toggleActiveGA($this, reC, repO);
+                            ga.setState($this, repClose, repOpen);
                         } else {
-                            ga.toggleActiveGA($this, reO, repC);
+                            ga.setState($this, repOpen, repClose);
                         }
                         $root.toggleClass('active');
                     };
@@ -1881,15 +2818,219 @@ Pathways.components.infographic = function(element, data) {
 
 };
 
-(function(w, exports, ga, $) {
+console.log('include letter-gallery');
 
-    var reO = /l2 open share/g,
-        reC = /l2 close share/g,
-        repO = 'l2 open share',
-        repC = 'l2 close share';
+(function(exports, w, getOverlayCtrl, getCarousel, getImageLoader, audioPlayer, utils, $, _Hammer, Mod) {
+
+    function getAudioPlayerTemplate() {
+        var $tmpl = $('<div class="audio-player audio-player-gallery">' +
+            '<div class="time-left">Time: <span>0:00</span></div>' +
+            '<div class="progress-bar">' +
+            '<div class="progressed"></div>' +
+            '</div>' +
+            '<div class="controls"></div>' +
+            '</div>');
+
+        return $tmpl;
+    }
+
+    function getTemplate() {
+        var $tmpl = $('<li><div class="letter-pane clearfix">' +
+            '<div class="letter-images">' +
+            '<div class="main-image"></div>' +
+            '<div class="highlight-image"></div>' +
+            '</div>' +
+            '<div class="letter-info">' +
+            '<div class="audio-player"></div>' +
+            '<div class="highlight-button"></div>' +
+            '<div class="letter-text"></div>' +
+            '</div>' +
+            '</div></li>');
+
+        return $tmpl;
+    }
+
+    function getPaneCtrlFac(carousel, overlay, imageLoader) {
+        var hiddenClass = 'highlight-hidden',
+            activeClass = 'highlight-active';
+
+        function _paneCtrlFactory(data, index, onReady) {
+
+            var $pane,
+                ratio = 1,
+                width = w.innerWidth;
+
+
+            function loadPlayer(src, $el) {
+                if (!src) return;
+
+                var $player = getAudioPlayerTemplate(),
+                    playerCtrl = audioPlayer.getAudioPlayer(src, $player);
+
+                carousel.on('setPaneIndex', function(newIndex) {
+                    // console.log('setPaneIndex playerCtrl', index, newIndex);
+                    if (index === newIndex) playerCtrl.enable();
+                    else {
+                        playerCtrl.disable();
+                    }
+                });
+
+                overlay.on('close', function() {
+                    console.log('close playerCtrl');
+                    playerCtrl.disable();
+                });
+
+                $el.replaceWith($player);
+
+            }
+
+            function initHighlightImgDiv(img, $el) {
+                $el.append($(img));
+                $el.addClass('highlight-hidden');
+            }
+
+            function initHighlightButton($btn, $text, $img) {
+                $btn.addClass('set-highlight');
+
+                $btn.click(function(e) {
+                    // console.log('highlight: ', $img);
+                    $btn.toggleClass('unset-highlight');
+
+                    if ($img.hasClass(activeClass)) {
+                        $img.removeClass(activeClass);
+                        $img.addClass('highlight-hidden');
+                        $text.removeClass('letter-text-highlight-active');
+                    } else {
+                        $img.removeClass('highlight-hidden');
+                        $img.addClass(activeClass);
+                        $text.addClass('letter-text-highlight-active');
+                    }
+                });
+
+            }
+
+            function loadComplete() {
+                // console.log('pane', index, 'load complete; ', typeof onReady);
+                if (typeof onReady === 'function') onReady.call(null, this);
+                onReady = null;
+                $pane.find('.letter-pane').show();
+            }
+
+            return {
+                create: function() {
+
+                    // console.log('create', index, data.audio);
+                    $tmpl = getTemplate();
+
+                    $pane = $tmpl;
+                    $pane.find('.letter-pane').hide();
+
+                    var $close = $('.overlay .close'),
+                        $txtdiv = $tmpl.find('.letter-text'),
+                        $mainimgdiv = $tmpl.find('.main-image'),
+                        $highlightimgdiv = $tmpl.find('.highlight-image'),
+                        $highlightbtndiv = $tmpl.find('.highlight-button'),
+                        $playerdiv = $tmpl.find('.audio-player'),
+                        highlightImgSrc,
+
+                        onMainImgLoaded = function(img) {
+                            $mainimgdiv.append($(img));
+                            if (data.audio) {
+                                highlightImgSrc = data.image + '-active';
+                                imageLoader.loadImage(highlightImgSrc, onHighlightImgLoaded);
+                            } else {
+                                loadComplete();
+                            }
+                        },
+                        onHighlightImgLoaded = function(img) {
+                            initHighlightImgDiv(img, $highlightimgdiv);
+                            initHighlightButton($highlightbtndiv, $txtdiv, $highlightimgdiv);
+                            loadComplete();
+                        };
+
+                    $txtdiv.load(data.textSrc);
+                    imageLoader.loadImage(data.image, onMainImgLoaded);
+
+                    loadPlayer(data.audio, $playerdiv);
+
+                    $close.addClass('close-carousel-letter-gallery');
+
+                    return this;
+                },
+                setIndex: function(newIndex) {
+                    // console.log('setIndex', index, newIndex);
+                    // if (newIndex === index) {
+                    //     $pane.css('display', 'block');
+                    // } else {
+                    //     $pane.css('opacity', 0.4);
+                    // }
+                    return this;
+                },
+                resize: function() {
+                    // console.log('resize', index);
+                    var newWidth = w.innerWidth;
+                    width = newWidth;
+                    $pane.width(newWidth);
+                    return this;
+                },
+                getPane: function() {
+                    return $pane;
+                },
+                getWidth: function() {
+                    return width;
+                }
+            };
+
+        }
+
+        return _paneCtrlFactory;
+    }
+
+    exports.letterGallery = function(element, data) {
+        var $elem = $(element),
+            $panel = $elem.closest('.panel'),
+            panelId = $panel.attr('id'),
+            location = data.location;
+
+        $(element).on('click', function(e) {
+
+            var overlay = getOverlayCtrl(),
+                $overlay = overlay.$overlay,
+                $div = $('<div class="carousel carousel-letter-gallery"></div>'),
+                $loading = $('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>'),
+                carousel = getCarousel($div, data),
+                imageLoader = getImageLoader(location),
+                paneCtrlFactory = getPaneCtrlFac(carousel, overlay, imageLoader);
+
+            carousel.setFactory(paneCtrlFactory);
+
+            $loading.css({
+                position: 'absolute',
+                top: ((w.innerHeight / 2) - 12),
+                left: ((w.innerWidth / 2) - 35)
+            });
+
+
+            $overlay.append($div);
+            $overlay.append($loading);
+
+            overlay.on('init', function() {
+                carousel.init();
+            });
+
+        });
+
+    };
+
+
+}(Pathways.components, window, Pathways.components.core.overlay.getCtrl, Pathways.components.core.carousel.getCarousel, Pathways.components.core.imageLoader.getImageLoader, Pathways.components.core.audioPlayer, Pathways.utils, jQuery, Hammer, Modernizr));
+
+(function(exports, w, ga, $) {
+
+    var repOpen = 'l2 open share',
+        repClose = 'l2 close share';
 
     exports.libraryPanel = function(element, data) {
-
 
         function closePanel($panel) {
             $panel.css('transform', 'translate(' + ($panel.outerWidth()) + 'px, ' + ($panel.outerHeight() - 60) + 'px)');
@@ -1909,20 +3050,20 @@ Pathways.components.infographic = function(element, data) {
 
             if ($panel.hasClass('active')) {
                 closePanel($panel);
-                ga.toggleActiveGA($this, reC, repO);
+                ga.setState($this, repClose, repOpen);
 
             } else {
                 openPanel($panel);
                 $(window).one('scroll', function() {
                     closePanel($panel);
-                    ga.toggleActiveGA($this, reC, repO);
+                    ga.setState($this, repClose, repOpen);
                 });
-                ga.toggleActiveGA($this, reO, repC);
+                ga.setState($this, repOpen, repClose);
             }
         });
     };
 
-}(window, Pathways.components, Pathways.components.core.ga, jQuery));
+}(Pathways.components, window, Pathways.components.core.ga, jQuery));
 
 (function(mod, overlay, ga, $) {
 
@@ -1982,7 +3123,7 @@ Pathways.components.infographic = function(element, data) {
 
 }(Pathways.components, Pathways.components.core.overlay, Pathways.components.core.ga, jQuery));
 
-(function(w, doc, exports, overlay, $, utils) {
+(function(exports, w, doc, overlay, $, utils) {
 
     exports.playerOverlay = function(elem) {
 
@@ -2092,9 +3233,9 @@ Pathways.components.infographic = function(element, data) {
             return false;
 
         });
-
     };
-}(window, document, Pathways.components, Pathways.components.core.overlay, jQuery, Pathways.utils));
+
+}(Pathways.components, window, document, Pathways.components.core.overlay, jQuery, Pathways.utils));
 
 
 Pathways.components.quiz = function(element, data) {
@@ -2388,10 +3529,8 @@ function Quiz(element, data) {
 
 (function(w, exports, ga, $) {
 
-    var reO = /l3 open library/g,
-        reC = /l3 close library/g,
-        repO = 'l3 open library',
-        repC = 'l3 close library';
+    var repOpen = 'l3 open library',
+        repClose = 'l3 close library';
 
     exports.toggleSection = function(element, data) {
 
@@ -2415,11 +3554,11 @@ function Quiz(element, data) {
                 $('html, body').animate({
                     scrollTop: $scrollAnchor.offset().top - 100
                 }, 400);
-                ga.toggleActiveGA($related, reO, repC);
+                ga.setState($related, repOpen, repClose);
 
             } else {
                 $target.css('height', 0);
-                ga.toggleActiveGA($related, reC, repO);
+                ga.setState($related, repClose, repOpen);
             }
 
             $target.toggleClass('open');
@@ -5398,7 +6537,6 @@ Pathways.scrollScenes.MagnetisedTrees = function(panelID, animation) {
             duration: Pathways.panelHeight
         })
         .on('enter', function(e) {
-            console.log('evetre');
             if (e.scrollDirection == 'FORWARD') {
                 TweenMax.to(panelID + ' .black-strip', 0.4, {
                     y: 0
@@ -5468,7 +6606,7 @@ Pathways.scrollScenes.OkeySisters = function(panelID) {
     });
     $('#thomas-wakley .main-content').css({
         'bottom': 'auto',
-        'top': (Pathways.panelHeight / 3)
+        'top': parseInt((Pathways.panelHeight / 3),10)
     });
 
     var $panel = $(panelID),
@@ -5810,67 +6948,6 @@ Pathways.components.cropZoom.uniqueArtifacts = {
 };
 
 
-Pathways.scrollScenes.KenVideo = function(panelID) {
-
-    var $panel  = $(panelID),
-        video   = $panel.find('video').get(0);
-
-    var scene = new ScrollScene({
-            triggerElement: $panel,
-            duration:       Pathways.panelHeight + 100
-        })
-        .on('enter', function(e) {
-            video.play();
-        })
-        .on('leave', function(e) {
-            video.pause();
-            video.currentTime = 0;
-        });
-
-    return scene;
-};
-
-
-Pathways.scrollScenes.Example = function() {
-
-    var scene = new ScrollScene({
-            triggerElement: '#example',
-            duration:       Pathways.panelHeight,
-            offset:         0
-        })
-        .on('enter', function(e) {
-            //
-        })
-        .on('leave', function(e) {
-            //
-        });
-
-    return scene;
-};
-
-
-Pathways.scrollScenes.BillsOfMortality = function() {
-
-    var scene1 = new ScrollScene({
-            triggerElement: '#bills-of-mortality',
-            triggerHook:    'top',
-            duration:       Pathways.panelHeight + 150
-        })
-        .on('enter', function(e) {
-            if( _('#bills-of-mortality video') )
-                _('#bills-of-mortality video').play();
-        })
-        .on('leave', function(e) {
-            if( _('#bills-of-mortality video') ) {
-                _('#bills-of-mortality video').pause();
-                _('#bills-of-mortality video').currentTime = 0;
-            }
-        });
-
-    return scene1;
-};
-
-
 Pathways.scrollScenes.GrauntRecords = function(panelID) {
 
     var $panel = $(panelID);
@@ -5932,24 +7009,6 @@ Pathways.scrollScenes.IsaacNewton = function() {
         });
 
     return scene1;
-};
-
-
-Pathways.scrollScenes.Example = function() {
-
-    var scene = new ScrollScene({
-            triggerElement: '#example',
-            duration:       Pathways.panelHeight,
-            offset:         0
-        })
-        .on('enter', function(e) {
-            //
-        })
-        .on('leave', function(e) {
-            //
-        });
-
-    return scene;
 };
 
 Pathways.components.infiniteCanvas.wellcomeCollection = {
@@ -6351,6 +7410,24 @@ Pathways.components.infiniteCanvas.wellcomeCollection = {
     }
 };
 
+Pathways.scrollScenes.StewartConn = function(panelID) {
+
+    var scene = new ScrollScene({
+            triggerElement: panelID,
+            duration:       Pathways.panelHeight
+        })
+        .on('enter', function(e) {
+            if( e.scrollDirection == 'FORWARD' )
+                TweenMax.to(panelID + ' .black-strip', 0.5, { y: 0 }); // Scroll up
+        })
+        .on('leave', function(e) {
+            if( e.scrollDirection == 'REVERSE' )
+                TweenMax.to(panelID + ' .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
+        });
+
+    return scene;
+};
+
 
 Pathways.scrollScenes.SeizedAndDestroyed = function() {
 
@@ -6452,25 +7529,6 @@ Pathways.components.gallery.indecentSexualImages = {
 };
 
 
-Pathways.scrollScenes.JosephKhan = function() {
-    var scene = new ScrollScene({
-            triggerElement: '#joseph-khan',
-            duration:       Pathways.panelHeight + 100
-        })
-        .on('enter', function(e) {
-            var ci_vid = _('#joseph-khan video');
-            ci_vid.play();
-        })
-        .on('leave', function(e) {
-            var ci_vid = _('#joseph-khan video');
-            ci_vid.pause();
-            ci_vid.currentTime = 0;
-        });
-
-    return scene;
-};
-
-
 Pathways.scrollScenes.BritishMuseum = function() {
 
     var scene = new ScrollScene({
@@ -6512,25 +7570,93 @@ Pathways.components.gallery.madeAFilm = {
     }
 };
 
-
 Pathways.scrollScenes.Letters = function() {
 
     var scene = new ScrollScene({
             triggerElement: '#letters',
-            duration:       Pathways.panelHeight
+            duration: Pathways.panelHeight
         })
         .on('enter', function(e) {
-            if( _('#letters audio') ) {
+            if (_('#letters audio')) {
                 _('#letters audio').play();
             }
         })
         .on('leave', function() {
-            if( _('#letters audio') ) {
+            if (_('#letters audio')) {
                 _('#letters audio').pause();
             }
         });
 
     return scene;
+};
+
+Pathways.components.letterGallery.marieStopesLetters = {
+    data: {
+        location: 'galleries/marie-stopes-letters/',
+        images: [{
+            image: '01-HorridVice-pp-01',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-01.html',
+        },{
+            image: '01-HorridVice-pp-02',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-02.html',
+        },{
+            image: '01-HorridVice-pp-03',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-03.html',
+         },{
+            image: '01-HorridVice-pp-04',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-04.html',
+        },{
+            image: '01-HorridVice-pp-05',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-05.html',
+        },{
+            image: '01-HorridVice-pp-06',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-06.html',
+        },{
+            image: '01-HorridVice-pp-07',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-07.html',
+        },{
+            image: '01-HorridVice-pp-08-HIGHLIGHT',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-08-highlight.html',
+            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/01-HorridVice-Extract.mp3',
+        }, {
+            image: '02-HugeAppendage-Transcript-pp-01',
+            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-01.html'
+        }, {
+            image: '02-HugeAppendage-Transcript-pp-02',
+            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-02.html'
+        }, {
+            image: '02-HugeAppendage-Transcript-pp-03-HIGHLIGHT',
+            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-03-highlight.html',
+            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/02-HugeAppendage-Extract.mp3',
+        }, {
+            image: '02-HugeAppendage-Transcript-pp-04',
+            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-04.html'
+        },{
+            image: '03-PositionsDuringPregnancy-pp-01-HIGHLIGHT',
+            textSrc: '/_assets/text/marie-stopes-letters/03-letter-pp-01.html',
+            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/03-PositionsDuringPregnancy-Extract.mp3',
+        }, {
+            image: '04-PleasureWithoutPregnancy-pp-01-HIGHLIGHT',
+            textSrc: '/_assets/text/marie-stopes-letters/04-letter-pp-01-highlight.html',
+            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/04-PleasureWithoutPregnancy-Extract.mp3',
+        }, {
+            image: '04-PleasureWithoutPregnancy-pp-02-HIGHLIGHT',
+            textSrc: '/_assets/text/marie-stopes-letters/04-letter-pp-02-highlight.html',
+            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/04-PleasureWithoutPregnancy-Extract.mp3',
+        },{
+            image: '05-LargeSexOrgans-pp-01-HIGHLIGHT',
+            textSrc: '/_assets/text/marie-stopes-letters/05-letter-pp-01.html',
+            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/05-LargeSexOrgans-Extract.mp3',
+        }, {
+            image: '06-GoBackHome-pp-01-HIGHLIGHT',
+            textSrc: '/_assets/text/marie-stopes-letters/06-letter-pp-01.html',
+            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/06-GoBackHome-Extract.mp3',
+        }, {
+            image: '07-FreeingTheCaptives-pp-01-HIGHLIGHT',
+            textSrc: '/_assets/text/marie-stopes-letters/07-letter-pp-01.html',
+            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/07-FreeingTheCaptives.mp3',
+        }]
+    }
 };
 
 
@@ -6834,6 +7960,7 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
         // Panels & Components
 
         $('[data-component="gallery"]').hide();
+        $('[data-component="letter-gallery"]').hide();
         $('[data-component="quiz"]').hide();
 
         var $panels = $('.sequence .panel'),
@@ -6846,6 +7973,7 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
                 $bg = $this.find('.bg-container'),
                 $library_panel = $('[data-panel="' + panelID + '"]').first(),
                 $gallery = $this.find('[data-component="gallery"]'),
+                $letterGallery = $this.find('[data-component="letter-gallery"]'),
                 $quiz = $this.find('[data-component="quiz"]'),
                 $panelAudio = $this.find('[data-audio="panel"]'),
                 $panelVideo = $this.find('[data-video="panel"]'),
@@ -6932,6 +8060,35 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
                     });
             }
 
+            // Letter Galleries
+            if ($letterGallery.length) {
+                var lg_offset = getValueFromConfig($letterGallery.attr('data-config'), 'offset_height') || 0;
+                scenes[idx++] = new Ss({
+                        triggerElement: $this,
+                        triggerHook: 'top',
+                        duration: getComponentDuration(lg_offset),
+                        offset: lg_offset
+                    })
+                    .on('enter', function() {
+                        $letterGallery.css({
+                            position: 'fixed',
+                            display: 'block'
+                        });
+                        setTimeout(function() {
+                            $letterGallery.addClass('active');
+                        }, 50);
+                    })
+                    .on('leave', function() {
+                        $letterGallery.css({
+                            position: 'absolute',
+                            display: 'none'
+                        });
+                        setTimeout(function() {
+                            $letterGallery.removeClass('active');
+                        }, 50);
+                    });
+            }
+
             // Quiz
             if ($quiz.length) {
                 var q_offset = getValueFromConfig($quiz.attr('data-config'), 'offset_height') || 0;
@@ -6989,22 +8146,25 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
             //
             if ($panelVideo.length || $panelAudio.length) {
                 var $video = $panelVideo.first(),
-                    audio = $panelAudio.first()[0],
-                    rawConfig = $video.attr('data-config'),
-                    initTime = getValueFromConfig(rawConfig, 'initTime') || 0,
-                    muteGlobal = getValueFromConfig(rawConfig, 'muteGlobal') || true;
+                    $audio = $panelAudio.first(),
+                    video = $video.get(0),
+                    audio = $audio.get(0),
+                    rawVideoConfig = $video.attr('data-config'),
+                    rawAudioConfig = $audio.attr('data-config'),
+                    videoConfig = rawVideoConfig ? JSON.parse(rawVideoConfig) : null,
+                    audioConfig = rawAudioConfig ? JSON.parse(rawAudioConfig) : null;
 
                 scenes[idx++] = new Ss({
                         triggerElement: $this,
                         duration: getMediaDuration
                     })
                     .on('enter', function() {
-                        if ($video) p.video.autoPlayVideoOnEnter($video[0], initTime, muteGlobal);
-                        if (audio) p.audio.mixer.loadPanelAudio(audio);
+                        if ($video) p.media.ctrl.playMediaOnVideoChannel(video, videoConfig);
+                        if (audio) p.media.ctrl.playMediaOnPanelChannel(audio, audioConfig);
                     })
                     .on('leave', function() {
-                        if ($video) p.video.autoStopVideoOnLeave($video[0], initTime, muteGlobal);
-                        if (audio) p.audio.mixer.unloadPanelAudio(audio);
+                        if ($video) p.media.ctrl.stopVideoChannel(videoConfig);
+                        if (audio) p.media.ctrl.stopPanelChannel(audioConfig);
                     });
             }
 
@@ -7044,7 +8204,7 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
 
             // Panel specific scene code if it has any
             var handlerClass = p.utils.toTitleCase(panelID),
-                animationClass = p.utils.camelCase(panelID),
+                animationClass = p.utils.toCamelCase(panelID),
                 animation = animations[animationClass],
                 panelMethod = p.scrollScenes[handlerClass],
                 panelScene, fn;

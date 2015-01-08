@@ -39,7 +39,7 @@
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
-    
+
     <div class="content">
         <p class="scene-set">Gorhambury House, Hertfordshire, c.1624</p>
 
@@ -52,10 +52,16 @@
             <span class="scroll-down--text">Scroll down</span>
             <span class="scroll-down--arrow"></span>
         </p>
-        
+
     </div>
 
+    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/02-bensalem-intro.mp3" loop data-audio="global"></audio>
+
 </div>
+
+
+
+
         <div class="sequence">
 
             
@@ -75,17 +81,18 @@
 <div id="bensalem" class="panel" data-config='{ "offset_height": 150, "background": { "type": "video" } }'>
 
     <div class="bg-container">
-        <video controls="true" preload="none">
-            <source src="http://wellcome-pathways.s3.amazonaws.com/airloom_720.mp4">
-            <source src="http://wellcome-pathways.s3.amazonaws.com/airloom_1080.webm">
+        <video controls="true" data-video="panel" data-config='{ "muteGlobal" : true }'>
+            <source src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/video/NewAtlantis.mp4">
+            <source src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/video/NewAtlantis.webm">
         </video>
         <img alt="" src="/_assets/img/spacer.png">
-    </div>   
+    </div>
 </div>
+
 <div id="bensalem-outro" class="panel" data-config='{ "offset_height": 150, "background": "none" }'>
 
     <div class="bg-container"></div>
-    
+
     <div class="main-content center">
 
         <div class="inner">
@@ -94,7 +101,10 @@
 
     </div>
 
+    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/02-bensalem-outro.mp3" loop data-audio="panel"></audio>
+
 </div>
+
         </div>
 
         <div class="info-panels">
