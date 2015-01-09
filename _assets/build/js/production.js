@@ -822,13 +822,31 @@ console.log('include media/channels/index');
         return media.src || media.currentSrc;
     }
 
-    function setMediaState(media, config) {
-        if (!(media && config)) return;
-        var initTime = +config.initTime;
-        if (isNaN(initTime)) return;
-        console.log('setting initTime', initTime, media.readyState);
-        if (media.readyState !== 0) media.currentTime = initTime;
+    function setMediaTime(media, time) {
+        if (!media || typeof time === 'undefined' || isNaN(time)) return;
+        console.log('setting media time', time, media.readyState);
+        if (media.readyState !== 0) {
+            media.currentTime = time;
+        }
+    }
 
+    function setMediaStateAtEnd(media, config) {
+        if (!(media && config)) return;
+        setMediaTime(media, config.seekToTimeAtEnd);
+    }
+
+    function setMediaStateAtStart(media, config) {
+        if (!(media && config)) return;
+        setMediaTime(media, config.initTime);
+    }
+
+    function setChannelStateOnComplete(media, channel) {
+        function onComplete() {
+            media.currentTime = 0;
+            channel.setState(channel.getState('activeStopped'));
+            media.removeEventListener('ended', onComplete);
+        }
+        media.addEventListener('ended', onComplete);
     }
 
     function ChannelDefaultState(channel) {
@@ -885,10 +903,17 @@ console.log('include media/channels/index');
             this.channel.currentMedia = media;
             this.channel.currentConfig = config;
 
-            console.log('>> playing:', getSrc(media));
+            console.log('>> playing:', this.channel.id + ': ', config, getSrc(media));
 
-            setMediaState(media, config);
-            mixer.fadeIn(media, 1000);
+            setMediaStateAtStart(media, config);
+            setChannelStateOnComplete(media, this.channel);
+
+            if (config && config.noFade) {
+                media.volume = 1;
+                media.play();
+            } else {
+                mixer.fadeIn(media, 1000);
+            }
 
             this.channel.setState(this.channel.getState('activePlaying'));
         },
@@ -912,11 +937,20 @@ console.log('include media/channels/index');
                 mediaNotTheSame = (currentMedia !== media),
                 currentConfig = this.channel.currentConfig;
 
-            console.log('>> crossfading:', getSrc(currentMedia), getSrc(media));
-            mixer.crossfade(currentMedia, media, 1000, function() {
-                setMediaState(currentMedia, currentConfig);
-            });
+            console.log('>> crossfading:', this.channel.id + ': ', getSrc(currentMedia), getSrc(media));
 
+            setMediaStateAtStart(media, config);
+            setChannelStateOnComplete(media, this.channel);
+
+            if (config && config.noFade) {
+                currentMedia.pause();
+                media.volume = 1;
+                media.play();
+            } else {
+                mixer.crossfade(currentMedia, media, 1000, function() {
+                    setMediaStateAtEnd(currentMedia, currentConfig);
+                });
+            }
             this.channel.currentMedia = media;
 
         },
@@ -925,10 +959,16 @@ console.log('include media/channels/index');
             var media = this.channel.currentMedia;
             config = config || this.channel.currentConfig || {};
 
-            console.log('>> stopping:', getSrc(media));
-            mixer.fadeOut(media, 1000, function() {
-                setMediaState(media, config);
-            });
+            console.log('>> stopping:', this.channel.id + ': ', config, getSrc(media));
+
+            if (config && config.noFade) {
+                media.pause();
+            } else {
+                mixer.fadeOut(media, 1000, function() {
+                    setMediaStateAtEnd(media, config);
+                });
+            }
+
 
             this.channel.currentMedia = null;
             this.channel.currentConfig = null;
@@ -936,7 +976,7 @@ console.log('include media/channels/index');
             this.channel.setState(this.channel.getState('activeStopped'));
         },
         silence: function() {
-            console.log('>> silencing:', getSrc(this.channel.currentMedia));
+            console.log('>> silencing:', this.channel.id + ': ', getSrc(this.channel.currentMedia));
             mixer.fadeOut(this.channel.currentMedia);
             this.channel.setState(this.channel.getState('inactivePlaying'));
         }
@@ -1049,7 +1089,7 @@ console.log('include media/channels/ctrl');
                         exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel]
                     }),
                     component: getChannel(CHANNEL_IDS.component, {
-                        exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.fx]
+                        exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video]
                     }),
                     panel: getChannel(CHANNEL_IDS.panel, {
                         exclude: [CHANNEL_IDS.global]
@@ -1068,7 +1108,7 @@ console.log('include media/channels/ctrl');
                     exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel]
                 }),
                 component: getChannel(CHANNEL_IDS.component, {
-                    exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.fx]
+                    exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video]
                 }),
                 panel: getChannel(CHANNEL_IDS.panel, {
                     exclude: [CHANNEL_IDS.global]
@@ -1104,7 +1144,7 @@ console.log('include media/channels/ctrl');
         if (!config || !config.exclude) return;
         // console.log('channel setChannelsInactive', config.exclude);
         function setChannelIn(channelID) {
-            // console.log('setting channel inactive', channelID);
+            console.log('setting channel inactive', channelID);
             var channel = getChannelById(channelID);
             channel.silence();
         }
@@ -1155,16 +1195,43 @@ console.log('include media/channels/ctrl');
         stopChannel(CHANNEL_IDS.video, config);
     }
 
+    function playMediaOnComponentChannel(media, config) {
+        playMediaWithChannel(media, CHANNEL_IDS.component, config);
+    }
+
+    function stopComponentChannel(config) {
+        stopChannel(CHANNEL_IDS.component, config);
+    }
+
+    function playMediaOnFxChannel(media, config) {
+        config = ((config || {}).noFade = true);
+        playMediaWithChannel(media, CHANNEL_IDS.fx, config);
+    }
+
+    function stopFxChannel(config) {
+        config = ((config || {}).noFade = true);
+        stopChannel(CHANNEL_IDS.fx, config);
+    }
+
     exports.ctrl = {
         init: init,
         playMediaWithChannel: playMediaWithChannel,
         stopChannel: stopChannel,
+
         playMediaOnPanelChannel: playMediaOnPanelChannel,
         stopPanelChannel: stopPanelChannel,
+
         playMediaOnGlobalChannel: playMediaOnGlobalChannel,
         stopGlobalChannel: stopGlobalChannel,
+
         playMediaOnVideoChannel: playMediaOnVideoChannel,
-        stopVideoChannel: stopVideoChannel
+        stopVideoChannel: stopVideoChannel,
+
+        playMediaOnComponentChannel: playMediaOnComponentChannel,
+        stopComponentChannel: stopComponentChannel,
+
+        playMediaOnFxChannel: playMediaOnFxChannel,
+        stopFxChannel: stopFxChannel
     };
 
 }(Pathways.media.channels, Pathways.media.channels.getChannel));
@@ -1185,15 +1252,25 @@ console.log('include media/ctrl');
 
         playMediaWithChannel: channelCtrl.playMediaWithChannel,
         stopChannel: channelCtrl.stopChannel,
+
         playMediaOnPanelChannel: channelCtrl.playMediaOnPanelChannel,
         stopPanelChannel: channelCtrl.stopPanelChannel,
+
         playMediaOnGlobalChannel: channelCtrl.playMediaOnGlobalChannel,
         stopGlobalChannel: channelCtrl.stopGlobalChannel,
+
         playMediaOnVideoChannel: channelCtrl.playMediaOnVideoChannel,
         stopVideoChannel: channelCtrl.stopVideoChannel,
 
+        playMediaOnComponentChannel: channelCtrl.playMediaOnComponentChannel,
+        stopComponentChannel: channelCtrl.stopComponentChannel,
+
+        playMediaOnFxChannel: channelCtrl.playMediaOnFxChannel,
+        stopFxChannel: channelCtrl.stopFxChannel,
+
         disable: function() {
             console.log('disabling media');
+            // TODO: disabling media
         }
 
     };
@@ -1691,7 +1768,7 @@ console.log('include image-loader');
 
 console.log('include core audio-player');
 
-(function(exports, viewControl, vol, volViews, utils, $) {
+(function(exports, viewControl, mediaCtrl, vol, volViews, utils, $) {
 
     var fallbackDuration = 600;
 
@@ -1701,28 +1778,36 @@ console.log('include core audio-player');
             if (!audio.paused) return;
             vol.addView(linkedView);
             audio.addEventListener('timeupdate', timeUpdate);
-            audio.muted = vol.isMuted();
-            audio.play();
+            console.log(audio.currentTime);
+            if (audio.currentTime !== 0) {
+                mediaCtrl.playMediaOnComponentChannel(audio, { noFade: true });
+            } else {
+                mediaCtrl.playMediaOnComponentChannel(audio);
+            }
+
             timeUpdate();
         };
     }
 
     function getPause(audio, linkedView, timeUpdate) {
+        function onPause (e) {
+            audio.removeEventListener('timeupdate', timeUpdate);
+            audio.removeEventListener('pause', onPause);
+            timeUpdate();
+        }
         return function pause() {
             if (audio.paused) return;
             vol.removeView(linkedView);
-            audio.pause();
-            audio.removeEventListener('timeupdate', timeUpdate);
-            timeUpdate();
+            mediaCtrl.stopComponentChannel({ noFade: true });
+            audio.addEventListener('pause', onPause);
         };
     }
 
     function getStop(audio, linkedView, timeUpdate) {
         return function stop() {
             vol.removeView(linkedView);
-            audio.pause();
+            mediaCtrl.stopComponentChannel();
             audio.removeEventListener('timeupdate', timeUpdate);
-            audio.currentTime = 0;
             timeUpdate();
         };
     }
@@ -1730,8 +1815,8 @@ console.log('include core audio-player');
     function getTimeUpdate(audio, viewCtrl) {
 
         return function(e) {
-            // console.log('timeupdate', audio.src);
-            if (audio.currentTime === audio.duration) audio.currentTime = 0;
+            console.log('timeupdate', audio.src);
+            //if (audio.currentTime === audio.duration) audio.currentTime = 0;
             viewCtrl.update(audio.paused, audio.duration, audio.currentTime);
         };
     }
@@ -1889,7 +1974,7 @@ console.log('include core audio-player');
         getPlayerView: getPlayerView
     };
 
-}(Pathways.components.core, Pathways.core.view, Pathways.media.vol, Pathways.media.vol.views, Pathways.utils, jQuery));
+}(Pathways.components.core, Pathways.core.view, Pathways.media.ctrl, Pathways.media.vol, Pathways.media.vol.views, Pathways.utils, jQuery));
 
 var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
@@ -6863,41 +6948,58 @@ Pathways.scrollScenes.Office2 = function(panelID) {
     return scene;
 };
 
-
 Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
 
-    var startY;
+    var startY,
+        coinInFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-onto-screen.mp3');
+        coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3');
 
     var scene = new ScrollScene({
             triggerElement: panelID,
-            triggerHook:    'top',
-            duration:       Pathways.panelHeight,
+            triggerHook: 'top',
+            duration: Pathways.panelHeight,
         })
         .on('enter', function(e) {
-            if( e.scrollDirection == 'FORWARD' )
+            if (e.scrollDirection == 'FORWARD') {
                 startY = window.scrollY;
-            else
+                Pathways.media.ctrl.playMediaOnFxChannel(coinInFx);
+            } else {
                 startY = window.scrollY - (Pathways.panelHeight - 100);
+            }
         })
         .on('progress', function(e) {
-            $('.pence').css('transform', 'translate(0, '+ (window.scrollY - startY) +'px)');
+            $('.pence').css('transform', 'translate(0, ' + (window.scrollY - startY) + 'px)');
         });
+
+    var scene2 = new ScrollScene({
+            triggerElement: panelID,
+            triggerHook: 'top',
+            offset: 400
+        })
+        .on('enter', function(e) {
+            if (e.scrollDirection == 'FORWARD') {
+                Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
+            }
+        });
+
 
     // Keep the clipping mask the correct height in relation to the 'cover' background.
     var ratio = 1900 / 1050,
         $clip = $('#duke-of-buckingham .clip');
 
     function resizeClip() {
-        if( (window.innerWidth / window.innerHeight) > ratio ) {
-            var newHeight   = window.innerWidth / ratio,
-                percent     = (newHeight / 100) * 87,
-                difference  = newHeight - window.innerHeight;
+        if ((window.innerWidth / window.innerHeight) > ratio) {
+            var newHeight = window.innerWidth / ratio,
+                percent = (newHeight / 100) * 87,
+                difference = newHeight - window.innerHeight;
 
             // console.log(newHeight, window.innerHeight, difference);
 
-            $clip.css( { 'height': percent, 'transform': 'translate(0, '+ -difference +'px)' } );
-        }
-        else
+            $clip.css({
+                'height': percent,
+                'transform': 'translate(0, ' + -difference + 'px)'
+            });
+        } else
             $clip.css('height', '87%');
     }
 
@@ -6907,7 +7009,7 @@ Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
         resizeClip();
     });
 
-    return scene;
+    return [scene, scene2];
 };
 
 
@@ -7976,6 +8078,7 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
                 $letterGallery = $this.find('[data-component="letter-gallery"]'),
                 $quiz = $this.find('[data-component="quiz"]'),
                 $panelAudio = $this.find('[data-audio="panel"]'),
+                $fxAudio = $this.find('[data-audio="fx"]'),
                 $panelVideo = $this.find('[data-video="panel"]'),
                 $slidingPanels = $this.find('.sliding-panel'),
 
@@ -8144,11 +8247,13 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
 
             // Audio & Video
             //
-            if ($panelVideo.length || $panelAudio.length) {
+            if ($panelVideo.length || $panelAudio.length || $fxAudio.length) {
                 var $video = $panelVideo.first(),
                     $audio = $panelAudio.first(),
+                    $fxaudio = $fxAudio.first(), // TODO: allow for multiple
                     video = $video.get(0),
                     audio = $audio.get(0),
+                    fxaudio = $fxaudio.get(0),
                     rawVideoConfig = $video.attr('data-config'),
                     rawAudioConfig = $audio.attr('data-config'),
                     videoConfig = rawVideoConfig ? JSON.parse(rawVideoConfig) : null,
@@ -8161,10 +8266,12 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
                     .on('enter', function() {
                         if ($video) p.media.ctrl.playMediaOnVideoChannel(video, videoConfig);
                         if (audio) p.media.ctrl.playMediaOnPanelChannel(audio, audioConfig);
+                        if (fxaudio) p.media.ctrl.playMediaOnFxChannel(fxaudio);
                     })
                     .on('leave', function() {
                         if ($video) p.media.ctrl.stopVideoChannel(videoConfig);
                         if (audio) p.media.ctrl.stopPanelChannel(audioConfig);
+                        if (fxaudio) p.media.ctrl.stopOnFxChannel(fxaudio);
                     });
             }
 
