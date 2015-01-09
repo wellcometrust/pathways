@@ -7,13 +7,22 @@ console.log('include media/channels/index');
         return media.src || media.currentSrc;
     }
 
-    function setMediaState(media, config) {
-        if (!(media && config)) return;
-        var initTime = +config.initTime;
-        if (isNaN(initTime)) return;
-        console.log('setting initTime', initTime, media.readyState);
-        if (media.readyState !== 0) media.currentTime = initTime;
+    function setMediaTime(media, time) {
+        if (!media || typeof time === 'undefined' || isNaN(time)) return;
+        console.log('setting media time', time, media.readyState);
+        if (media.readyState !== 0) {
+            media.currentTime = time;
+        }
+    }
 
+    function setMediaStateAtEnd(media, config) {
+        if (!(media && config)) return;
+        setMediaTime(media, config.seekToTimeAtEnd);
+    }
+
+    function setMediaStateAtStart(media, config) {
+        if (!(media && config)) return;
+        setMediaTime(media, config.initTime);
     }
 
     function ChannelDefaultState(channel) {
@@ -70,10 +79,16 @@ console.log('include media/channels/index');
             this.channel.currentMedia = media;
             this.channel.currentConfig = config;
 
-            console.log('>> playing:', getSrc(media));
+            console.log('>> playing:', this.channel.id + ': ', config, getSrc(media));
 
-            setMediaState(media, config);
-            mixer.fadeIn(media, 1000);
+            setMediaStateAtStart(media, config);
+
+            if (config && config.noFade) {
+                media.volume = 1;
+                media.play();
+            } else {
+                mixer.fadeIn(media, 1000);
+            }
 
             this.channel.setState(this.channel.getState('activePlaying'));
         },
@@ -97,11 +112,19 @@ console.log('include media/channels/index');
                 mediaNotTheSame = (currentMedia !== media),
                 currentConfig = this.channel.currentConfig;
 
-            console.log('>> crossfading:', getSrc(currentMedia), getSrc(media));
-            mixer.crossfade(currentMedia, media, 1000, function() {
-                setMediaState(currentMedia, currentConfig);
-            });
+            console.log('>> crossfading:', this.channel.id + ': ', getSrc(currentMedia), getSrc(media));
 
+            setMediaStateAtStart(media, config);
+
+            if (config && config.noFade) {
+                currentMedia.pause();
+                media.volume = 1;
+                media.play();
+            } else {
+                mixer.crossfade(currentMedia, media, 1000, function() {
+                    setMediaStateAtEnd(currentMedia, currentConfig);
+                });
+            }
             this.channel.currentMedia = media;
 
         },
@@ -110,10 +133,16 @@ console.log('include media/channels/index');
             var media = this.channel.currentMedia;
             config = config || this.channel.currentConfig || {};
 
-            console.log('>> stopping:', getSrc(media));
-            mixer.fadeOut(media, 1000, function() {
-                setMediaState(media, config);
-            });
+            console.log('>> stopping:', this.channel.id + ': ', config, getSrc(media));
+
+            if (config && config.noFade) {
+                media.pause();
+            } else {
+                mixer.fadeOut(media, 1000, function() {
+                    setMediaStateAtEnd(media, config);
+                });
+            }
+
 
             this.channel.currentMedia = null;
             this.channel.currentConfig = null;
@@ -121,7 +150,7 @@ console.log('include media/channels/index');
             this.channel.setState(this.channel.getState('activeStopped'));
         },
         silence: function() {
-            console.log('>> silencing:', getSrc(this.channel.currentMedia));
+            console.log('>> silencing:', this.channel.id + ': ', getSrc(this.channel.currentMedia));
             mixer.fadeOut(this.channel.currentMedia);
             this.channel.setState(this.channel.getState('inactivePlaying'));
         }

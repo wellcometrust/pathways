@@ -29,7 +29,7 @@ console.log('include media/channels/ctrl');
                         exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel]
                     }),
                     component: getChannel(CHANNEL_IDS.component, {
-                        exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.fx]
+                        exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video]
                     }),
                     panel: getChannel(CHANNEL_IDS.panel, {
                         exclude: [CHANNEL_IDS.global]
@@ -84,7 +84,7 @@ console.log('include media/channels/ctrl');
         if (!config || !config.exclude) return;
         // console.log('channel setChannelsInactive', config.exclude);
         function setChannelIn(channelID) {
-            // console.log('setting channel inactive', channelID);
+            console.log('setting channel inactive', channelID);
             var channel = getChannelById(channelID);
             channel.silence();
         }
@@ -135,16 +135,41 @@ console.log('include media/channels/ctrl');
         stopChannel(CHANNEL_IDS.video, config);
     }
 
+    function playMediaOnComponentChannel(media, config) {
+        playMediaWithChannel(media, CHANNEL_IDS.component, config);
+    }
+
+    function stopComponentChannel(config) {
+        stopChannel(CHANNEL_IDS.component, config);
+    }
+
+    function playMediaOnFxChannel(media, config) {
+        playMediaWithChannel(media, CHANNEL_IDS.component, config);
+    }
+
+    function stopFxChannel(config) {
+        stopChannel(CHANNEL_IDS.component, config);
+    }
+
     exports.ctrl = {
         init: init,
         playMediaWithChannel: playMediaWithChannel,
         stopChannel: stopChannel,
+
         playMediaOnPanelChannel: playMediaOnPanelChannel,
         stopPanelChannel: stopPanelChannel,
+
         playMediaOnGlobalChannel: playMediaOnGlobalChannel,
         stopGlobalChannel: stopGlobalChannel,
+
         playMediaOnVideoChannel: playMediaOnVideoChannel,
-        stopVideoChannel: stopVideoChannel
+        stopVideoChannel: stopVideoChannel,
+
+        playMediaOnComponentChannel: playMediaOnComponentChannel,
+        stopComponentChannel: stopComponentChannel,
+
+        playMediaOnFxChannel: playMediaOnFxChannel,
+        stopFxChannel: stopFxChannel
     };
 
 }(Pathways.media.channels, Pathways.media.channels.getChannel));

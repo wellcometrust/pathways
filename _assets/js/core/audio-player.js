@@ -1,6 +1,6 @@
 console.log('include core audio-player');
 
-(function(exports, viewControl, vol, volViews, utils, $) {
+(function(exports, viewControl, mediaCtrl, vol, volViews, utils, $) {
 
     var fallbackDuration = 600;
 
@@ -10,28 +10,36 @@ console.log('include core audio-player');
             if (!audio.paused) return;
             vol.addView(linkedView);
             audio.addEventListener('timeupdate', timeUpdate);
-            audio.muted = vol.isMuted();
-            audio.play();
+            console.log(audio.currentTime);
+            if (audio.currentTime !== 0) {
+                mediaCtrl.playMediaOnComponentChannel(audio, { noFade: true });
+            } else {
+                mediaCtrl.playMediaOnComponentChannel(audio);
+            }
+
             timeUpdate();
         };
     }
 
     function getPause(audio, linkedView, timeUpdate) {
+        function onPause (e) {
+            audio.removeEventListener('timeupdate', timeUpdate);
+            audio.removeEventListener('pause', onPause);
+            timeUpdate();
+        }
         return function pause() {
             if (audio.paused) return;
             vol.removeView(linkedView);
-            audio.pause();
-            audio.removeEventListener('timeupdate', timeUpdate);
-            timeUpdate();
+            mediaCtrl.stopComponentChannel({ noFade: true });
+            audio.addEventListener('pause', onPause);
         };
     }
 
     function getStop(audio, linkedView, timeUpdate) {
         return function stop() {
             vol.removeView(linkedView);
-            audio.pause();
+            mediaCtrl.stopComponentChannel();
             audio.removeEventListener('timeupdate', timeUpdate);
-            audio.currentTime = 0;
             timeUpdate();
         };
     }
@@ -39,7 +47,7 @@ console.log('include core audio-player');
     function getTimeUpdate(audio, viewCtrl) {
 
         return function(e) {
-            // console.log('timeupdate', audio.src);
+            console.log('timeupdate', audio.src);
             if (audio.currentTime === audio.duration) audio.currentTime = 0;
             viewCtrl.update(audio.paused, audio.duration, audio.currentTime);
         };
@@ -198,4 +206,4 @@ console.log('include core audio-player');
         getPlayerView: getPlayerView
     };
 
-}(Pathways.components.core, Pathways.core.view, Pathways.media.vol, Pathways.media.vol.views, Pathways.utils, jQuery));
+}(Pathways.components.core, Pathways.core.view, Pathways.media.ctrl, Pathways.media.vol, Pathways.media.vol.views, Pathways.utils, jQuery));
