@@ -297,6 +297,7 @@
                 $letterGallery = $this.find('[data-component="letter-gallery"]'),
                 $quiz = $this.find('[data-component="quiz"]'),
                 $panelAudio = $this.find('[data-audio="panel"]'),
+                $fxAudio = $this.find('[data-audio="fx"]'),
                 $panelVideo = $this.find('[data-video="panel"]'),
                 $slidingPanels = $this.find('.sliding-panel'),
 
@@ -465,11 +466,13 @@
 
             // Audio & Video
             //
-            if ($panelVideo.length || $panelAudio.length) {
+            if ($panelVideo.length || $panelAudio.length || $fxAudio.length) {
                 var $video = $panelVideo.first(),
                     $audio = $panelAudio.first(),
+                    $fxaudio = $fxAudio.first(), // TODO: allow for multiple
                     video = $video.get(0),
                     audio = $audio.get(0),
+                    fxaudio = $fxaudio.get(0),
                     rawVideoConfig = $video.attr('data-config'),
                     rawAudioConfig = $audio.attr('data-config'),
                     videoConfig = rawVideoConfig ? JSON.parse(rawVideoConfig) : null,
@@ -482,10 +485,12 @@
                     .on('enter', function() {
                         if ($video) p.media.ctrl.playMediaOnVideoChannel(video, videoConfig);
                         if (audio) p.media.ctrl.playMediaOnPanelChannel(audio, audioConfig);
+                        if (fxaudio) p.media.ctrl.playMediaOnFxChannel(fxaudio);
                     })
                     .on('leave', function() {
                         if ($video) p.media.ctrl.stopVideoChannel(videoConfig);
                         if (audio) p.media.ctrl.stopPanelChannel(audioConfig);
+                        if (fxaudio) p.media.ctrl.stopOnFxChannel(fxaudio);
                     });
             }
 

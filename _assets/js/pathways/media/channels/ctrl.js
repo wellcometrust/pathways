@@ -48,7 +48,7 @@ console.log('include media/channels/ctrl');
                     exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel]
                 }),
                 component: getChannel(CHANNEL_IDS.component, {
-                    exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.fx]
+                    exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video]
                 }),
                 panel: getChannel(CHANNEL_IDS.panel, {
                     exclude: [CHANNEL_IDS.global]
@@ -144,11 +144,13 @@ console.log('include media/channels/ctrl');
     }
 
     function playMediaOnFxChannel(media, config) {
-        playMediaWithChannel(media, CHANNEL_IDS.component, config);
+        config = ((config || {}).noFade = true);
+        playMediaWithChannel(media, CHANNEL_IDS.fx, config);
     }
 
     function stopFxChannel(config) {
-        stopChannel(CHANNEL_IDS.component, config);
+        config = ((config || {}).noFade = true);
+        stopChannel(CHANNEL_IDS.fx, config);
     }
 
     exports.ctrl = {

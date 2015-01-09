@@ -1,38 +1,55 @@
-
 Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
 
-    var startY;
+    var startY,
+        coinInFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-onto-screen.mp3');
+        coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3');
 
     var scene = new ScrollScene({
             triggerElement: panelID,
-            triggerHook:    'top',
-            duration:       Pathways.panelHeight,
+            triggerHook: 'top',
+            duration: Pathways.panelHeight,
         })
         .on('enter', function(e) {
-            if( e.scrollDirection == 'FORWARD' )
+            if (e.scrollDirection == 'FORWARD') {
                 startY = window.scrollY;
-            else
+                Pathways.media.ctrl.playMediaOnFxChannel(coinInFx);
+            } else {
                 startY = window.scrollY - (Pathways.panelHeight - 100);
+            }
         })
         .on('progress', function(e) {
-            $('.pence').css('transform', 'translate(0, '+ (window.scrollY - startY) +'px)');
+            $('.pence').css('transform', 'translate(0, ' + (window.scrollY - startY) + 'px)');
         });
+
+    var scene2 = new ScrollScene({
+            triggerElement: panelID,
+            triggerHook: 'top',
+            offset: 400
+        })
+        .on('enter', function(e) {
+            if (e.scrollDirection == 'FORWARD') {
+                Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
+            }
+        });
+
 
     // Keep the clipping mask the correct height in relation to the 'cover' background.
     var ratio = 1900 / 1050,
         $clip = $('#duke-of-buckingham .clip');
 
     function resizeClip() {
-        if( (window.innerWidth / window.innerHeight) > ratio ) {
-            var newHeight   = window.innerWidth / ratio,
-                percent     = (newHeight / 100) * 87,
-                difference  = newHeight - window.innerHeight;
+        if ((window.innerWidth / window.innerHeight) > ratio) {
+            var newHeight = window.innerWidth / ratio,
+                percent = (newHeight / 100) * 87,
+                difference = newHeight - window.innerHeight;
 
             // console.log(newHeight, window.innerHeight, difference);
 
-            $clip.css( { 'height': percent, 'transform': 'translate(0, '+ -difference +'px)' } );
-        }
-        else
+            $clip.css({
+                'height': percent,
+                'transform': 'translate(0, ' + -difference + 'px)'
+            });
+        } else
             $clip.css('height', '87%');
     }
 
@@ -42,5 +59,5 @@ Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
         resizeClip();
     });
 
-    return scene;
+    return [scene, scene2];
 };

@@ -25,6 +25,15 @@ console.log('include media/channels/index');
         setMediaTime(media, config.initTime);
     }
 
+    function setChannelStateOnComplete(media, channel) {
+        function onComplete() {
+            media.currentTime = 0;
+            channel.setState(channel.getState('activeStopped'));
+            media.removeEventListener('ended', onComplete);
+        }
+        media.addEventListener('ended', onComplete);
+    }
+
     function ChannelDefaultState(channel) {
         var self = this;
         self.channel = channel;
@@ -82,6 +91,7 @@ console.log('include media/channels/index');
             console.log('>> playing:', this.channel.id + ': ', config, getSrc(media));
 
             setMediaStateAtStart(media, config);
+            setChannelStateOnComplete(media, this.channel);
 
             if (config && config.noFade) {
                 media.volume = 1;
@@ -115,6 +125,7 @@ console.log('include media/channels/index');
             console.log('>> crossfading:', this.channel.id + ': ', getSrc(currentMedia), getSrc(media));
 
             setMediaStateAtStart(media, config);
+            setChannelStateOnComplete(media, this.channel);
 
             if (config && config.noFade) {
                 currentMedia.pause();

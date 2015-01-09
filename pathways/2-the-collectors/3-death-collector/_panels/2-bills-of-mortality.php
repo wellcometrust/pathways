@@ -2,7 +2,7 @@
 <div id="bills-of-mortality" class="panel" data-config='{ "offset_height": 500, "background": { "type": "image", "preserve_ratio": false } }'>
 
     <div class="bg-container">
-        <video preload="none" poster="/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-2.jpg" data-video="panel" data-config='{ "exclude": ["global"] }'>
+        <video preload="none" poster="/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-2.jpg" data-video="panel" data-config='{ "exclude": [] }'>
             <source src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/video/bills-of-mortality.mp4">
             <img alt="" src="/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-2.jpg">
         </video>
@@ -18,6 +18,6 @@
 
     </div>
 
-    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/03-bills-of-mortality.mp3" loop data-audio="panel"></audio>
+    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/03-fx-bills-of-mortality.mp3" data-audio="panel" data-config='{ "exclude": [] }'></audio>
 
 </div>

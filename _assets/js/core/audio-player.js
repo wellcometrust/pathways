@@ -48,7 +48,7 @@ console.log('include core audio-player');
 
         return function(e) {
             console.log('timeupdate', audio.src);
-            if (audio.currentTime === audio.duration) audio.currentTime = 0;
+            //if (audio.currentTime === audio.duration) audio.currentTime = 0;
             viewCtrl.update(audio.paused, audio.duration, audio.currentTime);
         };
     }
