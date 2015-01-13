@@ -15,23 +15,10 @@ sort($files);
 
 $root = str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']);
 
-include_once( $root .'/_includes/Spyc.php');
+// set_include_path(get_include_path() . PATH_SEPARATOR . $root .'pathways/1-mindcraft/1-mesmer/');
+
 include_once( $root .'/_includes/page-data.php');
-
-$config_yml = spyc_load_file( $root .'/_includes/config.yaml');
-
-// Default Config
-$pathway    = 'mindcraft';
-$module     = 'mesmer';
-$path       = $config_yml['site']['pathways'][$pathway]['path'];
-
-$teaser = array(
-    'image' => 'teaser-jtm.jpg',
-    'link'  => $path.'2-airloom',
-    'title' => 'A machine to control the mind'
-);
-
-$page = PageBuilder::getPage();
+$page = PageBuilder::getPage('mindcraft', 'mesmer');
 
 ?>
 <!DOCTYPE html>
@@ -41,7 +28,7 @@ $page = PageBuilder::getPage();
 
         <!-- Resize site based on device widths -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-       
+
         <link rel="stylesheet" href="/_assets/build/css/main.css">
 
         <style>
@@ -123,14 +110,14 @@ $page = PageBuilder::getPage();
             .clearfix {
                 *zoom: 1;
             }
-            
+
             .modal-outer,
             .modal,
             .modal-outer .modal {
                 position: relative;
                 top: 0;
             }
-            
+
         </style>
         <link rel="stylesheet" href="../tapestry/css/prism.css">
     </head>
@@ -138,7 +125,7 @@ $page = PageBuilder::getPage();
         <div class="primer-header">
 
             <h1>Patterns</h1>
-            
+
             <select onchange="document.location='#'+this.options[this.selectedIndex].value">
                 <?php
                 foreach ($files as $file):
@@ -158,9 +145,9 @@ $page = PageBuilder::getPage();
             ?>
 
             <div class="primer-section" id="<?php echo $pattern ?>">
-                
+
                 <h3 class="primer-section-header"><?php echo ucwords($title) ?> <span>(<?php echo $pattern ?>)</span></h3>
-                
+
                 <div class="primer-content clearfix">
 
             <?php
@@ -184,7 +171,7 @@ $page = PageBuilder::getPage();
                     echo $inc;
                 }
             ?>
-                
+
                 </div>
 
                 <div class="primer-code">
@@ -198,8 +185,8 @@ $page = PageBuilder::getPage();
         </div><!-- /.wrap -->
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        
+
         <script src="../tapestry/js/prism.js"></script>
-        
+
     </body>
 </html>

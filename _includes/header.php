@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title><?= $page->getPageTitle()?></title>
 
-    <meta name="description" content="<?= $page->getDescription()?>">
+    <meta name="description" content="<?= $page->getDescription() ?>">
     <meta name="viewport" content="initial-scale=1,width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 

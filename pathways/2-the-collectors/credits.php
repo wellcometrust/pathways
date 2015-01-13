@@ -41,18 +41,25 @@
                     <li><span>Project Manager:</span> Jessica Jebari</li>
                 </ul>
 
+                <h3>Angular Momentum</h3>
+
+                <ul>
+                    <li><span>Developer:</span> Danielle Huntrods</li>
+                </ul>
+
                 <h3>Beakus <span>(Air Loom Animation)</span></h3>
 
                 <ul>
                     <li><span>Producer:</span> Laura Thomas</li>
                     <li><span>Director:</span> Leo Bridle</li>
+                    <li><span>Script:</span> James Tilly Matthews / Mike Jay</li>
                 </ul>
 
             </div><!-- .inner -->
         </div><!-- .credits -->
 
         <?php
-            $page->renderPattern('navigation');
+            include_once($page->getPatternPath('navigation'));
         ?>
 
     </main>

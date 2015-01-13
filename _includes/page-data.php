@@ -17,10 +17,8 @@
     class PageBuilder {
 
         private $defaultTitle = 'Pathways';
-        private $defaultDescription = 'Wellcome Collection';
-
-        private $title = 'Pathways';
-        private $description = 'Wellcome Collection';
+        private $defaultPageTitle = 'Pathways | Wellcome Collection';
+        private $defaultDescription = 'Pathways | Wellcome Collection';
 
         private $siteConfigData;
         private $moduleData;
@@ -92,15 +90,28 @@
         }
 
         public function getTitle() {
-            return $this->getModule()['title'];
+            $mod = $this->getModule();
+            if (!empty($mod)) return $mod['title'];
+            return $this->defaultTitle;
         }
 
         public function getPageTitle() {
-            return $this->getModule()['title'] . $this->getModule()['title_postfix'];
+            $m = $this->getModule();
+            if (!empty($m)) {
+                if (isset($m['title'])) {
+                    if (isset($m['title_postfix'])) return $m['title'] . $m['title_postfix'];
+                    return $m['title'];
+                }
+            }
+
+            return $this->defaultPageTitle;
+
         }
 
         public function getDescription() {
-            return $this->getModule()['description'];
+            $m = $this->getModule();
+            if (!empty($m)) { if (isset($m['description'])) return $m['description']; }
+            return $this->defaultDescription;
         }
 
         public function getPathwayId() {
@@ -134,6 +145,16 @@
 
         public function getPathwayPath() {
             return $this->_getPathwayPath($this->pathwayId, $this->siteConfigData);
+        }
+
+        public function getModulePath() {
+            $mod = $this->getModule();
+            $path = $mod['path'];
+            return $this->docRoot.$this->_getPathwayPath($this->pathwayId, $this->siteConfigData).$path;
+        }
+
+        public function getPathwaySurveyLink() {
+            return $this->_getPathwaySurveyLink($this->pathwayId, $this->siteConfigData);
         }
 
         public function getPathwayModules() {
@@ -171,9 +192,9 @@
             include_once($this->docRoot.'/_includes/module.php');
         }
 
-        public function renderPattern($pattern, $data = null) {
+        public function getPatternPath($pattern, $data = null) {
             $page = $this;
-            include($this->docRoot . '/patterns/' . $pattern . '.php' );
+            return $this->docRoot . '/patterns/' . $pattern . '.php';
         }
 
 
@@ -196,23 +217,35 @@
         }
 
         private function _getModulePageInfo($id, $data, $item){
-            if (empty($id) && !empty($data)) {
+            if (empty($id) && !empty($data) && !empty($data['page_info'])) {
                 $id = $data['page_info'][$item];
             }
             return $id;
         }
 
         private function _getPathwayPath($pathwayId, $siteConfigData) {
-            return $siteConfigData['site']['pathways'][$pathwayId]['path'];
+            return $this->_getPathwayInfo('path', $pathwayId, $siteConfigData);
+        }
+
+        private function _getPathwaySurveyLink($pathwayId, $siteConfigData) {
+            return $this->_getPathwayInfo('survey-link', $pathwayId, $siteConfigData);
         }
 
         private function _getPathwayModules($pathwayId, $siteConfigData) {
-            $modules = $siteConfigData['site']['pathways'][$pathwayId]['modules'];
+            $modules = $this->_getPathwayInfo('modules', $pathwayId, $siteConfigData);
             return $this->_setModuleIndexes($modules);
+        }
+        private function _getPathwayInfo($itemId, $pathwayId, $siteConfigData) {
+            $p = $siteConfigData['site']['pathways'];
+            if (isset($p[$pathwayId])) {
+                $q = $p[$pathwayId];
+                if (isset($q[$itemId])) return $q[$itemId];
+            }
+            return '';
         }
 
         private function _setModuleIndexes($modules) {
-            if (isset($modules)) {
+            if (isset($modules) && !empty($modules)) {
                 $count = 1;
                 foreach($modules as &$m ) {
                     if ( isset($m['panels'])) $m['index'] = $count++;

@@ -4,7 +4,7 @@ site:
     pathways:
         mindcraft:
             path: '/pathways/1-mindcraft/'
-
+            survey-link: 'http://survey.euro.confirmit.com/wix/p1839093604.aspx'
             modules:
                 -   id: intro
                     path: 'index.php'
@@ -90,6 +90,7 @@ site:
 
         the-collectors:
             path: '/pathways/2-the-collectors/'
+            # survey-link: 'http://www.google.com'
             modules:
                 -   id: intro
                     path: 'index.php'

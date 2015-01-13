@@ -5,7 +5,7 @@
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
     include_once($docRoot.'/_includes/page-data.php');
-    
+
     $page = PageBuilder::getPage('mindcraft','credits');
 
     include_once($docRoot.'/_includes/header.php');
@@ -59,9 +59,9 @@
         </div><!-- .credits -->
 
         <?php
-            $page->renderPattern('navigation'); 
+            include_once($page->getPatternPath('navigation'));
         ?>
-        
+
     </main>
 
 <?php include_once($docRoot.'/_includes/footer.php') ?>

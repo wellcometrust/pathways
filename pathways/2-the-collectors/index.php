@@ -10,9 +10,9 @@ include_once($docRoot.'/_includes/page-data.php');
 $page = PageBuilder::getPage('the-collectors', 'intro');
 
 include_once($docRoot.'/_includes/header.php');
+include_once($docRoot.'/_includes/cookie_consent.php');
 
 ?>
-    <?php include_once($docRoot.'/_includes/cookie_consent.php'); ?>
 
     <main role="main">
 
@@ -29,7 +29,7 @@ include_once($docRoot.'/_includes/header.php');
                     <h1>The Collectors</h1>
                 </header>
 
-                <p class="intro-body">Example text</p>
+                <p class="intro-body">Collectors intro text</p>
 
                 <a href="1-curious-gardener/index.php" class="intro-button">
                     Start your journey
@@ -39,7 +39,7 @@ include_once($docRoot.'/_includes/header.php');
 
         <?php
             /* Navigation */
-            $page->renderPattern('intro-navigation');
+            include_once($page->getPatternPath('intro-navigation'));
         ?>
 
         </div>

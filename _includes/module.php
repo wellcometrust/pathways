@@ -1,7 +1,7 @@
 <?php include_once($page->docRoot.'/_includes/header.php'); ?>
 
     <main role="main">
-        
+
         <a class="mute" href="#"></a>
 
         <?php include_once('_panels/1-start.php'); ?>
@@ -15,7 +15,7 @@
 
                 // Process the files unless they are a hidden file (starts with a .) a directory command (. and ..) or the start panel
                 while (false !== ($file = $d->read())) {
-                    if( $file[0] != '.' && !preg_match('/start/', $file) )
+                    if( $file[0] != '.' && !preg_match('/start/', $file) && !preg_match('/fork/', $file) )
                         $file_array[] = $file;
                 }
 
@@ -30,39 +30,39 @@
 
         <div class="info-panels">
 
-            <?php            
+            <?php
                 $panels = $page->getModuleData('info_panels');
 
-                foreach ($panels as $key => $ip) {   
-                    
+                foreach ($panels as $key => $ip) {
+
                     $share = isset($ip['share']) ? $ip['share'] : NULL;
 
-                    if (isset($ip['links'])) {  
+                    if (isset($ip['links'])) {
                         $panel = array(
                             'id'    => $key,
                             'links' => $ip['links'],
                             'share' => $share
                         );
-                        $page->renderPattern('library_panel', $panel);
+                        include($page->getPatternPath('library_panel'));
                     }
                 }
-            
+
             ?>
         </div>
 
         <?php
             /* Survey */
             // Comment out this line to remove the survey when no longer required
-            $page->renderPattern('survey');   
+            include($page->getPatternPath('survey'));
 
             /* Teaser */
-            $page->renderPattern('fork');            
+            include($page->getPatternPath('fork'));
 
             /* Library Layer */
-            $page->renderPattern('library_layer');
-            
-            /* Navigation */   
-            $page->renderPattern('navigation'); 
+            include($page->getPatternPath('library_layer'));
+
+            /* Navigation */
+            include($page->getPatternPath('navigation'));
         ?>
 
     </main>

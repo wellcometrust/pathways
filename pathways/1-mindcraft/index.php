@@ -10,9 +10,8 @@ include_once($docRoot.'/_includes/page-data.php');
 $page = PageBuilder::getPage('mindcraft', 'intro');
 
 include_once($docRoot.'/_includes/header.php');
-
+include_once($docRoot.'/_includes/cookie_consent.php');
 ?>
-    <?php include_once($docRoot.'/_includes/cookie_consent.php'); ?>
 
     <main role="main">
 
@@ -39,7 +38,7 @@ include_once($docRoot.'/_includes/header.php');
 
         <?php
             /* Navigation */
-            $page->renderPattern('intro-navigation');
+            include_once($page->getPatternPath('intro-navigation'));
         ?>
 
         </div>

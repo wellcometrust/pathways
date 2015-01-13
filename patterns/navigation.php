@@ -5,11 +5,7 @@
     $currentModule = $page->getModule();
     $pathwayId = $page->getPathwayId();
 
-    $level = '';
     $count = 0;
-    if (stripos($currentModule['path'], '/') != 0) {
-        $level = '../';
-    }
 
 ?>
 
@@ -21,7 +17,7 @@
                 <li<?= $currentModule['id'] == '' ? ' class="active"' : '' ?>>
                     <a href="<?= $pathwayPath ?>index.php">
                         <span>Intro</span>
-                        <img src="<?= $level ?>_assets/navigation/intro.jpg">
+                        <img src="<?= $pathwayPath ?>_assets/navigation/intro.jpg">
                     </a>
                 </li>
 
@@ -33,7 +29,7 @@
                 <li<?= $currentModule['id'] == $m['id'] ? ' class="active"' : '' ?>>
                     <a href="<?= $pathwayPath . $m['path'] ?>index.php">
                         <span><?= $m['index']  . '. ' . $m['title'] ?></span>
-                        <img src="<?= $level ?>_assets/navigation/<?= $m['id'] ?>.jpg">
+                        <img src="<?= $pathwayPath . '_assets/navigation/' . $m['id'] ?>.jpg">
                     </a>
                 </li>
             <?php
