@@ -3,8 +3,8 @@
 
     <div class="bg-container">
         <video controls="true" data-video="panel" data-config='{ "muteGlobal" : true }'>>
-            <source src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/video/AnnaFaherty_Joseph_Kahn.mp4">
-            <source src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/video/AnnaFaherty_Joseph_Kahn.webm">
+            <source src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/video/AnnaFaherty_JosephKahn.mp4">
+            <source src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/video/AnnaFaherty_JosephKahn.webm">
         </video>
         <img alt="" src="/_assets/img/spacer.png">
     </div>
