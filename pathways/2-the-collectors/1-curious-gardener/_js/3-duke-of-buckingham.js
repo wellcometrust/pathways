@@ -1,10 +1,13 @@
 Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
 
     var startY,
-        coinInFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-onto-screen.mp3');
-        coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3');
+        coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3'),
+        coinOnPage = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-onto-screen.mp3'),
+        scenes = [],
+        difference = 0,
+        initCoinOffset = 380;
 
-    var scene = new ScrollScene({
+    scenes.push(new ScrollScene({
             triggerElement: panelID,
             triggerHook: 'top',
             duration: Pathways.panelHeight,
@@ -12,25 +15,32 @@ Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
         .on('enter', function(e) {
             if (e.scrollDirection == 'FORWARD') {
                 startY = window.scrollY;
-                Pathways.media.ctrl.playMediaOnFxChannel(coinInFx);
             } else {
                 startY = window.scrollY - (Pathways.panelHeight - 100);
             }
         })
         .on('progress', function(e) {
             $('.pence').css('transform', 'translate(0, ' + (window.scrollY - startY) + 'px)');
-        });
+        }));
 
-    var scene2 = new ScrollScene({
+    scenes.push(new ScrollScene({
             triggerElement: panelID,
             triggerHook: 'top',
-            offset: 400
+            offset: initCoinOffset
         })
-        .on('enter', function(e) {
-            if (e.scrollDirection == 'FORWARD') {
-                Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
-            }
-        });
+        .on('start', function(e) {
+            console.log('coin in box');
+            Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
+        }));
+
+    scenes.push(new ScrollScene({
+            triggerElement: panelID,
+            triggerHook: 'top'
+        })
+        .on('start', function(e) {
+            console.log('coin on page');
+            Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
+        }));
 
 
     // Keep the clipping mask the correct height in relation to the 'cover' background.
@@ -40,10 +50,8 @@ Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
     function resizeClip() {
         if ((window.innerWidth / window.innerHeight) > ratio) {
             var newHeight = window.innerWidth / ratio,
-                percent = (newHeight / 100) * 87,
-                difference = newHeight - window.innerHeight;
-
-            // console.log(newHeight, window.innerHeight, difference);
+                percent = (newHeight / 100) * 87;
+            difference = parseInt((newHeight - window.innerHeight), 10);
 
             $clip.css({
                 'height': percent,
@@ -59,5 +67,5 @@ Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
         resizeClip();
     });
 
-    return [scene, scene2];
+    return scenes;
 };

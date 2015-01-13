@@ -464,33 +464,39 @@
             }
 
 
+
             // Audio & Video
             //
+            //
+            function getPlay(channelID) {
+                return function playMedia(index, media) {
+                    var config = $(media).attr('data-config') ? $(media).attr('data-config') : null;
+                    p.media.ctrl.playMediaOnChannel(media, channelID, config);
+                };
+            }
+
+            function getStop(channelID) {
+                return function stopMedia(index, media) {
+                    var config = $(media).attr('data-config') ? $(media).attr('data-config') : null;
+                    p.media.ctrl.stopMediaOnChannel(media, channelID, config);
+                };
+            }
+
             if ($panelVideo.length || $panelAudio.length || $fxAudio.length) {
-                var $video = $panelVideo.first(),
-                    $audio = $panelAudio.first(),
-                    $fxaudio = $fxAudio.first(), // TODO: allow for multiple
-                    video = $video.get(0),
-                    audio = $audio.get(0),
-                    fxaudio = $fxaudio.get(0),
-                    rawVideoConfig = $video.attr('data-config'),
-                    rawAudioConfig = $audio.attr('data-config'),
-                    videoConfig = rawVideoConfig ? JSON.parse(rawVideoConfig) : null,
-                    audioConfig = rawAudioConfig ? JSON.parse(rawAudioConfig) : null;
 
                 scenes[idx++] = new Ss({
                         triggerElement: $this,
                         duration: getMediaDuration
                     })
                     .on('enter', function() {
-                        if ($video) p.media.ctrl.playMediaOnVideoChannel(video, videoConfig);
-                        if (audio) p.media.ctrl.playMediaOnPanelChannel(audio, audioConfig);
-                        if (fxaudio) p.media.ctrl.playMediaOnFxChannel(fxaudio);
+                        $panelVideo.each(getPlay('video'));
+                        $panelAudio.each(getPlay('panel'));
+                        $fxAudio.each(getPlay('fx'));
                     })
                     .on('leave', function() {
-                        if ($video) p.media.ctrl.stopVideoChannel(videoConfig);
-                        if (audio) p.media.ctrl.stopPanelChannel(audioConfig);
-                        if (fxaudio) p.media.ctrl.stopOnFxChannel(fxaudio);
+                        $panelVideo.each(getStop('video'));
+                        $panelAudio.each(getStop('panel'));
+                        p.media.ctrl.stopFxChannel();
                     });
             }
 
@@ -502,11 +508,13 @@
                 var slideStart = $this.find('.sliding-panels').data('sliding-offset'),
                     offset = slideStart ? slideStart : 0;
 
+
                 $slidingPanels.css({
                     'opacity': 0
                 });
 
-                var translations = [-100, 100];
+                var translations = [-100, 100],
+                    defaultFxAudioSrc = 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3';
 
 
                 $slidingPanels.each(function(index) {
@@ -515,17 +523,34 @@
                     $this.css('transform', 'translate(' + translations[((index + offset) % 2)] + 'px,0)');
 
                     var tween = TweenMax.to($this, 1, {
-                        x: 0,
-                        opacity: 1
-                    });
+                            x: 0,
+                            opacity: 1
+                        }),
+                        fxAudioSrc = $this.data('fx') || defaultFxAudioSrc,
+                        fxAudio = new Audio(fxAudioSrc);
 
                     scenes[idx++] = new Ss({
                             triggerElement: $this,
                             duration: 200,
                             offset: offset
                         })
+                        .on('enter', function(e) {
+                            if (e.scrollDirection === 'FORWARD') {
+                                console.log('playing:', fxAudioSrc);
+                                if (fxAudio) p.media.ctrl.playMediaOnFxChannel(fxAudio);
+                            } else if (e.scrollDirection == 'REVERSE') {
+                                if (fxAudio) p.media.ctrl.playMediaOnFxChannel(fxAudio);
+                            }
+                        })
+                        .on('leave', function(e) {
+                            // if (e.scrollDirection == 'REVERSE') {
+                            //     console.log('ss', idx, 'leave');
+                            //     if (fxAudio) p.media.ctrl.playMediaOnFxChannel(fxAudio);
+                            // }
+                        })
                         .setTween(tween);
                 });
+
             }
 
             // Panel specific scene code if it has any

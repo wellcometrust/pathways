@@ -39,6 +39,7 @@
         </div>
     </div>
 
+    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/06-fx-married-love.mp3" data-audio="fx"></audio>
     <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/06-married-love.mp3" loop data-audio="panel"></audio>
 
 </div>

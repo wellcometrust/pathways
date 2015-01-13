@@ -30,7 +30,7 @@ console.log('include core audio-player');
         return function pause() {
             if (audio.paused) return;
             vol.removeView(linkedView);
-            mediaCtrl.stopComponentChannel({ noFade: true });
+            mediaCtrl.stopMediaOnComponentChannel(audio, { noFade: true });
             audio.addEventListener('pause', onPause);
         };
     }
@@ -38,7 +38,7 @@ console.log('include core audio-player');
     function getStop(audio, linkedView, timeUpdate) {
         return function stop() {
             vol.removeView(linkedView);
-            mediaCtrl.stopComponentChannel();
+            mediaCtrl.stopMediaOnComponentChannel(audio);
             audio.removeEventListener('timeupdate', timeUpdate);
             timeUpdate();
         };

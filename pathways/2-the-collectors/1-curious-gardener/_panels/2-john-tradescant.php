@@ -13,7 +13,7 @@
 
         <div class="sliding-panels" data-scene="john-tradescant" data-component="modal">
 
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.1.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.1-large.jpg"
@@ -25,7 +25,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.2.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.2-large.jpg"
@@ -37,7 +37,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.3.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.3-large.jpg"
@@ -49,7 +49,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.4.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.4-large.jpg"
@@ -61,7 +61,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.5.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.5-large.jpg"
@@ -73,7 +73,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/1.6.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.6-large.jpg"
@@ -94,7 +94,7 @@
 
         <div class="sliding-panels" data-scene="john-tradescant" data-component="modal">
 
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-sea-creatures-duke-of-buckingham.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.1.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.1-large.jpg"
@@ -106,7 +106,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-sea-creatures-duke-of-buckingham.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.2.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.2-large.jpg"
@@ -118,7 +118,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-sea-creatures-duke-of-buckingham.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.3.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.3-large.jpg"
@@ -130,7 +130,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-sea-creatures-duke-of-buckingham.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.4.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.4-large.jpg"
@@ -142,7 +142,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.5.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.5-large.jpg"
@@ -154,7 +154,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/2.6.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/2.6-large.jpg"
@@ -175,7 +175,7 @@
 
         <div class="sliding-panels" data-scene="john-tradescant" data-component="modal">
 
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/3.1.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/3.1-large.jpg"
@@ -186,7 +186,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/3.2.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/3.2-large.jpg"

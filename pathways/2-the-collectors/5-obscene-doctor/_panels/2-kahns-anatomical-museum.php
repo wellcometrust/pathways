@@ -14,7 +14,7 @@
                 <p>Ladies were admitted only on specified days, when Kahn insisted the most offensive models were removed from display.</p>
             </div>
 
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-01.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/1.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/1-large.jpg"
@@ -26,7 +26,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-02.wav.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/2.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/2-large.jpg"
@@ -38,7 +38,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-03.wav.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/3.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/3-large.jpg"
@@ -50,7 +50,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-04.wav.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/4.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/4-large.jpg"
@@ -62,7 +62,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-05.wav.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/5.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/5-large.jpg"
@@ -74,7 +74,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-01.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/6.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/6-large.jpg"
@@ -86,7 +86,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-02.wav.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/7.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/7-large.jpg"
@@ -98,7 +98,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-03.wav.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/8.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/8-large.jpg"
@@ -110,7 +110,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-04.wav.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/9.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/9-large.jpg"
@@ -122,7 +122,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-05.wav.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/10.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/10-large.jpg"
@@ -134,7 +134,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-01.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/11.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/11-large.jpg"
@@ -146,7 +146,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-02.wav.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/12.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/12-large.jpg"
@@ -158,7 +158,7 @@
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
                 </svg>
             </div>
-            <div class="sliding-panel">
+            <div class="sliding-panel"  data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/05-fx-obscene-doctor-slide-03.wav.mp3">
                 <img alt="" src="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/13.jpg">
                 <svg class="info-box modal"
                     data-image="/pathways/2-the-collectors/_assets/5-obscene-doctor/kahn/full/13-large.jpg"

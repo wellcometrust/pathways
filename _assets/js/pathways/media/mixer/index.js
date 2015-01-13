@@ -2,7 +2,7 @@ console.log('include media/mixer/index');
 /***
  *   Media audio mixer
  */
-(function(exports, w, vol, $){
+(function(exports, w, vol, $) {
 
     function fadeOut(media, delay, callback) {
         delay = delay || 1000;
@@ -44,6 +44,22 @@ console.log('include media/mixer/index');
         }
     }
 
+    function play(media) {
+        if (!media) return;
+        media.muted = vol.isMuted();
+        media.volume = 1;
+        media.play();
+    }
+
+    function stop(media) {
+        if (media) media.pause();
+    }
+
+    function crossplay(oldMedia, newMedia, callback) {
+        play(newMedia);
+        stop(oldMedia);
+        callback();
+    }
 
     function crossfade(fadeOutMedia, fadeInMedia, delay, fadeOutCompleteCallback, fadeInCompleteCallback) {
         delay = delay || 1000;
@@ -54,16 +70,26 @@ console.log('include media/mixer/index');
             return;
         }
 
-        fadeOut(fadeOutMedia, delay, fadeOutCompleteCallback);
+        if (fadeOutMedia !== null && typeof fadeOutMedia !== 'undefined') {
+            fadeOut(fadeOutMedia, delay, fadeOutCompleteCallback);
+        } else {
+            if (fadeOutCompleteCallback) w.setTimeout(fadeOutCompleteCallback, delay);
+        }
 
-        fadeIn(fadeInMedia, delay, fadeInCompleteCallback);
-
+        if (fadeInMedia !== null && typeof fadeInMedia !== 'undefined') {
+            fadeIn(fadeInMedia, delay, fadeInCompleteCallback);
+        } else {
+            if (fadeInCompleteCallback) w.setTimeout(fadeInCompleteCallback, delay);
+        }
     }
 
     exports.mixer = {
-        crossfade : crossfade,
-        fadeIn : fadeIn,
-        fadeOut : fadeOut
+        crossfade: crossfade,
+        fadeIn: fadeIn,
+        fadeOut: fadeOut,
+        play: play,
+        stop: stop,
+        crossplay: crossplay
     };
 
 
