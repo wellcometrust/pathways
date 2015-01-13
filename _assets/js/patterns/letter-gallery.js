@@ -49,14 +49,14 @@ console.log('include letter-gallery');
 
                 carousel.on('setPaneIndex', function(newIndex) {
                     // console.log('setPaneIndex playerCtrl', index, newIndex);
-                    if (index === newIndex) playerCtrl.enable();
+                    if (index === newIndex) playerCtrl.enable(); //TODO: set to start of track on select
                     else {
                         playerCtrl.disable();
                     }
                 });
 
                 overlay.on('close', function() {
-                    console.log('close playerCtrl');
+                    // console.log('close playerCtrl');
                     playerCtrl.disable();
                 });
 
@@ -89,6 +89,37 @@ console.log('include letter-gallery');
 
             }
 
+            function linkHighlightAndPlayer($controls, $highlightbtn) {
+                $controls.click(function(e) {
+                    console.log('highlight: ', $controls.attr('class'));
+
+                });
+            }
+
+            function getLetterLengthStyle(text) {
+                var type = 'long-letter',
+                    length = text.length;
+                // var lShort = 500, lMed = 1000, lLong =
+                switch (true) {
+                    case (length < 500):
+                        type = 'short-letter';
+                        break;
+                    case (length < 1000):
+                        type = 'medium-letter';
+                        break;
+                    default:
+                        type = 'long-letter';
+                }
+                return type;
+            }
+
+            function updatePaneStyle($panediv, $txtdiv, type) {
+                $panediv.addClass(type + '-pane');
+                $panediv.find('.letter-images').addClass(type + '-images');
+                $panediv.find('.letter-info').addClass(type + '-info');
+                $txtdiv.addClass(type + '-text');
+            }
+
             function loadComplete() {
                 // console.log('pane', index, 'load complete; ', typeof onReady);
                 if (typeof onReady === 'function') onReady.call(null, this);
@@ -103,9 +134,10 @@ console.log('include letter-gallery');
                     $tmpl = getTemplate();
 
                     $pane = $tmpl;
-                    $pane.find('.letter-pane').hide();
+                    $pane.find('.letter-pane');
 
-                    var $close = $('.overlay .close'),
+                    var $panediv = $pane.find('.letter-pane'),
+                        $close = $('.overlay .close'),
                         $txtdiv = $tmpl.find('.letter-text'),
                         $mainimgdiv = $tmpl.find('.main-image'),
                         $highlightimgdiv = $tmpl.find('.highlight-image'),
@@ -128,10 +160,15 @@ console.log('include letter-gallery');
                             loadComplete();
                         };
 
-                    $txtdiv.load(data.textSrc);
+                    $panediv.hide();
+
+                    $txtdiv.load(data.textSrc, function(loadedHTML) {
+                        updatePaneStyle($panediv, $txtdiv, getLetterLengthStyle($(loadedHTML).text()));
+                    });
                     imageLoader.loadImage(data.image, onMainImgLoaded);
 
                     loadPlayer(data.audio, $playerdiv);
+                    linkHighlightAndPlayer($playerdiv.find('.controls'), $highlightbtndiv);
 
                     $close.addClass('close-carousel-letter-gallery');
 
@@ -148,9 +185,8 @@ console.log('include letter-gallery');
                 },
                 resize: function() {
                     // console.log('resize', index);
-                    var newWidth = w.innerWidth;
-                    width = newWidth;
-                    $pane.width(newWidth);
+                    width = w.innerWidth;
+                    $pane.width(width);
                     return this;
                 },
                 getPane: function() {

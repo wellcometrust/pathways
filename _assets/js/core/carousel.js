@@ -25,6 +25,7 @@ console.log('include carousel');
         var ob = Object.create(getEventListener());
 
         function setPaneCtrlIndices(index, doAnimate) {
+            // console.debug('index', index);
             containerCtrl.setPaneIndex(index, doAnimate);
             paneCtrl.setPaneIndex(index);
             navCtrl.setPaneIndex(index);
@@ -45,12 +46,10 @@ console.log('include carousel');
 
             $(w).on("resize orientationchange", function() {
                 ob.resize();
-                ob.reset(false);
+                ob.updateOffset(false);
             });
         };
         ob.setPaneIndex = function setPaneIndex(index, doAnimate) {
-            var count = 0;
-
             // between the bounds
             index = Math.max(0, Math.min(index, paneCtrl.getPaneCount() - 1));
             setPaneCtrlIndices(index, doAnimate);
@@ -78,11 +77,16 @@ console.log('include carousel');
         ob.setFactory = function setFactory(factory) {
             paneCtrlFactory = factory;
         };
-
+        ob.updateOffset = function updateOffset(doAnim){
+            doAnim = (typeof doAnim === 'boolean') ? doAnim : true;
+            containerCtrl.updateOffset(paneCtrl.getPanesOffsetAtIndex(currentIndex), doAnim);
+        };
         ob.setOffset = function setOffset(x, animate) {
             containerCtrl.updateOffset(x, animate);
         };
-
+        ob.getOffset = function getOffset() {
+            return paneCtrl.getPanesOffsetAtIndex(currentIndex);
+        };
         ob.getOffsetAtIndex = function getOffsetAtIndex(index) {
             return paneCtrl.getPanesOffsetAtIndex(index);
         };
@@ -92,10 +96,7 @@ console.log('include carousel');
         ob.getAveragePaneWidth = function getAveragePaneWidth() {
             return paneCtrl.getAveragePaneWidth();
         };
-        ob.reset = function reset(doAnim){
-            doAnim = (typeof doAnim === 'boolean') ? doAnim : true;
-            containerCtrl.updateOffset(paneCtrl.getPanesOffsetAtIndex(currentIndex), doAnim);
-        };
+
 
         return ob;
 
@@ -120,6 +121,7 @@ console.log('include carousel');
 
                 panes = paneDataList.map(function(paneData, index) {
                     var pane = paneCtrlFactory(paneData, index, function onReady(pane) {
+
                         if (typeof onFirst === 'function') onFirst.call();
                         onFirst = null;
                         ctrl.resize();
@@ -171,6 +173,7 @@ console.log('include carousel');
                     offset -= panes[i].getWidth();
                 }
                 offset += (totalOffset - (panes[index].getWidth() / 2));
+                // console.log(offset, totalOffset, panes[index].getWidth());
                 return offset;
             }
         };
@@ -190,6 +193,7 @@ console.log('include carousel');
                 this.updateOffset(ctrl.getOffsetAtIndex(index), animate);
             },
             updateOffset: function(x, animate) {
+                // console.debug('updateOffset', x);
                 $container.removeClass("animate");
 
                 if (animate) {
@@ -260,6 +264,7 @@ console.log('include carousel');
                 }
             },
             resize: function resize(height) {
+                if (!($prev && $next)) return;
                 $prev.height(height);
                 $next.height(height);
             }
@@ -317,7 +322,7 @@ console.log('include carousel');
                             ctrl.next();
                         }
                     } else {
-                        ctrl.reset();
+                        ctrl.updateOffset();
                     }
                     break;
             }

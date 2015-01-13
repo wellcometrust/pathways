@@ -11,14 +11,14 @@ console.log('include gallery');
         function _paneCtrlFactory(data, index, onReady) {
 
             var $pane,
-                $img,
                 ratio = 1,
                 width = w.innerWidth;
 
             function onImageLoad(img) {
-                $img = $(img);
                 ratio = img.naturalHeight / img.naturalWidth;
-                $pane.append($img);
+
+                updateWidth();
+                $pane.append($(img));
 
                 // add potential text
                 if (data.text) {
@@ -27,6 +27,12 @@ console.log('include gallery');
                 }
 
                 if (typeof onReady === 'function') onReady.call(null, this);
+            }
+
+            function updateWidth() {
+                width = parseInt((w.innerHeight / ratio), 10);
+                if (width >= w.innerWidth) width = w.innerWidth;
+                $pane.width(width);
             }
 
             return {
@@ -46,12 +52,11 @@ console.log('include gallery');
                     return this;
                 },
                 resize: function() {
-                    // console.log('resize', index);
-                    var newWidth = parseInt((w.innerHeight / ratio), 10),
-                        windowWidth = w.innerWidth;
+                    console.log('resize', index);
 
-                    if (newWidth >= windowWidth) {
-                        newWidth = windowWidth;
+                    updateWidth();
+
+                    if (width >= w.innerWidth) {
                         $pane.removeClass('full-height');
                         $pane.addClass('full-width');
                     } else {
@@ -59,8 +64,6 @@ console.log('include gallery');
                         $pane.addClass('full-height');
                     }
 
-                    width = newWidth;
-                    $pane.width(newWidth);
                     return this;
                 },
                 getPane: function() {

@@ -46,6 +46,11 @@
     mod.modal = function(element, data) {
 
         $(element).find('.modal').on('click', function() {
+            // var id = $(this).data('id');
+            // if (!id) return console.warn('No id defined for modal element:' + this);
+            // var mData = data[id];
+            // if (!mData) console.warn('No data defined for modal id \'' + id + '\'');
+            //
             var modal = new Modal($(this), data);
             modal.init();
         });
