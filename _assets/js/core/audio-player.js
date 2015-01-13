@@ -38,7 +38,7 @@ console.log('include core audio-player');
     function getStop(audio, linkedView, timeUpdate) {
         return function stop() {
             vol.removeView(linkedView);
-            mediaCtrl.stopMediaOnComponentChannel(audio);
+            mediaCtrl.stopMediaOnComponentChannel(audio, { seekToTimeAtEnd: 0 });
             audio.removeEventListener('timeupdate', timeUpdate);
             timeUpdate();
         };

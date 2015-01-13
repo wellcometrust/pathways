@@ -1,4 +1,4 @@
-console.log('include media/channels/index');
+
 
 (function(exports, getMediaAudio, mixer, utils, $) {
 
@@ -9,7 +9,6 @@ console.log('include media/channels/index');
 
     function setMediaTime(media, time) {
         if (!media || typeof time === 'undefined' || isNaN(time)) return;
-        // console.log('setting media time', time, media.readyState);
         if (media.readyState !== 0) {
             media.currentTime = time;
         }
@@ -17,7 +16,6 @@ console.log('include media/channels/index');
 
     function setMediaStateAtEnd(media, config) {
         if (!(media && config)) return;
-        // console.log('setting time at end:', config.seekToTimeAtEnd);
         setMediaTime(media, config.seekToTimeAtEnd);
     }
 
@@ -30,7 +28,6 @@ console.log('include media/channels/index');
     function setChannelStateOnComplete(media, channel) {
         function onComplete() {
 
-            // console.log('auto stopping');
             media.currentTime = 0;
             channel.removeMediaDefinitionsByMedia(media);
 
@@ -64,19 +61,19 @@ console.log('include media/channels/index');
 
         // (single && noFade) || ( !single && noInterrupt && noFade)
         function singlePlay() {
-            // console.log('>> single play ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
+            // console.debug('>> singlePlay ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
             mixer.play(media);
         }
 
         // (single && !noFade) || ( !single && noInterrupt && !noFade)
         function singleFade() {
-            // console.log('>> single fade in ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
+            // console.debug('>> singleFade ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
             mixer.fadeIn(media, delay);
         }
 
         // !single && !noInterrupt && noFade
         function crossPlay() {
-            // console.log('>> cross play ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
+            // console.debug('>> crossPlay ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
             mixer.crossplay(null, media, onStopComplete);
             currentDefs.forEach(function(def) {
                 mixer.stop(def.media);
@@ -85,7 +82,7 @@ console.log('include media/channels/index');
 
         // !single && !noInterrupt && !noFade
         function crossFade() {
-            // console.log('>> cross fade ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
+            // console.debug('>> crossFade ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
             mixer.crossfade(null, media, delay, onStopComplete);
             currentDefs.forEach(function(def) {
                 mixer.fadeOut(def.media, delay);
@@ -170,13 +167,16 @@ console.log('include media/channels/index');
 
     ChannelInactivePlayingState.prototype = {
         stopAll: function() {
+            this.channel.removeAllMediaDefinitions();
             this.channel.setState(this.channel.getState('inactiveStopped'));
         },
-        stop: function() {
-            this.channel.setState(this.channel.getState('inactiveStopped'));
+        stop: function(media) {
+            this.channel.removeMediaDefinitionsByMedia(media);
+            if (!this.channel.hasMediaDefinitions()) {
+                this.channel.setState(this.channel.getState('inactiveStopped'));
+            }
         },
         resume: function() {
-            // console.log('>> resuming:', getSrc(this.channel.currentMedia));
             var defs = this.channel.getAllMediaDefinitions();
             defs.forEach(function(def) {
                 getPlayStrategy(def.media, def.config)();
@@ -198,7 +198,6 @@ console.log('include media/channels/index');
         play: function(media, config) {
             var def = this.channel.addMediaDefinition(media, config);
 
-            // console.log('>> playing:', this.channel.id + ': ', config, getSrc(media));
 
             setMediaStateAtStart(media, config);
             setChannelStateOnComplete(media, this.channel);
@@ -241,7 +240,6 @@ console.log('include media/channels/index');
         stopAll: function(config) {
 
             var defs = this.channel.removeAllMediaDefinitions();
-            console.log('stopping all', defs);
 
             defs.forEach(function(def) {
                 config = config || def.config || {};
@@ -254,20 +252,25 @@ console.log('include media/channels/index');
             this.channel.setState(this.channel.getState('activeStopped'));
         },
         stop: function(media, config) {
+
+            var defsAll = this.channel.getAllMediaDefinitions();
+
             var defs = this.channel.removeMediaDefinitionsByMedia(media);
+            var defsAll2 = this.channel.getAllMediaDefinitions();
 
             defs.forEach(function(def) {
                 config = config || def.config || {};
-
                 getStopStrategy(def.media, config, function() {
                     setMediaStateAtEnd(def.media, config);
                 })();
             });
 
-            this.channel.setState(this.channel.getState('activeStopped'));
+            if (!this.channel.hasMediaDefinitions()) {
+                this.channel.setState(this.channel.getState('activeStopped'));
+            }
+
         },
         silence: function() {
-            // console.log('>> silencing:', this.channel.id + ': ', getSrc(this.channel.currentMedia));
             var defs = this.channel.getAllMediaDefinitions();
             defs.forEach(function(def) {
                 getStopStrategy(def.media, def.config)();
@@ -299,7 +302,6 @@ console.log('include media/channels/index');
             this.states[stateID] = state;
         },
         setState: function(state) {
-            //console.log('setting state', state.constructor.name);
             if (this.state === state) return;
             this.state = state;
         },
@@ -337,22 +339,17 @@ console.log('include media/channels/index');
         removeAllMediaDefinitions: function() {
             var defs = [].concat(this.mediaDefinitions);
             this.mediaDefinitions = [];
-            // console.log(defs, this.mediaDefinitions);
             return defs;
         },
         removeMediaDefinitions: function(defs) {
             var list = [].concat(this.mediaDefinitions),
                 removed = [];
 
-            // console.log(defs.length, list.length);
-
             defs.forEach(function(def) {
                 var l = utils.removeItemFromArray(def, list);
-                removed.push(l);
+                if (l) removed.push(l);
             });
-            // console.log(list.length);
             this.mediaDefinitions = list;
-            // console.log('defs', defs, 'removed', removed, 'this.mds', this.mediaDefinitions);
             return removed;
         },
         removeMediaDefinitionsByMedia: function(media) {
@@ -364,18 +361,15 @@ console.log('include media/channels/index');
             return defs;
         },
         getDefinitionsFromMedia: function(media) {
-            // console.log('mediasrc', getSrc(media));
             var mediaDefs = this.mediaDefinitions;
             mediaList = [].concat(media);
 
             var defs = mediaList.map(function(medium) {
                 return mediaDefs.filter(function(def) {
-                    // console.log('comparing', getSrc(def.media), getSrc(media));
                     return def.media === medium;
                 })[0];
             }) || [];
 
-            // console.log('defs from media', mediaList.length, defs.length);
             return defs;
         },
         removeMediaDefinition: function(definition) {

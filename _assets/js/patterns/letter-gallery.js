@@ -79,11 +79,11 @@ console.log('include letter-gallery');
                     if ($img.hasClass(activeClass)) {
                         $img.removeClass(activeClass);
                         $img.addClass('highlight-hidden');
-                        $text.removeClass('letter-text-highlight-active');
+                        // $text.removeClass('letter-text-highlight-active');
                     } else {
                         $img.removeClass('highlight-hidden');
                         $img.addClass(activeClass);
-                        $text.addClass('letter-text-highlight-active');
+                        // $text.addClass('letter-text-highlight-active');
                     }
                 });
 

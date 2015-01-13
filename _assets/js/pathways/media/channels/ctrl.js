@@ -81,9 +81,7 @@ console.log('include media/channels/ctrl');
 
     function resetChannels() {
         var channelIDs = [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.component, CHANNEL_IDS.fx];
-        // console.log('channel resetChannels');
         function setChannelAc(channelID) {
-            // console.log('setting channel active', channelID);
             var channel = getChannelById(channelID);
             channel.resume();
         }
@@ -92,9 +90,7 @@ console.log('include media/channels/ctrl');
 
     function setChannelsInactive(channelsToExclude) {
         if (!channelsToExclude || channelsToExclude.length === 0) return;
-        // console.log('channel setChannelsInactive', config.exclude);
         function setChannelIn(channelID) {
-            console.log('setting channel inactive', channelID);
             var channel = getChannelById(channelID);
             channel.silence();
         }
@@ -104,7 +100,6 @@ console.log('include media/channels/ctrl');
     function playMediaOnChannel(media, channelID, config) {
         if (!media) return;
         var channel = getChannelById(channelID);
-// console.log(channelsToExclude, config, channel.config);
         config = config || channel.config; //TODO: merge instead of overwrite
         var channelsToExclude = (config && config.exclude) ? config.exclude : channel.config.exclude;
 
@@ -115,7 +110,6 @@ console.log('include media/channels/ctrl');
     function stopChannel(channelID, config) {
         var channel = getChannelById(channelID);
         config = config || channel.config;
-        console.log('stopping channel', channelID);
         if (!channel.hasMediaDefinitions()) return;
         channel.stopAll(config);
         resetChannels();

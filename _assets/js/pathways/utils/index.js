@@ -58,12 +58,12 @@ console.log('include utils/index');
 
     function removeItemFromArray(item, array) {
         var i = array.indexOf(item),
-            val = [null];
+            val = [];
         if (i != -1) {
             val = array.splice(i, 1);
         }
 
-        return val[0];
+        return val.length ? val[0] : void 0;
     }
 
 
