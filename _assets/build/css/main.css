@@ -1630,7 +1630,12 @@ iframe {
       margin-right: 7.5%; } }
 .carousel-letter-gallery .letter-pane {
   position: relative;
-  padding: 15px; }
+  padding: 15px;
+  margin: 0 auto; }
+.carousel-letter-gallery .short-letter-pane {
+  width: 70%; }
+.carousel-letter-gallery .medium-letter-pane {
+  width: 90%; }
 .carousel-letter-gallery .letter-images {
   float: left;
   max-width: 40%;
@@ -1649,6 +1654,10 @@ iframe {
     display: block;
     max-width: 100%;
     max-height: 100%; }
+.carousel-letter-gallery .short-letter-images {
+  max-width: 60%; }
+.carousel-letter-gallery .medium-letter-images {
+  max-width: 50%; }
 .carousel-letter-gallery .highlight-hidden {
   opacity: 0; }
 .carousel-letter-gallery .highlight-active {
@@ -1672,6 +1681,10 @@ iframe {
   border-left: 3px solid #5cb8b2;
   max-width: 60%;
   padding: 10px 15px; }
+.carousel-letter-gallery .short-letter-info {
+  max-width: 40%; }
+.carousel-letter-gallery .medium-letter-info {
+  max-width: 50%; }
 .carousel-letter-gallery .letter-text {
   -webkit-transition: color 0.5s;
   -moz-transition: color 0.5s;
@@ -1696,18 +1709,6 @@ iframe {
     text-indent: 2em; }
   .carousel-letter-gallery .letter-text p.no-indent {
     text-indent: 0; }
-  .carousel-letter-gallery .letter-text .short-letter {
-    float: left;
-    width: 50%;
-    line-height: 2; }
-  .carousel-letter-gallery .letter-text .medium-letter {
-    float: left;
-    width: 75%;
-    line-height: 1.5; }
-  .carousel-letter-gallery .letter-text .long-letter {
-    float: left;
-    width: 100%;
-    line-height: 1.25; }
   .carousel-letter-gallery .letter-text .page-numbers {
     position: absolute;
     bottom: 20px;
@@ -1717,6 +1718,12 @@ iframe {
     font-style: normal;
     font-size: 0.75rem;
     height: 18px; }
+.carousel-letter-gallery .short-letter-text {
+  line-height: 2; }
+.carousel-letter-gallery .medium-letter-text {
+  line-height: 1.5; }
+.carousel-letter-gallery .long-letter-text {
+  line-height: 1.25; }
 .carousel-letter-gallery .letter-text-highlight-active {
   color: #aaa; }
   .carousel-letter-gallery .letter-text-highlight-active .audio-transcript {
@@ -1724,7 +1731,8 @@ iframe {
 
 .audio-player-gallery {
   float: left;
-  width: 200px;
+  max-width: 200px;
+  min-width: 120px;
   margin-bottom: 30px; }
 
 .close-carousel-letter-gallery {
@@ -3619,7 +3627,10 @@ iframe {
     background-position: 50% 50%;
     background-size: cover;
     text-align: center; }
+    .fork .teaser a {
+      color: #fff; }
   .fork .teaser-icon {
+    display: block;
     background: url(/_assets/img/icons/icon-arrow-right-circle-white.svg) 50% 50% no-repeat;
     -webkit-transform: scale(0.8, 0.8);
     -moz-transform: scale(0.8, 0.8);
@@ -3641,6 +3652,13 @@ iframe {
     font-weight: normal;
     font-style: normal;
     font-size: 0.766rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem; }
+  .fork .credits-text {
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    margin-top: 2rem;
     text-transform: uppercase;
     letter-spacing: 0.2rem; }
   .fork .further-reading {

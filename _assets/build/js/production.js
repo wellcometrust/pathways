@@ -350,10 +350,13 @@ console.log('include utils/index');
     }
 
     function removeItemFromArray(item, array) {
-        var i = array.indexOf(item);
+        var i = array.indexOf(item),
+            val = [];
         if (i != -1) {
-            array.splice(i, 1);
+            val = array.splice(i, 1);
         }
+
+        return val.length ? val[0] : void 0;
     }
 
 
@@ -524,6 +527,21 @@ console.log('include media/index');
 
 Pathways.media = {};
 
+(function(exports, utils) {
+
+    function MediaAudio(media, config) {
+        var self = this;
+        self.media = media;
+        self.config = config;
+    }
+
+    exports.MediaAudio = MediaAudio;
+    exports.getMediaAudio = function(media, config) {
+        return new MediaAudio(media, config);
+    };
+
+
+}(Pathways.media, Pathways.utils));
 
 console.log('include media/model');
 (function(exports, $) {
@@ -746,7 +764,7 @@ console.log('include media/mixer/index');
 /***
  *   Media audio mixer
  */
-(function(exports, w, vol, $){
+(function(exports, w, vol, $) {
 
     function fadeOut(media, delay, callback) {
         delay = delay || 1000;
@@ -788,6 +806,22 @@ console.log('include media/mixer/index');
         }
     }
 
+    function play(media) {
+        if (!media) return;
+        media.muted = vol.isMuted();
+        media.volume = 1;
+        media.play();
+    }
+
+    function stop(media) {
+        if (media) media.pause();
+    }
+
+    function crossplay(oldMedia, newMedia, callback) {
+        play(newMedia);
+        stop(oldMedia);
+        callback();
+    }
 
     function crossfade(fadeOutMedia, fadeInMedia, delay, fadeOutCompleteCallback, fadeInCompleteCallback) {
         delay = delay || 1000;
@@ -798,24 +832,34 @@ console.log('include media/mixer/index');
             return;
         }
 
-        fadeOut(fadeOutMedia, delay, fadeOutCompleteCallback);
+        if (fadeOutMedia !== null && typeof fadeOutMedia !== 'undefined') {
+            fadeOut(fadeOutMedia, delay, fadeOutCompleteCallback);
+        } else {
+            if (fadeOutCompleteCallback) w.setTimeout(fadeOutCompleteCallback, delay);
+        }
 
-        fadeIn(fadeInMedia, delay, fadeInCompleteCallback);
-
+        if (fadeInMedia !== null && typeof fadeInMedia !== 'undefined') {
+            fadeIn(fadeInMedia, delay, fadeInCompleteCallback);
+        } else {
+            if (fadeInCompleteCallback) w.setTimeout(fadeInCompleteCallback, delay);
+        }
     }
 
     exports.mixer = {
-        crossfade : crossfade,
-        fadeIn : fadeIn,
-        fadeOut : fadeOut
+        crossfade: crossfade,
+        fadeIn: fadeIn,
+        fadeOut: fadeOut,
+        play: play,
+        stop: stop,
+        crossplay: crossplay
     };
 
 
 }(Pathways.media, window, Pathways.media.vol, jQuery));
 
-console.log('include media/channels/index');
 
-(function(exports, mixer, utils, $) {
+
+(function(exports, getMediaAudio, mixer, utils, $) {
 
     function getSrc(media) {
         if (!media) return 'no media';
@@ -824,7 +868,6 @@ console.log('include media/channels/index');
 
     function setMediaTime(media, time) {
         if (!media || typeof time === 'undefined' || isNaN(time)) return;
-        console.log('setting media time', time, media.readyState);
         if (media.readyState !== 0) {
             media.currentTime = time;
         }
@@ -840,13 +883,112 @@ console.log('include media/channels/index');
         setMediaTime(media, config.initTime);
     }
 
+
     function setChannelStateOnComplete(media, channel) {
         function onComplete() {
+
             media.currentTime = 0;
-            channel.setState(channel.getState('activeStopped'));
+            channel.removeMediaDefinitionsByMedia(media);
+
+            if (!channel.hasMediaDefinitions()) {
+                switch (channel.state.id) {
+                    case 'activePlaying':
+                        channel.setState(channel.getState('activeStopped'));
+                        break;
+                    case 'inactivePlaying':
+                        channel.setState(channel.getState('inactiveStopped'));
+                        break;
+                }
+            }
+
             media.removeEventListener('ended', onComplete);
         }
         media.addEventListener('ended', onComplete);
+    }
+
+    function noop() {}
+
+    function getPlayStrategy(media, config, currentDefs, _onStopComplete) {
+        var delay = parseInt(((config && config.delay) || 1000), 10),
+            noFade = (config && config.noFade),
+            single = !currentDefs,
+            noInterrupt = (config && config.noInterrupt),
+            onStopComplete = _onStopComplete || function() {},
+            result;
+
+        if (!media.paused) return noop;
+
+        // (single && noFade) || ( !single && noInterrupt && noFade)
+        function singlePlay() {
+            // console.debug('>> singlePlay ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
+            mixer.play(media);
+        }
+
+        // (single && !noFade) || ( !single && noInterrupt && !noFade)
+        function singleFade() {
+            // console.debug('>> singleFade ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
+            mixer.fadeIn(media, delay);
+        }
+
+        // !single && !noInterrupt && noFade
+        function crossPlay() {
+            // console.debug('>> crossPlay ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
+            mixer.crossplay(null, media, onStopComplete);
+            currentDefs.forEach(function(def) {
+                mixer.stop(def.media);
+            });
+        }
+
+        // !single && !noInterrupt && !noFade
+        function crossFade() {
+            // console.debug('>> crossFade ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
+            mixer.crossfade(null, media, delay, onStopComplete);
+            currentDefs.forEach(function(def) {
+                mixer.fadeOut(def.media, delay);
+            });
+        }
+
+        if (single) {
+            if (noFade) result = singlePlay;
+            else result = singleFade;
+        } else {
+            if (noInterrupt) {
+                if (noFade) result = singlePlay;
+                else result = fadeIn;
+            } else {
+                if (noFade) result = crossPlay;
+                else result = crossFade;
+            }
+        }
+
+        return result;
+
+    }
+
+    function getStopStrategy(media, config, _onStopComplete) {
+        var delay = parseInt(((config && config.delay) || 1000), 10),
+            noFade = config && config.noFade,
+            onStopComplete = _onStopComplete || function() {},
+            result;
+
+        if (media.paused) return noop;
+
+        function singleStop() {
+            mixer.stop(media);
+            onStopComplete();
+        }
+
+        function singleFade() {
+            mixer.fadeOut(media, delay, onStopComplete);
+        }
+
+        if (noFade) {
+            result = singleStop;
+        } else {
+            result = singleFade;
+        }
+
+        return result;
     }
 
     function ChannelDefaultState(channel) {
@@ -856,9 +998,10 @@ console.log('include media/channels/index');
 
     ChannelDefaultState.prototype = {
         play: function(media, config) {},
-        stop: function(config) {},
-        silence: function() {},
-        resume: function() {}
+        stopAll: function(config) {},
+        stop: function(media, config) {},
+        silence: noop,
+        resume: noop
     };
 
 
@@ -882,12 +1025,22 @@ console.log('include media/channels/index');
     }
 
     ChannelInactivePlayingState.prototype = {
-        stop: function() {
+        stopAll: function() {
+            this.channel.removeAllMediaDefinitions();
             this.channel.setState(this.channel.getState('inactiveStopped'));
         },
+        stop: function(media) {
+            this.channel.removeMediaDefinitionsByMedia(media);
+            if (!this.channel.hasMediaDefinitions()) {
+                this.channel.setState(this.channel.getState('inactiveStopped'));
+            }
+        },
         resume: function() {
-            console.log('>> resuming:', getSrc(this.channel.currentMedia));
-            mixer.fadeIn(this.channel.currentMedia);
+            var defs = this.channel.getAllMediaDefinitions();
+            defs.forEach(function(def) {
+                getPlayStrategy(def.media, def.config)();
+            });
+
             this.channel.setState(this.channel.getState('activePlaying'));
         }
     };
@@ -898,24 +1051,20 @@ console.log('include media/channels/index');
         ChannelDefaultState.call(this, channel);
     }
 
+
+
     ChannelActiveStoppedState.prototype = {
         play: function(media, config) {
-            this.channel.currentMedia = media;
-            this.channel.currentConfig = config;
+            var def = this.channel.addMediaDefinition(media, config);
 
-            console.log('>> playing:', this.channel.id + ': ', config, getSrc(media));
 
             setMediaStateAtStart(media, config);
             setChannelStateOnComplete(media, this.channel);
 
-            if (config && config.noFade) {
-                media.volume = 1;
-                media.play();
-            } else {
-                mixer.fadeIn(media, 1000);
-            }
+            getPlayStrategy(media, config)();
 
             this.channel.setState(this.channel.getState('activePlaying'));
+            return def;
         },
         silence: function() {
             this.channel.setState(this.channel.getState('inactiveStopped'));
@@ -925,59 +1074,66 @@ console.log('include media/channels/index');
     utils.extend(ChannelDefaultState, ChannelActiveStoppedState);
 
 
-
-
     function ChannelActivePlayingState(channel) {
         ChannelDefaultState.call(this, channel);
     }
 
     ChannelActivePlayingState.prototype = {
         play: function(media, config) {
-            var currentMedia = this.channel.currentMedia,
-                mediaNotTheSame = (currentMedia !== media),
-                currentConfig = this.channel.currentConfig;
+            var lastDefs = this.channel.getAllMediaDefinitions(),
+                newDef;
 
-            console.log('>> crossfading:', this.channel.id + ': ', getSrc(currentMedia), getSrc(media));
+            newDef = this.channel.addMediaDefinition(media, config);
 
             setMediaStateAtStart(media, config);
             setChannelStateOnComplete(media, this.channel);
 
-            if (config && config.noFade) {
-                currentMedia.pause();
-                media.volume = 1;
-                media.play();
-            } else {
-                mixer.crossfade(currentMedia, media, 1000, function() {
-                    setMediaStateAtEnd(currentMedia, currentConfig);
+            getPlayStrategy(media, config, lastDefs, function() {
+                lastDefs.forEach(function(def) {
+                    setMediaStateAtEnd(def.media, def.config);
                 });
-            }
-            this.channel.currentMedia = media;
+            })();
 
+            return newDef;
         },
-        stop: function(config) {
+        stopAll: function(config) {
 
-            var media = this.channel.currentMedia;
-            config = config || this.channel.currentConfig || {};
+            var defs = this.channel.removeAllMediaDefinitions();
 
-            console.log('>> stopping:', this.channel.id + ': ', config, getSrc(media));
+            defs.forEach(function(def) {
+                config = config || def.config || {};
 
-            if (config && config.noFade) {
-                media.pause();
-            } else {
-                mixer.fadeOut(media, 1000, function() {
-                    setMediaStateAtEnd(media, config);
-                });
-            }
-
-
-            this.channel.currentMedia = null;
-            this.channel.currentConfig = null;
+                getStopStrategy(def.media, config, function() {
+                    setMediaStateAtEnd(def.media, config);
+                })();
+            });
 
             this.channel.setState(this.channel.getState('activeStopped'));
         },
+        stop: function(media, config) {
+
+            var defsAll = this.channel.getAllMediaDefinitions();
+
+            var defs = this.channel.removeMediaDefinitionsByMedia(media);
+            var defsAll2 = this.channel.getAllMediaDefinitions();
+
+            defs.forEach(function(def) {
+                config = config || def.config || {};
+                getStopStrategy(def.media, config, function() {
+                    setMediaStateAtEnd(def.media, config);
+                })();
+            });
+
+            if (!this.channel.hasMediaDefinitions()) {
+                this.channel.setState(this.channel.getState('activeStopped'));
+            }
+
+        },
         silence: function() {
-            console.log('>> silencing:', this.channel.id + ': ', getSrc(this.channel.currentMedia));
-            mixer.fadeOut(this.channel.currentMedia);
+            var defs = this.channel.getAllMediaDefinitions();
+            defs.forEach(function(def) {
+                getStopStrategy(def.media, def.config)();
+            });
             this.channel.setState(this.channel.getState('inactivePlaying'));
         }
     };
@@ -986,16 +1142,17 @@ console.log('include media/channels/index');
 
 
     function Channel(id, config) {
-        var self = this;
-        self.id = id;
-        self.config = config || null;
 
-        self.addState('activeStopped', new ChannelActiveStoppedState(self));
-        self.addState('inactiveStopped', new ChannelInactiveStoppedState(self));
-        self.addState('activePlaying', new ChannelActivePlayingState(self));
-        self.addState('inactivePlaying', new ChannelInactivePlayingState(self));
+        this.id = id;
+        this.config = config || null;
+        this.mediaDefinitions = [];
 
-        self.setState(self.getState('activeStopped'));
+        this.addState('activeStopped', new ChannelActiveStoppedState(this));
+        this.addState('inactiveStopped', new ChannelInactiveStoppedState(this));
+        this.addState('activePlaying', new ChannelActivePlayingState(this));
+        this.addState('inactivePlaying', new ChannelInactivePlayingState(this));
+
+        this.setState(this.getState('activeStopped'));
     }
 
     Channel.prototype = {
@@ -1004,7 +1161,6 @@ console.log('include media/channels/index');
             this.states[stateID] = state;
         },
         setState: function(state) {
-            //console.log('setting state', state.constructor.name);
             if (this.state === state) return;
             this.state = state;
         },
@@ -1017,14 +1173,69 @@ console.log('include media/channels/index');
         resume: function() {
             this.state.resume();
         },
-
         play: function(media, config) {
-            console.debug('channel -', this.id, '- play', getSrc(media));
-            this.state.play(media, config);
+            // console.debug('channel -', this.id, '- play', getSrc(media));
+            return this.state.play(media, config);
         },
-        stop: function(config) {
-            console.debug('channel -', this.id, '- stop', getSrc(this.currentMedia));
-            this.state.stop(config);
+        stopAll: function(config) {
+            // console.debug('channel -', this.id, '- stop', getSrc(this.currentMedia));
+            this.state.stopAll(config);
+        },
+        stop: function(media, config) {
+            // console.debug('channel -', this.id, '- stop', getSrc(this.currentMedia));
+            this.state.stop(media, config);
+        },
+
+
+        addMediaDefinition: function(media, config) {
+            var definition = {
+                media: media,
+                config: config
+            };
+            this.mediaDefinitions.push(definition);
+            return definition;
+        },
+        removeAllMediaDefinitions: function() {
+            var defs = [].concat(this.mediaDefinitions);
+            this.mediaDefinitions = [];
+            return defs;
+        },
+        removeMediaDefinitions: function(defs) {
+            var list = [].concat(this.mediaDefinitions),
+                removed = [];
+
+            defs.forEach(function(def) {
+                var l = utils.removeItemFromArray(def, list);
+                if (l) removed.push(l);
+            });
+            this.mediaDefinitions = list;
+            return removed;
+        },
+        removeMediaDefinitionsByMedia: function(media) {
+            var defs = this.getDefinitionsFromMedia(media);
+            return this.removeMediaDefinitions(defs);
+        },
+        getAllMediaDefinitions: function() {
+            var defs = [].concat(this.mediaDefinitions);
+            return defs;
+        },
+        getDefinitionsFromMedia: function(media) {
+            var mediaDefs = this.mediaDefinitions;
+            mediaList = [].concat(media);
+
+            var defs = mediaList.map(function(medium) {
+                return mediaDefs.filter(function(def) {
+                    return def.media === medium;
+                })[0];
+            }) || [];
+
+            return defs;
+        },
+        removeMediaDefinition: function(definition) {
+            return utils.removeItemFromArray(definition, this.mediaDefinitions);
+        },
+        hasMediaDefinitions: function() {
+            return this.mediaDefinitions.length > 0;
         }
     };
 
@@ -1037,26 +1248,7 @@ console.log('include media/channels/index');
     };
 
 
-}(Pathways.media, Pathways.media.mixer, Pathways.utils, jQuery));
-
-console.log('include media/channels/track');
-
-(function(exports) {
-
-    function Track(src, config) {
-        var self = this;
-        self.src = src;
-        self.config = config;
-    }
-
-    exports.track = {
-        Track: Track,
-        getTrack: function(src, config) {
-            return new Track(src, config);
-        }
-    };
-
-}(Pathways.media.channels));
+}(Pathways.media, Pathways.media.getMediaAudio, Pathways.media.mixer, Pathways.utils, jQuery));
 
 console.log('include media/channels/ctrl');
 (function(exports, getChannel) {
@@ -1068,111 +1260,127 @@ console.log('include media/channels/ctrl');
             component: 'component',
             fx: 'fx',
         },
-        modes = {
-            // basic: {
-            //     channels: {
-            //         global: getChannel(),
-            //         video: getChannel({ exclude: [CHANNEL_IDS.global]}),
-            //     }
-            // },
-            // component: {
-            //     channels: {
-            //         global: getChannel(),
-            //         video: getChannel({ exclude: [CHANNEL_IDS.global]}),
-            //         component : getChannel({ exclude: [CHANNEL_IDS.global, CHANNEL_IDS.video]}),
-            //     }
-            // },
-            scroll: {
-                channels: {
-                    global: getChannel(CHANNEL_IDS.global),
-                    video: getChannel(CHANNEL_IDS.video, {
-                        exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel]
-                    }),
-                    component: getChannel(CHANNEL_IDS.component, {
-                        exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video]
-                    }),
-                    panel: getChannel(CHANNEL_IDS.panel, {
-                        exclude: [CHANNEL_IDS.global]
-                    }),
-                    fx: getChannel(CHANNEL_IDS.fx)
-                }
+        configs = {
+            global: {
+                exclude: null
+            },
+            video: {
+                exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel]
+            },
+            component: {
+                exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video]
+            },
+            panel: {
+                exclude: [CHANNEL_IDS.global]
+            },
+            fx: {
+                exclude: null,
+                noFade: true,
+                noInterrupt: true
             }
         },
-        mode;
+        // modes = {
+        // basic: {
+        //     channels: {
+        //         global: getChannel(),
+        //         video: getChannel({ exclude: [CHANNEL_IDS.global]}),
+        //     }
+        // },
+        // component: {
+        //     channels: {
+        //         global: getChannel(),
+        //         video: getChannel({ exclude: [CHANNEL_IDS.global]}),
+        //         component : getChannel({ exclude: [CHANNEL_IDS.global, CHANNEL_IDS.video]}),
+        //     }
+        // },
+        // scroll: {
+        //     channels: {
+        //         global: getChannel(CHANNEL_IDS.global, configs.global),
+        //         video: getChannel(CHANNEL_IDS.video, configs.video),
+        //         component: getChannel(CHANNEL_IDS.component, configs.component),
+        //         panel: getChannel(CHANNEL_IDS.panel, configs.panel),
+        //         fx: getChannel(CHANNEL_IDS.fx, configs.fx)
+        //     }
+        // }
+        // },
+        channels;
 
-    function getMode() {
-        return {
-            channels: {
-                global: getChannel(CHANNEL_IDS.global),
-                video: getChannel(CHANNEL_IDS.video, {
-                    exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel]
-                }),
-                component: getChannel(CHANNEL_IDS.component, {
-                    exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video]
-                }),
-                panel: getChannel(CHANNEL_IDS.panel, {
-                    exclude: [CHANNEL_IDS.global]
-                }),
-                fx: getChannel(CHANNEL_IDS.fx)
-            }
-        };
+    function setMode() {
+        addChannel(CHANNEL_IDS.global, configs.global);
+        addChannel(CHANNEL_IDS.video, configs.video);
+        addChannel(CHANNEL_IDS.component, configs.component);
+        addChannel(CHANNEL_IDS.panel, configs.panel);
+        addChannel(CHANNEL_IDS.fx, configs.fx);
         //TODO: update for change in functionality level
     }
 
     function init() {
-        mode = getMode();
+        channels = {};
+        setMode();
+    }
+
+    function addChannel(channelID, config) {
+        channels = channels || {};
+        if (channels.hasOwnProperty(channelID)) return console.warn('[Pathways Channel] [addChannel] channel with id \'' + channelID + '\' already exists')
+        channels[channelID] = getChannel(channelID, config);
     }
 
     function getChannelById(channelID) {
-        var channel = mode.channels[channelID];
+        var channel = channels[channelID];
         if (!channel) return console.warn('[Pathways Channel] [getChannelById] no channel found with id \'' + channelID + '\'');
         return channel;
     }
 
     function resetChannels() {
-        var channelIDs =[CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.component, CHANNEL_IDS.fx];
-        // console.log('channel resetChannels');
+        var channelIDs = [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.component, CHANNEL_IDS.fx];
         function setChannelAc(channelID) {
-            // console.log('setting channel active', channelID);
             var channel = getChannelById(channelID);
             channel.resume();
         }
         channelIDs.forEach(setChannelAc);
     }
 
-    function setChannelsInactive(config) {
-        if (!config || !config.exclude) return;
-        // console.log('channel setChannelsInactive', config.exclude);
+    function setChannelsInactive(channelsToExclude) {
+        if (!channelsToExclude || channelsToExclude.length === 0) return;
         function setChannelIn(channelID) {
-            console.log('setting channel inactive', channelID);
             var channel = getChannelById(channelID);
             channel.silence();
         }
-        if (config.exclude && config.exclude.length > 0) {
-            config.exclude.forEach(setChannelIn);
-        }
+        channelsToExclude.forEach(setChannelIn);
     }
 
-    function playMediaWithChannel(media, channelID, config) {
+    function playMediaOnChannel(media, channelID, config) {
         if (!media) return;
         var channel = getChannelById(channelID);
+        config = config || channel.config; //TODO: merge instead of overwrite
+        var channelsToExclude = (config && config.exclude) ? config.exclude : channel.config.exclude;
 
-        var excludeConfig = (config && config.exclude) ? config : channel.config;
-        config = config || channel.config;
-
-        setChannelsInactive(excludeConfig);
+        setChannelsInactive(channelsToExclude);
         channel.play(media, config);
     }
 
     function stopChannel(channelID, config) {
         var channel = getChannelById(channelID);
-        if (!channel.currentMedia) return;
-        channel.stop(config);
+        config = config || channel.config;
+        if (!channel.hasMediaDefinitions()) return;
+        channel.stopAll(config);
+        resetChannels();
+    }
+
+    function stopMediaOnChannel(media, channelID, config) {
+        if (!media) return;
+        var channel = getChannelById(channelID);
+        config = config || channel.config;
+        channel.stop(media, config);
         resetChannels();
     }
 
     function playMediaOnPanelChannel(media, config) {
-        playMediaWithChannel(media, CHANNEL_IDS.panel, config);
+        playMediaOnChannel(media, CHANNEL_IDS.panel, config);
+    }
+
+    function stopMediaOnPanelChannel(media, config) {
+        stopMediaOnChannel(media, CHANNEL_IDS.panel, config);
     }
 
     function stopPanelChannel(config) {
@@ -1180,7 +1388,11 @@ console.log('include media/channels/ctrl');
     }
 
     function playMediaOnGlobalChannel(media, config) {
-        playMediaWithChannel(media, CHANNEL_IDS.global, config);
+        playMediaOnChannel(media, CHANNEL_IDS.global, config);
+    }
+
+    function stopMediaOnGlobalChannel(media, config) {
+        stopMediaOnChannel(media, CHANNEL_IDS.global, config);
     }
 
     function stopGlobalChannel(config) {
@@ -1188,7 +1400,11 @@ console.log('include media/channels/ctrl');
     }
 
     function playMediaOnVideoChannel(media, config) {
-        playMediaWithChannel(media, CHANNEL_IDS.video, config);
+        playMediaOnChannel(media, CHANNEL_IDS.video, config);
+    }
+
+    function stopMediaOnVideoChannel(media, config) {
+        stopMediaOnChannel(media, CHANNEL_IDS.video, config);
     }
 
     function stopVideoChannel(config) {
@@ -1196,7 +1412,11 @@ console.log('include media/channels/ctrl');
     }
 
     function playMediaOnComponentChannel(media, config) {
-        playMediaWithChannel(media, CHANNEL_IDS.component, config);
+        playMediaOnChannel(media, CHANNEL_IDS.component, config);
+    }
+
+    function stopMediaOnComponentChannel(media, config) {
+        stopMediaOnChannel(media, CHANNEL_IDS.component, config);
     }
 
     function stopComponentChannel(config) {
@@ -1204,40 +1424,51 @@ console.log('include media/channels/ctrl');
     }
 
     function playMediaOnFxChannel(media, config) {
-        config = ((config || {}).noFade = true);
-        playMediaWithChannel(media, CHANNEL_IDS.fx, config);
+        playMediaOnChannel(media, CHANNEL_IDS.fx, config);
+    }
+
+    function stopMediaOnFxChannel(media, config) {
+        stopMediaOnChannel(media, CHANNEL_IDS.fx, config);
     }
 
     function stopFxChannel(config) {
-        config = ((config || {}).noFade = true);
         stopChannel(CHANNEL_IDS.fx, config);
     }
 
     exports.ctrl = {
         init: init,
-        playMediaWithChannel: playMediaWithChannel,
+        addChannel: addChannel,
+        removeChannel: function() {},
+
+        playMediaOnChannel: playMediaOnChannel,
+        stopMediaOnChannel: stopMediaOnChannel,
         stopChannel: stopChannel,
 
         playMediaOnPanelChannel: playMediaOnPanelChannel,
+        stopMediaOnPanelChannel: stopMediaOnPanelChannel,
         stopPanelChannel: stopPanelChannel,
 
         playMediaOnGlobalChannel: playMediaOnGlobalChannel,
+        stopMediaOnGlobalChannel: stopMediaOnGlobalChannel,
         stopGlobalChannel: stopGlobalChannel,
 
         playMediaOnVideoChannel: playMediaOnVideoChannel,
+        stopMediaOnVideoChannel: stopMediaOnVideoChannel,
         stopVideoChannel: stopVideoChannel,
 
         playMediaOnComponentChannel: playMediaOnComponentChannel,
+        stopMediaOnComponentChannel: stopMediaOnComponentChannel,
         stopComponentChannel: stopComponentChannel,
 
         playMediaOnFxChannel: playMediaOnFxChannel,
+        stopMediaOnFxChannel: stopMediaOnFxChannel,
         stopFxChannel: stopFxChannel
     };
 
 }(Pathways.media.channels, Pathways.media.channels.getChannel));
 
 console.log('include media/ctrl');
-(function(exports, model, vol, channelCtrl) {
+(function(exports, model, vol, channelCtrl, $) {
 
     function init() {
 
@@ -1246,46 +1477,16 @@ console.log('include media/ctrl');
     }
 
 
-    exports.ctrl = {
-
+    exports.ctrl = $.extend({}, channelCtrl, {
         init: init,
-
-        playMediaWithChannel: channelCtrl.playMediaWithChannel,
-        stopChannel: channelCtrl.stopChannel,
-
-        playMediaOnPanelChannel: channelCtrl.playMediaOnPanelChannel,
-        stopPanelChannel: channelCtrl.stopPanelChannel,
-
-        playMediaOnGlobalChannel: channelCtrl.playMediaOnGlobalChannel,
-        stopGlobalChannel: channelCtrl.stopGlobalChannel,
-
-        playMediaOnVideoChannel: channelCtrl.playMediaOnVideoChannel,
-        stopVideoChannel: channelCtrl.stopVideoChannel,
-
-        playMediaOnComponentChannel: channelCtrl.playMediaOnComponentChannel,
-        stopComponentChannel: channelCtrl.stopComponentChannel,
-
-        playMediaOnFxChannel: channelCtrl.playMediaOnFxChannel,
-        stopFxChannel: channelCtrl.stopFxChannel,
-
         disable: function() {
             console.log('disabling media');
             // TODO: disabling media
         }
+    });
 
-    };
 
 }(Pathways.media, Pathways.media.model, Pathways.media.vol, Pathways.media.channels.ctrl, jQuery));
-
- console.log('include media/view');
-/***
- *   Audio: mute view
- */
-(function(exports, ctrl, $) {
-
-
-
-}(Pathways.media, Pathways.media.ctrl, jQuery));
 
 console.log('include media/video/index');
 /***
@@ -1798,7 +1999,7 @@ console.log('include core audio-player');
         return function pause() {
             if (audio.paused) return;
             vol.removeView(linkedView);
-            mediaCtrl.stopComponentChannel({ noFade: true });
+            mediaCtrl.stopMediaOnComponentChannel(audio, { noFade: true });
             audio.addEventListener('pause', onPause);
         };
     }
@@ -1806,7 +2007,7 @@ console.log('include core audio-player');
     function getStop(audio, linkedView, timeUpdate) {
         return function stop() {
             vol.removeView(linkedView);
-            mediaCtrl.stopComponentChannel();
+            mediaCtrl.stopMediaOnComponentChannel(audio, { seekToTimeAtEnd: 0 });
             audio.removeEventListener('timeupdate', timeUpdate);
             timeUpdate();
         };
@@ -2003,6 +2204,7 @@ console.log('include carousel');
         var ob = Object.create(getEventListener());
 
         function setPaneCtrlIndices(index, doAnimate) {
+            // console.debug('index', index);
             containerCtrl.setPaneIndex(index, doAnimate);
             paneCtrl.setPaneIndex(index);
             navCtrl.setPaneIndex(index);
@@ -2023,12 +2225,10 @@ console.log('include carousel');
 
             $(w).on("resize orientationchange", function() {
                 ob.resize();
-                ob.reset(false);
+                ob.updateOffset(false);
             });
         };
         ob.setPaneIndex = function setPaneIndex(index, doAnimate) {
-            var count = 0;
-
             // between the bounds
             index = Math.max(0, Math.min(index, paneCtrl.getPaneCount() - 1));
             setPaneCtrlIndices(index, doAnimate);
@@ -2056,11 +2256,16 @@ console.log('include carousel');
         ob.setFactory = function setFactory(factory) {
             paneCtrlFactory = factory;
         };
-
+        ob.updateOffset = function updateOffset(doAnim){
+            doAnim = (typeof doAnim === 'boolean') ? doAnim : true;
+            containerCtrl.updateOffset(paneCtrl.getPanesOffsetAtIndex(currentIndex), doAnim);
+        };
         ob.setOffset = function setOffset(x, animate) {
             containerCtrl.updateOffset(x, animate);
         };
-
+        ob.getOffset = function getOffset() {
+            return paneCtrl.getPanesOffsetAtIndex(currentIndex);
+        };
         ob.getOffsetAtIndex = function getOffsetAtIndex(index) {
             return paneCtrl.getPanesOffsetAtIndex(index);
         };
@@ -2070,10 +2275,7 @@ console.log('include carousel');
         ob.getAveragePaneWidth = function getAveragePaneWidth() {
             return paneCtrl.getAveragePaneWidth();
         };
-        ob.reset = function reset(doAnim){
-            doAnim = (typeof doAnim === 'boolean') ? doAnim : true;
-            containerCtrl.updateOffset(paneCtrl.getPanesOffsetAtIndex(currentIndex), doAnim);
-        };
+
 
         return ob;
 
@@ -2098,6 +2300,7 @@ console.log('include carousel');
 
                 panes = paneDataList.map(function(paneData, index) {
                     var pane = paneCtrlFactory(paneData, index, function onReady(pane) {
+
                         if (typeof onFirst === 'function') onFirst.call();
                         onFirst = null;
                         ctrl.resize();
@@ -2149,6 +2352,7 @@ console.log('include carousel');
                     offset -= panes[i].getWidth();
                 }
                 offset += (totalOffset - (panes[index].getWidth() / 2));
+                // console.log(offset, totalOffset, panes[index].getWidth());
                 return offset;
             }
         };
@@ -2168,6 +2372,7 @@ console.log('include carousel');
                 this.updateOffset(ctrl.getOffsetAtIndex(index), animate);
             },
             updateOffset: function(x, animate) {
+                // console.debug('updateOffset', x);
                 $container.removeClass("animate");
 
                 if (animate) {
@@ -2238,6 +2443,7 @@ console.log('include carousel');
                 }
             },
             resize: function resize(height) {
+                if (!($prev && $next)) return;
                 $prev.height(height);
                 $next.height(height);
             }
@@ -2295,7 +2501,7 @@ console.log('include carousel');
                             ctrl.next();
                         }
                     } else {
-                        ctrl.reset();
+                        ctrl.updateOffset();
                     }
                     break;
             }
@@ -2571,14 +2777,14 @@ console.log('include gallery');
         function _paneCtrlFactory(data, index, onReady) {
 
             var $pane,
-                $img,
                 ratio = 1,
                 width = w.innerWidth;
 
             function onImageLoad(img) {
-                $img = $(img);
                 ratio = img.naturalHeight / img.naturalWidth;
-                $pane.append($img);
+
+                updateWidth();
+                $pane.append($(img));
 
                 // add potential text
                 if (data.text) {
@@ -2587,6 +2793,12 @@ console.log('include gallery');
                 }
 
                 if (typeof onReady === 'function') onReady.call(null, this);
+            }
+
+            function updateWidth() {
+                width = parseInt((w.innerHeight / ratio), 10);
+                if (width >= w.innerWidth) width = w.innerWidth;
+                $pane.width(width);
             }
 
             return {
@@ -2606,12 +2818,11 @@ console.log('include gallery');
                     return this;
                 },
                 resize: function() {
-                    // console.log('resize', index);
-                    var newWidth = parseInt((w.innerHeight / ratio), 10),
-                        windowWidth = w.innerWidth;
+                    console.log('resize', index);
 
-                    if (newWidth >= windowWidth) {
-                        newWidth = windowWidth;
+                    updateWidth();
+
+                    if (width >= w.innerWidth) {
                         $pane.removeClass('full-height');
                         $pane.addClass('full-width');
                     } else {
@@ -2619,8 +2830,6 @@ console.log('include gallery');
                         $pane.addClass('full-height');
                     }
 
-                    width = newWidth;
-                    $pane.width(newWidth);
                     return this;
                 },
                 getPane: function() {
@@ -2954,14 +3163,14 @@ console.log('include letter-gallery');
 
                 carousel.on('setPaneIndex', function(newIndex) {
                     // console.log('setPaneIndex playerCtrl', index, newIndex);
-                    if (index === newIndex) playerCtrl.enable();
+                    if (index === newIndex) playerCtrl.enable(); //TODO: set to start of track on select
                     else {
                         playerCtrl.disable();
                     }
                 });
 
                 overlay.on('close', function() {
-                    console.log('close playerCtrl');
+                    // console.log('close playerCtrl');
                     playerCtrl.disable();
                 });
 
@@ -2984,14 +3193,45 @@ console.log('include letter-gallery');
                     if ($img.hasClass(activeClass)) {
                         $img.removeClass(activeClass);
                         $img.addClass('highlight-hidden');
-                        $text.removeClass('letter-text-highlight-active');
+                        // $text.removeClass('letter-text-highlight-active');
                     } else {
                         $img.removeClass('highlight-hidden');
                         $img.addClass(activeClass);
-                        $text.addClass('letter-text-highlight-active');
+                        // $text.addClass('letter-text-highlight-active');
                     }
                 });
 
+            }
+
+            function linkHighlightAndPlayer($controls, $highlightbtn) {
+                $controls.click(function(e) {
+                    console.log('highlight: ', $controls.attr('class'));
+
+                });
+            }
+
+            function getLetterLengthStyle(text) {
+                var type = 'long-letter',
+                    length = text.length;
+                // var lShort = 500, lMed = 1000, lLong =
+                switch (true) {
+                    case (length < 500):
+                        type = 'short-letter';
+                        break;
+                    case (length < 1000):
+                        type = 'medium-letter';
+                        break;
+                    default:
+                        type = 'long-letter';
+                }
+                return type;
+            }
+
+            function updatePaneStyle($panediv, $txtdiv, type) {
+                $panediv.addClass(type + '-pane');
+                $panediv.find('.letter-images').addClass(type + '-images');
+                $panediv.find('.letter-info').addClass(type + '-info');
+                $txtdiv.addClass(type + '-text');
             }
 
             function loadComplete() {
@@ -3008,9 +3248,10 @@ console.log('include letter-gallery');
                     $tmpl = getTemplate();
 
                     $pane = $tmpl;
-                    $pane.find('.letter-pane').hide();
+                    $pane.find('.letter-pane');
 
-                    var $close = $('.overlay .close'),
+                    var $panediv = $pane.find('.letter-pane'),
+                        $close = $('.overlay .close'),
                         $txtdiv = $tmpl.find('.letter-text'),
                         $mainimgdiv = $tmpl.find('.main-image'),
                         $highlightimgdiv = $tmpl.find('.highlight-image'),
@@ -3033,10 +3274,15 @@ console.log('include letter-gallery');
                             loadComplete();
                         };
 
-                    $txtdiv.load(data.textSrc);
+                    $panediv.hide();
+
+                    $txtdiv.load(data.textSrc, function(loadedHTML) {
+                        updatePaneStyle($panediv, $txtdiv, getLetterLengthStyle($(loadedHTML).text()));
+                    });
                     imageLoader.loadImage(data.image, onMainImgLoaded);
 
                     loadPlayer(data.audio, $playerdiv);
+                    linkHighlightAndPlayer($playerdiv.find('.controls'), $highlightbtndiv);
 
                     $close.addClass('close-carousel-letter-gallery');
 
@@ -3053,9 +3299,8 @@ console.log('include letter-gallery');
                 },
                 resize: function() {
                     // console.log('resize', index);
-                    var newWidth = w.innerWidth;
-                    width = newWidth;
-                    $pane.width(newWidth);
+                    width = w.innerWidth;
+                    $pane.width(width);
                     return this;
                 },
                 getPane: function() {
@@ -3198,6 +3443,11 @@ console.log('include letter-gallery');
     mod.modal = function(element, data) {
 
         $(element).find('.modal').on('click', function() {
+            // var id = $(this).data('id');
+            // if (!id) return console.warn('No id defined for modal element:' + this);
+            // var mData = data[id];
+            // if (!mData) console.warn('No data defined for modal id \'' + id + '\'');
+            //
             var modal = new Modal($(this), data);
             modal.init();
         });
@@ -6951,10 +7201,13 @@ Pathways.scrollScenes.Office2 = function(panelID) {
 Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
 
     var startY,
-        coinInFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-onto-screen.mp3');
-        coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3');
+        coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3'),
+        coinOnPage = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-onto-screen.mp3'),
+        scenes = [],
+        difference = 0,
+        initCoinOffset = 380;
 
-    var scene = new ScrollScene({
+    scenes.push(new ScrollScene({
             triggerElement: panelID,
             triggerHook: 'top',
             duration: Pathways.panelHeight,
@@ -6962,25 +7215,32 @@ Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
         .on('enter', function(e) {
             if (e.scrollDirection == 'FORWARD') {
                 startY = window.scrollY;
-                Pathways.media.ctrl.playMediaOnFxChannel(coinInFx);
             } else {
                 startY = window.scrollY - (Pathways.panelHeight - 100);
             }
         })
         .on('progress', function(e) {
             $('.pence').css('transform', 'translate(0, ' + (window.scrollY - startY) + 'px)');
-        });
+        }));
 
-    var scene2 = new ScrollScene({
+    scenes.push(new ScrollScene({
             triggerElement: panelID,
             triggerHook: 'top',
-            offset: 400
+            offset: initCoinOffset
         })
-        .on('enter', function(e) {
-            if (e.scrollDirection == 'FORWARD') {
-                Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
-            }
-        });
+        .on('start', function(e) {
+            console.log('coin in box');
+            Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
+        }));
+
+    scenes.push(new ScrollScene({
+            triggerElement: panelID,
+            triggerHook: 'top'
+        })
+        .on('start', function(e) {
+            console.log('coin on page');
+            Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
+        }));
 
 
     // Keep the clipping mask the correct height in relation to the 'cover' background.
@@ -6990,10 +7250,8 @@ Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
     function resizeClip() {
         if ((window.innerWidth / window.innerHeight) > ratio) {
             var newHeight = window.innerWidth / ratio,
-                percent = (newHeight / 100) * 87,
-                difference = newHeight - window.innerHeight;
-
-            // console.log(newHeight, window.innerHeight, difference);
+                percent = (newHeight / 100) * 87;
+            difference = parseInt((newHeight - window.innerHeight), 10);
 
             $clip.css({
                 'height': percent,
@@ -7009,7 +7267,7 @@ Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
         resizeClip();
     });
 
-    return [scene, scene2];
+    return scenes;
 };
 
 
@@ -7672,90 +7930,36 @@ Pathways.components.gallery.madeAFilm = {
     }
 };
 
-Pathways.scrollScenes.Letters = function() {
-
-    var scene = new ScrollScene({
-            triggerElement: '#letters',
-            duration: Pathways.panelHeight
-        })
-        .on('enter', function(e) {
-            if (_('#letters audio')) {
-                _('#letters audio').play();
-            }
-        })
-        .on('leave', function() {
-            if (_('#letters audio')) {
-                _('#letters audio').pause();
-            }
-        });
-
-    return scene;
-};
-
 Pathways.components.letterGallery.marieStopesLetters = {
     data: {
         location: 'galleries/marie-stopes-letters/',
         images: [{
-            image: '01-HorridVice-pp-01',
-            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-01.html',
-        },{
-            image: '01-HorridVice-pp-02',
-            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-02.html',
-        },{
-            image: '01-HorridVice-pp-03',
-            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-03.html',
-         },{
-            image: '01-HorridVice-pp-04',
-            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-04.html',
-        },{
-            image: '01-HorridVice-pp-05',
-            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-05.html',
-        },{
-            image: '01-HorridVice-pp-06',
-            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-06.html',
-        },{
-            image: '01-HorridVice-pp-07',
-            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-07.html',
-        },{
             image: '01-HorridVice-pp-08-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/01-letter-pp-08-highlight.html',
+            textSrc: '/_assets/text/marie-stopes-letters/01-letter.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/01-HorridVice-Extract.mp3',
         }, {
-            image: '02-HugeAppendage-Transcript-pp-01',
-            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-01.html'
-        }, {
-            image: '02-HugeAppendage-Transcript-pp-02',
-            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-02.html'
-        }, {
             image: '02-HugeAppendage-Transcript-pp-03-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-03-highlight.html',
+            textSrc: '/_assets/text/marie-stopes-letters/02-letter.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/02-HugeAppendage-Extract.mp3',
         }, {
-            image: '02-HugeAppendage-Transcript-pp-04',
-            textSrc: '/_assets/text/marie-stopes-letters/02-letter-pp-04.html'
-        },{
             image: '03-PositionsDuringPregnancy-pp-01-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/03-letter-pp-01.html',
+            textSrc: '/_assets/text/marie-stopes-letters/03-letter.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/03-PositionsDuringPregnancy-Extract.mp3',
         }, {
-            image: '04-PleasureWithoutPregnancy-pp-01-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/04-letter-pp-01-highlight.html',
+            image: '04-PleasureWithoutPregnancy-pp-0102-HIGHLIGHT',
+            textSrc: '/_assets/text/marie-stopes-letters/04-letter.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/04-PleasureWithoutPregnancy-Extract.mp3',
         }, {
-            image: '04-PleasureWithoutPregnancy-pp-02-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/04-letter-pp-02-highlight.html',
-            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/04-PleasureWithoutPregnancy-Extract.mp3',
-        },{
             image: '05-LargeSexOrgans-pp-01-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/05-letter-pp-01.html',
+            textSrc: '/_assets/text/marie-stopes-letters/05-letter.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/05-LargeSexOrgans-Extract.mp3',
         }, {
             image: '06-GoBackHome-pp-01-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/06-letter-pp-01.html',
+            textSrc: '/_assets/text/marie-stopes-letters/06-letter.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/06-GoBackHome-Extract.mp3',
         }, {
             image: '07-FreeingTheCaptives-pp-01-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/07-letter-pp-01.html',
+            textSrc: '/_assets/text/marie-stopes-letters/07-letter.html',
             audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/07-FreeingTheCaptives.mp3',
         }]
     }
@@ -8245,33 +8449,39 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
             }
 
 
+
             // Audio & Video
             //
+            //
+            function getPlay(channelID) {
+                return function playMedia(index, media) {
+                    var config = $(media).attr('data-config') ? $(media).attr('data-config') : null;
+                    p.media.ctrl.playMediaOnChannel(media, channelID, config);
+                };
+            }
+
+            function getStop(channelID) {
+                return function stopMedia(index, media) {
+                    var config = $(media).attr('data-config') ? $(media).attr('data-config') : null;
+                    p.media.ctrl.stopMediaOnChannel(media, channelID, config);
+                };
+            }
+
             if ($panelVideo.length || $panelAudio.length || $fxAudio.length) {
-                var $video = $panelVideo.first(),
-                    $audio = $panelAudio.first(),
-                    $fxaudio = $fxAudio.first(), // TODO: allow for multiple
-                    video = $video.get(0),
-                    audio = $audio.get(0),
-                    fxaudio = $fxaudio.get(0),
-                    rawVideoConfig = $video.attr('data-config'),
-                    rawAudioConfig = $audio.attr('data-config'),
-                    videoConfig = rawVideoConfig ? JSON.parse(rawVideoConfig) : null,
-                    audioConfig = rawAudioConfig ? JSON.parse(rawAudioConfig) : null;
 
                 scenes[idx++] = new Ss({
                         triggerElement: $this,
                         duration: getMediaDuration
                     })
                     .on('enter', function() {
-                        if ($video) p.media.ctrl.playMediaOnVideoChannel(video, videoConfig);
-                        if (audio) p.media.ctrl.playMediaOnPanelChannel(audio, audioConfig);
-                        if (fxaudio) p.media.ctrl.playMediaOnFxChannel(fxaudio);
+                        $panelVideo.each(getPlay('video'));
+                        $panelAudio.each(getPlay('panel'));
+                        $fxAudio.each(getPlay('fx'));
                     })
                     .on('leave', function() {
-                        if ($video) p.media.ctrl.stopVideoChannel(videoConfig);
-                        if (audio) p.media.ctrl.stopPanelChannel(audioConfig);
-                        if (fxaudio) p.media.ctrl.stopOnFxChannel(fxaudio);
+                        $panelVideo.each(getStop('video'));
+                        $panelAudio.each(getStop('panel'));
+                        p.media.ctrl.stopFxChannel();
                     });
             }
 
@@ -8283,11 +8493,13 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
                 var slideStart = $this.find('.sliding-panels').data('sliding-offset'),
                     offset = slideStart ? slideStart : 0;
 
+
                 $slidingPanels.css({
                     'opacity': 0
                 });
 
-                var translations = [-100, 100];
+                var translations = [-100, 100],
+                    defaultFxAudioSrc = 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3';
 
 
                 $slidingPanels.each(function(index) {
@@ -8296,17 +8508,34 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
                     $this.css('transform', 'translate(' + translations[((index + offset) % 2)] + 'px,0)');
 
                     var tween = TweenMax.to($this, 1, {
-                        x: 0,
-                        opacity: 1
-                    });
+                            x: 0,
+                            opacity: 1
+                        }),
+                        fxAudioSrc = $this.data('fx') || defaultFxAudioSrc,
+                        fxAudio = new Audio(fxAudioSrc);
 
                     scenes[idx++] = new Ss({
                             triggerElement: $this,
                             duration: 200,
                             offset: offset
                         })
+                        .on('enter', function(e) {
+                            if (e.scrollDirection === 'FORWARD') {
+                                console.log('playing:', fxAudioSrc);
+                                if (fxAudio) p.media.ctrl.playMediaOnFxChannel(fxAudio);
+                            } else if (e.scrollDirection == 'REVERSE') {
+                                if (fxAudio) p.media.ctrl.playMediaOnFxChannel(fxAudio);
+                            }
+                        })
+                        .on('leave', function(e) {
+                            // if (e.scrollDirection == 'REVERSE') {
+                            //     console.log('ss', idx, 'leave');
+                            //     if (fxAudio) p.media.ctrl.playMediaOnFxChannel(fxAudio);
+                            // }
+                        })
                         .setTween(tween);
                 });
+
             }
 
             // Panel specific scene code if it has any
