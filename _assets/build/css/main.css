@@ -1668,10 +1668,9 @@ iframe {
   background-size: 100%;
   width: 32px;
   height: 32px;
-  float: left;
-  top: 2px;
-  left: 5px;
-  position: relative;
+  position: absolute;
+  top: 12px;
+  right: 8px;
   opacity: 0.5; }
 .carousel-letter-gallery .unset-highlight {
   opacity: 1; }
@@ -1729,14 +1728,21 @@ iframe {
   .carousel-letter-gallery .letter-text-highlight-active .audio-transcript {
     color: #fff; }
 
+.audio-player-wrapper {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  padding: 10px;
+  margin: -10px 0 20px 0;
+  background: rgba(255, 255, 255, 0.23); }
+
 .audio-player-gallery {
-  float: left;
-  max-width: 200px;
-  min-width: 120px;
-  margin-bottom: 30px; }
+  margin: 0 35px 16px 0; }
+  .audio-player-gallery .progressed, .audio-player-gallery .progress-bar {
+    height: 3px; }
 
 .close-carousel-letter-gallery {
-  top: 20px;
+  top: 23px;
   right: 20px; }
 
 @-webkit-keyframes info-box-animation-inner {
