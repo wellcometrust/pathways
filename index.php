@@ -35,7 +35,7 @@
     <nav>
         <ul class="pathway-links">
             <li><a href="<?= $path1 ?>">Mindcraft</a></li>
-            <li><a href="<?= $path1 ?>">The Collectors</a></li>
+            <li><a href="<?= $path2 ?>">The Collectors</a></li>
         </ul>
     </nav>
 

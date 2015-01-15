@@ -46,10 +46,9 @@
         background-size: 100%;
         width: 32px;
         height: 32px;
-        float: left;
-        top: 2px;
-        left: 5px;
-        position: relative;
+        position: absolute;
+        top: 12px;
+        right: 8px;
         opacity: 0.5;
     }
     .unset-highlight {
@@ -115,13 +114,21 @@
         }
     }
 }
+.audio-player-wrapper {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    padding: 10px;
+    margin: -10px 0 20px 0;
+    background: rgba(255, 255, 255, 0.23);
+}
 .audio-player-gallery {
-    float: left;
-    max-width: 200px;
-    min-width: 120px;
-    margin-bottom: 30px;
+    margin: 0 35px 16px 0;
+    .progressed, .progress-bar {
+        height: 3px;
+    }
 }
 .close-carousel-letter-gallery {
-    top: 20px;
+    top: 23px;
     right: 20px;
 }

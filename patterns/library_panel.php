@@ -1,13 +1,22 @@
 <?php
 
-    $modulePath =   $page->getModulePath();
+    $hostRoot =     $page->hostRoot;
+    $module =       $page->getModule();
+    $modulePath =   $module['path'];
+    $pathwayPath =  $page->getPathwayPath();
+
+
 
     $id =           isset($panel['id']) ? $panel['id'] : '';
 
     $gaData =       $page->getGARoot() . $id . ' - ';
 
-    $panel_link =       $modulePath.'#'.$id;
+    $panel_link =       $hostRoot.$pathwayPath.$modulePath.'#'.$id;
     $url_panel_link =   urlencode($panel_link);
+
+    $share = '';
+    $pinterest_img = '';
+    $share_text = '';
 
     if (isset($panel['share'])) {
         $share =            $panel['share'];

@@ -21,8 +21,10 @@ console.log('include letter-gallery');
             '<div class="highlight-image"></div>' +
             '</div>' +
             '<div class="letter-info">' +
+            '<div class="audio-player-wrapper clearfix">' +
             '<div class="audio-player"></div>' +
             '<div class="highlight-button"></div>' +
+            '</div>' +
             '<div class="letter-text"></div>' +
             '</div>' +
             '</div></li>');
@@ -99,12 +101,12 @@ console.log('include letter-gallery');
             function getLetterLengthStyle(text) {
                 var type = 'long-letter',
                     length = text.length;
-                // var lShort = 500, lMed = 1000, lLong =
+               console.log(length);
                 switch (true) {
-                    case (length < 500):
+                    case (length < 400):
                         type = 'short-letter';
                         break;
-                    case (length < 1000):
+                    case (length < 900):
                         type = 'medium-letter';
                         break;
                     default:

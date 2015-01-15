@@ -4,6 +4,7 @@
     <div class="bg-container">
         <video preload="none" poster="/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-2.jpg" data-video="panel" data-config='{ "exclude": [] }'>
             <source src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/video/bills-of-mortality.mp4">
+            <source src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/video/bills-of-mortality.webm">
             <img alt="" src="/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-2.jpg">
         </video>
 
