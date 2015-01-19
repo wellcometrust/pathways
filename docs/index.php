@@ -8,8 +8,9 @@
     include_once($docRoot.'/_includes/Spyc.php');
     include_once($docRoot.'/_includes/parsedown.php');
 
-    $docs = file_get_contents($docRoot.'/tapestry/docs.md');
-    
+    $docs = file_get_contents($docRoot.'/docs/md/docs.md');
+    $overview = file_get_contents($docRoot.'/docs/md/overview.md');
+
     $parsedown = new Parsedown();
 
     $config_yml = spyc_load_file($docRoot.'/_includes/config.yaml');
@@ -19,10 +20,10 @@
     $path3  = $config_yml['site']['pathways']['breath']['path'];
 ?>
 <!DOCTYPE HTML>
-<html lang="en"> 
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Pathways: The Mind</title>
+    <title>Wellcome: Digital Stories</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -171,11 +172,13 @@
     <nav>
         <header class="project-name">
             <h1>Wellcome</h1>
-            <h2>Project X</h2>
+            <h2>Digital Stories</h2>
         </header>
 
         <ul class="project-nav">
-            <li data-tab="documentation" class="selected">Documentation</li>
+            <li data-tab="documentation" class="selected">Documentation
+            <ul><li data-tab="structure">Structure</li></ul>
+            </li>
             <li data-tab="pathways">Pathways</li>
             <li data-tab="patterns">Patterns</li>
         </ul>
@@ -190,14 +193,26 @@
                 <header>
                     <h1>Documentation</h1>
                 </header>
-                
+
+                <div class="content">
+                    <div class="markdown">
+                        <?php echo $parsedown->text($overview) ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab" data-tab="structure">
+                <header>
+                    <h1>Documentation</h1>
+                </header>
+
                 <div class="content">
                     <div class="markdown">
                         <?php echo $parsedown->text($docs) ?>
                     </div>
                 </div>
             </div>
-            
+
             <div class="tab" data-tab="pathways">
                 <header>
                     <h1>Pathways</h1>
@@ -217,8 +232,6 @@
                             <li><a href="<?php echo $path ?>6-freud/index.php">Sigmund Freud</a></li>
                             <li><a href="<?php echo $path ?>credits.php">Credits</a></li>
                         </ul>
-
-                        <div><a href="tapestry/download.php?pathway=mindcraft">Download</a></div>
                     </div>
 
                     <div class="block">
@@ -234,8 +247,6 @@
                             <li><a href="<?php echo $path2 ?>6-ignorant-bride/index.php">The Ignorant Bride</a></li>
                             <li><a href="<?php echo $path2 ?>credits.php">Credits</a></li>
                         </ul>
-
-                        <div><a href="tapestry/download.php?pathway=the-collectors">Download</a></div>
                     </div>
                 </div>
             </div>
@@ -297,8 +308,8 @@
         };
     </script>
 
-    <script src="/tapestry/js/prism.js"></script>
+    <script src="/docs/tapestry/js/prism.js"></script>
 
 </body>
 </html>
-    
+

@@ -1,5 +1,5 @@
 
-<div id="gonad-man" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="gonad-man" class="panel" data-config='{ "offset_height": 550 }'>
 
     <div class="bg-container">
         <img alt="" src="/pathways/1-mindcraft/_assets/4-esdaile/esdaile-2.jpg">

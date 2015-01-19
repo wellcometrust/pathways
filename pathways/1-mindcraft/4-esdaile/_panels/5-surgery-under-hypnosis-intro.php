@@ -1,5 +1,5 @@
 
-<div id="surgery-under-hypnosis-intro" class="panel" data-config='{ "offset_height": 250, "background": { "type": "none", "preserve_ratio": false } }'>
+<div id="surgery-under-hypnosis-intro" class="panel" data-config='{ "offset_height": 250 }'>
 
     <div class="bg-container"></div>
 
@@ -12,5 +12,5 @@
         </div>
 
     </div>
-    
+
 </div>

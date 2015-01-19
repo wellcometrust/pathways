@@ -1,5 +1,5 @@
 
-<div id="thomas-wakley" class="panel" data-config='{ "offset_height": 350, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="thomas-wakley" class="panel" data-config='{ "offset_height": 350 }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
@@ -13,7 +13,7 @@
         <div class="inner">
 
             <div class="past-twitter clearfix">
-                
+
                 <div class="tweet wakley left">
                     <div class="avatar"></div>
                     <div class="header">

@@ -1,14 +1,12 @@
 
-.library-panel {
-    display:    none;
-    position:   absolute;
-    bottom:     0;
-    right:      0;
-    z-index:    15;
-
-    @include transform( translate(100%, 88%) );
-    @include transition( all 0.5s ease );
-
+.info-panel {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 15;
+    @include transform( translate(100%, 100%));
+    @include transition( all 0.5s ease);
     .handle {
         display:            block;
         position:           relative;
@@ -55,9 +53,12 @@
         }
     }
 
-    &.active {
-        @include transform( translate(38px, 38px));
-
+    &.info-panel-ready {
+        position: fixed;
+        display: block;
+    }
+    &.info-panel-open {
+        @include transform( translate(38px, 38px) !important);
         .handle {
             background-color: rgba(0,0,0, 1);
             background-image: url(/_assets/img/icons/icon-cross-green.svg);

@@ -88,12 +88,12 @@ module.exports = function(grunt) {
 
         uglify: {
             libs: {
-                src: '_assets/build/js/libs.js',
-                dest: '_assets/build/js/libs.min.js'
+                // src: '_assets/build/js/libs.js',
+                // dest: '_assets/build/js/libs.min.js'
             },
             app_files: {
-                src: '_assets/build/js/production.js',
-                dest: '_assets/build/js/production.min.js'
+                // src: '_assets/build/js/production.js',
+                // dest: '_assets/build/js/production.min.js'
             }
         },
 

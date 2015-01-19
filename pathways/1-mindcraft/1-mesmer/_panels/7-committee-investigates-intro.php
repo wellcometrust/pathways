@@ -1,5 +1,5 @@
 
-<div id="committee-investigates-intro" class="panel" data-config='{ "offset_height": 400, "background": { "type": "none", "preserve_ratio": false } }'>
+<div id="committee-investigates-intro" class="panel" data-config='{ "offset_height": 400 }'>
 
     <div class="bg-container"></div>
 
@@ -10,7 +10,7 @@
                 <h1>The committee investigates&hellip;</h1>
             </header>
         </div>
-        
+
     </div>
 
 </div>

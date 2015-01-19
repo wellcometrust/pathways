@@ -194,7 +194,7 @@
 
         public function getPatternPath($pattern, $data = null) {
             $page = $this;
-            return $this->docRoot . '/patterns/' . $pattern . '.php';
+            return $this->docRoot . '/_includes/components/' . $pattern . '.php';
         }
 
 

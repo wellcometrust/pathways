@@ -1,5 +1,5 @@
 
-<div id="letters" class="panel" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="letters" class="panel" data-config='{ "offset_height": 200 }'>
 
     <div class="bg-container">
         <img alt="" class="letter" src="/pathways/2-the-collectors/_assets/6-ignorant-bride/letter-1.jpg">

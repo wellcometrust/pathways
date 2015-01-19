@@ -43,7 +43,7 @@
                             'links' => $ip['links'],
                             'share' => $share
                         );
-                        include($page->getPatternPath('library_panel'));
+                        include($page->getPatternPath('info_panel'));
                     }
                 }
 

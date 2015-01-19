@@ -27,7 +27,7 @@
 
 ?>
 
-<div class="library-panel" data-panel="<?= $id ?>" data-component="library-panel">
+<div class="info-panel" data-panel="<?= $id ?>" data-component="info-panel">
     <div class="handle" data-ga="<?= $gaData . 'l2 open share' ?>"></div>
     <div class="body">
         <?php if( isset($panel['links']) ): ?>

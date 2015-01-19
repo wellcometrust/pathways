@@ -1,12 +1,12 @@
 
-<div id="bompard" class="panel" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="bompard" class="panel" data-config='{ "offset_height": 0 }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
     <div class="main-content fixed">
-        
+
         <div class="inner">
             <div class="bompard-header">
                 <header>
@@ -15,7 +15,7 @@
                     <p>At her trial, expert witnesses disputed the power of hypnosis. Could it be used to make someone commit murder against their will, or without their knowledge?</p>
                 </header>
             </div>
-            
+
             <div class="comic-strip clearfix">
 
                 <div class="comic-row comic-row--1 clearfix">
@@ -26,7 +26,7 @@
                     <div class="comic-panel comic-panel--2">
                         <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-2.jpg">
                         <p class="panel-text">In 1889 Paris was gripped by a sensational murder. A wealthy businessman was lured by a young woman named Gabrielle Bompard to a rented apartment where her partner, a vicious con-man named Michel Eyraud, was lying in wait.</p>
-                    </div>                                
+                    </div>
                 </div>
 
                 <div class="comic-row comic-row--2 clearfix">
@@ -42,7 +42,7 @@
                         <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-5.jpg">
                     </div>
                 </div>
-                
+
                 <div class="comic-panel comic-panel--6">
                     <div class="panel-number">3</div>
                     <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/bonpard/bonpard-comic-6.jpg">
@@ -97,7 +97,7 @@
                 <p>After winning early release in 1903, she toured with a hypnotic stage show, in which she re-enacted her crime.</p>
             </div>
         </div>
-        
+
     </div>
 
 </div>

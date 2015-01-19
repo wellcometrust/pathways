@@ -1,5 +1,5 @@
 
-<div id="okey-sisters" class="panel" data-config='{ "offset_height": 1400, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="okey-sisters" class="panel" data-config='{ "offset_height": 1400 }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

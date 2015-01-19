@@ -1,5 +1,5 @@
 
-<div id="trilby" class="panel" data-config='{ "offset_height": 0, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="trilby" class="panel" data-config='{ "offset_height": 0 }'>
 
     <div class="bg-container">
         <img alt="" class="large-screen" src="/_assets/img/spacer.png">

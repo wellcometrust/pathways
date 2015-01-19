@@ -1,12 +1,12 @@
 
-<div id="verdict" class="panel" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="verdict" class="panel" data-config='{ "offset_height": 200 }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
     <div class="main-content">
-        
+
         <div class="inner">
             <header>
                 <h1>Wakley’s verdict</h1>
@@ -20,5 +20,5 @@
         </div>
 
     </div>
-    
+
 </div>

@@ -1,5 +1,5 @@
 
-<div id="satirised" class="panel" data-config='{ "offset_height": 300, "background": { "type": "video", "preserve_ratio": false } }'>
+<div id="satirised" class="panel" data-config='{ "offset_height": 300 }'>
 
     <div class="bg-container">
         <video preload="none" poster="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-5.jpg" data-video="panel" data-config='{ "exclude": ["panel"], "initTime" : 5 }'>

@@ -1,5 +1,5 @@
 
-<div id="death-infographic" class="panel" data-component="infographic" data-config='{ "offset_height": 150, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="death-infographic" class="panel" data-component="infographic" data-config='{ "offset_height": 150 }'>
 
     <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/03-death-infographic-isaac-newton.mp3" loop data-audio="panel"></audio>
     <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/03-fx-transition-into-death-infographic.mp3" data-audio="fx"></audio>

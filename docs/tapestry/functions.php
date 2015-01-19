@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-$patterns_dir = str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) . "patterns";
+$patterns_dir = str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) . "_includes/components/";
 // $sections_dir = str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) . "patterns/sections/";
 
 

@@ -1,5 +1,5 @@
 
-<div id="isaac-newton" class="panel" data-config='{ "offset_height": 150, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="isaac-newton" class="panel" data-config='{ "offset_height": 150 }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

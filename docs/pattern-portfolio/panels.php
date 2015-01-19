@@ -3,7 +3,7 @@ include '../tapestry/functions.php';
 
 $assets_dir     = str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) . "_assets";
 $files          = array();
-$handle         = opendir(str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) . '/patterns/panels');
+$handle         = opendir(str_replace($_SERVER['SCRIPT_NAME'], '/', $_SERVER['SCRIPT_FILENAME']) . '/_includes/components/panels');
 
 while (false !== ($file = readdir($handle))):
     if($file != 'index.php' && (stristr($file,'.html') || stristr($file,'.php'))):

@@ -1,5 +1,5 @@
 
-<div id="office-2" class="panel" data-config='{ "offset_height": 500, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="office-2" class="panel" data-config='{ "offset_height": 500 }'>
 
     <div class="bg-container">
         <img alt="" class="large-screen" src="/pathways/1-mindcraft/_assets/6-freud/freud-4.jpg">

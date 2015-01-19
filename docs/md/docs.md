@@ -1,17 +1,15 @@
-# Pathways - A guide
+# Digital Stories - A guide
 
 The pathways project, I like to think, is a sort of 'short-form journalism' partially inspired by the NYTimes long-form journalism pieces and other interactive ‘scroll enhanced’ sites.
-A 'Pathway' is a collection of, usually, around 5 or 6 stories/modules. Each module is made up of panels, each being, in effect, a chapter or scene (the naming conventions throughout are a little flexible).
+A 'Pathway' is a collection of, usually, around 5 or 6 stories or 'modules'. Each module is made up of panels, each of these being, in effect, a chapter or scene of the story.
 
-A full Pathway is defined by an Introduction page, an assumed 6 stories/modules and then a credits page
+A full Pathway is defined by an Introduction page, an assumed 6 stories/modules and then a credits page.
 
-A story/module is defined by an introductory start panel, followed a sequence of 1 or more panels which ‘fix’ to the screen and cross fade between each other and trigger actions, then end with the library layer and teaser for the next module.
-
-This is the intended structure for all Pathways current and future and the system is built to reflect this. Any deviations may require potentially significant rewriting of parts of the code and are out of scope of the project.
+A module is defined by an introductory start panel, followed a sequence of 1 or more panels which ‘fix’ to the screen and cross fade between each other and trigger actions, then end with the library layer and teaser for the next module.
 
 ##	Creating Pathways
 
-This tool, while useful in the development of a Pathway, is in no way necessary. It is the layout and setup of the HTML which triggers the corresponding JavaScript to make up a module and that is what we shall cover first.
+In the development of the Pathways project, an internal tool was created by Clearleft to speed up iteration and workflow. This tool has now become an integral part of the project, but while useful in the development of a Pathway, is in no way necessary. It is the layout and setup of the HTML which triggers the corresponding JavaScript to make up a module and that is what we shall cover first.
 
 It should be noted that Pathway modules are very much art directed and, thus, bespoke. As such, there are only so many reusable patterns, which are mostly structural. Once the basic structure is in place and the JavaScript is able to do its thing, it’s up to you to hook into the ‘engine’ to accomplish the per-panel effects.
 
@@ -19,34 +17,33 @@ It should be noted that Pathway modules are very much art directed and, thus, be
 
 #### Intro
 
-Grab the ‘intro’ panel and switch out the background image and the navigation images.
+The introduction page (index.php within each module) remains very consitent across pathways, and is mainly composed of imagery and links. Creating a new intro page simply involves copying an existing page and switching the background and navigation images, and modifying the link and title text.
+
 
 #### Module
 
 Within the body tags, the general structure is
 
 	<main role=“main”>
-
 		// Start panel here…
-
+        <div class="start" />
 		// Begin the cross fading sequence.
 		<div class=“sequence”>
-
 			// 1 or more panels…
-
+            <div class="panel" />
+                ...
 		</div>
-
 		// Panel Info boxes
 		<div class="info-panels">
 			// One or more info panel patterns
+            <div class="info-panel" />
 		</div>
-
 		// Library layer/Teaser ‘fork’ pattern
-
+        <div class="fork"/>
 		// Library Layer pattern
-
+        <div class="library-layer"/>
 		// Navigation pattern
-
+        <div class="global-navigation"/>
 	</main>
 
 #### Panels
@@ -83,6 +80,13 @@ Positioning of the text is handled by modifier classes such as `.left`, `.right`
 
 	<div class=“main-content centre”></div>
 
+`.left` : Positions the content 48px from the left, with a maximum width of 500px
+`.right` : Positions the content 48px from the right, with a maximum width of 500px
+`.center` : Explicitly sets the width to 100% of the viewport and removes any left positioning. Requires a child div with the class `.inner` to set auto-margins and a max-width of 500px on the content.
+`.title` : Like `.center`, but sets a max-width of 1024px.
+`.strip` : This is used in combination with the `.black-strip` class to set the max width of the content to the same size as the strip (320px).
+
+
 These classes will suit most of the time, but when they do not, then more classes can be added, or they can be overridden in a panel's specific CSS.
 
 If the content is longer than a panel would typically be, then use the modifier class `.fixed` on the `.main-content` element. This prevents the content being positioned absolutely, and allows the code to calculate how tall a panel actually is so that it gets scrolled completely instead of cutting off early.
@@ -106,13 +110,10 @@ The one other native panel type which is handled by the current code is the ‘t
 
 Panels can also be configured using the data-config attribute
 
-	<div class="panel" data-config='{ "offset_height": 200, "background": { "type": "video", "preserve_ratio": false } }'>
+	<div class="panel" data-config='{ "offset_height": 200 }'>
 
 `offset_height` takes a value of 0 or more. Used when a panel needs to stay onscreen for a longer scroll period.
 
-`background { preserve_ratio }` is a boolean. Use if a background container should always keep it’s aspect ratio, adding black strips to top and bottom is necessary, regardless of the user’s viewport ratio.
-
-`background { type }` is currently unused.
 
 ### Scenes
 
