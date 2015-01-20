@@ -13,7 +13,7 @@
 
     <main role="main">
 
-        <div id="credits" class="credits">
+        <div id="credits" class="credits credits-the-collectors">
 
             <div class="inner">
 

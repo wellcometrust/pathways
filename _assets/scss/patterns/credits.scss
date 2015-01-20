@@ -1,64 +1,56 @@
-
 #credits {
-    background:         url($mindcraft-assets + '/intro.jpg') 0 0 no-repeat fixed;
-    background-size:    cover;
-    height:             100%;
-    color:              #fff;
-
+    background-size: cover;
+    height: 100%;
+    color: #fff;
     .inner {
         padding: 3rem 1rem 1rem 1rem;
     }
-
     h1 {
-        font-size:  3.23rem;
+        font-size: 3.23rem;
     }
-
     h3 {
-        font-size:  2rem;
-        margin:     1em 0 .5em;
+        font-size: 2rem;
+        margin: 1em 0 .5em;
     }
-
     li {
-        list-style:     none;
-        @include        tablet-gothic;
-        margin-bottom:  0.618rem;
+        list-style: none;
+        @include tablet-gothic;
+        margin-bottom: 0.618rem;
     }
 }
-
+.credits-the-collectors {
+    background: url($the-collectors-assets + '/intro.jpg') 0 0 no-repeat fixed;
+}
+.credits-mindcraft {
+    background: url($mindcraft-assets + '/intro.jpg') 0 0 no-repeat fixed;
+}
 @media all and (min-width: 48rem) {
     #credits {
-
         .inner {
-            max-width:  1024px;
-            margin:     0 auto;
-            padding:    100px;
-            color:      #fff;
-            font-size:  1.293rem;
-
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 100px;
+            color: #fff;
+            font-size: 1.293rem;
             h1 {
-                font-size:      5.25rem;
+                font-size: 5.25rem;
                 text-transform: uppercase;
             }
-
             h3 {
-                font-size:  3.23rem;
-                margin:     1em 0 .5em;
-
-                span{
+                font-size: 3.23rem;
+                margin: 1em 0 .5em;
+                span {
                     font-size: 1.618rem;
                 }
             }
-
             li {
-                font-size:      1rem;
-                opacity:        0.7;
-
+                font-size: 1rem;
+                opacity: 0.7;
                 span {
-                    display:    inline-block;
-                    width:      200px;
+                    display: inline-block;
+                    width: 200px;
                 }
             }
-            
         }
-    }    
+    }
 }
