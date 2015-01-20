@@ -70,10 +70,9 @@ module.exports = function(grunt) {
 
                     '_assets/js/pathways/main.js', // Pathways Core files.
 
-                    '_assets/js/pathways.js', // The Pathways Main file.
                     '_assets/js/core/image-loader.js', // Then the pattern core files
                     '_assets/js/core/*.js', // Then the pattern core files
-                    '_assets/js/patterns/*.js', // Then the patterns
+                    '_assets/js/pathways/components/*.js', // Then the patterns
                     '_assets/js/infographics/*.js', // Then any infographics
                     'pathways/**/**/_js/*.js', // And finally the scenes
                     '_assets/js/main.js' // Then the main file.
