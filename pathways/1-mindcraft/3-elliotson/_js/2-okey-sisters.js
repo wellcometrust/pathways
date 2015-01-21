@@ -37,7 +37,7 @@ Pathways.scrollScenes.OkeySisters = function(panelID) {
 
 Pathways.components.gallery.hypnotisedWomen = {
     data: {
-        location: 'galleries/hypnotised-women/',
+        location: '_assets/galleries/hypnotised-women/',
         images: [{
             image: 'L0000476',
             text: '1/6: Most images of mesmerism and hypnotism show men treating women in manipulative or exploitative ways.'

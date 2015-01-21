@@ -5,7 +5,7 @@
 
         <div class="crop-zoom">
             <div class="vertical-center">
-                <img alt="" src="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-2.jpg">
+                <img alt="" src="/pathways/1-mindcraft/1-mesmer/_assets/mesmer-2.jpg">
                 <div class="tap-targets">
                     <svg class="info-box tap-target rod" data-crop="rod" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;" data-ga="mindcraft - mesmer - mesmers-salon - l2 image zoom magnetised rods">
                         <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>

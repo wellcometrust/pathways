@@ -2,7 +2,7 @@
 #verdict {
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/elliotson-4.jpg);
+        background-image: url(/pathways/1-mindcraft/3-elliotson/_assets/elliotson-4.jpg);
         background-position: 30% 0;
     }
 
@@ -13,7 +13,7 @@
 
 @media screen and (min-width: 48rem) {
     #verdict {
-        
+
         .main-content {
             @include clearfix;
         }

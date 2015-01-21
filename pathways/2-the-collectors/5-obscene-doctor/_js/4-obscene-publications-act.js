@@ -1,6 +1,6 @@
 Pathways.components.gallery.indecentSexualImages = {
     data: {
-        location: 'galleries/indecent-sexual-images/',
+        location: '_assets/galleries/indecent-sexual-images/',
         images: [{
             image: 'L0038201',
             text: 'Coloured illustration of scrotum diseased with Syphilis.'

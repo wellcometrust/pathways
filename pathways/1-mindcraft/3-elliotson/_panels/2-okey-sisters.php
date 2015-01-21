@@ -17,8 +17,8 @@
     </div>
 
     <div class="secondary-content">
-        <img alt="" src="/pathways/1-mindcraft/_assets/3-elliotson/demonstration1.jpg">
-        <img alt="" src="/pathways/1-mindcraft/_assets/3-elliotson/demonstration2.jpg">
+        <img alt="" src="/pathways/1-mindcraft/3-elliotson/_assets/demonstration1.jpg">
+        <img alt="" src="/pathways/1-mindcraft/3-elliotson/_assets/demonstration2.jpg">
     </div>
 
     <div class="info-box with-text" id="hypnotised-women" data-component="gallery" data-config='{ "offset_height": 400 }' data-ga="mindcraft - elliotson - okey-sisters - l2 gallery open">

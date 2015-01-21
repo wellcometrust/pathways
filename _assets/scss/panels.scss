@@ -1,9 +1,10 @@
 
 .start-mesmer {
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/1-mesmer/mesmer-1.jpg);
+        background-image: url(/pathways/1-mindcraft/1-mesmer/_assets/mesmer-1.jpg);
     }
 }
+
 
 #mesmers-salon-intro {
     .small-screen {
@@ -72,11 +73,11 @@
     overflow: hidden;
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/1-mesmer/mesmer-3.jpg);
+        background-image: url(/pathways/1-mindcraft/1-mesmer/_assets/mesmer-3.jpg);
     }
 
     .info-box {
-        position:   absolute; 
+        position:   absolute;
         bottom:     60px;
         right:      60px;
     }
@@ -95,9 +96,9 @@
 
 @media all and (min-width: 60rem) {
 
-    #animal-magnetism {    
+    #animal-magnetism {
 
-        .info-box {            
+        .info-box {
             bottom:     auto;
             top:        90px;
             right:      60px;
@@ -105,6 +106,7 @@
     }
 
 }
+
 
 #magnetised-trees {
     .bg-container {
@@ -169,14 +171,15 @@
 
 .start-airloom {
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/2-airloom/airloom-1.jpg);
+        background-image: url(/pathways/1-mindcraft/2-airloom/_assets/airloom-1.jpg);
     }
 }
+
 
 #where-will-this-technology-lead {
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/2-airloom/airloom-2.jpg);
+        background-image: url(/pathways/1-mindcraft/2-airloom/_assets/airloom-2.jpg);
     }
 
     .info-box {
@@ -184,21 +187,23 @@
         top:        60px;
         right:      60px;
     }
-    
+
 }
+
 
 .start-elliotson {
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/elliotson-1.jpg);
+        background-image: url(/pathways/1-mindcraft/3-elliotson/_assets/elliotson-1.jpg);
     }
 }
+
 
 #okey-sisters {
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/elliotson-2.jpg);
+        background-image: url(/pathways/1-mindcraft/3-elliotson/_assets/elliotson-2.jpg);
     }
-    
+
     .main-content {
         p {
             margin: 1em 0;
@@ -277,10 +282,11 @@
     }
 }
 
+
 #thomas-wakley {
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/elliotson-3.jpg);
+        background-image: url(/pathways/1-mindcraft/3-elliotson/_assets/elliotson-3.jpg);
     }
 
     .main-content {
@@ -315,10 +321,11 @@
     }
 }
 
+
 #verdict {
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/3-elliotson/elliotson-4.jpg);
+        background-image: url(/pathways/1-mindcraft/3-elliotson/_assets/elliotson-4.jpg);
         background-position: 30% 0;
     }
 
@@ -329,7 +336,7 @@
 
 @media screen and (min-width: 48rem) {
     #verdict {
-        
+
         .main-content {
             @include clearfix;
         }
@@ -383,9 +390,10 @@
 
 .start-esdaile {
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-1.jpg);
+        background-image: url(/pathways/1-mindcraft/4-esdaile/_assets/esdaile-1.jpg);
     }
 }
+
 
 #gonad-man {
     .info-box {
@@ -451,7 +459,7 @@
 
 #fakir {
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-3.jpg);
+        background-image: url(/pathways/1-mindcraft/4-esdaile/_assets/esdaile-3.jpg);
         background-position: 50% 100%;
     }
 }
@@ -466,10 +474,11 @@
     }
 }
 
+
 #india {
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-4.jpg);
+        background-image: url(/pathways/1-mindcraft/4-esdaile/_assets/esdaile-4.jpg);
         background-position: 50% 100%;
     }
 
@@ -490,7 +499,7 @@
             bottom:             110px;
             width:              100%;
             height:             161px;
-            background:         url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-4-boat.png) 0 0 no-repeat;
+            background:         url(/pathways/1-mindcraft/4-esdaile/_assets/esdaile-4-boat.png) 0 0 no-repeat;
             background-size:    100%;
         }
     }
@@ -521,6 +530,7 @@
     }
 }
 
+
 #surgery-under-hypnosis-intro {
 
 }
@@ -541,7 +551,7 @@
 
 #james-braid {
     .bg-container {
-        background-image:       url(/pathways/1-mindcraft/_assets/4-esdaile/esdaile-5.jpg);
+        background-image:       url(/pathways/1-mindcraft/4-esdaile/_assets/esdaile-5.jpg);
         background-position:    100% 0;
     }
 
@@ -578,7 +588,7 @@
 
 .start-svengali {
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/5-svengali/svengali-1.jpg);
+        background-image: url(/pathways/1-mindcraft/5-svengali/_assets/svengali-1.jpg);
     }
 
     .falling-lady {
@@ -627,12 +637,13 @@
     100%    { transform: translate(0, 500px); }
 }
 
+
 .comic-strip { min-height: 600px; }
 
 #trilby {
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/5-svengali/svengali-2.jpg);
+        background-image: url(/pathways/1-mindcraft/5-svengali/_assets/svengali-2.jpg);
 
         .large-screen {
             display:none;
@@ -979,7 +990,7 @@
 #bompard {
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/5-svengali/svengali-2.jpg);
+        background-image: url(/pathways/1-mindcraft/5-svengali/_assets/svengali-2.jpg);
     }
 
     img {
@@ -1131,7 +1142,7 @@
 
         .comic-row--4 {
             margin-top: 1em;
-            
+
             .comic-column:nth-child(1) {
                 width: 28%;
                 margin-right: 5%;
@@ -1188,19 +1199,21 @@
 
 @media all and (min-width: 60rem) {
     #bompard {
-       
+
         .text-panel--1 {
             width: 45%;
         }
-        
+
     }
 }
 
+
 .start-freud {
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/6-freud/freud-1.jpg);
+        background-image: url(/pathways/1-mindcraft/6-freud/_assets/freud-1.jpg);
     }
 }
+
 
 #anna-o {
     .fragmented {
@@ -1266,9 +1279,9 @@
 #fred-breuer {
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/6-freud/freud-3.jpg);
+        background-image: url(/pathways/1-mindcraft/6-freud/_assets/freud-3.jpg);
     }
-    
+
 }
 
 @media all and (min-width: 48rem) {
@@ -1378,7 +1391,7 @@
 
 .start-curious-gardener {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/1-curious-gardener/m1-curious-gardener-1.jpg);
+        background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-1.jpg);
     }
 }
 
@@ -1407,9 +1420,10 @@
         }
     }
 }
+
 #john-tradescant {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/1-curious-gardener/m1-curious-gardener-2.jpg);
+        background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-2.jpg);
     }
 }
 .touch {
@@ -1440,7 +1454,7 @@
 
 #duke-of-buckingham {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/1-curious-gardener/m1-curious-gardener-3.jpg);
+        background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-3.jpg);
         background-position: 50% 100%;
     }
 }
@@ -1453,7 +1467,7 @@
 
 .no-touch {
     #duke-of-buckingham {
-        
+
     }
 }
 
@@ -1463,7 +1477,7 @@
             position:           absolute;
             top:                30%;
             left:               45%;
-            background:         url(/pathways/2-the-collectors/_assets/1-curious-gardener/6pence.png) 0 0 no-repeat;
+            background:         url(/pathways/2-the-collectors/1-curious-gardener/_assets/6pence.png) 0 0 no-repeat;
             background-size:    100%;
             width:              140px;
             height:             155px;
@@ -1479,7 +1493,7 @@
 
         .main-content {
             color:          #030303;
-            
+
             .inner {
                 border-top:     1px solid #030303;
                 border-bottom:  1px solid #030303;
@@ -1499,9 +1513,10 @@
         }
     }
 }
+
 #unique-artifacts {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/1-curious-gardener/m1-curious-gardener-4.jpg);
+        background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-4.jpg);
     }
 }
 
@@ -1542,7 +1557,7 @@
 
 .start-merchants-of-light {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/2-merchants-of-light/m2-merchants-of-light-1.jpg);
+        background-image: url(/pathways/2-the-collectors/2-merchants-of-light/_assets/m2-merchants-of-light-1.jpg);
     }
 
     .scene-set {
@@ -1559,6 +1574,7 @@
         color: #030303;
     }
 }
+
 
 #bensalem-intro {
     
@@ -1596,7 +1612,7 @@
 
 .start-death-collector {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-1.jpg);
+        background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-1.jpg);
     }
 }
 
@@ -1610,9 +1626,10 @@
     }
 }
 
+
 #bills-of-mortality {
     .bg-container {
-        // background-image: url(/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-2.jpg);
+        // background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-2.jpg);
     }
 }
 
@@ -1624,13 +1641,13 @@
 
 .no-touch {
     #bills-of-mortality {
-        
+
     }
 }
 
 @media screen and (min-width: 48em) {
     #bills-of-mortality {
-           
+
     }
 
     .touch {
@@ -1646,9 +1663,10 @@
     }
 }
 
+
 #graunt-records {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-3.jpg);
+        background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-3.jpg);
     }
 }
 
@@ -1712,7 +1730,7 @@
 
 #isaac-newton {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/3-death-collector/m3-death-collector-4.jpg);
+        background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-4.jpg);
     }
 }
 
@@ -1724,13 +1742,13 @@
 
 .no-touch {
     #isaac-newton {
-        
+
     }
 }
 
 @media screen and (min-width: 48em) {
     #isaac-newton {
-           
+
     }
 
     .touch {
@@ -1746,11 +1764,592 @@
     }
 }
 
-.start-unceasing-seeker {
+#death-infographic {
+    .line-ticks {
+        -webkit-backface-visibility: hidden;
+        -webkit-perspective: 1px;
+        -moz-perspective: 1px;
+        perspective: 1px;
+    }
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/4-unceasing-seeker/m4-unceasing-seeker-1.jpg);
+        line-height: 1;
+        font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;
+        box-sizing: content-box;
+        background-color: #fdebc0;
+        color: #000;
+        background-image: url('_assets/infographics/death-collector/wellcome-background3.jpg');
+        background-size: 100% 100%;
+        background-repeat: repeat-y;
+        background-position: center center;
+
+        * {
+            box-sizing: content-box;
+        }
+    }
+    header {
+        padding-top: 2px;
+        background-color: rgba(255, 255, 255, 0.7);
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        position: relative;
+        margin: 0 auto;
+        width: 320px;
+        position: absolute;
+        top: 30px;
+        z-index: 2;
+        left: 0;
+        right: 0;
+    }
+    .display-opacity-0 {
+        opacity: 0;
+    }
+    .display-opacity-1 {
+        opacity: 1;
+    }
+    .opacity-transition {
+        -webkit-transition: opacity 0.3s;
+        transition: opacity 0.3s;
+    }
+    .rounded-border {
+        border-radius: 12px;
+    }
+    header h1 {
+        padding: 0;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    header h2 {
+        font-weight: bold;
+        font-size: 15px;
+        margin-bottom: 0;
+    }
+    header h1, header h2 {
+        font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;
+        text-align: center;
+        word-break: normal;
+    }
+    header .decoration {
+        margin: 0 auto;
+        max-width: 370px;
+        width: 88%;
+    }
+    header .gloassary-btn {
+        display: none;
+    }
+    .container {
+        max-width: 2560px;
+        width: 100%;
+        min-width: 320px;
+        margin: 0 auto;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        position: relative;
+    }
+    .input-container {
+        background-color: rgba(255, 255, 255, 0.7);
+        position: fixed;
+        right: 0;
+        left: 0;
+        bottom: 60px;
+        margin: 0 auto;
+        width: 550px;
+        height: 72px;
+    }
+    .input-container .yearSlider {
+        width: 65%;
+        max-width: 450px;
+        margin: 0 auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        padding-right: 60px;
+        top: 6px;
+    }
+    .slider {
+        width: 100%;
+    }
+    .slider > .dragger {
+        background: #e5254e;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 60px;
+        border-radius: 30px;
+        width: 60px;
+        height: 60px;
+    }
+    .slider > .dragger:hover {
+        background: #e5254e;
+    }
+    .slider > .track, .slider > .highlight-track {
+        background: rgba(255, 255, 255, 0.0);
+        border-top: 1px solid #000;
+        height: 4px;
+    }
+    .slider > .highlight-track {
+        background-color: #8DCA09;
+        background: -webkit-linear-gradient(top, #8DCA09, #72A307);
+        background: -moz-linear-gradient(top, #8DCA09, #72A307);
+        background: linear-gradient(top, #8DCA09, #72A307);
+        border-color: #496805;
+    }
+    .input-container .right-bracket span, .input-container .left-bracket span {
+        bottom: 10px;
+        position: relative;
+    }
+    .input-container .right-bracket {
+        right: 10px;
+        top: 20px;
+        position: absolute;
+        z-index: 1;
+    }
+    .input-container .left-bracket {
+        left: 10px;
+        top: 20px;
+        position: absolute;
+        z-index: 1;
+    }
+    text {
+        text-rendering: geometricPrecision;
+    }
+    #radial {
+        top: 0;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    #radial svg {
+        width: 100%;
+    }
+    .ie9 #radial svg {
+        height: 1000px;
+    }
+    .info-box {
+        max-width: 254px;
+        width: 20%;
+        padding-left: 18px;
+        padding-right: 18px;
+        padding-top: 18px;
+        padding-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.7);
+        position: fixed;
+        left: 28px;
+        top: 50%;
+        transform: translate(0, -50%);
+        -webkit-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        svg {
+            height: auto;
+            width: auto;
+        }
+        .data-container {
+            margin-bottom: 7px;
+            font-size: 20px;
+        }
+        .data-container .number-of-deaths {
+            color: #e6244f;
+        }
+        .arrow-right {
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-left: 20px solid rgba(255, 255, 255, 0.7);
+            position: absolute;
+            top: 120px;
+            right: -20px;
+        }
+        img {
+            max-width: 254px;
+            width: 100%;
+            -webkit-transition: opacity 0.3s;
+        }
+        h1 {
+            color: black;
+            font-size: 22px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        p {
+            font-size: 12px;
+        }
+        .btn {
+            margin-top: 20px;
+            float: right;
+            position: relative;
+            cursor: pointer;
+        }
+    }
+    .no-data {
+        width: 300px;
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+    }
+    .no-data h1, .no-data p {
+        text-align: center;
+    }
+    .no-data svg {
+        width: 151px;
+        margin: 0 auto;
+        display: block;
+    }
+    .currentYear {
+        position: absolute;
+        color: white;
+        width: 100%;
+        text-align: center;
+        top: 20px;
+        -webkit-transition: top 0.3s;
+        transition: top 0.3s;
+    }
+    .currentYear-dragging {
+        color: black;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 5px;
+        top: -30px;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        #radial svg {
+            width: 130%;
+            right: 15%;
+            position: relative;
+        }
+    }
+    @media screen and (min-width: 480px) and (max-width: 768px) {
+        #radial {
+            top: 12%;
+            position: relative;
+        }
+        #radial svg {
+            width: 200%;
+            right: 50%;
+            position: relative;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            height: 58px;
+            width: 93%;
+            background-color: black;
+            border-radius: 0!important;
+            padding-left: 7%;
+            padding-top: 12px;
+        }
+        header .gloassary-btn {
+            display: inline-block;
+            float: right;
+            position: absolute;
+            font-size: 10px;
+            top: 50%;
+            right: 5%;
+            transform: translate(0, -50%);
+            -webkit-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+            cursor: pointer;
+            color: white;
+        }
+        header .gloassary-btn svg {
+            margin-bottom: -8px;
+            margin-left: 5px;
+        }
+        header h1 {
+            padding: 0;
+            font-size: 24px;
+        }
+        header h2 {
+            font-size: 17px;
+            font-weight: normal
+        }
+        header h1, header h2 {
+            color: white;
+            text-align: left;
+            word-break: normal;
+        }
+        header .decoration {
+            display: none;
+        }
+        .info-box {
+            width: 95%;
+            max-width: 100%;
+            min-height: 160px;
+            border-radius: 0;
+            padding-left: 5%;
+            padding-right: 0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: white;
+            position: fixed;
+            left: 0;
+            transform: translate(0, 0);
+            -webkit-transform: translate(0, 0);
+            -ms-transform: translate(0, 0);
+            top: 70px;
+        }
+        .info-box .arrow-right {
+            display: none;
+        }
+        .info-box img {
+            max-width: 254px;
+            min-width: 180px;
+            width: 30%;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translate(0, -50%);
+            -webkit-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+            -webkit-transition: opacity 0.3s;
+        }
+        .info-box h1 {
+            color: black;
+            font-size: 22px;
+            margin-bottom: 2%;
+            width: 50%;
+        }
+        .info-box .data-container {
+            margin-top: 3%;
+            margin-bottom: 0;
+            font-size: 18px;
+        }
+        .info-box .data-container .number-of-deaths {
+            color: #e6244f;
+        }
+        .info-box p {
+            width: 50%;
+        }
+        .info-box .btn {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            margin-top: 0;
+            transform: translate(0, -50%);
+            -webkit-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+            cursor: pointer;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding-left: 4px;
+            padding-right: 4px;
+            padding-top: 4px;
+            padding-bottom: 15px;
+        }
+        .info-box .btn svg {
+            margin-top: 5px;
+            display: block;
+        }
+        .input-container {
+            background-color: rgba(255, 255, 255, 0.7);
+            position: fixed;
+            right: 0;
+            left: 0;
+            bottom: 60px;
+            margin: 0 auto;
+            width: 400px;
+            height: 45px;
+        }
+        .input-container .yearSlider {
+            width: 65%;
+            max-width: 300px;
+            margin: 0 auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            padding-right: 28px;
+            top: -5px;
+        }
+        .input-container .right-bracket {
+            right: 10px;
+            top: 7px;
+            position: absolute;
+            z-index: 1;
+        }
+        .input-container .left-bracket {
+            left: 10px;
+            top: 7px;
+            position: absolute;
+            z-index: 1;
+        }
+        .slider {
+            width: 230px;
+        }
+    }
+    @media screen and (max-width: 480px) {
+        header {
+            position: fixed;
+            top: 0;
+            height: 58px;
+            width: 95%;
+            background-color: black;
+            border-radius: 0!important;
+            padding-left: 5%px;
+            padding-top: 12px;
+        }
+        header h1 {
+            padding: 0;
+            font-size: 18px;
+        }
+        header h2 {
+            font-size: 14px;
+            font-weight: normal
+        }
+        header h1, header h2 {
+            color: white;
+            text-align: left;
+            word-break: normal;
+        }
+        header .decoration {
+            display: none;
+        }
+        header .gloassary-btn {
+            display: inline-block;
+            float: right;
+            position: absolute;
+            font-size: 10px;
+            top: 50%;
+            right: 5%;
+            transform: translate(0, -50%);
+            -webkit-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+            cursor: pointer;
+            color: white;
+        }
+        header .gloassary-btn svg {
+            margin-bottom: -8px;
+            margin-left: 5px;
+        }
+        #radial {
+            top: 0;
+            position: relative;
+        }
+        #radial svg {
+            width: 240%;
+            right: 70%;
+            position: relative;
+        }
+        .no-data {
+            width: 300px;
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+        }
+        .no-data h1, .no-data p {
+            text-align: center;
+        }
+        .no-data svg {
+            width: 151px;
+            margin: 0 auto;
+            display: block;
+        }
+        .info-box {
+            width: 95%;
+            max-width: 100%;
+            min-height: 160px;
+            border-radius: 0;
+            padding-left: 5%;
+            padding-right: 0;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color: white;
+            position: fixed;
+            left: 0;
+            transform: translate(0, 0);
+            -webkit-transform: translate(0, 0);
+            -ms-transform: translate(0, 0);
+            top: 70px;
+        }
+        .info-box .arrow-right {
+            display: none;
+        }
+        .info-box img {
+            max-width: 254px;
+            min-width: 120px;
+            width: 30%;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+            -webkit-transform: translate(0, -50%);
+            -webkit-transition: opacity 0.3s;
+        }
+        .info-box h1 {
+            color: black;
+            font-size: 18px;
+            margin-top: 2%;
+            margin-bottom: 2%;
+            width: 50%;
+        }
+        .info-box .data-container {
+            margin-top: 3%;
+            margin-bottom: 0;
+            font-size: 18px;
+        }
+        .info-box .data-container .number-of-deaths {
+            color: #e6244f;
+        }
+        .info-box p {
+            width: 50%;
+        }
+        .info-box .btn {
+            float: right;
+            position: relative;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        .input-container {
+            background-color: rgba(255, 255, 255, 0.7);
+            position: fixed;
+            right: 0;
+            left: 0;
+            bottom: 15px;
+            margin: 0 auto;
+            width: 310px;
+            height: 45px;
+        }
+        .input-container .yearSlider {
+            width: 65%;
+            max-width: 300px;
+            margin: 0 auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            padding-right: 0px;
+            padding-left: 3px;
+            top: -5px;
+        }
+        .input-container .right-bracket {
+            right: 10px;
+            top: 7px;
+            position: absolute;
+            z-index: 1;
+        }
+        .input-container .left-bracket {
+            left: 10px;
+            top: 7px;
+            position: absolute;
+            z-index: 1;
+        }
+        .slider {
+            width: 140px;
+        }
     }
 }
+
+
+.start-unceasing-seeker {
+    .bg-container {
+        background-image: url(/pathways/2-the-collectors/4-unceasing-seeker/_assets/m4-unceasing-seeker-1.jpg);
+    }
+}
+
 
 #wellcome-collection {
     
@@ -1815,7 +2414,7 @@
 
 #stewart-conn {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/4-unceasing-seeker/m4-unceasing-seeker-2.jpg);
+        background-image: url(/pathways/2-the-collectors/4-unceasing-seeker/_assets/m4-unceasing-seeker-2.jpg);
     }
     .black-strip {
         width: 600px;
@@ -1830,7 +2429,7 @@
 
 .start-obscene-doctor {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/m5-obscene-doctor-1.jpg);
+        background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-1.jpg);
     }
 }
 
@@ -1843,9 +2442,10 @@
         }
     }
 }
+
 #kahns-anatomical-museum {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/m5-obscene-doctor-2.jpg);
+        background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-2.jpg);
     }
 }
 .touch {
@@ -1871,7 +2471,7 @@
 
 #quackery {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/m5-obscene-doctor-3.jpg);
+        background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-3.jpg);
     }
 }
 
@@ -1883,7 +2483,7 @@
 
 .no-touch {
     #quackery {
-        
+
     }
 }
 
@@ -1915,7 +2515,7 @@
 
 #obscene-publications-act {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/m5-obscene-doctor-4.jpg);
+        background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-4.jpg);
     }
 }
 
@@ -1927,7 +2527,7 @@
 
 .no-touch {
     #obscene-publications-act {
-        
+
     }
 }
 
@@ -1956,9 +2556,10 @@
     }
 }
 
+
 #seized-and-destroyed {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/m5-obscene-doctor-5.jpg);
+        background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-5.jpg);
     }
 }
 
@@ -1970,7 +2571,7 @@
 
 .no-touch {
     #seized-and-destroyed {
-        
+
     }
 }
 
@@ -1996,7 +2597,7 @@
             right:      14%;
             width:      185px;
             height:     87px;
-            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/carrot.png) 0 0 no-repeat;
+            background: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/carrot.png) 0 0 no-repeat;
         }
 
         .cat {
@@ -2004,7 +2605,7 @@
             right:      32%;
             width:      178px;
             height:     143px;
-            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/cat.png) 0 0 no-repeat;
+            background: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/cat.png) 0 0 no-repeat;
         }
 
         .rubbish1 {
@@ -2012,35 +2613,35 @@
             right:      28%;
             width:      85px;
             height:     52px;
-            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/rubbish1.png) 0 0 no-repeat;
+            background: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/rubbish1.png) 0 0 no-repeat;
         }
         .rubbish2 {
             top:        85%;
             right:      3%;
             width:      85px;
             height:     45px;
-            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/rubbish2.png) 0 0 no-repeat;
+            background: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/rubbish2.png) 0 0 no-repeat;
         }
         .rubbish3 {
             top:        80%;
             right:      25%;
             width:      185px;
             height:     87px;
-            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/rubbish3.png) 0 0 no-repeat;
+            background: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/rubbish3.png) 0 0 no-repeat;
         }
         .rubbish4 {
             top:        40%;
             right:      30%;
             width:      106px;
             height:     113px;
-            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/rubbish4.png) 0 0 no-repeat;
+            background: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/rubbish4.png) 0 0 no-repeat;
         }
         .rubbish5 {
             top:        55%;
             right:      5%;
             width:      70px;
             height:     48px;
-            background: url(/pathways/2-the-collectors/_assets/5-obscene-doctor/rubbish5.png) 0 0 no-repeat;
+            background: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/rubbish5.png) 0 0 no-repeat;
         }
     }
 
@@ -2060,9 +2661,10 @@
     }
 }
 
+
 .start-ignorant-bride {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/6-ignorant-bride/m6-ignorant-bride-1.jpg);
+        background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-1.jpg);
     }
 }
 
@@ -2092,6 +2694,7 @@
         }
     }
 }
+
 
 #british-museum {
 
@@ -2148,7 +2751,7 @@
 
 #married-love {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/6-ignorant-bride/m6-ignorant-bride-3.jpg);
+        background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-3.jpg);
     }
 }
 
@@ -2160,7 +2763,7 @@
 
 .no-touch {
     #married-love {
-        
+
     }
 }
 
@@ -2210,9 +2813,10 @@
     }
 }
 
+
 #shared-experiences {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/6-ignorant-bride/m6-ignorant-bride-4.jpg);
+        background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg);
     }
 }
 
@@ -2224,7 +2828,7 @@
 
 .no-touch {
     #shared-experiences {
-        
+
     }
 }
 
@@ -2253,9 +2857,10 @@
     }
 }
 
+
 #letters {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/6-ignorant-bride/m6-ignorant-bride-4.jpg);
+        background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg);
     }
 }
 
@@ -2275,8 +2880,12 @@
     #letters {
         .info-box {
             position:   absolute;
-            top:        80px;
-            right:      100px;
+            top:        20%;
+            right:      50%;
+
+            .text {
+                color: #030303;
+            }
         }
     }
 
@@ -2294,6 +2903,7 @@
         }
     }
 }
+
 
 .start-example {
     .bg-container {

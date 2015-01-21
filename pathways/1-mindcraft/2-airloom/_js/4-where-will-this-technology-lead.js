@@ -1,6 +1,6 @@
 Pathways.components.gallery.aldinisExperiments = {
     data: {
-        location: 'galleries/aldinis-experiments/',
+        location: '_assets/galleries/aldinis-experiments/',
         images: [{
             image: 'L0001964',
             text: '1/11: Animal electricity produced on frog legs.'

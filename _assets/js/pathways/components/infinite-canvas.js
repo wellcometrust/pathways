@@ -12,7 +12,8 @@
 
             viewportWidth = w.innerWidth,
             viewportHeight = w.innerHeight,
-            gaRoot = data.gaRoot;
+            gaRoot = data.gaRoot,
+            location = data.location || '';
 
 
         this.init = function() {
@@ -84,7 +85,7 @@
                 $item = $('<div/>').addClass('image-panel');
 
                 $img = $('<img/>');
-                $img.attr('src', '/_assets/img/infinite-canvas/infiniteCanvas_' + images[i].id + '.jpg');
+                $img.attr('src', location + images[i].id + '.jpg');
 
                 $svg = $('<svg class="info-box" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">' +
                         '<circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>' +

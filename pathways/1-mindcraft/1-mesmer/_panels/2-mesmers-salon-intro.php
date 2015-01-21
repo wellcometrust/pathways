@@ -3,8 +3,8 @@
 
     <div class="bg-container">
         <div class="vertical-center">
-            <img alt="" class="large-screen" src="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-2-black.jpg">
-            <img alt="" class="small-screen" src="/pathways/1-mindcraft/_assets/1-mesmer/mesmer-2.jpg">
+            <img alt="" class="large-screen" src="/pathways/1-mindcraft/1-mesmer/_assets/mesmer-2-black.jpg">
+            <img alt="" class="small-screen" src="/pathways/1-mindcraft/1-mesmer/_assets/mesmer-2.jpg">
         </div>
     </div>
 

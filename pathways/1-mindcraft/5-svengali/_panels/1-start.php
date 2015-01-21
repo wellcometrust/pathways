@@ -6,9 +6,9 @@
     </div>
 
     <div class="falling-lady">
-        <img alt="" src="/pathways/1-mindcraft/_assets/5-svengali/falling-lady.png">
+        <img alt="" src="/pathways/1-mindcraft/5-svengali/_assets/falling-lady.png">
     </div>
-    
+
     <div class="content">
         <p class="scene-set">Paris 1894</p>
 
@@ -21,7 +21,7 @@
             <span class="scroll-down--text">Scroll down</span>
             <span class="scroll-down--arrow"></span>
         </p>
-        
+
     </div>
 
     <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/05-dark-forces.mp3" loop data-audio="global"></audio>

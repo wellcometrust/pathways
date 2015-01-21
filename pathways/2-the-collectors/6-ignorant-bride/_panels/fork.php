@@ -1,4 +1,4 @@
-                <div class="teaser" >
+                <div class="teaser" style="background-image: url(/pathways/2-the-collectors/_assets/teaser/teaser-next-pathway.jpg)">
                     <div class="teaser-text-container">
                         <a href="/pathways/1-mindcraft/">
                             <p class="teaser-text">Next:</p>

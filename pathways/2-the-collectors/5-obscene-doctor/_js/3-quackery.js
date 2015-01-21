@@ -1,6 +1,6 @@
 Pathways.components.gallery.quacksOfThe18thCentury = {
     data: {
-        location: 'galleries/quacks-of-the-18th-century/',
+        location: '_assets/galleries/quacks-of-the-18th-century/',
         images: [{
             image: 'L0018661a',
             text: 'Quacks and travelling medicine vendors were a common sight in the 17th and 18th century.'

@@ -1,6 +1,6 @@
 Pathways.components.gallery.madeAFilm = {
     data: {
-        location: 'galleries/they-even-made-a-film/',
+        location: '_assets/galleries/they-even-made-a-film/',
         images: [{
             image: '01_Maisie_Dick_in_love',
             text: 'Maisie’s Marriage was produced in the summer of 1923. It follows the story of Maisie Burrows, the eldest of ten children, and her beau, fireman Dick Reading.'

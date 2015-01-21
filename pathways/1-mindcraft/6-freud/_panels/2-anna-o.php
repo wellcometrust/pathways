@@ -2,12 +2,12 @@
 <div id="anna-o" class="panel" data-config='{ "offset_height": 800 }'>
 
     <div class="bg-container">
-        <img alt="" src="/pathways/1-mindcraft/_assets/6-freud/freud-2.jpg">
+        <img alt="" src="/pathways/1-mindcraft/6-freud/_assets/freud-2.jpg">
 
-        <img alt="" class="fragmented" src="/pathways/1-mindcraft/_assets/6-freud/freud-2.png">
-        <img alt="" class="fragmented" src="/pathways/1-mindcraft/_assets/6-freud/freud-2.png">
-        <img alt="" class="fragmented" src="/pathways/1-mindcraft/_assets/6-freud/freud-2.png">
-        <img alt="" class="fragmented" src="/pathways/1-mindcraft/_assets/6-freud/freud-2.png">
+        <img alt="" class="fragmented" src="/pathways/1-mindcraft/6-freud/_assets/freud-2.png">
+        <img alt="" class="fragmented" src="/pathways/1-mindcraft/6-freud/_assets/freud-2.png">
+        <img alt="" class="fragmented" src="/pathways/1-mindcraft/6-freud/_assets/freud-2.png">
+        <img alt="" class="fragmented" src="/pathways/1-mindcraft/6-freud/_assets/freud-2.png">
     </div>
 
     <div class="main-content left fixed">

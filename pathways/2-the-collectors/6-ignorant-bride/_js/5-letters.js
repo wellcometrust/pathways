@@ -1,6 +1,6 @@
 Pathways.components.letterGallery.marieStopesLetters = {
     data: {
-        location: 'galleries/marie-stopes-letters/',
+        location: '_assets/galleries/marie-stopes-letters/',
         images: [{
             image: '01-HorridVice-pp-08-HIGHLIGHT',
             textSrc: '/_assets/text/marie-stopes-letters/01-letter.html',

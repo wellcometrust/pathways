@@ -278,8 +278,8 @@
                         <span class='year'>1636</span>:
                         <span class='number-of-deaths'>2360</span>
                     </div>
-                    <img src='/_assets/img/infographics/death-collector/death_reason_1.jpg' srcset="/_assets/img/infographics/death-collector/death_reason_1.jpg 1x, /_assets/img/infographics/death-collector/death_reason_1_x2.jpg 2x,
-                                 /_assets/img/infographics/death-collector/death_reason_1_x2.jpg 3x, /_assets/img/infographics/death-collector/death_reason_1_x2.jpg 4x" />
+                    <img src='_assets/infographics/death-collector/death_reason_1.jpg' srcset="_assets/infographics/death-collector/death_reason_1.jpg 1x, _assets/infographics/death-collector/death_reason_1_x2.jpg 2x,
+                                 _assets/infographics/death-collector/death_reason_1_x2.jpg 3x, _assets/infographics/death-collector/death_reason_1_x2.jpg 4x" />
 
                     <h1>Abortive, and stilborn</h1>
                     <p>Primis vituperatoribus ad usu, cum ea veniam soleat. Eos te intellegam philosophia. Cu vix solet aliquando gloriatur, enim volutpat vis ne. Natum ubique salutandi id sit, nec in putant alienum, at mazim denique salutandi duo. Pri ex pericula reformidans, liber mandamus tractatos cu sit.</p>

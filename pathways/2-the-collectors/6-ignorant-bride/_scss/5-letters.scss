@@ -1,7 +1,7 @@
 
 #letters {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/_assets/6-ignorant-bride/m6-ignorant-bride-4.jpg);
+        background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg);
     }
 }
 
@@ -21,8 +21,12 @@
     #letters {
         .info-box {
             position:   absolute;
-            top:        80px;
-            right:      100px;
+            top:        20%;
+            right:      50%;
+
+            .text {
+                color: #030303;
+            }
         }
     }
 

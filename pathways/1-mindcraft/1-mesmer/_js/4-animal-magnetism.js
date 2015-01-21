@@ -1,7 +1,7 @@
 
 Pathways.components.gallery.toolsOfMesmerism = {
     data: {
-        location: 'galleries/tools-of-mesmerism/',
+        location: '_assets/galleries/tools-of-mesmerism/',
         images: [{
             image: 'V0016530',
             text: '1/7: The tub, or baquet, was central to Mesmer’s treatments.'

@@ -3,7 +3,7 @@
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
-        <img alt="" class="numbers" src="/pathways/2-the-collectors/_assets/3-death-collector/numbers.png">
+        <img alt="" class="numbers" src="/pathways/2-the-collectors/3-death-collector/_assets/numbers.png">
     </div>
 
     <div class="main-content left">

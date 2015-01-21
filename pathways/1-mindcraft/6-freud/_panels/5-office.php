@@ -2,8 +2,8 @@
 <div id="office" class="panel" data-config='{ "offset_height": 0 }'>
 
     <div class="bg-container">
-        <img alt="" class="small-screen" src="/pathways/1-mindcraft/_assets/6-freud/freud-4-crop.jpg">
-        <img alt="" class="large-screen" src="/pathways/1-mindcraft/_assets/6-freud/freud-4.jpg">
+        <img alt="" class="small-screen" src="/pathways/1-mindcraft/6-freud/_assets/freud-4-crop.jpg">
+        <img alt="" class="large-screen" src="/pathways/1-mindcraft/6-freud/_assets/freud-4.jpg">
     </div>
 
     <div class="black-strip" ></div>

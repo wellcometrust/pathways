@@ -3,11 +3,11 @@
     overflow: hidden;
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/1-mesmer/mesmer-3.jpg);
+        background-image: url(/pathways/1-mindcraft/1-mesmer/_assets/mesmer-3.jpg);
     }
 
     .info-box {
-        position:   absolute; 
+        position:   absolute;
         bottom:     60px;
         right:      60px;
     }
@@ -26,9 +26,9 @@
 
 @media all and (min-width: 60rem) {
 
-    #animal-magnetism {    
+    #animal-magnetism {
 
-        .info-box {            
+        .info-box {
             bottom:     auto;
             top:        90px;
             right:      60px;

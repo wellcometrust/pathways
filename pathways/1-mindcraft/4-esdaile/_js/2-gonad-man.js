@@ -23,7 +23,7 @@ Pathways.scrollScenes.GonadMan = function(panelID) {
 Pathways.components.quiz.guessTheTumour = {
     data: {
         'title': 'The Esdaile Game',
-        'images': '/_assets/img/quizzes/guess-the-tumour',
+        'images': '_assets/quizzes/guess-the-tumour',
         'questions': [{
             'image': 'q1-300h.jpg',
             'title': 'How much did this jaw-dropping tumour weigh?',

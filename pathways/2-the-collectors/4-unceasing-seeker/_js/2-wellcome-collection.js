@@ -1,6 +1,7 @@
 Pathways.components.infiniteCanvas.wellcomeCollection = {
     data: {
         gaRoot: 'the-collectors - unceasing-seeker - l2 open infinite canvas image',
+        location: '_assets/infinite-canvas/infiniteCanvas_',
         images: [{
             id: 'L0011600a',
             pos: [1220, 35],

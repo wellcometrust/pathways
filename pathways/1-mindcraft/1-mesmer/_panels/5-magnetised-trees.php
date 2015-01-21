@@ -3,7 +3,7 @@
 
     <div class="bg-container">
         <canvas id="magnetisedTrees" width="1900" height="1050"></canvas>
-        <img alt="" src="/_assets/animations/magnetised-trees/images/Bitmap1.jpg">
+        <img alt="" src="/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/Bitmap1.jpg">
     </div>
 
     <div class="black-strip"></div>

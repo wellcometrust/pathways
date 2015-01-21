@@ -2,7 +2,7 @@
 #bompard {
 
     .bg-container {
-        background-image: url(/pathways/1-mindcraft/_assets/5-svengali/svengali-2.jpg);
+        background-image: url(/pathways/1-mindcraft/5-svengali/_assets/svengali-2.jpg);
     }
 
     img {
@@ -154,7 +154,7 @@
 
         .comic-row--4 {
             margin-top: 1em;
-            
+
             .comic-column:nth-child(1) {
                 width: 28%;
                 margin-right: 5%;
@@ -211,10 +211,10 @@
 
 @media all and (min-width: 60rem) {
     #bompard {
-       
+
         .text-panel--1 {
             width: 45%;
         }
-        
+
     }
 }
