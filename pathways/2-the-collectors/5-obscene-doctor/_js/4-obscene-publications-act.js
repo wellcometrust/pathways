@@ -3,34 +3,34 @@ Pathways.components.gallery.indecentSexualImages = {
         location: 'galleries/indecent-sexual-images/',
         images: [{
             image: 'L0038201',
-            text: 'Coloured illustration of scrotum diseased with Syphilis.'
+            text: 'Scrotum diseased with syphilis'
         }, {
             image: 'L0038202',
-            text: 'Coloured illustration of labia diseased with Syphilis ‘Sclerosis of the Right Labium Majus’.'
+            text: 'Labia diseased with syphilis'
         }, {
             image: 'L0038205',
-            text: 'Skin of the scrotum and perineum area diseased with Syphilis.'
+            text: 'Skin of the scrotum and perineum diseased with syphilis'
         }, {
             image: 'L0038206',
-            text: 'Female breast diseased with Syphilis.'
+            text: 'Breast diseased with syphilis'
         }, {
             image: 'L0038209',
-            text: 'Male pubis and penis diseased with Syphilis. Paraphimosis from Venereal Ulcer on the Foreskin. Inflammatory Edema. Suppurative Adenitis in both groins.'
+            text: 'Pubis and penis diseased with syphilis'
         }, {
             image: 'L0060656',
-            text: 'Syphilitic frambesia (‘raspberry’).'
+            text: '‘Syphilide vegetante framboisee’'
         }, {
             image: 'L0074250',
-            text: 'Combycomata, female perineum.'
+            text: 'Combycomata, female perineum'
         }, {
             image: 'V0009962',
-            text: 'Female genitalia showing severely diseased tissue and hypertrophy of the clitoris.'
+            text: 'Hypertrophy of the clitoris'
         }, {
             image: 'V0009971',
-            text: 'Female genitalia showing severely diseased tissue caused by syphilis: extensive sores and abcesses are seen extending up the abdomen and torso.'
+            text: 'Syphilitic lesions on the genitalia and torso'
         }, {
             image: 'V0010253',
-            text: 'A section of leg with a swelling on the shin below the knee; and male genitalia with a lump on the testicles.'
+            text: 'Syphilitic swelling of the knee and testicles'
         }]
     }
 };
