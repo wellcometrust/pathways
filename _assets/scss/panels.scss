@@ -1668,6 +1668,10 @@
     .bg-container {
         background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-3.jpg);
     }
+    li {
+        list-style: disc;
+        margin-bottom: 0.5em;
+    }
 }
 
 .touch {
@@ -2860,7 +2864,7 @@
 
 #letters {
     .bg-container {
-        background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg);
+        background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/letter-1.jpg);
     }
 }
 
@@ -2880,8 +2884,8 @@
     #letters {
         .info-box {
             position:   absolute;
-            top:        20%;
-            right:      50%;
+            top:        18%;
+            right:      25%;
 
             .text {
                 color: #030303;
@@ -2899,6 +2903,49 @@
 
     .no-touch {
         #letters {
+
+        }
+    }
+}
+
+#locked-cabinet {
+    .bg-container {
+        background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg);
+    }
+}
+
+.touch {
+    #locked-cabinet {
+
+    }
+}
+
+.no-touch {
+    #locked-cabinet {
+
+    }
+}
+
+@media screen and (min-width: 48em) {
+    #locked-cabinet {
+        .main-content {
+            color:          #030303;
+
+            .inner {
+                border-top:     1px solid #030303;
+                border-bottom:  1px solid #030303;
+            }
+        }
+    }
+
+    .touch {
+        #locked-cabinet {
+
+        }
+    }
+
+    .no-touch {
+        #locked-cabinet {
 
         }
     }

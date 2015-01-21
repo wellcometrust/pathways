@@ -27,7 +27,7 @@
 
         <div class="text">
             <span class="info-type">Gallery:</span>
-            <span class="info-title">Quacks of the 18<sup>th</sup> Century</span>
+            <span class="info-title">Quacks and Charlatans</span>
         </div>
     </div>
 

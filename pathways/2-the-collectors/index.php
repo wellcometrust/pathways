@@ -29,7 +29,7 @@ include_once($docRoot.'/_includes/cookie_consent.php');
                     <h1>The Collectors</h1>
                 </header>
 
-                <p class="intro-body">Collectors intro text</p>
+                <p class="intro-body">Searchers, secrets and the power of curiosity</p>
 
                 <a href="1-curious-gardener/index.php" class="intro-button">
                     Start your journey

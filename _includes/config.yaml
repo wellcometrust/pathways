@@ -146,7 +146,7 @@ site:
 
                 -   id: obscene-doctor
                     path: '5-obscene-doctor/'
-                    title: The Obscene Doctor
+                    title: The ‘Obscene’ Doctor
                     title_postfix: ' | Wellcome Collection'
                     description: 'Whether paying a shilling to peek at an Italian anatomical model in a grocer’s shop on the Strand, or visiting a public museum, Londoners were avid consumers of anatomy collections in the eighteenth and early nineteenth century. '
                     panels:

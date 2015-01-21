@@ -1,0 +1,42 @@
+#locked-cabinet {
+    .bg-container {
+        background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg);
+    }
+}
+
+.touch {
+    #locked-cabinet {
+
+    }
+}
+
+.no-touch {
+    #locked-cabinet {
+
+    }
+}
+
+@media screen and (min-width: 48em) {
+    #locked-cabinet {
+        .main-content {
+            color:          #030303;
+
+            .inner {
+                border-top:     1px solid #030303;
+                border-bottom:  1px solid #030303;
+            }
+        }
+    }
+
+    .touch {
+        #locked-cabinet {
+
+        }
+    }
+
+    .no-touch {
+        #locked-cabinet {
+
+        }
+    }
+}

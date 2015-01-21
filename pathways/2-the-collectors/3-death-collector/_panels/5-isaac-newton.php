@@ -10,7 +10,7 @@
     <div class="main-content left strip">
 
         <div class="inner">
-            <p>Graunt lived at a time when mathematicians were akin to astrologers and ‘probability’ relied on imagination rather than considered analysis. His work so impressed King Charles II that the monarch decreed Graunt should be elected to the nascent Royal Society, an unexpected honour for a tradesman.</p>
+            <p>The work Graunt viewed as ‘laborious bustling and groping’ so impressed King Charles II that the monarch decreed his election to the nascent Royal Society, an unexpected honour for a haberdasher.</p>
         </div>
 
     </div>

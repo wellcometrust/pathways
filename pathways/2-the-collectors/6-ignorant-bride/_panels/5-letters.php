@@ -2,7 +2,7 @@
 <div id="letters" class="panel" data-config='{ "offset_height": 200 }'>
 
     <div class="bg-container">
-        <img alt="" class="letter" src="/pathways/2-the-collectors/6-ignorant-bride/_assets/letter-1.jpg">
+        <img alt="" src="/_assets/img/spacer.png">
         <div class="logo logo-bottom"><a href="http://www.wellcomecollection.org/"><img alt="Wellcome Collection" title="Wellcome Collection" src="/_assets/img/logo.png" /></a></div>
     </div>
 

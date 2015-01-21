@@ -1,4 +1,3 @@
-
 <div id="shared-experiences" class="panel" data-config='{ "offset_height": 200 }'>
 
     <div class="bg-container">

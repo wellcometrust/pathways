@@ -35,7 +35,7 @@
 
         <div class="text">
             <span class="info-type">Gallery:</span>
-            <span class="info-title">They even made a film!</span>
+            <span class="info-title"><i>Married Love</i> on screen</span>
         </div>
     </div>
 

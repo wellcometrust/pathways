@@ -27,7 +27,7 @@
 
         <div class="text">
             <span class="info-type">Gallery:</span>
-            <span class="info-title">Indecent sexual images</span>
+            <span class="info-title">Only for Medical Gentlemen (explicit content)</span>
         </div>
     </div>
 
