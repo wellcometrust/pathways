@@ -93,7 +93,7 @@ Pathways.components.infiniteCanvas.wellcomeCollection = {
         }, {
             id: 'L0036897a',
             pos: [2098, 576],
-            text: 'These jars full of seeds and roots are kept in storage at Blythe House, along with thousands of other items that were transferred to the Science Museum in the 1970s and 1980s.'
+            text: 'Jars full of seeds and roots.'
         }, {
             id: 'M0009391a',
             pos: [66, 670],
@@ -133,7 +133,7 @@ Pathways.components.infiniteCanvas.wellcomeCollection = {
         }, {
             id: 'L0032222',
             pos: [2765, 1372],
-            text: 'A Burroughs Wellcome &amp; Co. 1906 booklet on anaesthesia.'
+            text: 'A Burroughs Wellcome & Co. 1906 booklet on anaesthesia.'
         }, {
             id: 'L0057155a',
             pos: [5902, 1414],
@@ -325,7 +325,7 @@ Pathways.components.infiniteCanvas.wellcomeCollection = {
         }, {
             id: 'L0021269',
             pos: [4674, 3140],
-            text: 'An illustrated sixteenth-century book by Catherine of Siena, which was purchased from the library of William Morris. Wellcome noted on the auction catalogue, ‘Superb must have inspired Morris Stick High’.'
+            text: 'An illustrated sixteenth-century book by Catherine of Siena, which was purchased from the library of William Morris.'
         }, {
             id: 'L0021264a',
             pos: [2164, 3172],
@@ -361,7 +361,7 @@ Pathways.components.infiniteCanvas.wellcomeCollection = {
         }, {
             id: 'L0013410a',
             pos: [270, 3461],
-            text: 'Wellcome’s longest-serving collaborator, the writer Charles John Samuel Thompson. Despite working together for 25 years, their business relationship broke down after Thompson worked on one of his personal book projects during company time.'
+            text: 'Wellcome’s longest-serving collaborator, the writer Charles John Samuel Thompson. Their 25-year business relationship broke down after Thompson developed a personal book on company time.'
         }, {
             id: 'M0007600a',
             pos: [533, 3461],
