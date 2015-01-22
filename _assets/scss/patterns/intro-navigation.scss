@@ -1,91 +1,71 @@
-
 .intro-navigation {
-    overflow:   hidden;
+    overflow: hidden;
     margin-top: 1.616rem;
-
     nav {
-        max-width:  1280px;
-        height:     auto;
-        margin:     0 auto;
+        max-width: 1280px;
+        height: auto;
+        margin: 0 auto;
     }
-
     a {
-        display:            block;
-        color:              #fff;
-        @include            abril-regular;
-        font-size:          0.7rem;
-        text-transform:     uppercase;
-        letter-spacing:     0.1em;
-        padding:            0 1rem 1.618rem 1rem;
-        text-decoration:    none;
-
+        display: block;
+        color: #fff;
+        @include abril-regular;
+        font-size: 0.6875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 0 1rem 1.618rem 1rem;
+        text-decoration: none;
         span {
             padding-top: 0.2rem;
         }
-
         img {
             display: none;
         }
     }
-
     li {
         @include animation(nav-reveal 0.5s ease);
-
         -webkit-animation-fill-mode: forwards;
-           -moz-animation-fill-mode: forwards;
-            -ms-animation-fill-mode: forwards;
-                animation-fill-mode: forwards;
+        -moz-animation-fill-mode: forwards;
+        -ms-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
     }
-
     li:nth-child(1) {
         @include animation-delay(0.2s);
-
         span {
             border-top: 1px solid #D81793;
         }
     }
-
     li:nth-child(2) {
         @include animation-delay(0.3s);
-
         span {
             border-top: 1px solid #D5189A;
         }
     }
-
     li:nth-child(3) {
         @include animation-delay(0.4s);
-
         span {
             border-top: 1px solid #CB1AA8;
         }
     }
-
     li:nth-child(4) {
         @include animation-delay(0.5s);
-
         span {
             border-top: 1px solid #BB1DBD;
         }
     }
-
     li:nth-child(5) {
         @include animation-delay(0.6s);
-
         span {
             border-top: 1px solid #B01FCF;
         }
     }
-
     li:nth-child(6) {
         @include animation-delay(0.7s);
-
         span {
             border-top: 1px solid #A921D9;
         }
     }
 }
-
 .csstransitions {
     .intro-navigation {
         li {
@@ -93,50 +73,77 @@
         }
     }
 }
-
 @media screen and (min-width: 48em) {
     .intro-navigation {
         margin-top: 0;
-
         li {
-            float:      left;
+            float: left;
             list-style: none;
-            width:      16.666%;
+        }
+        /* one item */
+
+        li:first-child:nth-last-child(1) {
+            width: 70%;
+            margin: 0 15%;
+        }
+        /* two items */
+
+        li:first-child:nth-last-child(2), li:first-child:nth-last-child(2) ~ li {
+            width: 40%;
+        }
+        li:first-child:nth-last-child(2) {
+            margin-left: 10%;
+        }
+        /* three items */
+
+        li:first-child:nth-last-child(3), li:first-child:nth-last-child(3) ~ li {
+            width: 30%;
+        }
+        li:first-child:nth-last-child(3) {
+            margin-left: 5%;
         }
 
+        /* four items */
+
+        li:first-child:nth-last-child(4), li:first-child:nth-last-child(4) ~ li {
+            width: 25%;
+        }
+        /* five items */
+
+        li:first-child:nth-last-child(5), li:first-child:nth-last-child(5) ~ li {
+            width: 20%;
+        }
+        /* six items */
+
+        li:first-child:nth-last-child(6), li:first-child:nth-last-child(6) ~ li {
+            width: 16.666%;
+        }
         a {
             padding: 0.7rem 0.5rem 0.5rem 0.5rem;
-
+            em {
+                display: block;
+                text-decoration: none;
+            }
             span {
-                display:    block;
-                padding:    0.4em 0;
-                height:     48px;
+                display: block;
+                padding: 0.4em 0;
+                height: 48px;
             }
-
             img {
-                display:    block;
-                width:      100%;
-                border:     none;
+                display: block;
+                width: 100%;
+                border: none;
             }
-        }
-    }
-
-    .intro-navigation--the-collectors {
-        a {
-            color: #030303;
         }
     }
 }
-
 @media screen and (min-width: 72em) {
     .intro-navigation {
-
         a {
             padding: 1rem;
-
             span {
                 padding: 0.6em 0;
-                height:  48px;
+                height: 48px;
             }
         }
     }

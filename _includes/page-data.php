@@ -16,9 +16,9 @@
 
     class PageBuilder {
 
-        private $defaultTitle = 'Pathways';
-        private $defaultPageTitle = 'Pathways | Wellcome Collection';
-        private $defaultDescription = 'Pathways | Wellcome Collection';
+        private $defaultTitle = 'Digital Stories';
+        private $defaultPageTitle = 'Digital Stories | Wellcome Collection';
+        private $defaultDescription = 'Digital Stories from The Wellcome Collection';
 
         private $siteConfigData;
         private $moduleData;
