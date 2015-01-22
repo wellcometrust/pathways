@@ -1,220 +1,3 @@
-var createjs = createjs||{},
-	animations = animations||{};
-	animations.magnetisedTrees = {
-		lib: {},
-		images: {}
-	};
-
-(function (lib, img, cjs) {
-
-var p; // shortcut to reference prototypes
-
-// library properties:
-lib.properties = {
-	width: 1901,
-	height: 1050,
-	fps: 24,
-	color: "#FFFFFF",
-	manifest: [
-		{src:"/_assets/animations/magnetised-trees/images/Bitmap1.jpg", id:"Bitmap1"},
-		{src:"/_assets/animations/magnetised-trees/images/Bitmap2.jpg", id:"Bitmap2"},
-		{src:"/_assets/animations/magnetised-trees/images/Bitmap4.png", id:"Bitmap4"},
-		{src:"/_assets/animations/magnetised-trees/images/treemask.png", id:"treemask"}
-	]
-};
-
-// stage content:
-(lib.tree2 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// ROD-1
-	this.instance = new lib.ROD1();
-	this.instance.setTransform(861.4,580.5,1,1,0,0,0,43.2,188.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(685));
-
-	// ROD-2
-	this.instance_1 = new lib.ROD2();
-	this.instance_1.setTransform(916.8,569.5,1,1,0,0,0,27.6,177.7);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(685));
-
-	// ROD-3
-	this.instance_2 = new lib.ROD3();
-	this.instance_2.setTransform(1041.1,557.6,1,1,0,0,0,53.3,147.8);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_2).wait(685));
-
-	// ROD-4
-	this.instance_3 = new lib.ROD4();
-	this.instance_3.setTransform(1067.8,565.2,1,1,0,0,0,41.2,137.1);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_3).wait(685));
-
-	// ROD-5
-	this.instance_4 = new lib.ROD5();
-	this.instance_4.setTransform(1286.2,544.2,1,1,0,0,0,145.2,227.1);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_4).wait(685));
-
-	// BKG
-	this.instance_5 = new lib.Bitmap1();
-	this.instance_5.setTransform(0,0,1,1.011);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_5).wait(685));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(950.5,525,1901,1056);
-
-
-// symbols:
-(lib.Bitmap1 = function() {
-	this.initialize(img.Bitmap1);
-}).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,1901,1044);
-
-
-(lib.Bitmap2 = function() {
-	this.initialize(img.Bitmap2);
-}).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,609,459);
-
-
-(lib.Bitmap4 = function() {
-	this.initialize(img.Bitmap4);
-}).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,500,742);
-
-
-(lib.treemask = function() {
-	this.initialize(img.treemask);
-}).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,623,475);
-
-
-(lib.Symbol1 = function() {
-	this.initialize();
-
-	// Layer 1
-	this.shape = new cjs.Shape();
-	this.shape.graphics.bf(img.Bitmap4, null, new cjs.Matrix2D(-1.027,0,0,0.814,107.6,-302)).s().p("ArCd4MAAAg7vIWEAAMAAAA7vg");
-	this.shape.setTransform(178.2,238.3,2.52,1.246);
-
-	this.addChild(this.shape);
-}).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,0,356.4,476.5);
-
-
-(lib.ROD5 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// rod (mask)
-	var mask = new cjs.Shape();
-	mask._off = true;
-	var mask_graphics_1 = new cjs.Graphics().p("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");
-
-	this.timeline.addTween(cjs.Tween.get(mask).to({graphics:null,x:0,y:0}).wait(1).to({graphics:mask_graphics_1,x:145.2,y:227.1}).wait(45));
-
-	// grdt
-	this.instance = new lib.Symbol1();
-	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
-	this.instance._off = true;
-
-	this.instance.mask = mask;
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({_off:false},0).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:272.1},0).wait(1).to({y:311.2},0).wait(1).to({y:350.3},0).wait(1).to({y:389.4},0).wait(1).to({y:428.5},0).wait(1).to({y:467.6},0).wait(1).to({y:506.6},0).wait(1).to({y:545.7},0).wait(1).to({y:584.8},0).wait(1).to({y:623.9},0).wait(1).to({y:663},0).wait(1).to({y:702.1},0).wait(22));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = null;
-
-
-(lib.ROD4 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// rod (mask)
-	var mask = new cjs.Shape();
-	mask._off = true;
-	mask.graphics.p("AmWVSQgMgQAQgKQAXgPACgEQAKgGARgaQAPgXASgEQADgDAEgBIAOgcQgFgQAMgJIAXgOQAHghAKgTQAOgaAYgOQgGgVANgbQAUglABgGQAFgTALgZIAUgrIAQg1QAFgUADgKQAGgQAKgLIAVgyIAPgqQAKgYAOgOIAKgoIAHgLQgBgcAQgvQAPg0ACgXQASgbAPguIAYhNIAhiLQAEgyAOgeIABgKIAGglQAEgVAKgMIAbhnQAPg+AFgtQACgsADgbQAFgnALgeIACgSQgCgRALgPQAHhQAXg8QACgzAShDIAqksQgCgmATgsIABABQACgvAOgtQABgFACgFQgCgFAEgCIABgXQABgNAGgJQgDgDAEgCQABhlADglQgBgTABgKQACgQAOgIQAPgRAPAUQAXAygWA6IABABIgJAbIgBAAQASAUgFAbQgDAPgLAgQgKAHABAXQACAWgNAHQADAWgOAkQACAhgHAsIgOBMQgCAZgDAyQgDAsgMAdIgnDfQgKBUgfBpIAAAjQgBAUgIAOIgCAkQgCAUgGAOIgCATQAEA0ggA3QAAAigQAuQgXBCgDAOIAAALQgJAVgBAmIgFAlQgEAWgJAOQgIAPgHAnQgHAkgLARQgBAJACASQAAARgIAJQgHAbgbBCQgYA6gFAlQgBAIABAQQgCAOgRACQgBADgFAAQgBADABAVQAAAPgKAIIABAAIgfBTIgLATQACALgLAHQgCAHgCAQQgDAOgNAEQADAKgFALIgKASIgRAsIABACIgCACQAAAPgJAVQgLAagCAJQABAMgNAOQgPAPgBAJQABAOgHAOQgEAJgLAOIgIALQgCALgLALQgMALgFAGIgKAlQgJAUgUAFQABAVgNAIQgQAcgiAfQgUAUgFADQgWAQgFACQgGADgFAAQgKAAgHgJg");
-	mask.setTransform(41.2,137.1);
-
-	// grdt
-	this.instance = new lib.Symbol1();
-	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
-
-	this.instance.mask = mask;
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:265.5},0).wait(1).to({y:297.9},0).wait(1).to({y:330.3},0).wait(1).to({y:362.7},0).wait(1).to({y:395.1},0).wait(1).to({y:427.6},0).wait(1).to({y:460},0).wait(1).to({y:492.4},0).wait(1).to({y:524.8},0).wait(1).to({y:557.2},0).wait(1).to({y:589.6},0).wait(1).to({y:622.1},0).wait(22));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,0,82.5,274.3);
-
-
-(lib.ROD3 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// rod (mask)
-	var mask = new cjs.Shape();
-	mask._off = true;
-	mask.graphics.p("An8XDQgDgCgQgPQgJgIAHgKQAFgIANgHQAJgTAVgCQAJgUAFgGQAKgMAPgDIALgSQAIgKAMABIAAAAIABAAQAMg/AvgcIgBgLQACgGAGgCQAKgPAOgiQAOgcAagIIARgcIABgDQgJgTAPgSQAUgXACgGQAGgaAZggQAHgMAMgoQAJghAQgPQgEgeAXgUQgFgNAKgKIAQgSQgBgXADgJQAGgQAUgEQgIgUAIgVIATgmIAIgZQAGgOAIgJQABgaARgaIAKgTIAxiBQADgSADgJQAFgOAQgDQgIgJACgKQACgGAIgLIAKgeQAEgiAPgRIALgTQABgkASgaIAnhwQAHgHACgKIADgTQgFgPAIgLIASgWQgEgQAGgSQADgKALgUIABgPQACgHAHgFIADgJQgCgUAKgLQgCgUALgQIACgEIACgTQgCgIAJgDQAHg2AWgvQABgcAKgOIAUhYQgCgFAEgDQgBgPABgHQACgNAGgIIAHg3QAFgfAJgXIAAgZQACgOAIgKIAAgVQABgNAHgIIADAGIABgBQgCgBgBgEQAAgdAJgkQAEgSAPguIANgoQACgfANgoIAYhEQADg6ACgRQAEgqAKgfQgHgsAKhDQANhbAAgSQACgiAGgeQAEgTAGgHQAKgKATAJQARAFgDAWIgIBYQgGAzgJAkQACAFgDADQAAAlgCASQgCAfgHAYQgCAhgCBBQgFA4gSAmQgIA0gNAaQAAAVgKALIgDASIgSA+IgGApQgFAYgIAPQACAegKAVIABADIgDADQgDA4gPAqIgCAFQgJAJgCAOIAAAZQgBAMABAZQAAAWgJAOQgLAFABAUQABATgMAFQAAAFABALQAAAKgKADIgVBZQAFAbgOAQQgLAOgEAjQgDAigOAOIgKAKIgIAUIAIAHIgHADQACAxgaAwQgIArgSAkIgCAEQgEAMgFAZQgGAVgPALQAAAFgBAFQAFAagYAOQAAAFgCAEQAFAagNAcIgcAvQgDAmgUAfQgCACgEAPQgEAMgJADIgBAcQgBAQgDAGQgFAMgLAFIgVA9QACAYgTAQQgBAdgZAqQgcAwgFAVQgBAggSAWQACALgLANQgMAOAAAIQADAVgOAIIgHAdQgGAQgMAIQgEAJgBATQgDARgQAEIABAAQAEAIgGAIIgKANQAFAOgIAOIgPAXIgTAeQgGAcgSAJQAAAUgTAMQgHAagTAPIgYAnQgDAQgPAPQgJAdgXATQgFAXgQAGQgEARgYAQQgEAJgIAIIgQANIgzAyQgJAKgKAAQgFAAgFgCgAh4NuIADAAIAAgCg");
-	mask.setTransform(53.3,147.8);
-
-	// grdt\
-	this.instance = new lib.Symbol1();
-	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
-
-	this.instance.mask = mask;
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-110},0).wait(1).to({y:-67.1},0).wait(1).to({y:-24.2},0).wait(1).to({y:18.7},0).wait(1).to({y:61.6},0).wait(1).to({y:104.4},0).wait(1).to({y:147.3},0).wait(1).to({y:190.2},0).wait(1).to({y:233.1},0).wait(1).to({y:272},0).wait(1).to({y:310.9},0).wait(1).to({y:349.8},0).wait(1).to({y:388.7},0).wait(1).to({y:427.6},0).wait(1).to({y:466.5},0).wait(1).to({y:505.4},0).wait(1).to({y:544.3},0).wait(1).to({y:583.2},0).wait(1).to({y:622.1},0).wait(18));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,0,106.7,295.6);
-
-
-(lib.ROD2 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// ROD (mask)
-	var mask = new cjs.Shape();
-	mask._off = true;
-	var mask_graphics_4 = new cjs.Graphics().p("Aj9bwQgJgBgIgLQgKgOAOgSIAtg3QAAgRAQgZIAHgXQAEgNAKgFIABgIIgDgHIABgDQgEgdAWgXIAJgeQAGgSAJgKQgDgOAGgOQADgKALgPIADgRIAKgqQAHgYALgQQAGg0APgbIAVhZIAGgzQAFgcAIgWIABgdQgEgMAGgKQAEgHAMgJQgNgPAHgVQAJgegBgGQgDgWAMgIIABgKIAKhhQAHg6AJglIACgmQgDgVACgLQADgRAQgJQgMgJAAgOQAAgJAGgPQADgGAIAEQAMAFADAAQAAgHgOgPQgMgNAIgNQgFgcAZgXIgCgJQgOgQAGgYQAKgaAAgNQACgXAGghIAKg4IACgpQACgWAHgRIAQiQQgBgJAEgHIAMhhQACiLAPhzIADgaQgDgeABgSQACgaAHgUIADguQgEgmAMgjIAAAAIACgSQgCgmABgTQACghASgUIgJgUIAKi0QgBglAAgTQAAggAIgYIADgbIAAgLIgBguQABgbAIgUIACgQQAIhwABidIABkOIADgVIAFgWQAGgNAKACQAGABALAJIAGAHIAAABIACADQANATgCAbQAAAHgJApIABAEQAAADgCACIgBAHIgJAWQADAFAKAJQAGAJgLAIQgLAJAGALQAHAQAAACIAEAVQABAMgFAIIgBAeQAOAMgJAWQgKAYAGAJIgHAEIAAAAIADADQADgCABgFQAIAJgFAMQgFAQABAFQAHANgCARIgFAeIAAAqQAAAYgIAQQAAAEgDADQgIAUADApQADApgHATQgBAHABAjQACAZgLAPQACADgCAFQAJATgBAWQgBARgIAXIgBAnQADB3gVB8IgLARQAAADAGAGQAFAGgCAGIAAAmQABAXgHAOQAAACgDADIABA1QgCAegGAWQAAAEgCADIgMCyIABA0QAAAegHAVQABAEgDAEIgCA6QgCAwgRBHIAAATIAAAgQgBASgIAMIgRApQgHAXAPAVQADAFgCAIQgDAIgIADIgCAUQADAggGAoQgCAUgLA0QAAAKgDAIIgKAyQADAEgEADIABAXQgBANgIAHIgCAcIABAmQAAAXgJAPIgDAiQAEAcgMAaIACADIgCADIgCAdIgEAbQgEAPgLAIQAGArgHAcIAAAaQgBAPgIAJIgKAdIADAhQgBATgKAMIgKBEQADAEgFAFQgEAJgBAbQgBAZgKALIgCgHIgCAAIADAHQACAagGAeQgEATgMAiQgBAegSAVQADAFgEADQgCAIACARQgBAPgKAIQgDAEgFgBQAEAYgIAbQgEANgPAiQgCARgEAJQgHAMgPAEQABAFgBAEQADARgHATQgEAMgLAWQACAVgPAcQABAKgGAJIgNAOIgBAPQgDAIgHAEIAAABIAAAAQgFARgPARIgdAcQgJAIgJAAIgCAAg");
-
-	this.timeline.addTween(cjs.Tween.get(mask).to({graphics:null,x:0,y:0}).wait(4).to({graphics:mask_graphics_4,x:27.6,y:177.7}).wait(41));
-
-	// GRDT
-	this.instance = new lib.Symbol1();
-	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
-	this.instance._off = true;
-
-	this.instance.mask = mask;
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(4).to({_off:false},0).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:265.5},0).wait(1).to({y:297.9},0).wait(1).to({y:330.3},0).wait(1).to({y:362.7},0).wait(1).to({y:395.1},0).wait(1).to({y:427.6},0).wait(1).to({y:460},0).wait(1).to({y:492.4},0).wait(1).to({y:524.8},0).wait(1).to({y:557.2},0).wait(1).to({y:589.6},0).wait(1).to({y:622.1},0).wait(18));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = null;
-
-
-(lib.ROD1 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// rod (mask)
-	var mask = new cjs.Shape();
-	mask._off = true;
-	mask.graphics.p("AmqdWQgKgjALgjQAJgaAYgkQADgoAQgeQgCgQAGgQQADgKALgTIANgUQgDgNAIgNIAOgXQgBgDAAgGQgFgSAHgUQAFgOANgTIAAgBQAEgmAZg2QgBgEADgEQAAgNAHgRQAKgUADgKQgBgFADgEIANhIQAJgqAUgZIgCgLQACgkAMgtIAXhPIABgbQABgOAKgJQACgcACgKQAEgUAJgPQACgbADgNQAFgWAUgJQgbgeAmgQQAOgKgIgZQgHgaANgJQAEgfAFgRQAHgZAPgSQgEgSAAgIQABgOAJgLQAJh0AqiFIACgTIALhCQAIgmAKgbIAShQQACguAPglIACgGQAAgpAUg8QAEgyAQgeQgHgfARgbQgBgTABgIQACgPAIgLQgDgEAEgCQABgzASgqQAAgfALgQIABgaQACgPAHgJIABgLQgDgMAGgSQAHgXAAgGQgBg2AUglIABgWQABgNAGgIIADglIAKgnQgDgIAIgEIAEgeQACgTAIgKIAUhPQgBgYAGgeIAOg4IAHglQgBgDAEgPQgBgeABgOQACgZAHgSQgDgFAFgDIAMh4QgFgqANgdIgBAAIAAg8QACgiAHgaIADgnQADgfACgPQAFgaAJgTQACg7ARgrQgDgEAEgDIAGgtIAIgsQAEgRAGgIQAJgLAQADQAOADADANQACAJgDAQIgXBvIgGgCIAAABQADACADgBQgDA0gTA6IAAAbQgBAQgIAKQACAFgDACQgCAFACAbQACAUgLALIACA2QgBAegNAWQAHAVgCAdIgFAyQAJAcgTAhQAAAfgJAjQgIAkgKAKQgBAGAIARQAHAOgIAKIgSAfQAUAQgTANIAEAQQABAIgFAHQgNARgCAfQgEAsgCAHQgBAHgBAOQgBAMgIAHQgBAJACARQAAAQgJAJQgBAzgTAyQABAcgKAOQABAkgMAVQgFA4gNAbQAAAEgDADQAAAhgKArQgFAZgOAxQADAjgNAYIgKAeQgBA3gPAtQgBAHgEAEQACAXgOAhQgQAngCAPQAIALABAEQABAIgKAGQgFAIADAUQAEATgMAJQgCAEgFAAQABAIAGAQQADAOgNAJQgKAMACAeQACAdgNAMQACAFgEADQAEAPgMAQIgBATIgUBRIgIAKQgDAIABAcQABAWgJAMQACAIgFAIIgKANQgDBRgfBvQgDAFABAUQAAAPgMAGQgGADgBAHIgCANQgBAYgDANQgEAVgKAOIgDAcQgCAagQAYQADAcgNAPIgBAZQgBAOgIAJIgLAdQAEAKgIAPQgJAQACAIQADAlgUAkIgBARQgBAKgJAEIgBAbQABAfgUAfQACAEgEADQAEArgWAnQgBAggFAPQgHAZgSAPQgGAQgHAlQgGAjgHASQgEALgFADQgFADgKgBQADADgCAEQAIAlgNAnQgJAcgZAoQgBApgIAbQgKAjgXAaQAEASgIAXIgQAnQgDAVgKAGQgEADgFAAQgJAAgMgIgAiuPaIADACIABgCIAAgBIgDgCgAE81IIAEgDIgEgCgAGX7EgAGX7Eg");
-	mask.setTransform(43.2,188.6);
-
-	// GRDT
-	this.instance = new lib.Symbol1();
-	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
-
-	this.instance.mask = mask;
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:265.5},0).wait(1).to({y:297.9},0).wait(1).to({y:330.3},0).wait(1).to({y:362.7},0).wait(1).to({y:395.1},0).wait(1).to({y:427.6},0).wait(1).to({y:460},0).wait(1).to({y:492.4},0).wait(1).to({y:524.8},0).wait(1).to({y:557.2},0).wait(1).to({y:589.6},0).wait(1).to({y:622.1},0).wait(22));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,0,86.5,377.3);
-
-})(animations.magnetisedTrees.lib, animations.magnetisedTrees.images, createjs);
-
 console.log('include /index');
 Pathways = Pathways || {};
 
@@ -1635,6 +1418,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         var $panel = $(panel),
             data = $panel.attr('data-config'),
             bg = $panel.find('.bg-container').get(0),
+            content = $panel.find('.main-content').get(0),
             configData = {};
 
         if (data) configData = JSON.parse(data);
@@ -1642,7 +1426,8 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         return {
             elem: panel,
             config: configData,
-            bg: bg
+            bg: bg,
+            content: content
         };
     }
 
@@ -1746,23 +1531,41 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         }
     }
 
-    function resizePanel(panel, panelHeight) {
+    function resizePanel(panel, viewPortHeight) {
         var _panel = panel.elem;
 
-        unSetElementHeight(_panel);
+        // unSetElementHeight(_panel);
 
         var config = panel.config,
             _bg = panel.bg,
+            _content = panel.content,
 
-            currentHeight = _panel.offsetHeight,
+            panelHeight = _panel.offsetHeight,
             offset = config ? ((sys.supportsTouch || !config.offset_height) ? 0 : config.offset_height) : 0,
-            largerHeight = currentHeight < panelHeight ? panelHeight : currentHeight;
+            largerContentHeight,
+            newPanelHeight;
 
-        if (largerHeight !== currentHeight || offset) {
-            setElementHeight(_panel, (largerHeight + offset));
+        if (_content) {
+            largerContentHeight = parseInt(Math.max(_content.offsetHeight, viewPortHeight), 10);
+            newPanelHeight = largerContentHeight + offset;
+
+        } else {
+            newPanelHeight = viewPortHeight;
         }
 
-        if (_bg) setElementHeight(_bg, panelHeight);
+
+        if (panelHeight !== newPanelHeight) {
+            setElementHeight(_panel, newPanelHeight);
+        }
+
+        if (_bg) setElementHeight(_bg, viewPortHeight);
+
+        if (_content) { // If content is absolutely positioned with a top - or -bottom value, height will not be calc'd properly unless prop is removed
+            var top = _content.offsetTop;
+            if (top < 0) _content.classList.add('full-height');
+            else _content.classList.remove('full-height');
+        }
+
     }
 
     function resizePanelChild(index, child) {
@@ -1880,6 +1683,11 @@ Pathways.MIN_SCROLL_LEVEL = 4;
             loadCheck(onScrollLoad, onScrollUnload);
         });
 
+        w.addEventListener('load', function() {
+            resizeCheck();
+            loadCheck(onScrollLoad, onScrollUnload);
+        });
+
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
         $(function() {
             console.log('doc ready');
@@ -1916,7 +1724,7 @@ console.log('include image-loader');
 
 (function(exports, w, $) {
 
-    var defaultBase = '/_assets/img/';
+    var defaultBase = '';
 
     exports.imageLoader = {
         getImageLoader: function(location, base) {
@@ -1979,7 +1787,7 @@ console.log('include core audio-player');
             if (!audio.paused) return;
             vol.addView(linkedView);
             audio.addEventListener('timeupdate', timeUpdate);
-            console.log(audio.currentTime);
+            // console.log(audio.currentTime);
             if (audio.currentTime !== 0) {
                 mediaCtrl.playMediaOnComponentChannel(audio, { noFade: true });
             } else {
@@ -2016,7 +1824,7 @@ console.log('include core audio-player');
     function getTimeUpdate(audio, viewCtrl) {
 
         return function(e) {
-            console.log('timeupdate', audio.src);
+            // console.log('timeupdate', audio.src);
             //if (audio.currentTime === audio.duration) audio.currentTime = 0;
             viewCtrl.update(audio.paused, audio.duration, audio.currentTime);
         };
@@ -2304,6 +2112,7 @@ console.log('include carousel');
                         if (typeof onFirst === 'function') onFirst.call();
                         onFirst = null;
                         ctrl.resize();
+                        ctrl.updateOffset(false);
                     }).create();
 
                     addPane(pane.getPane());
@@ -2818,7 +2627,7 @@ console.log('include gallery');
                     return this;
                 },
                 resize: function() {
-                    console.log('resize', index);
+                    // console.log('resize', index);
 
                     updateWidth();
 
@@ -2894,7 +2703,8 @@ console.log('include gallery');
 
             viewportWidth = w.innerWidth,
             viewportHeight = w.innerHeight,
-            gaRoot = data.gaRoot;
+            gaRoot = data.gaRoot,
+            location = data.location || '';
 
 
         this.init = function() {
@@ -2942,8 +2752,8 @@ console.log('include gallery');
 
         this.loadImages = function(images) {
 
-            var repOpen = 'l2 open infinite canvas',
-                repClose = 'l2 close infinite canvas';
+            var repOpen = 'l2 infinite-canvas open ',
+                repClose = 'l2 infinite-canvas close ';
 
             var length = images.length,
                 items = [],
@@ -2966,7 +2776,7 @@ console.log('include gallery');
                 $item = $('<div/>').addClass('image-panel');
 
                 $img = $('<img/>');
-                $img.attr('src', '/_assets/img/infinite-canvas/infiniteCanvas_' + images[i].id + '.jpg');
+                $img.attr('src', location + images[i].id + '.jpg');
 
                 $svg = $('<svg class="info-box" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">' +
                         '<circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>' +
@@ -3094,6 +2904,46 @@ console.log('include gallery');
 
 }(window, Pathways.components, Pathways.components.core.ga, Hammer, jQuery));
 
+(function(exports, w, ga, $) {
+
+    var repOpen = 'l2 open share',
+        repClose = 'l2 close share',
+        offsetHeight = 60,
+        visibleClass = 'info-panel-open';
+
+    exports.infoPanel = function(element, data) {
+
+        function closePanel($panel) {
+            $panel.removeClass(visibleClass);
+        }
+
+        function openPanel($panel) {
+            $panel.addClass(visibleClass);
+        }
+
+        $(element).on('click', '.handle', function() {
+            var $this = $(this);
+            var $panel = $this.parent();
+
+            //console.log(gaData);
+
+            if ($panel.hasClass(visibleClass)) {
+                closePanel($panel);
+                ga.setState($this, repClose, repOpen);
+
+            } else {
+                openPanel($panel);
+                $(window).one('scroll', function() {
+                    closePanel($panel);
+                    ga.setState($this, repClose, repOpen);
+                });
+                ga.setState($this, repOpen, repClose);
+            }
+        });
+    };
+
+}(Pathways.components, window, Pathways.components.core.ga, jQuery));
+
 Pathways.components.infographic = function(element, data) {
 
     var $svg = $(element).find('svg');
@@ -3165,7 +3015,7 @@ console.log('include letter-gallery');
 
                 carousel.on('setPaneIndex', function(newIndex) {
                     // console.log('setPaneIndex playerCtrl', index, newIndex);
-                    if (index === newIndex) playerCtrl.enable(); //TODO: set to start of track on select
+                    if (index === newIndex) playerCtrl.enable();
                     else {
                         playerCtrl.disable();
                     }
@@ -3215,8 +3065,9 @@ console.log('include letter-gallery');
             function getLetterLengthStyle(text) {
                 var type = 'long-letter',
                     length = text.length;
+               // console.log(length);
                 switch (true) {
-                    case (length < 400):
+                    case (length < 600):
                         type = 'short-letter';
                         break;
                     case (length < 900):
@@ -3906,6 +3757,782 @@ function Quiz(element, data) {
 
 }(window, Pathways.components, Pathways.components.core.ga, jQuery));
 
+Pathways.components.cropZoom.mesmersSalon = {
+    data: {
+        'rod': {
+            'image': '/pathways/1-mindcraft/1-mesmer/_assets/rod-crop.jpg',
+            'title': '',
+            'text': 'Mesmer ‘magnetised’ rods or wands that could be used to direct the fluid to the afflicted part of the body. He would often play music on a glass harmonica that sent shivers through the patients’ nerves.',
+            'position': 'right'
+        },
+        'woman': {
+            'image': '/pathways/1-mindcraft/1-mesmer/_assets/woman-crop.jpg',
+            'text': 'Patients would form circles, holding hands or grasping cords, to transfer the healing energies between them. Sometimes these healing circles would climax in mass convulsions.',
+            'position': 'left'
+        },
+        'mesmer': {
+            'image': '/pathways/1-mindcraft/1-mesmer/_assets/mesmer-crop.jpg',
+            'text': 'Mesmer, depicted here with his wand, taught his healing skills to initiates. They were obliged to take a strict vow of secrecy and pay the large sum of 100 livres. Many French aristocrats signed up.',
+            'position': 'left'
+        }
+    }
+};
+
+
+Pathways.components.gallery.toolsOfMesmerism = {
+    data: {
+        location: '_assets/galleries/tools-of-mesmerism/',
+        images: [{
+            image: 'V0016530',
+            text: '1/7: The tub, or baquet, was central to Mesmer’s treatments.'
+        }, {
+            image: 'L0023349',
+            text: '2/7: Mesmer magnetised objects such as these to treat his patients.'
+        }, {
+            image: 'L0023350',
+            text: '3/7: The different shaped items conducted the superfine fluid he saw as present in all living things.'
+        }, {
+            image: 'L0023351',
+            text: '4/7: By controlling the fluid to bring a patient to a crisis point, Mesmer would ‘cure’ them.'
+        }, {
+            image: 'L0023352',
+            text: '5/7: Magnetised objects showing their magnetic fields.'
+        }, {
+            image: 'M0006352',
+            text: '6/7: Mesmer’s assistants blew a whistle to indicate which social class of baquet they should go to.'
+        }, {
+            image: 'V0011096',
+            text: '7/7: Another baquet and a description of how Animal Magnetism works.'
+        }, ]
+    }
+};
+
+Pathways.scrollScenes.MagnetisedTrees = function(panelID, animation) {
+
+    if (!animation) return console.warn('animation not inited for \'' + panelID + '\'');
+
+
+    var scene1 = new ScrollScene({
+            triggerElement: panelID,
+            duration: Pathways.panelHeight
+        })
+        .on('enter', function(e) {
+            if (e.scrollDirection == 'FORWARD') {
+                TweenMax.to(panelID + ' .black-strip', 0.4, {
+                    y: 0
+                }); // Scroll up
+                animation.start();
+            }
+        })
+        .on('leave', function(e) {
+
+            if (e.scrollDirection == 'REVERSE') {
+                TweenMax.to(panelID + ' .black-strip', 0.2, {
+                    y: Pathways.panelHeight
+                }); // scroll down
+                animation.stop();
+
+            }
+        });
+
+    return scene1;
+};
+
+var createjs = createjs||{},
+	animations = animations||{};
+	animations.magnetisedTrees = {
+		lib: {},
+		images: {}
+	};
+
+(function (lib, img, cjs) {
+
+var p; // shortcut to reference prototypes
+
+// library properties:
+lib.properties = {
+	width: 1901,
+	height: 1050,
+	fps: 24,
+	color: "#FFFFFF",
+	manifest: [
+		{src:"/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/Bitmap1.jpg", id:"Bitmap1"},
+		{src:"/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/Bitmap2.jpg", id:"Bitmap2"},
+		{src:"/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/Bitmap4.png", id:"Bitmap4"},
+		{src:"/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/treemask.png", id:"treemask"}
+	]
+};
+
+// stage content:
+(lib.tree2 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// ROD-1
+	this.instance = new lib.ROD1();
+	this.instance.setTransform(861.4,580.5,1,1,0,0,0,43.2,188.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(685));
+
+	// ROD-2
+	this.instance_1 = new lib.ROD2();
+	this.instance_1.setTransform(916.8,569.5,1,1,0,0,0,27.6,177.7);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(685));
+
+	// ROD-3
+	this.instance_2 = new lib.ROD3();
+	this.instance_2.setTransform(1041.1,557.6,1,1,0,0,0,53.3,147.8);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance_2).wait(685));
+
+	// ROD-4
+	this.instance_3 = new lib.ROD4();
+	this.instance_3.setTransform(1067.8,565.2,1,1,0,0,0,41.2,137.1);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance_3).wait(685));
+
+	// ROD-5
+	this.instance_4 = new lib.ROD5();
+	this.instance_4.setTransform(1286.2,544.2,1,1,0,0,0,145.2,227.1);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance_4).wait(685));
+
+	// BKG
+	this.instance_5 = new lib.Bitmap1();
+	this.instance_5.setTransform(0,0,1,1.011);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance_5).wait(685));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(950.5,525,1901,1056);
+
+
+// symbols:
+(lib.Bitmap1 = function() {
+	this.initialize(img.Bitmap1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,1901,1044);
+
+
+(lib.Bitmap2 = function() {
+	this.initialize(img.Bitmap2);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,609,459);
+
+
+(lib.Bitmap4 = function() {
+	this.initialize(img.Bitmap4);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,500,742);
+
+
+(lib.treemask = function() {
+	this.initialize(img.treemask);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,623,475);
+
+
+(lib.Symbol1 = function() {
+	this.initialize();
+
+	// Layer 1
+	this.shape = new cjs.Shape();
+	this.shape.graphics.bf(img.Bitmap4, null, new cjs.Matrix2D(-1.027,0,0,0.814,107.6,-302)).s().p("ArCd4MAAAg7vIWEAAMAAAA7vg");
+	this.shape.setTransform(178.2,238.3,2.52,1.246);
+
+	this.addChild(this.shape);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(0,0,356.4,476.5);
+
+
+(lib.ROD5 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// rod (mask)
+	var mask = new cjs.Shape();
+	mask._off = true;
+	var mask_graphics_1 = new cjs.Graphics().p("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");
+
+	this.timeline.addTween(cjs.Tween.get(mask).to({graphics:null,x:0,y:0}).wait(1).to({graphics:mask_graphics_1,x:145.2,y:227.1}).wait(45));
+
+	// grdt
+	this.instance = new lib.Symbol1();
+	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
+	this.instance._off = true;
+
+	this.instance.mask = mask;
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({_off:false},0).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:272.1},0).wait(1).to({y:311.2},0).wait(1).to({y:350.3},0).wait(1).to({y:389.4},0).wait(1).to({y:428.5},0).wait(1).to({y:467.6},0).wait(1).to({y:506.6},0).wait(1).to({y:545.7},0).wait(1).to({y:584.8},0).wait(1).to({y:623.9},0).wait(1).to({y:663},0).wait(1).to({y:702.1},0).wait(22));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = null;
+
+
+(lib.ROD4 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// rod (mask)
+	var mask = new cjs.Shape();
+	mask._off = true;
+	mask.graphics.p("AmWVSQgMgQAQgKQAXgPACgEQAKgGARgaQAPgXASgEQADgDAEgBIAOgcQgFgQAMgJIAXgOQAHghAKgTQAOgaAYgOQgGgVANgbQAUglABgGQAFgTALgZIAUgrIAQg1QAFgUADgKQAGgQAKgLIAVgyIAPgqQAKgYAOgOIAKgoIAHgLQgBgcAQgvQAPg0ACgXQASgbAPguIAYhNIAhiLQAEgyAOgeIABgKIAGglQAEgVAKgMIAbhnQAPg+AFgtQACgsADgbQAFgnALgeIACgSQgCgRALgPQAHhQAXg8QACgzAShDIAqksQgCgmATgsIABABQACgvAOgtQABgFACgFQgCgFAEgCIABgXQABgNAGgJQgDgDAEgCQABhlADglQgBgTABgKQACgQAOgIQAPgRAPAUQAXAygWA6IABABIgJAbIgBAAQASAUgFAbQgDAPgLAgQgKAHABAXQACAWgNAHQADAWgOAkQACAhgHAsIgOBMQgCAZgDAyQgDAsgMAdIgnDfQgKBUgfBpIAAAjQgBAUgIAOIgCAkQgCAUgGAOIgCATQAEA0ggA3QAAAigQAuQgXBCgDAOIAAALQgJAVgBAmIgFAlQgEAWgJAOQgIAPgHAnQgHAkgLARQgBAJACASQAAARgIAJQgHAbgbBCQgYA6gFAlQgBAIABAQQgCAOgRACQgBADgFAAQgBADABAVQAAAPgKAIIABAAIgfBTIgLATQACALgLAHQgCAHgCAQQgDAOgNAEQADAKgFALIgKASIgRAsIABACIgCACQAAAPgJAVQgLAagCAJQABAMgNAOQgPAPgBAJQABAOgHAOQgEAJgLAOIgIALQgCALgLALQgMALgFAGIgKAlQgJAUgUAFQABAVgNAIQgQAcgiAfQgUAUgFADQgWAQgFACQgGADgFAAQgKAAgHgJg");
+	mask.setTransform(41.2,137.1);
+
+	// grdt
+	this.instance = new lib.Symbol1();
+	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
+
+	this.instance.mask = mask;
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:265.5},0).wait(1).to({y:297.9},0).wait(1).to({y:330.3},0).wait(1).to({y:362.7},0).wait(1).to({y:395.1},0).wait(1).to({y:427.6},0).wait(1).to({y:460},0).wait(1).to({y:492.4},0).wait(1).to({y:524.8},0).wait(1).to({y:557.2},0).wait(1).to({y:589.6},0).wait(1).to({y:622.1},0).wait(22));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(0,0,82.5,274.3);
+
+
+(lib.ROD3 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// rod (mask)
+	var mask = new cjs.Shape();
+	mask._off = true;
+	mask.graphics.p("An8XDQgDgCgQgPQgJgIAHgKQAFgIANgHQAJgTAVgCQAJgUAFgGQAKgMAPgDIALgSQAIgKAMABIAAAAIABAAQAMg/AvgcIgBgLQACgGAGgCQAKgPAOgiQAOgcAagIIARgcIABgDQgJgTAPgSQAUgXACgGQAGgaAZggQAHgMAMgoQAJghAQgPQgEgeAXgUQgFgNAKgKIAQgSQgBgXADgJQAGgQAUgEQgIgUAIgVIATgmIAIgZQAGgOAIgJQABgaARgaIAKgTIAxiBQADgSADgJQAFgOAQgDQgIgJACgKQACgGAIgLIAKgeQAEgiAPgRIALgTQABgkASgaIAnhwQAHgHACgKIADgTQgFgPAIgLIASgWQgEgQAGgSQADgKALgUIABgPQACgHAHgFIADgJQgCgUAKgLQgCgUALgQIACgEIACgTQgCgIAJgDQAHg2AWgvQABgcAKgOIAUhYQgCgFAEgDQgBgPABgHQACgNAGgIIAHg3QAFgfAJgXIAAgZQACgOAIgKIAAgVQABgNAHgIIADAGIABgBQgCgBgBgEQAAgdAJgkQAEgSAPguIANgoQACgfANgoIAYhEQADg6ACgRQAEgqAKgfQgHgsAKhDQANhbAAgSQACgiAGgeQAEgTAGgHQAKgKATAJQARAFgDAWIgIBYQgGAzgJAkQACAFgDADQAAAlgCASQgCAfgHAYQgCAhgCBBQgFA4gSAmQgIA0gNAaQAAAVgKALIgDASIgSA+IgGApQgFAYgIAPQACAegKAVIABADIgDADQgDA4gPAqIgCAFQgJAJgCAOIAAAZQgBAMABAZQAAAWgJAOQgLAFABAUQABATgMAFQAAAFABALQAAAKgKADIgVBZQAFAbgOAQQgLAOgEAjQgDAigOAOIgKAKIgIAUIAIAHIgHADQACAxgaAwQgIArgSAkIgCAEQgEAMgFAZQgGAVgPALQAAAFgBAFQAFAagYAOQAAAFgCAEQAFAagNAcIgcAvQgDAmgUAfQgCACgEAPQgEAMgJADIgBAcQgBAQgDAGQgFAMgLAFIgVA9QACAYgTAQQgBAdgZAqQgcAwgFAVQgBAggSAWQACALgLANQgMAOAAAIQADAVgOAIIgHAdQgGAQgMAIQgEAJgBATQgDARgQAEIABAAQAEAIgGAIIgKANQAFAOgIAOIgPAXIgTAeQgGAcgSAJQAAAUgTAMQgHAagTAPIgYAnQgDAQgPAPQgJAdgXATQgFAXgQAGQgEARgYAQQgEAJgIAIIgQANIgzAyQgJAKgKAAQgFAAgFgCgAh4NuIADAAIAAgCg");
+	mask.setTransform(53.3,147.8);
+
+	// grdt\
+	this.instance = new lib.Symbol1();
+	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
+
+	this.instance.mask = mask;
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-110},0).wait(1).to({y:-67.1},0).wait(1).to({y:-24.2},0).wait(1).to({y:18.7},0).wait(1).to({y:61.6},0).wait(1).to({y:104.4},0).wait(1).to({y:147.3},0).wait(1).to({y:190.2},0).wait(1).to({y:233.1},0).wait(1).to({y:272},0).wait(1).to({y:310.9},0).wait(1).to({y:349.8},0).wait(1).to({y:388.7},0).wait(1).to({y:427.6},0).wait(1).to({y:466.5},0).wait(1).to({y:505.4},0).wait(1).to({y:544.3},0).wait(1).to({y:583.2},0).wait(1).to({y:622.1},0).wait(18));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(0,0,106.7,295.6);
+
+
+(lib.ROD2 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// ROD (mask)
+	var mask = new cjs.Shape();
+	mask._off = true;
+	var mask_graphics_4 = new cjs.Graphics().p("Aj9bwQgJgBgIgLQgKgOAOgSIAtg3QAAgRAQgZIAHgXQAEgNAKgFIABgIIgDgHIABgDQgEgdAWgXIAJgeQAGgSAJgKQgDgOAGgOQADgKALgPIADgRIAKgqQAHgYALgQQAGg0APgbIAVhZIAGgzQAFgcAIgWIABgdQgEgMAGgKQAEgHAMgJQgNgPAHgVQAJgegBgGQgDgWAMgIIABgKIAKhhQAHg6AJglIACgmQgDgVACgLQADgRAQgJQgMgJAAgOQAAgJAGgPQADgGAIAEQAMAFADAAQAAgHgOgPQgMgNAIgNQgFgcAZgXIgCgJQgOgQAGgYQAKgaAAgNQACgXAGghIAKg4IACgpQACgWAHgRIAQiQQgBgJAEgHIAMhhQACiLAPhzIADgaQgDgeABgSQACgaAHgUIADguQgEgmAMgjIAAAAIACgSQgCgmABgTQACghASgUIgJgUIAKi0QgBglAAgTQAAggAIgYIADgbIAAgLIgBguQABgbAIgUIACgQQAIhwABidIABkOIADgVIAFgWQAGgNAKACQAGABALAJIAGAHIAAABIACADQANATgCAbQAAAHgJApIABAEQAAADgCACIgBAHIgJAWQADAFAKAJQAGAJgLAIQgLAJAGALQAHAQAAACIAEAVQABAMgFAIIgBAeQAOAMgJAWQgKAYAGAJIgHAEIAAAAIADADQADgCABgFQAIAJgFAMQgFAQABAFQAHANgCARIgFAeIAAAqQAAAYgIAQQAAAEgDADQgIAUADApQADApgHATQgBAHABAjQACAZgLAPQACADgCAFQAJATgBAWQgBARgIAXIgBAnQADB3gVB8IgLARQAAADAGAGQAFAGgCAGIAAAmQABAXgHAOQAAACgDADIABA1QgCAegGAWQAAAEgCADIgMCyIABA0QAAAegHAVQABAEgDAEIgCA6QgCAwgRBHIAAATIAAAgQgBASgIAMIgRApQgHAXAPAVQADAFgCAIQgDAIgIADIgCAUQADAggGAoQgCAUgLA0QAAAKgDAIIgKAyQADAEgEADIABAXQgBANgIAHIgCAcIABAmQAAAXgJAPIgDAiQAEAcgMAaIACADIgCADIgCAdIgEAbQgEAPgLAIQAGArgHAcIAAAaQgBAPgIAJIgKAdIADAhQgBATgKAMIgKBEQADAEgFAFQgEAJgBAbQgBAZgKALIgCgHIgCAAIADAHQACAagGAeQgEATgMAiQgBAegSAVQADAFgEADQgCAIACARQgBAPgKAIQgDAEgFgBQAEAYgIAbQgEANgPAiQgCARgEAJQgHAMgPAEQABAFgBAEQADARgHATQgEAMgLAWQACAVgPAcQABAKgGAJIgNAOIgBAPQgDAIgHAEIAAABIAAAAQgFARgPARIgdAcQgJAIgJAAIgCAAg");
+
+	this.timeline.addTween(cjs.Tween.get(mask).to({graphics:null,x:0,y:0}).wait(4).to({graphics:mask_graphics_4,x:27.6,y:177.7}).wait(41));
+
+	// GRDT
+	this.instance = new lib.Symbol1();
+	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
+	this.instance._off = true;
+
+	this.instance.mask = mask;
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(4).to({_off:false},0).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:265.5},0).wait(1).to({y:297.9},0).wait(1).to({y:330.3},0).wait(1).to({y:362.7},0).wait(1).to({y:395.1},0).wait(1).to({y:427.6},0).wait(1).to({y:460},0).wait(1).to({y:492.4},0).wait(1).to({y:524.8},0).wait(1).to({y:557.2},0).wait(1).to({y:589.6},0).wait(1).to({y:622.1},0).wait(18));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = null;
+
+
+(lib.ROD1 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// rod (mask)
+	var mask = new cjs.Shape();
+	mask._off = true;
+	mask.graphics.p("AmqdWQgKgjALgjQAJgaAYgkQADgoAQgeQgCgQAGgQQADgKALgTIANgUQgDgNAIgNIAOgXQgBgDAAgGQgFgSAHgUQAFgOANgTIAAgBQAEgmAZg2QgBgEADgEQAAgNAHgRQAKgUADgKQgBgFADgEIANhIQAJgqAUgZIgCgLQACgkAMgtIAXhPIABgbQABgOAKgJQACgcACgKQAEgUAJgPQACgbADgNQAFgWAUgJQgbgeAmgQQAOgKgIgZQgHgaANgJQAEgfAFgRQAHgZAPgSQgEgSAAgIQABgOAJgLQAJh0AqiFIACgTIALhCQAIgmAKgbIAShQQACguAPglIACgGQAAgpAUg8QAEgyAQgeQgHgfARgbQgBgTABgIQACgPAIgLQgDgEAEgCQABgzASgqQAAgfALgQIABgaQACgPAHgJIABgLQgDgMAGgSQAHgXAAgGQgBg2AUglIABgWQABgNAGgIIADglIAKgnQgDgIAIgEIAEgeQACgTAIgKIAUhPQgBgYAGgeIAOg4IAHglQgBgDAEgPQgBgeABgOQACgZAHgSQgDgFAFgDIAMh4QgFgqANgdIgBAAIAAg8QACgiAHgaIADgnQADgfACgPQAFgaAJgTQACg7ARgrQgDgEAEgDIAGgtIAIgsQAEgRAGgIQAJgLAQADQAOADADANQACAJgDAQIgXBvIgGgCIAAABQADACADgBQgDA0gTA6IAAAbQgBAQgIAKQACAFgDACQgCAFACAbQACAUgLALIACA2QgBAegNAWQAHAVgCAdIgFAyQAJAcgTAhQAAAfgJAjQgIAkgKAKQgBAGAIARQAHAOgIAKIgSAfQAUAQgTANIAEAQQABAIgFAHQgNARgCAfQgEAsgCAHQgBAHgBAOQgBAMgIAHQgBAJACARQAAAQgJAJQgBAzgTAyQABAcgKAOQABAkgMAVQgFA4gNAbQAAAEgDADQAAAhgKArQgFAZgOAxQADAjgNAYIgKAeQgBA3gPAtQgBAHgEAEQACAXgOAhQgQAngCAPQAIALABAEQABAIgKAGQgFAIADAUQAEATgMAJQgCAEgFAAQABAIAGAQQADAOgNAJQgKAMACAeQACAdgNAMQACAFgEADQAEAPgMAQIgBATIgUBRIgIAKQgDAIABAcQABAWgJAMQACAIgFAIIgKANQgDBRgfBvQgDAFABAUQAAAPgMAGQgGADgBAHIgCANQgBAYgDANQgEAVgKAOIgDAcQgCAagQAYQADAcgNAPIgBAZQgBAOgIAJIgLAdQAEAKgIAPQgJAQACAIQADAlgUAkIgBARQgBAKgJAEIgBAbQABAfgUAfQACAEgEADQAEArgWAnQgBAggFAPQgHAZgSAPQgGAQgHAlQgGAjgHASQgEALgFADQgFADgKgBQADADgCAEQAIAlgNAnQgJAcgZAoQgBApgIAbQgKAjgXAaQAEASgIAXIgQAnQgDAVgKAGQgEADgFAAQgJAAgMgIgAiuPaIADACIABgCIAAgBIgDgCgAE81IIAEgDIgEgCgAGX7EgAGX7Eg");
+	mask.setTransform(43.2,188.6);
+
+	// GRDT
+	this.instance = new lib.Symbol1();
+	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
+
+	this.instance.mask = mask;
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:265.5},0).wait(1).to({y:297.9},0).wait(1).to({y:330.3},0).wait(1).to({y:362.7},0).wait(1).to({y:395.1},0).wait(1).to({y:427.6},0).wait(1).to({y:460},0).wait(1).to({y:492.4},0).wait(1).to({y:524.8},0).wait(1).to({y:557.2},0).wait(1).to({y:589.6},0).wait(1).to({y:622.1},0).wait(22));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(0,0,86.5,377.3);
+
+})(animations.magnetisedTrees.lib, animations.magnetisedTrees.images, createjs);
+
+Pathways.components.gallery.aldinisExperiments = {
+    data: {
+        location: '_assets/galleries/aldinis-experiments/',
+        images: [{
+            image: 'L0001964',
+            text: '1/11: Animal electricity produced on frog legs.'
+        }, {
+            image: 'L0011096',
+            text: '2/11: Galvanism experiments on people&hellip;'
+        }, {
+            image: 'L0023892',
+            text: '3/11: &hellip;and animals.'
+        }, {
+            image: 'L0023893',
+            text: '4/11: And animals’ heads.'
+        }, {
+            image: 'L0023894',
+            text: '5/11: Human dissection without heads&hellip;'
+        }, {
+            image: 'L0023895',
+            text: '6/11: &hellip;and with.'
+        }, {
+            image: 'L0023897',
+            text: '7/11: Galvanism experiment with dog.'
+        }, {
+            image: 'L0023898',
+            text: '8/11: More frogs’ legs.'
+        }, {
+            image: 'L0023899',
+            text: '9/11: Galvanic apparatus.'
+        }, {
+            image: 'L0029687',
+            text: '10/11: Frogs’ legs experiment - how to. Part I'
+        }, {
+            image: 'L0029689',
+            text: '11/11: Frogs’ legs experiment - how to. Part II'
+        }, ]
+    }
+};
+
+Pathways.scrollScenes.OkeySisters = function(panelID) {
+
+    $('#okey-sisters .main-content, #okey-sisters .secondary-content').css({
+        'bottom': 'auto',
+        'top': Pathways.panelHeight
+    });
+    $('#thomas-wakley .main-content').css({
+        'bottom': 'auto',
+        'top': parseInt((Pathways.panelHeight / 3),10)
+    });
+
+    var $panel = $(panelID),
+        height = $panel.outerHeight();
+
+    var scene = new ScrollScene({
+            triggerElement: panelID,
+            triggerHook: 'top',
+            duration: Pathways.panelHeight
+        })
+        .on('enter', function(e) {
+            if (e.scrollDirection == 'FORWARD')
+                TweenMax.to('.black-strip', 0.5, {
+                    y: 0
+                }); // Scroll up
+        })
+        .on('leave', function(e) {
+            if (e.scrollDirection == 'REVERSE')
+                TweenMax.to('.black-strip', 0.2, {
+                    y: Pathways.panelHeight
+                }); // scroll down
+        });
+
+
+    return scene;
+};
+
+
+Pathways.components.gallery.hypnotisedWomen = {
+    data: {
+        location: '_assets/galleries/hypnotised-women/',
+        images: [{
+            image: 'L0000476',
+            text: '1/6: Most images of mesmerism and hypnotism show men treating women in manipulative or exploitative ways.'
+        }, {
+            image: 'L0034228',
+            text: '2/6: A corrupt old man tries to seduce a woman by urging her to take a hypnotic draught.'
+        }, {
+            image: 'L0034922',
+            text: '3/6: A mesmeric physician taking advantage of his female patient.'
+        }, {
+            image: 'V0006760',
+            text: '4/6: Jean-Martin Charcot demonstrates hysteria in a hypnotised subject at the Salpêtrière hospital in Paris, 1888.'
+        }, {
+            image: 'V0011793',
+            text: '5/6: An exotic doctor magnetises a young woman; her husband looks on.'
+        }, {
+            image: 'V0016621',
+            text: '6/6: A female patient being hypnotised in front of a group of four men.'
+        }, ]
+    }
+};
+
+Pathways.scrollScenes.GonadMan = function(panelID) {
+
+    var $panel = $(panelID),
+        $quiz = $panel.find('[data-component="quiz"]'),
+        height = $panel.outerHeight();
+
+    var scene1 = new ScrollScene({
+            triggerElement: panelID,
+            triggerHook: 'top',
+            duration: function() {
+                return $panel.outerHeight() + (Pathways.panelHeight * 0.5);
+            }
+        })
+        .on('enter', function() {
+            $panel.addClass('active');
+        }).on('leave', function() {
+            $panel.removeClass('active');
+        });
+
+    return scene1;
+};
+
+Pathways.components.quiz.guessTheTumour = {
+    data: {
+        'title': 'The Esdaile Game',
+        'images': '_assets/quizzes/guess-the-tumour',
+        'questions': [{
+            'image': 'q1-300h.jpg',
+            'title': 'How much did this jaw-dropping tumour weigh?',
+            'answers': ['2 pounds', '5 pounds', '10 pounds', '23 pounds'],
+            'correct': 2
+        }, {
+            'image': 'q2-300h.jpg',
+            'title': 'How long did it take Esdaile to remove this whopping 103 pound tumour?',
+            'answers': ['10 seconds', '1 hour', '6 and a half minutes', '6 hours'],
+            'correct': 3
+        }, {
+            'image': 'q3-300h.jpg',
+            'title': 'What was the weight of this extremely uncomfortable-looking tumour?',
+            'answers': ['80 pounds', '40 pounds', '400 pounds', '60 pounds'],
+            'correct': 1
+        }, {
+            'image': 'q4-300h.jpg',
+            'title': 'How much did this tumour weigh before Esdaile got it off the patient’s chest?',
+            'answers': ['10 pounds', '80 pounds', '60 pounds', '40 pounds'],
+            'correct': 1
+        }, {
+            'image': 'q5-300h.jpg',
+            'title': 'This 90 pound tumour was removed by Esdaile without anaesthetic. But how long did it take?',
+            'answers': ['It never was removed', '30 minutes', '9 minutes', '3 minutes'],
+            'correct': 4
+        }, ]
+    }
+};
+
+
+Pathways.scrollScenes.India = function(panelID) {
+
+    var $panel      = $(panelID),
+        $boats      = $panel.find('.boats'),
+        ratio       = 1050 / 1900,
+        boat_ratio  = 322 / 1900,
+        boat_height = (boat_ratio * window.innerWidth),
+        offsetHeight = $(panelID).find('.main-content').outerHeight() + 100;
+
+        var height  = $panel.outerHeight();
+
+    $boats.css({ bottom: 0, height: boat_height });
+
+    $(window).on('resize', function() {
+        boat_height = (boat_ratio * window.innerWidth);
+        $boats.css({ height: boat_height });
+    });
+
+    var scene = new ScrollScene({
+            triggerElement: panelID,
+            duration:       function() { return $panel.outerHeight() + (Pathways.panelHeight / 4); }
+        })
+        .on('enter', function() {
+            $boats.css('transition', 'transform 120s linear');
+            $boats.css('transform', 'translate('+window.innerWidth+'px,0)');
+        })
+        .on('leave', function() {
+            $boats.css('transition', 'none');
+            $boats.css('transform', 'translate(-600px,0)');
+        });
+
+    return scene;
+};
+
+
+Pathways.scrollScenes.Trilby = function(panelID) {
+
+    var scenes = [];
+
+    $('.comic-panel').css('opacity', 0);
+
+    $('.comic-panel').each(function() {
+        var $this   = $(this),
+            tween   = TweenMax.to( $this, 1, { opacity: 1 } ),
+            offset  = $this.data('offset') ? $this.data('offset') : 0;
+
+        var scene = new ScrollScene({
+                triggerElement:     $this,
+                duration:           200,
+                offset:             offset
+            })
+            .setTween(tween);
+
+        scenes.push(scene);
+    });
+
+    return scenes;
+};
+
+
+Pathways.scrollScenes.AnnaO = function(panelID) {
+
+    var positions = [
+        { x: -57,   y: -107 },
+        { x: 79,    y: 32 },
+        { x: 178,   y: 178 },
+        { x: -144,  y: 106 },
+    ];
+
+    var counter = 0;
+    var $panel = $(panelID);
+    var scenes = [];
+
+    $(panelID + ' .fragmented').each(function() {
+        var $this = $(this);
+
+        var x = positions[counter].x,
+            y = positions[counter].y;
+
+        if( Modernizr.csstransforms3d )
+            $this.css( { 'transform': 'translate3d('+ x +'px, '+ y +'px, 0)' } );
+        else
+            $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
+
+        counter++;
+    });
+
+    $(panelID + ' .fragmented').each(function() {
+        var tween = TweenMax.to( $(this), 1, { x: 0, y: -3 } );
+
+        var scene = new ScrollScene({
+                triggerElement: panelID,
+                triggerHook:    'top',
+                duration:       function() { return $panel.height() - 400; },
+                offset:         50,
+            })
+            .setTween(tween);
+
+        scenes.push(scene);
+    });
+
+    return scenes;
+};
+
+
+Pathways.scrollScenes.Office = function(panelID) {
+
+    var scene = new ScrollScene({
+            triggerElement: panelID,
+            duration:       Pathways.panelHeight
+        })
+        .on('enter', function(e) {
+            if( e.scrollDirection == 'FORWARD' )
+                TweenMax.to(panelID + ' .black-strip', 0.5, { y: 0 }); // Scroll up
+        })
+        .on('leave', function(e) {
+            if( e.scrollDirection == 'REVERSE' )
+                TweenMax.to(panelID + ' .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
+        });
+
+    return scene;
+};
+
+
+Pathways.scrollScenes.Office2 = function(panelID) {
+
+    var $panel = $(panelID),
+        $img = $panel.find('.large-screen').first();
+
+    var scene = new ScrollScene({
+            triggerElement: panelID,
+            duration:       function () { return $panel.outerHeight() + (Pathways.panelHeight * 0.5); },
+            offset:         100
+        })
+        .on('enter', function() {
+            //console.log('enter couch')
+            $img.css('transition', 'transform 14s ease');
+            $img.css('transform', 'translate(-80%, -10%) scale(1.8, 1.8)');
+        })
+        .on('leave', function() {
+            $img.css('transition', 'none');
+            $img.css('transform', 'translate(0,0) scale(1.6, 1.6)');
+        });
+
+    return scene;
+};
+
+Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
+
+    var startY,
+        coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3'),
+        coinOnPage = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-onto-screen.mp3'),
+        scenes = [],
+        difference = 0,
+        initCoinOffset = 380;
+
+    scenes.push(new ScrollScene({
+            triggerElement: panelID,
+            triggerHook: 'top',
+            duration: Pathways.panelHeight,
+        })
+        .on('enter', function(e) {
+            if (e.scrollDirection == 'FORWARD') {
+                startY = window.scrollY;
+            } else {
+                startY = window.scrollY - (Pathways.panelHeight - 100);
+            }
+        })
+        .on('progress', function(e) {
+            $('.pence').css('transform', 'translate(0, ' + (window.scrollY - startY) + 'px)');
+        }));
+
+    scenes.push(new ScrollScene({
+            triggerElement: panelID,
+            triggerHook: 'top',
+            offset: initCoinOffset
+        })
+        .on('start', function(e) {
+            console.log('coin in box');
+            Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
+        }));
+
+    scenes.push(new ScrollScene({
+            triggerElement: panelID,
+            triggerHook: 'top'
+        })
+        .on('start', function(e) {
+            console.log('coin on page');
+            Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
+        }));
+
+
+    // Keep the clipping mask the correct height in relation to the 'cover' background.
+    var ratio = 1900 / 1050,
+        $clip = $('#duke-of-buckingham .clip');
+
+    function resizeClip() {
+        if ((window.innerWidth / window.innerHeight) > ratio) {
+            var newHeight = window.innerWidth / ratio,
+                percent = (newHeight / 100) * 87;
+            difference = parseInt((newHeight - window.innerHeight), 10);
+
+            $clip.css({
+                'height': percent,
+                'transform': 'translate(0, ' + -difference + 'px)'
+            });
+        } else
+            $clip.css('height', '87%');
+    }
+
+    resizeClip();
+
+    window.addEventListener('resize', function() {
+        resizeClip();
+    });
+
+    return scenes;
+};
+
+
+Pathways.components.cropZoom.uniqueArtifacts = {
+    data: {
+        'croc': {
+            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/crocodile.jpg',
+            'title': '',
+            'text': 'Tradescant was attracted by large or exotic items. His requests to British ships included pleas for ‘the biggest that canbe gotten’ and ‘any thing that is strang’.',
+            'position': 'right'
+        },
+        'person': {
+            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/people.jpg',
+            'text': 'Royal apothecary John Parkinson described his friend, and self-made man, John Tradescant as ‘that worthy, curious, and diligent searcher and preserver of all natures rarities and varieties’.',
+            'position': 'left'
+        },
+        'bird': {
+            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/birds.jpg',
+            'text': 'One of Tradescant’s earliest documented collecting experiences occurred on a 16-week sea voyage to the Russian city of Archangel. When a strange bird, ‘whose like I yet never sawe’, flew onto the ship’s deck, it was caught and given to Tradescant.',
+            'position': 'right'
+        },
+        'cabinet': {
+            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/cabinet.jpg',
+            'text': 'Tradescant’s rarities were ultimately acquired, in disputed circumstances, by the lawyer and alchemist Elias Ashmole. Ashmole later left the collection to the University of Oxford, where it formed the basis of the Ashmolean Museum.',
+            'position': 'right'
+        },
+        'books': {
+            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/books.jpg',
+            'text': 'New World explorer John Smith bequeathed half his library of books to Tradescant.',
+            'position': 'left'
+        },
+        'window': {
+            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/window.jpg',
+            'text': 'After establishing what would become Britain’s first museum, Tradescant clocked up another first. He became the initial Keeper of the Oxford Physic Garden, England’s first botanic garden.',
+            'position': 'left'
+        }
+    }
+};
+
+
+Pathways.scrollScenes.GrauntRecords = function(panelID) {
+
+    var $panel = $(panelID);
+
+    var scene = new ScrollScene({
+            triggerElement: panelID,
+            triggerHook: 'top',
+            duration:     Pathways.panelHeight,
+        })
+        .on('enter', function() {
+            $panel.addClass('active');
+        }).on('leave', function() {
+            $panel.removeClass('active');
+        });
+
+    return scene;
+};
+
+Pathways.scrollScenes.DeathInfographic = function(panelID) {
+
+    var $infoBox = $(panelID + ' .info-box'),
+        $inputContainer = $(panelID + ' .input-container');
+        //console.log(infoBox, inputContainer);
+
+    var $panel = $(panelID);
+
+    var scene = new ScrollScene({
+            triggerElement: panelID,
+            duration:       Pathways.panelHeight
+        })
+        .on('enter', function() {
+            $panel.addClass('active');
+        }).on('leave', function() {
+            $panel.removeClass('active');
+            if($infoBox.css('display') === 'block') {
+                $infoBox.css('display', 'none');
+            }
+        });
+
+    return scene;
+};
+
+
+Pathways.scrollScenes.IsaacNewton = function() {
+
+    var scene1 = new ScrollScene({
+            triggerElement: '#isaac-newton',
+            duration:       Pathways.panelHeight
+        })
+        .on('enter', function(e) {
+            if( e.scrollDirection == 'FORWARD' ) {
+                TweenMax.to('#isaac-newton .black-strip', 0.4, { y: 0 }); // Scroll up
+            }
+        })
+        .on('leave', function(e) {
+            if( e.scrollDirection == 'REVERSE' ) {
+                TweenMax.to('#isaac-newton .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
+            }
+        });
+
+    return scene1;
+};
+
 window.TheCollectors = {};
 
 $(function() {
@@ -3959,7 +4586,7 @@ TheCollectors.getData = function(SCREEN_MODE) {
 
 };
 
-TheCollectors.assetRoot = '/_assets/img/infographics/death-collector/';
+TheCollectors.assetRoot = '_assets/infographics/death-collector/';
 
 TheCollectors.data = [{
 
@@ -6813,568 +7440,10 @@ TheCollectors.Interface = function() {
     return self;
 }();
 
-Pathways.components.cropZoom.mesmersSalon = {
-    data: {
-        'rod': {
-            'image': '/pathways/1-mindcraft/_assets/1-mesmer/rod-crop.jpg',
-            'title': '',
-            'text': 'Mesmer ‘magnetised’ rods or wands that could be used to direct the fluid to the afflicted part of the body. He would often play music on a glass harmonica that sent shivers through the patients’ nerves.',
-            'position': 'right'
-        },
-        'woman': {
-            'image': '/pathways/1-mindcraft/_assets/1-mesmer/woman-crop.jpg',
-            'text': 'Patients would form circles, holding hands or grasping cords, to transfer the healing energies between them. Sometimes these healing circles would climax in mass convulsions.',
-            'position': 'left'
-        },
-        'mesmer': {
-            'image': '/pathways/1-mindcraft/_assets/1-mesmer/mesmer-crop.jpg',
-            'text': 'Mesmer, depicted here with his wand, taught his healing skills to initiates. They were obliged to take a strict vow of secrecy and pay the large sum of 100 livres. Many French aristocrats signed up.',
-            'position': 'left'
-        }
-    }
-};
-
-
-Pathways.components.gallery.toolsOfMesmerism = {
-    data: {
-        location: 'galleries/tools-of-mesmerism/',
-        images: [{
-            image: 'V0016530',
-            text: '1/7: The tub, or baquet, was central to Mesmer’s treatments.'
-        }, {
-            image: 'L0023349',
-            text: '2/7: Mesmer magnetised objects such as these to treat his patients.'
-        }, {
-            image: 'L0023350',
-            text: '3/7: The different shaped items conducted the superfine fluid he saw as present in all living things.'
-        }, {
-            image: 'L0023351',
-            text: '4/7: By controlling the fluid to bring a patient to a crisis point, Mesmer would ‘cure’ them.'
-        }, {
-            image: 'L0023352',
-            text: '5/7: Magnetised objects showing their magnetic fields.'
-        }, {
-            image: 'M0006352',
-            text: '6/7: Mesmer’s assistants blew a whistle to indicate which social class of baquet they should go to.'
-        }, {
-            image: 'V0011096',
-            text: '7/7: Another baquet and a description of how Animal Magnetism works.'
-        }, ]
-    }
-};
-
-Pathways.scrollScenes.MagnetisedTrees = function(panelID, animation) {
-
-    if (!animation) return console.warn('animation not inited for \'' + panelID + '\'');
-
-
-    var scene1 = new ScrollScene({
-            triggerElement: panelID,
-            duration: Pathways.panelHeight
-        })
-        .on('enter', function(e) {
-            if (e.scrollDirection == 'FORWARD') {
-                TweenMax.to(panelID + ' .black-strip', 0.4, {
-                    y: 0
-                }); // Scroll up
-                animation.start();
-            }
-        })
-        .on('leave', function(e) {
-
-            if (e.scrollDirection == 'REVERSE') {
-                TweenMax.to(panelID + ' .black-strip', 0.2, {
-                    y: Pathways.panelHeight
-                }); // scroll down
-                animation.stop();
-
-            }
-        });
-
-    return scene1;
-};
-
-Pathways.components.gallery.aldinisExperiments = {
-    data: {
-        location: 'galleries/aldinis-experiments/',
-        images: [{
-            image: 'L0001964',
-            text: '1/11: Animal electricity produced on frog legs.'
-        }, {
-            image: 'L0011096',
-            text: '2/11: Galvanism experiments on people&hellip;'
-        }, {
-            image: 'L0023892',
-            text: '3/11: &hellip;and animals.'
-        }, {
-            image: 'L0023893',
-            text: '4/11: And animals’ heads.'
-        }, {
-            image: 'L0023894',
-            text: '5/11: Human dissection without heads&hellip;'
-        }, {
-            image: 'L0023895',
-            text: '6/11: &hellip;and with.'
-        }, {
-            image: 'L0023897',
-            text: '7/11: Galvanism experiment with dog.'
-        }, {
-            image: 'L0023898',
-            text: '8/11: More frogs’ legs.'
-        }, {
-            image: 'L0023899',
-            text: '9/11: Galvanic apparatus.'
-        }, {
-            image: 'L0029687',
-            text: '10/11: Frogs’ legs experiment - how to. Part I'
-        }, {
-            image: 'L0029689',
-            text: '11/11: Frogs’ legs experiment - how to. Part II'
-        }, ]
-    }
-};
-
-Pathways.scrollScenes.OkeySisters = function(panelID) {
-
-    $('#okey-sisters .main-content, #okey-sisters .secondary-content').css({
-        'bottom': 'auto',
-        'top': Pathways.panelHeight
-    });
-    $('#thomas-wakley .main-content').css({
-        'bottom': 'auto',
-        'top': parseInt((Pathways.panelHeight / 3),10)
-    });
-
-    var $panel = $(panelID),
-        height = $panel.outerHeight();
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            triggerHook: 'top',
-            duration: Pathways.panelHeight
-        })
-        .on('enter', function(e) {
-            if (e.scrollDirection == 'FORWARD')
-                TweenMax.to('.black-strip', 0.5, {
-                    y: 0
-                }); // Scroll up
-        })
-        .on('leave', function(e) {
-            if (e.scrollDirection == 'REVERSE')
-                TweenMax.to('.black-strip', 0.2, {
-                    y: Pathways.panelHeight
-                }); // scroll down
-        });
-
-
-    return scene;
-};
-
-
-Pathways.components.gallery.hypnotisedWomen = {
-    data: {
-        location: 'galleries/hypnotised-women/',
-        images: [{
-            image: 'L0000476',
-            text: '1/6: Most images of mesmerism and hypnotism show men treating women in manipulative or exploitative ways.'
-        }, {
-            image: 'L0034228',
-            text: '2/6: A corrupt old man tries to seduce a woman by urging her to take a hypnotic draught.'
-        }, {
-            image: 'L0034922',
-            text: '3/6: A mesmeric physician taking advantage of his female patient.'
-        }, {
-            image: 'V0006760',
-            text: '4/6: Jean-Martin Charcot demonstrates hysteria in a hypnotised subject at the Salpêtrière hospital in Paris, 1888.'
-        }, {
-            image: 'V0011793',
-            text: '5/6: An exotic doctor magnetises a young woman; her husband looks on.'
-        }, {
-            image: 'V0016621',
-            text: '6/6: A female patient being hypnotised in front of a group of four men.'
-        }, ]
-    }
-};
-
-Pathways.scrollScenes.GonadMan = function(panelID) {
-
-    var $panel = $(panelID),
-        $quiz = $panel.find('[data-component="quiz"]'),
-        height = $panel.outerHeight();
-
-    var scene1 = new ScrollScene({
-            triggerElement: panelID,
-            triggerHook: 'top',
-            duration: function() {
-                return $panel.outerHeight() + (Pathways.panelHeight * 0.5);
-            }
-        })
-        .on('enter', function() {
-            $panel.addClass('active');
-        }).on('leave', function() {
-            $panel.removeClass('active');
-        });
-
-    return scene1;
-};
-
-Pathways.components.quiz.guessTheTumour = {
-    data: {
-        'title': 'The Esdaile Game',
-        'images': '/_assets/img/quizzes/guess-the-tumour',
-        'questions': [{
-            'image': 'q1-300h.jpg',
-            'title': 'How much did this jaw-dropping tumour weigh?',
-            'answers': ['2 pounds', '5 pounds', '10 pounds', '23 pounds'],
-            'correct': 2
-        }, {
-            'image': 'q2-300h.jpg',
-            'title': 'How long did it take Esdaile to remove this whopping 103 pound tumour?',
-            'answers': ['10 seconds', '1 hour', '6 and a half minutes', '6 hours'],
-            'correct': 3
-        }, {
-            'image': 'q3-300h.jpg',
-            'title': 'What was the weight of this extremely uncomfortable-looking tumour?',
-            'answers': ['80 pounds', '40 pounds', '400 pounds', '60 pounds'],
-            'correct': 1
-        }, {
-            'image': 'q4-300h.jpg',
-            'title': 'How much did this tumour weigh before Esdaile got it off the patient’s chest?',
-            'answers': ['10 pounds', '80 pounds', '60 pounds', '40 pounds'],
-            'correct': 1
-        }, {
-            'image': 'q5-300h.jpg',
-            'title': 'This 90 pound tumour was removed by Esdaile without anaesthetic. But how long did it take?',
-            'answers': ['It never was removed', '30 minutes', '9 minutes', '3 minutes'],
-            'correct': 4
-        }, ]
-    }
-};
-
-
-Pathways.scrollScenes.India = function(panelID) {
-
-    var $panel      = $(panelID),
-        $boats      = $panel.find('.boats'),
-        ratio       = 1050 / 1900,
-        boat_ratio  = 322 / 1900,
-        boat_height = (boat_ratio * window.innerWidth),
-        offsetHeight = $(panelID).find('.main-content').outerHeight() + 100;
-
-        var height  = $panel.outerHeight();
-
-    $boats.css({ bottom: 0, height: boat_height });
-
-    $(window).on('resize', function() {
-        boat_height = (boat_ratio * window.innerWidth);
-        $boats.css({ height: boat_height });
-    });
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       function() { return $panel.outerHeight() + (Pathways.panelHeight / 4); }
-        })
-        .on('enter', function() {
-            $boats.css('transition', 'transform 120s linear');
-            $boats.css('transform', 'translate('+window.innerWidth+'px,0)');
-        })
-        .on('leave', function() {
-            $boats.css('transition', 'none');
-            $boats.css('transform', 'translate(-600px,0)');
-        });
-
-    return scene;
-};
-
-
-Pathways.scrollScenes.Trilby = function(panelID) {
-
-    var scenes = [];
-
-    $('.comic-panel').css('opacity', 0);
-
-    $('.comic-panel').each(function() {
-        var $this   = $(this),
-            tween   = TweenMax.to( $this, 1, { opacity: 1 } ),
-            offset  = $this.data('offset') ? $this.data('offset') : 0;
-
-        var scene = new ScrollScene({
-                triggerElement:     $this,
-                duration:           200,
-                offset:             offset
-            })
-            .setTween(tween);
-
-        scenes.push(scene);
-    });
-
-    return scenes;
-};
-
-
-Pathways.scrollScenes.AnnaO = function(panelID) {
-
-    var positions = [
-        { x: -57,   y: -107 },
-        { x: 79,    y: 32 },
-        { x: 178,   y: 178 },
-        { x: -144,  y: 106 },
-    ];
-
-    var counter = 0;
-    var $panel = $(panelID);
-    var scenes = [];
-
-    $(panelID + ' .fragmented').each(function() {
-        var $this = $(this);
-
-        var x = positions[counter].x,
-            y = positions[counter].y;
-
-        if( Modernizr.csstransforms3d )
-            $this.css( { 'transform': 'translate3d('+ x +'px, '+ y +'px, 0)' } );
-        else
-            $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
-
-        counter++;
-    });
-
-    $(panelID + ' .fragmented').each(function() {
-        var tween = TweenMax.to( $(this), 1, { x: 0, y: -3 } );
-
-        var scene = new ScrollScene({
-                triggerElement: panelID,
-                triggerHook:    'top',
-                duration:       function() { return $panel.height() - 400; },
-                offset:         50,
-            })
-            .setTween(tween);
-
-        scenes.push(scene);
-    });
-
-    return scenes;
-};
-
-
-Pathways.scrollScenes.Office = function(panelID) {
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       Pathways.panelHeight
-        })
-        .on('enter', function(e) {
-            if( e.scrollDirection == 'FORWARD' )
-                TweenMax.to(panelID + ' .black-strip', 0.5, { y: 0 }); // Scroll up
-        })
-        .on('leave', function(e) {
-            if( e.scrollDirection == 'REVERSE' )
-                TweenMax.to(panelID + ' .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
-        });
-
-    return scene;
-};
-
-
-Pathways.scrollScenes.Office2 = function(panelID) {
-
-    var $panel = $(panelID),
-        $img = $panel.find('.large-screen').first();
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       function () { return $panel.outerHeight() + (Pathways.panelHeight * 0.5); },
-            offset:         100
-        })
-        .on('enter', function() {
-            //console.log('enter couch')
-            $img.css('transition', 'transform 14s ease');
-            $img.css('transform', 'translate(-80%, -10%) scale(1.8, 1.8)');
-        })
-        .on('leave', function() {
-            $img.css('transition', 'none');
-            $img.css('transform', 'translate(0,0) scale(1.6, 1.6)');
-        });
-
-    return scene;
-};
-
-Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
-
-    var startY,
-        coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3'),
-        coinOnPage = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-onto-screen.mp3'),
-        scenes = [],
-        difference = 0,
-        initCoinOffset = 380;
-
-    scenes.push(new ScrollScene({
-            triggerElement: panelID,
-            triggerHook: 'top',
-            duration: Pathways.panelHeight,
-        })
-        .on('enter', function(e) {
-            if (e.scrollDirection == 'FORWARD') {
-                startY = window.scrollY;
-            } else {
-                startY = window.scrollY - (Pathways.panelHeight - 100);
-            }
-        })
-        .on('progress', function(e) {
-            $('.pence').css('transform', 'translate(0, ' + (window.scrollY - startY) + 'px)');
-        }));
-
-    scenes.push(new ScrollScene({
-            triggerElement: panelID,
-            triggerHook: 'top',
-            offset: initCoinOffset
-        })
-        .on('start', function(e) {
-            console.log('coin in box');
-            Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
-        }));
-
-    scenes.push(new ScrollScene({
-            triggerElement: panelID,
-            triggerHook: 'top'
-        })
-        .on('start', function(e) {
-            console.log('coin on page');
-            Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
-        }));
-
-
-    // Keep the clipping mask the correct height in relation to the 'cover' background.
-    var ratio = 1900 / 1050,
-        $clip = $('#duke-of-buckingham .clip');
-
-    function resizeClip() {
-        if ((window.innerWidth / window.innerHeight) > ratio) {
-            var newHeight = window.innerWidth / ratio,
-                percent = (newHeight / 100) * 87;
-            difference = parseInt((newHeight - window.innerHeight), 10);
-
-            $clip.css({
-                'height': percent,
-                'transform': 'translate(0, ' + -difference + 'px)'
-            });
-        } else
-            $clip.css('height', '87%');
-    }
-
-    resizeClip();
-
-    window.addEventListener('resize', function() {
-        resizeClip();
-    });
-
-    return scenes;
-};
-
-
-Pathways.components.cropZoom.uniqueArtifacts = {
-    data: {
-        'croc': {
-            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/crocodile.jpg',
-            'title': '',
-            'text': 'Tradescant was attracted by large or exotic items. His requests to British ships included pleas for ‘the biggest that canbe gotten’ and ‘any thing that is strang’.',
-            'position': 'right'
-        },
-        'person': {
-            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/people.jpg',
-            'text': 'Royal apothecary John Parkinson described his friend, and self-made man, John Tradescant as ‘that worthy, curious, and diligent searcher and preserver of all natures rarities and varieties’.',
-            'position': 'left'
-        },
-        'bird': {
-            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/birds.jpg',
-            'text': 'One of Tradescant’s earliest documented collecting experiences occurred on a 16-week sea voyage to the Russian city of Archangel. When a strange bird, ‘whose like I yet never sawe’, flew onto the ship’s deck, it was caught and given to Tradescant.',
-            'position': 'right'
-        },
-        'cabinet': {
-            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/cabinet.jpg',
-            'text': 'Tradescant’s rarities were ultimately acquired, in disputed circumstances, by the lawyer and alchemist Elias Ashmole. Ashmole later left the collection to the University of Oxford, where it formed the basis of the Ashmolean Museum.',
-            'position': 'right'
-        },
-        'books': {
-            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/books.jpg',
-            'text': 'New World explorer John Smith bequeathed half his library of books to Tradescant.',
-            'position': 'left'
-        },
-        'window': {
-            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/crop-zoom/window.jpg',
-            'text': 'After establishing what would become Britain’s first museum, Tradescant clocked up another first. He became the initial Keeper of the Oxford Physic Garden, England’s first botanic garden.',
-            'position': 'left'
-        }
-    }
-};
-
-
-Pathways.scrollScenes.GrauntRecords = function(panelID) {
-
-    var $panel = $(panelID);
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            triggerHook: 'top',
-            duration:     Pathways.panelHeight,
-        })
-        .on('enter', function() {
-            $panel.addClass('active');
-        }).on('leave', function() {
-            $panel.removeClass('active');
-        });
-
-    return scene;
-};
-
-Pathways.scrollScenes.DeathInfographic = function(panelID) {
-
-    var $infoBox = $(panelID + ' .info-box'),
-        $inputContainer = $(panelID + ' .input-container');
-        //console.log(infoBox, inputContainer);
-
-    var $panel = $(panelID);
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       Pathways.panelHeight
-        })
-        .on('enter', function() {
-            $panel.addClass('active');
-        }).on('leave', function() {
-            $panel.removeClass('active');
-            if($infoBox.css('display') === 'block') {
-                $infoBox.css('display', 'none');
-            }
-        });
-
-    return scene;
-};
-
-
-Pathways.scrollScenes.IsaacNewton = function() {
-
-    var scene1 = new ScrollScene({
-            triggerElement: '#isaac-newton',
-            duration:       Pathways.panelHeight
-        })
-        .on('enter', function(e) {
-            if( e.scrollDirection == 'FORWARD' ) {
-                TweenMax.to('#isaac-newton .black-strip', 0.4, { y: 0 }); // Scroll up
-            }
-        })
-        .on('leave', function(e) {
-            if( e.scrollDirection == 'REVERSE' ) {
-                TweenMax.to('#isaac-newton .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
-            }
-        });
-
-    return scene1;
-};
-
 Pathways.components.infiniteCanvas.wellcomeCollection = {
     data: {
-        gaRoot: 'the-collectors - unceasing-seeker - l2 open infinite canvas image',
+        gaRoot: 'the-collectors - unceasing-seeker - l2 infinite-canvas open image',
+        location: '_assets/infinite-canvas/infiniteCanvas_',
         images: [{
             id: 'L0011600a',
             pos: [1220, 35],
@@ -7466,7 +7535,7 @@ Pathways.components.infiniteCanvas.wellcomeCollection = {
         }, {
             id: 'L0036897a',
             pos: [2098, 576],
-            text: 'These jars full of seeds and roots are kept in storage at Blythe House, along with thousands of other items that were transferred to the Science Museum in the 1970s and 1980s.'
+            text: 'Jars full of seeds and roots.'
         }, {
             id: 'M0009391a',
             pos: [66, 670],
@@ -7506,7 +7575,7 @@ Pathways.components.infiniteCanvas.wellcomeCollection = {
         }, {
             id: 'L0032222',
             pos: [2765, 1372],
-            text: 'A Burroughs Wellcome &amp; Co. 1906 booklet on anaesthesia.'
+            text: 'A Burroughs Wellcome & Co. 1906 booklet on anaesthesia.'
         }, {
             id: 'L0057155a',
             pos: [5902, 1414],
@@ -7698,7 +7767,7 @@ Pathways.components.infiniteCanvas.wellcomeCollection = {
         }, {
             id: 'L0021269',
             pos: [4674, 3140],
-            text: 'An illustrated sixteenth-century book by Catherine of Siena, which was purchased from the library of William Morris. Wellcome noted on the auction catalogue, ‘Superb must have inspired Morris Stick High’.'
+            text: 'An illustrated sixteenth-century book by Catherine of Siena, which was purchased from the library of William Morris.'
         }, {
             id: 'L0021264a',
             pos: [2164, 3172],
@@ -7734,7 +7803,7 @@ Pathways.components.infiniteCanvas.wellcomeCollection = {
         }, {
             id: 'L0013410a',
             pos: [270, 3461],
-            text: 'Wellcome’s longest-serving collaborator, the writer Charles John Samuel Thompson. Despite working together for 25 years, their business relationship broke down after Thompson worked on one of his personal book projects during company time.'
+            text: 'Wellcome’s longest-serving collaborator, the writer Charles John Samuel Thompson. Their 25-year business relationship broke down after Thompson developed a personal book on company time.'
         }, {
             id: 'M0007600a',
             pos: [533, 3461],
@@ -7817,31 +7886,31 @@ Pathways.scrollScenes.SeizedAndDestroyed = function() {
 
 Pathways.components.gallery.quacksOfThe18thCentury = {
     data: {
-        location: 'galleries/quacks-of-the-18th-century/',
+        location: '_assets/galleries/quacks-of-the-18th-century/',
         images: [{
             image: 'L0018661a',
             text: 'Quacks and travelling medicine vendors were a common sight in the 17th and 18th century.'
         }, {
             image: 'M0013726',
-            text: 'They were selling snake oil but sometimes antidotes to snake poison, like this vendor.'
+            text: 'Some may have hawked snake oil, but this Italian charlatan is selling antidotes to snake poison.'
         }, {
             image: 'V0007356a',
             text: 'Some of them were women: Anne Manning, a quack doctor, outside her cottage with Betty Upton.'
         }, {
             image: 'V0010929a',
-            text: 'Doctor Kill’em-or-Cure’em irresponsibly dispensing his potions.'
+            text: 'The tale of ‘Doctor Kill’em or Cure’em’: ‘if you kill ‘em or cure’ em it don’t matter to thee’.'
         }, {
             image: 'V0011005',
             text: 'A sailor with a bandaged eye consulting a quack doctor.'
         }, {
             image: 'V0016170',
-            text: 'Doctor Bossy selling his wares on stage with assistants at Covent Garden, London.'
+            text: 'Doctor Bossey selling his wares on stage.'
         }, {
             image: 'V0016171',
-            text: 'Doctor Botherum, perhaps based on Doctor Bossy, selling his goods to a raucous crowd.'
+            text: '‘Doctor Botherum’, a caricature probably based on Doctor Bossey, selling his goods to a raucous crowd.'
         }, {
             image: 'V0016188a',
-            text: 'Doctor Rock using his horse-drawn carriage as a stage to present his remedies to a crowd.'
+            text: 'Richard ‘Doctor’ Rock using his horse-drawn carriage as a stage. He may be selling his ‘anti-venereal, grand, specifick pill’.'
         }, {
             image: 'V0016215',
             text: 'This vendor puts on a real show, assisted by an elaborately dressed man and an owl.'
@@ -7854,37 +7923,37 @@ Pathways.components.gallery.quacksOfThe18thCentury = {
 
 Pathways.components.gallery.indecentSexualImages = {
     data: {
-        location: 'galleries/indecent-sexual-images/',
+        location: '_assets/galleries/indecent-sexual-images/',
         images: [{
             image: 'L0038201',
-            text: 'Coloured illustration of scrotum diseased with Syphilis.'
+            text: 'Scrotum diseased with syphilis'
         }, {
             image: 'L0038202',
-            text: 'Coloured illustration of labia diseased with Syphilis ‘Sclerosis of the Right Labium Majus’.'
+            text: 'Labia diseased with syphilis'
         }, {
             image: 'L0038205',
-            text: 'Skin of the scrotum and perineum area diseased with Syphilis.'
+            text: 'Skin of the scrotum and perineum diseased with syphilis'
         }, {
             image: 'L0038206',
-            text: 'Female breast diseased with Syphilis.'
+            text: 'Breast diseased with syphilis'
         }, {
             image: 'L0038209',
-            text: 'Male pubis and penis diseased with Syphilis. Paraphimosis from Venereal Ulcer on the Foreskin. Inflammatory Edema. Suppurative Adenitis in both groins.'
+            text: 'Pubis and penis diseased with syphilis'
         }, {
             image: 'L0060656',
-            text: 'Syphilitic frambesia (‘raspberry’).'
+            text: '‘Syphilide vegetante framboisee’'
         }, {
             image: 'L0074250',
-            text: 'Combycomata, female perineum.'
+            text: 'Combycomata, female perineum'
         }, {
             image: 'V0009962',
-            text: 'Female genitalia showing severely diseased tissue and hypertrophy of the clitoris.'
+            text: 'Hypertrophy of the clitoris'
         }, {
             image: 'V0009971',
-            text: 'Female genitalia showing severely diseased tissue caused by syphilis: extensive sores and abcesses are seen extending up the abdomen and torso.'
+            text: 'Syphilitic lesions on the genitalia and torso'
         }, {
             image: 'V0010253',
-            text: 'A section of leg with a swelling on the shin below the knee; and male genitalia with a lump on the testicles.'
+            text: 'Syphilitic swelling of the knee and testicles'
         }]
     }
 };
@@ -7905,7 +7974,7 @@ Pathways.scrollScenes.BritishMuseum = function() {
 
 Pathways.components.gallery.madeAFilm = {
     data: {
-        location: 'galleries/they-even-made-a-film/',
+        location: '_assets/galleries/they-even-made-a-film/',
         images: [{
             image: '01_Maisie_Dick_in_love',
             text: 'Maisie’s Marriage was produced in the summer of 1923. It follows the story of Maisie Burrows, the eldest of ten children, and her beau, fireman Dick Reading.'
@@ -7933,7 +8002,7 @@ Pathways.components.gallery.madeAFilm = {
 
 Pathways.components.letterGallery.marieStopesLetters = {
     data: {
-        location: 'galleries/marie-stopes-letters/',
+        location: '_assets/galleries/marie-stopes-letters/',
         images: [{
             image: '01-HorridVice-pp-08-HIGHLIGHT',
             textSrc: '/_assets/text/marie-stopes-letters/01-letter.html',
