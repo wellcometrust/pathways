@@ -85,6 +85,12 @@ module.exports = function(grunt) {
         },
 
         uglify: {
+            options: {
+                preserveComments: 'some',
+                compress: {
+                    drop_console: true
+                }
+            },
             libs: {
                 src: '_assets/build/js/libs.js',
                 dest: '_assets/build/js/libs.min.js'
@@ -139,20 +145,11 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['pathways/<%= globalConfig.path %>/index.php', 'pathways/<%= globalConfig.path %>/credits.php', 'pathways/<%= globalConfig.path %>/**/index.php'],
+                    src: ['index.php', 'pathways/<%= globalConfig.path %>/index.php', 'pathways/<%= globalConfig.path %>/credits.php', 'pathways/<%= globalConfig.path %>/**/index.php'],
                     dest: '<%= exportRoot %>',
                     ext: '.html'
                 }],
-            },
-            all: {
-                files: [{
-                    expand: true,
-                    cwd: '',
-                    src: ['pathways/*/index.php', '!pathways/x-example/**', '!pathways/x-example/index.php', 'pathways/*/credits.php', '!pathways/x-example/credits.php', 'pathways/*/**/index.php', '!pathways/x-example/**/index.php'],
-                    dest: '<%= exportRoot %>',
-                    ext: '.html'
-                }],
-            },
+            }
 
         },
 
@@ -184,17 +181,20 @@ module.exports = function(grunt) {
         imagemin: {
             options: { // Target options
                 optimizationLevel: 3,
-                svgoPlugins: [
-                { removeViewBox: false },
-                { removeUselessStrokeAndFill: false },
-                { removeEmptyAttrs: false }],
+                svgoPlugins: [{
+                    removeViewBox: false
+                }, {
+                    removeUselessStrokeAndFill: false
+                }, {
+                    removeEmptyAttrs: false
+                }],
                 progressive: true
             },
             core: {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['_assets/img/**/*.{png,jpg,gif,svg}'],
+                    src: ['_assets/img/**/*.{png,jpg,gif}'],
                     dest: '<%= exportRoot %>'
                 }]
             },
@@ -205,12 +205,32 @@ module.exports = function(grunt) {
                     src: ['pathways/<%= globalConfig.path %>/**/_assets/**/*.{png,jpg,gif,svg}'],
                     dest: '<%= exportRoot %>'
                 }]
+            }
+        },
+
+        svgmin: {
+            options: {
+                plugins: [{
+                    removeViewBox: false
+                }, {
+                    removeUselessStrokeAndFill: false
+                }, {
+                    removeEmptyAttrs: false
+                }]
             },
-            all: {
+            core: {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['pathways/*/_assets/**/*.{png,jpg,gif,svg}', '!pathways/x-example/**'],
+                    src: ['_assets/img/**/*.{svg}'],
+                    dest: '<%= exportRoot %>'
+                }]
+            },
+            pathway: {
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['pathways/<%= globalConfig.path %>/**/_assets/**/*.{svg}'],
                     dest: '<%= exportRoot %>'
                 }]
             }
@@ -229,7 +249,7 @@ module.exports = function(grunt) {
     grunt.registerTask('export', 'Exporting pathways', function(arg) {
         function runPath(path) {
             globalConfig.path = path;
-            grunt.task.run(['php2html:pathway', 'copy:default', 'replace', 'imagemin:core', 'imagemin:pathway']);
+            grunt.task.run(['php2html:pathway', 'copy:default', 'replace', 'imagemin:core', 'imagemin:pathway', 'svgmin:core', 'svgmin:pathway']);
         }
         if (arg) {
             grunt.log.writeln('Exporting ', arg);

@@ -35,7 +35,7 @@
             <div class="inner">
                 <header class="intro-header">
                     <h1>Digital Stories</h1>
-                    <h2>The Wellcome Collection</h2>
+                    <h2>Wellcome Collection</h2>
                 </header>
             </div>
         </div>
@@ -68,5 +68,5 @@
  </div>
 </div>
 
-<?php include_once($docRoot.'/_includes/footer.php') ?>
-
+</body>
+</html>
