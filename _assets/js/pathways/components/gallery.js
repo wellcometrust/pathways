@@ -52,7 +52,7 @@ console.log('include gallery');
                     return this;
                 },
                 resize: function() {
-                    console.log('resize', index);
+                    // console.log('resize', index);
 
                     updateWidth();
 

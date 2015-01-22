@@ -1,11 +1,11 @@
 
-<div id="kahns-anatomical-museum" class="panel" data-config='{ "offset_height": 0 }'>
+<div id="kahns-anatomical-museum" class="panel" data-config='{ "offset_height": 150 }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
-    <div class="main-content center fixed">
+    <div class="main-content center">
 
         <div class="sliding-panels" data-component="modal" data-sliding-offset='1'>
 
@@ -32,7 +32,7 @@
                     data-image="/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/2-large.jpg"
                     data-caption="Dissections made by Dr Francis Sibson, illustrating the lungs after breathing out and in. In an 1851 edition of the Lancet, Kahn’s anatomical wax models and an anatomical lecture by Sibson were advertised side by side."
                     data-download="http://wellcomelibrary.org/actual/b16423896/0/a9f9fb9c-e4fe-4d69-95da-bd8fe7b30f94/jp2?download=true"
-                    data-ga="the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 1"
+                    data-ga="the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 2"
                     version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>

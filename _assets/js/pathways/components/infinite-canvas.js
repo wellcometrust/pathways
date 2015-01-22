@@ -61,8 +61,8 @@
 
         this.loadImages = function(images) {
 
-            var repOpen = 'l2 open infinite canvas',
-                repClose = 'l2 close infinite canvas';
+            var repOpen = 'l2 infinite-canvas open ',
+                repClose = 'l2 infinite-canvas close ';
 
             var length = images.length,
                 items = [],

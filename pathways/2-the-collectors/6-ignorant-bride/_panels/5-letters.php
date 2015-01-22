@@ -10,7 +10,7 @@
 
     </div>
 
-    <div class="info-box with-text" id="marie-stopes-letters" data-component="letter-gallery">
+    <div class="info-box with-text" id="marie-stopes-letters" data-component="letter-gallery" data-ga="the-collectors - ignorant-bride - letters - l2 letter-gallery open">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>

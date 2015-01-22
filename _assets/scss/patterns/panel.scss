@@ -150,6 +150,10 @@
                 left: auto;
                 right: auto;
             }
+            .main-content.full-height {
+                top: auto;
+                bottom: 0;
+            }
         }
         .panel:last-child {
             .bg-container {

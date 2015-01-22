@@ -19,7 +19,7 @@
     </div>
 
 
-    <div class="info-box with-text" id="made-a-film" data-component="gallery">
+    <div class="info-box with-text" id="made-a-film" data-component="gallery" data-ga="the-collectors - ignorant-bride - married-love - l2 gallery open">
         <img alt="" class="stub" src="/pathways/2-the-collectors/6-ignorant-bride/_assets/ticket-stub.jpg">
 
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >

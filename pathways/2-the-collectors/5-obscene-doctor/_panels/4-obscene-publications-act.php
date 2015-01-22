@@ -13,7 +13,7 @@
 
     </div>
 
-    <div class="info-box with-text" id="indecent-sexual-images" data-component="gallery">
+    <div class="info-box with-text" id="indecent-sexual-images" data-component="gallery" data-ga="the-collectors - obscene-doctor - obscene-publications-act - l2 gallery open">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>

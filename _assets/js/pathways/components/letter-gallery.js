@@ -51,7 +51,7 @@ console.log('include letter-gallery');
 
                 carousel.on('setPaneIndex', function(newIndex) {
                     // console.log('setPaneIndex playerCtrl', index, newIndex);
-                    if (index === newIndex) playerCtrl.enable(); //TODO: set to start of track on select
+                    if (index === newIndex) playerCtrl.enable();
                     else {
                         playerCtrl.disable();
                     }
@@ -101,9 +101,9 @@ console.log('include letter-gallery');
             function getLetterLengthStyle(text) {
                 var type = 'long-letter',
                     length = text.length;
-               console.log(length);
+               // console.log(length);
                 switch (true) {
-                    case (length < 400):
+                    case (length < 600):
                         type = 'short-letter';
                         break;
                     case (length < 900):

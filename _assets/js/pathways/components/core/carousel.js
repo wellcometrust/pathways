@@ -125,6 +125,7 @@ console.log('include carousel');
                         if (typeof onFirst === 'function') onFirst.call();
                         onFirst = null;
                         ctrl.resize();
+                        ctrl.updateOffset(false);
                     }).create();
 
                     addPane(pane.getPane());

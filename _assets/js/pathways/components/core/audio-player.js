@@ -10,7 +10,7 @@ console.log('include core audio-player');
             if (!audio.paused) return;
             vol.addView(linkedView);
             audio.addEventListener('timeupdate', timeUpdate);
-            console.log(audio.currentTime);
+            // console.log(audio.currentTime);
             if (audio.currentTime !== 0) {
                 mediaCtrl.playMediaOnComponentChannel(audio, { noFade: true });
             } else {
@@ -47,7 +47,7 @@ console.log('include core audio-player');
     function getTimeUpdate(audio, viewCtrl) {
 
         return function(e) {
-            console.log('timeupdate', audio.src);
+            // console.log('timeupdate', audio.src);
             //if (audio.currentTime === audio.duration) audio.currentTime = 0;
             viewCtrl.update(audio.paused, audio.duration, audio.currentTime);
         };

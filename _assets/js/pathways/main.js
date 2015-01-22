@@ -70,6 +70,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         var $panel = $(panel),
             data = $panel.attr('data-config'),
             bg = $panel.find('.bg-container').get(0),
+            content = $panel.find('.main-content').get(0),
             configData = {};
 
         if (data) configData = JSON.parse(data);
@@ -77,7 +78,8 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         return {
             elem: panel,
             config: configData,
-            bg: bg
+            bg: bg,
+            content: content
         };
     }
 
@@ -181,23 +183,41 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         }
     }
 
-    function resizePanel(panel, panelHeight) {
+    function resizePanel(panel, viewPortHeight) {
         var _panel = panel.elem;
 
-        unSetElementHeight(_panel);
+        // unSetElementHeight(_panel);
 
         var config = panel.config,
             _bg = panel.bg,
+            _content = panel.content,
 
-            currentHeight = _panel.offsetHeight,
+            panelHeight = _panel.offsetHeight,
             offset = config ? ((sys.supportsTouch || !config.offset_height) ? 0 : config.offset_height) : 0,
-            largerHeight = currentHeight < panelHeight ? panelHeight : currentHeight;
+            largerContentHeight,
+            newPanelHeight;
 
-        if (largerHeight !== currentHeight || offset) {
-            setElementHeight(_panel, (largerHeight + offset));
+        if (_content) {
+            largerContentHeight = parseInt(Math.max(_content.offsetHeight, viewPortHeight), 10);
+            newPanelHeight = largerContentHeight + offset;
+
+        } else {
+            newPanelHeight = viewPortHeight;
         }
 
-        if (_bg) setElementHeight(_bg, panelHeight);
+
+        if (panelHeight !== newPanelHeight) {
+            setElementHeight(_panel, newPanelHeight);
+        }
+
+        if (_bg) setElementHeight(_bg, viewPortHeight);
+
+        if (_content) { // If content is absolutely positioned with a top - or -bottom value, height will not be calc'd properly unless prop is removed
+            var top = _content.offsetTop;
+            if (top < 0) _content.classList.add('full-height');
+            else _content.classList.remove('full-height');
+        }
+
     }
 
     function resizePanelChild(index, child) {
@@ -311,6 +331,11 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         resizeCheck();
 
         w.addEventListener('resize', function() {
+            resizeCheck();
+            loadCheck(onScrollLoad, onScrollUnload);
+        });
+
+        w.addEventListener('load', function() {
             resizeCheck();
             loadCheck(onScrollLoad, onScrollUnload);
         });
