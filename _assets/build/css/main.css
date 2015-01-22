@@ -246,7 +246,7 @@ iframe {
     font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
     font-weight: normal;
     font-style: normal;
-    font-size: 0.7rem;
+    font-size: 0.6875rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     padding: 0 1rem 1.618rem 1rem;
@@ -318,13 +318,38 @@ iframe {
 
 @media screen and (min-width: 48em) {
   .intro-navigation {
-    margin-top: 0; }
+    margin-top: 0;
+    /* one item */
+    /* two items */
+    /* three items */
+    /* four items */
+    /* five items */
+    /* six items */ }
     .intro-navigation li {
       float: left;
-      list-style: none;
+      list-style: none; }
+    .intro-navigation li:first-child:nth-last-child(1) {
+      width: 70%;
+      margin: 0 15%; }
+    .intro-navigation li:first-child:nth-last-child(2), .intro-navigation li:first-child:nth-last-child(2) ~ li {
+      width: 40%; }
+    .intro-navigation li:first-child:nth-last-child(2) {
+      margin-left: 10%; }
+    .intro-navigation li:first-child:nth-last-child(3), .intro-navigation li:first-child:nth-last-child(3) ~ li {
+      width: 30%; }
+    .intro-navigation li:first-child:nth-last-child(3) {
+      margin-left: 5%; }
+    .intro-navigation li:first-child:nth-last-child(4), .intro-navigation li:first-child:nth-last-child(4) ~ li {
+      width: 25%; }
+    .intro-navigation li:first-child:nth-last-child(5), .intro-navigation li:first-child:nth-last-child(5) ~ li {
+      width: 20%; }
+    .intro-navigation li:first-child:nth-last-child(6), .intro-navigation li:first-child:nth-last-child(6) ~ li {
       width: 16.666%; }
     .intro-navigation a {
       padding: 0.7rem 0.5rem 0.5rem 0.5rem; }
+      .intro-navigation a em {
+        display: block;
+        text-decoration: none; }
       .intro-navigation a span {
         display: block;
         padding: 0.4em 0;
@@ -332,10 +357,7 @@ iframe {
       .intro-navigation a img {
         display: block;
         width: 100%;
-        border: none; }
-
-  .intro-navigation--the-collectors a {
-    color: #030303; } }
+        border: none; } }
 @media screen and (min-width: 72em) {
   .intro-navigation a {
     padding: 1rem; }
@@ -351,6 +373,48 @@ iframe {
 @media screen and (min-width: 48em) {
   .intro-navigation--the-collectors a {
     color: #fff; } }
+.intro-navigation--digital-stories a {
+  font-size: 0.8125em; }
+  .intro-navigation--digital-stories a em {
+    display: block;
+    font-style: normal;
+    font-size: 1.231em;
+    text-transform: uppercase;
+    text-decoration: none; }
+  .intro-navigation--digital-stories a span {
+    text-transform: none;
+    display: block;
+    padding: 0.4em 0;
+    height: 52px; }
+  .intro-navigation--digital-stories a img {
+    display: none; }
+.intro-navigation--digital-stories li:nth-child(1) {
+  -webkit-animation-delay: 0.2s;
+  -moz-animation-delay: 0.2s;
+  -ms-animation-delay: 0.2s;
+  -o-animation-delay: 0.2s;
+  animation-delay: 0.2s; }
+  .intro-navigation--digital-stories li:nth-child(1) span {
+    border-top: 1px solid #D81793; }
+.intro-navigation--digital-stories li:nth-child(2) {
+  -webkit-animation-delay: 0.3s;
+  -moz-animation-delay: 0.3s;
+  -ms-animation-delay: 0.3s;
+  -o-animation-delay: 0.3s;
+  animation-delay: 0.3s; }
+  .intro-navigation--digital-stories li:nth-child(2) span {
+    border-top: 1px solid #CF5D00; }
+
+@media screen and (min-width: 48em) {
+  .intro-navigation--digital-stories a {
+    padding: 0.7rem 0.5rem 0.5rem 0.5rem; }
+    .intro-navigation--digital-stories a span {
+      display: block;
+      padding: 0.4em 0; }
+    .intro-navigation--digital-stories a img {
+      display: block;
+      width: 100%;
+      border: none; } }
 /** Library layer */
 .library-layer {
   position: relative;
