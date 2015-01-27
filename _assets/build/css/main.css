@@ -369,6 +369,18 @@ iframe {
   font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-style: normal; }
+.intro-navigation--the-collectors li:nth-child(1) span {
+  border-top: 1px solid #e65035; }
+.intro-navigation--the-collectors li:nth-child(2) span {
+  border-top: 1px solid #e95d3a; }
+.intro-navigation--the-collectors li:nth-child(3) span {
+  border-top: 1px solid #ec6c3f; }
+.intro-navigation--the-collectors li:nth-child(4) span {
+  border-top: 1px solid #ef7b44; }
+.intro-navigation--the-collectors li:nth-child(5) span {
+  border-top: 1px solid #f28a49; }
+.intro-navigation--the-collectors li:nth-child(6) span {
+  border-top: 1px solid #f4974d; }
 
 @media screen and (min-width: 48em) {
   .intro-navigation--the-collectors a {
