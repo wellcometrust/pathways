@@ -1,16 +1,23 @@
-
 .start-obscene-doctor {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-1.jpg);
     }
 }
-
 @media all and (min-width: 48rem) {
     .start-obscene-doctor {
         .content {
-            margin:         0;
-            float:          right;
-            text-shadow:    1px 1px 2px #333;
+            margin: 0;
+            float: right;
+            text-shadow: 1px 1px 2px #333;
+        }
+    }
+    .no-touch {
+        .start-obscene-doctor {
+            .content {
+                left: auto;
+                right: 0;
+                text-shadow: 1px 1px 2px #333;
+            }
         }
     }
 }
