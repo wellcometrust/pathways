@@ -128,15 +128,6 @@
         }
 
 
-
-        public function getAudio() {
-            return $this->_getModuleData('audio', $this->moduleData);
-        }
-
-        public function getTeaserData() {
-            return $this->_getModuleData('teaser', $this->moduleData);
-        }
-
         public function getPanels() {
             return $this->_getModuleData('panels', $this->moduleData);
         }
@@ -157,6 +148,14 @@
             return $this->_getPathwaySurveyLink($this->pathwayId, $this->siteConfigData);
         }
 
+        public function getPathwayIntroText() {
+            return $this->_getPathwayIntroText($this->pathwayId, $this->siteConfigData);
+        }
+
+        public function getPathwayTitle() {
+            return $this->_getPathwayTitle($this->pathwayId, $this->siteConfigData);
+        }
+
         public function getPathwayModules() {
             return $this->modules;
         }
@@ -168,6 +167,12 @@
             return $this->_getModuleById($this->moduleId, $this->modules);
         }
 
+        public function getFirstPathwayPanelModule() {
+            foreach( $this->modules as $m ){
+                if ( isset($m['panels']) ) return $m;
+            }
+            return null;
+        }
 
         public function getModuleData($id) {
             return $this->_getModuleData($id, $this->moduleData);
@@ -181,16 +186,8 @@
 
 
 
-        public function getAudioByPanelId($id) {
-            return $this->getAudio()[$id];
-        }
 
 
-
-        public function render() {
-            $page = $this;
-            include_once($this->docRoot.'/_includes/module.php');
-        }
 
         public function getPatternPath($pattern, $data = null) {
             $page = $this;
@@ -228,7 +225,15 @@
         }
 
         private function _getPathwaySurveyLink($pathwayId, $siteConfigData) {
-            return $this->_getPathwayInfo('survey-link', $pathwayId, $siteConfigData);
+            return $this->_getPathwayInfo('survey_link', $pathwayId, $siteConfigData);
+        }
+
+        private function _getPathwayIntroText($pathwayId, $siteConfigData) {
+            return $this->_getPathwayInfo('intro_text', $pathwayId, $siteConfigData);
+        }
+
+        private function _getPathwayTitle($pathwayId, $siteConfigData) {
+            return $this->_getPathwayInfo('title', $pathwayId, $siteConfigData);
         }
 
         private function _getPathwayModules($pathwayId, $siteConfigData) {
@@ -274,11 +279,6 @@
 
         public static function getPage($pathwayId = '', $moduleId = '') {
             return new PageBuilder($pathwayId, $moduleId);
-        }
-
-        public static function renderPage() {
-            $page = new PageBuilder();
-            $page->render();
         }
 
     }

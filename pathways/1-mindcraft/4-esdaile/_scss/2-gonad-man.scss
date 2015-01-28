@@ -27,7 +27,7 @@
                 @include transform-origin(50% 0%);
             }
 
-            .info-box {                           
+            .info-box {
                 right:      6%;
                 top:        48%;
             }
@@ -42,10 +42,10 @@
                 @include transition(none);
             }
 
-            &.active img {
+            &.current-scroll-panel img {
                 @include transform(scale(1, 1));
                 @include transition(all 14s ease);
-            }            
+            }
         }
     }
 }
@@ -53,7 +53,7 @@
 @media all and (min-width: 64rem) {
     .touch {
         #gonad-man {
-            .info-box {                
+            .info-box {
                 top:        66%;
             }
         }

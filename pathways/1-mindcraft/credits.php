@@ -5,17 +5,10 @@
         $docRoot = $_SERVER['DOCUMENT_ROOT'];
 
     include_once($docRoot.'/_includes/page-data.php');
+    $page = PageBuilder::getPage('mindcraft', 'credits');
 
-    $page = PageBuilder::getPage('mindcraft','credits');
-
-    include_once($docRoot.'/_includes/header.php');
+    include_once($docRoot.'/_includes/credits_start.php');
 ?>
-
-    <main role="main">
-
-        <div id="credits" class="credits credits-mindcraft">
-
-            <div class="inner">
 
                 <h1>Credits</h1>
 
@@ -55,13 +48,4 @@
                     <li><span>Script:</span> James Tilly Matthews / Mike Jay</li>
                 </ul>
 
-            </div><!-- .inner -->
-        </div><!-- .credits -->
-
-        <?php
-            include_once($page->getPatternPath('navigation'));
-        ?>
-
-    </main>
-
-<?php include_once($docRoot.'/_includes/footer.php') ?>
+<?php include_once($docRoot.'/_includes/credits_end.php') ?>

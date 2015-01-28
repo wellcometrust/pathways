@@ -18,3 +18,59 @@ Pathways.components.cropZoom.mesmersSalon = {
         }
     }
 };
+
+// Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('mesmers-salon', function() {
+//     return {
+//         getScenes: function(panelId, panelEl, panelAttrs) {
+//             scene = new ScrollScene({
+//                     triggerElement: panelId,
+//                     duration: Pathways.panelHeight
+//                 })
+//                 .on('enter', function(e) {
+//                     console.log('>>enter factory');
+//                 })
+//                 .on('leave', function(e) {
+//                     console.log('>>leave factory');
+//                 });
+
+//             return scene;
+//         }
+//     };
+// });
+
+// Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('mesmers-salon', {
+//     getScenes: function(panelId, panelEl, panelAttrs) {
+//         scene = new ScrollScene({
+//                 triggerElement: panelId,
+//                 duration: Pathways.panelHeight
+//             })
+//             .on('enter', function(e) {
+//                 console.log('>>enter object');
+//             })
+//             .on('leave', function(e) {
+//                 console.log('>>leave object');
+//             });
+
+//         return scene;
+//     }
+
+// });
+
+// Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('mesmers-salon',
+//     function(panelId, panelEl, panelAttrs) {
+//         scene = new ScrollScene({
+//                 triggerElement: panelId,
+//                 duration: Pathways.panelHeight
+//             })
+//             .on('enter', function(e) {
+//                 console.log('>>enter method');
+//             })
+//             .on('leave', function(e) {
+//                 console.log('>>leave method');
+//             });
+
+//         return scene;
+//     }
+
+// );
+

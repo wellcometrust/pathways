@@ -50,7 +50,7 @@
                     <img alt="" src="/pathways/1-mindcraft/5-svengali/_assets/trilby/trilby-comic-6.jpg">
                     <p class="panel-text">She falls under the spell of Svengali</p>
 
-                    <blockquote class="comic-quote">
+                    <blockquote class="comic-quote" data-component="click-active">
                         <div class="info-box">
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
                                 <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
@@ -93,7 +93,7 @@
                     <img alt="" src="/pathways/1-mindcraft/5-svengali/_assets/trilby/trilby-comic-11.jpg">
                     <p class="panel-text">Trilby finds herself on stage, frozen in front of a heckling crowd, with no recollection that she had ever been a singer</p>
 
-                    <blockquote class="comic-quote">
+                    <blockquote class="comic-quote" data-component="click-active">
                         <div class="info-box">
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
                                 <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>

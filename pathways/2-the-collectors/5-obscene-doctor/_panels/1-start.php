@@ -5,7 +5,7 @@
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
-    <div class="content">
+    <div class="content" data-parallax-effect>
         <p class="scene-set">Joseph Kahn’s Anatomical Museum, 315 Oxford Street, 1873</p>
 
         <header>

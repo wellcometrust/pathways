@@ -1,7 +1,6 @@
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('seized-and-destroyed', function(panelId, panelEl, panelAttrs) {
 
-Pathways.scrollScenes.SeizedAndDestroyed = function() {
-
-    var $panel = $('#seized-and-destroyed'),
+    var $panel = $(panelEl),
         vector = { x: -10, y: -5 },
         scenes = [];
 
@@ -22,4 +21,5 @@ Pathways.scrollScenes.SeizedAndDestroyed = function() {
     });
 
     return scenes;
-};
+
+});

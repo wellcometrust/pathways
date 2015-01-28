@@ -2,6 +2,7 @@
 <div id="bills-of-mortality" class="panel" data-config='{ "offset_height": 500 }'>
 
     <div class="bg-container">
+
         <video preload="none" poster="/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-2.jpg" data-video="panel" data-config='{ "exclude": [], "seekToTimeAtStart" : 0 }'>
             <source src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/video/bills-of-mortality.mp4">
             <source src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/video/bills-of-mortality.webm">

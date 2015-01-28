@@ -3,7 +3,7 @@
     .info-box, .input-container {
         display: none;
     }
-    &.active {
+    &.current-scroll-panel {
         .info-box, .input-container {
             display: block;
         }

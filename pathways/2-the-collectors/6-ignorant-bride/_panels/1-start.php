@@ -5,7 +5,7 @@
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
-    <div class="content">
+    <div class="content" data-parallax-effect>
         <p class="scene-set">The British Museum Reading Room, Bloomsbury, 1913</p>
 
         <header>

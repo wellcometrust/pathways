@@ -1,38 +1,19 @@
-Pathways.scrollScenes.OkeySisters = function(panelID) {
-
-    $('#okey-sisters .main-content, #okey-sisters .secondary-content').css({
-        'bottom': 'auto',
-        'top': Pathways.panelHeight
-    });
-    $('#thomas-wakley .main-content').css({
-        'bottom': 'auto',
-        'top': parseInt((Pathways.panelHeight / 3),10)
-    });
-
-    var $panel = $(panelID),
-        height = $panel.outerHeight();
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            triggerHook: 'top',
-            duration: Pathways.panelHeight
-        })
-        .on('enter', function(e) {
-            if (e.scrollDirection == 'FORWARD')
-                TweenMax.to('.black-strip', 0.5, {
-                    y: 0
-                }); // Scroll up
-        })
-        .on('leave', function(e) {
-            if (e.scrollDirection == 'REVERSE')
-                TweenMax.to('.black-strip', 0.2, {
-                    y: Pathways.panelHeight
-                }); // scroll down
+Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('okey-sisters', {
+    load: function(panelId, panelEl, panelAttrs) {
+        $('#okey-sisters .main-content, #okey-sisters .secondary-content').css({
+            'bottom': 'auto',
+            'top': Pathways.panelHeight
         });
+    },
+    getScenes: function(panelId, panelEl, panelAttrs) {
+        return null;
+    },
+    unload: function(panelId, panelEl, panelAttrs) {
+        $('#okey-sisters .main-content, #okey-sisters .secondary-content').removeAttr('style');
+        $('#thomas-wakley .main-content').removeAttr('style');
+    }
 
-
-    return scene;
-};
+});
 
 
 Pathways.components.gallery.hypnotisedWomen = {

@@ -5,7 +5,7 @@
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
-    <div class="content">
+    <div class="content" data-parallax-effect>
         <p class="scene-set">John Tradescant’s Thames-side home, 1634</p>
 
         <header>

@@ -33,8 +33,7 @@
                 @include transition(all 30s linear);
             }
         }
-
-        &.active {
+        &.current-scroll-panel {
             .numbers {
                 @include transform( translate(0, -2000px) );
             }

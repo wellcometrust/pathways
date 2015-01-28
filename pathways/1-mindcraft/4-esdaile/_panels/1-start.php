@@ -4,8 +4,8 @@
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
-    
-    <div class="content">
+
+    <div class="content" data-parallax-effect>
         <p class="scene-set">Bengal 1845</p>
 
         <header>

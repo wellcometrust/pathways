@@ -7,7 +7,7 @@
 
     <div class="main-content center">
 
-        <div class="sliding-panels" data-component="modal" data-sliding-offset='1'>
+        <div class="sliding-panels" data-component="sliding-modal" data-sliding-offset='1'>
 
             <div class="text-panel">
                 <p>The 2000 people who visited self-styled ‘Doctor’ Joseph Kahn’s Museum every week encountered a life-sized anatomical Venus, models of dissections and monstrous births and candid displays on the pathology of venereal disease. They might also study slides under a microscope or listen to daily educational lectures about the ‘wondrous’ structure and function of the human body.</p>

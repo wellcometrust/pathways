@@ -1,4 +1,3 @@
-
 Pathways.components.gallery.toolsOfMesmerism = {
     data: {
         location: '_assets/galleries/tools-of-mesmerism/',

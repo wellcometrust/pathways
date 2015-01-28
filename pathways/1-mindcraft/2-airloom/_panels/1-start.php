@@ -4,8 +4,8 @@
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
-    
-    <div class="content">
+
+    <div class="content" data-parallax-effect>
         <p class="scene-set">London 1810</p>
 
         <header>
@@ -17,7 +17,7 @@
             <span class="scroll-down--text">Scroll down</span>
             <span class="scroll-down--arrow"></span>
         </p>
-        
+
     </div>
 
     <audio src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/02-asylum-background.mp3" loop data-audio="global"></audio>

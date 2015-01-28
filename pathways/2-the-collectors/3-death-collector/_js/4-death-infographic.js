@@ -1,23 +1,23 @@
-Pathways.scrollScenes.DeathInfographic = function(panelID) {
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('death-infographic', function(panelId, panelEl, panelAttrs) {
+    var $panel = $(panelEl),
+        $infoBox = $panel.find('.info-box'),
+        $inputContainer = $panel.find('.input-container');
+    //console.log(infoBox, inputContainer);
 
-    var $infoBox = $(panelID + ' .info-box'),
-        $inputContainer = $(panelID + ' .input-container');
-        //console.log(infoBox, inputContainer);
-
-    var $panel = $(panelID);
 
     var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       Pathways.panelHeight
+            triggerElement: panelEl,
+            duration: Pathways.panelHeight
         })
         .on('enter', function() {
-            $panel.addClass('active');
+            $panel.addClass('current-scroll-panel');
         }).on('leave', function() {
-            $panel.removeClass('active');
-            if($infoBox.css('display') === 'block') {
+            $panel.removeClass('current-scroll-panel');
+            if ($infoBox.css('display') === 'block') {
                 $infoBox.css('display', 'none');
             }
         });
 
     return scene;
-};
+
+});

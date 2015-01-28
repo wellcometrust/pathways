@@ -69,6 +69,9 @@ module.exports = function(grunt) {
 
                     '_assets/js/pathways/media/video/index.js', // Pathways Core files.
 
+                    '_assets/js/pathways/scroll/index.js', // Main scrollcontrol file.
+                    '_assets/js/pathways/scroll/components/*.js', // Scroll components files.
+
                     '_assets/js/pathways/main.js', // Pathways Core files.
 
                     '_assets/js/pathways/components/core/image-loader.js', // Then the pattern core files
@@ -94,12 +97,12 @@ module.exports = function(grunt) {
                 }
             },
             libs: {
-                // src: '_assets/build/js/libs.js',
-                // dest: '_assets/build/js/libs.min.js'
+                src: '_assets/build/js/libs.js',
+                dest: '_assets/build/js/libs.min.js'
             },
             app_files: {
-                // src: '_assets/build/js/production.js',
-                // dest: '_assets/build/js/production.min.js'
+                src: '_assets/build/js/production.js',
+                dest: '_assets/build/js/production.min.js'
             }
         },
 

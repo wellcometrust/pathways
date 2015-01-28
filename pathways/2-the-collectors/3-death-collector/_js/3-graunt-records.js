@@ -1,18 +1,17 @@
-
-Pathways.scrollScenes.GrauntRecords = function(panelID) {
-
-    var $panel = $(panelID);
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('graunt-records', function(panelId, panelEl, panelAttrs) {
+    var $panel = $(panelEl);
 
     var scene = new ScrollScene({
-            triggerElement: panelID,
+            triggerElement: panelEl,
             triggerHook: 'top',
-            duration:     Pathways.panelHeight,
+            duration: Pathways.panelHeight,
         })
         .on('enter', function() {
-            $panel.addClass('active');
+            $panel.addClass('current-scroll-panel');
         }).on('leave', function() {
-            $panel.removeClass('active');
+            $panel.removeClass('current-scroll-panel');
         });
 
     return scene;
-};
+
+});

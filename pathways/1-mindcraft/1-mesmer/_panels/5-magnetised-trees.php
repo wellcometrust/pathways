@@ -2,7 +2,7 @@
 <div id="magnetised-trees" class="panel" data-config='{ "offset_height": 350 }'>
 
     <div class="bg-container">
-        <canvas id="magnetisedTrees" width="1900" height="1050"></canvas>
+        <canvas class="panel-animation" width="1900" height="1050"></canvas>
         <img alt="" src="/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/Bitmap1.jpg">
     </div>
 

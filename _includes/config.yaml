@@ -3,8 +3,10 @@
 site:
     pathways:
         mindcraft:
+            title: 'Mindcraft'
+            intro_text: 'A century of madness, murder and mental healing'
             path: '/pathways/1-mindcraft/'
-            survey-link: 'http://survey.euro.confirmit.com/wix/p1839093604.aspx'
+            survey_link: 'http://survey.euro.confirmit.com/wix/p1839093604.aspx'
             modules:
                 -   id: intro
                     path: 'index.php'
@@ -89,8 +91,10 @@ site:
                         - id: office-2
 
         the-collectors:
+            title: The Collectors
+            intro_text: 'Searchers, secrets and the power of curiosity'
             path: '/pathways/2-the-collectors/'
-            # survey-link: 'http://www.google.com'
+            # survey_link: 'http://www.google.com'
             modules:
                 -   id: intro
                     path: 'index.php'

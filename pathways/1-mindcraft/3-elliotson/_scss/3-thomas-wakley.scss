@@ -1,16 +1,13 @@
-
 #thomas-wakley {
-
     .bg-container {
         background-image: url(/pathways/1-mindcraft/3-elliotson/_assets/elliotson-3.jpg);
     }
-
     .main-content {
+        margin-top: 30%;
         .inner {
             max-width: 640px;
         }
     }
-
     header {
         h1 {
             text-align: left;
@@ -20,17 +17,15 @@
         }
     }
 }
-
 @media all and (min-width: 48em) {
     #thomas-wakley {
         header {
             padding: 3em 0;
-
             h1 {
                 color: #030303;
                 text-align: center;
                 line-height: 1;
-                width:80%;
+                width: 80%;
                 margin: 0 auto;
             }
         }

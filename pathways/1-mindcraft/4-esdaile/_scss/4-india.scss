@@ -1,23 +1,17 @@
-
 #india {
-
     .bg-container {
         background-image: url(/pathways/1-mindcraft/4-esdaile/_assets/esdaile-4.jpg);
         background-position: 50% 100%;
     }
-
 }
-
 @media all and (min-width: 48rem) {
     #india {
         .main-content {
             color: #333;
-
             p {
                 font-size: 1.618rem;
             }
         }
-
         .boats {
             position:           absolute;
             bottom:             110px;
@@ -27,27 +21,28 @@
             background-size:    100%;
         }
     }
-
     .no-touch {
         #india {
             .boats {
-                @include transform( translate(-600px, 0) );
+                @include transform( translate(-610px, 0));
+                @include transition(none);
+            }
+            &.current-scroll-panel .boats {
+                @include transition(all 120s ease);
+                @include transform(translateX(100%));
             }
         }
     }
-
     .touch {
         #india {
             .main-content {
                 p {
-                    font-size:  1.239rem;
+                    font-size: 1.239rem;
                 }
             }
-
             .boats {
                 bottom: 10px;
                 height: 130px;
-
                 @include animation(boats 100s linear infinite);
             }
         }

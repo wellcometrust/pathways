@@ -1,23 +1,18 @@
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('office-2', function(panelId, panelEl, panelAttrs) {
+    var $panel = $(panelEl);
 
-Pathways.scrollScenes.Office2 = function(panelID) {
-
-    var $panel = $(panelID),
-        $img = $panel.find('.large-screen').first();
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       function () { return $panel.outerHeight() + (Pathways.panelHeight * 0.5); },
-            offset:         100
+    var scene1 = new ScrollScene({
+            triggerElement: $panel,
+            triggerHook: 'top',
+            duration: function() {
+                return $panel.outerHeight() - $('.fork').outerHeight();
+            }
         })
         .on('enter', function() {
-            //console.log('enter couch')
-            $img.css('transition', 'transform 14s ease');
-            $img.css('transform', 'translate(-80%, -10%) scale(1.8, 1.8)');
-        })
-        .on('leave', function() {
-            $img.css('transition', 'none');
-            $img.css('transform', 'translate(0,0) scale(1.6, 1.6)');
+            $panel.addClass('current-scroll-panel');
+        }).on('leave', function() {
+            $panel.removeClass('current-scroll-panel');
         });
 
-    return scene;
-};
+    return scene1;
+});

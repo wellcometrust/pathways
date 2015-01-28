@@ -282,19 +282,16 @@
     }
 }
 
-
 #thomas-wakley {
-
     .bg-container {
         background-image: url(/pathways/1-mindcraft/3-elliotson/_assets/elliotson-3.jpg);
     }
-
     .main-content {
+        margin-top: 30%;
         .inner {
             max-width: 640px;
         }
     }
-
     header {
         h1 {
             text-align: left;
@@ -304,17 +301,15 @@
         }
     }
 }
-
 @media all and (min-width: 48em) {
     #thomas-wakley {
         header {
             padding: 3em 0;
-
             h1 {
                 color: #030303;
                 text-align: center;
                 line-height: 1;
-                width:80%;
+                width: 80%;
                 margin: 0 auto;
             }
         }
@@ -423,7 +418,7 @@
                 @include transform-origin(50% 0%);
             }
 
-            .info-box {                           
+            .info-box {
                 right:      6%;
                 top:        48%;
             }
@@ -438,10 +433,10 @@
                 @include transition(none);
             }
 
-            &.active img {
+            &.current-scroll-panel img {
                 @include transform(scale(1, 1));
                 @include transition(all 14s ease);
-            }            
+            }
         }
     }
 }
@@ -449,7 +444,7 @@
 @media all and (min-width: 64rem) {
     .touch {
         #gonad-man {
-            .info-box {                
+            .info-box {
                 top:        66%;
             }
         }
@@ -474,26 +469,20 @@
     }
 }
 
-
 #india {
-
     .bg-container {
         background-image: url(/pathways/1-mindcraft/4-esdaile/_assets/esdaile-4.jpg);
         background-position: 50% 100%;
     }
-
 }
-
 @media all and (min-width: 48rem) {
     #india {
         .main-content {
             color: #333;
-
             p {
                 font-size: 1.618rem;
             }
         }
-
         .boats {
             position:           absolute;
             bottom:             110px;
@@ -503,27 +492,28 @@
             background-size:    100%;
         }
     }
-
     .no-touch {
         #india {
             .boats {
-                @include transform( translate(-600px, 0) );
+                @include transform( translate(-610px, 0));
+                @include transition(none);
+            }
+            &.current-scroll-panel .boats {
+                @include transition(all 120s ease);
+                @include transform(translateX(100%));
             }
         }
     }
-
     .touch {
         #india {
             .main-content {
                 p {
-                    font-size:  1.239rem;
+                    font-size: 1.239rem;
                 }
             }
-
             .boats {
                 bottom: 10px;
                 height: 130px;
-
                 @include animation(boats 100s linear infinite);
             }
         }
@@ -637,8 +627,6 @@
     100%    { transform: translate(0, 500px); }
 }
 
-
-.comic-strip { min-height: 600px; }
 
 #trilby {
 
@@ -1227,10 +1215,6 @@
 @media all and (min-width: 48rem) {
     #anna-o {
 
-        .main-content {
-            padding-left: 48px;
-        }
-
         header {
             margin: 8rem 0 6rem 0;
         }
@@ -1267,9 +1251,8 @@
 
     .no-touch {
         #anna-o {
-            .main-content {
-                bottom: auto;
-                top: 0;
+            .main-content.left.fixed {
+                top: 8%;
             }
         }
     }
@@ -1327,17 +1310,14 @@
     }
 }
 
-
 #office-2 {
-     
     header {
         h1 {
             font-size: 1.618rem;
-            text-shadow: 1px 1px 1px #030303;  
+            text-shadow: 1px 1px 1px #030303;
         }
     }
 }
-
 .no-touch {
     #office-2 {
         img {
@@ -1345,30 +1325,26 @@
         }
     }
 }
-
 @media all and (min-width: 48rem) {
     #office-2 {
         .large-screen {
-            @include transform-origin( 0 0 );
-            @include transform( scale(1.6, 1.6) );
+            @include transform-origin( 0 0);
+            @include transform( translate(0, 0) scale(1.6, 1.6));
         }
-
         header {
             h1 {
                 font-size: 2.618rem;
             }
         }
     }
-
     .touch {
         #office-2 {
             .small-screen {
-                @include transform-origin( 100% 0 );
-                @include transform( scale(1.6, 1.6) );
+                @include transform-origin( 100% 0);
+                @include transform( scale(1.6, 1.6));
             }
         }
     }
-
     .no-touch {
         #office-2 {
             .small-screen {
@@ -1376,17 +1352,23 @@
             }
             .large-screen {
                 display: block;
+                //@include transition(none);
+                @include transition(all 14s ease);
             }
-
             header {
                 h1 {
                     text-shadow: 1px 1px 1px #030303;
                 }
             }
+            &.current-scroll-panel {
+                .large-screen {
+                    @include transition(all 14s ease);
+                    @include transform(translate(-80%, -10%) scale(1.8, 1.8));
+                }
+            }
         }
     }
 }
-
 
 
 .start-curious-gardener {
@@ -1685,8 +1667,7 @@
                 @include transition(all 30s linear);
             }
         }
-
-        &.active {
+        &.current-scroll-panel {
             .numbers {
                 @include transform( translate(0, -2000px) );
             }
@@ -1711,7 +1692,7 @@
     .info-box, .input-container {
         display: none;
     }
-    &.active {
+    &.current-scroll-panel {
         .info-box, .input-container {
             display: block;
         }
@@ -2720,7 +2701,7 @@
 
 .no-touch {
     #british-museum {
-        
+
     }
 }
 
@@ -2731,10 +2712,12 @@
             bottom:     0;
 
             @include transform-origin( 35% 70% );
-            @include transition( all 14s ease );
+            @include transform( scale(1, 1));
+            @include transition( all 2s ease );
         }
 
-        &.active img {
+        &.current-scroll-panel img {
+            @include transition( all 14s ease );
             @include transform( scale(1.8, 1.8));
         }
 
@@ -2760,6 +2743,7 @@
     }
 
 }
+
 
 #married-love {
     .bg-container {

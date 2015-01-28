@@ -7,10 +7,11 @@ function _(str) {
 Pathways.MIN_COMPONENT_LEVEL = 2;
 Pathways.MIN_SCROLL_LEVEL = 4;
 
+
 /***
     Pathways main
 */
-(function(exports, w, _, sys, utils, media, vol, video, $, undefined) {
+(function(exports, w, _, p, sys, utils, media, vol, video, scrollSceneCtrl, $, undefined) {
 
     'use strict';
 
@@ -31,7 +32,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
     exports.panelHeight = calcPanelHeight(minHeight);
     exports.getPanelHeight = function() {
-        return this.panelHeight;
+        return exports.panelHeight;
     };
 
 
@@ -65,22 +66,36 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
 
 
-    function initPanel(panel) {
+    function initPanel(panel, isFirst, isLast) {
 
         var $panel = $(panel),
+            id = $panel.attr('id'),
             data = $panel.attr('data-config'),
             bg = $panel.find('.bg-container').get(0),
             content = $panel.find('.main-content').get(0),
+            contentHeight = $(content).outerHeight(),
             configData = {};
 
+
+        if (!id) throw new Error('All panels require an id [' + panel + ']');
         if (data) configData = JSON.parse(data);
 
-        return {
+        var panelOb = {
+            id: id,
             elem: panel,
             config: configData,
             bg: bg,
-            content: content
+            content: content,
+            contentHeight: contentHeight,
+            isFirst: isFirst,
+            isLast: isLast
         };
+
+        panelOb.getContentHeight = function() {
+            return panelOb.contentHeight;
+        };
+
+        return panelOb;
     }
 
     function isRatioPreserved(panel) {
@@ -89,10 +104,16 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
     function initPanels(panelSelector) {
         var $panels = $(panelSelector),
+            first = $panels.first().get(0),
+            last = $panels.last().get(0),
+            isFirst, isLast,
             panels = [];
 
         $panels.each(function(index, panel) {
-            panels.push(initPanel(panel));
+            // console.log(panel);
+            isFirst = panel === first;
+            isLast = panel === last;
+            panels.push(initPanel(panel, isFirst, isLast));
         });
         return panels;
     }
@@ -124,8 +145,11 @@ Pathways.MIN_SCROLL_LEVEL = 4;
             if (typeof method === 'undefined' || method === null) return console.warn('Could not load the necessary component: ' + handlerClass);
 
             if (id && method[id] && method[id].data) data = method[id].data;
-
-            method(component, data);
+            if (typeof method === 'function') {
+                method(component, data);
+            } else if (typeof method === 'object') {
+                method.onLoad(component, data);
+            }
         });
     }
 
@@ -185,6 +209,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
     function resizePanel(panel, viewPortHeight) {
         var _panel = panel.elem;
+        panel.contentHeight = $(panel.content).outerHeight();
 
         // unSetElementHeight(_panel);
 
@@ -242,79 +267,69 @@ Pathways.MIN_SCROLL_LEVEL = 4;
     function removeScrollSceneStyling() {
 
         if (startPanel) $(startPanel).removeAttr('style');
-        $('.comic-panel').removeAttr('style');
-
-        for (var i = 0; i < panels.length; i++) {
-            var panel = panels[i],
-                $bg = $(panel.bg),
-                $panel = $(panel.elem),
-                panelID = $panel.attr('id'),
-                $libraryPanel = $panel.find('[data-panel="' + panelID + '"]').first(),
-                $gallery = $panel.find('[data-component="gallery"]'),
-                $quiz = $panel.find('[data-component="quiz"]'),
-                $slidingPanels = $panel.find('.sliding-panel');
-
-            if ($bg.length) $bg.removeAttr('style');
-            if ($libraryPanel.length) $libraryPanel.removeAttr('style');
-            if ($gallery.length) $gallery.removeAttr('style');
-            if ($quiz.length) $quiz.removeAttr('style');
-            if ($slidingPanels.length) $slidingPanels.removeAttr('style');
-
-        }
     }
 
     var panelsUnsized = false;
 
     function resizeCheck() {
-        if (sys.level < exports.MIN_COMPONENT_LEVEL) {
+        if (sys.level < p.MIN_COMPONENT_LEVEL) {
             unsizePanels(panels);
             panelsUnsized = true;
-        } else if (sys.level >= exports.MIN_COMPONENT_LEVEL && sys.level < exports.MIN_SCROLL_LEVEL) {
+        } else if (sys.level >= p.MIN_COMPONENT_LEVEL && sys.level < p.MIN_SCROLL_LEVEL) {
             resizePanels(null, ratioedPanels);
             panelsUnsized = false;
-        } else if (sys.level >= exports.MIN_SCROLL_LEVEL) {
+        } else if (sys.level >= p.MIN_SCROLL_LEVEL) {
             resizePanels(startPanel, panels);
             panelsUnsized = false;
         }
     }
 
-    function loadCheck(onScrollLoad, onScrollUnload) {
+    function loadCheck() {
         exports.panelHeight = calcPanelHeight(exports.panelHeight);
 
         // If it's iPad width or larger, load the components
         if (!componentsLoaded) {
-            if (sys.level >= exports.MIN_COMPONENT_LEVEL) {
+            if (sys.level >= p.MIN_COMPONENT_LEVEL) {
                 loadComponents(exports.components);
                 componentsLoaded = true;
             }
         } else {
-            if (sys.level < exports.MIN_COMPONENT_LEVEL) {
+            if (sys.level < p.MIN_COMPONENT_LEVEL) {
                 // unload components
             }
         }
 
         if (!scenesLoaded) {
             // If it's a non-touch device, load the scenes.
-            if (sys.level >= exports.MIN_SCROLL_LEVEL) {
-                sceneController = onScrollLoad();
+            if (sys.level >= p.MIN_SCROLL_LEVEL) {
 
                 media.model.init(panels);
                 media.ctrl.init();
 
-
                 vol.enable();
                 media.ctrl.playMediaOnGlobalChannel(media.model.globalAudio());
+
+                if (scrollSceneCtrl) {
+                    scrollSceneCtrl.init(panels);
+                    console.log('loading ctrl');
+                    scrollSceneCtrl.load();
+
+                }
 
                 scenesLoaded = true;
             }
         } else {
-            if (sys.level < exports.MIN_SCROLL_LEVEL) {
-                sceneController.destroy(true);
+            if (sys.level < p.MIN_SCROLL_LEVEL) {
+
                 removeScrollSceneStyling();
-                onScrollUnload();
 
                 media.ctrl.disable();
                 vol.disable();
+
+                if (scrollSceneCtrl) {
+                    console.log('unloading ctrl');
+                    scrollSceneCtrl.unload(panels);
+                }
 
                 scenesLoaded = false;
             }
@@ -323,7 +338,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
 
 
-    function init(onLoadComplete, onScrollLoad, onScrollUnload) {
+    function init(onLoadComplete) {
 
         startPanel = $('.start').get(0);
         panels = initPanels('.panel');
@@ -332,7 +347,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
         w.addEventListener('resize', function() {
             resizeCheck();
-            loadCheck(onScrollLoad, onScrollUnload);
+            loadCheck();
         });
 
         w.addEventListener('load', function() {
@@ -351,7 +366,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
             onLoadComplete();
             resizeCheck();
-            loadCheck(onScrollLoad, onScrollUnload);
+            loadCheck();
 
             video.init(panels);
 
@@ -367,4 +382,4 @@ Pathways.MIN_SCROLL_LEVEL = 4;
     utils.getHeightWithOffset = getHeightWithOffset;
     utils.getWidthWithOffset = getWidthWithOffset;
 
-}(Pathways, this, _, Pathways.system, Pathways.utils, Pathways.media, Pathways.media.vol, Pathways.video, jQuery));
+}(Pathways, this, _, Pathways, Pathways.system, Pathways.utils, Pathways.media, Pathways.media.vol, Pathways.video, Pathways.scrollSceneCtrl, jQuery));

@@ -25,6 +25,7 @@
             media.removeEventListener('ended', onComplete);
         }
         media.addEventListener('ended', onComplete);
+
         return def;
     }
 

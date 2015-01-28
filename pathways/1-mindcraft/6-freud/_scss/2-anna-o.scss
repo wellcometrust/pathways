@@ -11,10 +11,6 @@
 @media all and (min-width: 48rem) {
     #anna-o {
 
-        .main-content {
-            padding-left: 48px;
-        }
-
         header {
             margin: 8rem 0 6rem 0;
         }
@@ -51,9 +47,8 @@
 
     .no-touch {
         #anna-o {
-            .main-content {
-                bottom: auto;
-                top: 0;
+            .main-content.left.fixed {
+                top: 8%;
             }
         }
     }

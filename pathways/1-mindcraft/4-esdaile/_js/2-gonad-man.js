@@ -1,24 +1,21 @@
-Pathways.scrollScenes.GonadMan = function(panelID) {
-
-    var $panel = $(panelID),
-        $quiz = $panel.find('[data-component="quiz"]'),
-        height = $panel.outerHeight();
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('gonad-man', function(panelId, panelEl, panelAttrs) {
+    var $panel = $(panelEl);
 
     var scene1 = new ScrollScene({
-            triggerElement: panelID,
+            triggerElement: $panel,
             triggerHook: 'top',
             duration: function() {
-                return $panel.outerHeight() + (Pathways.panelHeight * 0.5);
+                return $panel.outerHeight();
             }
         })
         .on('enter', function() {
-            $panel.addClass('active');
+            $panel.addClass('current-scroll-panel');
         }).on('leave', function() {
-            $panel.removeClass('active');
+            $panel.removeClass('current-scroll-panel');
         });
 
     return scene1;
-};
+});
 
 Pathways.components.quiz.guessTheTumour = {
     data: {

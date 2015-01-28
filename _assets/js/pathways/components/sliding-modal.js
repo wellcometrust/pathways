@@ -1,4 +1,4 @@
-(function(mod, overlay, ga, $) {
+(function(exports, overlay, ga, $) {
 
     function Modal(elm, data) {
 
@@ -43,7 +43,7 @@
         };
     }
 
-    mod.modal = function(element, data) {
+    exports.slidingModal = function(element, data) {
 
         $(element).find('.modal').on('click', function() {
             // var id = $(this).data('id');
