@@ -57,8 +57,10 @@ module.exports = function(grunt) {
 
                     '_assets/js/pathways/media/mixer/index.js', // Pathways Core files.
 
+                    '_assets/js/pathways/media/channels/silencer.js', // Pathways Core files.
+                    '_assets/js/pathways/media/channels/media-definitions.js', // Pathways Core files.
                     '_assets/js/pathways/media/channels/index.js', // Pathways Core files.
-                    '_assets/js/pathways/media/channels/track.js', // Pathways Core files.
+                    '_assets/js/pathways/media/channels/model.js', // Pathways Core files.
                     '_assets/js/pathways/media/channels/ctrl.js', // Pathways Core files.
 
 
@@ -92,12 +94,12 @@ module.exports = function(grunt) {
                 }
             },
             libs: {
-                src: '_assets/build/js/libs.js',
-                dest: '_assets/build/js/libs.min.js'
+                // src: '_assets/build/js/libs.js',
+                // dest: '_assets/build/js/libs.min.js'
             },
             app_files: {
-                src: '_assets/build/js/production.js',
-                dest: '_assets/build/js/production.min.js'
+                // src: '_assets/build/js/production.js',
+                // dest: '_assets/build/js/production.min.js'
             }
         },
 

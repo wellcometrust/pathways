@@ -12,7 +12,7 @@ console.log('include core audio-player');
             audio.addEventListener('timeupdate', timeUpdate);
             // console.log(audio.currentTime);
             if (audio.currentTime !== 0) {
-                mediaCtrl.playMediaOnComponentChannel(audio, { noFade: true });
+                mediaCtrl.playMediaOnComponentChannel(audio, { fadeDuration: 0 });
             } else {
                 mediaCtrl.playMediaOnComponentChannel(audio);
             }
@@ -30,7 +30,7 @@ console.log('include core audio-player');
         return function pause() {
             if (audio.paused) return;
             vol.removeView(linkedView);
-            mediaCtrl.stopMediaOnComponentChannel(audio, { noFade: true });
+            mediaCtrl.stopMediaOnComponentChannel(audio, { fadeDuration: 0 });
             audio.addEventListener('pause', onPause);
         };
     }

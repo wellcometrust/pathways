@@ -47,6 +47,6 @@
 
     </div>
 
-    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/04-conn-poem.mp3" data-config='{ "initTime": 0 }' data-audio="panel"></audio>
+    <audio src="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/04-conn-poem.mp3" data-config='{ "seekToTimeAtStart": 0 }' data-audio="panel"></audio>
 
 </div>

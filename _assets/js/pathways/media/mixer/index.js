@@ -4,16 +4,34 @@ console.log('include media/mixer/index');
  */
 (function(exports, w, vol, $) {
 
-    function fadeOut(media, delay, callback) {
-        delay = delay || 1000;
+    function setMediaTime(media, time) {
+        if (!media || typeof time === 'undefined' || isNaN(time)) return;
+        if (media.readyState !== 0) {
+            media.currentTime = time;
+        }
+    }
+
+    function setMediaStateAtEnd(media, config) {
+        if (!(media && config)) return;
+        setMediaTime(media, config.seekToTimeAtEnd);
+    }
+
+    function setMediaStateAtStart(media, config) {
+        if (!(media && config)) return;
+        setMediaTime(media, config.seekToTimeAtStart);
+    }
+
+    function fadeOut(media, duration, config, callback) {
+        duration = duration || 0;
         if (media && (typeof media !== 'undefined')) {
             $(media).stop(false, true);
             $(media).animate({
                 volume: 0
             }, {
-                duration: delay,
+                duration: duration,
                 complete: function() {
                     this.pause();
+                    setMediaStateAtEnd(media, config);
                     if (callback) {
                         callback();
                         callback = null;
@@ -23,9 +41,10 @@ console.log('include media/mixer/index');
         }
     }
 
-    function fadeIn(media, delay, callback) {
-        delay = delay || 1000;
+    function fadeIn(media, duration, config, callback) {
+        duration = duration || 0;
         if (media && (typeof media !== 'undefined')) {
+            setMediaStateAtStart(media, config);
             $(media).stop(false, true);
             media.volume = 0;
             media.muted = vol.isMuted();
@@ -33,7 +52,7 @@ console.log('include media/mixer/index');
             $(media).animate({
                 volume: 1
             }, {
-                duration: delay,
+                duration: duration,
                 complete: function() {
                     if (callback) {
                         callback();
@@ -44,52 +63,32 @@ console.log('include media/mixer/index');
         }
     }
 
-    function play(media) {
-        if (!media) return;
-        media.muted = vol.isMuted();
-        media.volume = 1;
-        media.play();
-    }
-
-    function stop(media) {
-        if (media) media.pause();
-    }
-
-    function crossplay(oldMedia, newMedia, callback) {
-        play(newMedia);
-        stop(oldMedia);
-        callback();
-    }
-
-    function crossfade(fadeOutMedia, fadeInMedia, delay, fadeOutCompleteCallback, fadeInCompleteCallback) {
-        delay = delay || 1000;
+    function crossfade(fadeOutMedia, fadeInMedia, duration, fadeOutCompleteCallback, fadeInCompleteCallback, fadeOutConfig, fadeInConfig) {
+        duration = duration || 0;
 
         if (fadeOutMedia === fadeInMedia) {
-            if (fadeOutCompleteCallback) w.setTimeout(fadeOutCompleteCallback, delay);
-            if (fadeInCompleteCallback) w.setTimeout(fadeInCompleteCallback, delay);
+            if (fadeOutCompleteCallback) w.setTimeout(fadeOutCompleteCallback, duration);
+            if (fadeInCompleteCallback) w.setTimeout(fadeInCompleteCallback, duration);
             return;
         }
 
         if (fadeOutMedia !== null && typeof fadeOutMedia !== 'undefined') {
-            fadeOut(fadeOutMedia, delay, fadeOutCompleteCallback);
+            fadeOut(fadeOutMedia, duration, fadeOutConfig, fadeOutCompleteCallback);
         } else {
-            if (fadeOutCompleteCallback) w.setTimeout(fadeOutCompleteCallback, delay);
+            if (fadeOutCompleteCallback) w.setTimeout(fadeOutCompleteCallback, duration);
         }
 
         if (fadeInMedia !== null && typeof fadeInMedia !== 'undefined') {
-            fadeIn(fadeInMedia, delay, fadeInCompleteCallback);
+            fadeIn(fadeInMedia, duration, fadeInConfig, fadeInCompleteCallback);
         } else {
-            if (fadeInCompleteCallback) w.setTimeout(fadeInCompleteCallback, delay);
+            if (fadeInCompleteCallback) w.setTimeout(fadeInCompleteCallback, duration);
         }
     }
 
     exports.mixer = {
         crossfade: crossfade,
         fadeIn: fadeIn,
-        fadeOut: fadeOut,
-        play: play,
-        stop: stop,
-        crossplay: crossplay
+        fadeOut: fadeOut
     };
 
 

@@ -29,7 +29,7 @@ Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
             offset: initCoinOffset
         })
         .on('start', function(e) {
-            console.log('coin in box');
+            // console.log('coin in box');
             Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
         }));
 
@@ -38,7 +38,7 @@ Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
             triggerHook: 'top'
         })
         .on('start', function(e) {
-            console.log('coin on page');
+            // console.log('coin on page');
             Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
         }));
 

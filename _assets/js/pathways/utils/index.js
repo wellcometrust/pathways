@@ -34,7 +34,7 @@ console.log('include utils/index');
         });
     }
 
-    function extend(base, sub) {
+    function extendClass(base, sub) {
         // Avoid instantiating the base class just to setup inheritance
         // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
         // for a polyfill
@@ -66,13 +66,47 @@ console.log('include utils/index');
         return val.length ? val[0] : void 0;
     }
 
+    function unique(array1, array2) {
+        var array3 = [];
+
+        var arr = array1.concat(array2),
+            len = arr.length;
+
+        while (len--) {
+            var itm = arr[len];
+            if (array3.indexOf(itm) === -1) {
+                array3.unshift(itm);
+            }
+        }
+        return array3;
+    }
+
+    function curry() {
+        var fn = this,
+            args = Array.prototype.slice.call(arguments);
+        return function() {
+            return fn.apply(this, args.concat(
+                Array.prototype.slice.call(arguments)));
+        };
+    }
+
+    function getSrc(media) {
+        if (!media) return 'no media';
+        return media.src || media.currentSrc;
+    }
+
+
 
     exports.utils = {
         toCamelCase: toCamelCase,
         toTitleCase: toTitleCase,
         positionCenter: positionCenter,
-        extend: extend,
-        removeItemFromArray: removeItemFromArray
+        extendClass: extendClass,
+        removeItemFromArray: removeItemFromArray,
+        unique: unique,
+        extend: $.extend,
+        curry: curry,
+        getSrc: getSrc
     };
 
 }(Pathways, Pathways.system, jQuery));

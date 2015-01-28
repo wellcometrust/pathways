@@ -1,192 +1,114 @@
 console.log('include media/channels/ctrl');
-(function(exports, getChannel) {
+(function(exports, model, utils) {
 
-    var CHANNEL_IDS = {
-            global: 'global',
-            video: 'video',
-            panel: 'panel',
-            component: 'component',
-            fx: 'fx',
-        },
-        configs = {
-            global: {
-                exclude: null
-            },
-            video: {
-                exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel]
-            },
-            component: {
-                exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video]
-            },
-            panel: {
-                exclude: [CHANNEL_IDS.global]
-            },
-            fx: {
-                exclude: null,
-                noFade: true,
-                noInterrupt: true
-            }
-        },
-        // modes = {
-        // basic: {
-        //     channels: {
-        //         global: getChannel(),
-        //         video: getChannel({ exclude: [CHANNEL_IDS.global]}),
-        //     }
-        // },
-        // component: {
-        //     channels: {
-        //         global: getChannel(),
-        //         video: getChannel({ exclude: [CHANNEL_IDS.global]}),
-        //         component : getChannel({ exclude: [CHANNEL_IDS.global, CHANNEL_IDS.video]}),
-        //     }
-        // },
-        // scroll: {
-        //     channels: {
-        //         global: getChannel(CHANNEL_IDS.global, configs.global),
-        //         video: getChannel(CHANNEL_IDS.video, configs.video),
-        //         component: getChannel(CHANNEL_IDS.component, configs.component),
-        //         panel: getChannel(CHANNEL_IDS.panel, configs.panel),
-        //         fx: getChannel(CHANNEL_IDS.fx, configs.fx)
-        //     }
-        // }
-        // },
-        channels;
-
-    function setMode() {
-        addChannel(CHANNEL_IDS.global, configs.global);
-        addChannel(CHANNEL_IDS.video, configs.video);
-        addChannel(CHANNEL_IDS.component, configs.component);
-        addChannel(CHANNEL_IDS.panel, configs.panel);
-        addChannel(CHANNEL_IDS.fx, configs.fx);
-        //TODO: update for change in functionality level
-    }
+    var extend = utils.extend,
+        unique = utils.unique;
 
     function init() {
-        channels = {};
-        setMode();
+        model.init();
     }
 
-    function addChannel(channelID, config) {
-        channels = channels || {};
-        if (channels.hasOwnProperty(channelID)) return console.warn('[Pathways Channel] [addChannel] channel with id \'' + channelID + '\' already exists')
-        channels[channelID] = getChannel(channelID, config);
+    function getSilenceMethod(silencer) {
+        return function silenceChannel(channelID) {
+            var channel = model.getChannelById(channelID);
+            silencer.addSilencee(channel.silencer);
+        };
     }
 
-    function getChannelById(channelID) {
-        var channel = channels[channelID];
-        if (!channel) return console.warn('[Pathways Channel] [getChannelById] no channel found with id \'' + channelID + '\'');
-        return channel;
-    }
+    function silenceChannels(channelsToExclude, silencer) {
+        if (!channelsToExclude || channelsToExclude === 'none') return;
+        if (channelsToExclude === 'all') channelsToExclude = channelList;
+        if (channelsToExclude.length === 0) return;
 
-    function resetChannels() {
-        var channelIDs = [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.component, CHANNEL_IDS.fx];
-        function setChannelAc(channelID) {
-            var channel = getChannelById(channelID);
-            channel.resume();
-        }
-        channelIDs.forEach(setChannelAc);
-    }
-
-    function setChannelsInactive(channelsToExclude) {
-        if (!channelsToExclude || channelsToExclude.length === 0) return;
-        function setChannelIn(channelID) {
-            var channel = getChannelById(channelID);
-            channel.silence();
-        }
-        channelsToExclude.forEach(setChannelIn);
+        channelsToExclude.forEach(getSilenceMethod(silencer));
     }
 
     function playMediaOnChannel(media, channelID, config) {
         if (!media) return;
-        var channel = getChannelById(channelID);
-        config = config || channel.config; //TODO: merge instead of overwrite
-        var channelsToExclude = (config && config.exclude) ? config.exclude : channel.config.exclude;
-
-        setChannelsInactive(channelsToExclude);
+        var channel = model.getChannelById(channelID);
+        config = extend({}, channel.config, config);
+        silenceChannels(config.exclude, channel.silencer);
         channel.play(media, config);
     }
 
     function stopChannel(channelID, config) {
-        var channel = getChannelById(channelID);
-        config = config || channel.config;
+        var channel = model.getChannelById(channelID);
         if (!channel.hasMediaDefinitions()) return;
+        config = extend({}, channel.config, config);
+
         channel.stopAll(config);
-        resetChannels();
     }
 
     function stopMediaOnChannel(media, channelID, config) {
         if (!media) return;
-        var channel = getChannelById(channelID);
-        config = config || channel.config;
+        var channel = model.getChannelById(channelID);
+        config = extend({}, channel.config, config);
+
         channel.stop(media, config);
-        resetChannels();
     }
 
     function playMediaOnPanelChannel(media, config) {
-        playMediaOnChannel(media, CHANNEL_IDS.panel, config);
+        playMediaOnChannel(media, model.CHANNEL_IDS.panel, config);
     }
 
     function stopMediaOnPanelChannel(media, config) {
-        stopMediaOnChannel(media, CHANNEL_IDS.panel, config);
+        stopMediaOnChannel(media, model.CHANNEL_IDS.panel, config);
     }
 
     function stopPanelChannel(config) {
-        stopChannel(CHANNEL_IDS.panel, config);
+        stopChannel(model.CHANNEL_IDS.panel, config);
     }
 
     function playMediaOnGlobalChannel(media, config) {
-        playMediaOnChannel(media, CHANNEL_IDS.global, config);
+        playMediaOnChannel(media, model.CHANNEL_IDS.global, config);
     }
 
     function stopMediaOnGlobalChannel(media, config) {
-        stopMediaOnChannel(media, CHANNEL_IDS.global, config);
+        stopMediaOnChannel(media, model.CHANNEL_IDS.global, config);
     }
 
     function stopGlobalChannel(config) {
-        stopChannel(CHANNEL_IDS.global, config);
+        stopChannel(model.CHANNEL_IDS.global, config);
     }
 
     function playMediaOnVideoChannel(media, config) {
-        playMediaOnChannel(media, CHANNEL_IDS.video, config);
+        playMediaOnChannel(media, model.CHANNEL_IDS.video, config);
     }
 
     function stopMediaOnVideoChannel(media, config) {
-        stopMediaOnChannel(media, CHANNEL_IDS.video, config);
+        stopMediaOnChannel(media, model.CHANNEL_IDS.video, config);
     }
 
     function stopVideoChannel(config) {
-        stopChannel(CHANNEL_IDS.video, config);
+        stopChannel(model.CHANNEL_IDS.video, config);
     }
 
     function playMediaOnComponentChannel(media, config) {
-        playMediaOnChannel(media, CHANNEL_IDS.component, config);
+        playMediaOnChannel(media, model.CHANNEL_IDS.component, config);
     }
 
     function stopMediaOnComponentChannel(media, config) {
-        stopMediaOnChannel(media, CHANNEL_IDS.component, config);
+        stopMediaOnChannel(media, model.CHANNEL_IDS.component, config);
     }
 
     function stopComponentChannel(config) {
-        stopChannel(CHANNEL_IDS.component, config);
+        stopChannel(model.CHANNEL_IDS.component, config);
     }
 
     function playMediaOnFxChannel(media, config) {
-        playMediaOnChannel(media, CHANNEL_IDS.fx, config);
+        playMediaOnChannel(media, model.CHANNEL_IDS.fx, config);
     }
 
     function stopMediaOnFxChannel(media, config) {
-        stopMediaOnChannel(media, CHANNEL_IDS.fx, config);
+        stopMediaOnChannel(media, model.CHANNEL_IDS.fx, config);
     }
 
     function stopFxChannel(config) {
-        stopChannel(CHANNEL_IDS.fx, config);
+        stopChannel(model.CHANNEL_IDS.fx, config);
     }
 
     exports.ctrl = {
         init: init,
-        addChannel: addChannel,
-        removeChannel: function() {},
 
         playMediaOnChannel: playMediaOnChannel,
         stopMediaOnChannel: stopMediaOnChannel,
@@ -213,4 +135,4 @@ console.log('include media/channels/ctrl');
         stopFxChannel: stopFxChannel
     };
 
-}(Pathways.media.channels, Pathways.media.channels.getChannel));
+}(Pathways.media.channels, Pathways.media.channels.model, Pathways.utils));

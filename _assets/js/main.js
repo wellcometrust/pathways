@@ -205,9 +205,12 @@
             w.addEventListener('resize', resizeBlackStrip);
         }
 
+        function getConfig(rawConfig) {
+            if (rawConfig) return JSON.parse(rawConfig);
+            return null;
+        }
         function getValueFromConfig(rawConfig, name) {
-            var config;
-            if (rawConfig) config = JSON.parse(rawConfig);
+            var config = getConfig(rawConfig);
             return (config && config[name]) || null;
         }
 
@@ -470,14 +473,14 @@
             //
             function getPlay(channelID) {
                 return function playMedia(index, media) {
-                    var config = $(media).attr('data-config') ? $(media).attr('data-config') : null;
+                    var config = getConfig($(media).attr('data-config'));
                     p.media.ctrl.playMediaOnChannel(media, channelID, config);
                 };
             }
 
             function getStop(channelID) {
                 return function stopMedia(index, media) {
-                    var config = $(media).attr('data-config') ? $(media).attr('data-config') : null;
+                    var config = getConfig($(media).attr('data-config'));
                     p.media.ctrl.stopMediaOnChannel(media, channelID, config);
                 };
             }
@@ -536,7 +539,6 @@
                         })
                         .on('enter', function(e) {
                             if (e.scrollDirection === 'FORWARD') {
-                                console.log('playing:', fxAudioSrc);
                                 if (fxAudio) p.media.ctrl.playMediaOnFxChannel(fxAudio);
                             } else if (e.scrollDirection == 'REVERSE') {
                                 if (fxAudio) p.media.ctrl.playMediaOnFxChannel(fxAudio);
