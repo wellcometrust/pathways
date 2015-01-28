@@ -11,7 +11,7 @@
             media.currentTime = config.seekToTimeAtEnd || 0;
             channel.removeMediaDefinitions(def);
 
-            if (!channel.hasMediaDefinitions()) {
+            if (channel.isEmpty()) {
                 switch (channel.state.id) {
                     case 'activePlaying':
                         channel.setState(channel.getState('activeStopped'));
@@ -68,7 +68,7 @@
         },
         stop: function(media) {
             var defs = this.channel.removeMediaDefinitionsByMedia(media);
-            if (!this.channel.hasMediaDefinitions()) {
+            if (this.channel.isEmpty()) {
                 this.channel.setState(this.channel.getState('inactiveStopped'));
             }
             return defs;
@@ -137,7 +137,7 @@
                 def.stop(config);
             });
 
-            if (!this.channel.hasMediaDefinitions()) {
+            if (this.channel.isEmpty()) {
                 this.channel.setState(this.channel.getState('activeStopped'));
             }
             return defs;
@@ -160,7 +160,7 @@
 
         this.id = id;
         this.config = config || null;
-        this.mediaDefinitions = getMediaDefinitionList(this);
+        this.media = getMediaDefinitionList(this);
         this.silencer = getSilenceCtrl(this);
 
         this.addState('activeStopped', new ChannelActiveStoppedState(this));
@@ -206,82 +206,38 @@
 
 
         addMediaDefinition: function(media, config) {
-            return setChannelStateOnComplete(this.mediaDefinitions.push(media, config), this);
+            return setChannelStateOnComplete(this.media.push(media, config), this);
         },
 
         removeAllMediaDefinitions: function() {
-            var defs = this.mediaDefinitions.removeAll();
+            var defs = this.media.removeAll();
             this.silencer.removeSilenceesByDefs(defs);
             return defs;
         },
         removeMediaDefinitions: function(defs) {
-            this.mediaDefinitions.removeSet(defs);
+            this.media.removeSet(defs);
             this.silencer.removeSilenceesByDefs(defs);
             return defs;
         },
         removeMediaDefinitionsByMedia: function(media) {
-            var defs = this.mediaDefinitions.removeByMedia(media);
+            var defs = this.media.removeByMedia(media);
             this.silencer.removeSilenceesByDefs(defs);
             return defs;
         },
 
         getAllMediaDefinitions: function() {
-            return this.mediaDefinitions.getAll();
+            return this.media.getAll();
         },
-        shiftMediaDefinition: function() {
-            return this.mediaDefinitions.shift();
+        shift: function() {
+            return this.media.shift();
         },
-        hasMediaDefinitions: function() {
-            return !this.mediaDefinitions.isEmpty();
+        isEmpty: function() {
+            return this.media.isEmpty();
         },
-        lengthMediaDefinitions: function() {
-            return this.mediaDefinitions.length();
-        },
+        length: function() {
+            return this.media.length();
+        }
 
-
-        // addSilencer: function addSilencer(silencer) {
-        //     this.silencer.addSilencer(silencer);
-        // },
-
-        // removeSilencer: function removeSilencer(silencer) {
-        //     this.silencer.removeSilencer(silencer);
-        // },
-
-        // hasNoSilencers: function hasNoSilencers() {
-        //     return this.silencer.hasNoSilencers();
-        // },
-
-        // addSilencee: function addSilencee(silencee) {
-        //     this.silencer.addSilencee(silencee);
-        // },
-
-        // removeSilencee: function removeSilencee(silencee) {
-        //     this.silenceCtrl.removeSilencee(silencee);
-        // },
-
-        // removeSilencees: function removeSilencee() {
-        //     this.silenceCtrl.removeSilencees();
-        // },
-
-        // removeSilenceeSet: function removeSilenceeSet (silencees) {
-        //     this.silenceCtrl.removeSilenceeSet(silencees);
-        // },
-
-        // removeSilenceesByDefs: function removeSilenceesByDefs(defList) {
-        //     this.silenceCtrl.removeSilenceesByDefs(defList);
-        // },
-
-        // getChannelSilencees: function getSilencees() {
-        //     return this.silenceCtrl.getChannelSilencees();
-        // },
-
-        // getSilenceesById: function getSilenceesById(ids) {
-        //    return this.silenceCtrl.getSilenceesById(ids);
-        // },
-
-        // getSilenceesByDefs: function getSilenceesByDefs(defList) {
-        //     return this.silenceCtrl.getSilenceesByDefs(defList);
-        // }
     };
 
 

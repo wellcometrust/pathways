@@ -33,7 +33,7 @@ console.log('include media/channels/ctrl');
 
     function stopChannel(channelID, config) {
         var channel = model.getChannelById(channelID);
-        if (!channel.hasMediaDefinitions()) return;
+        if (channel.isEmpty()) return;
         config = extend({}, channel.config, config);
 
         channel.stopAll(config);

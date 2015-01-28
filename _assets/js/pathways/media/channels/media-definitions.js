@@ -17,8 +17,8 @@ console.log('include media/channels/track');
                 maxConcurrentSounds = parseInt(config.maxConcurrentSounds, 10);
 
             mixer.fadeIn(media, fadeDuration, config);
-            while (channel.lengthMediaDefinitions() > maxConcurrentSounds) {
-                var head = channel.shiftMediaDefinition();
+            while (channel.length() > maxConcurrentSounds) {
+                var head = channel.shift();
                 mixer.fadeOut(head.media, fadeDuration, head.config);
             }
         },
