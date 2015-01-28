@@ -22,6 +22,7 @@ Pathways.components.core = Pathways.components.core || {};
 
     // Assumes selector will be in form '[data-<val>]'
     function init(selector) {
+        console.log('initing ga');
         attrSelector = selector;
         baseSelector = selector.replace(/\[data-(\w*)\]/, '$1');
         update();

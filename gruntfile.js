@@ -88,7 +88,7 @@ module.exports = function(grunt) {
             options: {
                 preserveComments: 'some',
                 compress: {
-                    drop_console: true
+                    // drop_console: true
                 }
             },
             libs: {

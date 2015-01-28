@@ -1,5 +1,5 @@
 
-<div id="stewart-conn" class="panel" data-config='{ "offset_height": 1600 }'>
+<div id="stewart-conn" class="panel" data-config='{ "offset_height": 800 }'>
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
@@ -32,11 +32,11 @@
             increasingly hemmed in, until overwhelmed<br>
             by the mouldering mountain, moth-eaten,<br>
             worm-ridden, filling his Willesden warehouse<br>
-            to overflowing, he ended up part haunted,<br>
-            part devoured by more than enough to fill five<br>
-            Louvres but not some insatiable chasm within.</p>
+            to overflowing, he ended up part haunted,</p>
 
-            <p>Garlanded and afforded the scholastic kudos<br>
+            <p>part devoured by more than enough to fill five<br>
+            Louvres but not some insatiable chasm within.<br>
+            Garlanded and afforded the scholastic kudos<br>
             he craved, a vast fortune securely amassed,<br>
             did he at the last find respite from cupidity<br>
             or in a lonely hall of mirrors cower from those<br>

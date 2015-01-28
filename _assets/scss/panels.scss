@@ -1575,40 +1575,29 @@
     }
 }
 
-
 #bensalem-intro {
-    
+    .bg-container {
+        background-image: url(/pathways/2-the-collectors/2-merchants-of-light/_assets/m2-merchants-of-light-2.jpg);
+    }
+    .main-content {
+        color: #030303;
+    }
 }
-
 .touch {
-    #bensalem-intro {
-
-    }
+    #bensalem-intro {}
 }
-
 .no-touch {
-    #bensalem-intro {
-        
-    }
+    #bensalem-intro {}
 }
-
 @media screen and (min-width: 48em) {
-    #bensalem-intro {
-           
+    #bensalem-intro {} .touch {
+        #bensalem-intro {}
     }
-
-    .touch {
-        #bensalem-intro {
-
-        }
-    }
-
     .no-touch {
-        #bensalem-intro {
-
-        }
+        #bensalem-intro {}
     }
 }
+
 
 .start-death-collector {
     .bg-container {
@@ -1779,7 +1768,7 @@
         box-sizing: content-box;
         background-color: #fdebc0;
         color: #000;
-        background-image: url('_assets/infographics/death-collector/wellcome-background3.jpg');
+        background-image: url('/pathways/2-the-collectors/3-death-collector/_assets/infographics/death-collector/wellcome-background3.jpg');
         background-size: 100% 100%;
         background-repeat: repeat-y;
         background-position: center center;
@@ -2419,12 +2408,18 @@
         background-image: url(/pathways/2-the-collectors/4-unceasing-seeker/_assets/m4-unceasing-seeker-2.jpg);
     }
     .black-strip {
-        width: 600px;
+        width: 550px;
     }
     .strip {
-        max-width: 500px;
+        max-width: 450px;
     }
 
+    .main-content {
+        p {
+            line-height: 1.8;
+        }
+
+    }
 }
 
 

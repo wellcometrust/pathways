@@ -1,34 +1,22 @@
-
 #bensalem-intro {
-    
+    .bg-container {
+        background-image: url(/pathways/2-the-collectors/2-merchants-of-light/_assets/m2-merchants-of-light-2.jpg);
+    }
+    .main-content {
+        color: #030303;
+    }
 }
-
 .touch {
-    #bensalem-intro {
-
-    }
+    #bensalem-intro {}
 }
-
 .no-touch {
-    #bensalem-intro {
-        
-    }
+    #bensalem-intro {}
 }
-
 @media screen and (min-width: 48em) {
-    #bensalem-intro {
-           
+    #bensalem-intro {} .touch {
+        #bensalem-intro {}
     }
-
-    .touch {
-        #bensalem-intro {
-
-        }
-    }
-
     .no-touch {
-        #bensalem-intro {
-
-        }
+        #bensalem-intro {}
     }
 }

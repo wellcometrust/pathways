@@ -17,6 +17,7 @@
         border-right: 3px solid rgba(92, 184, 178, 1);
         div {
             @include transition( opacity 0.5s);
+            width: 100%;
         }
         .highlight-image {
             position: absolute;

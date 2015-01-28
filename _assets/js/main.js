@@ -600,15 +600,11 @@
         initScript(document, 'script', 'pth-ga-api', "//apis.google.com/js/platform.js");
         initScript(document, 'script', 'pth-pin-api', "//assets.pinterest.com/js/pinit.js");
         initScript(document, 'script', 'pth-twt-api', "//platform.twitter.com/widgets.js");
+
+        p.components.core.ga.init('[data-ga]');
     }
 
     p.init(onPathwaysLoad, onScrollLoad, onScrollUnload);
 
 }(window, jQuery, Pathways, ScrollMagic, ScrollScene, Modernizr, TweenMax));
 
-// Init global ga tracking
-(function(ga, $) {
-
-    ga.init('[data-ga]');
-
-}(Pathways.components.core.ga, jQuery));
