@@ -17,7 +17,7 @@
 
     </div>
 
-    <div class="info-box with-text" id="tools-of-mesmerism" data-component="gallery" data-config='{ "offset_height": 200 }' data-ga="mindcraft - mesmer - animal-magnetism - l2 gallery open">
+    <div class="info-box with-text" id="tools-of-mesmerism" data-component="gallery" data-ga="mindcraft - mesmer - animal-magnetism - l2 gallery open">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>

@@ -227,7 +227,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['_assets/img/**/*.{svg}'],
+                    src: ['_assets/img/**/*.svg'],
                     dest: '<%= exportRoot %>'
                 }]
             },
@@ -235,7 +235,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['pathways/<%= globalConfig.path %>/**/_assets/**/*.{svg}'],
+                    src: ['pathways/<%= globalConfig.path %>/**/_assets/**/*.svg'],
                     dest: '<%= exportRoot %>'
                 }]
             }

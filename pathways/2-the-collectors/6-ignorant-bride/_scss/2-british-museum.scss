@@ -20,7 +20,6 @@
         img {
             position:   absolute;
             bottom:     0;
-
             @include transform-origin( 35% 70% );
             @include transform( scale(1, 1));
             @include transition( all 2s ease );

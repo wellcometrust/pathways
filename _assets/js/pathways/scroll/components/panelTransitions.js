@@ -9,9 +9,9 @@
         return {
             load: function(panelId, panelEl, panelAttrs) {
                 $('html').addClass('scroll-active');
+                $(panelEl).removeClass('fixed-active');
             },
             getScenes: function(panelId, panelEl, panelAttrs) {
-
                 var scenes = [],
                     $panel = $(panelEl),
                     $bg = $(panelAttrs.bg),
@@ -46,38 +46,47 @@
                         })
                         .setTween(tween));
                 }
-
-                if ($bottom.length) {
-                    scenes.push(new Ss({
-                        triggerElement: $bottom,
-                        triggerHook: 'bottom'
-                    }).on('start', function(e) {
-                        // console.log('bottom');
-                        if (e.scrollDirection == 'FORWARD') {
-                            $panel.removeClass('fixed-active');
-
-                        } else {
-                            $panel.addClass('fixed-active');
-                            // setTimeout(function() {
-                            //     $panel.addClass('fixed-active');
-                            // }, 50);
-                        }
-
-                    }));
-                }
-
-
                 return scenes;
             },
             unload: function(panelId, panelEl, panelAttrs) {
-                console.log('unloading ');
-                var $bg = $(panelAttrs.bg);
-                $bg.removeAttr('style');
-
                 $('html').removeClass('scroll-active');
+                $(panelEl).removeClass('fixed-active');
             }
         };
-
     });
+
+    Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
+        var $panels = $('.panel'),
+            $survey = $('.survey'),
+            $bottom = $survey.length ? $survey : $('.fork');
+
+        if ($bottom.length === 0) return null;
+
+        return {
+            load: function() {
+                $panels.removeClass('fixed-active');
+            },
+            getScenes: function() {
+                var scenes = [];
+
+                scenes.push(new Ss({
+                    triggerElement: $bottom,
+                    triggerHook: 'bottom'
+                }).on('start', function(e) {
+                    if (e.scrollDirection == 'FORWARD') {
+                        $panels.removeClass('fixed-active');
+                    } else {
+                        $panels.addClass('fixed-active');
+                    }
+                }));
+
+                return scenes;
+            },
+            unload: function() {
+                $panels.removeClass('fixed-active');
+            }
+        };
+    });
+
 
 }(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));

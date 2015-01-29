@@ -8,7 +8,7 @@
 
     scrollCtrl.addGlobalPanelScrollFactory(function() {
         var heightOffset = 60,
-            visibleOffset = 100;
+            visibleOffset = 0;
 
         return {
             load: function(panelId, panelEl, panelAttrs) {
@@ -27,11 +27,17 @@
                 var $component = $('[data-panel="' + panelAttrs.id + '"]').first(),
                     scene = [];
 
+                var m = function m(offset) {
+                    return function ret() {
+                        return Math.max((panelAttrs.componentHeight - offset), 0);
+                    };
+                };
+
                 if ($component.length) {
                     scene = new Ss({
                         triggerElement: panelEl,
-                        triggerHook: 'top',
-                        duration: scrollDurations.getComponentDuration(visibleOffset),
+                        triggerHook: 'middle',
+                        duration: m(visibleOffset),
                         offset: visibleOffset
                     }).on('enter', function(e) {
                         $component.addClass('info-panel-ready');

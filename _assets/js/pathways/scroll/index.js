@@ -80,6 +80,7 @@
         globalPanelFactories = [],
         panelFactories = {},
         panels,
+        defaultMethods = ['load', 'unload', 'getScenes'],
         noop = function() {};
 
     function getInstance(factory) {
@@ -94,10 +95,11 @@
                 instance = factory;
                 break;
         }
+
         if (!instance) return;
-        if (!instance.load) instance.load = noop;
-        if (!instance.unload) instance.unload = noop;
-        if (!instance.getScenes) instance.getScenes = noop;
+        defaultMethods.forEach(function (name) {
+            if(!instance[name]) instance[name] = noop;
+        });
         return instance;
     }
 
@@ -156,17 +158,19 @@
 
 
     function init(_panels) {
-        console.log('initing');
+        // console.log('initing ss control');
         controller = new Sm({
             //loglevel: 3
         });
         panels = _panels;
 
-        exports.scrollSceneCtrl.init = function() {};
+        exports.scrollSceneCtrl.init = noop;
     }
 
     function destroy() {
+        // console.log('destroying ss control');
         controller.destroy(true);
+        exports.scrollSceneCtrl.init = init;
     }
 
     function getEm() {
@@ -188,6 +192,7 @@
     }
 
     function loadPanelScenes(panel) {
+        // console.log('loading ss control scenes');
         var pID = '#' + panel.id,
             pEl = panel.elem,
             pAttrs = panel,
@@ -200,9 +205,11 @@
             // console.log(facs, loadFactory);
             if (facs && facs.length) facs.forEach(loadFactory);
         }
+        controller.update(true);
     }
 
     function unloadPanelScenes(panel) {
+        // console.log('unloading ss control scenes');
         var pID = '#' + panel.id,
             pEl = panel.elem,
             pAttrs = panel,
@@ -214,20 +221,20 @@
             var facs = panelFactories[panel.id];
             if (facs && facs.length) facs.forEach(unloadFactory);
         }
+        controller.update(true);
     }
 
     function load() {
-        // console.log('loading');
+        // console.log('loading ss control');
         globalFactories.forEach(getEm());
         panels.forEach(loadPanelScenes);
         scrollDurations.init();
-        // console.log(controller.info());
+        // console.log('globalFactories.length:', globalFactories.length);
     }
 
     function unload() {
         globalFactories.forEach(ungetEm());
         panels.forEach(unloadPanelScenes);
-        controller.destroy(true);
         scrollDurations.destroy();
         // console.log(controller.info());
     }

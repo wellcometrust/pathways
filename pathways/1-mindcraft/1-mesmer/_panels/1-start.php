@@ -5,7 +5,7 @@
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
-    <div class="content" data-parallax-effect>
+    <div class="content" data-scroll-parallax-effect>
         <p class="scene-set">Paris 1778</p>
 
         <header>

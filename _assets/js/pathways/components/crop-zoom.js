@@ -44,8 +44,7 @@
 
                 $overlay.append($popup);
 
-                // Set an event so that after the image transitions in, show the text
-                $imageCrop.get(0).addEventListener('transitionend', function() {
+                setTimeout(function() {
                     $text.css({
                         top: (window.innerHeight - $text.outerHeight() - 15)
                     });
@@ -56,7 +55,22 @@
                         $text.css('left', 40);
 
                     $text.addClass('show');
-                });
+                }, 500);
+                //Can't use transtionend with ie9 :( the delay is css timing value
+
+                // Set an event so that after the image transitions in, show the text
+                // $imageCrop.get(0).addEventListener('transitionend', function() {
+                //     $text.css({
+                //         top: (window.innerHeight - $text.outerHeight() - 15)
+                //     });
+
+                //     if (position == 'right')
+                //         $text.css('right', 40);
+                //     else
+                //         $text.css('left', 40);
+
+                //     $text.addClass('show');
+                // });
 
                 $imageCrop.css({
                     top: 0,

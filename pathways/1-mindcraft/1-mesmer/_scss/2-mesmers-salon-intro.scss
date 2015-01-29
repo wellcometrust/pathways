@@ -17,13 +17,20 @@
 
         .large-screen {
             display: block;
-        }   
+        }
     }
 
     .touch {
         #mesmers-salon-intro {
             .main-content {
-                top: 15%;
+                margin-top: 15%;
+            }
+        }
+    }
+    .no-touch {
+        #mesmers-salon-intro {
+            .main-content {
+                margin-top: 25%;
             }
         }
     }

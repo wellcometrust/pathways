@@ -48,11 +48,11 @@
         }
     }
     .main-content.fixed {
-        position: relative;
-        top: auto;
-        bottom: auto;
-        left: auto;
-        right: auto;
+        // position: relative;
+        // top: auto;
+        // bottom: auto;
+        // left: auto;
+        // right: auto;
     }
 }
 .no-touch {
@@ -96,6 +96,7 @@
                 max-width: 500px;
             }
             &.right {
+                float: right;
                 right: 48px;
                 max-width: 500px;
             }
@@ -140,33 +141,37 @@
     .no-touch {
         .panel {
             .main-content {
-                position: absolute;
-                bottom: 20%;
+                position: relative;
+                margin-bottom: 25%;
+                margin-top: 25%;
             }
             .main-content.fixed {
-                position: relative;
-                top: auto;
-                bottom: auto;
-                left: auto;
-                right: auto;
-                min-height: 551px; // Ensures panel height calculation will not cut off content
-                &.left {
-                    left: 48px;
-                }
-                &.right {
-                    right: 48px;
-                }
-                &.center {
-                    left: 0;
-                }
-                &.title {
-                    left: 0;
-                }
+                // position: relative;
+                // top: auto;
+                // bottom: auto;
+                // left: auto;
+                // right: auto;
+                // min-height: 551px; // Ensures panel height calculation will not cut off content
+                // &.left {
+                //     left: 48px;
+                // }
+                // &.right {
+                //     right: 48px;
+                // }
+                // &.center {
+                //     left: 0;
+                // }
+                // &.title {
+                //     left: 0;
+                // }
             }
-            .main-content.full-height {
-                top: auto;
-                bottom: 0;
+            .main-content.viewport-height {
+                // margin-bottom: 20%;
             }
+            // .main-content.full-height {
+            //     top: auto;
+            //     bottom: 0;
+            // }
         }
         .panel:last-child {
             .bg-container {

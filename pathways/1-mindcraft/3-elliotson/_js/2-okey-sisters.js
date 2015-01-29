@@ -1,21 +1,3 @@
-Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('okey-sisters', {
-    load: function(panelId, panelEl, panelAttrs) {
-        $('#okey-sisters .main-content, #okey-sisters .secondary-content').css({
-            'bottom': 'auto',
-            'top': Pathways.panelHeight
-        });
-    },
-    getScenes: function(panelId, panelEl, panelAttrs) {
-        return null;
-    },
-    unload: function(panelId, panelEl, panelAttrs) {
-        $('#okey-sisters .main-content, #okey-sisters .secondary-content').removeAttr('style');
-        $('#thomas-wakley .main-content').removeAttr('style');
-    }
-
-});
-
-
 Pathways.components.gallery.hypnotisedWomen = {
     data: {
         location: '_assets/galleries/hypnotised-women/',

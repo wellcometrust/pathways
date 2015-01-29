@@ -5,11 +5,11 @@
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
-    <div class="falling-lady" data-parallax-effect='{ "fallRate": 0.7, "fadeRate": 0 } '>
+    <div class="falling-lady" data-scroll-parallax-effect='{ "fallRate": 0.7, "endOpacity": 1 } '>
         <img alt="" src="/pathways/1-mindcraft/5-svengali/_assets/falling-lady.png">
     </div>
 
-    <div class="content" data-parallax-effect>
+    <div class="content" data-scroll-parallax-effect>
         <p class="scene-set">Paris 1894</p>
 
         <header>

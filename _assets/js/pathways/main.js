@@ -30,7 +30,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         panelHeightDecreased = false;
 
 
-    exports.panelHeight = calcPanelHeight(minHeight);
+    exports.panelHeight = calcPanelHeight();
     exports.getPanelHeight = function() {
         return exports.panelHeight;
     };
@@ -49,17 +49,8 @@ Pathways.MIN_SCROLL_LEVEL = 4;
     }
 
 
-    function calcPanelHeight(oldHeight) {
-        var newHeight = sys.innerHeight < minHeight ? minHeight : sys.innerHeight;
-
-        if (oldHeight > newHeight) {
-            panelHeightDecreased = true;
-        } else {
-            panelHeightDecreased = false;
-        }
-
-
-        return newHeight;
+    function calcPanelHeight() {
+        return parseInt((sys.innerHeight < minHeight ? minHeight : sys.innerHeight), 10);
     }
 
 
@@ -184,7 +175,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         }
     }
 
-    function unsizePanels(panels) {
+    function unsizePanels(startPanel, panels) {
         if (startPanel) unSetElementHeight(startPanel);
 
         var unsizePanel = function(index, child) {
@@ -207,41 +198,54 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         }
     }
 
-    function resizePanel(panel, viewPortHeight) {
-        var _panel = panel.elem;
-        panel.contentHeight = $(panel.content).outerHeight();
+    function getTotalHeight(el) {
+        var style = getComputedStyle(el, null),
+            margin = parseFloat(style.marginTop) + parseFloat(style.marginBottom);
 
-        // unSetElementHeight(_panel);
+            // console.log('margin', margin);
+        return el.offsetHeight + margin;
+    }
+
+    function resizePanel(panel, viewPortHeight, index) {
+        var _panel = panel.elem;
 
         var config = panel.config,
             _bg = panel.bg,
             _content = panel.content,
-
+            // id = $(panel.elem).attr('id'),
             panelHeight = _panel.offsetHeight,
-            offset = config ? ((sys.supportsTouch || !config.offset_height) ? 0 : config.offset_height) : 0,
-            largerContentHeight,
             newPanelHeight;
 
         if (_content) {
-            largerContentHeight = parseInt(Math.max(_content.offsetHeight, viewPortHeight), 10);
-            newPanelHeight = largerContentHeight + offset;
+            var $content = $(_content),
+                contentHeight = getTotalHeight(_content),
+                largerContentHeight;
+
+            // console.log('c, p', id, contentHeight, panelHeight);
+            largerContentHeight = parseInt(Math.max(contentHeight, viewPortHeight), 10);
+            newPanelHeight = largerContentHeight;
 
         } else {
             newPanelHeight = viewPortHeight;
         }
 
+        panel.contentHeight = newPanelHeight;
+        panel.componentHeight = parseInt((newPanelHeight * 0.75), 10);
 
-        if (panelHeight !== newPanelHeight) {
+        // console.log('p np:', index, panelHeight, newPanelHeight, (newPanelHeight === viewPortHeight));
+
+        // if (panelHeight !== newPanelHeight) {
+        //     setElementHeight(_panel, newPanelHeight);
+        // }
+
+        if (newPanelHeight === viewPortHeight) {
+            // console.log(index, ' setting new height ', newPanelHeight);
             setElementHeight(_panel, newPanelHeight);
+        } else {
+            unSetElementHeight(_panel);
         }
 
         if (_bg) setElementHeight(_bg, viewPortHeight);
-
-        if (_content) { // If content is absolutely positioned with a top - or -bottom value, height will not be calc'd properly unless prop is removed
-            var top = _content.offsetTop;
-            if (top < 0) _content.classList.add('full-height');
-            else _content.classList.remove('full-height');
-        }
 
     }
 
@@ -256,7 +260,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         if (startPanel) setElementHeight(startPanel, exports.panelHeight);
 
         for (var i = 0; i < panels.length; i++) {
-            resizePanel(panels[i], exports.panelHeight);
+            resizePanel(panels[i], exports.panelHeight, i);
 
             if (isRatioPreserved(panels[i])) {
                 $(panels[i].elem).children().each(resizePanelChild);
@@ -264,18 +268,17 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         }
     }
 
-    function removeScrollSceneStyling() {
-
-        if (startPanel) $(startPanel).removeAttr('style');
-    }
-
     var panelsUnsized = false;
 
     function resizeCheck() {
+
+        exports.panelHeight = calcPanelHeight();
+
         if (sys.level < p.MIN_COMPONENT_LEVEL) {
-            unsizePanels(panels);
+            unsizePanels(startPanel, panels);
             panelsUnsized = true;
         } else if (sys.level >= p.MIN_COMPONENT_LEVEL && sys.level < p.MIN_SCROLL_LEVEL) {
+            unsizePanels(startPanel);
             resizePanels(null, ratioedPanels);
             panelsUnsized = false;
         } else if (sys.level >= p.MIN_SCROLL_LEVEL) {
@@ -285,7 +288,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
     }
 
     function loadCheck() {
-        exports.panelHeight = calcPanelHeight(exports.panelHeight);
+        exports.panelHeight = calcPanelHeight();
 
         // If it's iPad width or larger, load the components
         if (!componentsLoaded) {
@@ -311,7 +314,6 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
                 if (scrollSceneCtrl) {
                     scrollSceneCtrl.init(panels);
-                    console.log('loading ctrl');
                     scrollSceneCtrl.load();
 
                 }
@@ -321,14 +323,12 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         } else {
             if (sys.level < p.MIN_SCROLL_LEVEL) {
 
-                removeScrollSceneStyling();
-
                 media.ctrl.disable();
                 vol.disable();
 
                 if (scrollSceneCtrl) {
-                    console.log('unloading ctrl');
                     scrollSceneCtrl.unload(panels);
+                    scrollSceneCtrl.destroy();
                 }
 
                 scenesLoaded = false;
@@ -352,7 +352,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
         w.addEventListener('load', function() {
             resizeCheck();
-            loadCheck(onScrollLoad, onScrollUnload);
+            loadCheck();
         });
 
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)

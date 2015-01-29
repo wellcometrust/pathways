@@ -5,25 +5,26 @@
 
     scrollCtrl.addScrollContentFactory(function() {
 
-        var $start = $('.start'),
+        var parallaxSelectors = '[data-scroll-parallax-effect]',
+            $start = $('.start'),
             $parallaxContent,
             scenes = [];
 
         function processParallaxes(index, parallax) {
             var $parallax = $(parallax),
-                rawconfig = $parallax.data('parallax-effect'),
+                rawconfig = $parallax.find(parallaxSelectors).get(0),
                 fallRate = 0.3,
-                fadeRate = 0.5,
+                endOpacity = 0,
                 config;
 
             if (rawconfig) {
                 config = JSON.parse(rawconfig);
                 fallRate = isNaN(config.fallRate) ? fallRate : config.fallRate;
-                fadeRate = isNaN(config.fadeRate) ? fadeRate : config.fadeRate;
+                endOpacity = isNaN(config.endOpacity) ? endOpacity : config.endOpacity;
             }
 
             var tween = Tm.to($parallax, 1, {
-                opacity: 0,
+                opacity: endOpacity,
                 y: p.panelHeight * fallRate
             });
 
@@ -52,7 +53,7 @@
 
             getScenes: function() {
                 scenes = [];
-                $parallaxContent = $start.find('[data-parallax-effect]');
+                $parallaxContent = $start.find(parallaxSelectors);
                 $parallaxContent.each(processParallaxes);
                 return scenes;
             }

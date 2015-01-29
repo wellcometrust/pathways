@@ -23,7 +23,7 @@
         </svg>
 
         <div class="text">
-            <span class="info-type">Gallery:</span>
+            <span class="info-type">Audio Gallery:</span>
             <span class="info-title">Letters to Marie Stopes</span>
         </div>
     </div>
