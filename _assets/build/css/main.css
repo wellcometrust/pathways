@@ -701,6 +701,7 @@ iframe {
 
   .no-touch .start .content {
     position: absolute;
+    left: 10%;
     padding-top: 15%; }
   .no-touch .start .scene-set {
     margin-bottom: 6rem; }
@@ -801,7 +802,7 @@ iframe {
   position: absolute;
   bottom: 0;
   right: 0;
-  z-index: 15;
+  z-index: 21;
   -webkit-transform: translate(100%, 100%);
   -moz-transform: translate(100%, 100%);
   -o-transform: translate(100%, 100%);
@@ -888,8 +889,7 @@ iframe {
       margin: 5px 5px 0 0;
       padding: 5px 5px 2px 0px;
       border-radius: 3px; }
-    .info-panel .share-me ul .twitter,
-    .info-panel .share-me ul .googleplus {
+    .info-panel .share-me ul .twitter, .info-panel .share-me ul .googleplus {
       padding-top: 8px; }
     .info-panel .share-me ul .facebook {
       padding-top: 8px; }
@@ -899,6 +899,8 @@ iframe {
         .info-panel .share-me ul .facebook span > iframe {
           height: 1000px !important;
           width: 75px !important; }
+    .info-panel .share-me ul .googleplus {
+      width: 58px; }
   .info-panel .share-me img {
     border: none;
     margin: 0px; }
@@ -1183,7 +1185,9 @@ iframe {
       opacity: 0.2; }
 
 .carousel-gallery .full-height img {
-  height: 100%; }
+  height: 100%;
+  width: auto;
+  margin: 0; }
 .carousel-gallery .full-width img {
   height: auto;
   width: 100%;
@@ -1614,6 +1618,7 @@ iframe {
 .popup .image-crop {
   position: absolute;
   width: 100%;
+  height: auto;
   opacity: 0;
   z-index: 15; }
 .popup .image-crop.animate {
@@ -1726,14 +1731,17 @@ iframe {
     -moz-transition: opacity 0.5s;
     -ms-transition: opacity 0.5s;
     -o-transition: opacity 0.5s;
-    transition: opacity 0.5s; }
+    transition: opacity 0.5s;
+    width: 100%; }
   .carousel-letter-gallery .letter-images .highlight-image {
     position: absolute;
     top: 0; }
   .carousel-letter-gallery .letter-images img {
     display: block;
     max-width: 100%;
-    max-height: 100%; }
+    max-height: 100%;
+    width: auto;
+    height: auto; }
 .carousel-letter-gallery .short-letter-images {
   max-width: 60%; }
 .carousel-letter-gallery .medium-letter-images {
@@ -2009,7 +2017,10 @@ iframe {
     display: block; }
 
   .touch #mesmers-salon-intro .main-content {
-    top: 15%; } }
+    margin-top: 15%; }
+
+  .no-touch #mesmers-salon-intro .main-content {
+    margin-top: 25%; } }
 #mesmers-salon {
   display: none; }
 
@@ -2097,15 +2108,19 @@ iframe {
     position: absolute;
     left: 600px;
     width: 40%;
-    max-width: 500px; }
+    max-width: 500px;
+    top: 26%; }
     #okey-sisters .secondary-content img {
       display: block;
       width: 100%; }
     #okey-sisters .secondary-content img:first-child {
       margin-bottom: 10rem; }
 
-  .no-touch #okey-sisters .main-content p {
-    margin: 1em 0 10rem 0; }
+  .no-touch #okey-sisters .main-content {
+    margin-bottom: 10%;
+    margin-top: 40%; }
+    .no-touch #okey-sisters .main-content p {
+      margin: 1em 0 10rem 0; }
   .no-touch #okey-sisters img:first-child {
     margin-left: -100px; }
   .no-touch #okey-sisters .info-box {
@@ -2177,7 +2192,7 @@ iframe {
 
   .no-touch #verdict .main-content {
     padding: 0 1.618rem;
-    bottom: 30%; } }
+    margin-bottom: 30%; } }
 @media screen and (min-width: 52rem) and (min-height: 48rem) {
   #verdict blockquote p {
     font-size: 1.618rem; }
@@ -2228,7 +2243,7 @@ iframe {
     -ms-transition: none;
     -o-transition: none;
     transition: none; }
-  .no-touch #gonad-man.active img {
+  .no-touch #gonad-man.current-scroll-panel img {
     -webkit-transform: scale(1, 1);
     -moz-transform: scale(1, 1);
     -o-transform: scale(1, 1);
@@ -2267,11 +2282,27 @@ iframe {
     background-size: 100%; }
 
   .no-touch #india .boats {
-    -webkit-transform: translate(-600px, 0);
-    -moz-transform: translate(-600px, 0);
-    -o-transform: translate(-600px, 0);
-    -ms-transform: translate(-600px, 0);
-    transform: translate(-600px, 0); }
+    -webkit-transform: translate(-610px, 0);
+    -moz-transform: translate(-610px, 0);
+    -o-transform: translate(-610px, 0);
+    -ms-transform: translate(-610px, 0);
+    transform: translate(-610px, 0);
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none; }
+  .no-touch #india.current-scroll-panel .boats {
+    -webkit-transition: all 120s ease;
+    -moz-transition: all 120s ease;
+    -ms-transition: all 120s ease;
+    -o-transition: all 120s ease;
+    transition: all 120s ease;
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -o-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%); }
 
   .touch #india .main-content p {
     font-size: 1.239rem; }
@@ -2337,9 +2368,6 @@ iframe {
     transform: translate(0, 0); }
   100% {
     transform: translate(0, 500px); } }
-.comic-strip {
-  min-height: 600px; }
-
 #trilby .bg-container {
   background-image: url(/pathways/1-mindcraft/5-svengali/_assets/svengali-2.jpg); }
   #trilby .bg-container .large-screen {
@@ -2674,8 +2702,6 @@ iframe {
   width: 100%; }
 
 @media all and (min-width: 48rem) {
-  #anna-o .main-content {
-    padding-left: 48px; }
   #anna-o header {
     margin: 8rem 0 6rem 0; }
   #anna-o h1 {
@@ -2693,9 +2719,8 @@ iframe {
   .touch #anna-o p + p {
     margin-top: 3rem; }
 
-  .no-touch #anna-o .main-content {
-    bottom: auto;
-    top: 0; } }
+  .no-touch #anna-o .main-content.left.fixed {
+    top: 8%; } }
 #fred-breuer .bg-container {
   background-image: url(/pathways/1-mindcraft/6-freud/_assets/freud-3.jpg); }
 
@@ -2738,11 +2763,11 @@ iframe {
     -ms-transform-origin: 0 0;
     -o-transform-origin: 0 0;
     transform-origin: 0 0;
-    -webkit-transform: scale(1.6, 1.6);
-    -moz-transform: scale(1.6, 1.6);
-    -o-transform: scale(1.6, 1.6);
-    -ms-transform: scale(1.6, 1.6);
-    transform: scale(1.6, 1.6); }
+    -webkit-transform: translate(0, 0) scale(1.6, 1.6);
+    -moz-transform: translate(0, 0) scale(1.6, 1.6);
+    -o-transform: translate(0, 0) scale(1.6, 1.6);
+    -ms-transform: translate(0, 0) scale(1.6, 1.6);
+    transform: translate(0, 0) scale(1.6, 1.6); }
   #office-2 header h1 {
     font-size: 2.618rem; }
 
@@ -2761,9 +2786,25 @@ iframe {
   .no-touch #office-2 .small-screen {
     display: none; }
   .no-touch #office-2 .large-screen {
-    display: block; }
+    display: block;
+    -webkit-transition: all 14s ease;
+    -moz-transition: all 14s ease;
+    -ms-transition: all 14s ease;
+    -o-transition: all 14s ease;
+    transition: all 14s ease; }
   .no-touch #office-2 header h1 {
-    text-shadow: 1px 1px 1px #030303; } }
+    text-shadow: 1px 1px 1px #030303; }
+  .no-touch #office-2.current-scroll-panel .large-screen {
+    -webkit-transition: all 14s ease;
+    -moz-transition: all 14s ease;
+    -ms-transition: all 14s ease;
+    -o-transition: all 14s ease;
+    transition: all 14s ease;
+    -webkit-transform: translate(-80%, -10%) scale(1.8, 1.8);
+    -moz-transform: translate(-80%, -10%) scale(1.8, 1.8);
+    -o-transform: translate(-80%, -10%) scale(1.8, 1.8);
+    -ms-transform: translate(-80%, -10%) scale(1.8, 1.8);
+    transform: translate(-80%, -10%) scale(1.8, 1.8); } }
 .start-curious-gardener .bg-container {
   background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-1.jpg); }
 
@@ -2846,13 +2887,16 @@ iframe {
 .start-merchants-of-light .intro-text {
   color: #030303; }
 
+#bensalem-intro .bg-container {
+  background-image: url(/pathways/2-the-collectors/2-merchants-of-light/_assets/m2-merchants-of-light-2.jpg); }
+#bensalem-intro .main-content {
+  color: #030303; }
+
 .start-death-collector .bg-container {
   background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-1.jpg); }
 
 @media all and (min-width: 48rem) {
   .start-death-collector .content {
-    float: right;
-    margin: 0;
     text-shadow: 1px 1px 2px #333; } }
 #graunt-records .bg-container {
   background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-3.jpg); }
@@ -2871,7 +2915,7 @@ iframe {
     -ms-transition: all 30s linear;
     -o-transition: all 30s linear;
     transition: all 30s linear; }
-  #graunt-records.active .numbers {
+  #graunt-records.current-scroll-panel .numbers {
     -webkit-transform: translate(0, -2000px);
     -moz-transform: translate(0, -2000px);
     -o-transform: translate(0, -2000px);
@@ -2879,7 +2923,7 @@ iframe {
     transform: translate(0, -2000px); } }
 #death-infographic .info-box, #death-infographic .input-container {
   display: none; }
-#death-infographic.active .info-box, #death-infographic.active .input-container {
+#death-infographic.current-scroll-panel .info-box, #death-infographic.current-scroll-panel .input-container {
   display: block; }
 
 #isaac-newton .bg-container {
@@ -2896,7 +2940,7 @@ iframe {
   box-sizing: content-box;
   background-color: #fdebc0;
   color: #000;
-  background-image: url("_assets/infographics/death-collector/wellcome-background3.jpg");
+  background-image: url("/pathways/2-the-collectors/3-death-collector/_assets/infographics/death-collector/wellcome-background3.jpg");
   background-size: 100% 100%;
   background-repeat: repeat-y;
   background-position: center center; }
@@ -3392,9 +3436,11 @@ iframe {
 #stewart-conn .bg-container {
   background-image: url(/pathways/2-the-collectors/4-unceasing-seeker/_assets/m4-unceasing-seeker-2.jpg); }
 #stewart-conn .black-strip {
-  width: 600px; }
+  width: 550px; }
 #stewart-conn .strip {
-  max-width: 500px; }
+  max-width: 450px; }
+#stewart-conn .main-content p {
+  line-height: 1.8; }
 
 .start-obscene-doctor .bg-container {
   background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-1.jpg); }
@@ -3403,6 +3449,11 @@ iframe {
   .start-obscene-doctor .content {
     margin: 0;
     float: right;
+    text-shadow: 1px 1px 2px #333; }
+
+  .no-touch .start-obscene-doctor .content {
+    left: auto;
+    right: 0;
     text-shadow: 1px 1px 2px #333; } }
 #kahns-anatomical-museum .bg-container {
   background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-2.jpg); }
@@ -3508,7 +3559,10 @@ iframe {
   .start-ignorant-bride header h1 {
     color: #030303; }
   .start-ignorant-bride .intro-text {
-    color: #030303; } }
+    color: #030303; }
+
+  .no-touch .start-ignorant-bride .content {
+    left: 0; } }
 @media screen and (min-width: 48em) {
   #british-museum img {
     position: absolute;
@@ -3518,12 +3572,22 @@ iframe {
     -ms-transform-origin: 35% 70%;
     -o-transform-origin: 35% 70%;
     transform-origin: 35% 70%;
+    -webkit-transform: scale(1, 1);
+    -moz-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    transform: scale(1, 1);
+    -webkit-transition: all 2s ease;
+    -moz-transition: all 2s ease;
+    -ms-transition: all 2s ease;
+    -o-transition: all 2s ease;
+    transition: all 2s ease; }
+  #british-museum.current-scroll-panel img {
     -webkit-transition: all 14s ease;
     -moz-transition: all 14s ease;
     -ms-transition: all 14s ease;
     -o-transition: all 14s ease;
-    transition: all 14s ease; }
-  #british-museum.active img {
+    transition: all 14s ease;
     -webkit-transform: scale(1.8, 1.8);
     -moz-transform: scale(1.8, 1.8);
     -o-transform: scale(1.8, 1.8);
@@ -3634,12 +3698,6 @@ iframe {
       margin: 1.239rem 0; }
     .panel .main-content.align-center {
       text-align: center; }
-  .panel .main-content.fixed {
-    position: relative;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    right: auto; }
 
 .no-touch .panel .bg-container video, .no-touch .panel .bg-container canvas {
   position: absolute;
@@ -3668,6 +3726,7 @@ iframe {
         left: 48px;
         max-width: 500px; }
       .panel .main-content.right {
+        float: right;
         right: 48px;
         max-width: 500px; }
       .panel .main-content.strip {
@@ -3700,20 +3759,21 @@ iframe {
       margin-top: 20%; }
 
   .no-touch .panel .main-content {
-    position: absolute;
-    bottom: 20%; }
-  .no-touch .panel .main-content.fixed {
     position: relative;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    right: auto; }
-  .no-touch .panel .main-content.full-height {
-    top: auto;
-    bottom: 0; }
+    margin-bottom: 25%;
+    margin-top: 25%; }
   .no-touch .panel:last-child .bg-container {
     top: auto;
-    bottom: 0; } }
+    bottom: 0; }
+
+  .scroll-active .sequence .panel .bg-container {
+    opacity: 0;
+    position: absolute; }
+  .scroll-active .sequence .panel.fixed-active .bg-container {
+    position: fixed;
+    display: block; }
+  .scroll-active:first-child .bg-container {
+    opacity: 1; } }
 @media screen and (min-width: 80em) {
   .panel {
     min-height: 700px; } }

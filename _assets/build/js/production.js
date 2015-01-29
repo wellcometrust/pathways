@@ -110,7 +110,7 @@ console.log('include utils/index');
         });
     }
 
-    function extend(base, sub) {
+    function extendClass(base, sub) {
         // Avoid instantiating the base class just to setup inheritance
         // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
         // for a polyfill
@@ -142,13 +142,47 @@ console.log('include utils/index');
         return val.length ? val[0] : void 0;
     }
 
+    function unique(array1, array2) {
+        var array3 = [];
+
+        var arr = array1.concat(array2),
+            len = arr.length;
+
+        while (len--) {
+            var itm = arr[len];
+            if (array3.indexOf(itm) === -1) {
+                array3.unshift(itm);
+            }
+        }
+        return array3;
+    }
+
+    function curry() {
+        var fn = this,
+            args = Array.prototype.slice.call(arguments);
+        return function() {
+            return fn.apply(this, args.concat(
+                Array.prototype.slice.call(arguments)));
+        };
+    }
+
+    function getSrc(media) {
+        if (!media) return 'no media';
+        return media.src || media.currentSrc;
+    }
+
+
 
     exports.utils = {
         toCamelCase: toCamelCase,
         toTitleCase: toTitleCase,
         positionCenter: positionCenter,
-        extend: extend,
-        removeItemFromArray: removeItemFromArray
+        extendClass: extendClass,
+        removeItemFromArray: removeItemFromArray,
+        unique: unique,
+        extend: $.extend,
+        curry: curry,
+        getSrc: getSrc
     };
 
 }(Pathways, Pathways.system, jQuery));
@@ -309,22 +343,6 @@ console.log('include cookies/index');
 console.log('include media/index');
 
 Pathways.media = {};
-
-(function(exports, utils) {
-
-    function MediaAudio(media, config) {
-        var self = this;
-        self.media = media;
-        self.config = config;
-    }
-
-    exports.MediaAudio = MediaAudio;
-    exports.getMediaAudio = function(media, config) {
-        return new MediaAudio(media, config);
-    };
-
-
-}(Pathways.media, Pathways.utils));
 
 console.log('include media/model');
 (function(exports, $) {
@@ -549,106 +567,6 @@ console.log('include media/mixer/index');
  */
 (function(exports, w, vol, $) {
 
-    function fadeOut(media, delay, callback) {
-        delay = delay || 1000;
-        if (media && (typeof media !== 'undefined')) {
-            $(media).stop(false, true);
-            $(media).animate({
-                volume: 0
-            }, {
-                duration: delay,
-                complete: function() {
-                    this.pause();
-                    if (callback) {
-                        callback();
-                        callback = null;
-                    }
-                }
-            });
-        }
-    }
-
-    function fadeIn(media, delay, callback) {
-        delay = delay || 1000;
-        if (media && (typeof media !== 'undefined')) {
-            $(media).stop(false, true);
-            media.volume = 0;
-            media.muted = vol.isMuted();
-            media.play();
-            $(media).animate({
-                volume: 1
-            }, {
-                duration: delay,
-                complete: function() {
-                    if (callback) {
-                        callback();
-                        callback = null;
-                    }
-                }
-            });
-        }
-    }
-
-    function play(media) {
-        if (!media) return;
-        media.muted = vol.isMuted();
-        media.volume = 1;
-        media.play();
-    }
-
-    function stop(media) {
-        if (media) media.pause();
-    }
-
-    function crossplay(oldMedia, newMedia, callback) {
-        play(newMedia);
-        stop(oldMedia);
-        callback();
-    }
-
-    function crossfade(fadeOutMedia, fadeInMedia, delay, fadeOutCompleteCallback, fadeInCompleteCallback) {
-        delay = delay || 1000;
-
-        if (fadeOutMedia === fadeInMedia) {
-            if (fadeOutCompleteCallback) w.setTimeout(fadeOutCompleteCallback, delay);
-            if (fadeInCompleteCallback) w.setTimeout(fadeInCompleteCallback, delay);
-            return;
-        }
-
-        if (fadeOutMedia !== null && typeof fadeOutMedia !== 'undefined') {
-            fadeOut(fadeOutMedia, delay, fadeOutCompleteCallback);
-        } else {
-            if (fadeOutCompleteCallback) w.setTimeout(fadeOutCompleteCallback, delay);
-        }
-
-        if (fadeInMedia !== null && typeof fadeInMedia !== 'undefined') {
-            fadeIn(fadeInMedia, delay, fadeInCompleteCallback);
-        } else {
-            if (fadeInCompleteCallback) w.setTimeout(fadeInCompleteCallback, delay);
-        }
-    }
-
-    exports.mixer = {
-        crossfade: crossfade,
-        fadeIn: fadeIn,
-        fadeOut: fadeOut,
-        play: play,
-        stop: stop,
-        crossplay: crossplay
-    };
-
-
-}(Pathways.media, window, Pathways.media.vol, jQuery));
-
-
-
-(function(exports, getMediaAudio, mixer, utils, $) {
-
-    function getSrc(media) {
-        if (!media) return 'no media';
-        return media.src || media.currentSrc;
-    }
-
     function setMediaTime(media, time) {
         if (!media || typeof time === 'undefined' || isNaN(time)) return;
         if (media.readyState !== 0) {
@@ -663,17 +581,312 @@ console.log('include media/mixer/index');
 
     function setMediaStateAtStart(media, config) {
         if (!(media && config)) return;
-        setMediaTime(media, config.initTime);
+        setMediaTime(media, config.seekToTimeAtStart);
     }
 
+    function fadeOut(media, duration, config, callback) {
+        duration = duration || 0;
+        if (media && (typeof media !== 'undefined')) {
+            $(media).stop(false, true);
+            $(media).animate({
+                volume: 0
+            }, {
+                duration: duration,
+                complete: function() {
+                    this.pause();
+                    setMediaStateAtEnd(media, config);
+                    if (callback) {
+                        callback();
+                        callback = null;
+                    }
+                }
+            });
+        }
+    }
 
-    function setChannelStateOnComplete(media, channel) {
+    function fadeIn(media, duration, config, callback) {
+        duration = duration || 0;
+        if (media && (typeof media !== 'undefined')) {
+            setMediaStateAtStart(media, config);
+            $(media).stop(false, true);
+            media.volume = 0;
+            media.muted = vol.isMuted();
+            media.play();
+            $(media).animate({
+                volume: 1
+            }, {
+                duration: duration,
+                complete: function() {
+                    if (callback) {
+                        callback();
+                        callback = null;
+                    }
+                }
+            });
+        }
+    }
+
+    function crossfade(fadeOutMedia, fadeInMedia, duration, fadeOutCompleteCallback, fadeInCompleteCallback, fadeOutConfig, fadeInConfig) {
+        duration = duration || 0;
+
+        if (fadeOutMedia === fadeInMedia) {
+            if (fadeOutCompleteCallback) w.setTimeout(fadeOutCompleteCallback, duration);
+            if (fadeInCompleteCallback) w.setTimeout(fadeInCompleteCallback, duration);
+            return;
+        }
+
+        if (fadeOutMedia !== null && typeof fadeOutMedia !== 'undefined') {
+            fadeOut(fadeOutMedia, duration, fadeOutConfig, fadeOutCompleteCallback);
+        } else {
+            if (fadeOutCompleteCallback) w.setTimeout(fadeOutCompleteCallback, duration);
+        }
+
+        if (fadeInMedia !== null && typeof fadeInMedia !== 'undefined') {
+            fadeIn(fadeInMedia, duration, fadeInConfig, fadeInCompleteCallback);
+        } else {
+            if (fadeInCompleteCallback) w.setTimeout(fadeInCompleteCallback, duration);
+        }
+    }
+
+    exports.mixer = {
+        crossfade: crossfade,
+        fadeIn: fadeIn,
+        fadeOut: fadeOut
+    };
+
+
+}(Pathways.media, window, Pathways.media.vol, jQuery));
+
+(function(exports, utils) {
+
+    function getExcludesFromDefs(defs) {
+        return [].concat(defs).map(function(def) {
+            return def.config.exclude || [];
+        }).reduce(function(lastExclude, currExclude) {
+            return utils.unique(lastExclude, currExclude);
+        }, []);
+    }
+
+    function getSilenceesById(silencees, ids) {
+        return ids.map(function mapId (id) {
+            return [].concat(silencees).filter(function(silencee){
+                return silencee.id === id;
+            }).pop();
+        });
+    }
+
+    function getSilenceesByDefs(silencees, defList) {
+        return getSilenceesById(silencees, getExcludesFromDefs(defList));
+    }
+
+    function removeSilenceeSet(list, set, silencer) {
+        set.forEach(function removeSilencee(item) {
+            utils.removeItemFromArray(item, list);
+            item.removeSilencer(silencer);
+        });
+    }
+
+    function SilenceCtrl(channel) {
+
+        this.silencers = [];
+        this.silencees = [];
+        this.channel = channel;
+        this.id = this.channel.id;
+    }
+
+    SilenceCtrl.prototype = {
+
+        addSilencer: function addSilencer(silencer) {
+            this.silencers.push(silencer);
+            if (!this.hasNoSilencers()) {
+                this.channel.silence();
+            }
+        },
+
+        removeSilencer: function removeSilencer(silencer) {
+            utils.removeItemFromArray(silencer, this.silencers);
+            if (this.hasNoSilencers()) {
+                this.channel.resume();
+            }
+        },
+
+        hasNoSilencers: function hasNoSilencers(channelID) {
+            if (this.silencers.length === 0) return true;
+            return false;
+        },
+
+        addSilencee: function addSilencee(silencee) {
+            this.silencees.push(silencee);
+            silencee.addSilencer(this);
+        },
+
+        removeSilencee: function removeSilencee(silencee) {
+            var set = [].concat(silencee);
+            removeSilenceeSet(this.silencees, set, this);
+        },
+
+        removeSilenceesByDefs: function removeSilenceesByDefs(defList) {
+            defList = [].concat(defList);
+            var set = getSilenceesByDefs(this.silencees, defList);
+            if (set.length === 0) return;
+            removeSilenceeSet(this.silencees, set, this);
+        },
+
+        toString: function toString () {
+            return '[' + this.id + '] ' + this.silencers;
+        }
+    };
+
+
+    exports.silencer = {
+        SilenceCtrl: SilenceCtrl,
+        getSilenceCtrl: getSilenceCtrl = function(id, config) {
+            return new SilenceCtrl(id, config);
+        }
+    };
+
+
+}(Pathways.media, Pathways.utils));
+
+console.log('include media/channels/track');
+
+(function(exports, mixer, utils) {
+
+    var unique = utils.unique;
+
+    function MediaDefinition(media, config) {
+        this.media = media;
+        this.config = config;
+    }
+
+    MediaDefinition.prototype = {
+        play: function play(channel, config) {
+            config = utils.extend({}, this.config, config);
+            var media = this.media,
+                fadeDuration = parseInt((config && config.fadeDuration), 10),
+                maxConcurrentSounds = parseInt(config.maxConcurrentSounds, 10);
+
+            mixer.fadeIn(media, fadeDuration, config);
+            while (channel.length() > maxConcurrentSounds) {
+                var head = channel.shift();
+                mixer.fadeOut(head.media, fadeDuration, head.config);
+            }
+        },
+        stop: function stop(config) {
+            config = utils.extend({}, this.config, config);
+            var media = this.media,
+                fadeDuration = parseInt((config && config.fadeDuration), 10);
+
+            mixer.fadeOut(media, fadeDuration, config);
+        },
+        getExcludes: function getExcludes() {
+            return this.config.exclude || [];
+        }
+    };
+
+
+    function MediaDefinitionList(channel) {
+        this.list = [];
+        this.channel = channel;
+    }
+    MediaDefinitionList.prototype = {
+        push: function(media, config) {
+            var definition = getMediaDefinition(media, config);
+            this.list.push(definition);
+            // setChannelStateOnComplete(definition, this);
+            return definition;
+        },
+
+        remove: function(definition) {
+            return utils.removeItemFromArray(definition, this.list);
+        },
+        removeAll: function() {
+            var defs = [].concat(this.list);
+            this.list = [];
+            return defs;
+        },
+        removeSet: function(defs) {
+            defs = [].concat(defs);
+            var list = [].concat(this.list),
+                removed = [];
+
+            defs.forEach(function(def) {
+                var l = utils.removeItemFromArray(def, list);
+                if (l) removed.push(l);
+            });
+            this.list = list;
+            return removed;
+        },
+        removeByMedia: function(media) {
+            return this.removeSet(this.getByMedia(media));
+        },
+
+        getAll: function() {
+            return [].concat(this.list);
+        },
+        shift: function() {
+            return this.list.shift();
+        },
+        getByMedia: function(media) {
+            var mediaList = [].concat(media),
+                mediaDefs = this.list;
+
+            return mediaList.map(function(medium) {
+                return mediaDefs.filter(function(def) {
+                    return def.media === medium;
+                })[0];
+            }) || [];
+        },
+
+        isEmpty: function() {
+            return this.list.length === 0;
+        },
+        length: function() {
+            return this.list.length;
+        },
+
+        getExcludes: function getExcludes() {
+            var arr = this.list;
+            var ret = arr.map(function(def) {
+                return def.getExcludes();
+            }).reduce(function(lastExclude, currExclude) {
+                return unique(lastExclude, currExclude);
+            }, []);
+            console.log('ret', ret);
+            return ret;
+        }
+
+    };
+
+    function getMediaDefinition(media, config) {
+        return new MediaDefinition(media, config);
+    }
+
+    exports.MediaDefinition = MediaDefinition;
+    exports.getMediaDefinition = getMediaDefinition;
+
+    exports.MediaDefinitionList = MediaDefinitionList;
+    exports.getMediaDefinitionList = function() {
+        return new MediaDefinitionList();
+    };
+
+
+}(Pathways.media, Pathways.media.mixer, Pathways.utils));
+
+(function(exports, getMediaDefinitionList, getSilenceCtrl, mixer, utils, $) {
+
+    function noop() {}
+    function setChannelStateOnComplete(def, channel) {
+
+        var media = def.media,
+            config = def.config;
+
         function onComplete() {
 
-            media.currentTime = 0;
-            channel.removeMediaDefinitionsByMedia(media);
+            media.currentTime = config.seekToTimeAtEnd || 0;
+            channel.removeMediaDefinitions(def);
 
-            if (!channel.hasMediaDefinitions()) {
+            if (channel.isEmpty()) {
                 switch (channel.state.id) {
                     case 'activePlaying':
                         channel.setState(channel.getState('activeStopped'));
@@ -687,96 +900,12 @@ console.log('include media/mixer/index');
             media.removeEventListener('ended', onComplete);
         }
         media.addEventListener('ended', onComplete);
-    }
 
-    function noop() {}
-
-    function getPlayStrategy(media, config, currentDefs, _onStopComplete) {
-        var delay = parseInt(((config && config.delay) || 1000), 10),
-            noFade = (config && config.noFade),
-            single = !currentDefs,
-            noInterrupt = (config && config.noInterrupt),
-            onStopComplete = _onStopComplete || function() {},
-            result;
-
-        if (!media.paused) return noop;
-
-        // (single && noFade) || ( !single && noInterrupt && noFade)
-        function singlePlay() {
-            // console.debug('>> singlePlay ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
-            mixer.play(media);
-        }
-
-        // (single && !noFade) || ( !single && noInterrupt && !noFade)
-        function singleFade() {
-            // console.debug('>> singleFade ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
-            mixer.fadeIn(media, delay);
-        }
-
-        // !single && !noInterrupt && noFade
-        function crossPlay() {
-            // console.debug('>> crossPlay ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
-            mixer.crossplay(null, media, onStopComplete);
-            currentDefs.forEach(function(def) {
-                mixer.stop(def.media);
-            });
-        }
-
-        // !single && !noInterrupt && !noFade
-        function crossFade() {
-            // console.debug('>> crossFade ['+ channel.id + '] ', getSrc(currentMedia), getSrc(media));
-            mixer.crossfade(null, media, delay, onStopComplete);
-            currentDefs.forEach(function(def) {
-                mixer.fadeOut(def.media, delay);
-            });
-        }
-
-        if (single) {
-            if (noFade) result = singlePlay;
-            else result = singleFade;
-        } else {
-            if (noInterrupt) {
-                if (noFade) result = singlePlay;
-                else result = fadeIn;
-            } else {
-                if (noFade) result = crossPlay;
-                else result = crossFade;
-            }
-        }
-
-        return result;
-
-    }
-
-    function getStopStrategy(media, config, _onStopComplete) {
-        var delay = parseInt(((config && config.delay) || 1000), 10),
-            noFade = config && config.noFade,
-            onStopComplete = _onStopComplete || function() {},
-            result;
-
-        if (media.paused) return noop;
-
-        function singleStop() {
-            mixer.stop(media);
-            onStopComplete();
-        }
-
-        function singleFade() {
-            mixer.fadeOut(media, delay, onStopComplete);
-        }
-
-        if (noFade) {
-            result = singleStop;
-        } else {
-            result = singleFade;
-        }
-
-        return result;
+        return def;
     }
 
     function ChannelDefaultState(channel) {
-        var self = this;
-        self.channel = channel;
+        this.channel = channel;
     }
 
     ChannelDefaultState.prototype = {
@@ -800,7 +929,7 @@ console.log('include media/mixer/index');
             this.channel.setState(this.channel.getState('activeStopped'));
         }
     };
-    utils.extend(ChannelDefaultState, ChannelInactiveStoppedState);
+    utils.extendClass(ChannelDefaultState, ChannelInactiveStoppedState);
 
 
     function ChannelInactivePlayingState(channel) {
@@ -809,25 +938,30 @@ console.log('include media/mixer/index');
 
     ChannelInactivePlayingState.prototype = {
         stopAll: function() {
-            this.channel.removeAllMediaDefinitions();
+            var defs = this.channel.removeAllMediaDefinitions();
             this.channel.setState(this.channel.getState('inactiveStopped'));
+            return defs;
         },
         stop: function(media) {
-            this.channel.removeMediaDefinitionsByMedia(media);
-            if (!this.channel.hasMediaDefinitions()) {
+            var defs = this.channel.removeMediaDefinitionsByMedia(media);
+            if (this.channel.isEmpty()) {
                 this.channel.setState(this.channel.getState('inactiveStopped'));
             }
+            return defs;
         },
         resume: function() {
-            var defs = this.channel.getAllMediaDefinitions();
+            var defs = this.channel.getAllMediaDefinitions(),
+                channel = this.channel;
+
             defs.forEach(function(def) {
-                getPlayStrategy(def.media, def.config)();
+                def.play(channel);
             });
 
             this.channel.setState(this.channel.getState('activePlaying'));
+            return defs;
         }
     };
-    utils.extend(ChannelDefaultState, ChannelInactivePlayingState);
+    utils.extendClass(ChannelDefaultState, ChannelInactivePlayingState);
 
 
     function ChannelActiveStoppedState(channel) {
@@ -839,12 +973,7 @@ console.log('include media/mixer/index');
     ChannelActiveStoppedState.prototype = {
         play: function(media, config) {
             var def = this.channel.addMediaDefinition(media, config);
-
-
-            setMediaStateAtStart(media, config);
-            setChannelStateOnComplete(media, this.channel);
-
-            getPlayStrategy(media, config)();
+            def.play(this.channel, config);
 
             this.channel.setState(this.channel.getState('activePlaying'));
             return def;
@@ -854,7 +983,7 @@ console.log('include media/mixer/index');
         }
     };
 
-    utils.extend(ChannelDefaultState, ChannelActiveStoppedState);
+    utils.extendClass(ChannelDefaultState, ChannelActiveStoppedState);
 
 
     function ChannelActivePlayingState(channel) {
@@ -863,64 +992,43 @@ console.log('include media/mixer/index');
 
     ChannelActivePlayingState.prototype = {
         play: function(media, config) {
-            var lastDefs = this.channel.getAllMediaDefinitions(),
-                newDef;
+            var def = this.channel.addMediaDefinition(media, config);
+            def.play(this.channel, config);
 
-            newDef = this.channel.addMediaDefinition(media, config);
-
-            setMediaStateAtStart(media, config);
-            setChannelStateOnComplete(media, this.channel);
-
-            getPlayStrategy(media, config, lastDefs, function() {
-                lastDefs.forEach(function(def) {
-                    setMediaStateAtEnd(def.media, def.config);
-                });
-            })();
-
-            return newDef;
+            return def;
         },
         stopAll: function(config) {
 
             var defs = this.channel.removeAllMediaDefinitions();
-
             defs.forEach(function(def) {
-                config = config || def.config || {};
-
-                getStopStrategy(def.media, config, function() {
-                    setMediaStateAtEnd(def.media, config);
-                })();
+                def.stop(config);
             });
 
             this.channel.setState(this.channel.getState('activeStopped'));
+            return defs;
         },
         stop: function(media, config) {
-
-            var defsAll = this.channel.getAllMediaDefinitions();
-
             var defs = this.channel.removeMediaDefinitionsByMedia(media);
-            var defsAll2 = this.channel.getAllMediaDefinitions();
-
             defs.forEach(function(def) {
-                config = config || def.config || {};
-                getStopStrategy(def.media, config, function() {
-                    setMediaStateAtEnd(def.media, config);
-                })();
+                def.stop(config);
             });
 
-            if (!this.channel.hasMediaDefinitions()) {
+            if (this.channel.isEmpty()) {
                 this.channel.setState(this.channel.getState('activeStopped'));
             }
+            return defs;
 
         },
         silence: function() {
             var defs = this.channel.getAllMediaDefinitions();
             defs.forEach(function(def) {
-                getStopStrategy(def.media, def.config)();
+                def.stop();
             });
             this.channel.setState(this.channel.getState('inactivePlaying'));
+            return defs;
         }
     };
-    utils.extend(ChannelDefaultState, ChannelActivePlayingState);
+    utils.extendClass(ChannelDefaultState, ChannelActivePlayingState);
 
 
 
@@ -928,7 +1036,8 @@ console.log('include media/mixer/index');
 
         this.id = id;
         this.config = config || null;
-        this.mediaDefinitions = [];
+        this.media = getMediaDefinitionList(this);
+        this.silencer = getSilenceCtrl(this);
 
         this.addState('activeStopped', new ChannelActiveStoppedState(this));
         this.addState('inactiveStopped', new ChannelInactiveStoppedState(this));
@@ -951,75 +1060,60 @@ console.log('include media/mixer/index');
             return this.states[stateID];
         },
         silence: function() {
-            this.state.silence();
+            return this.state.silence();
         },
         resume: function() {
-            this.state.resume();
+            return this.state.resume();
         },
         play: function(media, config) {
             // console.debug('channel -', this.id, '- play', getSrc(media));
-            return this.state.play(media, config);
+            var def = this.state.play(media, config);
+            return def;
         },
         stopAll: function(config) {
             // console.debug('channel -', this.id, '- stop', getSrc(this.currentMedia));
-            this.state.stopAll(config);
+            return this.state.stopAll(config);
         },
         stop: function(media, config) {
             // console.debug('channel -', this.id, '- stop', getSrc(this.currentMedia));
-            this.state.stop(media, config);
+            return this.state.stop(media, config);
         },
+
 
 
         addMediaDefinition: function(media, config) {
-            var definition = {
-                media: media,
-                config: config
-            };
-            this.mediaDefinitions.push(definition);
-            return definition;
+            return setChannelStateOnComplete(this.media.push(media, config), this);
         },
+
         removeAllMediaDefinitions: function() {
-            var defs = [].concat(this.mediaDefinitions);
-            this.mediaDefinitions = [];
+            var defs = this.media.removeAll();
+            this.silencer.removeSilenceesByDefs(defs);
             return defs;
         },
         removeMediaDefinitions: function(defs) {
-            var list = [].concat(this.mediaDefinitions),
-                removed = [];
-
-            defs.forEach(function(def) {
-                var l = utils.removeItemFromArray(def, list);
-                if (l) removed.push(l);
-            });
-            this.mediaDefinitions = list;
-            return removed;
+            this.media.removeSet(defs);
+            this.silencer.removeSilenceesByDefs(defs);
+            return defs;
         },
         removeMediaDefinitionsByMedia: function(media) {
-            var defs = this.getDefinitionsFromMedia(media);
-            return this.removeMediaDefinitions(defs);
+            var defs = this.media.removeByMedia(media);
+            this.silencer.removeSilenceesByDefs(defs);
+            return defs;
         },
+
         getAllMediaDefinitions: function() {
-            var defs = [].concat(this.mediaDefinitions);
-            return defs;
+            return this.media.getAll();
         },
-        getDefinitionsFromMedia: function(media) {
-            var mediaDefs = this.mediaDefinitions;
-            mediaList = [].concat(media);
-
-            var defs = mediaList.map(function(medium) {
-                return mediaDefs.filter(function(def) {
-                    return def.media === medium;
-                })[0];
-            }) || [];
-
-            return defs;
+        shift: function() {
+            return this.media.shift();
         },
-        removeMediaDefinition: function(definition) {
-            return utils.removeItemFromArray(definition, this.mediaDefinitions);
+        isEmpty: function() {
+            return this.media.isEmpty();
         },
-        hasMediaDefinitions: function() {
-            return this.mediaDefinitions.length > 0;
+        length: function() {
+            return this.media.length();
         }
+
     };
 
 
@@ -1031,10 +1125,13 @@ console.log('include media/mixer/index');
     };
 
 
-}(Pathways.media, Pathways.media.getMediaAudio, Pathways.media.mixer, Pathways.utils, jQuery));
+}(Pathways.media, Pathways.media.getMediaDefinitionList, Pathways.media.silencer.getSilenceCtrl, Pathways.media.mixer, Pathways.utils, jQuery));
 
-console.log('include media/channels/ctrl');
-(function(exports, getChannel) {
+console.log('include media/channels/model');
+(function(exports, getChannel, utils) {
+
+    var extend = utils.extend,
+        unique = utils.unique;
 
     var CHANNEL_IDS = {
             global: 'global',
@@ -1043,50 +1140,47 @@ console.log('include media/channels/ctrl');
             component: 'component',
             fx: 'fx',
         },
+        channelList = [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.component, CHANNEL_IDS.fx],
         configs = {
             global: {
-                exclude: null
+                exclude: null,
+                fadeDuration: 1000,
+                // seekToTimeAtStart: false,
+                // seekToTimeAtEnd: false,
+                maxConcurrentSounds: 1
             },
             video: {
-                exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel]
+                exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel],
+                fadeDuration: 1000,
+                // seekToTimeAtStart: false,
+                // seekToTimeAtEnd: false,
+                maxConcurrentSounds: 1
             },
             component: {
-                exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video]
+                exclude: [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video],
+                fadeDuration: 1000,
+                // seekToTimeAtStart: false,
+                // seekToTimeAtEnd: false,
+                maxConcurrentSounds: 1
             },
             panel: {
-                exclude: [CHANNEL_IDS.global]
+                exclude: [CHANNEL_IDS.global],
+                fadeDuration: 1000,
+                // seekToTimeAtStart: false,
+                // seekToTimeAtEnd: false,
+                maxConcurrentSounds: 1
             },
             fx: {
                 exclude: null,
-                noFade: true,
-                noInterrupt: true
+                fadeDuration: 0,
+                seekToTimeAtStart: 0,
+                // seekToTimeAtEnd: false,
+                maxConcurrentSounds: 4, // or 'Infinity'
             }
         },
-        // modes = {
-        // basic: {
-        //     channels: {
-        //         global: getChannel(),
-        //         video: getChannel({ exclude: [CHANNEL_IDS.global]}),
-        //     }
-        // },
-        // component: {
-        //     channels: {
-        //         global: getChannel(),
-        //         video: getChannel({ exclude: [CHANNEL_IDS.global]}),
-        //         component : getChannel({ exclude: [CHANNEL_IDS.global, CHANNEL_IDS.video]}),
-        //     }
-        // },
-        // scroll: {
-        //     channels: {
-        //         global: getChannel(CHANNEL_IDS.global, configs.global),
-        //         video: getChannel(CHANNEL_IDS.video, configs.video),
-        //         component: getChannel(CHANNEL_IDS.component, configs.component),
-        //         panel: getChannel(CHANNEL_IDS.panel, configs.panel),
-        //         fx: getChannel(CHANNEL_IDS.fx, configs.fx)
-        //     }
-        // }
-        // },
         channels;
+
+
 
     function setMode() {
         addChannel(CHANNEL_IDS.global, configs.global);
@@ -1104,7 +1198,7 @@ console.log('include media/channels/ctrl');
 
     function addChannel(channelID, config) {
         channels = channels || {};
-        if (channels.hasOwnProperty(channelID)) return console.warn('[Pathways Channel] [addChannel] channel with id \'' + channelID + '\' already exists')
+        if (channels.hasOwnProperty(channelID)) return console.warn('[Pathways Channel] [addChannel] channel with id \'' + channelID + '\' already exists');
         channels[channelID] = getChannel(channelID, config);
     }
 
@@ -1114,114 +1208,129 @@ console.log('include media/channels/ctrl');
         return channel;
     }
 
-    function resetChannels() {
-        var channelIDs = [CHANNEL_IDS.global, CHANNEL_IDS.panel, CHANNEL_IDS.video, CHANNEL_IDS.component, CHANNEL_IDS.fx];
-        function setChannelAc(channelID) {
-            var channel = getChannelById(channelID);
-            channel.resume();
-        }
-        channelIDs.forEach(setChannelAc);
+
+
+    exports.model = {
+        init: init,
+        addChannel: addChannel,
+        removeChannel: function() {},
+        getChannelById: getChannelById,
+        CHANNEL_IDS: CHANNEL_IDS
+    };
+
+}(Pathways.media.channels, Pathways.media.channels.getChannel, Pathways.utils));
+
+console.log('include media/channels/ctrl');
+(function(exports, model, utils) {
+
+    var extend = utils.extend,
+        unique = utils.unique;
+
+    function init() {
+        model.init();
     }
 
-    function setChannelsInactive(channelsToExclude) {
-        if (!channelsToExclude || channelsToExclude.length === 0) return;
-        function setChannelIn(channelID) {
-            var channel = getChannelById(channelID);
-            channel.silence();
-        }
-        channelsToExclude.forEach(setChannelIn);
+    function getSilenceMethod(silencer) {
+        return function silenceChannel(channelID) {
+            var channel = model.getChannelById(channelID);
+            silencer.addSilencee(channel.silencer);
+        };
+    }
+
+    function silenceChannels(channelsToExclude, silencer) {
+        if (!channelsToExclude || channelsToExclude === 'none') return;
+        if (channelsToExclude === 'all') channelsToExclude = channelList;
+        if (channelsToExclude.length === 0) return;
+
+        channelsToExclude.forEach(getSilenceMethod(silencer));
     }
 
     function playMediaOnChannel(media, channelID, config) {
         if (!media) return;
-        var channel = getChannelById(channelID);
-        config = config || channel.config; //TODO: merge instead of overwrite
-        var channelsToExclude = (config && config.exclude) ? config.exclude : channel.config.exclude;
-
-        setChannelsInactive(channelsToExclude);
+        var channel = model.getChannelById(channelID);
+        config = extend({}, channel.config, config);
+        silenceChannels(config.exclude, channel.silencer);
         channel.play(media, config);
     }
 
     function stopChannel(channelID, config) {
-        var channel = getChannelById(channelID);
-        config = config || channel.config;
-        if (!channel.hasMediaDefinitions()) return;
+        var channel = model.getChannelById(channelID);
+        if (channel.isEmpty()) return;
+        config = extend({}, channel.config, config);
+
         channel.stopAll(config);
-        resetChannels();
     }
 
     function stopMediaOnChannel(media, channelID, config) {
         if (!media) return;
-        var channel = getChannelById(channelID);
-        config = config || channel.config;
+        var channel = model.getChannelById(channelID);
+        config = extend({}, channel.config, config);
+
         channel.stop(media, config);
-        resetChannels();
     }
 
     function playMediaOnPanelChannel(media, config) {
-        playMediaOnChannel(media, CHANNEL_IDS.panel, config);
+        playMediaOnChannel(media, model.CHANNEL_IDS.panel, config);
     }
 
     function stopMediaOnPanelChannel(media, config) {
-        stopMediaOnChannel(media, CHANNEL_IDS.panel, config);
+        stopMediaOnChannel(media, model.CHANNEL_IDS.panel, config);
     }
 
     function stopPanelChannel(config) {
-        stopChannel(CHANNEL_IDS.panel, config);
+        stopChannel(model.CHANNEL_IDS.panel, config);
     }
 
     function playMediaOnGlobalChannel(media, config) {
-        playMediaOnChannel(media, CHANNEL_IDS.global, config);
+        playMediaOnChannel(media, model.CHANNEL_IDS.global, config);
     }
 
     function stopMediaOnGlobalChannel(media, config) {
-        stopMediaOnChannel(media, CHANNEL_IDS.global, config);
+        stopMediaOnChannel(media, model.CHANNEL_IDS.global, config);
     }
 
     function stopGlobalChannel(config) {
-        stopChannel(CHANNEL_IDS.global, config);
+        stopChannel(model.CHANNEL_IDS.global, config);
     }
 
     function playMediaOnVideoChannel(media, config) {
-        playMediaOnChannel(media, CHANNEL_IDS.video, config);
+        playMediaOnChannel(media, model.CHANNEL_IDS.video, config);
     }
 
     function stopMediaOnVideoChannel(media, config) {
-        stopMediaOnChannel(media, CHANNEL_IDS.video, config);
+        stopMediaOnChannel(media, model.CHANNEL_IDS.video, config);
     }
 
     function stopVideoChannel(config) {
-        stopChannel(CHANNEL_IDS.video, config);
+        stopChannel(model.CHANNEL_IDS.video, config);
     }
 
     function playMediaOnComponentChannel(media, config) {
-        playMediaOnChannel(media, CHANNEL_IDS.component, config);
+        playMediaOnChannel(media, model.CHANNEL_IDS.component, config);
     }
 
     function stopMediaOnComponentChannel(media, config) {
-        stopMediaOnChannel(media, CHANNEL_IDS.component, config);
+        stopMediaOnChannel(media, model.CHANNEL_IDS.component, config);
     }
 
     function stopComponentChannel(config) {
-        stopChannel(CHANNEL_IDS.component, config);
+        stopChannel(model.CHANNEL_IDS.component, config);
     }
 
     function playMediaOnFxChannel(media, config) {
-        playMediaOnChannel(media, CHANNEL_IDS.fx, config);
+        playMediaOnChannel(media, model.CHANNEL_IDS.fx, config);
     }
 
     function stopMediaOnFxChannel(media, config) {
-        stopMediaOnChannel(media, CHANNEL_IDS.fx, config);
+        stopMediaOnChannel(media, model.CHANNEL_IDS.fx, config);
     }
 
     function stopFxChannel(config) {
-        stopChannel(CHANNEL_IDS.fx, config);
+        stopChannel(model.CHANNEL_IDS.fx, config);
     }
 
     exports.ctrl = {
         init: init,
-        addChannel: addChannel,
-        removeChannel: function() {},
 
         playMediaOnChannel: playMediaOnChannel,
         stopMediaOnChannel: stopMediaOnChannel,
@@ -1248,7 +1357,7 @@ console.log('include media/channels/ctrl');
         stopFxChannel: stopFxChannel
     };
 
-}(Pathways.media.channels, Pathways.media.channels.getChannel));
+}(Pathways.media.channels, Pathways.media.channels.model, Pathways.utils));
 
 console.log('include media/ctrl');
 (function(exports, model, vol, channelCtrl, $) {
@@ -1346,6 +1455,954 @@ console.log('include media/video/index');
 }(Pathways, Pathways, Pathways.system, Pathways.media.vol, jQuery));
 
 
+/***
+    Pathways scrollscene scrollDurations
+*/
+(function(exports, w, p, $) {
+
+    'use strict';
+
+    var screenDurationCache = 0,
+        componentDurationCache = 0,
+        mediaDurationCache = 0,
+        lastMediaDurationCache = 0,
+        opacityTransitionDurationCache = 0;
+
+    function getScreenDuration() {
+        return screenDurationCache;
+    }
+
+    function getComponentDuration(offset) {
+        return function() {
+            var val = componentDurationCache - offset;
+            return (val > 0 ? val : 0);
+        };
+    }
+
+    function getMediaDuration() {
+        return mediaDurationCache;
+    }
+
+    function getMediaDurationForPanel(panel) {
+        return function() {
+
+        };
+    }
+
+    function getOpacityTranstionDuration() {
+        return opacityTransitionDurationCache;
+    }
+
+    function updateDuration(e) {
+        // total time on screen is panel height
+        screenDurationCache = p.panelHeight;
+        opacityTransitionDurationCache = parseInt((p.panelHeight / 3), 10);
+        // visible time on screen is approx 3/4 actual time with transitions
+        componentDurationCache = parseInt((p.panelHeight * 0.75), 10);
+        // fork makes last panel sometimes not hit triggerHook, so must be accounted for
+        //mediaDurationCache = panel === $lastPanel[0] ? p.panelHeight : p.panelHeight - $('.fork').innerHeight();
+        mediaDurationCache = p.panelHeight;
+        lastMediaDurationCache = p.panelHeight - $('.fork').innerHeight();
+    }
+
+    function init() {
+        $(w).on("resize", updateDuration);
+        updateDuration();
+    }
+
+    function destroy() {
+        $(w).off("resize", updateDuration);
+    }
+
+    exports.scrollSceneDurations = {
+        init: init,
+        destroy: destroy,
+        getScreenDuration: getScreenDuration,
+        getComponentDuration: getComponentDuration,
+        getMediaDuration: getMediaDuration,
+        getOpacityTranstionDuration: getOpacityTranstionDuration
+    };
+
+}(Pathways, window, Pathways, jQuery));
+
+
+/***
+    Pathways scrollscene control
+*/
+(function(exports, w, scrollDurations, $, Sm, Ss) {
+    'use strict';
+
+    var controller,
+        globalFactories = [],
+        globalPanelFactories = [],
+        panelFactories = {},
+        panels,
+        defaultMethods = ['load', 'unload', 'getScenes'],
+        noop = function() {};
+
+    function getInstance(factory) {
+        if (!factory) return;
+        var instance;
+        // console.log(typeof factory);
+        switch (typeof factory) {
+            case 'function':
+                instance = factory();
+                break;
+            case 'object':
+                instance = factory;
+                break;
+        }
+
+        if (!instance) return;
+        defaultMethods.forEach(function (name) {
+            if(!instance[name]) instance[name] = noop;
+        });
+        return instance;
+    }
+
+    function addScrollContentFactory(sceneFactory) {
+        var instance = getInstance(sceneFactory);
+        if (!instance) return;
+        globalFactories.push(instance);
+    }
+
+    function addSinglePanelScrollFactory(id, sceneFactory) {
+        var instance = getInstance(sceneFactory);
+        if (!instance) return;
+        panelFactories[id] = (panelFactories[id] || []);
+        panelFactories[id].push(instance);
+        // console.log(panelFactories[id], instance);
+    }
+
+    function addSinglePanelScrollMethod(id, sceneMethod) {
+        var instance = getInstance({});
+        if (!instance) return;
+        instance.getScenes = sceneMethod;
+        panelFactories[id] = (panelFactories[id] || []);
+        panelFactories[id].push(instance);
+        // console.log(panelFactories[id], instance);
+    }
+
+    function removeSinglePanelScrollFactory(id, sceneFactory) {
+        //TODO: splice factory from array
+    }
+
+    function removeSinglePanelScrollMethod(id, sceneMethod) {
+        //TODO: splice method from array
+    }
+
+    function addGlobalPanelScrollFactory(sceneFactory) {
+        var instance = getInstance(sceneFactory);
+        if (!instance) return;
+        globalPanelFactories.push(instance);
+    }
+
+    function addGlobalPanelScrollMethod(sceneMethod) {
+        var instance = getInstance({});
+        if (!instance) return;
+        instance.getScenes = sceneMethod;
+        globalPanelFactories.push(instance);
+    }
+
+    function removeGlobalPanelScrollFactory(sceneFactory) {
+        //TODO: splice factory from array
+    }
+
+    function removeGlobalPanelScrollMethod(sceneMethod) {
+        //TODO: splice factory from array
+    }
+
+
+
+    function init(_panels) {
+        // console.log('initing ss control');
+        controller = new Sm({
+            //loglevel: 3
+        });
+        panels = _panels;
+
+        exports.scrollSceneCtrl.init = noop;
+    }
+
+    function destroy() {
+        // console.log('destroying ss control');
+        controller.destroy(true);
+        exports.scrollSceneCtrl.init = init;
+    }
+
+    function getEm() {
+        var args = [].splice.call(arguments, 0);
+        return function loadPanelSceneFactory(sceneFactory) {
+            // console.log('>', args, arguments);
+            sceneFactory.load.apply(sceneFactory, args);
+            var sc = sceneFactory.getScenes.apply(sceneFactory, args);
+            if (sc) controller.addScene(sc);
+        };
+    }
+
+    function ungetEm() {
+        var args = [].splice.call(arguments, 0);
+        return function unloadFactory(sceneFactory) {
+            // console.log('unloading factory scene');
+            sceneFactory.unload.apply(sceneFactory, args);
+        };
+    }
+
+    function loadPanelScenes(panel) {
+        // console.log('loading ss control scenes');
+        var pID = '#' + panel.id,
+            pEl = panel.elem,
+            pAttrs = panel,
+            loadFactory = getEm(pID, pEl, pAttrs);
+
+        globalPanelFactories.forEach(loadFactory);
+
+        if (panelFactories[panel.id]) {
+            var facs = panelFactories[panel.id];
+            // console.log(facs, loadFactory);
+            if (facs && facs.length) facs.forEach(loadFactory);
+        }
+        controller.update(true);
+    }
+
+    function unloadPanelScenes(panel) {
+        // console.log('unloading ss control scenes');
+        var pID = '#' + panel.id,
+            pEl = panel.elem,
+            pAttrs = panel,
+            unloadFactory = ungetEm(pID, pEl, pAttrs);
+
+        globalPanelFactories.forEach(unloadFactory);
+
+        if (panelFactories[panel.id]) {
+            var facs = panelFactories[panel.id];
+            if (facs && facs.length) facs.forEach(unloadFactory);
+        }
+        controller.update(true);
+    }
+
+    function load() {
+        // console.log('loading ss control');
+        globalFactories.forEach(getEm());
+        panels.forEach(loadPanelScenes);
+        scrollDurations.init();
+        // console.log('globalFactories.length:', globalFactories.length);
+    }
+
+    function unload() {
+        globalFactories.forEach(ungetEm());
+        panels.forEach(unloadPanelScenes);
+        scrollDurations.destroy();
+        // console.log(controller.info());
+    }
+
+    exports.scrollSceneCtrl = {
+        addSinglePanelScrollFactory: addSinglePanelScrollFactory,
+        addSinglePanelScrollMethod: addSinglePanelScrollMethod,
+        addGlobalPanelScrollFactory: addGlobalPanelScrollFactory,
+        addGlobalPanelScrollMethod: addGlobalPanelScrollMethod,
+        addScrollContentFactory: addScrollContentFactory,
+        init: init,
+        destroy: destroy,
+        load: load,
+        unload: unload
+    };
+
+
+}(Pathways, window, Pathways.scrollSceneDurations, jQuery, ScrollMagic));
+
+
+/**
+ * Controls Library panel transitions
+ */
+
+// Init Animations
+(Pathways.animation = function(w, doc, cjs, $, Mod) {
+    "use strict";
+
+    var anim = {};
+
+    return {
+        init: function(id, canvas) {
+
+            if (!canvas) return;
+            if (!anim[id]) return console.warn('No animation properties with id \'' + id + '\' found');
+
+            function initCanvas() {
+                var lib = anim[id].lib;
+
+                var loader = new cjs.LoadQueue(false);
+                loader.addEventListener("fileload", handleFileLoad);
+                loader.addEventListener("complete", handleComplete);
+                loader.loadManifest(lib.properties.manifest);
+                anim[id].start = function() {};
+                anim[id].stop = function() {};
+
+            }
+
+            function handleFileLoad(evt) {
+                var images = anim[id].images;
+                if (evt.item.type == "image") {
+                    images[evt.item.id] = evt.result;
+                }
+            }
+
+            function handleComplete() {
+                var lib = anim[id].lib,
+                    exportRoot = new lib.tree2(),
+                    stage = new cjs.Stage(canvas);
+
+                anim[id].stage = stage;
+
+                stage.addChild(exportRoot);
+                stage.update();
+
+                cjs.Ticker.setFPS(lib.properties.fps);
+
+                anim[id].start = function() {
+                    cjs.Ticker.addEventListener("tick", stage);
+                };
+                anim[id].stop = function() {
+                    cjs.Ticker.removeEventListener("tick", stage);
+                };
+            }
+
+            if (w.innerWidth >= 768) {
+                initCanvas();
+            }
+
+            return anim[id];
+        },
+        getAnimation: function(id) {
+            if (anim && anim[id]) return anim[id];
+            else return null;
+        },
+        addAnimation: function(id, def) {
+            anim[id] = def;
+        }
+    };
+
+}(window, document, (createjs || {}), jQuery, Modernizr));
+
+
+
+(function(w, scrollCtrl, scrollDurations, mediaCtrl, animationCtrl, utils, $, Tm, Ss) {
+
+    'use strict';
+
+    scrollCtrl.addGlobalPanelScrollFactory(function() {
+
+        return {
+            load: function(panelId, panelEl, panelAttrs) {
+                var canvas = $(panelEl).find('.panel-animation').get(0), //TODO: Allow for mulitple animations
+                    animationId = utils.toCamelCase(panelAttrs.id);
+                if (canvas)
+                    animationCtrl.init(animationId, canvas);
+            },
+            getScenes: function(panelId, panelEl, panelAttrs) {
+                var animationId = utils.toCamelCase(panelAttrs.id),
+                    animation = animationCtrl.getAnimation(animationId);
+
+                if (!animation) return null;
+
+                var scene = new ScrollScene({
+                        triggerElement: panelId,
+                        duration: Pathways.panelHeight
+                    })
+                    .on('enter', function(e) {
+                        // if (e.scrollDirection == 'FORWARD') {
+                        console.log(panelId, animation);
+                        animation.start();
+                        // }
+                    })
+                    .on('leave', function(e) {
+                        // if (e.scrollDirection == 'REVERSE') {
+                        animation.stop();
+                        // }
+                    });
+
+                return scene;
+            },
+            unload: function(panelId, panelEl, panelAttrs) {
+                var animationId = utils.toCamelCase(panelAttrs.id),
+                    animation = animationCtrl.getAnimation(animationId);
+                if (animation) animation.stop();
+            }
+        };
+    });
+
+}(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, Pathways.animation, Pathways.utils, jQuery, TweenMax, ScrollScene));
+
+/**
+ * Controls Gallery, Letter-gallery and Quiz transitions
+ */
+
+(function(w, scrollCtrl, scrollDurations, mediaCtrl, $, Tm, Ss) {
+
+    'use strict';
+
+
+    var sidebarComponents = ['gallery', 'letter-gallery', 'quiz'];
+
+    function getConfig(rawConfig) {
+        var config = null;
+        if (rawConfig) config = JSON.parse(rawConfig);
+        return config;
+    }
+
+    function getValueFromConfig(rawConfig, name) {
+        var config = getConfig(rawConfig);
+        return (config && config[name]) || null;
+    }
+
+    function findComponent($panel, type) {
+        return $panel.find('[data-component="' + type + '"]');
+    }
+
+    function getComponentScene($panel, type, getDuration) {
+        var $elem = $panel.find('[data-component="' + type + '"]'),
+            scene = [];
+
+        if ($elem.length) {
+            var offset = getValueFromConfig($elem.attr('data-config'), 'offset_height') || 0;
+
+            scene = new Ss({
+                triggerElement: $panel,
+                triggerHook: 'top',
+                duration: getDuration(offset),
+                offset: offset
+            }).on('enter', function(e) {
+                $elem.css({
+                    position: 'fixed',
+                    display: 'block'
+                });
+                setTimeout(function() {
+                    $elem.addClass('active');
+                }, 50);
+            }).on('leave', function(e) {
+                $elem.css({
+                    position: 'absolute',
+                    display: 'none'
+                });
+                setTimeout(function() {
+                    $elem.removeClass('active');
+                }, 50);
+            });
+        }
+
+        return scene;
+    }
+
+    function getComponentObjectFactory(componentId) {
+        return {
+            load: function(panelId, panelEl, panelAttrs) {
+                var $component = findComponent($(panelEl), componentId);
+                if ($component.length) $component.hide();
+            },
+            getScenes: function(panelId, panelEl, panelAttrs) {
+                var m = function m(offset) {
+                    return function ret() {
+                        return Math.max((panelAttrs.componentHeight - offset), 0);
+                    };
+                };
+                return getComponentScene($(panelEl), componentId, m);
+            },
+            unload: function(panelId, panelEl, panelAttrs) {
+                var $component = findComponent($(panelEl), componentId);
+                if ($component.length) $component.removeAttr('style');
+            }
+        };
+    }
+
+    sidebarComponents.forEach(function(componentId) {
+        scrollCtrl.addGlobalPanelScrollFactory(function() {
+            return getComponentObjectFactory(componentId);
+        });
+    });
+
+
+}(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));
+
+/**
+ * Black-strip positioning
+ */
+
+(function(w, scrollCtrl, scrollDurations, mediaCtrl, $, Tm, Ss) {
+
+    'use strict';
+
+
+    scrollCtrl.addGlobalPanelScrollFactory(function() {
+        var $blackStrips = $('.black-strip'),
+        currY = Pathways.panelHeight;
+
+        if ($blackStrips.length === 0) return; //Check for any strips on page; if none, don't create this object
+
+        function resizeBlackStrips(e) {
+            currY = (currY === 0) ? 0 : Pathways.panelHeight;
+            $blackStrips.css({
+                position: 'fixed',
+                'transform': 'translate(0,' + currY + 'px)',
+                height: Pathways.panelHeight
+            });
+        }
+
+        return {
+            load: function() {
+                resizeBlackStrips();
+                w.addEventListener('resize', resizeBlackStrips);
+            },
+            getScenes: function(panelId, panelEl, panel) {
+                var scenes = [],
+                    $strip = $(panelEl).find('.black-strip'),
+                    inTw = function(e) {
+                        Tm.to($strip, 0.5, {
+                            y: 0,
+                            onComplete: function(){
+                                currY = 0;
+                            }
+                        });
+                    },
+                    outTw = function(e) {
+                        Tm.to($strip, 0.2, {
+                            y: Pathways.panelHeight,
+                            onComplete: function(){
+                                currY = Pathways.panelHeight;
+                            }
+                        });
+                    };
+
+                if ($strip.length === 0 || !panel.content) return; // Check for strips in panel; if none, don't return the scene
+
+                scenes.push(new ScrollScene({
+                        triggerElement: panel.content,
+                        triggerHook: 'bottom',
+                        duration: panel.content.offsetHeight + Pathways.panelHeight
+                    })
+                    .on('enter', inTw)
+                    .on('leave', outTw));
+
+                return scenes;
+            },
+            unload: function() {
+                $blackStrips.removeAttr('style');
+                w.removeEventListener('resize', resizeBlackStrips);
+            }
+        };
+    });
+
+
+
+}(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));
+
+Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
+    var scrollFadeSelector = '[data-scroll-fadeIn]';
+
+    if ($(scrollFadeSelector).length === 0) return null;
+
+    return {
+        load: function() {
+            $(scrollFadeSelector).css('opacity', 0);
+        },
+        getScenes: function() {
+            var scenes = [];
+            $(scrollFadeSelector).each(function() {
+                var $this = $(this),
+                    tween = TweenMax.to($this, 1, {
+                        opacity: 1
+                    }),
+                    offset = $this.data('offset') ? $this.data('offset') : 0;
+
+                var scene = new ScrollScene({
+                        triggerElement: $this,
+                        duration: 200,
+                        offset: offset
+                    })
+                    .setTween(tween);
+
+                scenes.push(scene);
+            });
+
+            return scenes;
+        },
+        unload: function() {
+            $(scrollFadeSelector).removeAttr('style');
+        }
+    };
+});
+
+/**
+ * Controls Info panel transitions
+ */
+
+(function(w, scrollCtrl, scrollDurations, mediaCtrl, $, Tm, Ss) {
+
+    'use strict';
+
+    scrollCtrl.addGlobalPanelScrollFactory(function() {
+        var heightOffset = 60,
+            visibleOffset = 0;
+
+        return {
+            load: function(panelId, panelEl, panelAttrs) {
+                var $component = $('[data-panel="' + panelAttrs.id + '"]').first(),
+                    offsetHeight = $component.outerHeight() - heightOffset,
+                    offsetWidth = $component.outerWidth(),
+                    val = 'translate(' + offsetWidth + 'px, ' + offsetHeight + 'px)';
+
+                if ($component.length) {
+                    $component.css({
+                        'transform': val
+                    });
+                }
+            },
+            getScenes: function(panelId, panelEl, panelAttrs) {
+                var $component = $('[data-panel="' + panelAttrs.id + '"]').first(),
+                    scene = [];
+
+                var m = function m(offset) {
+                    return function ret() {
+                        return Math.max((panelAttrs.componentHeight - offset), 0);
+                    };
+                };
+
+                if ($component.length) {
+                    scene = new Ss({
+                        triggerElement: panelEl,
+                        triggerHook: 'middle',
+                        duration: m(visibleOffset),
+                        offset: visibleOffset
+                    }).on('enter', function(e) {
+                        $component.addClass('info-panel-ready');
+                    }).on('leave', function(e) {
+                        $component.removeClass('info-panel-ready');
+                    });
+                }
+
+                return scene;
+            },
+            unload: function(panelId, panelEl, panelAttrs) {
+                var $component = $('[data-panel="' + panelAttrs.id + '"]').first();
+                if ($component.length) $component.removeAttr('style');
+            }
+        };
+    });
+
+}(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));
+
+/**
+ * Controls panel media auto play and stop
+ */
+
+(function(w, scrollCtrl, scrollDurations, mediaCtrl, $, Tm, Ss) {
+
+    'use strict';
+
+    function getConfig(rawConfig) {
+        var config = null;
+        if (rawConfig) config = JSON.parse(rawConfig);
+        return config;
+    }
+
+    function getPlay(channelID) {
+        return function playMedia(index, media) {
+            var config = getConfig($(media).attr('data-config'));
+            mediaCtrl.playMediaOnChannel(media, channelID, config);
+        };
+    }
+
+    function getStop(channelID) {
+        return function stopMedia(index, media) {
+            var config = getConfig($(media).attr('data-config'));
+            mediaCtrl.stopMediaOnChannel(media, channelID, config);
+        };
+    }
+
+    scrollCtrl.addGlobalPanelScrollFactory(function() {
+
+        return {
+            load: function(panelId, panelEl, panelAttrs) {
+
+            },
+            getScenes: function(panelId, panelEl, panelAttrs) {
+                var $panel = $(panelId),
+                    $panelAudio = $panel.find('[data-audio="panel"]'),
+                    $panelVideo = $panel.find('[data-video="panel"]'),
+                    $fxAudio = $panel.find('[data-audio="fx"]'),
+                    scene = [];
+
+                if ($panelVideo.length || $panelAudio.length || $fxAudio.length) {
+
+                    scene = new Ss({
+                            triggerElement: panelEl,
+                            duration: scrollDurations.getMediaDuration
+                        })
+                        .on('enter', function() {
+                            $panelVideo.each(getPlay('video'));
+                            $panelAudio.each(getPlay('panel'));
+                            $fxAudio.each(getPlay('fx'));
+                        })
+                        .on('leave', function() {
+                            $panelVideo.each(getStop('video'));
+                            $panelAudio.each(getStop('panel'));
+                            mediaCtrl.stopFxChannel({
+                                noFade: true
+                            });
+                        });
+                }
+                return scene;
+            },
+            unload: function(panelId, panelEl, panelAttrs) {
+
+            }
+        };
+    });
+
+}(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));
+
+/**
+ * Controls panel transitions
+ */
+(function(w, scrollCtrl, scrollDurations, mediaCtrl, $, Tm, Ss) {
+
+    'use strict';
+
+    scrollCtrl.addGlobalPanelScrollFactory(function() {
+        return {
+            load: function(panelId, panelEl, panelAttrs) {
+                $('html').addClass('scroll-active');
+                $(panelEl).removeClass('fixed-active');
+            },
+            getScenes: function(panelId, panelEl, panelAttrs) {
+                var scenes = [],
+                    $panel = $(panelEl),
+                    $bg = $(panelAttrs.bg),
+                    triggerHook = panelAttrs.isFirst ? 'top' : 'middle',
+                    $survey = $('.survey'),
+                    $bottom = $survey.length ? $survey : $('.fork'),
+                    tween = Tm.to($bg, 1, {
+                        opacity: 1
+                    });
+
+                scenes.push(new Ss({
+                        triggerElement: $panel,
+                        triggerHook: triggerHook,
+                        duration: scrollDurations.getScreenDuration,
+                    })
+                    .on('start', function(e) {
+                        if (e.scrollDirection == 'FORWARD') {
+                            $panel.addClass('fixed-active');
+                        } else {
+                            setTimeout(function() {
+                                $panel.removeClass('fixed-active');
+                            }, 50);
+                        }
+                    }));
+
+                if (!panelAttrs.isFirst) {
+                    // Panels Opacity transition
+                    scenes.push(new Ss({
+                            triggerElement: $panel,
+                            triggerHook: triggerHook,
+                            duration: scrollDurations.getOpacityTranstionDuration
+                        })
+                        .setTween(tween));
+                }
+                return scenes;
+            },
+            unload: function(panelId, panelEl, panelAttrs) {
+                $('html').removeClass('scroll-active');
+                $(panelEl).removeClass('fixed-active');
+            }
+        };
+    });
+
+    Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
+        var $panels = $('.panel'),
+            $survey = $('.survey'),
+            $bottom = $survey.length ? $survey : $('.fork');
+
+        if ($bottom.length === 0) return null;
+
+        return {
+            load: function() {
+                $panels.removeClass('fixed-active');
+            },
+            getScenes: function() {
+                var scenes = [];
+
+                scenes.push(new Ss({
+                    triggerElement: $bottom,
+                    triggerHook: 'bottom'
+                }).on('start', function(e) {
+                    if (e.scrollDirection == 'FORWARD') {
+                        $panels.removeClass('fixed-active');
+                    } else {
+                        $panels.addClass('fixed-active');
+                    }
+                }));
+
+                return scenes;
+            },
+            unload: function() {
+                $panels.removeClass('fixed-active');
+            }
+        };
+    });
+
+
+}(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));
+
+// Init parallax ScrollScenes
+(function(w, $, p, scrollCtrl, Sc, Tm, Mod) {
+
+    "use strict";
+
+    scrollCtrl.addScrollContentFactory(function() {
+
+        var parallaxSelectors = '[data-scroll-parallax-effect]',
+            $start = $('.start'),
+            $parallaxContent,
+            scenes = [];
+
+        function processParallaxes(index, parallax) {
+            var $parallax = $(parallax),
+                rawconfig = $parallax.find(parallaxSelectors).get(0),
+                fallRate = 0.3,
+                endOpacity = 0,
+                config;
+
+            if (rawconfig) {
+                config = JSON.parse(rawconfig);
+                fallRate = isNaN(config.fallRate) ? fallRate : config.fallRate;
+                endOpacity = isNaN(config.endOpacity) ? endOpacity : config.endOpacity;
+            }
+
+            var tween = Tm.to($parallax, 1, {
+                opacity: endOpacity,
+                y: p.panelHeight * fallRate
+            });
+
+            var scene = new Sc({
+                    triggerElement: $start,
+                    duration: p.panelHeight,
+                    triggerHook: 'top'
+                })
+                .on('enter', function(e) {
+                    $parallax.css({
+                        'display': 'block'
+                    });
+                })
+                .on('leave', function(e) {
+                    if (e.scrollDirection === 'FORWARD')
+                        $parallax.css({
+                            'display': 'none'
+                        });
+                })
+                .setTween(tween);
+
+            scenes.push(scene);
+        }
+
+        return {
+
+            getScenes: function() {
+                scenes = [];
+                $parallaxContent = $start.find(parallaxSelectors);
+                $parallaxContent.each(processParallaxes);
+                return scenes;
+            }
+        };
+    });
+
+}(window, jQuery, Pathways, Pathways.scrollSceneCtrl, ScrollScene, TweenMax, Modernizr));
+
+/**
+ * Sliding panels controls
+ */
+
+(function(w, scrollCtrl, scrollDurations, mediaCtrl, $, Tm, Ss) {
+
+    'use strict';
+
+
+    scrollCtrl.addGlobalPanelScrollFactory(function() {
+        var heightOffset = 60;
+        var translations = [-100, 100],
+            defaultFxAudioSrc = 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3',
+            $root,
+            $components,
+            offset = 0;
+
+        return {
+            load: function(panelId, panelEl, panelAttrs) {
+                $root = $(panelEl).find('.sliding-panels');
+                $components = $root.find('.sliding-panel');
+                offset = $root.data('sliding-offset') || 0;
+
+                $components.each(function(index) {
+                    var val = 'translate(' + translations[((index + offset) % 2)] + 'px,0)';
+
+                    $(this).css({
+                        'opacity': 0,
+                        'transform': val,
+                    });
+                });
+
+            },
+            getScenes: function(panelId, panelEl, panelAttrs) {
+                var idx = 0,
+                    scenes = [],
+                    // offset = slideStart,
+                    tween;
+
+                $components = $components || $(panelEl).find('.sliding-panel');
+                $components.each(function(index) {
+                    var $this = $(this),
+                        fxAudioSrc = $this.data('fx') || defaultFxAudioSrc,
+                        fxAudio = new Audio(fxAudioSrc),
+                        translateVal = translations[((index + offset) % 2)],
+                        val = 'translate(' + translations[((index + offset) % 2)] + 'px,0)';
+
+                    // $this.css('transform', val);
+                    // $this.css('-webkit-transform', val);
+
+                    tween = Tm.to($this, 1, {
+                        x: 0,
+                        opacity: 1
+                    });
+
+                    scenes[idx++] = new Ss({
+                            triggerElement: $this,
+                            duration: 200,
+                            offset: offset
+                        })
+                        .on('enter', function(e) {
+                            if (e.scrollDirection === 'FORWARD') {
+                                console.log('playing:', fxAudioSrc);
+                                if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
+                            } else if (e.scrollDirection == 'REVERSE') {
+                                if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
+                            }
+                        })
+                        .on('leave', function(e) {
+                            //if (fxAudio) mediaCtrl.stopMediaOnFxChannel(fxAudio);
+                        })
+                        .setTween(tween);
+                });
+
+
+                return scenes;
+            },
+            unload: function(panelId, panelEl, panelAttrs) {
+                var $components = $components || $(panelEl).find('.sliding-panel');
+                if ($components.length) $components.removeAttr('style');
+            }
+        };
+    });
+
+}(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));
+
 console.log('include main');
 
 function _(str) {
@@ -1355,10 +2412,11 @@ function _(str) {
 Pathways.MIN_COMPONENT_LEVEL = 2;
 Pathways.MIN_SCROLL_LEVEL = 4;
 
+
 /***
     Pathways main
 */
-(function(exports, w, _, sys, utils, media, vol, video, $, undefined) {
+(function(exports, w, _, p, sys, utils, media, vol, video, scrollSceneCtrl, $, undefined) {
 
     'use strict';
 
@@ -1377,9 +2435,9 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         panelHeightDecreased = false;
 
 
-    exports.panelHeight = calcPanelHeight(minHeight);
+    exports.panelHeight = calcPanelHeight();
     exports.getPanelHeight = function() {
-        return this.panelHeight;
+        return exports.panelHeight;
     };
 
 
@@ -1396,39 +2454,44 @@ Pathways.MIN_SCROLL_LEVEL = 4;
     }
 
 
-    function calcPanelHeight(oldHeight) {
-        var newHeight = sys.innerHeight < minHeight ? minHeight : sys.innerHeight;
-
-        if (oldHeight > newHeight) {
-            panelHeightDecreased = true;
-        } else {
-            panelHeightDecreased = false;
-        }
-
-
-        return newHeight;
+    function calcPanelHeight() {
+        return parseInt((sys.innerHeight < minHeight ? minHeight : sys.innerHeight), 10);
     }
 
 
 
 
 
-    function initPanel(panel) {
+    function initPanel(panel, isFirst, isLast) {
 
         var $panel = $(panel),
+            id = $panel.attr('id'),
             data = $panel.attr('data-config'),
             bg = $panel.find('.bg-container').get(0),
             content = $panel.find('.main-content').get(0),
+            contentHeight = $(content).outerHeight(),
             configData = {};
 
+
+        if (!id) throw new Error('All panels require an id [' + panel + ']');
         if (data) configData = JSON.parse(data);
 
-        return {
+        var panelOb = {
+            id: id,
             elem: panel,
             config: configData,
             bg: bg,
-            content: content
+            content: content,
+            contentHeight: contentHeight,
+            isFirst: isFirst,
+            isLast: isLast
         };
+
+        panelOb.getContentHeight = function() {
+            return panelOb.contentHeight;
+        };
+
+        return panelOb;
     }
 
     function isRatioPreserved(panel) {
@@ -1437,10 +2500,16 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
     function initPanels(panelSelector) {
         var $panels = $(panelSelector),
+            first = $panels.first().get(0),
+            last = $panels.last().get(0),
+            isFirst, isLast,
             panels = [];
 
         $panels.each(function(index, panel) {
-            panels.push(initPanel(panel));
+            // console.log(panel);
+            isFirst = panel === first;
+            isLast = panel === last;
+            panels.push(initPanel(panel, isFirst, isLast));
         });
         return panels;
     }
@@ -1472,8 +2541,11 @@ Pathways.MIN_SCROLL_LEVEL = 4;
             if (typeof method === 'undefined' || method === null) return console.warn('Could not load the necessary component: ' + handlerClass);
 
             if (id && method[id] && method[id].data) data = method[id].data;
-
-            method(component, data);
+            if (typeof method === 'function') {
+                method(component, data);
+            } else if (typeof method === 'object') {
+                method.onLoad(component, data);
+            }
         });
     }
 
@@ -1508,7 +2580,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         }
     }
 
-    function unsizePanels(panels) {
+    function unsizePanels(startPanel, panels) {
         if (startPanel) unSetElementHeight(startPanel);
 
         var unsizePanel = function(index, child) {
@@ -1531,40 +2603,54 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         }
     }
 
-    function resizePanel(panel, viewPortHeight) {
-        var _panel = panel.elem;
+    function getTotalHeight(el) {
+        var style = getComputedStyle(el, null),
+            margin = parseFloat(style.marginTop) + parseFloat(style.marginBottom);
 
-        // unSetElementHeight(_panel);
+            // console.log('margin', margin);
+        return el.offsetHeight + margin;
+    }
+
+    function resizePanel(panel, viewPortHeight, index) {
+        var _panel = panel.elem;
 
         var config = panel.config,
             _bg = panel.bg,
             _content = panel.content,
-
+            // id = $(panel.elem).attr('id'),
             panelHeight = _panel.offsetHeight,
-            offset = config ? ((sys.supportsTouch || !config.offset_height) ? 0 : config.offset_height) : 0,
-            largerContentHeight,
             newPanelHeight;
 
         if (_content) {
-            largerContentHeight = parseInt(Math.max(_content.offsetHeight, viewPortHeight), 10);
-            newPanelHeight = largerContentHeight + offset;
+            var $content = $(_content),
+                contentHeight = getTotalHeight(_content),
+                largerContentHeight;
+
+            // console.log('c, p', id, contentHeight, panelHeight);
+            largerContentHeight = parseInt(Math.max(contentHeight, viewPortHeight), 10);
+            newPanelHeight = largerContentHeight;
 
         } else {
             newPanelHeight = viewPortHeight;
         }
 
+        panel.contentHeight = newPanelHeight;
+        panel.componentHeight = parseInt((newPanelHeight * 0.75), 10);
 
-        if (panelHeight !== newPanelHeight) {
+        // console.log('p np:', index, panelHeight, newPanelHeight, (newPanelHeight === viewPortHeight));
+
+        // if (panelHeight !== newPanelHeight) {
+        //     setElementHeight(_panel, newPanelHeight);
+        // }
+
+        if (newPanelHeight === viewPortHeight) {
+            // console.log(index, ' setting new height ', newPanelHeight);
             setElementHeight(_panel, newPanelHeight);
+        } else {
+            unSetElementHeight(_panel);
         }
 
         if (_bg) setElementHeight(_bg, viewPortHeight);
-
-        if (_content) { // If content is absolutely positioned with a top - or -bottom value, height will not be calc'd properly unless prop is removed
-            var top = _content.offsetTop;
-            if (top < 0) _content.classList.add('full-height');
-            else _content.classList.remove('full-height');
-        }
 
     }
 
@@ -1579,7 +2665,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         if (startPanel) setElementHeight(startPanel, exports.panelHeight);
 
         for (var i = 0; i < panels.length; i++) {
-            resizePanel(panels[i], exports.panelHeight);
+            resizePanel(panels[i], exports.panelHeight, i);
 
             if (isRatioPreserved(panels[i])) {
                 $(panels[i].elem).children().each(resizePanelChild);
@@ -1587,82 +2673,68 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         }
     }
 
-    function removeScrollSceneStyling() {
-
-        if (startPanel) $(startPanel).removeAttr('style');
-        $('.comic-panel').removeAttr('style');
-
-        for (var i = 0; i < panels.length; i++) {
-            var panel = panels[i],
-                $bg = $(panel.bg),
-                $panel = $(panel.elem),
-                panelID = $panel.attr('id'),
-                $libraryPanel = $panel.find('[data-panel="' + panelID + '"]').first(),
-                $gallery = $panel.find('[data-component="gallery"]'),
-                $quiz = $panel.find('[data-component="quiz"]'),
-                $slidingPanels = $panel.find('.sliding-panel');
-
-            if ($bg.length) $bg.removeAttr('style');
-            if ($libraryPanel.length) $libraryPanel.removeAttr('style');
-            if ($gallery.length) $gallery.removeAttr('style');
-            if ($quiz.length) $quiz.removeAttr('style');
-            if ($slidingPanels.length) $slidingPanels.removeAttr('style');
-
-        }
-    }
-
     var panelsUnsized = false;
 
     function resizeCheck() {
-        if (sys.level < exports.MIN_COMPONENT_LEVEL) {
-            unsizePanels(panels);
+
+        exports.panelHeight = calcPanelHeight();
+
+        if (sys.level < p.MIN_COMPONENT_LEVEL) {
+            unsizePanels(startPanel, panels);
             panelsUnsized = true;
-        } else if (sys.level >= exports.MIN_COMPONENT_LEVEL && sys.level < exports.MIN_SCROLL_LEVEL) {
+        } else if (sys.level >= p.MIN_COMPONENT_LEVEL && sys.level < p.MIN_SCROLL_LEVEL) {
+            unsizePanels(startPanel);
             resizePanels(null, ratioedPanels);
             panelsUnsized = false;
-        } else if (sys.level >= exports.MIN_SCROLL_LEVEL) {
+        } else if (sys.level >= p.MIN_SCROLL_LEVEL) {
             resizePanels(startPanel, panels);
             panelsUnsized = false;
         }
     }
 
-    function loadCheck(onScrollLoad, onScrollUnload) {
-        exports.panelHeight = calcPanelHeight(exports.panelHeight);
+    function loadCheck() {
+        exports.panelHeight = calcPanelHeight();
 
         // If it's iPad width or larger, load the components
         if (!componentsLoaded) {
-            if (sys.level >= exports.MIN_COMPONENT_LEVEL) {
+            if (sys.level >= p.MIN_COMPONENT_LEVEL) {
                 loadComponents(exports.components);
                 componentsLoaded = true;
             }
         } else {
-            if (sys.level < exports.MIN_COMPONENT_LEVEL) {
+            if (sys.level < p.MIN_COMPONENT_LEVEL) {
                 // unload components
             }
         }
 
         if (!scenesLoaded) {
             // If it's a non-touch device, load the scenes.
-            if (sys.level >= exports.MIN_SCROLL_LEVEL) {
-                sceneController = onScrollLoad();
+            if (sys.level >= p.MIN_SCROLL_LEVEL) {
 
                 media.model.init(panels);
                 media.ctrl.init();
 
-
                 vol.enable();
                 media.ctrl.playMediaOnGlobalChannel(media.model.globalAudio());
+
+                if (scrollSceneCtrl) {
+                    scrollSceneCtrl.init(panels);
+                    scrollSceneCtrl.load();
+
+                }
 
                 scenesLoaded = true;
             }
         } else {
-            if (sys.level < exports.MIN_SCROLL_LEVEL) {
-                sceneController.destroy(true);
-                removeScrollSceneStyling();
-                onScrollUnload();
+            if (sys.level < p.MIN_SCROLL_LEVEL) {
 
                 media.ctrl.disable();
                 vol.disable();
+
+                if (scrollSceneCtrl) {
+                    scrollSceneCtrl.unload(panels);
+                    scrollSceneCtrl.destroy();
+                }
 
                 scenesLoaded = false;
             }
@@ -1671,7 +2743,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
 
 
-    function init(onLoadComplete, onScrollLoad, onScrollUnload) {
+    function init(onLoadComplete) {
 
         startPanel = $('.start').get(0);
         panels = initPanels('.panel');
@@ -1680,12 +2752,12 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
         w.addEventListener('resize', function() {
             resizeCheck();
-            loadCheck(onScrollLoad, onScrollUnload);
+            loadCheck();
         });
 
         w.addEventListener('load', function() {
             resizeCheck();
-            loadCheck(onScrollLoad, onScrollUnload);
+            loadCheck();
         });
 
         // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
@@ -1699,7 +2771,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
             onLoadComplete();
             resizeCheck();
-            loadCheck(onScrollLoad, onScrollUnload);
+            loadCheck();
 
             video.init(panels);
 
@@ -1715,7 +2787,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
     utils.getHeightWithOffset = getHeightWithOffset;
     utils.getWidthWithOffset = getWidthWithOffset;
 
-}(Pathways, this, _, Pathways.system, Pathways.utils, Pathways.media, Pathways.media.vol, Pathways.video, jQuery));
+}(Pathways, this, _, Pathways, Pathways.system, Pathways.utils, Pathways.media, Pathways.media.vol, Pathways.video, Pathways.scrollSceneCtrl, jQuery));
 
 var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
@@ -1789,7 +2861,7 @@ console.log('include core audio-player');
             audio.addEventListener('timeupdate', timeUpdate);
             // console.log(audio.currentTime);
             if (audio.currentTime !== 0) {
-                mediaCtrl.playMediaOnComponentChannel(audio, { noFade: true });
+                mediaCtrl.playMediaOnComponentChannel(audio, { fadeDuration: 0 });
             } else {
                 mediaCtrl.playMediaOnComponentChannel(audio);
             }
@@ -1807,7 +2879,7 @@ console.log('include core audio-player');
         return function pause() {
             if (audio.paused) return;
             vol.removeView(linkedView);
-            mediaCtrl.stopMediaOnComponentChannel(audio, { noFade: true });
+            mediaCtrl.stopMediaOnComponentChannel(audio, { fadeDuration: 0 });
             audio.addEventListener('pause', onPause);
         };
     }
@@ -2361,6 +3433,7 @@ Pathways.components.core = Pathways.components.core || {};
 
     // Assumes selector will be in form '[data-<val>]'
     function init(selector) {
+        console.log('initing ga');
         attrSelector = selector;
         baseSelector = selector.replace(/\[data-(\w*)\]/, '$1');
         update();
@@ -2482,6 +3555,26 @@ console.log('include panel audio-player');
 
 }(Pathways.components, Pathways.components.core.audioPlayer, jQuery));
 
+(function(w, exports, ga, $) {
+
+    var repOpen = 'l3 open library',
+        repClose = 'l3 close library';
+
+    exports.clickActive = function(element, data) {
+
+        var $element = $(element),
+            targetSel = $element.data('click-active-target') || '.info-box',
+            $target = $(targetSel);
+
+        $element.on('click', targetSel, function toggleActive(e) {
+            $element.toggleClass('active');
+            return false;
+        });
+
+    };
+
+}(window, Pathways.components, Pathways.components.core.ga, jQuery));
+
 (function(w, doc, exports, overlay, $, utils) {
 
     exports.cropZoom = function(element, data) {
@@ -2528,8 +3621,7 @@ console.log('include panel audio-player');
 
                 $overlay.append($popup);
 
-                // Set an event so that after the image transitions in, show the text
-                $imageCrop.get(0).addEventListener('transitionend', function() {
+                setTimeout(function() {
                     $text.css({
                         top: (window.innerHeight - $text.outerHeight() - 15)
                     });
@@ -2540,7 +3632,22 @@ console.log('include panel audio-player');
                         $text.css('left', 40);
 
                     $text.addClass('show');
-                });
+                }, 500);
+                //Can't use transtionend with ie9 :( the delay is css timing value
+
+                // Set an event so that after the image transitions in, show the text
+                // $imageCrop.get(0).addEventListener('transitionend', function() {
+                //     $text.css({
+                //         top: (window.innerHeight - $text.outerHeight() - 15)
+                //     });
+
+                //     if (position == 'right')
+                //         $text.css('right', 40);
+                //     else
+                //         $text.css('left', 40);
+
+                //     $text.addClass('show');
+                // });
 
                 $imageCrop.css({
                     top: 0,
@@ -3207,109 +4314,6 @@ console.log('include letter-gallery');
 
 }(Pathways.components, window, Pathways.components.core.overlay.getCtrl, Pathways.components.core.carousel.getCarousel, Pathways.components.core.imageLoader.getImageLoader, Pathways.components.core.audioPlayer, Pathways.utils, jQuery, Hammer, Modernizr));
 
-(function(exports, w, ga, $) {
-
-    var repOpen = 'l2 open share',
-        repClose = 'l2 close share';
-
-    exports.libraryPanel = function(element, data) {
-
-        function closePanel($panel) {
-            $panel.css('transform', 'translate(' + ($panel.outerWidth()) + 'px, ' + ($panel.outerHeight() - 60) + 'px)');
-            $panel.removeClass('active');
-        }
-
-        function openPanel($panel) {
-            $panel.css('transform', 'translate(38px, 38px)');
-            $panel.addClass('active');
-        }
-
-        $(element).on('click', '.handle', function() {
-            var $this = $(this);
-            var $panel = $this.parent();
-
-            //console.log(gaData);
-
-            if ($panel.hasClass('active')) {
-                closePanel($panel);
-                ga.setState($this, repClose, repOpen);
-
-            } else {
-                openPanel($panel);
-                $(window).one('scroll', function() {
-                    closePanel($panel);
-                    ga.setState($this, repClose, repOpen);
-                });
-                ga.setState($this, repOpen, repClose);
-            }
-        });
-    };
-
-}(Pathways.components, window, Pathways.components.core.ga, jQuery));
-
-(function(mod, overlay, ga, $) {
-
-    function Modal(elm, data) {
-
-        var self = this,
-            $elm = elm,
-            baseClass = 'modal-box',
-            hiddenClass = 'modal-box-hidden',
-            shownClass = 'modal-box-shown',
-            $overlay,
-            $img;
-
-        this.init = function() {
-
-            var img = new Image(),
-                ctrl = overlay.getCtrl(),
-                $overlay = ctrl.$overlay,
-                $img = $(img),
-                $container = $('<div/>').addClass(baseClass + ' ' + hiddenClass),
-                src = $elm.attr('data-image'),
-                caption = $elm.data('caption'),
-                download = $elm.data('download'),
-                gaLabel = ($elm.data('ga') || src) + ' - download',
-                $caption = caption ? $('<p>' + caption + '</p>').addClass('text') : '';
-                $download = download ? $('<a>Download</a>')
-                            .attr('href', download).addClass('download')
-                            .click(function(){
-                                ga.send(gaLabel);
-                            }) : '';
-
-            //console.log('ga', gaTracking);
-            img.src = $elm.attr('data-image');
-            $caption.append($download);
-
-            $container.on('click', ctrl.closeHandler);
-
-            img.onload = function() {
-                $overlay.append($container);
-                $container.append($img);
-                $container.append($caption);
-                $container.removeClass(hiddenClass).addClass(shownClass);
-            };
-        };
-    }
-
-    mod.modal = function(element, data) {
-
-        $(element).find('.modal').on('click', function() {
-            // var id = $(this).data('id');
-            // if (!id) return console.warn('No id defined for modal element:' + this);
-            // var mData = data[id];
-            // if (!mData) console.warn('No data defined for modal id \'' + id + '\'');
-            //
-            var modal = new Modal($(this), data);
-            modal.init();
-        });
-
-    };
-
-
-
-}(Pathways.components, Pathways.components.core.overlay, Pathways.components.core.ga, jQuery));
-
 (function(exports, w, doc, overlay, $, utils) {
 
     exports.playerOverlay = function(elem) {
@@ -3714,6 +4718,69 @@ function Quiz(element, data) {
     this.init();
 }
 
+(function(exports, overlay, ga, $) {
+
+    function Modal(elm, data) {
+
+        var self = this,
+            $elm = elm,
+            baseClass = 'modal-box',
+            hiddenClass = 'modal-box-hidden',
+            shownClass = 'modal-box-shown',
+            $overlay,
+            $img;
+
+        this.init = function() {
+
+            var img = new Image(),
+                ctrl = overlay.getCtrl(),
+                $overlay = ctrl.$overlay,
+                $img = $(img),
+                $container = $('<div/>').addClass(baseClass + ' ' + hiddenClass),
+                src = $elm.attr('data-image'),
+                caption = $elm.data('caption'),
+                download = $elm.data('download'),
+                gaLabel = ($elm.data('ga') || src) + ' - download',
+                $caption = caption ? $('<p>' + caption + '</p>').addClass('text') : '';
+                $download = download ? $('<a>Download</a>')
+                            .attr('href', download).addClass('download')
+                            .click(function(){
+                                ga.send(gaLabel);
+                            }) : '';
+
+            //console.log('ga', gaTracking);
+            img.src = $elm.attr('data-image');
+            $caption.append($download);
+
+            $container.on('click', ctrl.closeHandler);
+
+            img.onload = function() {
+                $overlay.append($container);
+                $container.append($img);
+                $container.append($caption);
+                $container.removeClass(hiddenClass).addClass(shownClass);
+            };
+        };
+    }
+
+    exports.slidingModal = function(element, data) {
+
+        $(element).find('.modal').on('click', function() {
+            // var id = $(this).data('id');
+            // if (!id) return console.warn('No id defined for modal element:' + this);
+            // var mData = data[id];
+            // if (!mData) console.warn('No data defined for modal id \'' + id + '\'');
+            //
+            var modal = new Modal($(this), data);
+            modal.init();
+        });
+
+    };
+
+
+
+}(Pathways.components, Pathways.components.core.overlay, Pathways.components.core.ga, jQuery));
+
 (function(w, exports, ga, $) {
 
     var repOpen = 'l3 open library',
@@ -3778,6 +4845,61 @@ Pathways.components.cropZoom.mesmersSalon = {
     }
 };
 
+// Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('mesmers-salon', function() {
+//     return {
+//         getScenes: function(panelId, panelEl, panelAttrs) {
+//             scene = new ScrollScene({
+//                     triggerElement: panelId,
+//                     duration: Pathways.panelHeight
+//                 })
+//                 .on('enter', function(e) {
+//                     console.log('>>enter factory');
+//                 })
+//                 .on('leave', function(e) {
+//                     console.log('>>leave factory');
+//                 });
+
+//             return scene;
+//         }
+//     };
+// });
+
+// Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('mesmers-salon', {
+//     getScenes: function(panelId, panelEl, panelAttrs) {
+//         scene = new ScrollScene({
+//                 triggerElement: panelId,
+//                 duration: Pathways.panelHeight
+//             })
+//             .on('enter', function(e) {
+//                 console.log('>>enter object');
+//             })
+//             .on('leave', function(e) {
+//                 console.log('>>leave object');
+//             });
+
+//         return scene;
+//     }
+
+// });
+
+// Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('mesmers-salon',
+//     function(panelId, panelEl, panelAttrs) {
+//         scene = new ScrollScene({
+//                 triggerElement: panelId,
+//                 duration: Pathways.panelHeight
+//             })
+//             .on('enter', function(e) {
+//                 console.log('>>enter method');
+//             })
+//             .on('leave', function(e) {
+//                 console.log('>>leave method');
+//             });
+
+//         return scene;
+//     }
+
+// );
+
 
 Pathways.components.gallery.toolsOfMesmerism = {
     data: {
@@ -3807,253 +4929,488 @@ Pathways.components.gallery.toolsOfMesmerism = {
     }
 };
 
-Pathways.scrollScenes.MagnetisedTrees = function(panelID, animation) {
+var createjs = createjs || {},
 
-    if (!animation) return console.warn('animation not inited for \'' + panelID + '\'');
+    magnetisedTrees = {
+        lib: {},
+        images: {}
+    };
 
+(function(lib, img, cjs) {
 
-    var scene1 = new ScrollScene({
-            triggerElement: panelID,
-            duration: Pathways.panelHeight
-        })
-        .on('enter', function(e) {
-            if (e.scrollDirection == 'FORWARD') {
-                TweenMax.to(panelID + ' .black-strip', 0.4, {
-                    y: 0
-                }); // Scroll up
-                animation.start();
-            }
-        })
-        .on('leave', function(e) {
+    var p; // shortcut to reference prototypes
 
-            if (e.scrollDirection == 'REVERSE') {
-                TweenMax.to(panelID + ' .black-strip', 0.2, {
-                    y: Pathways.panelHeight
-                }); // scroll down
-                animation.stop();
+    // library properties:
+    lib.properties = {
+        width: 1901,
+        height: 1050,
+        fps: 24,
+        color: "#FFFFFF",
+        manifest: [{
+            src: "/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/Bitmap1.jpg",
+            id: "Bitmap1"
+        }, {
+            src: "/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/Bitmap2.jpg",
+            id: "Bitmap2"
+        }, {
+            src: "/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/Bitmap4.png",
+            id: "Bitmap4"
+        }, {
+            src: "/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/treemask.png",
+            id: "treemask"
+        }]
+    };
 
-            }
-        });
+    // stage content:
+    (lib.tree2 = function(mode, startPosition, loop) {
+        this.initialize(mode, startPosition, loop, {});
 
-    return scene1;
-};
+        // ROD-1
+        this.instance = new lib.ROD1();
+        this.instance.setTransform(861.4, 580.5, 1, 1, 0, 0, 0, 43.2, 188.6);
 
-var createjs = createjs||{},
-	animations = animations||{};
-	animations.magnetisedTrees = {
-		lib: {},
-		images: {}
-	};
+        this.timeline.addTween(cjs.Tween.get(this.instance).wait(685));
 
-(function (lib, img, cjs) {
+        // ROD-2
+        this.instance_1 = new lib.ROD2();
+        this.instance_1.setTransform(916.8, 569.5, 1, 1, 0, 0, 0, 27.6, 177.7);
 
-var p; // shortcut to reference prototypes
+        this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(685));
 
-// library properties:
-lib.properties = {
-	width: 1901,
-	height: 1050,
-	fps: 24,
-	color: "#FFFFFF",
-	manifest: [
-		{src:"/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/Bitmap1.jpg", id:"Bitmap1"},
-		{src:"/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/Bitmap2.jpg", id:"Bitmap2"},
-		{src:"/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/Bitmap4.png", id:"Bitmap4"},
-		{src:"/pathways/1-mindcraft/1-mesmer/_assets/animations/magnetised-trees/images/treemask.png", id:"treemask"}
-	]
-};
-
-// stage content:
-(lib.tree2 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// ROD-1
-	this.instance = new lib.ROD1();
-	this.instance.setTransform(861.4,580.5,1,1,0,0,0,43.2,188.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(685));
-
-	// ROD-2
-	this.instance_1 = new lib.ROD2();
-	this.instance_1.setTransform(916.8,569.5,1,1,0,0,0,27.6,177.7);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(685));
-
-	// ROD-3
-	this.instance_2 = new lib.ROD3();
-	this.instance_2.setTransform(1041.1,557.6,1,1,0,0,0,53.3,147.8);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_2).wait(685));
-
-	// ROD-4
-	this.instance_3 = new lib.ROD4();
-	this.instance_3.setTransform(1067.8,565.2,1,1,0,0,0,41.2,137.1);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_3).wait(685));
-
-	// ROD-5
-	this.instance_4 = new lib.ROD5();
-	this.instance_4.setTransform(1286.2,544.2,1,1,0,0,0,145.2,227.1);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_4).wait(685));
-
-	// BKG
-	this.instance_5 = new lib.Bitmap1();
-	this.instance_5.setTransform(0,0,1,1.011);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_5).wait(685));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(950.5,525,1901,1056);
-
-
-// symbols:
-(lib.Bitmap1 = function() {
-	this.initialize(img.Bitmap1);
-}).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,1901,1044);
-
-
-(lib.Bitmap2 = function() {
-	this.initialize(img.Bitmap2);
-}).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,609,459);
-
-
-(lib.Bitmap4 = function() {
-	this.initialize(img.Bitmap4);
-}).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,500,742);
-
-
-(lib.treemask = function() {
-	this.initialize(img.treemask);
-}).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,623,475);
-
-
-(lib.Symbol1 = function() {
-	this.initialize();
-
-	// Layer 1
-	this.shape = new cjs.Shape();
-	this.shape.graphics.bf(img.Bitmap4, null, new cjs.Matrix2D(-1.027,0,0,0.814,107.6,-302)).s().p("ArCd4MAAAg7vIWEAAMAAAA7vg");
-	this.shape.setTransform(178.2,238.3,2.52,1.246);
-
-	this.addChild(this.shape);
-}).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,0,356.4,476.5);
-
-
-(lib.ROD5 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// rod (mask)
-	var mask = new cjs.Shape();
-	mask._off = true;
-	var mask_graphics_1 = new cjs.Graphics().p("EgWqAjbQgEgGALgPQAAgPAKgDQAEgBARABQAQgZAjgRIA7gbIAlgNQAYgbAegKQAGgLAMgCQAFgBAOABIAAgCQACgQATgNIAggRQAEgLAMgCIAYgSQAKgPAXgMIAlgVIAXgSQAMgLAGgNIA5g1IALgHQAKgLARgWQARgTARgIIAcgXIBGg6QAUgRAmgkQAjgfAcgQQAMgkAbgQQAGgPAOgFIAJgIIAhgnQAFgPAOgGQAFgEAggnQAWgbAVgKIAVgdQAEgQAOgFQAIgTAUgMQAZgmAdgUQAGgQAMgFQALgaASgGIAMgRIAdggQAAgUATgKIAggmQALgGAKgSQALgUAIgGQAKgFAJgVQAIgUANgEIAbgqQARgWAXgHQAAgWAPgVQAHgMAUgXIAmghQgBgEADgEQgBgOABgDQACgHAOADIAqgpQgagmAugCQADgeAcACQgCgxAfgWIAEgJQANgeAOgLQABgSAYgbQAWgaAAgTIBciqIAOgYQAIgPAQgBQgCgNAIgKQAFgHAMgKIAnhRIANggQAHgSAKgLQgBgOAIgFIAJgWQAGgNAIgHQAAgNAKgEQAAgOAIgFIADgLQADgFAFgDIACgLQACgHAGgCIAMgVQAFgZAOgOQABgPAKgEQAKgkAUgYIAKgUQgBgNALgHQACgRASgXIAKgUQAEgXAQgSIABABIAdhGQgCgOAMgHIASgoQAIgiANgPQAHghAOgRQAHgjAPgPQgEgOAOgPQAAgXASgTQAIgcAHgPQAKgWAPgPIALgTIgBgaQABgPALgJQACgZAQgPQAKgjAHgQQAMgbAfgFQgBADADADIABgDIgDgDQgTgfAOgoQAVgsAEgXIABgMQACgHAGgDQgDgWARgPIAPglIABgFQgBgFAEgDIAlhcQgBgTAMgKQAKg6AUgfQgBgOAMgaQABgZAPgaQAAgUAJgZIAQgsQAGgeALgNIADgRQACgRADgKQAEgOAJgJQAFgHADggQACgYAUgHQgCgEABgDQgDgUAIgZIAQgpQgCgUALgKQAEgiAQgXQgBgdAMgNQgCgEAEgEIALgpQAHgXAJgRIANg7IAHgaQAEgQAIgIIATgzQAPgbAUAOQASANgKAXIggBGQgIA+gWA5QACAFgDAEQgCAVgJAaIgSAtIgEAbQgFAOgLAIQADAPgIARIgRAbQAGAfgZAeIACAQQACAUgLAYQgGAOgPAaIABAfQgCARgKAMIgFAWQgEANgLAFQAFAggOASQgEAjgQAbQgBARgKAKQgBAmgTAhQADAPgNAOQgGAIgCAUQgCATgJAIQgBAQgJAPQgGALgPAPQADAXgKAYQgGAOgRAbQgFALgGAlQgGAegMAPQgFAYgLAbIgXAwQgCAUgVAcIgGAjQgGASgRAJQABAMgJARQgLAUgBAJQACARgKASIgVAdQADAVgMAYIgWApQgCADgGAaQgEARgQAFIgCATQACAZgXAXIgJAWQAAATgJAVQgFALgNAYIgDAFIAAAAQgEAhgRAPIgJAMIgFAaQgFAPgLAHQgGALgdBDQgWAwgWAaQgDAHgDAPQgEANgLAEQgUAOAAAbQgKAKgLAgQgKAbgQAKQgBAUgTAeQgVAhgDAQQgBASgOAZQgTAggDAIQgEARgTATQgWAXgFAJIABABQgGAcgaAeQgFASgGAHQgJAKgQgCQAKAYgPAYQgUAagHAOIgfArQgLAogIAQQgPAegaAPQACAJgJgDQAJAWgOASQgUATgHALQgFALgDAGQgGAIgJADQgIAEgJASQgIAQgLAEQABAOgJANIgSAVQgHANgEAFQgHAJgKACQgDADgFAAQgCATgFAJQgGANgRACQACALgHAHQgDAEgNAGQgCAegbALQADAIgGAHIgKAMQgFARgUAQIgUAcQgJAYgWAQIgKAJQgTAmgcAXQgDAIgCADQgFAEgHgCQgHAjgeALIgTAVQABAFgDAEQgCALgKALIgRARIhuB5QAAAMgMAKQgRAOgCAEQgCAMgRAFQgHAHgxA/QghArgfATIgxAzQADAIgKAEIg0A1IgKAGQgPAZgiAPQgNAVgYATIgtAeIgSAVQgFANgRAHQgQAZgsAXQgGAQgIAHQgLAJgPgBQgBARgNALQgFAEgWAOIgmAYIgMASQgIALgMgBQgOAEgYAZQgWAWgTACQADAFgFADQgHANgNAFQgKAEgRAAIgKAJQgSAcgiALIgRAOQgLAHgMgCQgfAggdAIIgdAFQACALgGAHQgFAEgLAEIgVAIIgdANQgQAIgMADQgHACgFAAQgGAAgDgEgAS33PIgBgFIgCAEIADABg");
-
-	this.timeline.addTween(cjs.Tween.get(mask).to({graphics:null,x:0,y:0}).wait(1).to({graphics:mask_graphics_1,x:145.2,y:227.1}).wait(45));
-
-	// grdt
-	this.instance = new lib.Symbol1();
-	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
-	this.instance._off = true;
-
-	this.instance.mask = mask;
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({_off:false},0).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:272.1},0).wait(1).to({y:311.2},0).wait(1).to({y:350.3},0).wait(1).to({y:389.4},0).wait(1).to({y:428.5},0).wait(1).to({y:467.6},0).wait(1).to({y:506.6},0).wait(1).to({y:545.7},0).wait(1).to({y:584.8},0).wait(1).to({y:623.9},0).wait(1).to({y:663},0).wait(1).to({y:702.1},0).wait(22));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = null;
-
-
-(lib.ROD4 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// rod (mask)
-	var mask = new cjs.Shape();
-	mask._off = true;
-	mask.graphics.p("AmWVSQgMgQAQgKQAXgPACgEQAKgGARgaQAPgXASgEQADgDAEgBIAOgcQgFgQAMgJIAXgOQAHghAKgTQAOgaAYgOQgGgVANgbQAUglABgGQAFgTALgZIAUgrIAQg1QAFgUADgKQAGgQAKgLIAVgyIAPgqQAKgYAOgOIAKgoIAHgLQgBgcAQgvQAPg0ACgXQASgbAPguIAYhNIAhiLQAEgyAOgeIABgKIAGglQAEgVAKgMIAbhnQAPg+AFgtQACgsADgbQAFgnALgeIACgSQgCgRALgPQAHhQAXg8QACgzAShDIAqksQgCgmATgsIABABQACgvAOgtQABgFACgFQgCgFAEgCIABgXQABgNAGgJQgDgDAEgCQABhlADglQgBgTABgKQACgQAOgIQAPgRAPAUQAXAygWA6IABABIgJAbIgBAAQASAUgFAbQgDAPgLAgQgKAHABAXQACAWgNAHQADAWgOAkQACAhgHAsIgOBMQgCAZgDAyQgDAsgMAdIgnDfQgKBUgfBpIAAAjQgBAUgIAOIgCAkQgCAUgGAOIgCATQAEA0ggA3QAAAigQAuQgXBCgDAOIAAALQgJAVgBAmIgFAlQgEAWgJAOQgIAPgHAnQgHAkgLARQgBAJACASQAAARgIAJQgHAbgbBCQgYA6gFAlQgBAIABAQQgCAOgRACQgBADgFAAQgBADABAVQAAAPgKAIIABAAIgfBTIgLATQACALgLAHQgCAHgCAQQgDAOgNAEQADAKgFALIgKASIgRAsIABACIgCACQAAAPgJAVQgLAagCAJQABAMgNAOQgPAPgBAJQABAOgHAOQgEAJgLAOIgIALQgCALgLALQgMALgFAGIgKAlQgJAUgUAFQABAVgNAIQgQAcgiAfQgUAUgFADQgWAQgFACQgGADgFAAQgKAAgHgJg");
-	mask.setTransform(41.2,137.1);
-
-	// grdt
-	this.instance = new lib.Symbol1();
-	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
-
-	this.instance.mask = mask;
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:265.5},0).wait(1).to({y:297.9},0).wait(1).to({y:330.3},0).wait(1).to({y:362.7},0).wait(1).to({y:395.1},0).wait(1).to({y:427.6},0).wait(1).to({y:460},0).wait(1).to({y:492.4},0).wait(1).to({y:524.8},0).wait(1).to({y:557.2},0).wait(1).to({y:589.6},0).wait(1).to({y:622.1},0).wait(22));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,0,82.5,274.3);
-
-
-(lib.ROD3 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// rod (mask)
-	var mask = new cjs.Shape();
-	mask._off = true;
-	mask.graphics.p("An8XDQgDgCgQgPQgJgIAHgKQAFgIANgHQAJgTAVgCQAJgUAFgGQAKgMAPgDIALgSQAIgKAMABIAAAAIABAAQAMg/AvgcIgBgLQACgGAGgCQAKgPAOgiQAOgcAagIIARgcIABgDQgJgTAPgSQAUgXACgGQAGgaAZggQAHgMAMgoQAJghAQgPQgEgeAXgUQgFgNAKgKIAQgSQgBgXADgJQAGgQAUgEQgIgUAIgVIATgmIAIgZQAGgOAIgJQABgaARgaIAKgTIAxiBQADgSADgJQAFgOAQgDQgIgJACgKQACgGAIgLIAKgeQAEgiAPgRIALgTQABgkASgaIAnhwQAHgHACgKIADgTQgFgPAIgLIASgWQgEgQAGgSQADgKALgUIABgPQACgHAHgFIADgJQgCgUAKgLQgCgUALgQIACgEIACgTQgCgIAJgDQAHg2AWgvQABgcAKgOIAUhYQgCgFAEgDQgBgPABgHQACgNAGgIIAHg3QAFgfAJgXIAAgZQACgOAIgKIAAgVQABgNAHgIIADAGIABgBQgCgBgBgEQAAgdAJgkQAEgSAPguIANgoQACgfANgoIAYhEQADg6ACgRQAEgqAKgfQgHgsAKhDQANhbAAgSQACgiAGgeQAEgTAGgHQAKgKATAJQARAFgDAWIgIBYQgGAzgJAkQACAFgDADQAAAlgCASQgCAfgHAYQgCAhgCBBQgFA4gSAmQgIA0gNAaQAAAVgKALIgDASIgSA+IgGApQgFAYgIAPQACAegKAVIABADIgDADQgDA4gPAqIgCAFQgJAJgCAOIAAAZQgBAMABAZQAAAWgJAOQgLAFABAUQABATgMAFQAAAFABALQAAAKgKADIgVBZQAFAbgOAQQgLAOgEAjQgDAigOAOIgKAKIgIAUIAIAHIgHADQACAxgaAwQgIArgSAkIgCAEQgEAMgFAZQgGAVgPALQAAAFgBAFQAFAagYAOQAAAFgCAEQAFAagNAcIgcAvQgDAmgUAfQgCACgEAPQgEAMgJADIgBAcQgBAQgDAGQgFAMgLAFIgVA9QACAYgTAQQgBAdgZAqQgcAwgFAVQgBAggSAWQACALgLANQgMAOAAAIQADAVgOAIIgHAdQgGAQgMAIQgEAJgBATQgDARgQAEIABAAQAEAIgGAIIgKANQAFAOgIAOIgPAXIgTAeQgGAcgSAJQAAAUgTAMQgHAagTAPIgYAnQgDAQgPAPQgJAdgXATQgFAXgQAGQgEARgYAQQgEAJgIAIIgQANIgzAyQgJAKgKAAQgFAAgFgCgAh4NuIADAAIAAgCg");
-	mask.setTransform(53.3,147.8);
-
-	// grdt\
-	this.instance = new lib.Symbol1();
-	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
-
-	this.instance.mask = mask;
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-110},0).wait(1).to({y:-67.1},0).wait(1).to({y:-24.2},0).wait(1).to({y:18.7},0).wait(1).to({y:61.6},0).wait(1).to({y:104.4},0).wait(1).to({y:147.3},0).wait(1).to({y:190.2},0).wait(1).to({y:233.1},0).wait(1).to({y:272},0).wait(1).to({y:310.9},0).wait(1).to({y:349.8},0).wait(1).to({y:388.7},0).wait(1).to({y:427.6},0).wait(1).to({y:466.5},0).wait(1).to({y:505.4},0).wait(1).to({y:544.3},0).wait(1).to({y:583.2},0).wait(1).to({y:622.1},0).wait(18));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,0,106.7,295.6);
-
-
-(lib.ROD2 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// ROD (mask)
-	var mask = new cjs.Shape();
-	mask._off = true;
-	var mask_graphics_4 = new cjs.Graphics().p("Aj9bwQgJgBgIgLQgKgOAOgSIAtg3QAAgRAQgZIAHgXQAEgNAKgFIABgIIgDgHIABgDQgEgdAWgXIAJgeQAGgSAJgKQgDgOAGgOQADgKALgPIADgRIAKgqQAHgYALgQQAGg0APgbIAVhZIAGgzQAFgcAIgWIABgdQgEgMAGgKQAEgHAMgJQgNgPAHgVQAJgegBgGQgDgWAMgIIABgKIAKhhQAHg6AJglIACgmQgDgVACgLQADgRAQgJQgMgJAAgOQAAgJAGgPQADgGAIAEQAMAFADAAQAAgHgOgPQgMgNAIgNQgFgcAZgXIgCgJQgOgQAGgYQAKgaAAgNQACgXAGghIAKg4IACgpQACgWAHgRIAQiQQgBgJAEgHIAMhhQACiLAPhzIADgaQgDgeABgSQACgaAHgUIADguQgEgmAMgjIAAAAIACgSQgCgmABgTQACghASgUIgJgUIAKi0QgBglAAgTQAAggAIgYIADgbIAAgLIgBguQABgbAIgUIACgQQAIhwABidIABkOIADgVIAFgWQAGgNAKACQAGABALAJIAGAHIAAABIACADQANATgCAbQAAAHgJApIABAEQAAADgCACIgBAHIgJAWQADAFAKAJQAGAJgLAIQgLAJAGALQAHAQAAACIAEAVQABAMgFAIIgBAeQAOAMgJAWQgKAYAGAJIgHAEIAAAAIADADQADgCABgFQAIAJgFAMQgFAQABAFQAHANgCARIgFAeIAAAqQAAAYgIAQQAAAEgDADQgIAUADApQADApgHATQgBAHABAjQACAZgLAPQACADgCAFQAJATgBAWQgBARgIAXIgBAnQADB3gVB8IgLARQAAADAGAGQAFAGgCAGIAAAmQABAXgHAOQAAACgDADIABA1QgCAegGAWQAAAEgCADIgMCyIABA0QAAAegHAVQABAEgDAEIgCA6QgCAwgRBHIAAATIAAAgQgBASgIAMIgRApQgHAXAPAVQADAFgCAIQgDAIgIADIgCAUQADAggGAoQgCAUgLA0QAAAKgDAIIgKAyQADAEgEADIABAXQgBANgIAHIgCAcIABAmQAAAXgJAPIgDAiQAEAcgMAaIACADIgCADIgCAdIgEAbQgEAPgLAIQAGArgHAcIAAAaQgBAPgIAJIgKAdIADAhQgBATgKAMIgKBEQADAEgFAFQgEAJgBAbQgBAZgKALIgCgHIgCAAIADAHQACAagGAeQgEATgMAiQgBAegSAVQADAFgEADQgCAIACARQgBAPgKAIQgDAEgFgBQAEAYgIAbQgEANgPAiQgCARgEAJQgHAMgPAEQABAFgBAEQADARgHATQgEAMgLAWQACAVgPAcQABAKgGAJIgNAOIgBAPQgDAIgHAEIAAABIAAAAQgFARgPARIgdAcQgJAIgJAAIgCAAg");
-
-	this.timeline.addTween(cjs.Tween.get(mask).to({graphics:null,x:0,y:0}).wait(4).to({graphics:mask_graphics_4,x:27.6,y:177.7}).wait(41));
-
-	// GRDT
-	this.instance = new lib.Symbol1();
-	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
-	this.instance._off = true;
-
-	this.instance.mask = mask;
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(4).to({_off:false},0).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:265.5},0).wait(1).to({y:297.9},0).wait(1).to({y:330.3},0).wait(1).to({y:362.7},0).wait(1).to({y:395.1},0).wait(1).to({y:427.6},0).wait(1).to({y:460},0).wait(1).to({y:492.4},0).wait(1).to({y:524.8},0).wait(1).to({y:557.2},0).wait(1).to({y:589.6},0).wait(1).to({y:622.1},0).wait(18));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = null;
-
-
-(lib.ROD1 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// rod (mask)
-	var mask = new cjs.Shape();
-	mask._off = true;
-	mask.graphics.p("AmqdWQgKgjALgjQAJgaAYgkQADgoAQgeQgCgQAGgQQADgKALgTIANgUQgDgNAIgNIAOgXQgBgDAAgGQgFgSAHgUQAFgOANgTIAAgBQAEgmAZg2QgBgEADgEQAAgNAHgRQAKgUADgKQgBgFADgEIANhIQAJgqAUgZIgCgLQACgkAMgtIAXhPIABgbQABgOAKgJQACgcACgKQAEgUAJgPQACgbADgNQAFgWAUgJQgbgeAmgQQAOgKgIgZQgHgaANgJQAEgfAFgRQAHgZAPgSQgEgSAAgIQABgOAJgLQAJh0AqiFIACgTIALhCQAIgmAKgbIAShQQACguAPglIACgGQAAgpAUg8QAEgyAQgeQgHgfARgbQgBgTABgIQACgPAIgLQgDgEAEgCQABgzASgqQAAgfALgQIABgaQACgPAHgJIABgLQgDgMAGgSQAHgXAAgGQgBg2AUglIABgWQABgNAGgIIADglIAKgnQgDgIAIgEIAEgeQACgTAIgKIAUhPQgBgYAGgeIAOg4IAHglQgBgDAEgPQgBgeABgOQACgZAHgSQgDgFAFgDIAMh4QgFgqANgdIgBAAIAAg8QACgiAHgaIADgnQADgfACgPQAFgaAJgTQACg7ARgrQgDgEAEgDIAGgtIAIgsQAEgRAGgIQAJgLAQADQAOADADANQACAJgDAQIgXBvIgGgCIAAABQADACADgBQgDA0gTA6IAAAbQgBAQgIAKQACAFgDACQgCAFACAbQACAUgLALIACA2QgBAegNAWQAHAVgCAdIgFAyQAJAcgTAhQAAAfgJAjQgIAkgKAKQgBAGAIARQAHAOgIAKIgSAfQAUAQgTANIAEAQQABAIgFAHQgNARgCAfQgEAsgCAHQgBAHgBAOQgBAMgIAHQgBAJACARQAAAQgJAJQgBAzgTAyQABAcgKAOQABAkgMAVQgFA4gNAbQAAAEgDADQAAAhgKArQgFAZgOAxQADAjgNAYIgKAeQgBA3gPAtQgBAHgEAEQACAXgOAhQgQAngCAPQAIALABAEQABAIgKAGQgFAIADAUQAEATgMAJQgCAEgFAAQABAIAGAQQADAOgNAJQgKAMACAeQACAdgNAMQACAFgEADQAEAPgMAQIgBATIgUBRIgIAKQgDAIABAcQABAWgJAMQACAIgFAIIgKANQgDBRgfBvQgDAFABAUQAAAPgMAGQgGADgBAHIgCANQgBAYgDANQgEAVgKAOIgDAcQgCAagQAYQADAcgNAPIgBAZQgBAOgIAJIgLAdQAEAKgIAPQgJAQACAIQADAlgUAkIgBARQgBAKgJAEIgBAbQABAfgUAfQACAEgEADQAEArgWAnQgBAggFAPQgHAZgSAPQgGAQgHAlQgGAjgHASQgEALgFADQgFADgKgBQADADgCAEQAIAlgNAnQgJAcgZAoQgBApgIAbQgKAjgXAaQAEASgIAXIgQAnQgDAVgKAGQgEADgFAAQgJAAgMgIgAiuPaIADACIABgCIAAgBIgDgCgAE81IIAEgDIgEgCgAGX7EgAGX7Eg");
-	mask.setTransform(43.2,188.6);
-
-	// GRDT
-	this.instance = new lib.Symbol1();
-	this.instance.setTransform(43.6,-200,1,1,0,0,0,70.7,191.2);
-
-	this.instance.mask = mask;
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({regX:178.2,regY:238.3,x:151.1,y:-117.8},0).wait(1).to({y:-82.7},0).wait(1).to({y:-47.6},0).wait(1).to({y:-12.5},0).wait(1).to({y:22.6},0).wait(1).to({y:57.6},0).wait(1).to({y:92.7},0).wait(1).to({y:127.8},0).wait(1).to({y:162.9},0).wait(1).to({y:198},0).wait(1).to({y:233.1},0).wait(1).to({y:265.5},0).wait(1).to({y:297.9},0).wait(1).to({y:330.3},0).wait(1).to({y:362.7},0).wait(1).to({y:395.1},0).wait(1).to({y:427.6},0).wait(1).to({y:460},0).wait(1).to({y:492.4},0).wait(1).to({y:524.8},0).wait(1).to({y:557.2},0).wait(1).to({y:589.6},0).wait(1).to({y:622.1},0).wait(22));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,0,86.5,377.3);
-
-})(animations.magnetisedTrees.lib, animations.magnetisedTrees.images, createjs);
+        // ROD-3
+        this.instance_2 = new lib.ROD3();
+        this.instance_2.setTransform(1041.1, 557.6, 1, 1, 0, 0, 0, 53.3, 147.8);
+
+        this.timeline.addTween(cjs.Tween.get(this.instance_2).wait(685));
+
+        // ROD-4
+        this.instance_3 = new lib.ROD4();
+        this.instance_3.setTransform(1067.8, 565.2, 1, 1, 0, 0, 0, 41.2, 137.1);
+
+        this.timeline.addTween(cjs.Tween.get(this.instance_3).wait(685));
+
+        // ROD-5
+        this.instance_4 = new lib.ROD5();
+        this.instance_4.setTransform(1286.2, 544.2, 1, 1, 0, 0, 0, 145.2, 227.1);
+
+        this.timeline.addTween(cjs.Tween.get(this.instance_4).wait(685));
+
+        // BKG
+        this.instance_5 = new lib.Bitmap1();
+        this.instance_5.setTransform(0, 0, 1, 1.011);
+
+        this.timeline.addTween(cjs.Tween.get(this.instance_5).wait(685));
+
+    }).prototype = p = new cjs.MovieClip();
+    p.nominalBounds = new cjs.Rectangle(950.5, 525, 1901, 1056);
+
+
+    // symbols:
+    (lib.Bitmap1 = function() {
+        this.initialize(img.Bitmap1);
+    }).prototype = p = new cjs.Bitmap();
+    p.nominalBounds = new cjs.Rectangle(0, 0, 1901, 1044);
+
+
+    (lib.Bitmap2 = function() {
+        this.initialize(img.Bitmap2);
+    }).prototype = p = new cjs.Bitmap();
+    p.nominalBounds = new cjs.Rectangle(0, 0, 609, 459);
+
+
+    (lib.Bitmap4 = function() {
+        this.initialize(img.Bitmap4);
+    }).prototype = p = new cjs.Bitmap();
+    p.nominalBounds = new cjs.Rectangle(0, 0, 500, 742);
+
+
+    (lib.treemask = function() {
+        this.initialize(img.treemask);
+    }).prototype = p = new cjs.Bitmap();
+    p.nominalBounds = new cjs.Rectangle(0, 0, 623, 475);
+
+
+    (lib.Symbol1 = function() {
+        this.initialize();
+
+        // Layer 1
+        this.shape = new cjs.Shape();
+        this.shape.graphics.bf(img.Bitmap4, null, new cjs.Matrix2D(-1.027, 0, 0, 0.814, 107.6, -302)).s().p("ArCd4MAAAg7vIWEAAMAAAA7vg");
+        this.shape.setTransform(178.2, 238.3, 2.52, 1.246);
+
+        this.addChild(this.shape);
+    }).prototype = p = new cjs.Container();
+    p.nominalBounds = new cjs.Rectangle(0, 0, 356.4, 476.5);
+
+
+    (lib.ROD5 = function(mode, startPosition, loop) {
+        this.initialize(mode, startPosition, loop, {});
+
+        // rod (mask)
+        var mask = new cjs.Shape();
+        mask._off = true;
+        var mask_graphics_1 = new cjs.Graphics().p("EgWqAjbQgEgGALgPQAAgPAKgDQAEgBARABQAQgZAjgRIA7gbIAlgNQAYgbAegKQAGgLAMgCQAFgBAOABIAAgCQACgQATgNIAggRQAEgLAMgCIAYgSQAKgPAXgMIAlgVIAXgSQAMgLAGgNIA5g1IALgHQAKgLARgWQARgTARgIIAcgXIBGg6QAUgRAmgkQAjgfAcgQQAMgkAbgQQAGgPAOgFIAJgIIAhgnQAFgPAOgGQAFgEAggnQAWgbAVgKIAVgdQAEgQAOgFQAIgTAUgMQAZgmAdgUQAGgQAMgFQALgaASgGIAMgRIAdggQAAgUATgKIAggmQALgGAKgSQALgUAIgGQAKgFAJgVQAIgUANgEIAbgqQARgWAXgHQAAgWAPgVQAHgMAUgXIAmghQgBgEADgEQgBgOABgDQACgHAOADIAqgpQgagmAugCQADgeAcACQgCgxAfgWIAEgJQANgeAOgLQABgSAYgbQAWgaAAgTIBciqIAOgYQAIgPAQgBQgCgNAIgKQAFgHAMgKIAnhRIANggQAHgSAKgLQgBgOAIgFIAJgWQAGgNAIgHQAAgNAKgEQAAgOAIgFIADgLQADgFAFgDIACgLQACgHAGgCIAMgVQAFgZAOgOQABgPAKgEQAKgkAUgYIAKgUQgBgNALgHQACgRASgXIAKgUQAEgXAQgSIABABIAdhGQgCgOAMgHIASgoQAIgiANgPQAHghAOgRQAHgjAPgPQgEgOAOgPQAAgXASgTQAIgcAHgPQAKgWAPgPIALgTIgBgaQABgPALgJQACgZAQgPQAKgjAHgQQAMgbAfgFQgBADADADIABgDIgDgDQgTgfAOgoQAVgsAEgXIABgMQACgHAGgDQgDgWARgPIAPglIABgFQgBgFAEgDIAlhcQgBgTAMgKQAKg6AUgfQgBgOAMgaQABgZAPgaQAAgUAJgZIAQgsQAGgeALgNIADgRQACgRADgKQAEgOAJgJQAFgHADggQACgYAUgHQgCgEABgDQgDgUAIgZIAQgpQgCgUALgKQAEgiAQgXQgBgdAMgNQgCgEAEgEIALgpQAHgXAJgRIANg7IAHgaQAEgQAIgIIATgzQAPgbAUAOQASANgKAXIggBGQgIA+gWA5QACAFgDAEQgCAVgJAaIgSAtIgEAbQgFAOgLAIQADAPgIARIgRAbQAGAfgZAeIACAQQACAUgLAYQgGAOgPAaIABAfQgCARgKAMIgFAWQgEANgLAFQAFAggOASQgEAjgQAbQgBARgKAKQgBAmgTAhQADAPgNAOQgGAIgCAUQgCATgJAIQgBAQgJAPQgGALgPAPQADAXgKAYQgGAOgRAbQgFALgGAlQgGAegMAPQgFAYgLAbIgXAwQgCAUgVAcIgGAjQgGASgRAJQABAMgJARQgLAUgBAJQACARgKASIgVAdQADAVgMAYIgWApQgCADgGAaQgEARgQAFIgCATQACAZgXAXIgJAWQAAATgJAVQgFALgNAYIgDAFIAAAAQgEAhgRAPIgJAMIgFAaQgFAPgLAHQgGALgdBDQgWAwgWAaQgDAHgDAPQgEANgLAEQgUAOAAAbQgKAKgLAgQgKAbgQAKQgBAUgTAeQgVAhgDAQQgBASgOAZQgTAggDAIQgEARgTATQgWAXgFAJIABABQgGAcgaAeQgFASgGAHQgJAKgQgCQAKAYgPAYQgUAagHAOIgfArQgLAogIAQQgPAegaAPQACAJgJgDQAJAWgOASQgUATgHALQgFALgDAGQgGAIgJADQgIAEgJASQgIAQgLAEQABAOgJANIgSAVQgHANgEAFQgHAJgKACQgDADgFAAQgCATgFAJQgGANgRACQACALgHAHQgDAEgNAGQgCAegbALQADAIgGAHIgKAMQgFARgUAQIgUAcQgJAYgWAQIgKAJQgTAmgcAXQgDAIgCADQgFAEgHgCQgHAjgeALIgTAVQABAFgDAEQgCALgKALIgRARIhuB5QAAAMgMAKQgRAOgCAEQgCAMgRAFQgHAHgxA/QghArgfATIgxAzQADAIgKAEIg0A1IgKAGQgPAZgiAPQgNAVgYATIgtAeIgSAVQgFANgRAHQgQAZgsAXQgGAQgIAHQgLAJgPgBQgBARgNALQgFAEgWAOIgmAYIgMASQgIALgMgBQgOAEgYAZQgWAWgTACQADAFgFADQgHANgNAFQgKAEgRAAIgKAJQgSAcgiALIgRAOQgLAHgMgCQgfAggdAIIgdAFQACALgGAHQgFAEgLAEIgVAIIgdANQgQAIgMADQgHACgFAAQgGAAgDgEgAS33PIgBgFIgCAEIADABg");
+
+        this.timeline.addTween(cjs.Tween.get(mask).to({
+            graphics: null,
+            x: 0,
+            y: 0
+        }).wait(1).to({
+            graphics: mask_graphics_1,
+            x: 145.2,
+            y: 227.1
+        }).wait(45));
+
+        // grdt
+        this.instance = new lib.Symbol1();
+        this.instance.setTransform(43.6, -200, 1, 1, 0, 0, 0, 70.7, 191.2);
+        this.instance._off = true;
+
+        this.instance.mask = mask;
+
+        this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({
+            _off: false
+        }, 0).wait(1).to({
+            regX: 178.2,
+            regY: 238.3,
+            x: 151.1,
+            y: -117.8
+        }, 0).wait(1).to({
+            y: -82.7
+        }, 0).wait(1).to({
+            y: -47.6
+        }, 0).wait(1).to({
+            y: -12.5
+        }, 0).wait(1).to({
+            y: 22.6
+        }, 0).wait(1).to({
+            y: 57.6
+        }, 0).wait(1).to({
+            y: 92.7
+        }, 0).wait(1).to({
+            y: 127.8
+        }, 0).wait(1).to({
+            y: 162.9
+        }, 0).wait(1).to({
+            y: 198
+        }, 0).wait(1).to({
+            y: 233.1
+        }, 0).wait(1).to({
+            y: 272.1
+        }, 0).wait(1).to({
+            y: 311.2
+        }, 0).wait(1).to({
+            y: 350.3
+        }, 0).wait(1).to({
+            y: 389.4
+        }, 0).wait(1).to({
+            y: 428.5
+        }, 0).wait(1).to({
+            y: 467.6
+        }, 0).wait(1).to({
+            y: 506.6
+        }, 0).wait(1).to({
+            y: 545.7
+        }, 0).wait(1).to({
+            y: 584.8
+        }, 0).wait(1).to({
+            y: 623.9
+        }, 0).wait(1).to({
+            y: 663
+        }, 0).wait(1).to({
+            y: 702.1
+        }, 0).wait(22));
+
+    }).prototype = p = new cjs.MovieClip();
+    p.nominalBounds = null;
+
+
+    (lib.ROD4 = function(mode, startPosition, loop) {
+        this.initialize(mode, startPosition, loop, {});
+
+        // rod (mask)
+        var mask = new cjs.Shape();
+        mask._off = true;
+        mask.graphics.p("AmWVSQgMgQAQgKQAXgPACgEQAKgGARgaQAPgXASgEQADgDAEgBIAOgcQgFgQAMgJIAXgOQAHghAKgTQAOgaAYgOQgGgVANgbQAUglABgGQAFgTALgZIAUgrIAQg1QAFgUADgKQAGgQAKgLIAVgyIAPgqQAKgYAOgOIAKgoIAHgLQgBgcAQgvQAPg0ACgXQASgbAPguIAYhNIAhiLQAEgyAOgeIABgKIAGglQAEgVAKgMIAbhnQAPg+AFgtQACgsADgbQAFgnALgeIACgSQgCgRALgPQAHhQAXg8QACgzAShDIAqksQgCgmATgsIABABQACgvAOgtQABgFACgFQgCgFAEgCIABgXQABgNAGgJQgDgDAEgCQABhlADglQgBgTABgKQACgQAOgIQAPgRAPAUQAXAygWA6IABABIgJAbIgBAAQASAUgFAbQgDAPgLAgQgKAHABAXQACAWgNAHQADAWgOAkQACAhgHAsIgOBMQgCAZgDAyQgDAsgMAdIgnDfQgKBUgfBpIAAAjQgBAUgIAOIgCAkQgCAUgGAOIgCATQAEA0ggA3QAAAigQAuQgXBCgDAOIAAALQgJAVgBAmIgFAlQgEAWgJAOQgIAPgHAnQgHAkgLARQgBAJACASQAAARgIAJQgHAbgbBCQgYA6gFAlQgBAIABAQQgCAOgRACQgBADgFAAQgBADABAVQAAAPgKAIIABAAIgfBTIgLATQACALgLAHQgCAHgCAQQgDAOgNAEQADAKgFALIgKASIgRAsIABACIgCACQAAAPgJAVQgLAagCAJQABAMgNAOQgPAPgBAJQABAOgHAOQgEAJgLAOIgIALQgCALgLALQgMALgFAGIgKAlQgJAUgUAFQABAVgNAIQgQAcgiAfQgUAUgFADQgWAQgFACQgGADgFAAQgKAAgHgJg");
+        mask.setTransform(41.2, 137.1);
+
+        // grdt
+        this.instance = new lib.Symbol1();
+        this.instance.setTransform(43.6, -200, 1, 1, 0, 0, 0, 70.7, 191.2);
+
+        this.instance.mask = mask;
+
+        this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({
+            regX: 178.2,
+            regY: 238.3,
+            x: 151.1,
+            y: -117.8
+        }, 0).wait(1).to({
+            y: -82.7
+        }, 0).wait(1).to({
+            y: -47.6
+        }, 0).wait(1).to({
+            y: -12.5
+        }, 0).wait(1).to({
+            y: 22.6
+        }, 0).wait(1).to({
+            y: 57.6
+        }, 0).wait(1).to({
+            y: 92.7
+        }, 0).wait(1).to({
+            y: 127.8
+        }, 0).wait(1).to({
+            y: 162.9
+        }, 0).wait(1).to({
+            y: 198
+        }, 0).wait(1).to({
+            y: 233.1
+        }, 0).wait(1).to({
+            y: 265.5
+        }, 0).wait(1).to({
+            y: 297.9
+        }, 0).wait(1).to({
+            y: 330.3
+        }, 0).wait(1).to({
+            y: 362.7
+        }, 0).wait(1).to({
+            y: 395.1
+        }, 0).wait(1).to({
+            y: 427.6
+        }, 0).wait(1).to({
+            y: 460
+        }, 0).wait(1).to({
+            y: 492.4
+        }, 0).wait(1).to({
+            y: 524.8
+        }, 0).wait(1).to({
+            y: 557.2
+        }, 0).wait(1).to({
+            y: 589.6
+        }, 0).wait(1).to({
+            y: 622.1
+        }, 0).wait(22));
+
+    }).prototype = p = new cjs.MovieClip();
+    p.nominalBounds = new cjs.Rectangle(0, 0, 82.5, 274.3);
+
+
+    (lib.ROD3 = function(mode, startPosition, loop) {
+        this.initialize(mode, startPosition, loop, {});
+
+        // rod (mask)
+        var mask = new cjs.Shape();
+        mask._off = true;
+        mask.graphics.p("An8XDQgDgCgQgPQgJgIAHgKQAFgIANgHQAJgTAVgCQAJgUAFgGQAKgMAPgDIALgSQAIgKAMABIAAAAIABAAQAMg/AvgcIgBgLQACgGAGgCQAKgPAOgiQAOgcAagIIARgcIABgDQgJgTAPgSQAUgXACgGQAGgaAZggQAHgMAMgoQAJghAQgPQgEgeAXgUQgFgNAKgKIAQgSQgBgXADgJQAGgQAUgEQgIgUAIgVIATgmIAIgZQAGgOAIgJQABgaARgaIAKgTIAxiBQADgSADgJQAFgOAQgDQgIgJACgKQACgGAIgLIAKgeQAEgiAPgRIALgTQABgkASgaIAnhwQAHgHACgKIADgTQgFgPAIgLIASgWQgEgQAGgSQADgKALgUIABgPQACgHAHgFIADgJQgCgUAKgLQgCgUALgQIACgEIACgTQgCgIAJgDQAHg2AWgvQABgcAKgOIAUhYQgCgFAEgDQgBgPABgHQACgNAGgIIAHg3QAFgfAJgXIAAgZQACgOAIgKIAAgVQABgNAHgIIADAGIABgBQgCgBgBgEQAAgdAJgkQAEgSAPguIANgoQACgfANgoIAYhEQADg6ACgRQAEgqAKgfQgHgsAKhDQANhbAAgSQACgiAGgeQAEgTAGgHQAKgKATAJQARAFgDAWIgIBYQgGAzgJAkQACAFgDADQAAAlgCASQgCAfgHAYQgCAhgCBBQgFA4gSAmQgIA0gNAaQAAAVgKALIgDASIgSA+IgGApQgFAYgIAPQACAegKAVIABADIgDADQgDA4gPAqIgCAFQgJAJgCAOIAAAZQgBAMABAZQAAAWgJAOQgLAFABAUQABATgMAFQAAAFABALQAAAKgKADIgVBZQAFAbgOAQQgLAOgEAjQgDAigOAOIgKAKIgIAUIAIAHIgHADQACAxgaAwQgIArgSAkIgCAEQgEAMgFAZQgGAVgPALQAAAFgBAFQAFAagYAOQAAAFgCAEQAFAagNAcIgcAvQgDAmgUAfQgCACgEAPQgEAMgJADIgBAcQgBAQgDAGQgFAMgLAFIgVA9QACAYgTAQQgBAdgZAqQgcAwgFAVQgBAggSAWQACALgLANQgMAOAAAIQADAVgOAIIgHAdQgGAQgMAIQgEAJgBATQgDARgQAEIABAAQAEAIgGAIIgKANQAFAOgIAOIgPAXIgTAeQgGAcgSAJQAAAUgTAMQgHAagTAPIgYAnQgDAQgPAPQgJAdgXATQgFAXgQAGQgEARgYAQQgEAJgIAIIgQANIgzAyQgJAKgKAAQgFAAgFgCgAh4NuIADAAIAAgCg");
+        mask.setTransform(53.3, 147.8);
+
+        // grdt\
+        this.instance = new lib.Symbol1();
+        this.instance.setTransform(43.6, -200, 1, 1, 0, 0, 0, 70.7, 191.2);
+
+        this.instance.mask = mask;
+
+        this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({
+            regX: 178.2,
+            regY: 238.3,
+            x: 151.1,
+            y: -110
+        }, 0).wait(1).to({
+            y: -67.1
+        }, 0).wait(1).to({
+            y: -24.2
+        }, 0).wait(1).to({
+            y: 18.7
+        }, 0).wait(1).to({
+            y: 61.6
+        }, 0).wait(1).to({
+            y: 104.4
+        }, 0).wait(1).to({
+            y: 147.3
+        }, 0).wait(1).to({
+            y: 190.2
+        }, 0).wait(1).to({
+            y: 233.1
+        }, 0).wait(1).to({
+            y: 272
+        }, 0).wait(1).to({
+            y: 310.9
+        }, 0).wait(1).to({
+            y: 349.8
+        }, 0).wait(1).to({
+            y: 388.7
+        }, 0).wait(1).to({
+            y: 427.6
+        }, 0).wait(1).to({
+            y: 466.5
+        }, 0).wait(1).to({
+            y: 505.4
+        }, 0).wait(1).to({
+            y: 544.3
+        }, 0).wait(1).to({
+            y: 583.2
+        }, 0).wait(1).to({
+            y: 622.1
+        }, 0).wait(18));
+
+    }).prototype = p = new cjs.MovieClip();
+    p.nominalBounds = new cjs.Rectangle(0, 0, 106.7, 295.6);
+
+
+    (lib.ROD2 = function(mode, startPosition, loop) {
+        this.initialize(mode, startPosition, loop, {});
+
+        // ROD (mask)
+        var mask = new cjs.Shape();
+        mask._off = true;
+        var mask_graphics_4 = new cjs.Graphics().p("Aj9bwQgJgBgIgLQgKgOAOgSIAtg3QAAgRAQgZIAHgXQAEgNAKgFIABgIIgDgHIABgDQgEgdAWgXIAJgeQAGgSAJgKQgDgOAGgOQADgKALgPIADgRIAKgqQAHgYALgQQAGg0APgbIAVhZIAGgzQAFgcAIgWIABgdQgEgMAGgKQAEgHAMgJQgNgPAHgVQAJgegBgGQgDgWAMgIIABgKIAKhhQAHg6AJglIACgmQgDgVACgLQADgRAQgJQgMgJAAgOQAAgJAGgPQADgGAIAEQAMAFADAAQAAgHgOgPQgMgNAIgNQgFgcAZgXIgCgJQgOgQAGgYQAKgaAAgNQACgXAGghIAKg4IACgpQACgWAHgRIAQiQQgBgJAEgHIAMhhQACiLAPhzIADgaQgDgeABgSQACgaAHgUIADguQgEgmAMgjIAAAAIACgSQgCgmABgTQACghASgUIgJgUIAKi0QgBglAAgTQAAggAIgYIADgbIAAgLIgBguQABgbAIgUIACgQQAIhwABidIABkOIADgVIAFgWQAGgNAKACQAGABALAJIAGAHIAAABIACADQANATgCAbQAAAHgJApIABAEQAAADgCACIgBAHIgJAWQADAFAKAJQAGAJgLAIQgLAJAGALQAHAQAAACIAEAVQABAMgFAIIgBAeQAOAMgJAWQgKAYAGAJIgHAEIAAAAIADADQADgCABgFQAIAJgFAMQgFAQABAFQAHANgCARIgFAeIAAAqQAAAYgIAQQAAAEgDADQgIAUADApQADApgHATQgBAHABAjQACAZgLAPQACADgCAFQAJATgBAWQgBARgIAXIgBAnQADB3gVB8IgLARQAAADAGAGQAFAGgCAGIAAAmQABAXgHAOQAAACgDADIABA1QgCAegGAWQAAAEgCADIgMCyIABA0QAAAegHAVQABAEgDAEIgCA6QgCAwgRBHIAAATIAAAgQgBASgIAMIgRApQgHAXAPAVQADAFgCAIQgDAIgIADIgCAUQADAggGAoQgCAUgLA0QAAAKgDAIIgKAyQADAEgEADIABAXQgBANgIAHIgCAcIABAmQAAAXgJAPIgDAiQAEAcgMAaIACADIgCADIgCAdIgEAbQgEAPgLAIQAGArgHAcIAAAaQgBAPgIAJIgKAdIADAhQgBATgKAMIgKBEQADAEgFAFQgEAJgBAbQgBAZgKALIgCgHIgCAAIADAHQACAagGAeQgEATgMAiQgBAegSAVQADAFgEADQgCAIACARQgBAPgKAIQgDAEgFgBQAEAYgIAbQgEANgPAiQgCARgEAJQgHAMgPAEQABAFgBAEQADARgHATQgEAMgLAWQACAVgPAcQABAKgGAJIgNAOIgBAPQgDAIgHAEIAAABIAAAAQgFARgPARIgdAcQgJAIgJAAIgCAAg");
+
+        this.timeline.addTween(cjs.Tween.get(mask).to({
+            graphics: null,
+            x: 0,
+            y: 0
+        }).wait(4).to({
+            graphics: mask_graphics_4,
+            x: 27.6,
+            y: 177.7
+        }).wait(41));
+
+        // GRDT
+        this.instance = new lib.Symbol1();
+        this.instance.setTransform(43.6, -200, 1, 1, 0, 0, 0, 70.7, 191.2);
+        this.instance._off = true;
+
+        this.instance.mask = mask;
+
+        this.timeline.addTween(cjs.Tween.get(this.instance).wait(4).to({
+            _off: false
+        }, 0).wait(1).to({
+            regX: 178.2,
+            regY: 238.3,
+            x: 151.1,
+            y: -117.8
+        }, 0).wait(1).to({
+            y: -82.7
+        }, 0).wait(1).to({
+            y: -47.6
+        }, 0).wait(1).to({
+            y: -12.5
+        }, 0).wait(1).to({
+            y: 22.6
+        }, 0).wait(1).to({
+            y: 57.6
+        }, 0).wait(1).to({
+            y: 92.7
+        }, 0).wait(1).to({
+            y: 127.8
+        }, 0).wait(1).to({
+            y: 162.9
+        }, 0).wait(1).to({
+            y: 198
+        }, 0).wait(1).to({
+            y: 233.1
+        }, 0).wait(1).to({
+            y: 265.5
+        }, 0).wait(1).to({
+            y: 297.9
+        }, 0).wait(1).to({
+            y: 330.3
+        }, 0).wait(1).to({
+            y: 362.7
+        }, 0).wait(1).to({
+            y: 395.1
+        }, 0).wait(1).to({
+            y: 427.6
+        }, 0).wait(1).to({
+            y: 460
+        }, 0).wait(1).to({
+            y: 492.4
+        }, 0).wait(1).to({
+            y: 524.8
+        }, 0).wait(1).to({
+            y: 557.2
+        }, 0).wait(1).to({
+            y: 589.6
+        }, 0).wait(1).to({
+            y: 622.1
+        }, 0).wait(18));
+
+    }).prototype = p = new cjs.MovieClip();
+    p.nominalBounds = null;
+
+
+    (lib.ROD1 = function(mode, startPosition, loop) {
+        this.initialize(mode, startPosition, loop, {});
+
+        // rod (mask)
+        var mask = new cjs.Shape();
+        mask._off = true;
+        mask.graphics.p("AmqdWQgKgjALgjQAJgaAYgkQADgoAQgeQgCgQAGgQQADgKALgTIANgUQgDgNAIgNIAOgXQgBgDAAgGQgFgSAHgUQAFgOANgTIAAgBQAEgmAZg2QgBgEADgEQAAgNAHgRQAKgUADgKQgBgFADgEIANhIQAJgqAUgZIgCgLQACgkAMgtIAXhPIABgbQABgOAKgJQACgcACgKQAEgUAJgPQACgbADgNQAFgWAUgJQgbgeAmgQQAOgKgIgZQgHgaANgJQAEgfAFgRQAHgZAPgSQgEgSAAgIQABgOAJgLQAJh0AqiFIACgTIALhCQAIgmAKgbIAShQQACguAPglIACgGQAAgpAUg8QAEgyAQgeQgHgfARgbQgBgTABgIQACgPAIgLQgDgEAEgCQABgzASgqQAAgfALgQIABgaQACgPAHgJIABgLQgDgMAGgSQAHgXAAgGQgBg2AUglIABgWQABgNAGgIIADglIAKgnQgDgIAIgEIAEgeQACgTAIgKIAUhPQgBgYAGgeIAOg4IAHglQgBgDAEgPQgBgeABgOQACgZAHgSQgDgFAFgDIAMh4QgFgqANgdIgBAAIAAg8QACgiAHgaIADgnQADgfACgPQAFgaAJgTQACg7ARgrQgDgEAEgDIAGgtIAIgsQAEgRAGgIQAJgLAQADQAOADADANQACAJgDAQIgXBvIgGgCIAAABQADACADgBQgDA0gTA6IAAAbQgBAQgIAKQACAFgDACQgCAFACAbQACAUgLALIACA2QgBAegNAWQAHAVgCAdIgFAyQAJAcgTAhQAAAfgJAjQgIAkgKAKQgBAGAIARQAHAOgIAKIgSAfQAUAQgTANIAEAQQABAIgFAHQgNARgCAfQgEAsgCAHQgBAHgBAOQgBAMgIAHQgBAJACARQAAAQgJAJQgBAzgTAyQABAcgKAOQABAkgMAVQgFA4gNAbQAAAEgDADQAAAhgKArQgFAZgOAxQADAjgNAYIgKAeQgBA3gPAtQgBAHgEAEQACAXgOAhQgQAngCAPQAIALABAEQABAIgKAGQgFAIADAUQAEATgMAJQgCAEgFAAQABAIAGAQQADAOgNAJQgKAMACAeQACAdgNAMQACAFgEADQAEAPgMAQIgBATIgUBRIgIAKQgDAIABAcQABAWgJAMQACAIgFAIIgKANQgDBRgfBvQgDAFABAUQAAAPgMAGQgGADgBAHIgCANQgBAYgDANQgEAVgKAOIgDAcQgCAagQAYQADAcgNAPIgBAZQgBAOgIAJIgLAdQAEAKgIAPQgJAQACAIQADAlgUAkIgBARQgBAKgJAEIgBAbQABAfgUAfQACAEgEADQAEArgWAnQgBAggFAPQgHAZgSAPQgGAQgHAlQgGAjgHASQgEALgFADQgFADgKgBQADADgCAEQAIAlgNAnQgJAcgZAoQgBApgIAbQgKAjgXAaQAEASgIAXIgQAnQgDAVgKAGQgEADgFAAQgJAAgMgIgAiuPaIADACIABgCIAAgBIgDgCgAE81IIAEgDIgEgCgAGX7EgAGX7Eg");
+        mask.setTransform(43.2, 188.6);
+
+        // GRDT
+        this.instance = new lib.Symbol1();
+        this.instance.setTransform(43.6, -200, 1, 1, 0, 0, 0, 70.7, 191.2);
+
+        this.instance.mask = mask;
+
+        this.timeline.addTween(cjs.Tween.get(this.instance).wait(1).to({
+            regX: 178.2,
+            regY: 238.3,
+            x: 151.1,
+            y: -117.8
+        }, 0).wait(1).to({
+            y: -82.7
+        }, 0).wait(1).to({
+            y: -47.6
+        }, 0).wait(1).to({
+            y: -12.5
+        }, 0).wait(1).to({
+            y: 22.6
+        }, 0).wait(1).to({
+            y: 57.6
+        }, 0).wait(1).to({
+            y: 92.7
+        }, 0).wait(1).to({
+            y: 127.8
+        }, 0).wait(1).to({
+            y: 162.9
+        }, 0).wait(1).to({
+            y: 198
+        }, 0).wait(1).to({
+            y: 233.1
+        }, 0).wait(1).to({
+            y: 265.5
+        }, 0).wait(1).to({
+            y: 297.9
+        }, 0).wait(1).to({
+            y: 330.3
+        }, 0).wait(1).to({
+            y: 362.7
+        }, 0).wait(1).to({
+            y: 395.1
+        }, 0).wait(1).to({
+            y: 427.6
+        }, 0).wait(1).to({
+            y: 460
+        }, 0).wait(1).to({
+            y: 492.4
+        }, 0).wait(1).to({
+            y: 524.8
+        }, 0).wait(1).to({
+            y: 557.2
+        }, 0).wait(1).to({
+            y: 589.6
+        }, 0).wait(1).to({
+            y: 622.1
+        }, 0).wait(22));
+
+    }).prototype = p = new cjs.MovieClip();
+    p.nominalBounds = new cjs.Rectangle(0, 0, 86.5, 377.3);
+
+})(magnetisedTrees.lib, magnetisedTrees.images, createjs);
+
+Pathways.animation.addAnimation('magnetisedTrees', magnetisedTrees);
 
 Pathways.components.gallery.aldinisExperiments = {
     data: {
@@ -4095,43 +5452,6 @@ Pathways.components.gallery.aldinisExperiments = {
     }
 };
 
-Pathways.scrollScenes.OkeySisters = function(panelID) {
-
-    $('#okey-sisters .main-content, #okey-sisters .secondary-content').css({
-        'bottom': 'auto',
-        'top': Pathways.panelHeight
-    });
-    $('#thomas-wakley .main-content').css({
-        'bottom': 'auto',
-        'top': parseInt((Pathways.panelHeight / 3),10)
-    });
-
-    var $panel = $(panelID),
-        height = $panel.outerHeight();
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            triggerHook: 'top',
-            duration: Pathways.panelHeight
-        })
-        .on('enter', function(e) {
-            if (e.scrollDirection == 'FORWARD')
-                TweenMax.to('.black-strip', 0.5, {
-                    y: 0
-                }); // Scroll up
-        })
-        .on('leave', function(e) {
-            if (e.scrollDirection == 'REVERSE')
-                TweenMax.to('.black-strip', 0.2, {
-                    y: Pathways.panelHeight
-                }); // scroll down
-        });
-
-
-    return scene;
-};
-
-
 Pathways.components.gallery.hypnotisedWomen = {
     data: {
         location: '_assets/galleries/hypnotised-women/',
@@ -4157,27 +5477,24 @@ Pathways.components.gallery.hypnotisedWomen = {
     }
 };
 
-Pathways.scrollScenes.GonadMan = function(panelID) {
-
-    var $panel = $(panelID),
-        $quiz = $panel.find('[data-component="quiz"]'),
-        height = $panel.outerHeight();
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('gonad-man', function(panelId, panelEl, panelAttrs) {
+    var $panel = $(panelEl);
 
     var scene1 = new ScrollScene({
-            triggerElement: panelID,
+            triggerElement: $panel,
             triggerHook: 'top',
             duration: function() {
-                return $panel.outerHeight() + (Pathways.panelHeight * 0.5);
+                return $panel.outerHeight();
             }
         })
         .on('enter', function() {
-            $panel.addClass('active');
+            $panel.addClass('current-scroll-panel');
         }).on('leave', function() {
-            $panel.removeClass('active');
+            $panel.removeClass('current-scroll-panel');
         });
 
     return scene1;
-};
+});
 
 Pathways.components.quiz.guessTheTumour = {
     data: {
@@ -4212,99 +5529,82 @@ Pathways.components.quiz.guessTheTumour = {
     }
 };
 
-
-Pathways.scrollScenes.India = function(panelID) {
-
-    var $panel      = $(panelID),
-        $boats      = $panel.find('.boats'),
-        ratio       = 1050 / 1900,
-        boat_ratio  = 322 / 1900,
-        boat_height = (boat_ratio * window.innerWidth),
-        offsetHeight = $(panelID).find('.main-content').outerHeight() + 100;
-
-        var height  = $panel.outerHeight();
-
-    $boats.css({ bottom: 0, height: boat_height });
-
-    $(window).on('resize', function() {
+Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('india', function() {
+    var $panel,
+        $boats,
+        ratio = 1050 / 1900,
+        boat_ratio = 322 / 1900,
         boat_height = (boat_ratio * window.innerWidth);
-        $boats.css({ height: boat_height });
-    });
 
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       function() { return $panel.outerHeight() + (Pathways.panelHeight / 4); }
-        })
-        .on('enter', function() {
-            $boats.css('transition', 'transform 120s linear');
-            $boats.css('transform', 'translate('+window.innerWidth+'px,0)');
-        })
-        .on('leave', function() {
-            $boats.css('transition', 'none');
-            $boats.css('transform', 'translate(-600px,0)');
-        });
+    function setBoatStyle(e) {
+        boat_height = (boat_ratio * window.innerWidth);
+        if ($boats.length) {
+            $boats.css({
+                bottom: 0,
+                height: boat_height
+            });
+        }
+    }
 
-    return scene;
-};
+    return {
+        load: function(panelId, panelEl, panelAttrs) {
+            $panel = $(panelEl);
+            $boats = $panel.find('.boats');
+            setBoatStyle();
+            $(window).on('resize', setBoatStyle);
+        },
+        getScenes: function(panelId, panelEl, panelAttrs) {
+            var $panel = $(panelEl),
+                $boats = $boats || $panel.find('.boats');
 
+            var scene1 = new ScrollScene({
+                    triggerElement: $panel,
+                    triggerHook: 'top',
+                    duration: function() {
+                        return $panel.outerHeight();
+                    }
+                })
+                .on('enter', function() {
+                    $panel.addClass('current-scroll-panel');
+                }).on('leave', function() {
+                    $panel.removeClass('current-scroll-panel');
+                });
 
-Pathways.scrollScenes.Trilby = function(panelID) {
+            return scene1;
+        },
+        unload: function() {
+            $(window).off('resize', setBoatStyle);
+            $boats.removeAttr('style');
+        }
+    };
+});
 
-    var scenes = [];
-
-    $('.comic-panel').css('opacity', 0);
-
-    $('.comic-panel').each(function() {
-        var $this   = $(this),
-            tween   = TweenMax.to( $this, 1, { opacity: 1 } ),
-            offset  = $this.data('offset') ? $this.data('offset') : 0;
-
-        var scene = new ScrollScene({
-                triggerElement:     $this,
-                duration:           200,
-                offset:             offset
-            })
-            .setTween(tween);
-
-        scenes.push(scene);
-    });
-
-    return scenes;
-};
-
-
-Pathways.scrollScenes.AnnaO = function(panelID) {
-
-    var positions = [
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('anna-o', function(panelId, panelEl, panelAttrs) {
+   var positions = [
         { x: -57,   y: -107 },
         { x: 79,    y: 32 },
         { x: 178,   y: 178 },
         { x: -144,  y: 106 },
-    ];
+        ],
+        $panel = $(panelEl),
+        scenes = [],
+        $fragments = $(panelEl).find('.fragmented');
 
-    var counter = 0;
-    var $panel = $(panelID);
-    var scenes = [];
+    $fragments.each(function(index) {
 
-    $(panelID + ' .fragmented').each(function() {
         var $this = $(this);
+        var x = positions[index].x,
+            y = positions[index].y;
 
-        var x = positions[counter].x,
-            y = positions[counter].y;
+        $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
 
-        if( Modernizr.csstransforms3d )
-            $this.css( { 'transform': 'translate3d('+ x +'px, '+ y +'px, 0)' } );
-        else
-            $this.css( { 'transform': 'translate('+ x +'px, '+ y +'px)' } );
-
-        counter++;
     });
 
-    $(panelID + ' .fragmented').each(function() {
+    $fragments.each(function() {
         var tween = TweenMax.to( $(this), 1, { x: 0, y: -3 } );
 
         var scene = new ScrollScene({
-                triggerElement: panelID,
+                triggerElement: panelEl,
                 triggerHook:    'top',
                 duration:       function() { return $panel.height() - 400; },
                 offset:         50,
@@ -4315,122 +5615,151 @@ Pathways.scrollScenes.AnnaO = function(panelID) {
     });
 
     return scenes;
-};
+});
 
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('office-2', function(panelId, panelEl, panelAttrs) {
+    var $panel = $(panelEl);
 
-Pathways.scrollScenes.Office = function(panelID) {
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       Pathways.panelHeight
-        })
-        .on('enter', function(e) {
-            if( e.scrollDirection == 'FORWARD' )
-                TweenMax.to(panelID + ' .black-strip', 0.5, { y: 0 }); // Scroll up
-        })
-        .on('leave', function(e) {
-            if( e.scrollDirection == 'REVERSE' )
-                TweenMax.to(panelID + ' .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
-        });
-
-    return scene;
-};
-
-
-Pathways.scrollScenes.Office2 = function(panelID) {
-
-    var $panel = $(panelID),
-        $img = $panel.find('.large-screen').first();
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       function () { return $panel.outerHeight() + (Pathways.panelHeight * 0.5); },
-            offset:         100
-        })
-        .on('enter', function() {
-            //console.log('enter couch')
-            $img.css('transition', 'transform 14s ease');
-            $img.css('transform', 'translate(-80%, -10%) scale(1.8, 1.8)');
-        })
-        .on('leave', function() {
-            $img.css('transition', 'none');
-            $img.css('transform', 'translate(0,0) scale(1.6, 1.6)');
-        });
-
-    return scene;
-};
-
-Pathways.scrollScenes.DukeOfBuckingham = function(panelID) {
-
-    var startY,
-        coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3'),
-        coinOnPage = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-onto-screen.mp3'),
-        scenes = [],
-        difference = 0,
-        initCoinOffset = 380;
-
-    scenes.push(new ScrollScene({
-            triggerElement: panelID,
+    var scene1 = new ScrollScene({
+            triggerElement: $panel,
             triggerHook: 'top',
-            duration: Pathways.panelHeight,
-        })
-        .on('enter', function(e) {
-            if (e.scrollDirection == 'FORWARD') {
-                startY = window.scrollY;
-            } else {
-                startY = window.scrollY - (Pathways.panelHeight - 100);
+            duration: function() {
+                return $panel.outerHeight() - $('.fork').outerHeight();
             }
         })
-        .on('progress', function(e) {
-            $('.pence').css('transform', 'translate(0, ' + (window.scrollY - startY) + 'px)');
-        }));
+        .on('enter', function() {
+            $panel.addClass('current-scroll-panel');
+        }).on('leave', function() {
+            $panel.removeClass('current-scroll-panel');
+        });
 
-    scenes.push(new ScrollScene({
-            triggerElement: panelID,
-            triggerHook: 'top',
-            offset: initCoinOffset
-        })
-        .on('start', function(e) {
-            console.log('coin in box');
-            Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
-        }));
+    return scene1;
+});
 
-    scenes.push(new ScrollScene({
-            triggerElement: panelID,
-            triggerHook: 'top'
-        })
-        .on('start', function(e) {
-            console.log('coin on page');
-            Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
-        }));
+Pathways.components.slidingModal.johnTradescant = {
+    data: {
+        '1.1': {
+            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.1-large.jpg',
+            'title': 'Smilax Hortensis (kidney bean)',
+            'download': 'http://wellcomelibrary.org/actual/b20723143/0/f87d84f4-d665-4102-b90f-7b76c4f70b5d/jp2?download=true',
+            'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.1',
+            'fx': 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3',
+        },
+        '1.2': {
+            'image': 'data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.2-large.jpg',
+            'title': 'Hedera Nigra (black ivy)',
+            'download': 'http://wellcomelibrary.org/actual/b20723143/0/dd26de48-0556-431a-bffb-abf9885ed89a/jp2?download=true',
+            'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.2',
+            'fx': 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3',
+        },
+        '1.3': {
+            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.3-large.jpg',
+            'title': 'Tilia Foemina (limetree)"',
+            'download': 'http://wellcomelibrary.org/actual/b20723143/0/42e2e4df-a131-4f64-9181-af53ad6ec59b/jp2?download=true',
+            'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.3',
+            'fx': 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3',
+        },
+        '1.4': {
+            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.4-large.jpg',
+            'title': 'Daffodils',
+            'download': 'http://wellcomelibrary.org/actual/b11827786/0/87530b09-1873-4a7e-a68f-3efd00e7690c/jp2?download=true',
+            'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.4',
+            'fx': 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3',
+        },
+    }
+};
 
+Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', function() {
 
-    // Keep the clipping mask the correct height in relation to the 'cover' background.
-    var ratio = 1900 / 1050,
-        $clip = $('#duke-of-buckingham .clip');
+    var $clip,
+        $pence,
+        startY,
+        ratio = 1900 / 1050;
 
-    function resizeClip() {
+    // Keep the clipping mask the correct height in relation to the 'cover' background
+    function doResize(e) {
+        if ($pence) $pence.css('transform', 'translate(0, ' + (window.scrollY - startY) + 'px)');
+        if (!$clip) return;
+
         if ((window.innerWidth / window.innerHeight) > ratio) {
             var newHeight = window.innerWidth / ratio,
-                percent = (newHeight / 100) * 87;
-            difference = parseInt((newHeight - window.innerHeight), 10);
+                percent = parseInt(((newHeight / 100) * 88), 10),
+                difference = parseInt((newHeight - window.innerHeight), 10);
 
             $clip.css({
                 'height': percent,
                 'transform': 'translate(0, ' + -difference + 'px)'
             });
         } else
-            $clip.css('height', '87%');
+            $clip.css({
+                'height': '88%',
+                'transform': 'none'
+            });
     }
 
-    resizeClip();
+    return {
+        load: function(panelId, panelEl, panelAttrs) {
+            $clip = $(panelEl).find('.clip');
+            $pence = $(panelEl).find('.pence');
+        },
+        getScenes: function(panelId, panelEl, panelAttrs) {
+            var $panel = $(panelEl),
+                startY,
+                coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3'),
+                coinOnPage = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-onto-screen.mp3'),
+                scenes = [],
+                initCoinOffset = 380;
 
-    window.addEventListener('resize', function() {
-        resizeClip();
-    });
+            scenes.push(new ScrollScene({
+                    triggerElement: panelEl,
+                    triggerHook: 'top',
+                    duration: Pathways.panelHeight,
+                })
+                .on('enter', function(e) {
+                    doResize();
+                    window.addEventListener('resize', doResize);
 
-    return scenes;
-};
+                    if (e.scrollDirection == 'FORWARD') {
+                        startY = window.scrollY;
+                    } else {
+                        startY = window.scrollY - (Pathways.panelHeight - 100);
+                    }
+                })
+                .on('progress', function(e) {
+                    $pence.css('transform', 'translate(0, ' + (window.scrollY - startY) + 'px)');
+                }).on('leave', function() {
+                    window.removeEventListener('resize', doResize);
+                }));
+
+            scenes.push(new ScrollScene({
+                    triggerElement: panelEl,
+                    triggerHook: 'top',
+                    offset: initCoinOffset
+                })
+                .on('start', function(e) {
+                    console.log('coin in box');
+                    Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
+                }));
+
+            scenes.push(new ScrollScene({
+                    triggerElement: $pence,
+                    triggerHook: 'bottom',
+                    offset: 20
+                })
+                .on('start', function(e) {
+                    if (e.scrollDirection == 'FORWARD') {
+                        console.log('coin on page');
+                        Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
+                    }
+                }));
+
+            return scenes;
+        },
+        unload: function(panelId, panelEl, panelAttrs) {
+            window.removeEventListener('resize', resizeClip);
+        }
+    };
+});
 
 
 Pathways.components.cropZoom.uniqueArtifacts = {
@@ -4469,69 +5798,47 @@ Pathways.components.cropZoom.uniqueArtifacts = {
     }
 };
 
-
-Pathways.scrollScenes.GrauntRecords = function(panelID) {
-
-    var $panel = $(panelID);
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('graunt-records', function(panelId, panelEl, panelAttrs) {
+    var $panel = $(panelEl);
 
     var scene = new ScrollScene({
-            triggerElement: panelID,
+            triggerElement: panelEl,
             triggerHook: 'top',
-            duration:     Pathways.panelHeight,
+            duration: Pathways.panelHeight,
         })
         .on('enter', function() {
-            $panel.addClass('active');
+            $panel.addClass('current-scroll-panel');
         }).on('leave', function() {
-            $panel.removeClass('active');
+            $panel.removeClass('current-scroll-panel');
         });
 
     return scene;
-};
 
-Pathways.scrollScenes.DeathInfographic = function(panelID) {
+});
 
-    var $infoBox = $(panelID + ' .info-box'),
-        $inputContainer = $(panelID + ' .input-container');
-        //console.log(infoBox, inputContainer);
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('death-infographic', function(panelId, panelEl, panelAttrs) {
+    var $panel = $(panelEl),
+        $infoBox = $panel.find('.info-box'),
+        $inputContainer = $panel.find('.input-container');
+    //console.log(infoBox, inputContainer);
 
-    var $panel = $(panelID);
 
     var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       Pathways.panelHeight
+            triggerElement: panelEl,
+            duration: Pathways.panelHeight
         })
         .on('enter', function() {
-            $panel.addClass('active');
+            $panel.addClass('current-scroll-panel');
         }).on('leave', function() {
-            $panel.removeClass('active');
-            if($infoBox.css('display') === 'block') {
+            $panel.removeClass('current-scroll-panel');
+            if ($infoBox.css('display') === 'block') {
                 $infoBox.css('display', 'none');
             }
         });
 
     return scene;
-};
 
-
-Pathways.scrollScenes.IsaacNewton = function() {
-
-    var scene1 = new ScrollScene({
-            triggerElement: '#isaac-newton',
-            duration:       Pathways.panelHeight
-        })
-        .on('enter', function(e) {
-            if( e.scrollDirection == 'FORWARD' ) {
-                TweenMax.to('#isaac-newton .black-strip', 0.4, { y: 0 }); // Scroll up
-            }
-        })
-        .on('leave', function(e) {
-            if( e.scrollDirection == 'REVERSE' ) {
-                TweenMax.to('#isaac-newton .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
-            }
-        });
-
-    return scene1;
-};
+});
 
 window.TheCollectors = {};
 
@@ -7840,28 +9147,9 @@ Pathways.components.infiniteCanvas.wellcomeCollection = {
     }
 };
 
-Pathways.scrollScenes.StewartConn = function(panelID) {
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('seized-and-destroyed', function(panelId, panelEl, panelAttrs) {
 
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       Pathways.panelHeight
-        })
-        .on('enter', function(e) {
-            if( e.scrollDirection == 'FORWARD' )
-                TweenMax.to(panelID + ' .black-strip', 0.5, { y: 0 }); // Scroll up
-        })
-        .on('leave', function(e) {
-            if( e.scrollDirection == 'REVERSE' )
-                TweenMax.to(panelID + ' .black-strip', 0.2, { y: Pathways.panelHeight }); // scroll down
-        });
-
-    return scene;
-};
-
-
-Pathways.scrollScenes.SeizedAndDestroyed = function() {
-
-    var $panel = $('#seized-and-destroyed'),
+    var $panel = $(panelEl),
         vector = { x: -10, y: -5 },
         scenes = [];
 
@@ -7882,7 +9170,8 @@ Pathways.scrollScenes.SeizedAndDestroyed = function() {
     });
 
     return scenes;
-};
+
+});
 
 Pathways.components.gallery.quacksOfThe18thCentury = {
     data: {
@@ -7958,19 +9247,23 @@ Pathways.components.gallery.indecentSexualImages = {
     }
 };
 
-
-Pathways.scrollScenes.BritishMuseum = function() {
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('british-museum', function(panelId, panelEl, panelAttrs) {
+    var $panel = $(panelEl);
 
     var scene = new ScrollScene({
-            triggerElement: '#british-museum',
-            triggerHook:    'top'
+            triggerElement: panelEl,
+            triggerHook: 'top',
+            duration: Pathways.panelHeight,
         })
-        .on('enter', function(e) {
-            $('#british-museum').addClass('active');
+        .on('enter', function() {
+            $panel.addClass('current-scroll-panel');
+        }).on('leave', function() {
+            $panel.removeClass('current-scroll-panel');
         });
 
     return scene;
-};
+
+});
 
 Pathways.components.gallery.madeAFilm = {
     data: {
@@ -8089,553 +9382,15 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
         $nav_handle.trigger('click');
     }, 1000);
 
-
-    /*
-        Events
-    */
-
-    // put this here for now.
-    $('.comic-quote').on('click', '.info-box', function() {
-        var $this = $(this),
-            $parent = $this.parent();
-
-        if ($parent.hasClass('active')) {
-            $parent.removeClass('active');
-        } else {
-            $parent.addClass('active');
-        }
-    });
-
-
-
 }(window, $));
 
 
 
 
-// Init Animations
-(Pathways.initAnimation = function(w, doc, anim, cjs, Mod) {
-    "use strict";
-
-    return function(id) {
-        var canvas = doc.getElementById(id),
-            a = anim[id];
-
-        if (!canvas) return;
-        if (!a) return console.warn('No animation properties with id \'' + id + '\' found');
-
-        function initCanvas() {
-            var lib = a.lib;
-
-            var loader = new cjs.LoadQueue(false);
-            loader.addEventListener("fileload", handleFileLoad);
-            loader.addEventListener("complete", handleComplete);
-            loader.loadManifest(lib.properties.manifest);
-            a.start = function() {};
-            a.stop = function() {};
-
-        }
-
-        function handleFileLoad(evt) {
-            var images = a.images;
-            if (evt.item.type == "image") {
-                images[evt.item.id] = evt.result;
-            }
-        }
-
-        function handleComplete() {
-            var lib = a.lib,
-                exportRoot = new lib.tree2(),
-                stage = new cjs.Stage(canvas);
-
-            a.stage = stage;
-
-            stage.addChild(exportRoot);
-            stage.update();
-
-            cjs.Ticker.setFPS(lib.properties.fps);
-
-            a.start = function() {
-                cjs.Ticker.addEventListener("tick", stage);
-            };
-            a.stop = function() {
-                cjs.Ticker.removeEventListener("tick", stage);
-            };
-
-
-        }
-
-        if (w.innerWidth >= 768) {
-            initCanvas();
-        }
-    };
-
-
-}(window, document, animations, createjs, Modernizr));
-
-
-
-
-
-// Init Global ScrollScenes
-(function(w, $, p, Sm, Ss, Mod, Tm) {
-
-    "use strict";
-
-    var $parallaxContent = $('.start').find('.content').first();
-    var $parallaxLady = $('.start').find('.falling-lady').first();
-
-    function parallaxContentLoad() {
-        var scrollY = w.pageYOffset,
-            unit = 0.5 / (p.panelHeight / 2);
-
-        if ($parallaxContent) {
-            if (scrollY > p.panelHeight) {
-                $parallaxContent.removeAttr('style');
-                return;
-            }
-
-            $parallaxContent.css({
-                'display': 'block',
-                'opacity': 1 - (unit * scrollY),
-                'transform': Mod.csstransforms3d ? 'translate3d(0,' + (scrollY / 2) + 'px,0)' : 'translate(0,' + (scrollY / 2) + 'px)'
-            });
-        }
-    }
-
-    function parallaxContentUnload() {
-        $parallaxContent.removeAttr('style');
-        w.removeEventListener('scroll', parallaxContentLoad);
-    }
-
-    function parallaxLadyLoad() {
-        var scrollY = w.pageYOffset,
-            $parallaxLady = $('.falling-lady').first();
-
-        if ($parallaxLady) {
-            if (scrollY > p.panelHeight)
-                return;
-
-            $parallaxLady.css({
-                'transform': Mod.csstransforms3d ? 'translate3d(0,' + (scrollY * 0.7) + 'px,0)' : 'translate(0,' + (scrollY * 0.7) + 'px)'
-            });
-        }
-    }
-
-    function parallaxLadyUnload() {
-        $parallaxLady.removeAttr('style');
-        w.removeEventListener('scroll', parallaxLadyLoad);
-    }
-
-    function onScrollUnload() {
-
-        if ($parallaxContent) {
-            parallaxContentUnload();
-        }
-
-        if ($parallaxLady) {
-            parallaxLadyUnload();
-        }
-    }
-
-
-    function onScrollLoad() {
-
-        var $sequence = $('.sequence'),
-            controller = new Sm({
-                //refreshInterval: 500
-            }),
-            $blackStrip = $('.black-strip');
-
-        function resizeBlackStrip(e) {
-            $blackStrip.css({
-                position: 'fixed',
-                'height': p.panelHeight,
-                'transform': 'translate(0,' + p.panelHeight + 'px)'
-            });
-        }
-
-        if ($blackStrip.length) {
-            resizeBlackStrip();
-            w.addEventListener('resize', resizeBlackStrip);
-        }
-
-        function getValueFromConfig(rawConfig, name) {
-            var config;
-            if (rawConfig) config = JSON.parse(rawConfig);
-            return (config && config[name]) || null;
-        }
-
-
-
-        /**************
-            Scenes
-        **************/
-
-        var scenes = [],
-            idx = 0;
-
-        // Start panel
-
-        if ($parallaxContent) {
-            w.addEventListener('scroll', parallaxContentLoad, false);
-        }
-
-
-        // Svengali
-        if ($parallaxLady) {
-            w.addEventListener('scroll', parallaxLadyLoad, false);
-        }
-
-
-        /**************
-            Sequence
-         **************/
-
-        if ($sequence.length) {
-            var $bgs = $sequence.find('.bg-container'),
-                $first_panel = $sequence.find('.panel').first(),
-                $last_panel = $sequence.find('.panel').last();
-
-            scenes[idx++] = new Ss({
-                    triggerElement: $sequence,
-                    triggerHook: 'top',
-                    duration: function() {
-                        return ($sequence.height() - p.panelHeight);
-                    }
-                })
-                .on('enter', function(e) {
-                    $bgs.css({
-                        display: 'block'
-                    }); // To fix layering when reloading
-                    if (e.scrollDirection == 'FORWARD') {
-                        $bgs.css({
-                            position: 'fixed',
-                            display: 'none',
-                            opacity: 0
-                        });
-                        $first_panel.find('.bg-container').css({
-                            display: 'block',
-                            opacity: 1
-                        });
-                    }
-                    if (e.scrollDirection == 'REVERSE') {
-                        $bgs.css({
-                            position: 'fixed'
-                        });
-                    }
-                })
-                .on('leave', function(e) {
-                    $bgs.css({
-                        position: 'absolute',
-                        display: 'block'
-                    });
-                });
-        }
-
-        // Panels & Components
-
-        $('[data-component="gallery"]').hide();
-        $('[data-component="letter-gallery"]').hide();
-        $('[data-component="quiz"]').hide();
-
-        var $panels = $('.sequence .panel'),
-            panel_total = $panels.length,
-            panel_count = 0;
-
-        $panels.each(function() {
-            var $this = $(this),
-                panelID = $this.attr('id'),
-                $bg = $this.find('.bg-container'),
-                $library_panel = $('[data-panel="' + panelID + '"]').first(),
-                $gallery = $this.find('[data-component="gallery"]'),
-                $letterGallery = $this.find('[data-component="letter-gallery"]'),
-                $quiz = $this.find('[data-component="quiz"]'),
-                $panelAudio = $this.find('[data-audio="panel"]'),
-                $fxAudio = $this.find('[data-audio="fx"]'),
-                $panelVideo = $this.find('[data-video="panel"]'),
-                $slidingPanels = $this.find('.sliding-panel'),
-
-                tween = Tm.to($bg, 1, {
-                    opacity: 1
-                });
-
-            panel_count += 1; // for tracking first and last panels (when logic needs to differ because of the lack of cross-fading)
-
-            function getMediaDuration() {
-                return $this.outerHeight();
-            }
-
-            function getTweenDuration() {
-                return p.panelHeight / 4;
-            }
-
-            function getComponentDuration(offset) {
-                return function() {
-                    var val = ($this.outerHeight() * 0.75) - offset;
-                    return (val > 0 ? val : 0);
-                };
-            }
-
-            function getLibPanelDuration() {
-                var h = $this.outerHeight(),
-                    val = parseInt((panel_count == panel_total) ? (h * 0.75) : (h - 300), 10);
-
-                return (val > 0 ? val : 0);
-            }
-
-            function getPinDuration() {
-                return parseInt($this.outerHeight() + (p.panelHeight * 0.75), 10);
-            }
-
-            // Controls layering
-            scenes[idx++] = new Ss({
-                    triggerElement: $this,
-                    triggerHook: 'bottom',
-                    duration: getPinDuration
-                })
-                .on('enter', function() {
-                    $bg.css('display', 'block');
-                })
-                .on('leave', function() {
-                    $bg.css('display', 'none');
-                });
-
-            // Panels Opacity transition
-            scenes[idx++] = new Ss({
-                    triggerElement: $this,
-                    duration: getTweenDuration
-                })
-                .setTween(tween);
-
-            // Galleries
-            if ($gallery.length) {
-                var g_offset = getValueFromConfig($gallery.attr('data-config'), 'offset_height') || 0;
-                scenes[idx++] = new Ss({
-                        triggerElement: $this,
-                        triggerHook: 'top',
-                        duration: getComponentDuration(g_offset),
-                        offset: g_offset
-                    })
-                    .on('enter', function() {
-                        $gallery.css({
-                            position: 'fixed',
-                            display: 'block'
-                        });
-                        setTimeout(function() {
-                            $gallery.addClass('active');
-                        }, 50);
-                    })
-                    .on('leave', function() {
-                        $gallery.css({
-                            position: 'absolute',
-                            display: 'none'
-                        });
-                        setTimeout(function() {
-                            $gallery.removeClass('active');
-                        }, 50);
-                    });
-            }
-
-            // Letter Galleries
-            if ($letterGallery.length) {
-                var lg_offset = getValueFromConfig($letterGallery.attr('data-config'), 'offset_height') || 0;
-                scenes[idx++] = new Ss({
-                        triggerElement: $this,
-                        triggerHook: 'top',
-                        duration: getComponentDuration(lg_offset),
-                        offset: lg_offset
-                    })
-                    .on('enter', function() {
-                        $letterGallery.css({
-                            position: 'fixed',
-                            display: 'block'
-                        });
-                        setTimeout(function() {
-                            $letterGallery.addClass('active');
-                        }, 50);
-                    })
-                    .on('leave', function() {
-                        $letterGallery.css({
-                            position: 'absolute',
-                            display: 'none'
-                        });
-                        setTimeout(function() {
-                            $letterGallery.removeClass('active');
-                        }, 50);
-                    });
-            }
-
-            // Quiz
-            if ($quiz.length) {
-                var q_offset = getValueFromConfig($quiz.attr('data-config'), 'offset_height') || 0;
-                scenes[idx++] = new Ss({
-                        triggerElement: $this,
-                        triggerHook: 'top',
-                        duration: getComponentDuration(q_offset),
-                        offset: q_offset
-                    })
-                    .on('enter', function() {
-                        $quiz.css({
-                            position: 'fixed',
-                            display: 'block'
-                        });
-                        setTimeout(function() {
-                            $quiz.addClass('active');
-                        }, 50);
-                    })
-                    .on('leave', function() {
-                        $quiz.css({
-                            position: 'absolute',
-                            display: 'none'
-                        });
-                        setTimeout(function() {
-                            $quiz.removeClass('active');
-                        }, 50);
-                    });
-            }
-
-            // Library panels
-            if ($library_panel.length) {
-                $library_panel.css('transform', 'translate(' + ($library_panel.outerWidth()) + 'px, ' + ($library_panel.outerHeight() - 60) + 'px)');
-
-                scenes[idx++] = new Ss({
-                        triggerElement: $this,
-                        duration: getLibPanelDuration,
-                        offset: 100
-                    })
-                    .on('enter', function() {
-                        $library_panel.css({
-                            position: 'fixed',
-                            display: 'block'
-                        });
-                    })
-                    .on('leave', function() {
-                        $library_panel.css({
-                            position: 'absolute',
-                            display: 'none'
-                        });
-                    });
-            }
-
-
-
-            // Audio & Video
-            //
-            //
-            function getPlay(channelID) {
-                return function playMedia(index, media) {
-                    var config = $(media).attr('data-config') ? $(media).attr('data-config') : null;
-                    p.media.ctrl.playMediaOnChannel(media, channelID, config);
-                };
-            }
-
-            function getStop(channelID) {
-                return function stopMedia(index, media) {
-                    var config = $(media).attr('data-config') ? $(media).attr('data-config') : null;
-                    p.media.ctrl.stopMediaOnChannel(media, channelID, config);
-                };
-            }
-
-            if ($panelVideo.length || $panelAudio.length || $fxAudio.length) {
-
-                scenes[idx++] = new Ss({
-                        triggerElement: $this,
-                        duration: getMediaDuration
-                    })
-                    .on('enter', function() {
-                        $panelVideo.each(getPlay('video'));
-                        $panelAudio.each(getPlay('panel'));
-                        $fxAudio.each(getPlay('fx'));
-                    })
-                    .on('leave', function() {
-                        $panelVideo.each(getStop('video'));
-                        $panelAudio.each(getStop('panel'));
-                        p.media.ctrl.stopFxChannel();
-                    });
-            }
-
-
-
-            //Sliding panels
-            //
-            if ($slidingPanels.length) {
-                var slideStart = $this.find('.sliding-panels').data('sliding-offset'),
-                    offset = slideStart ? slideStart : 0;
-
-
-                $slidingPanels.css({
-                    'opacity': 0
-                });
-
-                var translations = [-100, 100],
-                    defaultFxAudioSrc = 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3';
-
-
-                $slidingPanels.each(function(index) {
-                    var $this = $(this);
-
-                    $this.css('transform', 'translate(' + translations[((index + offset) % 2)] + 'px,0)');
-
-                    var tween = TweenMax.to($this, 1, {
-                            x: 0,
-                            opacity: 1
-                        }),
-                        fxAudioSrc = $this.data('fx') || defaultFxAudioSrc,
-                        fxAudio = new Audio(fxAudioSrc);
-
-                    scenes[idx++] = new Ss({
-                            triggerElement: $this,
-                            duration: 200,
-                            offset: offset
-                        })
-                        .on('enter', function(e) {
-                            if (e.scrollDirection === 'FORWARD') {
-                                console.log('playing:', fxAudioSrc);
-                                if (fxAudio) p.media.ctrl.playMediaOnFxChannel(fxAudio);
-                            } else if (e.scrollDirection == 'REVERSE') {
-                                if (fxAudio) p.media.ctrl.playMediaOnFxChannel(fxAudio);
-                            }
-                        })
-                        .on('leave', function(e) {
-                            // if (e.scrollDirection == 'REVERSE') {
-                            //     console.log('ss', idx, 'leave');
-                            //     if (fxAudio) p.media.ctrl.playMediaOnFxChannel(fxAudio);
-                            // }
-                        })
-                        .setTween(tween);
-                });
-
-            }
-
-            // Panel specific scene code if it has any
-            var handlerClass = p.utils.toTitleCase(panelID),
-                animationClass = p.utils.toCamelCase(panelID),
-                animation = animations[animationClass],
-                panelMethod = p.scrollScenes[handlerClass],
-                panelScene, fn;
-
-            // Check the handler exists, then load
-            if (typeof panelMethod !== 'undefined') {
-                panelScene = panelMethod('#' + panelID, animation);
-                if (panelScene) {
-                    controller.addScene(panelScene);
-                }
-
-            }
-        });
-
-        controller.addScene(scenes);
-
-        return controller;
-    }
+// Init Pathways
+(function(w, p, ga) {
 
     function onPathwaysLoad() {
-
-        if (animations.magnetisedTrees) {
-            p.initAnimation('magnetisedTrees');
-        }
-
 
         function initScript(d, s, id, a) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -8655,15 +9410,11 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
         initScript(document, 'script', 'pth-ga-api', "//apis.google.com/js/platform.js");
         initScript(document, 'script', 'pth-pin-api', "//assets.pinterest.com/js/pinit.js");
         initScript(document, 'script', 'pth-twt-api', "//platform.twitter.com/widgets.js");
+
+        p.components.core.ga.init('[data-ga]');
     }
 
-    p.init(onPathwaysLoad, onScrollLoad, onScrollUnload);
+    p.init(onPathwaysLoad);
 
-}(window, jQuery, Pathways, ScrollMagic, ScrollScene, Modernizr, TweenMax));
+}(window, Pathways, ga));
 
-// Init global ga tracking
-(function(ga, $) {
-
-    ga.init('[data-ga]');
-
-}(Pathways.components.core.ga, jQuery));
