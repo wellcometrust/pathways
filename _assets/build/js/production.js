@@ -2379,7 +2379,7 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
                         })
                         .on('enter', function(e) {
                             if (e.scrollDirection === 'FORWARD') {
-                                console.log('playing:', fxAudioSrc);
+                                // console.log('playing:', fxAudioSrc);
                                 if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
                             } else if (e.scrollDirection == 'REVERSE') {
                                 if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
@@ -3413,7 +3413,7 @@ var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
 Pathways.components.core = Pathways.components.core || {};
 
-(function(w, exports, ga, $) {
+(function(w, exports, $) {
 
     var baseSelector = '';
     var attrSelector = '';
@@ -3427,8 +3427,8 @@ Pathways.components.core = Pathways.components.core || {};
     }
 
     function send(label) {
-        console.log(baseSelector + ' click:', label);
-        if (label) ga('send', 'event', 'link', 'click', label);
+        console.log(baseSelector + ' click:', label, typeof ga);
+        if (label) window.ga('send', 'event', 'link', 'click', label);
     }
 
     // Assumes selector will be in form '[data-<val>]'
@@ -3452,7 +3452,7 @@ Pathways.components.core = Pathways.components.core || {};
         update: update
     };
 
-}(window, Pathways.components.core, ga, jQuery));
+}(window, Pathways.components.core, jQuery));
 
 var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
@@ -5737,7 +5737,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
                     offset: initCoinOffset
                 })
                 .on('start', function(e) {
-                    console.log('coin in box');
+                    // console.log('coin in box');
                     Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
                 }));
 
@@ -5748,7 +5748,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
                 })
                 .on('start', function(e) {
                     if (e.scrollDirection == 'FORWARD') {
-                        console.log('coin on page');
+                        // console.log('coin on page');
                         Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
                     }
                 }));
