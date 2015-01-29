@@ -66,7 +66,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
                     offset: initCoinOffset
                 })
                 .on('start', function(e) {
-                    console.log('coin in box');
+                    // console.log('coin in box');
                     Pathways.media.ctrl.playMediaOnFxChannel(coinBoxFx);
                 }));
 
@@ -77,7 +77,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
                 })
                 .on('start', function(e) {
                     if (e.scrollDirection == 'FORWARD') {
-                        console.log('coin on page');
+                        // console.log('coin on page');
                         Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
                     }
                 }));

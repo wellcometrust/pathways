@@ -2,7 +2,7 @@ var Pathways = Pathways || {};
 Pathways.components = Pathways.components || {};
 Pathways.components.core = Pathways.components.core || {};
 
-(function(w, exports, ga, $) {
+(function(w, exports, $) {
 
     var baseSelector = '';
     var attrSelector = '';
@@ -16,8 +16,8 @@ Pathways.components.core = Pathways.components.core || {};
     }
 
     function send(label) {
-        console.log(baseSelector + ' click:', label);
-        if (label) ga('send', 'event', 'link', 'click', label);
+        console.log(baseSelector + ' click:', label, typeof ga);
+        if (label) window.ga('send', 'event', 'link', 'click', label);
     }
 
     // Assumes selector will be in form '[data-<val>]'
@@ -41,4 +41,4 @@ Pathways.components.core = Pathways.components.core || {};
         update: update
     };
 
-}(window, Pathways.components.core, ga, jQuery));
+}(window, Pathways.components.core, jQuery));

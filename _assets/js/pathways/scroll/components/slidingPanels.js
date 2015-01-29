@@ -60,7 +60,7 @@
                         })
                         .on('enter', function(e) {
                             if (e.scrollDirection === 'FORWARD') {
-                                console.log('playing:', fxAudioSrc);
+                                // console.log('playing:', fxAudioSrc);
                                 if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
                             } else if (e.scrollDirection == 'REVERSE') {
                                 if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
