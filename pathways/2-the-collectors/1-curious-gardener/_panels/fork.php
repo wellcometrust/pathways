@@ -1,4 +1,4 @@
-                <a class="teaser" href="/pathways/2-the-collectors/2-merchants-of-light/" style="background-image: url(/pathways/2-the-collectors/_assets/teaser/teaser-merchants-of-light.jpg)">
+                <a class="teaser" data-preload-link href="/pathways/2-the-collectors/2-merchants-of-light/" style="background-image: url(/pathways/2-the-collectors/_assets/teaser/teaser-merchants-of-light.jpg)">
                     <div class="teaser-text-container">
                         <p class="teaser-text">Next:</p>
                         <h1>Merchants of Light</h1>

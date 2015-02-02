@@ -1,4 +1,4 @@
-                <a class="teaser" href="/pathways/2-the-collectors/4-unceasing-seeker/" style="background-image: url(/pathways/2-the-collectors/_assets/teaser/teaser-unceasing-seeker.jpg)">
+                <a class="teaser" data-preload-link href="/pathways/2-the-collectors/4-unceasing-seeker/" style="background-image: url(/pathways/2-the-collectors/_assets/teaser/teaser-unceasing-seeker.jpg)">
                     <div class="teaser-text-container">
                         <p class="teaser-text">Next:</p>
                         <h1>The Unceasing Seeker</h1>

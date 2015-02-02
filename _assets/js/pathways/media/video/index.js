@@ -50,7 +50,7 @@ console.log('include media/video/index');
             video = videos[i];
             if (video) {
                 var tracks = video.textTracks;
-                if (tracks.length) {
+                if (tracks && tracks.length) {
                     for (var j = 0, m = tracks.length; j < m; j++) {
                         var track = tracks[j];
                         if (track) track.mode = 'hidden';

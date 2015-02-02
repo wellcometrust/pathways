@@ -8,8 +8,11 @@
     <meta name="description" content="<?= $page->getDescription() ?>">
     <meta name="viewport" content="initial-scale=1,width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="http://digitalstories.s3-website-eu-west-1.amazonaws.com">
 
     <link rel="stylesheet" type="text/css" href="<?= $page->getAsset('build/css/main.css') ?>">
+
     <script src="//use.typekit.net/nlx6tdo.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
 
@@ -20,12 +23,11 @@
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-54268163-1', 'auto');
-	  ga('send', 'pageview');
-
+      if (window === window.top) {
+	   ga('create', 'UA-54268163-1', 'auto');
+	   ga('send', 'pageview');
+      }
 	</script>
-
-
 
 </head>
 <?php flush(); ?>

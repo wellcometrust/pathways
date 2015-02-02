@@ -12,20 +12,20 @@ console.log('include media/vol/views/global');
     GlobalMuteView.prototype = {
         enable: function() {
             this.isEnabled = true;
-            $(this.globalMediaSelector).each(function(e) {
-                this.pause();
+            $(this.globalMediaSelector).each(function(i, item) {
+                if (item.readyState !== 0) item.pause();
             });
         },
         update: function(isMuted) {
             if (!this.isEnabled) return;
-            $(this.globalMediaSelector).each(function(e) {
+            $(this.globalMediaSelector).each(function(i) {
                 this.muted = isMuted;
             });
         },
         disable: function() {
             this.isEnabled = false;
-            $(this.globalMediaSelector).each(function(e) {
-                this.pause();
+            $(this.globalMediaSelector).each(function(i, item) {
+                if (item.readyState !== 0) item.pause();
             });
         }
     };

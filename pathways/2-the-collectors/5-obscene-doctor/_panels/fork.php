@@ -1,4 +1,4 @@
-                <a class="teaser" href="/pathways/2-the-collectors/6-ignorant-bride/" style="background-image: url(/pathways/2-the-collectors/_assets/teaser/teaser-ignorant-bride.jpg)">
+                <a class="teaser" data-preload-link href="/pathways/2-the-collectors/6-ignorant-bride/" style="background-image: url(/pathways/2-the-collectors/_assets/teaser/teaser-ignorant-bride.jpg)">
                     <div class="teaser-text-container">
                         <p class="teaser-text">Next:</p>
                         <h1>The Ignorant Bride</h1>

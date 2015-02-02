@@ -1,4 +1,4 @@
-                <a class="teaser" href="/pathways/2-the-collectors/5-obscene-doctor/" style="background-image: url(/pathways/2-the-collectors/_assets/teaser/teaser-obscene-doctor.jpg)">
+                <a class="teaser" data-preload-link href="/pathways/2-the-collectors/5-obscene-doctor/" style="background-image: url(/pathways/2-the-collectors/_assets/teaser/teaser-obscene-doctor.jpg)">
                     <div class="teaser-text-container">
                         <p class="teaser-text">Next:</p>
                         <h1>The ‘Obscene’ Doctor</h1>

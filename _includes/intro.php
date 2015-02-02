@@ -31,7 +31,7 @@ $pathwayIntroText = $page->getPathwayIntroText();
 
                 <p class="intro-body"><?= $pathwayIntroText ?></p>
 
-                <a href="<?= $firstPath ?>" class="intro-button">
+                <a data-preload-link href="<?= $firstPath ?>" class="intro-button">
                     Start your journey
                     <span></span>
                 </a>

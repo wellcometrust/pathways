@@ -40,7 +40,7 @@
 
 
 // Init Pathways
-(function(w, p, ga) {
+(function(w, p, preloader, ga) {
 
     function onPathwaysLoad() {
 
@@ -64,9 +64,11 @@
         initScript(document, 'script', 'pth-twt-api', "//platform.twitter.com/widgets.js");
 
         p.components.core.ga.init('[data-ga]');
+
+        preloader.init('[data-preload-link]');
+
     }
 
     p.init(onPathwaysLoad);
 
-}(window, Pathways, ga));
-
+}(window, Pathways, Pathways.preloader, ga));

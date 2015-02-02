@@ -11,7 +11,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 /***
     Pathways main
 */
-(function(exports, w, _, p, sys, utils, media, vol, video, scrollSceneCtrl, $, undefined) {
+(function(exports, w, _, p, sys, utils, media, vol, video, scrollSceneCtrl, preloader, $, undefined) {
 
     'use strict';
 
@@ -315,7 +315,6 @@ Pathways.MIN_SCROLL_LEVEL = 4;
                 if (scrollSceneCtrl) {
                     scrollSceneCtrl.init(panels);
                     scrollSceneCtrl.load();
-
                 }
 
                 scenesLoaded = true;
@@ -336,13 +335,14 @@ Pathways.MIN_SCROLL_LEVEL = 4;
         }
     }
 
-
-
     function init(onLoadComplete) {
+
+        if (window !== window.top) return console.log('Not initialising Pathways as called within iFrame');
 
         startPanel = $('.start').get(0);
         panels = initPanels('.panel');
         ratioedPanels = initRatioedPanels(panels);
+
         resizeCheck();
 
         w.addEventListener('resize', function() {
@@ -370,6 +370,7 @@ Pathways.MIN_SCROLL_LEVEL = 4;
 
             video.init(panels);
 
+            preloader.load(3000); // set a four second delay before preloading the next page(s)
 
         });
     }
@@ -382,4 +383,4 @@ Pathways.MIN_SCROLL_LEVEL = 4;
     utils.getHeightWithOffset = getHeightWithOffset;
     utils.getWidthWithOffset = getWidthWithOffset;
 
-}(Pathways, this, _, Pathways, Pathways.system, Pathways.utils, Pathways.media, Pathways.media.vol, Pathways.video, Pathways.scrollSceneCtrl, jQuery));
+}(Pathways, this, _, Pathways, Pathways.system, Pathways.utils, Pathways.media, Pathways.media.vol, Pathways.video, Pathways.scrollSceneCtrl, Pathways.preloader, jQuery));

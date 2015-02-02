@@ -44,6 +44,7 @@ module.exports = function(grunt) {
 
                     '_assets/js/pathways/system/index.js', // Pathways Core files.
                     '_assets/js/pathways/utils/index.js', // Pathways Core files.
+                    '_assets/js/pathways/utils/*.js', // Pathways Core files.
                     '_assets/js/pathways/core/index.js', // Pathways Core files.
                     '_assets/js/pathways/core/*.js', // Pathways Core files.
                     '_assets/js/pathways/cookies/index.js', // Pathways Core files.
@@ -93,7 +94,7 @@ module.exports = function(grunt) {
             options: {
                 preserveComments: 'some',
                 compress: {
-                    // drop_console: true
+                    drop_console: true
                 }
             },
             libs: {
