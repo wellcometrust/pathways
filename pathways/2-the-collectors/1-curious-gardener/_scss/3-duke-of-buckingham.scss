@@ -1,62 +1,50 @@
-
 #duke-of-buckingham {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-3.jpg);
         background-position: 50% 100%;
     }
 }
-
 .touch {
-    #duke-of-buckingham {
-
-    }
+    #duke-of-buckingham {}
 }
-
 .no-touch {
-    #duke-of-buckingham {
-
-    }
+    #duke-of-buckingham {}
 }
-
 @media screen and (min-width: 48em) {
     #duke-of-buckingham {
         .pence {
-            position:           absolute;
-            top:                30%;
-            left:               45%;
-            background:         url(/pathways/2-the-collectors/1-curious-gardener/_assets/6pence.png) 0 0 no-repeat;
-            background-size:    100%;
-            width:              140px;
-            height:             155px;
+            position: absolute;
+            top: 30%;
+            left: 45%;
+            background: url(/pathways/2-the-collectors/1-curious-gardener/_assets/6pence.png) 0 0 no-repeat;
+            background-size: 100%;
+            width: 140px;
+            height: 155px;
         }
-
         .clip {
-            position:   absolute;
-            top:        0;
-            width:      100%;
-            height:     90%;
-            overflow:   hidden;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 90%;
+            overflow: hidden;
         }
-
         .main-content {
-            color:          #030303;
-
+            color: #030303;
             .inner {
-                border-top:     1px solid #030303;
-                border-bottom:  1px solid #030303;
+                border-top: 1px solid #030303;
+                border-bottom: 1px solid #030303;
             }
         }
     }
-
     .touch {
         #duke-of-buckingham {
-
+            .main-content {
+                margin-top: 5%;
+                margin-bottom: 45%;
+            }
         }
     }
-
     .no-touch {
-        #duke-of-buckingham {
-
-        }
+        #duke-of-buckingham {}
     }
 }

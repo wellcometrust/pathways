@@ -1,5 +1,5 @@
 
-<div id="satirised" class="panel" data-config='{ "offset_height": 300 }'>
+<div id="satirised" class="panel">
 
     <div class="bg-container">
         <video preload="none" poster="/pathways/1-mindcraft/1-mesmer/_assets/mesmer-5.jpg" data-video="panel" data-config='{ "exclude": ["panel"], "seekToTimeAtStart" : 5 }'>

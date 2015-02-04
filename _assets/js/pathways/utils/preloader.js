@@ -14,7 +14,6 @@
             return $(this).attr('href');
         }).get();
         links = utils.unique([], links);
-        console.log(links);
     }
 
     function _load() {

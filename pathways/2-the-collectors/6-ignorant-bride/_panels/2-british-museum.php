@@ -1,5 +1,5 @@
 
-<div id="british-museum" class="panel" data-config='{ "offset_height": 200 }'>
+<div id="british-museum" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-british-museum.jpg">

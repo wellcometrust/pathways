@@ -1,30 +1,24 @@
-
 .start-curious-gardener {
+    .scene-set {
+        color: #030303;
+        sup {
+            font-size: 0.8rem;
+        }
+    }
+    header {
+        h1 {
+            color: #030303;
+        }
+    }
+    .intro-text {
+        color: #030303;
+    }
     .bg-container {
         background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-1.jpg);
     }
 }
-
 @media all and (min-width: 48rem) {
     .start-curious-gardener {
-        .scene-set {
-            color: #030303;
-
-            sup {
-                font-size: 0.8rem;
-            }
-        }
-
-        header {
-            h1 {
-                color: #030303;
-            }
-        }
-
-        .intro-text {
-            color: #030303;
-        }
-
         .scroll-down--arrow {
             background-image: url(/_assets/img/icons/icon-arrow-down-circle-black.svg);
         }

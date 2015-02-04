@@ -8,11 +8,12 @@
 
     scrollCtrl.addGlobalPanelScrollFactory(function() {
         var heightOffset = 60,
-            visibleOffset = 0;
+            visibleOffset = 0,
+            readyClass = 'info-panel-ready';
 
         return {
-            load: function(panelId, panelEl, panelAttrs) {
-                var $component = $('[data-panel="' + panelAttrs.id + '"]').first(),
+            load: function(panelId, panelEl, panel) {
+                var $component = $('[data-panel="' + panel.id + '"]').first(),
                     offsetHeight = $component.outerHeight() - heightOffset,
                     offsetWidth = $component.outerWidth(),
                     val = 'translate(' + offsetWidth + 'px, ' + offsetHeight + 'px)';
@@ -23,33 +24,29 @@
                     });
                 }
             },
-            getScenes: function(panelId, panelEl, panelAttrs) {
-                var $component = $('[data-panel="' + panelAttrs.id + '"]').first(),
-                    scene = [];
+            getScenes: function(panelId, panelEl, panel) {
 
-                var m = function m(offset) {
-                    return function ret() {
-                        return Math.max((panelAttrs.componentHeight - offset), 0);
-                    };
-                };
+                if (panel.isStart) return;
+
+                var $component = $('[data-panel="' + panel.id + '"]').first(),
+                    scene = [];
 
                 if ($component.length) {
                     scene = new Ss({
                         triggerElement: panelEl,
                         triggerHook: 'middle',
-                        duration: m(visibleOffset),
-                        offset: visibleOffset
+                        duration: panel.getComponentDuration
                     }).on('enter', function(e) {
-                        $component.addClass('info-panel-ready');
+                        $component.addClass(readyClass);
                     }).on('leave', function(e) {
-                        $component.removeClass('info-panel-ready');
+                        $component.removeClass(readyClass);
                     });
                 }
 
                 return scene;
             },
-            unload: function(panelId, panelEl, panelAttrs) {
-                var $component = $('[data-panel="' + panelAttrs.id + '"]').first();
+            unload: function(panelId, panelEl, panel) {
+                var $component = $('[data-panel="' + panel.id + '"]').first();
                 if ($component.length) $component.removeAttr('style');
             }
         };

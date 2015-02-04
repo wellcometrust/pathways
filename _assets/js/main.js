@@ -63,7 +63,7 @@
         initScript(document, 'script', 'pth-pin-api', "//assets.pinterest.com/js/pinit.js");
         initScript(document, 'script', 'pth-twt-api', "//platform.twitter.com/widgets.js");
 
-        p.components.core.ga.init('[data-ga]');
+        p.core.ga.init('[data-ga]');
 
         preloader.init('[data-preload-link]');
 

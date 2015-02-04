@@ -1,8 +1,3 @@
-/*
-    Carousel pattern initiator followed by the component.
-*/
-console.log('include gallery');
-
 (function(exports, w, overlay, getCarousel, getImageLoader, utils, $, _Hammer, Mod) {
 
     var doc = w.document;

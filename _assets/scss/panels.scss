@@ -43,36 +43,29 @@
     }
 }
 
-
 #mesmers-salon {
     display: none;
 }
-
 @media screen and (min-width: 48em) {
     #mesmers-salon {
         display: block;
-    }
-}
-
-/**
-    Crop zoom
-**/
-
-.crop-zoom {
-
-    .tap-target.rod {
-        top:    46%;
-        left:   14%;
-    }
-
-    .tap-target.woman {
-        top:    74%;
-        left:   39%;
-    }
-
-    .tap-target.mesmer {
-        top:    26%;
-        left:   74%;
+        .bg-container {
+            min-height: 566px;
+        }
+        .crop-zoom {
+            .tap-target.rod {
+                top: 46%;
+                left: 14%;
+            }
+            .tap-target.woman {
+                top: 74%;
+                left: 39%;
+            }
+            .tap-target.mesmer {
+                top: 26%;
+                left: 74%;
+            }
+        }
     }
 }
 
@@ -115,32 +108,27 @@
 
 }
 
-
 #magnetised-trees {
     .bg-container {
         canvas {
             display: none;
         }
     }
-
     p {
         text-shadow: 2px 2px 0px #030303;
     }
 }
-
 @media all and (min-width: 48rem) {
     #magnetised-trees {
         .bg-container {
             img {
                 display: none;
             }
-
             canvas {
                 display: block;
             }
         }
     }
-
     .no-touch {
         #magnetised-trees {
             .bg-container {
@@ -151,7 +139,20 @@
             }
         }
     }
+    .touch {
+        #magnetised-trees {
+            .bg-container {
+                img {
+                    display: block;
+                }
+                canvas {
+                    display: none;
+                }
+            }
+        }
+    }
 }
+
 
 @media all and (min-width: 48em) and (max-width: 80em) {
     #satirised {
@@ -431,16 +432,6 @@
             &.current-scroll-panel img {
                 @include transform(scale(1, 1));
                 @include transition(all 14s ease);
-            }
-        }
-    }
-}
-
-@media all and (min-width: 64rem) {
-    .touch {
-        #gonad-man {
-            .info-box {
-                top:        66%;
             }
         }
     }
@@ -862,6 +853,13 @@
             }
         }
     }
+    .touch {
+        #trilby {
+            .main-content {
+                margin-top: 0%;
+            }
+        }
+    }
 }
 @media all and (min-width: 62.5rem) {
     #trilby {
@@ -1115,6 +1113,14 @@
         }
     }
 
+    .touch {
+        #bompard {
+            .main-content {
+                margin-top: 0%;
+            }
+        }
+    }
+
 }
 
 @media all and (min-width: 60rem) {
@@ -1167,6 +1173,9 @@
 
     .touch {
         #anna-o {
+            .main-content {
+                margin-top: 0;
+            }
             header {
                 height: 370px;
             }
@@ -1183,7 +1192,7 @@
 
     .no-touch {
         #anna-o {
-            .main-content.left.fixed {
+            .main-content.left {
                 top: 8%;
             }
         }
@@ -1302,33 +1311,27 @@
     }
 }
 
-
 .start-curious-gardener {
+    .scene-set {
+        color: #030303;
+        sup {
+            font-size: 0.8rem;
+        }
+    }
+    header {
+        h1 {
+            color: #030303;
+        }
+    }
+    .intro-text {
+        color: #030303;
+    }
     .bg-container {
         background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-1.jpg);
     }
 }
-
 @media all and (min-width: 48rem) {
     .start-curious-gardener {
-        .scene-set {
-            color: #030303;
-
-            sup {
-                font-size: 0.8rem;
-            }
-        }
-
-        header {
-            h1 {
-                color: #030303;
-            }
-        }
-
-        .intro-text {
-            color: #030303;
-        }
-
         .scroll-down--arrow {
             background-image: url(/_assets/img/icons/icon-arrow-down-circle-black.svg);
         }
@@ -1365,105 +1368,100 @@
     }
 }
 
-
 #duke-of-buckingham {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-3.jpg);
         background-position: 50% 100%;
     }
 }
-
 .touch {
-    #duke-of-buckingham {
-
-    }
+    #duke-of-buckingham {}
 }
-
 .no-touch {
-    #duke-of-buckingham {
-
-    }
+    #duke-of-buckingham {}
 }
-
 @media screen and (min-width: 48em) {
     #duke-of-buckingham {
         .pence {
-            position:           absolute;
-            top:                30%;
-            left:               45%;
-            background:         url(/pathways/2-the-collectors/1-curious-gardener/_assets/6pence.png) 0 0 no-repeat;
-            background-size:    100%;
-            width:              140px;
-            height:             155px;
+            position: absolute;
+            top: 30%;
+            left: 45%;
+            background: url(/pathways/2-the-collectors/1-curious-gardener/_assets/6pence.png) 0 0 no-repeat;
+            background-size: 100%;
+            width: 140px;
+            height: 155px;
         }
-
         .clip {
-            position:   absolute;
-            top:        0;
-            width:      100%;
-            height:     90%;
-            overflow:   hidden;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 90%;
+            overflow: hidden;
         }
-
         .main-content {
-            color:          #030303;
-
+            color: #030303;
             .inner {
-                border-top:     1px solid #030303;
-                border-bottom:  1px solid #030303;
+                border-top: 1px solid #030303;
+                border-bottom: 1px solid #030303;
             }
         }
     }
-
     .touch {
         #duke-of-buckingham {
-
+            .main-content {
+                margin-top: 5%;
+                margin-bottom: 45%;
+            }
         }
     }
-
     .no-touch {
-        #duke-of-buckingham {
-
-        }
-    }
-}
-
-#unique-artifacts {
-    .bg-container {
-        background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-4.jpg);
+        #duke-of-buckingham {}
     }
 }
 
 @media screen and (min-width: 48em) {
-
-/**
-    Crop zoom
-**/
-
-    .crop-zoom {
-        .tap-target.croc {
-            top: 2%;
-            left: 40%;
+    #unique-artifacts {
+        min-height: 707px;
+        .main-content {
+            text-shadow: 1px 1px 2px #333;
         }
-        .tap-target.person {
-            top: 60%;
-            left: 57%;
+        .bg-container {
+            min-height: 707px;
+            background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-4.jpg);
         }
-        .tap-target.bird {
-            top: 35%;
-            left: 5%;
+        .crop-zoom {
+            .tap-target.croc {
+                top: 2%;
+                left: 40%;
+            }
+            .tap-target.person {
+                top: 60%;
+                left: 57%;
+            }
+            .tap-target.bird {
+                top: 35%;
+                left: 5%;
+            }
+            .tap-target.cabinet {
+                top: 80%;
+                left: 5%;
+            }
+            .tap-target.books {
+                top: 40%;
+                left: 80%;
+            }
+            .tap-target.window {
+                top: 40%;
+                left: 40%;
+            }
         }
-        .tap-target.cabinet {
-            top: 80%;
-            left: 5%;
-        }
-        .tap-target.books {
-            top: 40%;
-            left: 80%;
-        }
-        .tap-target.window {
-            top: 40%;
-            left: 40%;
+    }
+    .touch {
+        #unique-artifacts {
+            .main-content {
+                margin-top: 32%;
+                margin-bottom: 10%;
+            }
         }
     }
 }
@@ -1493,9 +1491,6 @@
     .bg-container {
         background-image: url(/pathways/2-the-collectors/2-merchants-of-light/_assets/m2-merchants-of-light-2.jpg);
     }
-    .main-content {
-        color: #030303;
-    }
 }
 .touch {
     #bensalem-intro {}
@@ -1504,7 +1499,12 @@
     #bensalem-intro {}
 }
 @media screen and (min-width: 48em) {
-    #bensalem-intro {} .touch {
+    #bensalem-intro {
+        .main-content {
+            color: #030303;
+        }
+    }
+    .touch {
         #bensalem-intro {}
     }
     .no-touch {
@@ -1564,69 +1564,79 @@
     }
 }
 
-
 #graunt-records {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-3.jpg);
+        .numbers {
+            display: none;
+        }
     }
     li {
         list-style: disc;
         margin-bottom: 0.5em;
     }
 }
-
 .touch {
-    #graunt-records {
-
-    }
+    #graunt-records {}
 }
-
 .no-touch {
-    #graunt-records {
-
-    }
+    #graunt-records {}
 }
-
 @media screen and (min-width: 48em) {
     #graunt-records {
         .bg-container {
             .numbers {
-                position:   absolute;
-                right:      0;
-                top:        0;
-                width:      50%;
-
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 50%;
                 @include transition(all 30s linear);
             }
         }
         &.current-scroll-panel {
             .numbers {
-                @include transform( translate(0, -2000px) );
+                @include transform( translate(0, -2000px));
             }
         }
     }
-
     .touch {
-        #graunt-records {
-
-        }
+        #graunt-records {}
     }
-
     .no-touch {
-        #graunt-records {
-
-        }
+        #graunt-records {}
     }
 }
 
 #death-infographic {
-    // TODO: make this transition nicer
-    .info-box, .input-container {
-        display: none;
+    .main-content {
+        width: 1px;
+        margin-top: 35%;
+        margin-bottom: 35%;
     }
-    &.current-scroll-panel {
-        .info-box, .input-container {
-            display: block;
+}
+@media screen and (min-width: 48em) {
+    .touch {
+        #death-infographic {
+            .input-container {
+                position: absolute;
+                bottom: 20%;
+            }
+        }
+    }
+    .no-touch {
+        #death-infographic {}
+    }
+    .scroll-active {
+        #death-infographic {
+            .container {
+                z-index: -1;
+            }
+            &.current-scroll-panel {
+                .container {
+                    z-index: auto;
+                }
+            }
         }
     }
 }
@@ -2344,18 +2354,9 @@
 @media all and (min-width: 48rem) {
     .start-obscene-doctor {
         .content {
-            margin: 0;
-            float: right;
+            margin-left: auto;
+            margin-right: 0;
             text-shadow: 1px 1px 2px #333;
-        }
-    }
-    .no-touch {
-        .start-obscene-doctor {
-            .content {
-                left: auto;
-                right: 0;
-                text-shadow: 1px 1px 2px #333;
-            }
         }
     }
 }
@@ -2381,96 +2382,78 @@
         }
     }
     .touch {
-        #kahns-anatomical-museum {}
+        #kahns-anatomical-museum {
+            .main-content {
+                margin-top: 5%;
+            }
+        }
     }
     .no-touch {
         #kahns-anatomical-museum {}
     }
 }
-
 
 #quackery {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-3.jpg);
     }
 }
-
 .touch {
-    #quackery {
-
-    }
+    #quackery {}
 }
-
 .no-touch {
-    #quackery {
-
-    }
+    #quackery {}
 }
-
 @media screen and (min-width: 48em) {
     #quackery {
         .info-box {
-            position:   absolute;
-            bottom:     80px;
-            left:       6%;
+            position: absolute;
+            bottom: 80px;
+            left: 6%;
         }
     }
-
     .touch {
-        #quackery {
-
-        }
+        #quackery {}
     }
-
     .no-touch {
         #quackery {
             .info-box {
-                bottom: 100px;
-                left:   40%;
+                bottom: auto;
+                top: 60px;
+                left: 43%;
             }
         }
     }
 }
-
 
 #obscene-publications-act {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-4.jpg);
     }
 }
-
 .touch {
-    #obscene-publications-act {
-
-    }
+    #obscene-publications-act {}
 }
-
 .no-touch {
-    #obscene-publications-act {
-
-    }
+    #obscene-publications-act {}
 }
-
 @media screen and (min-width: 48em) {
     #obscene-publications-act {
         .info-box {
-            position:   absolute;
-            bottom:     80px;
-            left:       6%
+            position: absolute;
+            bottom: 80px;
+            left: 6%
         }
     }
-
     .touch {
-        #obscene-publications-act {
-
-        }
+        #obscene-publications-act {}
     }
-
     .no-touch {
         #obscene-publications-act {
             .info-box {
-                bottom: 100px;
-                left:   40%;
+                bottom: auto;
+                top: 50px;
+                left: 40%;
             }
         }
     }
@@ -2568,8 +2551,7 @@
     .touch {
         #seized-and-destroyed {
             .main-content {
-                position:   absolute;
-                margin-top: 2rem;
+                margin-top: 5%;
             }
         }
     }
@@ -2591,8 +2573,7 @@
 @media all and (min-width: 48rem) {
     .start-ignorant-bride {
         .content {
-            margin: 0;
-            float:  left;
+            margin-left: 0;
         }
 
         .scene-set {
@@ -2611,11 +2592,6 @@
 
         .intro-text {
             color: #030303;
-        }
-    }
-    .no-touch .start-ignorant-bride {
-        .content {
-            left:  0;
         }
     }
 }
@@ -2655,21 +2631,6 @@
         .main-content {
             border-top:     1px solid #fff;
             text-shadow:    1px 1px 1px #333;
-        }
-    }
-
-    .touch {
-        #british-museum {
-            .main-content {
-                position:   absolute;
-                margin-top: 2rem;
-            }
-        }
-    }
-
-    .no-touch {
-        #british-museum {
-
         }
     }
 
@@ -2729,7 +2690,9 @@
 
     .touch {
         #married-love {
-
+            .main-content {
+                margin-top: 5%;
+            }
         }
     }
 
@@ -2740,47 +2703,36 @@
     }
 }
 
-
 #shared-experiences {
     .bg-container {
+        display: none;
         background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg);
     }
 }
-
 .touch {
-    #shared-experiences {
-
-    }
+    #shared-experiences {}
 }
-
 .no-touch {
-    #shared-experiences {
-
-    }
+    #shared-experiences {}
 }
-
 @media screen and (min-width: 48em) {
     #shared-experiences {
+        .bg-container {
+            display: block;
+        }
         .main-content {
-            color:          #030303;
-
+            color: #030303;
             .inner {
-                border-top:     1px solid #030303;
-                border-bottom:  1px solid #030303;
+                border-top: 1px solid #030303;
+                border-bottom: 1px solid #030303;
             }
         }
     }
-
     .touch {
-        #shared-experiences {
-
-        }
+        #shared-experiences {}
     }
-
     .no-touch {
-        #shared-experiences {
-
-        }
+        #shared-experiences {}
     }
 }
 
@@ -2833,6 +2785,7 @@
 
 #locked-cabinet {
     .bg-container {
+        display: none;
         background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg);
     }
 }
@@ -2851,6 +2804,9 @@
 
 @media screen and (min-width: 48em) {
     #locked-cabinet {
+        .bg-container {
+            display: block;
+        }
         .main-content {
             color:          #030303;
 

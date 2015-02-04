@@ -5,7 +5,7 @@
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
-    <div class="main-content center fixed">
+    <div class="main-content center">
         <header>
             <h1>Wakley’s experiments produced very different results</h1>
         </header>

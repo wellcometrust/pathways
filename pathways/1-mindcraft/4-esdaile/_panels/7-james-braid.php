@@ -1,5 +1,5 @@
 
-<div id="james-braid" class="panel" data-config='{ "offset_height": 730 }'>
+<div id="james-braid" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

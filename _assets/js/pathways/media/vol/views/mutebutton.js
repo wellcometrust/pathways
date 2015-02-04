@@ -1,4 +1,3 @@
-console.log('include media/vol/views/mutebtn');
 /***
  *   Audio: vol view
  */

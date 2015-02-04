@@ -1,7 +1,3 @@
-var Pathways = Pathways || {};
-Pathways.components = Pathways.components || {};
-Pathways.components.core = Pathways.components.core || {};
-
 (function(w, exports, $) {
 
     var baseSelector = '';
@@ -41,4 +37,4 @@ Pathways.components.core = Pathways.components.core || {};
         update: update
     };
 
-}(window, Pathways.components.core, jQuery));
+}(window, Pathways.core, jQuery));

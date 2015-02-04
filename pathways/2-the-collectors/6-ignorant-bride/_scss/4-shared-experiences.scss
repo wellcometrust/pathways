@@ -1,43 +1,32 @@
-
 #shared-experiences {
     .bg-container {
+        display: none;
         background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg);
     }
 }
-
 .touch {
-    #shared-experiences {
-
-    }
+    #shared-experiences {}
 }
-
 .no-touch {
-    #shared-experiences {
-
-    }
+    #shared-experiences {}
 }
-
 @media screen and (min-width: 48em) {
     #shared-experiences {
+        .bg-container {
+            display: block;
+        }
         .main-content {
-            color:          #030303;
-
+            color: #030303;
             .inner {
-                border-top:     1px solid #030303;
-                border-bottom:  1px solid #030303;
+                border-top: 1px solid #030303;
+                border-bottom: 1px solid #030303;
             }
         }
     }
-
     .touch {
-        #shared-experiences {
-
-        }
+        #shared-experiences {}
     }
-
     .no-touch {
-        #shared-experiences {
-
-        }
+        #shared-experiences {}
     }
 }

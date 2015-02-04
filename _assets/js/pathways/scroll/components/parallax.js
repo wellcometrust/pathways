@@ -1,5 +1,5 @@
 // Init parallax ScrollScenes
-(function(w, $, p, scrollCtrl, Sc, Tm, Mod) {
+(function(w, $, p, scrollCtrl, Ss, Tm, Mod) {
 
     "use strict";
 
@@ -15,7 +15,9 @@
                 rawconfig = $parallax.find(parallaxSelectors).get(0),
                 fallRate = 0.3,
                 endOpacity = 0,
-                config;
+                config,
+                tween,
+                scene;
 
             if (rawconfig) {
                 config = JSON.parse(rawconfig);
@@ -23,25 +25,25 @@
                 endOpacity = isNaN(config.endOpacity) ? endOpacity : config.endOpacity;
             }
 
-            var tween = Tm.to($parallax, 1, {
+            tween = Tm.to($parallax, 1, {
                 opacity: endOpacity,
                 y: p.panelHeight * fallRate
             });
 
-            var scene = new Sc({
+            scene = new Ss({
                     triggerElement: $start,
                     duration: p.panelHeight,
                     triggerHook: 'top'
                 })
                 .on('enter', function(e) {
                     $parallax.css({
-                        'display': 'block'
+                        'visibility':'visible'
                     });
                 })
                 .on('leave', function(e) {
                     if (e.scrollDirection === 'FORWARD')
                         $parallax.css({
-                            'display': 'none'
+                            'visibility':'hidden'
                         });
                 })
                 .setTween(tween);
@@ -50,12 +52,17 @@
         }
 
         return {
-
             getScenes: function() {
                 scenes = [];
                 $parallaxContent = $start.find(parallaxSelectors);
                 $parallaxContent.each(processParallaxes);
                 return scenes;
+            },
+            unload: function() {
+                $parallaxContent = $start.find(parallaxSelectors);
+                $parallaxContent.each(function(index, parallax) {
+                    $(parallax).removeAttr('style');
+                });
             }
         };
     });

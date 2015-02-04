@@ -1,38 +1,9 @@
 /***
- *   Pathways utils
+ *   Base utils
  */
-console.log('include utils/index');
-(function(exports, sys, $, undefined) {
+(function(exports, d, $, undefined) {
 
-    function toCamelCase(str) {
-        str = str || '';
-        return str.toLowerCase().replace(/-(.)/g, function(match, group1) {
-            return group1.toUpperCase();
-        });
-    }
-
-    function toTitleCase(str) {
-        str = str || '';
-        str = str.replace(/-/g, ' ').replace(/_/g, ' ');
-        str = str.replace(/\w\S*/g, function(txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1);
-        });
-        return str.replace(/\W/g, '');
-    }
-
-    function positionCenter($elm) {
-        var width = $elm.width(),
-            height = $elm.height(),
-
-            top = (sys.innerHeight / 2) - (height / 2),
-            left = (sys.innerWidth / 2) - (width / 2);
-
-        $elm.css({
-            position: 'absolute',
-            top: top,
-            left: left
-        });
-    }
+    var oldGetUtils = exports.getUtils;
 
     function extendClass(base, sub) {
         // Avoid instantiating the base class just to setup inheritance
@@ -90,23 +61,20 @@ console.log('include utils/index');
         };
     }
 
-    function getSrc(media) {
-        if (!media) return 'no media';
-        return media.src || media.currentSrc;
+    function getUtils(extended) {
+        return $.extend({}, {
+            extendClass: extendClass,
+            removeItemFromArray: removeItemFromArray,
+            unique: unique,
+            extend: $.extend,
+            curry: curry,
+        }, extended);
     }
 
+    function _(str) {
+        return d.querySelector(str);
+    }
 
+    exports.getUtils = getUtils;
 
-    exports.utils = {
-        toCamelCase: toCamelCase,
-        toTitleCase: toTitleCase,
-        positionCenter: positionCenter,
-        extendClass: extendClass,
-        removeItemFromArray: removeItemFromArray,
-        unique: unique,
-        extend: $.extend,
-        curry: curry,
-        getSrc: getSrc
-    };
-
-}(Pathways, Pathways.system, jQuery));
+}((window || this), document, jQuery));

@@ -1,39 +1,46 @@
-#unique-artifacts {
-    .bg-container {
-        background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-4.jpg);
-    }
-}
-
 @media screen and (min-width: 48em) {
-
-/**
-    Crop zoom
-**/
-
-    .crop-zoom {
-        .tap-target.croc {
-            top: 2%;
-            left: 40%;
+    #unique-artifacts {
+        min-height: 707px;
+        .main-content {
+            text-shadow: 1px 1px 2px #333;
         }
-        .tap-target.person {
-            top: 60%;
-            left: 57%;
+        .bg-container {
+            min-height: 707px;
+            background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-4.jpg);
         }
-        .tap-target.bird {
-            top: 35%;
-            left: 5%;
+        .crop-zoom {
+            .tap-target.croc {
+                top: 2%;
+                left: 40%;
+            }
+            .tap-target.person {
+                top: 60%;
+                left: 57%;
+            }
+            .tap-target.bird {
+                top: 35%;
+                left: 5%;
+            }
+            .tap-target.cabinet {
+                top: 80%;
+                left: 5%;
+            }
+            .tap-target.books {
+                top: 40%;
+                left: 80%;
+            }
+            .tap-target.window {
+                top: 40%;
+                left: 40%;
+            }
         }
-        .tap-target.cabinet {
-            top: 80%;
-            left: 5%;
-        }
-        .tap-target.books {
-            top: 40%;
-            left: 80%;
-        }
-        .tap-target.window {
-            top: 40%;
-            left: 40%;
+    }
+    .touch {
+        #unique-artifacts {
+            .main-content {
+                margin-top: 32%;
+                margin-bottom: 10%;
+            }
         }
     }
 }

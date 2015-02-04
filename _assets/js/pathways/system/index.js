@@ -1,8 +1,7 @@
 /***
  *   System capabilities
  */
-console.log('include system/index');
-(function(exports, w, $, undefined) {
+(function(exports, w, undefined) {
 
     var capabilities = {
         aspectRatio: 1900 / 1050,
@@ -68,4 +67,4 @@ console.log('include system/index');
 
     exports.system = capabilities;
 
-}(Pathways, window, jQuery));
+}(Pathways, window));

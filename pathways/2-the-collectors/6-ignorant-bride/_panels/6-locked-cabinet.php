@@ -1,4 +1,4 @@
-<div id="locked-cabinet" class="panel" data-config='{ "offset_height": 100 }'>
+<div id="locked-cabinet" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

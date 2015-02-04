@@ -1,4 +1,14 @@
-(function(exports, w, doc, overlay, $, utils) {
+(function(exports, w, doc, p, overlay, $, utils) {
+
+    function getHeightWithOffset(offset) {
+        offset = offset || 0;
+        return p.panelHeight - offset;
+    }
+
+    function getWidthWithOffset(offset) {
+        offset = offset || 0;
+        return w.innerWidth - offset;
+    }
 
     exports.playerOverlay = function(elem) {
 
@@ -9,10 +19,7 @@
 
             playerSel = '.wellcomePlayer',
             overlayFullscreenClass = 'overlay-fullscreen',
-            iframeTmpl = '<iframe/>',
-
-            getHeightWithOffset = utils.getHeightWithOffset,
-            getWidthWithOffset = utils.getWidthWithOffset;
+            iframeTmpl = '<iframe/>';
 
 
         $element.on('click', function(e) {
@@ -110,4 +117,4 @@
         });
     };
 
-}(Pathways.components, window, document, Pathways.components.core.overlay, jQuery, Pathways.utils));
+}(Pathways.components, window, document, Pathways, Pathways.components.core.overlay, jQuery, Pathways.utils));

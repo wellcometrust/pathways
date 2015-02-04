@@ -1,5 +1,5 @@
 
-<div id="mesmers-salon-intro" class="panel" data-config='{ "offset_height": 550 }'>
+<div id="mesmers-salon-intro" class="panel">
 
     <div class="bg-container">
         <div class="vertical-center">

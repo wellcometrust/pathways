@@ -59,4 +59,4 @@
 
 
 
-}(Pathways.components, Pathways.components.core.overlay, Pathways.components.core.ga, jQuery));
+}(Pathways.components, Pathways.components.core.overlay, Pathways.core.ga, jQuery));

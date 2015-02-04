@@ -1,5 +1,5 @@
 
-<div id="anna-o" class="panel" data-config='{ "offset_height": 800 }'>
+<div id="anna-o" class="panel">
 
     <div class="bg-container">
         <div class="vertical-center">
@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="main-content left fixed">
+    <div class="main-content left">
         <header>
             <h1>The curious case of Anna&nbsp;O</h1>
         </header>

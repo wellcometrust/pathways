@@ -1,9 +1,3 @@
-var Pathways = Pathways || {};
-Pathways.components = Pathways.components || {};
-Pathways.components.core = Pathways.components.core || {};
-console.log('include carousel');
-
-
 (function(exports, w, getEventListener, imgLoader, Hamr, Mod, $) {
     'use strict';
 

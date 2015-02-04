@@ -1,42 +1,31 @@
-
 #obscene-publications-act {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-4.jpg);
     }
 }
-
 .touch {
-    #obscene-publications-act {
-
-    }
+    #obscene-publications-act {}
 }
-
 .no-touch {
-    #obscene-publications-act {
-
-    }
+    #obscene-publications-act {}
 }
-
 @media screen and (min-width: 48em) {
     #obscene-publications-act {
         .info-box {
-            position:   absolute;
-            bottom:     80px;
-            left:       6%
+            position: absolute;
+            bottom: 80px;
+            left: 6%
         }
     }
-
     .touch {
-        #obscene-publications-act {
-
-        }
+        #obscene-publications-act {}
     }
-
     .no-touch {
         #obscene-publications-act {
             .info-box {
-                bottom: 100px;
-                left:   40%;
+                bottom: auto;
+                top: 50px;
+                left: 40%;
             }
         }
     }

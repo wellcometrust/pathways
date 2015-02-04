@@ -1,4 +1,3 @@
-console.log('include panel audio-player');
 (function(exports, audioPlayer, $) {
 
     exports.audioPlayer = function(element, data, src) {

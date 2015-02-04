@@ -8,8 +8,7 @@
 @media all and (min-width: 48rem) {
     .start-ignorant-bride {
         .content {
-            margin: 0;
-            float:  left;
+            margin-left: 0;
         }
 
         .scene-set {
@@ -28,11 +27,6 @@
 
         .intro-text {
             color: #030303;
-        }
-    }
-    .no-touch .start-ignorant-bride {
-        .content {
-            left:  0;
         }
     }
 }

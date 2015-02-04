@@ -1,4 +1,3 @@
-console.log('include media/channels/model');
 (function(exports, getChannel, utils) {
 
     var extend = utils.extend,

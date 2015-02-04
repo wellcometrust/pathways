@@ -1,32 +1,25 @@
-
 #mesmers-salon {
     display: none;
 }
-
 @media screen and (min-width: 48em) {
     #mesmers-salon {
         display: block;
-    }
-}
-
-/**
-    Crop zoom
-**/
-
-.crop-zoom {
-
-    .tap-target.rod {
-        top:    46%;
-        left:   14%;
-    }
-
-    .tap-target.woman {
-        top:    74%;
-        left:   39%;
-    }
-
-    .tap-target.mesmer {
-        top:    26%;
-        left:   74%;
+        .bg-container {
+            min-height: 566px;
+        }
+        .crop-zoom {
+            .tap-target.rod {
+                top: 46%;
+                left: 14%;
+            }
+            .tap-target.woman {
+                top: 74%;
+                left: 39%;
+            }
+            .tap-target.mesmer {
+                top: 26%;
+                left: 74%;
+            }
+        }
     }
 }

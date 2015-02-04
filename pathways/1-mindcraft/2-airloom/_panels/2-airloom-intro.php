@@ -1,5 +1,5 @@
 
-<div id="airloom-intro" class="panel" data-config='{ "offset_height": 0 }'>
+<div id="airloom-intro" class="panel">
 
     <div class="bg-container"></div>
 

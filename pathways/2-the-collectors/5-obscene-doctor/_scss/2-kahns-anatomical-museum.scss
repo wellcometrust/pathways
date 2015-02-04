@@ -19,7 +19,11 @@
         }
     }
     .touch {
-        #kahns-anatomical-museum {}
+        #kahns-anatomical-museum {
+            .main-content {
+                margin-top: 5%;
+            }
+        }
     }
     .no-touch {
         #kahns-anatomical-museum {}

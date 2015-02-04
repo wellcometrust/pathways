@@ -36,4 +36,4 @@
         });
     };
 
-}(Pathways.components, window, Pathways.components.core.ga, jQuery));
+}(Pathways.components, window, Pathways.core.ga, jQuery));

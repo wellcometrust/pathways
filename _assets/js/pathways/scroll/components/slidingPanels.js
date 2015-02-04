@@ -8,8 +8,9 @@
 
 
     scrollCtrl.addGlobalPanelScrollFactory(function() {
-        var heightOffset = 60;
-        var translations = [-100, 100],
+        var heightOffset = 60,
+            translations = [-100, 100],
+            slideDuration = 200,
             defaultFxAudioSrc = 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3',
             $root,
             $components,
@@ -45,31 +46,23 @@
                         translateVal = translations[((index + offset) % 2)],
                         val = 'translate(' + translations[((index + offset) % 2)] + 'px,0)';
 
-                    // $this.css('transform', val);
-                    // $this.css('-webkit-transform', val);
-
                     tween = Tm.to($this, 1, {
                         x: 0,
                         opacity: 1
                     });
 
-                    scenes[idx++] = new Ss({
+                    scenes.push(new Ss({
                             triggerElement: $this,
-                            duration: 200,
+                            duration: slideDuration,
                             offset: offset
                         })
                         .on('enter', function(e) {
-                            if (e.scrollDirection === 'FORWARD') {
-                                // console.log('playing:', fxAudioSrc);
-                                if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
-                            } else if (e.scrollDirection == 'REVERSE') {
-                                if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
-                            }
+                            if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
                         })
                         .on('leave', function(e) {
-                            //if (fxAudio) mediaCtrl.stopMediaOnFxChannel(fxAudio);
+                            if (fxAudio) mediaCtrl.stopMediaOnFxChannel(fxAudio, { fadeDuration: 500 });
                         })
-                        .setTween(tween);
+                        .setTween(tween));
                 });
 
 

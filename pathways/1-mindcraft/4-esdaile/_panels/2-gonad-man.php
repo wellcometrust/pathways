@@ -1,5 +1,5 @@
 
-<div id="gonad-man" class="panel" data-config='{ "offset_height": 550 }'>
+<div id="gonad-man" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/pathways/1-mindcraft/4-esdaile/_assets/esdaile-2.jpg">
@@ -15,7 +15,7 @@
         <p>Many more operations followed, from tooth extractions to amputations. Esdaile was given a hospital ward in Kolkata to develop his new technique.</p>
     </div>
 
-    <div class="info-box with-text" id="guess-the-tumour" data-component="quiz" data-config='{ "offset_height": 100 }' data-ga="mindcraft - esdaile - gonad-man - l2 quiz open">
+    <div class="info-box with-text" id="guess-the-tumour" data-component="quiz" data-config='{ "offset_height": 300 }' data-ga="mindcraft - esdaile - gonad-man - l2 quiz open">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>

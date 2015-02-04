@@ -1,5 +1,5 @@
 
-<div id="graunt-records" class="panel" data-config='{ "offset_height": 900 }'>
+<div id="graunt-records" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

@@ -1,5 +1,3 @@
-console.log('include letter-gallery');
-
 (function(exports, w, getOverlayCtrl, getCarousel, getImageLoader, audioPlayer, utils, $, _Hammer, Mod) {
 
     function getAudioPlayerTemplate() {

@@ -26,15 +26,18 @@
 
     function getComponentScene($panel, type, getDuration) {
         var $elem = $panel.find('[data-component="' + type + '"]'),
-            scene = [];
+            scene = [],
+            offset,
+            durationMethod;
 
         if ($elem.length) {
-            var offset = getValueFromConfig($elem.attr('data-config'), 'offset_height') || 0;
+            offset = getValueFromConfig($elem.attr('data-config'), 'offset_height') || 0;
+            durationMethod = getDuration(offset);
 
             scene = new Ss({
                 triggerElement: $panel,
-                triggerHook: 'top',
-                duration: getDuration(offset),
+                triggerHook: 'middle',
+                duration: durationMethod,
                 offset: offset
             }).on('enter', function(e) {
                 $elem.css({
@@ -60,19 +63,21 @@
 
     function getComponentObjectFactory(componentId) {
         return {
-            load: function(panelId, panelEl, panelAttrs) {
+            load: function(panelId, panelEl, panel) {
                 var $component = findComponent($(panelEl), componentId);
                 if ($component.length) $component.hide();
             },
-            getScenes: function(panelId, panelEl, panelAttrs) {
+            getScenes: function(panelId, panelEl, panel) {
                 var m = function m(offset) {
                     return function ret() {
-                        return Math.max((panelAttrs.componentHeight - offset), 0);
+                        var val = Math.max((panel.componentDuration - offset), 0);
+                        // console.log(val, panel.componentDuration);
+                        return Math.max((panel.componentDuration - offset), 0);
                     };
                 };
                 return getComponentScene($(panelEl), componentId, m);
             },
-            unload: function(panelId, panelEl, panelAttrs) {
+            unload: function(panelId, panelEl, panel) {
                 var $component = findComponent($(panelEl), componentId);
                 if ($component.length) $component.removeAttr('style');
             }

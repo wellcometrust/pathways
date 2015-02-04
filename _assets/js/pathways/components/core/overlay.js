@@ -1,7 +1,3 @@
-var Pathways = Pathways || {};
-Pathways.components = Pathways.components || {};
-Pathways.components.core = Pathways.components.core || {};
-
 (function(exports, w, getEventListener, utils, $) {
 
     function getOverlayCtrl() {

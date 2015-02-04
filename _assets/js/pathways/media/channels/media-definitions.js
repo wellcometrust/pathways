@@ -1,5 +1,3 @@
-console.log('include media/channels/track');
-
 (function(exports, mixer, utils) {
 
     var unique = utils.unique;

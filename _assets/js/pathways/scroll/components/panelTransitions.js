@@ -5,66 +5,83 @@
 
     'use strict';
 
+    var rootEl = 'html',
+        bottomSel = '.survey, .fork',
+        scrollActiveClass = 'scroll-active',
+        scrollInactiveClass = 'scroll-inactive',
+        fixedActiveClass = 'fixed-active';
+
     scrollCtrl.addGlobalPanelScrollFactory(function() {
+
         return {
             load: function(panelId, panelEl, panelAttrs) {
-                $('html').addClass('scroll-active');
-                $(panelEl).removeClass('fixed-active');
+                $(rootEl).removeClass(scrollInactiveClass).addClass(scrollActiveClass);
             },
             getScenes: function(panelId, panelEl, panelAttrs) {
+
+                if (panelAttrs.isStart) return null;
+
                 var scenes = [],
                     $panel = $(panelEl),
                     $bg = $(panelAttrs.bg),
                     triggerHook = panelAttrs.isFirst ? 'top' : 'middle',
-                    $survey = $('.survey'),
-                    $bottom = $survey.length ? $survey : $('.fork'),
+                    $bottom = $(bottomSel).first(),
                     tween = Tm.to($bg, 1, {
                         opacity: 1
                     });
 
-                scenes.push(new Ss({
-                        triggerElement: $panel,
-                        triggerHook: triggerHook,
-                        duration: scrollDurations.getScreenDuration,
-                    })
-                    .on('start', function(e) {
-                        if (e.scrollDirection == 'FORWARD') {
-                            $panel.addClass('fixed-active');
-                        } else {
-                            setTimeout(function() {
-                                $panel.removeClass('fixed-active');
-                            }, 50);
-                        }
-                    }));
-
                 if (!panelAttrs.isFirst) {
-                    // Panels Opacity transition
+
                     scenes.push(new Ss({
                             triggerElement: $panel,
                             triggerHook: triggerHook,
                             duration: scrollDurations.getOpacityTranstionDuration
                         })
-                        .setTween(tween));
+                        .on('start', function(e) {
+                            if (e.scrollDirection == 'FORWARD') {
+                                $panel.addClass(fixedActiveClass);
+                            } else {
+                                setTimeout(function() {
+                                    $panel.removeClass(fixedActiveClass);
+                                }, 50);
+                            }
+                        }).setTween(tween));
+
+                } else {
+                    scenes.push(new Ss({
+                            triggerElement: $panel,
+                            triggerHook: triggerHook,
+                            duration: scrollDurations.getOpacityTranstionDuration
+                        })
+                        .on('start', function(e) {
+                            if (e.scrollDirection == 'FORWARD') {
+                                $panel.addClass(fixedActiveClass);
+                            } else {
+                                setTimeout(function() {
+                                    $panel.removeClass(fixedActiveClass);
+                                }, 50);
+                            }
+                        }));
                 }
+
                 return scenes;
             },
             unload: function(panelId, panelEl, panelAttrs) {
-                $('html').removeClass('scroll-active');
-                $(panelEl).removeClass('fixed-active');
+                $(panelEl).removeClass(fixedActiveClass);
+                $(rootEl).addClass(scrollInactiveClass).removeClass(scrollActiveClass);
             }
         };
     });
 
     Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
         var $panels = $('.panel'),
-            $survey = $('.survey'),
-            $bottom = $survey.length ? $survey : $('.fork');
+            $bottom = $(bottomSel).first();
 
         if ($bottom.length === 0) return null;
 
         return {
             load: function() {
-                $panels.removeClass('fixed-active');
+                $panels.removeClass(fixedActiveClass);
             },
             getScenes: function() {
                 var scenes = [];
@@ -74,16 +91,16 @@
                     triggerHook: 'bottom'
                 }).on('start', function(e) {
                     if (e.scrollDirection == 'FORWARD') {
-                        $panels.removeClass('fixed-active');
+                        $panels.removeClass(fixedActiveClass);
                     } else {
-                        $panels.addClass('fixed-active');
+                        $panels.addClass(fixedActiveClass);
                     }
                 }));
 
                 return scenes;
             },
             unload: function() {
-                $panels.removeClass('fixed-active');
+                $panels.removeClass(fixedActiveClass);
             }
         };
     });

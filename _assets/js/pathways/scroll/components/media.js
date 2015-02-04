@@ -29,10 +29,10 @@
     scrollCtrl.addGlobalPanelScrollFactory(function() {
 
         return {
-            load: function(panelId, panelEl, panelAttrs) {
+            load: function(panelId, panelEl, panel) {
 
             },
-            getScenes: function(panelId, panelEl, panelAttrs) {
+            getScenes: function(panelId, panelEl, panel) {
                 var $panel = $(panelId),
                     $panelAudio = $panel.find('[data-audio="panel"]'),
                     $panelVideo = $panel.find('[data-video="panel"]'),
@@ -43,7 +43,7 @@
 
                     scene = new Ss({
                             triggerElement: panelEl,
-                            duration: scrollDurations.getMediaDuration
+                            duration: panel.getMediaDuration
                         })
                         .on('enter', function() {
                             $panelVideo.each(getPlay('video'));
@@ -60,7 +60,7 @@
                 }
                 return scene;
             },
-            unload: function(panelId, panelEl, panelAttrs) {
+            unload: function(panelId, panelEl, panel) {
 
             }
         };

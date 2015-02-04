@@ -1,5 +1,5 @@
 
-<div id="where-will-this-technology-lead" class="panel" data-config='{ "offset_height": 550 }'>
+<div id="where-will-this-technology-lead" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

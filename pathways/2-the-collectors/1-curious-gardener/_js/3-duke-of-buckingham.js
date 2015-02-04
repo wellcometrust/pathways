@@ -2,7 +2,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
 
     var $clip,
         $pence,
-        startY,
+        startY = window.scrollY;
         ratio = 1900 / 1050;
 
     // Keep the clipping mask the correct height in relation to the 'cover' background
@@ -45,14 +45,14 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
                     duration: Pathways.panelHeight,
                 })
                 .on('enter', function(e) {
-                    doResize();
-                    window.addEventListener('resize', doResize);
 
                     if (e.scrollDirection == 'FORWARD') {
                         startY = window.scrollY;
                     } else {
                         startY = window.scrollY - (Pathways.panelHeight - 100);
                     }
+                    doResize();
+                    window.addEventListener('resize', doResize);
                 })
                 .on('progress', function(e) {
                     $pence.css('transform', 'translate(0, ' + (window.scrollY - startY) + 'px)');
@@ -72,20 +72,17 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
 
             scenes.push(new ScrollScene({
                     triggerElement: $pence,
-                    triggerHook: 'bottom',
-                    offset: 20
+                    triggerHook: 0.88,
+                    offset: 100
                 })
-                .on('start', function(e) {
-                    if (e.scrollDirection == 'FORWARD') {
-                        // console.log('coin on page');
-                        Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
-                    }
+                .on('enter', function(e) {
+                    Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
                 }));
 
             return scenes;
         },
         unload: function(panelId, panelEl, panelAttrs) {
-            window.removeEventListener('resize', resizeClip);
+            window.removeEventListener('resize', doResize);
         }
     };
 });

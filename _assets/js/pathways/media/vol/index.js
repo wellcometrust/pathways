@@ -1,4 +1,3 @@
-console.log('include media/vol/index');
 (function(exports, view, cookies, utils, $) {
 
     var model = {
@@ -21,11 +20,6 @@ console.log('include media/vol/index');
                 this.update(doMute);
             }
         },
-        // disable: {
-        //     value: function disable() {
-        //         viewCtrl.disable();
-        //     }
-        // },
         update: {
             value: function update(doMute) {
                 viewCtrl.update(doMute);

@@ -1,5 +1,5 @@
 
-<div id="stewart-conn" class="panel" data-config='{ "offset_height": 800 }'>
+<div id="stewart-conn" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

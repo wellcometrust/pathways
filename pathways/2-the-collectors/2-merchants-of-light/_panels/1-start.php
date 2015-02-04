@@ -16,6 +16,7 @@
         <p class="intro-text scroll-down">
             <span class="scroll-down--text">Scroll down</span>
             <span class="scroll-down--arrow"></span>
+            <div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
         </p>
 
     </div>

@@ -1,42 +1,31 @@
-
 #quackery {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-3.jpg);
     }
 }
-
 .touch {
-    #quackery {
-
-    }
+    #quackery {}
 }
-
 .no-touch {
-    #quackery {
-
-    }
+    #quackery {}
 }
-
 @media screen and (min-width: 48em) {
     #quackery {
         .info-box {
-            position:   absolute;
-            bottom:     80px;
-            left:       6%;
+            position: absolute;
+            bottom: 80px;
+            left: 6%;
         }
     }
-
     .touch {
-        #quackery {
-
-        }
+        #quackery {}
     }
-
     .no-touch {
         #quackery {
             .info-box {
-                bottom: 100px;
-                left:   40%;
+                bottom: auto;
+                top: 60px;
+                left: 43%;
             }
         }
     }

@@ -39,6 +39,6 @@ The one other native panel type which is handled by the current code is the ‘t
 
 Panels can also be configured using the data-config attribute
 
-    <div class="panel" data-config='{ "offset_height": 200 }'>
+    <div class="panel">
 
 `offset_height` takes a value of 0 or more. Used when a panel needs to stay onscreen for a longer scroll period.

@@ -1,8 +1,3 @@
-var Pathways = Pathways || {};
-Pathways.components = Pathways.components || {};
-Pathways.components.core = Pathways.components.core || {};
-console.log('include image-loader');
-
 (function(exports, w, $) {
 
     var defaultBase = '';

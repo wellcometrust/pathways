@@ -2,23 +2,23 @@
  * Black-strip positioning
  */
 
-(function(w, scrollCtrl, scrollDurations, mediaCtrl, $, Tm, Ss) {
+(function(w, p, scrollCtrl, scrollDurations, mediaCtrl, $, Tm, Ss) {
 
     'use strict';
 
-
     scrollCtrl.addGlobalPanelScrollFactory(function() {
-        var $blackStrips = $('.black-strip'),
-        currY = Pathways.panelHeight;
+        var selector = '.black-strip',
+            $blackStrips = $(selector),
+            currY = p.panelHeight;
 
-        if ($blackStrips.length === 0) return; //Check for any strips on page; if none, don't create this object
+        if ($blackStrips.length === 0) return null; //Check for any strips on page; if none, don't create this object
 
         function resizeBlackStrips(e) {
-            currY = (currY === 0) ? 0 : Pathways.panelHeight;
+            currY = (currY === 0) ? 0 : p.panelHeight;
             $blackStrips.css({
                 position: 'fixed',
                 'transform': 'translate(0,' + currY + 'px)',
-                height: Pathways.panelHeight
+                height: p.panelHeight
             });
         }
 
@@ -29,20 +29,20 @@
             },
             getScenes: function(panelId, panelEl, panel) {
                 var scenes = [],
-                    $strip = $(panelEl).find('.black-strip'),
+                    $strip = $(panelEl).find(selector),
                     inTw = function(e) {
                         Tm.to($strip, 0.5, {
                             y: 0,
-                            onComplete: function(){
+                            onComplete: function() {
                                 currY = 0;
                             }
                         });
                     },
                     outTw = function(e) {
-                        Tm.to($strip, 0.2, {
-                            y: Pathways.panelHeight,
-                            onComplete: function(){
-                                currY = Pathways.panelHeight;
+                        Tm.to($strip, 0.1, {
+                            y: p.panelHeight,
+                            onComplete: function() {
+                                currY = p.panelHeight;
                             }
                         });
                     };
@@ -52,7 +52,7 @@
                 scenes.push(new ScrollScene({
                         triggerElement: panel.content,
                         triggerHook: 'bottom',
-                        duration: panel.content.offsetHeight + Pathways.panelHeight
+                        duration: panel.content.offsetHeight + p.panelHeight
                     })
                     .on('enter', inTw)
                     .on('leave', outTw));
@@ -68,4 +68,4 @@
 
 
 
-}(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));
+}(window, Pathways, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));

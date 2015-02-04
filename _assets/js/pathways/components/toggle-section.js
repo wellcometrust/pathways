@@ -39,4 +39,4 @@
 
     };
 
-}(window, Pathways.components, Pathways.components.core.ga, jQuery));
+}(window, Pathways.components, Pathways.core.ga, jQuery));

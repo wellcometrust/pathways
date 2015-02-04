@@ -1,5 +1,5 @@
 
-<div id="ken-video" class="panel talking-head" data-config='{ "offset_height": 200 }'>
+<div id="ken-video" class="panel talking-head">
 
     <div class="bg-container">
         <video controls="true" data-video="panel">

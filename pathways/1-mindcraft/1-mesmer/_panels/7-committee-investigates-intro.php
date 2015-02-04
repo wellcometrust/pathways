@@ -1,5 +1,5 @@
 
-<div id="committee-investigates-intro" class="panel" data-config='{ "offset_height": 400 }'>
+<div id="committee-investigates-intro" class="panel">
 
     <div class="bg-container"></div>
 

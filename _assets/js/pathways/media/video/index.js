@@ -1,22 +1,26 @@
-console.log('include media/video/index');
 /***
     Video
 */
 (function(exports, p, sys, vol, $) {
 
-    var panelVideos;
+    var panelVideos,
+        panels,
+        selector = 'video',
+        noop = function() {},
+        currentLoad = noop,
+        currentUnload = noop,
+        MIN_LEVEL = 0;
 
-    function volumeChangeHandler (e) {
+    function volumeChangeHandler(e) {
         if (this.muted == vol.isMuted()) return;
         vol.mute(this.muted);
     }
 
-    function errorHandler (e) {
+    function errorHandler(e) {
         console.warn('Video loading error for ', (this.src || this.currentSrc));
     }
 
-    function initPanelVideo(panels, videoSelector) {
-
+    function initPanelVideo(panels, videoSelector, level) {
         var videos = [];
 
         for (var i = 0; i < panels.length; i++) {
@@ -28,7 +32,7 @@ console.log('include media/video/index');
                 _video.addEventListener('volumechange', volumeChangeHandler);
                 _video.addEventListener('error', errorHandler);
 
-                if (sys.level >= p.MIN_SCROLL_LEVEL) {
+                if (level >= p.MIN_SCROLL_LEVEL) {
                     _video.setAttribute('preload', 'auto');
                 } else {
                     _video.setAttribute('preload', 'metadata');
@@ -42,6 +46,15 @@ console.log('include media/video/index');
 
         return videos;
 
+    }
+
+    function updateState(level) {
+
+        if (level >= MIN_LEVEL) {
+            currentLoad(level);
+        } else {
+            currentUnload(level);
+        }
     }
 
     function hideCaptions(videos) {
@@ -60,15 +73,20 @@ console.log('include media/video/index');
         }
     }
 
+    function init(_panels) {
+        panels = _panels;
+        currentLoad = load;
+    }
 
-    function initVideo(panels) {
-        panelVideos = initPanelVideo(panels, 'video');
+    function load(level) {
+        panelVideos = initPanelVideo(panels, selector, level);
         hideCaptions(panelVideos);
+        currentLoad = noop;
     }
 
     exports.video = {
-        init: initVideo
+        init: init,
+        updateState: updateState
     };
 
 }(Pathways, Pathways, Pathways.system, Pathways.media.vol, jQuery));
-

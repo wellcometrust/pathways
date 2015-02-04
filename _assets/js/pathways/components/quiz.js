@@ -1,4 +1,3 @@
-
 Pathways.components.quiz = function(element, data) {
 
     if(typeof data === 'undefined') return console.warn('Quiz component not provided data');
@@ -24,7 +23,7 @@ Pathways.components.quiz = function(element, data) {
 
         // append and initialize quiz
         setTimeout(function() {
-            var $code           = $( _('#template-quiz').innerHTML ),
+            var $code           = $('#template-quiz').html(),
                 $content        = $('<div class="content"></div>'),
                 $quizContainer  = $('<div class="quiz"></div>');
 

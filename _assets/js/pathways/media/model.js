@@ -1,11 +1,9 @@
-console.log('include media/model');
 (function(exports, $) {
 
     var globalAudio,
         panelTracks;
 
     function initPanelAudio(panels, selector) {
-
         var tracks = [];
 
         for (var i = 0; i < panels.length; i++) {

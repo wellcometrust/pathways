@@ -1,5 +1,5 @@
 
-<div id="bills-of-mortality" class="panel" data-config='{ "offset_height": 500 }'>
+<div id="bills-of-mortality" class="panel">
 
     <div class="bg-container">
 

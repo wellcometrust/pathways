@@ -1,5 +1,5 @@
 
-<div id="airloom" class="panel animation" data-config='{ "offset_height": 200 }'>
+<div id="airloom" class="panel animation">
 
     <div class="bg-container">
         <video controls="true" preload="none" data-video="panel">

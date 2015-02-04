@@ -4,7 +4,7 @@
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
-    
+
     <div class="content">
         <p class="scene-set">Example 2014</p>
 

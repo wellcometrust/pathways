@@ -1,11 +1,11 @@
 
-<div id="married-love" class="panel" data-config='{ "offset_height": 200 }'>
+<div id="married-love" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
-    <div class="main-content center fixed">
+    <div class="main-content center">
 
         <div class="inner-img">
             <img alt="" src="/pathways/2-the-collectors/6-ignorant-bride/_assets/married-love.png">

@@ -15,7 +15,7 @@
 
             <ul class="clearfix">
                 <li<?= $currentModule['id'] == '' ? ' class="active"' : '' ?>>
-                    <a href="<?= $pathwayPath ?>index.php">
+                    <a href="<?= $pathwayPath ?>">
                         <span>Intro</span>
                         <img src="<?= $pathwayPath ?>_assets/navigation/intro.jpg">
                     </a>
@@ -27,7 +27,7 @@
                         $count++;
             ?>
                 <li<?= $currentModule['id'] == $m['id'] ? ' class="active"' : '' ?>>
-                    <a href="<?= $pathwayPath . $m['path'] ?>index.php">
+                    <a href="<?= $pathwayPath . $m['path'] ?>">
                         <span><?= $m['index']  . '. ' . $m['title'] ?></span>
                         <img src="<?= $pathwayPath . '_assets/navigation/' . $m['id'] ?>.jpg">
                     </a>

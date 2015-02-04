@@ -37,12 +37,18 @@ module.exports = function(grunt) {
                 ],
                 dest: '_assets/build/js/libs.js',
             },
+            header: {
+                src: [
+                    '_assets/js/lib/modernizr-2.8.3.custom.min.js',
+                    '_assets/js/pathways/index.js',
+                    '_assets/js/pathways/system/index.js',
+                    '_assets/js/pathways/scroll/loading-view.js'
+                ],
+                dest: '_assets/build/js/header.js'
+            },
             app_files: {
                 src: [
-
-                    '_assets/js/pathways/index.js', // Pathways Core files.
-
-                    '_assets/js/pathways/system/index.js', // Pathways Core files.
+                    '_assets/js/pathways/utils/.js', // Pathways Core files.
                     '_assets/js/pathways/utils/index.js', // Pathways Core files.
                     '_assets/js/pathways/utils/*.js', // Pathways Core files.
                     '_assets/js/pathways/core/index.js', // Pathways Core files.
@@ -73,8 +79,10 @@ module.exports = function(grunt) {
                     '_assets/js/pathways/scroll/index.js', // Main scrollcontrol file.
                     '_assets/js/pathways/scroll/components/*.js', // Scroll components files.
 
+                    '_assets/js/pathways/components/index.js', // Then the patterns
                     '_assets/js/pathways/main.js', // Pathways Core files.
 
+                    '_assets/js/pathways/components/core/index.js', // Then the pattern core files
                     '_assets/js/pathways/components/core/image-loader.js', // Then the pattern core files
                     '_assets/js/pathways/components/core/*.js', // Then the pattern core files
                     '_assets/js/pathways/components/*.js', // Then the patterns
@@ -100,6 +108,10 @@ module.exports = function(grunt) {
             libs: {
                 src: '_assets/build/js/libs.js',
                 dest: '_assets/build/js/libs.min.js'
+            },
+            header: {
+                src: '_assets/build/js/header.js',
+                dest: '_assets/build/js/header.min.js'
             },
             app_files: {
                 src: '_assets/build/js/production.js',
@@ -164,7 +176,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['_assets/**', '!_assets/scss/**', '!_assets/js/**', '!_assets/img/**', '_assets/js/lib/modernizr-2.8.3.custom.min.js', 'wellcomeplayer/**', 'player-config.js'],
+                    src: ['_assets/**', '!_assets/scss/**', '!_assets/js/**', '!_assets/img/**', 'wellcomeplayer/**', 'player-config.js'],
                     dest: '<%= exportRoot %>'
                 }]
             }

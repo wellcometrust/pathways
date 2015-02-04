@@ -1,5 +1,6 @@
 #locked-cabinet {
     .bg-container {
+        display: none;
         background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg);
     }
 }
@@ -18,6 +19,9 @@
 
 @media screen and (min-width: 48em) {
     #locked-cabinet {
+        .bg-container {
+            display: block;
+        }
         .main-content {
             color:          #030303;
 

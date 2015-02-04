@@ -1,8 +1,7 @@
-
-Pathways.scrollScenes.Example = function(panel_height, panelID) {
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('example', function(panelId, panelEl, panelAttrs) {
 
     var scene = new ScrollScene({
-            triggerElement: panelID,
+            triggerElement: panelEl,
             duration:       Pathways.panelHeight,
             offset:         0
         })
@@ -14,4 +13,4 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
         });
 
     return scene;
-};
+});

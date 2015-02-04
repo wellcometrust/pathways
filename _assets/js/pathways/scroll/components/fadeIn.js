@@ -1,5 +1,5 @@
 Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
-    var scrollFadeSelector = '[data-scroll-fadeIn]';
+    var scrollFadeSelector = '[data-scroll-fadein]';
 
     if ($(scrollFadeSelector).length === 0) return null;
 
@@ -14,9 +14,10 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
                     tween = TweenMax.to($this, 1, {
                         opacity: 1
                     }),
-                    offset = $this.data('offset') ? $this.data('offset') : 0;
+                    offset = $this.data('offset') ? $this.data('offset') : 0,
+                    scene;
 
-                var scene = new ScrollScene({
+                scene = new ScrollScene({
                         triggerElement: $this,
                         duration: 200,
                         offset: offset

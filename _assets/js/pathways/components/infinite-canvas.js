@@ -211,4 +211,4 @@
 
     };
 
-}(window, Pathways.components, Pathways.components.core.ga, Hammer, jQuery));
+}(window, Pathways.components, Pathways.core.ga, Hammer, jQuery));

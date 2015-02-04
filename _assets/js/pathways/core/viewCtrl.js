@@ -1,4 +1,3 @@
-console.log('include viewCtrl');
 (function(exports, utils, jQuery) {
 
     exports.view = exports.view || {};

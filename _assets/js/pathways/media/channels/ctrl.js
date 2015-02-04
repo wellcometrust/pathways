@@ -1,4 +1,3 @@
-console.log('include media/channels/ctrl');
 (function(exports, model, utils) {
 
     var extend = utils.extend,
@@ -43,7 +42,6 @@ console.log('include media/channels/ctrl');
         if (!media) return;
         var channel = model.getChannelById(channelID);
         config = extend({}, channel.config, config);
-
         channel.stop(media, config);
     }
 

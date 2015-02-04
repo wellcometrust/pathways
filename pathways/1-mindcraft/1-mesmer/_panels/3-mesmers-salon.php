@@ -1,5 +1,5 @@
 
-<div id="mesmers-salon" class="panel" data-component="crop-zoom" data-config='{ "offset_height": 300 }'>
+<div id="mesmers-salon" class="panel" data-component="crop-zoom">
 
     <div class="bg-container">
 

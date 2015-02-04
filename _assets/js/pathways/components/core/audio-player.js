@@ -1,9 +1,6 @@
-console.log('include core audio-player');
-
 (function(exports, viewControl, mediaCtrl, vol, volViews, utils, $) {
 
     var fallbackDuration = 600;
-
 
     function getPlay(audio, linkedView, timeUpdate) {
         return function play() {

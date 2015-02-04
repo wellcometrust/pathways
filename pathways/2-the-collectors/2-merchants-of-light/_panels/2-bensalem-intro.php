@@ -1,7 +1,7 @@
 
-<div id="bensalem-intro" class="panel" data-config='{ "offset_height": 300 }'>
+<div id="bensalem-intro" class="panel">
 
-    <div class="bg-container"></div>
+    <div class="bg-container"><img alt="" src="/_assets/img/spacer.png"></div>
 
     <div class="main-content right">
 

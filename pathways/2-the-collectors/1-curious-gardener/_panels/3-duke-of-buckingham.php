@@ -1,5 +1,5 @@
 
-<div id="duke-of-buckingham" class="panel" data-config='{ "offset_height": 500 }'>
+<div id="duke-of-buckingham" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

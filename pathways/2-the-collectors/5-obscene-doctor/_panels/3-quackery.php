@@ -1,5 +1,5 @@
 
-<div id="quackery" class="panel" data-config='{ "offset_height": 550 }'>
+<div id="quackery" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">

@@ -2,7 +2,6 @@
  *
  * Cookie manager
  */
-console.log('include cookies/index');
 (function(exports, cookies) {
 
     var expiry = Infinity,

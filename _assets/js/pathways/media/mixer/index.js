@@ -1,4 +1,3 @@
-console.log('include media/mixer/index');
 /***
  *   Media audio mixer
  */

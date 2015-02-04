@@ -1,5 +1,5 @@
 
-<div id="self-hypnosis" class="panel talking-head" data-config='{ "offset_height": 0 }'>
+<div id="self-hypnosis" class="panel talking-head">
 
     <div class="bg-container">
         <video controls="true" preload="none" data-video="panel">

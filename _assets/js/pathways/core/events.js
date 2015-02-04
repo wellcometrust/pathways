@@ -1,4 +1,3 @@
-console.log('include media/vol/index');
 (function(exports, utils, jQuery) {
 
     exports.events = exports.events || {};

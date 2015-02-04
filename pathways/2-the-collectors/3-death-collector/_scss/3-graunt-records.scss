@@ -1,54 +1,43 @@
-
 #graunt-records {
     .bg-container {
         background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-3.jpg);
+        .numbers {
+            display: none;
+        }
     }
     li {
         list-style: disc;
         margin-bottom: 0.5em;
     }
 }
-
 .touch {
-    #graunt-records {
-
-    }
+    #graunt-records {}
 }
-
 .no-touch {
-    #graunt-records {
-
-    }
+    #graunt-records {}
 }
-
 @media screen and (min-width: 48em) {
     #graunt-records {
         .bg-container {
             .numbers {
-                position:   absolute;
-                right:      0;
-                top:        0;
-                width:      50%;
-
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 50%;
                 @include transition(all 30s linear);
             }
         }
         &.current-scroll-panel {
             .numbers {
-                @include transform( translate(0, -2000px) );
+                @include transform( translate(0, -2000px));
             }
         }
     }
-
     .touch {
-        #graunt-records {
-
-        }
+        #graunt-records {}
     }
-
     .no-touch {
-        #graunt-records {
-
-        }
+        #graunt-records {}
     }
 }

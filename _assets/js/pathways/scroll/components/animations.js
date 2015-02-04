@@ -79,38 +79,34 @@
     scrollCtrl.addGlobalPanelScrollFactory(function() {
 
         return {
-            load: function(panelId, panelEl, panelAttrs) {
+            load: function(panelId, panelEl, panel) {
                 var canvas = $(panelEl).find('.panel-animation').get(0), //TODO: Allow for mulitple animations
-                    animationId = utils.toCamelCase(panelAttrs.id);
+                    animationId = utils.toCamelCase(panel.id);
                 if (canvas)
                     animationCtrl.init(animationId, canvas);
             },
-            getScenes: function(panelId, panelEl, panelAttrs) {
-                var animationId = utils.toCamelCase(panelAttrs.id),
-                    animation = animationCtrl.getAnimation(animationId);
+            getScenes: function(panelId, panelEl, panel) {
+                var animationId = utils.toCamelCase(panel.id),
+                    animation = animationCtrl.getAnimation(animationId),
+                    scene;
 
                 if (!animation) return null;
 
-                var scene = new ScrollScene({
-                        triggerElement: panelId,
-                        duration: Pathways.panelHeight
+                scene = new Ss({
+                        triggerElement: panelEl,
+                        duration: panel.getContentHeight
                     })
                     .on('enter', function(e) {
-                        // if (e.scrollDirection == 'FORWARD') {
-                        console.log(panelId, animation);
                         animation.start();
-                        // }
                     })
                     .on('leave', function(e) {
-                        // if (e.scrollDirection == 'REVERSE') {
                         animation.stop();
-                        // }
                     });
 
                 return scene;
             },
-            unload: function(panelId, panelEl, panelAttrs) {
-                var animationId = utils.toCamelCase(panelAttrs.id),
+            unload: function(panelId, panelEl, panel) {
+                var animationId = utils.toCamelCase(panel.id),
                     animation = animationCtrl.getAnimation(animationId);
                 if (animation) animation.stop();
             }

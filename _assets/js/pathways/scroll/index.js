@@ -26,12 +26,6 @@
         return mediaDurationCache;
     }
 
-    function getMediaDurationForPanel(panel) {
-        return function() {
-
-        };
-    }
-
     function getOpacityTranstionDuration() {
         return opacityTransitionDurationCache;
     }
@@ -72,7 +66,7 @@
 /***
     Pathways scrollscene control
 */
-(function(exports, w, scrollDurations, $, Sm, Ss) {
+(function(exports, w, p, scrollDurations, $, Sm) {
     'use strict';
 
     var controller,
@@ -81,7 +75,11 @@
         panelFactories = {},
         panels,
         defaultMethods = ['load', 'unload', 'getScenes'],
-        noop = function() {};
+        MIN_LEVEL = p.MIN_SCROLL_LEVEL,
+        noop = function() {},
+        currentLoad = noop,
+        currentUnload = noop,
+        currentLevel = -1;
 
     function getInstance(factory) {
         if (!factory) return;
@@ -97,8 +95,8 @@
         }
 
         if (!instance) return;
-        defaultMethods.forEach(function (name) {
-            if(!instance[name]) instance[name] = noop;
+        defaultMethods.forEach(function(name) {
+            if (!instance[name]) instance[name] = noop;
         });
         return instance;
     }
@@ -155,22 +153,22 @@
         //TODO: splice factory from array
     }
 
+    function updateState(level) {
+        if (currentLevel === level) return;
 
-
-    function init(_panels) {
-        // console.log('initing ss control');
-        controller = new Sm({
-            //loglevel: 3
-        });
-        panels = _panels;
-
-        exports.scrollSceneCtrl.init = noop;
+        if (level >= MIN_LEVEL) {
+            currentLoad();
+        } else {
+            currentUnload();
+        }
+        currentLevel = level;
     }
 
-    function destroy() {
-        // console.log('destroying ss control');
-        controller.destroy(true);
-        exports.scrollSceneCtrl.init = init;
+    function init(_panels) {
+        panels = _panels;
+
+        currentLoad = load;
+        currentUnload = noop;
     }
 
     function getEm() {
@@ -205,7 +203,6 @@
             // console.log(facs, loadFactory);
             if (facs && facs.length) facs.forEach(loadFactory);
         }
-        controller.update(true);
     }
 
     function unloadPanelScenes(panel) {
@@ -221,21 +218,30 @@
             var facs = panelFactories[panel.id];
             if (facs && facs.length) facs.forEach(unloadFactory);
         }
-        controller.update(true);
     }
 
     function load() {
-        // console.log('loading ss control');
+        controller = new Sm({
+            // container: '#main',
+            // loglevel: 3
+        });
         globalFactories.forEach(getEm());
         panels.forEach(loadPanelScenes);
         scrollDurations.init();
+
+        currentLoad = noop;
+        currentUnload = unload;
         // console.log('globalFactories.length:', globalFactories.length);
     }
 
     function unload() {
+        controller.destroy(true);
         globalFactories.forEach(ungetEm());
         panels.forEach(unloadPanelScenes);
         scrollDurations.destroy();
+
+        currentLoad = load;
+        currentUnload = noop;
         // console.log(controller.info());
     }
 
@@ -245,12 +251,95 @@
         addGlobalPanelScrollFactory: addGlobalPanelScrollFactory,
         addGlobalPanelScrollMethod: addGlobalPanelScrollMethod,
         addScrollContentFactory: addScrollContentFactory,
-        init: init,
-        destroy: destroy,
-        load: load,
-        unload: unload
+        updateState: updateState,
+        init: init
     };
 
 
-}(Pathways, window, Pathways.scrollSceneDurations, jQuery, ScrollMagic));
+}(Pathways, window, Pathways, Pathways.scrollSceneDurations, jQuery, ScrollMagic));
 
+
+/***
+    Pathways scrollscene resizing control
+*/
+(function(exports, w, p, sys, scrollSceneCtrl, $) {
+    'use strict';
+
+    var panels,
+        rootSelector,
+        noop = function() {},
+        currentLoad = noop,
+        currentUnload = noop,
+        currentLevel = -1,
+        originalLoadingText = '',
+        MIN_SCROLL_LEVEL = p.MIN_SCROLL_LEVEL;
+
+    function resizePanels(panels) {
+        for (var i = 0; i < panels.length; i++) {
+            panels[i].resize(p.panelHeight);
+        }
+    }
+
+    function unsizePanels(panels) {
+        for (var i = 0; i < panels.length; i++) {
+            panels[i].unsize();
+        }
+    }
+
+    function updateState(level) {
+        if (level < MIN_SCROLL_LEVEL) {
+            currentUnload(level);
+        } else {
+            currentLoad(level);
+        }
+        scrollSceneCtrl.updateState(level);
+        currentLevel = level;
+    }
+
+    function firstLoad(level) {
+        p.loadingState.hide();
+
+        scrollSceneCtrl.init(panels);
+        unsize(level);
+        resize(level);
+
+        currentLoad = resize;
+        currentUnload = unsize;
+    }
+
+    function resize(level) {
+        resizePanels(panels);
+        currentUnload = unsize;
+    }
+
+    function unsize(level) {
+        unsizePanels(panels);
+        currentUnload = noop;
+    }
+
+    function unload() {
+        currentLevel = -1;
+        unsize(0);
+        currentLoad = noop;
+        currentUnload = noop;
+    }
+
+    function init(_rootSelector, _panels) {
+        panels = _panels;
+        rootSelector = _rootSelector;
+        currentLoad = firstLoad;
+        currentUnload = unsize;
+    }
+
+    function destroy() {
+        unload();
+    }
+
+    exports.scrollSceneResizeCtrl = {
+        init: init,
+        destroy: destroy,
+        updateState: updateState
+    };
+
+
+}(Pathways, window, Pathways, Pathways.system, Pathways.scrollSceneCtrl, jQuery));

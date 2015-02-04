@@ -1,11 +1,32 @@
 #death-infographic {
-    // TODO: make this transition nicer
-    .info-box, .input-container {
-        display: none;
+    .main-content {
+        width: 1px;
+        margin-top: 35%;
+        margin-bottom: 35%;
     }
-    &.current-scroll-panel {
-        .info-box, .input-container {
-            display: block;
+}
+@media screen and (min-width: 48em) {
+    .touch {
+        #death-infographic {
+            .input-container {
+                position: absolute;
+                bottom: 20%;
+            }
+        }
+    }
+    .no-touch {
+        #death-infographic {}
+    }
+    .scroll-active {
+        #death-infographic {
+            .container {
+                z-index: -1;
+            }
+            &.current-scroll-panel {
+                .container {
+                    z-index: auto;
+                }
+            }
         }
     }
 }

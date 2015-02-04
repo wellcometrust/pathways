@@ -1,11 +1,11 @@
 
-<div id="john-tradescant" class="panel" data-config='{ "offset_height": 0 }'>
+<div id="john-tradescant" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
-    <div class="main-content center fixed">
+    <div class="main-content center">
 
         <div class="inner">
             <p>As a young man, gardener John Tradescant travelled to France and the Low Countries collecting outlandish trees and plants on behalf of his employer, the Lord Treasurer Robert Cecil.</p>

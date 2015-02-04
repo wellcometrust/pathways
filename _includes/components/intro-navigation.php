@@ -18,7 +18,7 @@
                     if ( isset($m['panels']) ) {
             ?>
                 <li>
-                    <a href="<?= $pathwayPath . $m['path'] ?>index.php">
+                    <a href="<?= $pathwayPath . $m['path'] ?>">
                         <span><?= $m['index']  . '. ' . $m['title'] ?></span>
                         <img src="<?= $pathwayPath . '_assets/navigation/'. $m['id'] ?>.jpg">
                     </a>

@@ -1,5 +1,5 @@
 
-<div id="kahns-anatomical-museum" class="panel" data-config='{ "offset_height": 150 }'>
+<div id="kahns-anatomical-museum" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
