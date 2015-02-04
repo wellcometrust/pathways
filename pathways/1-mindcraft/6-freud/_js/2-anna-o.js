@@ -1,4 +1,4 @@
-Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('anna-o', function(panelId, panelEl, panelAttrs) {
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('anna-o', function(panelId, panelEl, panel) {
    var positions = [
         { x: -57,   y: -107 },
         { x: 79,    y: 32 },
@@ -25,8 +25,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('anna-o', function(panelId, 
         var scene = new ScrollScene({
                 triggerElement: panelEl,
                 triggerHook:    'top',
-                duration:       function() { return $panel.height() - 400; },
-                offset:         50,
+                duration:       panel.getComponentDuration,
             })
             .setTween(tween);
 

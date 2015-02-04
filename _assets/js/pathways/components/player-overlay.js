@@ -2,7 +2,7 @@
 
     function getHeightWithOffset(offset) {
         offset = offset || 0;
-        return p.panelHeight - offset;
+        return p.viewportHeight - offset;
     }
 
     function getWidthWithOffset(offset) {

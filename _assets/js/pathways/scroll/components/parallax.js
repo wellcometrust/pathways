@@ -6,7 +6,7 @@
     scrollCtrl.addScrollContentFactory(function() {
 
         var parallaxSelectors = '[data-scroll-parallax-effect]',
-            $start = $('.start'),
+            $start = $('.start'), //TODO: enable parent trigger selection
             $parallaxContent,
             scenes = [];
 
@@ -27,12 +27,12 @@
 
             tween = Tm.to($parallax, 1, {
                 opacity: endOpacity,
-                y: p.panelHeight * fallRate
+                y: p.viewportHeight * fallRate
             });
 
             scene = new Ss({
                     triggerElement: $start,
-                    duration: p.panelHeight,
+                    duration: p.viewportHeight,
                     triggerHook: 'top'
                 })
                 .on('enter', function(e) {

@@ -11,13 +11,14 @@
         panels;
 
 
-    exports.panelHeight = calcPanelHeight();
-    exports.getPanelHeight = function() {
-        return exports.panelHeight;
+    exports.viewportHeight = calcViewportHeight();
+    exports.viewportHeight = calcViewportHeight();
+    exports.getViewportHeight = function() {
+        return exports.viewportHeight;
     };
 
 
-    function calcPanelHeight() {
+    function calcViewportHeight() {
         return parseInt((sys.innerHeight < MIN_HEIGHT ? MIN_HEIGHT : sys.innerHeight), 10);
     }
 
@@ -43,7 +44,7 @@
     }
 
     function updateState() {
-        exports.panelHeight = calcPanelHeight();
+        exports.viewportHeight = calcViewportHeight();
         var level = sys.level;
 
         mediaCtrl.updateState(level);

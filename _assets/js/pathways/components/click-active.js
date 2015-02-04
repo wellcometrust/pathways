@@ -1,16 +1,14 @@
 (function(components, ga, $) {
 
-    var repOpen = 'l3 open library',
-        repClose = 'l3 close library';
+    var activeClass = 'active';
 
     components.create('click-active', function(element, data) {
 
         var $element = $(element),
-            targetSel = $element.data('click-active-target') || '.info-box',
-            $target = $(targetSel);
+            targetSel = $element.data('click-active-target') || '.info-box';
 
         $element.on('click', targetSel, function toggleActive(e) {
-            $element.toggleClass('active');
+            $element.toggleClass(activeClass);
             return false;
         });
 

@@ -1,4 +1,4 @@
-Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('seized-and-destroyed', function(panelId, panelEl, panelAttrs) {
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('seized-and-destroyed', function(panelId, panelEl, panel) {
 
     var $panel = $(panelEl),
         vector = { x: -10, y: -5 },
@@ -12,7 +12,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('seized-and-destroyed', func
 
         var scene = new ScrollScene({
                 triggerElement: $panel,
-                duration:       $panel.outerHeight(),
+                duration:       panel.getContentDuration,
                 offset:         50,
             })
             .setTween(tween);

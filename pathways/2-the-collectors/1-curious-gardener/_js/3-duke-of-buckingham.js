@@ -27,11 +27,11 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
     }
 
     return {
-        load: function(panelId, panelEl, panelAttrs) {
+        load: function(panelId, panelEl, panel) {
             $clip = $(panelEl).find('.clip');
             $pence = $(panelEl).find('.pence');
         },
-        getScenes: function(panelId, panelEl, panelAttrs) {
+        getScenes: function(panelId, panelEl, panel) {
             var $panel = $(panelEl),
                 startY,
                 coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3'),
@@ -42,14 +42,14 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
             scenes.push(new ScrollScene({
                     triggerElement: panelEl,
                     triggerHook: 'top',
-                    duration: Pathways.panelHeight,
+                    duration: panel.getContentDuration,
                 })
                 .on('enter', function(e) {
 
                     if (e.scrollDirection == 'FORWARD') {
                         startY = window.scrollY;
                     } else {
-                        startY = window.scrollY - (Pathways.panelHeight - 100);
+                        startY = window.scrollY - (Pathways.viewportHeight - 100);
                     }
                     doResize();
                     window.addEventListener('resize', doResize);
@@ -81,7 +81,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
 
             return scenes;
         },
-        unload: function(panelId, panelEl, panelAttrs) {
+        unload: function(panelId, panelEl, panel) {
             window.removeEventListener('resize', doResize);
         }
     };

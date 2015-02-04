@@ -51,7 +51,7 @@
                     <p class="panel-text">She falls under the spell of Svengali</p>
 
                     <blockquote class="comic-quote" data-component="click-active">
-                        <div class="info-box">
+                        <div class="info-box" data-ga="mindcraft - svengali - l2 comic-quote open">
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
                                 <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
                                 <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>

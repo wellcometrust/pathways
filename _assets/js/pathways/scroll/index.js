@@ -5,41 +5,14 @@
 
     'use strict';
 
-    var screenDurationCache = 0,
-        componentDurationCache = 0,
-        mediaDurationCache = 0,
-        lastMediaDurationCache = 0,
-        opacityTransitionDurationCache = 0;
+    var opacityTransitionDurationCache = 0;
 
-    function getScreenDuration() {
-        return screenDurationCache;
-    }
-
-    function getComponentDuration(offset) {
-        return function() {
-            var val = componentDurationCache - offset;
-            return (val > 0 ? val : 0);
-        };
-    }
-
-    function getMediaDuration() {
-        return mediaDurationCache;
-    }
-
-    function getOpacityTranstionDuration() {
+    function getOpacityTransitionDuration() {
         return opacityTransitionDurationCache;
     }
 
     function updateDuration(e) {
-        // total time on screen is panel height
-        screenDurationCache = p.panelHeight;
-        opacityTransitionDurationCache = parseInt((p.panelHeight / 3), 10);
-        // visible time on screen is approx 3/4 actual time with transitions
-        componentDurationCache = parseInt((p.panelHeight * 0.75), 10);
-        // fork makes last panel sometimes not hit triggerHook, so must be accounted for
-        //mediaDurationCache = panel === $lastPanel[0] ? p.panelHeight : p.panelHeight - $('.fork').innerHeight();
-        mediaDurationCache = p.panelHeight;
-        lastMediaDurationCache = p.panelHeight - $('.fork').innerHeight();
+        opacityTransitionDurationCache = parseInt((p.viewportHeight / 3), 10);
     }
 
     function init() {
@@ -54,10 +27,7 @@
     exports.scrollSceneDurations = {
         init: init,
         destroy: destroy,
-        getScreenDuration: getScreenDuration,
-        getComponentDuration: getComponentDuration,
-        getMediaDuration: getMediaDuration,
-        getOpacityTranstionDuration: getOpacityTranstionDuration
+        getOpacityTransitionDuration: getOpacityTransitionDuration
     };
 
 }(Pathways, window, Pathways, jQuery));
@@ -276,7 +246,7 @@
 
     function resizePanels(panels) {
         for (var i = 0; i < panels.length; i++) {
-            panels[i].resize(p.panelHeight);
+            panels[i].resize(p.viewportHeight);
         }
     }
 

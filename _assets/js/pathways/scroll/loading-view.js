@@ -5,12 +5,13 @@
         rS = 'html',
         tS = '.scroll-down--text',
         aS = '.scroll-down--arrow',
-        lS = 'scroll-loading',
-        _ = function(el) {
-            return d.querySelector(el);
-        };
+        lS = 'scroll-loading';
 
-    function removeClass(e, c) {
+    function _(el) {
+        return d.querySelector(el);
+    }
+
+    function rm(e, c) {
         e.className = e.className.replace(new RegExp('(?:^|\\s)' + c + '(?!\\S)'), '');
     }
     P.loadingState = {
@@ -20,27 +21,22 @@
             }
         },
         show: function() {
+            tE = _(tS);
+            aE = _(aS);
+            if (!tE || !aE) return;
+            txt = tE.innerHTML;
             if (P.system.level >= lvl) {
-                console.log('showing loading state');
-                tE = _(tS);
-                aE = _(aS);
-                if (!tE || !aE) return;
-                txt = tE.innerHTML;
                 tE.innerHTML = 'Loading';
                 aE.style.display = 'none';
             }
         },
         hide: function() {
-            console.log('calling hide');
-            if (P.system.level >= lvl) {
-                console.log('   hiding loading state');
-                tE = _(tS);
-                aE = _(aS);
-                if (!tE || !aE) return;
-                tE.innerHTML = txt;
-                aE.style.display = '';
-                removeClass(_(rS), lS);
-            }
+            tE = _(tS);
+            aE = _(aS);
+            if (!tE || !aE) return;
+            if (txt) tE.innerHTML = txt;
+            aE.style.display = '';
+            rm(_(rS), lS);
         }
     };
     P.loadingState.init();

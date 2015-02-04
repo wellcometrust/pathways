@@ -22,25 +22,6 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('india', function() {
             setBoatStyle();
             $(window).on('resize', setBoatStyle);
         },
-        getScenes: function(panelId, panelEl, panelAttrs) {
-            var $panel = $(panelEl),
-                $boats = $boats || $panel.find('.boats');
-
-            var scene1 = new ScrollScene({
-                    triggerElement: $panel,
-                    triggerHook: 'top',
-                    duration: function() {
-                        return $panel.outerHeight();
-                    }
-                })
-                .on('enter', function() {
-                    $panel.addClass('current-scroll-panel');
-                }).on('leave', function() {
-                    $panel.removeClass('current-scroll-panel');
-                });
-
-            return scene1;
-        },
         unload: function() {
             $(window).off('resize', setBoatStyle);
             $boats.removeAttr('style');

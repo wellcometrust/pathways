@@ -35,7 +35,7 @@
                 scene = new Ss({
                         triggerElement: $panel,
                         triggerHook: triggerHook,
-                        duration: scrollDurations.getOpacityTranstionDuration
+                        duration: scrollDurations.getOpacityTransitionDuration
                     })
                     .on('start', function(e) {
                         if (e.scrollDirection == 'FORWARD') {

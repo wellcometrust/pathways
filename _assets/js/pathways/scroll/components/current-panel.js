@@ -1,10 +1,11 @@
-Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('british-museum', function(panelId, panelEl, panelAttrs) {
-    var $panel = $(panelEl);
+Pathways.scrollSceneCtrl.addGlobalPanelScrollMethod(function(panelId, panelEl, panel) {
+    var $panel = $(panelEl),
+        triggerHook = panel.isFirst ? 'middle' : 'top';
 
     var scene = new ScrollScene({
             triggerElement: panelEl,
-            triggerHook: 'top',
-            duration: Pathways.panelHeight,
+            triggerHook: triggerHook,
+            duration: panel.getContentDuration
         })
         .on('enter', function() {
             $panel.addClass('current-scroll-panel');

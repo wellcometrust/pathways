@@ -1,22 +1,3 @@
-Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('gonad-man', function(panelId, panelEl, panelAttrs) {
-    var $panel = $(panelEl);
-
-    var scene1 = new ScrollScene({
-            triggerElement: $panel,
-            triggerHook: 'top',
-            duration: function() {
-                return $panel.outerHeight();
-            }
-        })
-        .on('enter', function() {
-            $panel.addClass('current-scroll-panel');
-        }).on('leave', function() {
-            $panel.removeClass('current-scroll-panel');
-        });
-
-    return scene1;
-});
-
 Pathways.components.get('quiz').addData('guess-the-tumour', {
     'title': 'The Esdaile Game',
     'images': '_assets/quizzes/guess-the-tumour',

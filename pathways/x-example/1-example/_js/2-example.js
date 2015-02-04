@@ -2,7 +2,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('example', function(panelId,
 
     var scene = new ScrollScene({
             triggerElement: panelEl,
-            duration:       Pathways.panelHeight,
+            duration:       Pathways.viewportHeight,
             offset:         0
         })
         .on('enter', function(e) {

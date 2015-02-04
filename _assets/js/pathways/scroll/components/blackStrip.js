@@ -9,16 +9,16 @@
     scrollCtrl.addGlobalPanelScrollFactory(function() {
         var selector = '.black-strip',
             $blackStrips = $(selector),
-            currY = p.panelHeight;
+            currY = p.viewportHeight;
 
         if ($blackStrips.length === 0) return null; //Check for any strips on page; if none, don't create this object
 
         function resizeBlackStrips(e) {
-            currY = (currY === 0) ? 0 : p.panelHeight;
+            currY = (currY === 0) ? 0 : p.viewportHeight;
             $blackStrips.css({
                 position: 'fixed',
                 'transform': 'translate(0,' + currY + 'px)',
-                height: p.panelHeight
+                height: p.viewportHeight
             });
         }
 
@@ -40,9 +40,9 @@
                     },
                     outTw = function(e) {
                         Tm.to($strip, 0.1, {
-                            y: p.panelHeight,
+                            y: p.viewportHeight,
                             onComplete: function() {
-                                currY = p.panelHeight;
+                                currY = p.viewportHeight;
                             }
                         });
                     };
@@ -52,7 +52,7 @@
                 scenes.push(new ScrollScene({
                         triggerElement: panel.content,
                         triggerHook: 'bottom',
-                        duration: panel.content.offsetHeight + p.panelHeight
+                        duration: panel.contentHeight
                     })
                     .on('enter', inTw)
                     .on('leave', outTw));

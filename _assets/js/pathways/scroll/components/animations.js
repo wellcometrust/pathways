@@ -94,7 +94,7 @@
 
                 scene = new Ss({
                         triggerElement: panelEl,
-                        duration: panel.getContentHeight
+                        duration: panel.getContentDuration
                     })
                     .on('enter', function(e) {
                         animation.start();

@@ -19,10 +19,10 @@ Pathways.components.get('crop-zoom').addData('mesmers-salon', {
 
 // Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('mesmers-salon', function() {
 //     return {
-//         getScenes: function(panelId, panelEl, panelAttrs) {
+//         getScenes: function(panelId, panelEl, panel) {
 //             scene = new ScrollScene({
 //                     triggerElement: panelId,
-//                     duration: Pathways.panelHeight
+//                     duration: panel.getContentDuration
 //                 })
 //                 .on('enter', function(e) {
 //                     console.log('>>enter factory');
@@ -37,10 +37,10 @@ Pathways.components.get('crop-zoom').addData('mesmers-salon', {
 // });
 
 // Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('mesmers-salon', {
-//     getScenes: function(panelId, panelEl, panelAttrs) {
+//     getScenes: function(panelId, panelEl, panel) {
 //         scene = new ScrollScene({
 //                 triggerElement: panelId,
-//                 duration: Pathways.panelHeight
+//                 duration: panel.getContentDuration
 //             })
 //             .on('enter', function(e) {
 //                 console.log('>>enter object');
@@ -55,10 +55,10 @@ Pathways.components.get('crop-zoom').addData('mesmers-salon', {
 // });
 
 // Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('mesmers-salon',
-//     function(panelId, panelEl, panelAttrs) {
+//     function(panelId, panelEl, panel) {
 //         scene = new ScrollScene({
 //                 triggerElement: panelId,
-//                 duration: Pathways.panelHeight
+//                 duration: panel.getContentDuration
 //             })
 //             .on('enter', function(e) {
 //                 console.log('>>enter method');

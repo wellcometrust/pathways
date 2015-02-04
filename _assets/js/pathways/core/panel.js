@@ -93,10 +93,10 @@
         panel.getComponentDuration = function getComponentDuration() {
             return panel.componentDuration;
         };
-        panel.getMediaDuration = function getMediaDuration(argument) {
+        panel.getMediaDuration = function getMediaDuration() {
             return panel.contentDuration;
         };
-        panel.getContentDuration = function getContentDuration(argument) {
+        panel.getContentDuration = function getContentDuration() {
             return panel.contentDuration;
         };
 
@@ -115,7 +115,7 @@
             unStyleElement(panel.bg);
         };
 
-        panel.resize(exports.panelHeight);
+        panel.resize(exports.viewportHeight);
 
         return panel;
     }

@@ -75,7 +75,7 @@
                 $imageCrop.css({
                     top: 0,
                     left: 0,
-                    'transform': 'translate(0, ' + (Pathways.panelHeight) + 'px)',
+                    'transform': 'translate(0, ' + (Pathways.viewportHeight) + 'px)',
                     opacity: 0
                 });
 
