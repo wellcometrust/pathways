@@ -7,23 +7,29 @@
     <meta name="description" content="The Collectors">
     <meta name="viewport" content="initial-scale=1,width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="x-dns-prefetch-control" content="on">
 
     <link rel="stylesheet" type="text/css" href="/_assets/build/css/main.css">
-    <script src="//use.typekit.net/nlx6tdo.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
 
-    <script src="/_assets/js/lib/modernizr-2.8.3.custom.min.js"></script>
+    <link rel="dns-prefetch" href="http://digitalstories.s3-website-eu-west-1.amazonaws.com">
+    <link rel="dns-prefetch" href="//use.typekit.net">
+    <link rel="dns-prefetch" href="//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=1494497634145827&version=v2.0">
+    <link rel="dns-prefetch" href="//apis.google.com/js/platform.js">
+    <link rel="dns-prefetch" href="//assets.pinterest.com/js/pinit.js">
+    <link rel="dns-prefetch" href="//platform.twitter.com/widgets.js">
+
     <script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	  ga('create', 'UA-54268163-1', 'auto');
-	  ga('send', 'pageview');
-
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        if (window === window.top) {
+            ga('create', 'UA-54268163-1', 'auto');
+            ga('send', 'pageview');
+        }
 	</script>
 
+    <script src="/_assets/build/js/header.min.js"></script>
+
+    <script src="//use.typekit.net/nlx6tdo.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
 
 
 </head>
@@ -50,7 +56,7 @@
 
                 <p class="intro-body">Searchers, secrets and the power of curiosity</p>
 
-                <a href="1-curious-gardener/" class="intro-button">
+                <a data-preload-link href="1-curious-gardener/" class="intro-button">
                     Start your journey
                     <span></span>
                 </a>
@@ -64,37 +70,37 @@
             <ul class="clearfix">
 
                             <li>
-                    <a href="/pathways/2-the-collectors/1-curious-gardener/index.html">
+                    <a href="/pathways/2-the-collectors/1-curious-gardener/">
                         <span>1. The Curious Gardener</span>
                         <img src="/pathways/2-the-collectors/_assets/navigation/curious-gardener.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/2-the-collectors/2-merchants-of-light/index.html">
+                    <a href="/pathways/2-the-collectors/2-merchants-of-light/">
                         <span>2. Merchants of Light</span>
                         <img src="/pathways/2-the-collectors/_assets/navigation/merchants-of-light.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/2-the-collectors/3-death-collector/index.html">
+                    <a href="/pathways/2-the-collectors/3-death-collector/">
                         <span>3. The Death Collector</span>
                         <img src="/pathways/2-the-collectors/_assets/navigation/death-collector.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/2-the-collectors/4-unceasing-seeker/index.html">
+                    <a href="/pathways/2-the-collectors/4-unceasing-seeker/">
                         <span>4. The Unceasing Seeker</span>
                         <img src="/pathways/2-the-collectors/_assets/navigation/unceasing-seeker.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/2-the-collectors/5-obscene-doctor/index.html">
+                    <a href="/pathways/2-the-collectors/5-obscene-doctor/">
                         <span>5. The ‘Obscene’ Doctor</span>
                         <img src="/pathways/2-the-collectors/_assets/navigation/obscene-doctor.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/2-the-collectors/6-ignorant-bride/index.html">
+                    <a href="/pathways/2-the-collectors/6-ignorant-bride/">
                         <span>6. The Ignorant Bride</span>
                         <img src="/pathways/2-the-collectors/_assets/navigation/ignorant-bride.jpg">
                     </a>
@@ -108,7 +114,9 @@
 
     </main>
 
-
+    <script type="text/javascript">
+         Pathways.loadingState.show();
+    </script>
     <script src="/_assets/build/js/libs.min.js"></script>
     <script src="/_assets/build/js/production.min.js"></script>
     <script id="embedWellcomePlayer" src="http://wellcomelibrary.org/spas/player/build/wellcomeplayer/js/embed.js"></script>

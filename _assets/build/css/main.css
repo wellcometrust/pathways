@@ -621,57 +621,72 @@ iframe {
 
 @media screen and (min-width: 48em) {
   .info-box {
-    display: block; } }
-.start .bg-container {
-  position: absolute;
-  top: 0;
-  background-color: #000;
-  background-size: cover;
-  background-position: 50% 0%;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; }
-  .start .bg-container img, .start .bg-container video, .start .bg-container canvas {
+    display: block; }
+
+  .info-box.with-text {
+    position: absolute;
+    bottom: 80px;
+    right: 6%; } }
+.start {
+  position: relative; }
+  .start .bg-container {
+    position: absolute;
+    top: 0;
+    background-color: #000;
+    background-size: cover;
+    background-position: 50% 0%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; }
+    .start .bg-container img, .start .bg-container video, .start .bg-container canvas {
+      display: block;
+      width: 100%; }
+  .start .content {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.618rem 0; }
+  .start .scene-set {
     display: block;
-    width: 100%; }
-.start .content {
-  position: relative;
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1.618rem 0; }
-.start .scene-set {
-  display: block;
-  color: #fff;
-  font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
-  font-weight: normal;
-  font-style: normal;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2rem;
-  text-align: center;
-  margin-bottom: 2rem; }
-.start header h1 {
-  color: #fff;
-  font-size: 2.618rem;
-  line-height: 1;
-  text-align: center;
-  margin: 0.3rem 0 0 0; }
-.start .intro-text {
-  color: #fff;
-  font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
-  font-weight: normal;
-  font-style: normal;
-  font-size: 1rem;
-  line-height: 1.618;
-  text-align: center;
-  margin: 1.618rem auto 0 auto; }
+    color: #fff;
+    font-family: "tablet-gothic", 'Avenir Next', Corbel, Arial, Roboto, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    text-align: center;
+    margin-bottom: 2rem; }
+  .start header h1 {
+    color: #fff;
+    font-size: 2.618rem;
+    line-height: 1;
+    text-align: center;
+    margin: 0.3rem 0 0 0; }
+  .start .intro-text {
+    color: #fff;
+    font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 1.618;
+    text-align: center;
+    margin: 1.618rem auto 0 auto; }
+  .start .spinner {
+    display: none;
+    margin: 30px auto; }
+
+.scroll-loading .start .spinner {
+  display: block; }
 
 @media screen and (min-width: 48em) {
   .start {
     min-height: 600px; }
     .start .bg-container {
-      min-height: 600px; }
+      position: absolute;
+      top: 0;
+      left: 0; }
     .start .content {
       width: 80%;
       padding-top: 6rem;
@@ -700,8 +715,6 @@ iframe {
       margin: 5px auto 0 auto; }
 
   .no-touch .start .content {
-    position: absolute;
-    left: 10%;
     padding-top: 15%; }
   .no-touch .start .scene-set {
     margin-bottom: 6rem; }
@@ -1449,6 +1462,9 @@ iframe {
   .player-item.image .player-item--thumb {
     background: #DBDBDB url("/_assets/img/icons/icon-picture-white.svg") 50% 50% no-repeat;
     background-size: 40%; }
+  .player-item.video .player-item--thumb {
+    background: #DBDBDB url("/_assets/img/icons/icon-video-white.svg") 50% 50% no-repeat;
+    background-size: 60%; }
 
 /** 650px */
 @media screen and (min-width: 40.625em) {
@@ -1497,6 +1513,9 @@ iframe {
   .related-item.image {
     background: url("/_assets/img/icons/icon-picture-black.svg") 16px 0 no-repeat;
     background-size: 24px; }
+  .related-item.video {
+    background: url("/_assets/img/icons/icon-video-black.svg") 16px 0 no-repeat;
+    background-size: 28px; }
 
 @media screen and (min-width: 48em) {
   .related-item {
@@ -1583,79 +1602,6 @@ iframe {
       right: -10px; }
     .tweet.right .body {
       padding-right: 80px; } }
-.crop-zoom {
-  display: none;
-  background-color: #000;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 10; }
-  .crop-zoom .tap-target {
-    position: absolute;
-    width: 36px;
-    height: 36px; }
-
-.tap-targets {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%; }
-
-@media screen and (min-width: 48em) {
-  .js .crop-zoom {
-    display: block; }
-
-  .vertical-center {
-    position: relative; }
-
-  .no-touch .vertical-center {
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%); } }
-.popup .image-crop {
-  position: absolute;
-  width: 100%;
-  height: auto;
-  opacity: 0;
-  z-index: 15; }
-.popup .image-crop.animate {
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease; }
-.popup .text {
-  position: absolute;
-  color: #fff;
-  font-size: 1.239rem;
-  background-color: rgba(0, 0, 0, 0.6);
-  width: 320px;
-  padding: 45px;
-  line-height: 1.4;
-  z-index: 20;
-  -webkit-transform: translate(0, 100px);
-  -moz-transform: translate(0, 100px);
-  -o-transform: translate(0, 100px);
-  -ms-transform: translate(0, 100px);
-  transform: translate(0, 100px);
-  -webkit-transition: -webkit-transform 0.5s ease;
-  -moz-transition: -moz-transform 0.5s ease;
-  -ms-transition: -ms-transform 0.5s ease;
-  transition: transform 0.5s ease; }
-
-.csstransforms .popup .text {
-  opacity: 0; }
-.csstransforms .popup .text.show {
-  opacity: 1;
-  -webkit-transform: translate(0, -20px);
-  -moz-transform: translate(0, -20px);
-  -o-transform: translate(0, -20px);
-  -ms-transform: translate(0, -20px);
-  transform: translate(0, -20px); }
-
 .sliding-panels {
   max-width: 960px;
   margin: 0 auto;
@@ -2026,20 +1972,18 @@ iframe {
 
 @media screen and (min-width: 48em) {
   #mesmers-salon {
-    display: block; } }
-/**
-    Crop zoom
-**/
-.crop-zoom .tap-target.rod {
-  top: 46%;
-  left: 14%; }
-.crop-zoom .tap-target.woman {
-  top: 74%;
-  left: 39%; }
-.crop-zoom .tap-target.mesmer {
-  top: 26%;
-  left: 74%; }
-
+    display: block; }
+    #mesmers-salon .bg-container {
+      min-height: 566px; }
+    #mesmers-salon .crop-zoom .tap-target.rod {
+      top: 46%;
+      left: 14%; }
+    #mesmers-salon .crop-zoom .tap-target.woman {
+      top: 74%;
+      left: 39%; }
+    #mesmers-salon .crop-zoom .tap-target.mesmer {
+      top: 26%;
+      left: 74%; } }
 #animal-magnetism {
   overflow: hidden; }
   #animal-magnetism .bg-container {
@@ -2070,7 +2014,12 @@ iframe {
 
   .no-touch #magnetised-trees .bg-container canvas {
     right: auto;
-    left: 0; } }
+    left: 0; }
+
+  .touch #magnetised-trees .bg-container img {
+    display: block; }
+  .touch #magnetised-trees .bg-container canvas {
+    display: none; } }
 @media all and (min-width: 48em) and (max-width: 80em) {
   #satirised .main-content {
     max-width: 25%; } }
@@ -2254,9 +2203,6 @@ iframe {
     -ms-transition: all 14s ease;
     -o-transition: all 14s ease;
     transition: all 14s ease; } }
-@media all and (min-width: 64rem) {
-  .touch #gonad-man .info-box {
-    top: 66%; } }
 #fakir .bg-container {
   background-image: url(/pathways/1-mindcraft/4-esdaile/_assets/esdaile-3.jpg);
   background-position: 50% 100%; }
@@ -2543,7 +2489,10 @@ iframe {
       padding: 1rem 1.2rem 1rem 3rem;
       border-radius: 4px; }
     #trilby .comic-quote.active p {
-      display: block; } }
+      display: block; }
+
+  .touch #trilby .main-content {
+    margin-top: 0%; } }
 @media all and (min-width: 62.5rem) {
   #trilby .comic-panel--9 {
     margin-top: -70px; }
@@ -2688,7 +2637,10 @@ iframe {
   #bompard .outro {
     margin: 7rem .5rem; }
     #bompard .outro p {
-      font-size: 2.005rem; } }
+      font-size: 2.005rem; }
+
+  .touch #bompard .main-content {
+    margin-top: 0%; } }
 @media all and (min-width: 60rem) {
   #bompard .text-panel--1 {
     width: 45%; } }
@@ -2712,6 +2664,8 @@ iframe {
   #anna-o p + p {
     margin-top: 8rem; }
 
+  .touch #anna-o .main-content {
+    margin-top: 0; }
   .touch #anna-o header {
     height: 370px; }
   .touch #anna-o p {
@@ -2719,7 +2673,7 @@ iframe {
   .touch #anna-o p + p {
     margin-top: 3rem; }
 
-  .no-touch #anna-o .main-content.left.fixed {
+  .no-touch #anna-o .main-content.left {
     top: 8%; } }
 #fred-breuer .bg-container {
   background-image: url(/pathways/1-mindcraft/6-freud/_assets/freud-3.jpg); }
@@ -2805,18 +2759,18 @@ iframe {
     -o-transform: translate(-80%, -10%) scale(1.8, 1.8);
     -ms-transform: translate(-80%, -10%) scale(1.8, 1.8);
     transform: translate(-80%, -10%) scale(1.8, 1.8); } }
+.start-curious-gardener .scene-set {
+  color: #030303; }
+  .start-curious-gardener .scene-set sup {
+    font-size: 0.8rem; }
+.start-curious-gardener header h1 {
+  color: #030303; }
+.start-curious-gardener .intro-text {
+  color: #030303; }
 .start-curious-gardener .bg-container {
   background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-1.jpg); }
 
 @media all and (min-width: 48rem) {
-  .start-curious-gardener .scene-set {
-    color: #030303; }
-    .start-curious-gardener .scene-set sup {
-      font-size: 0.8rem; }
-  .start-curious-gardener header h1 {
-    color: #030303; }
-  .start-curious-gardener .intro-text {
-    color: #030303; }
   .start-curious-gardener .scroll-down--arrow {
     background-image: url(/_assets/img/icons/icon-arrow-down-circle-black.svg); } }
 #john-tradescant .bg-container {
@@ -2852,32 +2806,51 @@ iframe {
     color: #030303; }
     #duke-of-buckingham .main-content .inner {
       border-top: 1px solid #030303;
-      border-bottom: 1px solid #030303; } }
-#unique-artifacts .bg-container {
-  background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-4.jpg); }
+      border-bottom: 1px solid #030303; }
+
+  .touch #duke-of-buckingham .main-content {
+    margin-top: 5%;
+    margin-bottom: 45%; } }
+@media screen and (min-width: 48em) {
+  #unique-artifacts-intro {
+    min-height: 707px; }
+    #unique-artifacts-intro .bg-container {
+      min-height: 707px; }
+
+  .touch #unique-artifacts-intro .main-content {
+    margin-top: 32%;
+    margin-bottom: 10%; } }
+#unique-artifacts {
+  display: none; }
 
 @media screen and (min-width: 48em) {
-  /**
-      Crop zoom
-  **/
-  .crop-zoom .tap-target.croc {
-    top: 2%;
-    left: 40%; }
-  .crop-zoom .tap-target.person {
-    top: 60%;
-    left: 57%; }
-  .crop-zoom .tap-target.bird {
-    top: 35%;
-    left: 5%; }
-  .crop-zoom .tap-target.cabinet {
-    top: 80%;
-    left: 5%; }
-  .crop-zoom .tap-target.books {
-    top: 40%;
-    left: 80%; }
-  .crop-zoom .tap-target.window {
-    top: 40%;
-    left: 40%; } }
+  #unique-artifacts {
+    display: block;
+    min-height: 707px; }
+    #unique-artifacts .bg-container {
+      min-height: 707px; }
+    #unique-artifacts .crop-zoom .tap-target.croc {
+      top: 2%;
+      left: 40%; }
+    #unique-artifacts .crop-zoom .tap-target.person {
+      top: 60%;
+      left: 57%; }
+    #unique-artifacts .crop-zoom .tap-target.bird {
+      top: 35%;
+      left: 5%; }
+    #unique-artifacts .crop-zoom .tap-target.cabinet {
+      top: 80%;
+      left: 5%; }
+    #unique-artifacts .crop-zoom .tap-target.books {
+      top: 40%;
+      left: 80%; }
+    #unique-artifacts .crop-zoom .tap-target.window {
+      top: 40%;
+      left: 40%; }
+
+  .touch #unique-artifacts .main-content {
+    margin-top: 32%;
+    margin-bottom: 10%; } }
 .start-merchants-of-light .bg-container {
   background-image: url(/pathways/2-the-collectors/2-merchants-of-light/_assets/m2-merchants-of-light-1.jpg); }
 .start-merchants-of-light .scene-set {
@@ -2889,9 +2862,10 @@ iframe {
 
 #bensalem-intro .bg-container {
   background-image: url(/pathways/2-the-collectors/2-merchants-of-light/_assets/m2-merchants-of-light-2.jpg); }
-#bensalem-intro .main-content {
-  color: #030303; }
 
+@media screen and (min-width: 48em) {
+  #bensalem-intro .main-content {
+    color: #030303; } }
 .start-death-collector .bg-container {
   background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-1.jpg); }
 
@@ -2900,12 +2874,15 @@ iframe {
     text-shadow: 1px 1px 2px #333; } }
 #graunt-records .bg-container {
   background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-3.jpg); }
+  #graunt-records .bg-container .numbers {
+    display: none; }
 #graunt-records li {
   list-style: disc;
   margin-bottom: 0.5em; }
 
 @media screen and (min-width: 48em) {
   #graunt-records .bg-container .numbers {
+    display: block;
     position: absolute;
     right: 0;
     top: 0;
@@ -2921,11 +2898,20 @@ iframe {
     -o-transform: translate(0, -2000px);
     -ms-transform: translate(0, -2000px);
     transform: translate(0, -2000px); } }
-#death-infographic .info-box, #death-infographic .input-container {
-  display: none; }
-#death-infographic.current-scroll-panel .info-box, #death-infographic.current-scroll-panel .input-container {
-  display: block; }
+#death-infographic .main-content {
+  width: 1px;
+  margin-top: 35%;
+  margin-bottom: 35%; }
 
+@media screen and (min-width: 48em) {
+  .touch #death-infographic .input-container {
+    position: absolute;
+    bottom: 20%; }
+
+  .scroll-active #death-infographic .container {
+    z-index: -1; }
+  .scroll-active #death-infographic.current-scroll-panel .container {
+    z-index: auto; } }
 #isaac-newton .bg-container {
   background-image: url(/pathways/2-the-collectors/3-death-collector/_assets/m3-death-collector-4.jpg); }
 
@@ -3074,8 +3060,8 @@ iframe {
   -webkit-transform: translate(0, -50%);
   -ms-transform: translate(0, -50%); }
   #death-infographic .info-box svg {
-    height: auto;
-    width: auto; }
+    height: 11px;
+    width: 48px; }
   #death-infographic .info-box .data-container {
     margin-bottom: 7px;
     font-size: 20px; }
@@ -3447,20 +3433,18 @@ iframe {
 
 @media all and (min-width: 48rem) {
   .start-obscene-doctor .content {
-    margin: 0;
-    float: right;
-    text-shadow: 1px 1px 2px #333; }
-
-  .no-touch .start-obscene-doctor .content {
-    left: auto;
-    right: 0;
+    margin-left: auto;
+    margin-right: 0;
     text-shadow: 1px 1px 2px #333; } }
 #kahns-anatomical-museum .bg-container {
   background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-2.jpg); }
 
 @media screen and (min-width: 48em) {
   #kahns-anatomical-museum .inner {
-    max-width: 1024px; } }
+    max-width: 1024px; }
+
+  .touch #kahns-anatomical-museum .main-content {
+    margin-top: 5%; } }
 #quackery .bg-container {
   background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-3.jpg); }
 
@@ -3471,8 +3455,9 @@ iframe {
     left: 6%; }
 
   .no-touch #quackery .info-box {
-    bottom: 100px;
-    left: 40%; } }
+    bottom: auto;
+    top: 60px;
+    left: 43%; } }
 #obscene-publications-act .bg-container {
   background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-4.jpg); }
 
@@ -3483,7 +3468,8 @@ iframe {
     left: 6%; }
 
   .no-touch #obscene-publications-act .info-box {
-    bottom: 100px;
+    bottom: auto;
+    top: 50px;
     left: 40%; } }
 #seized-and-destroyed .bg-container {
   background-image: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/m5-obscene-doctor-5.jpg); }
@@ -3543,15 +3529,13 @@ iframe {
       background: url(/pathways/2-the-collectors/5-obscene-doctor/_assets/rubbish5.png) 0 0 no-repeat; }
 
   .touch #seized-and-destroyed .main-content {
-    position: absolute;
-    margin-top: 2rem; } }
+    margin-top: 5%; } }
 .start-ignorant-bride .bg-container {
   background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-1.jpg); }
 
 @media all and (min-width: 48rem) {
   .start-ignorant-bride .content {
-    margin: 0;
-    float: left; }
+    margin-left: 0; }
   .start-ignorant-bride .scene-set {
     color: #030303; }
     .start-ignorant-bride .scene-set sup {
@@ -3559,10 +3543,7 @@ iframe {
   .start-ignorant-bride header h1 {
     color: #030303; }
   .start-ignorant-bride .intro-text {
-    color: #030303; }
-
-  .no-touch .start-ignorant-bride .content {
-    left: 0; } }
+    color: #030303; } }
 @media screen and (min-width: 48em) {
   #british-museum img {
     position: absolute;
@@ -3595,11 +3576,7 @@ iframe {
     transform: scale(1.8, 1.8); }
   #british-museum .main-content {
     border-top: 1px solid #fff;
-    text-shadow: 1px 1px 1px #333; }
-
-  .touch #british-museum .main-content {
-    position: absolute;
-    margin-top: 2rem; } }
+    text-shadow: 1px 1px 1px #333; } }
 #married-love .bg-container {
   background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-3.jpg); }
 
@@ -3625,11 +3602,17 @@ iframe {
       -ms-transform: translate(-127px, -20px);
       transform: translate(-127px, -20px); }
     #married-love .info-box .text {
-      color: #030303; } }
+      color: #030303; }
+
+  .touch #married-love .main-content {
+    margin-top: 5%; } }
 #shared-experiences .bg-container {
+  display: none;
   background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg); }
 
 @media screen and (min-width: 48em) {
+  #shared-experiences .bg-container {
+    display: block; }
   #shared-experiences .main-content {
     color: #030303; }
     #shared-experiences .main-content .inner {
@@ -3646,9 +3629,12 @@ iframe {
     #letters .info-box .text {
       color: #030303; } }
 #locked-cabinet .bg-container {
+  display: none;
   background-image: url(/pathways/2-the-collectors/6-ignorant-bride/_assets/m6-ignorant-bride-4.jpg); }
 
 @media screen and (min-width: 48em) {
+  #locked-cabinet .bg-container {
+    display: block; }
   #locked-cabinet .main-content {
     color: #030303; }
     #locked-cabinet .main-content .inner {
@@ -3683,6 +3669,10 @@ iframe {
     .panel .bg-container.bg-contain {
       background-size: contain;
       background-position: 50% 50%; }
+    .panel .bg-container .small-screen {
+      display: block; }
+    .panel .bg-container .large-screen {
+      display: none; }
   .panel .main-content {
     color: #fff;
     font-family: "abril text", Georgia, 'Times New Roman', Times, serif;
@@ -3698,6 +3688,8 @@ iframe {
       margin: 1.239rem 0; }
     .panel .main-content.align-center {
       text-align: center; }
+    .panel .main-content .inner-img img {
+      width: 100%; }
 
 .no-touch .panel .bg-container video, .no-touch .panel .bg-container canvas {
   position: absolute;
@@ -3717,6 +3709,10 @@ iframe {
       position: absolute;
       top: 0;
       left: 0; }
+      .panel .bg-container .small-screen {
+        display: none; }
+      .panel .bg-container .large-screen {
+        display: block; }
     .panel .main-content {
       font-size: 1.2rem;
       padding: 1.239rem 0; }
@@ -3754,7 +3750,8 @@ iframe {
 
   .touch .panel .main-content {
     position: relative;
-    top: 0; }
+    margin-top: 15%;
+    margin-bottom: 20%; }
     .touch .panel .main-content.title {
       margin-top: 20%; }
 
@@ -3765,6 +3762,9 @@ iframe {
   .no-touch .panel:last-child .bg-container {
     top: auto;
     bottom: 0; }
+
+  .scroll-loading .sequence, .scroll-loading .info-panels, .scroll-loading .fork, .scroll-loading .survey, .scroll-loading .library-layer {
+    display: none; }
 
   .scroll-active .sequence .panel .bg-container {
     opacity: 0;
@@ -3890,6 +3890,78 @@ iframe {
       background: url("/_assets/img/show-more-arrow.png") 50% 70% no-repeat;
       width: 33.3%;
       padding: 0.2rem 0 1.8rem 0; } }
+.crop-zoom {
+  background-color: #000;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  .crop-zoom .tap-targets {
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%; }
+    .crop-zoom .tap-targets .tap-target {
+      position: absolute;
+      width: 36px;
+      height: 36px; }
+
+@media screen and (min-width: 48em) {
+  .js .crop-zoom .tap-targets {
+    display: block; }
+
+  .vertical-center {
+    position: relative; }
+
+  .no-touch .vertical-center {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); } }
+.popup .image-crop {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  z-index: 15; }
+.popup .image-crop.animate {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
+.popup .text {
+  position: absolute;
+  color: #fff;
+  font-size: 1.239rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 320px;
+  padding: 45px;
+  line-height: 1.4;
+  z-index: 20;
+  -webkit-transform: translate(0, 100px);
+  -moz-transform: translate(0, 100px);
+  -o-transform: translate(0, 100px);
+  -ms-transform: translate(0, 100px);
+  transform: translate(0, 100px);
+  -webkit-transition: -webkit-transform 0.5s ease;
+  -moz-transition: -moz-transform 0.5s ease;
+  -ms-transition: -ms-transform 0.5s ease;
+  transition: transform 0.5s ease; }
+
+.csstransforms .popup .text {
+  opacity: 0; }
+.csstransforms .popup .text.show {
+  opacity: 1;
+  -webkit-transform: translate(0, -20px);
+  -moz-transform: translate(0, -20px);
+  -o-transform: translate(0, -20px);
+  -ms-transform: translate(0, -20px);
+  transform: translate(0, -20px); }
+
 .logo {
   position: absolute;
   width: 100px;

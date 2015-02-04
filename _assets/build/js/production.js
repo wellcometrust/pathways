@@ -1,114 +1,9 @@
-console.log('include /index');
-Pathways = Pathways || {};
-
-
 /***
- *   System capabilities
+ *   Base utils
  */
-console.log('include system/index');
-(function(exports, w, $, undefined) {
+(function(exports, d, $, undefined) {
 
-    var capabilities = {
-        aspectRatio: 1900 / 1050,
-        supportsTouch: false,
-        innerHeight: 0,
-        innerWidth: 0,
-        orientation: 'landscape',
-        level: 0,
-
-        calcSupportsTouch: function() {
-            return ('ontouchstart' in w) || (w.DocumentTouch && document instanceof DocumentTouch);
-        },
-        calcOrientation: function() {
-            return (this.innerWidth / this.innerHeight) > 1.2 ? 'landscape' : 'portrait';
-        },
-        calcAspectRatio: function() {
-            return (this.orientation === 'landscape') ? (1900 / 1050) : (1050 / 1900);
-        },
-        /*
-                Do a few checks on screen size and touch abilities to allocate a level to the current device. This will be used to determine
-                what gets loaded when.
-
-                Need to further refine the levels.
-            */
-        getEnhancementLevel: function() {
-            // small screen
-            var level = 0;
-
-            // small to mid screens
-            if (w.innerWidth >= 480)
-                level = 1;
-
-            // ~ iPad portrait (mid screens) or Nexus 7 ()
-            if (w.innerWidth >= 768 && this.supportsTouch)
-                level = 2;
-
-            // ~ Nexus 7 landscape (mid screens)
-            if (w.innerWidth >= 960 && this.supportsTouch)
-                level = 3;
-
-            // Desktop
-            if (w.innerWidth >= 768 && !this.supportsTouch)
-                level = 4;
-
-
-            return level;
-        },
-        getDisplaySettings: function() {
-            this.innerWidth = w.innerWidth;
-            this.innerHeight = w.innerHeight;
-
-            this.orientation = this.calcOrientation();
-            this.supportsTouch = this.calcSupportsTouch();
-            this.level = this.getEnhancementLevel();
-        },
-        init: function() {
-            w.addEventListener('resize', (this.getDisplaySettings).bind(this), false);
-        }
-    };
-
-    capabilities.getDisplaySettings();
-    capabilities.init();
-
-    exports.system = capabilities;
-
-}(Pathways, window, jQuery));
-
-/***
- *   Pathways utils
- */
-console.log('include utils/index');
-(function(exports, sys, $, undefined) {
-
-    function toCamelCase(str) {
-        str = str || '';
-        return str.toLowerCase().replace(/-(.)/g, function(match, group1) {
-            return group1.toUpperCase();
-        });
-    }
-
-    function toTitleCase(str) {
-        str = str || '';
-        str = str.replace(/-/g, ' ').replace(/_/g, ' ');
-        str = str.replace(/\w\S*/g, function(txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1);
-        });
-        return str.replace(/\W/g, '');
-    }
-
-    function positionCenter($elm) {
-        var width = $elm.width(),
-            height = $elm.height(),
-
-            top = (sys.innerHeight / 2) - (height / 2),
-            left = (sys.innerWidth / 2) - (width / 2);
-
-        $elm.css({
-            position: 'absolute',
-            top: top,
-            left: left
-        });
-    }
+    var oldGetUtils = exports.getUtils;
 
     function extendClass(base, sub) {
         // Avoid instantiating the base class just to setup inheritance
@@ -166,6 +61,60 @@ console.log('include utils/index');
         };
     }
 
+    function getUtils(extended) {
+        return $.extend({}, {
+            extendClass: extendClass,
+            removeItemFromArray: removeItemFromArray,
+            unique: unique,
+            extend: $.extend,
+            curry: curry,
+        }, extended);
+    }
+
+    function _(str) {
+        return d.querySelector(str);
+    }
+
+    exports.getUtils = getUtils;
+
+}((window || this), document, jQuery));
+
+/***
+ *   Pathways utils
+ */
+(function(exports, w, sys, $, undefined) {
+
+
+    function toCamelCase(str) {
+        str = str || '';
+        return str.toLowerCase().replace(/-(.)/g, function(match, group1) {
+            return group1.toUpperCase();
+        });
+    }
+
+    function toTitleCase(str) {
+        str = str || '';
+        str = str.replace(/-/g, ' ').replace(/_/g, ' ');
+        str = str.replace(/\w\S*/g, function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1);
+        });
+        return str.replace(/\W/g, '');
+    }
+
+    function positionCenter($elm) {
+        var width = $elm.width(),
+            height = $elm.height(),
+
+            top = (sys.innerHeight / 2) - (height / 2),
+            left = (sys.innerWidth / 2) - (width / 2);
+
+        $elm.css({
+            position: 'absolute',
+            top: top,
+            left: left
+        });
+    }
+
     function getSrc(media) {
         if (!media) return 'no media';
         return media.src || media.currentSrc;
@@ -173,23 +122,61 @@ console.log('include utils/index');
 
 
 
-    exports.utils = {
+    exports.utils = w.getUtils({
         toCamelCase: toCamelCase,
         toTitleCase: toTitleCase,
         positionCenter: positionCenter,
-        extendClass: extendClass,
-        removeItemFromArray: removeItemFromArray,
-        unique: unique,
-        extend: $.extend,
-        curry: curry,
         getSrc: getSrc
+    });
+
+}(Pathways, (window||this), Pathways.system, jQuery));
+
+(function(exports, utils, $) {
+
+    var baseSelector = 'preload-link';
+    var attrSelector = '[data-preload-link]';
+    var links = [];
+
+
+    // Assumes selector will be in form '[data-<val>]'
+    function init(selector) {
+        console.log('initing preloader');
+        attrSelector = selector || attrSelector;
+        baseSelector = attrSelector.replace(/\[data-(\w*)\]/, '$1');
+        links = $(selector).map(function() {
+            return $(this).attr('href');
+        }).get();
+        links = utils.unique([], links);
+    }
+
+    function _load() {
+        links.forEach(function(link) {
+            var $i = $('<iframe class="preloader"></iframe>');
+            $i.css({
+                'width': '100%',
+                'height': '1px',
+                'position': 'absolute',
+                'top': '-100px',
+            });
+            $('body').append($i);
+            $i.attr('src', link);
+        });
+    }
+
+    function load(delay) {
+        delay = delay || 10;
+        setTimeout(_load, delay);
+    }
+
+    exports.preloader = {
+        init: init,
+        load: load
     };
 
-}(Pathways, Pathways.system, jQuery));
+}(Pathways, Pathways.utils, jQuery));
 
 Pathways.core = {};
 
-console.log('include media/vol/index');
 (function(exports, utils, jQuery) {
 
     exports.events = exports.events || {};
@@ -237,7 +224,176 @@ console.log('include media/vol/index');
 
 }(Pathways.core, Pathways.utils, jQuery));
 
-console.log('include viewCtrl');
+(function(w, exports, $) {
+
+    var baseSelector = '';
+    var attrSelector = '';
+
+    function setState($el, re1, re2) {
+        var gaData = $el.data(baseSelector);
+
+        if (!gaData) return;
+        var newStr = gaData.replace(re1, re2);
+        $el.data(baseSelector, newStr);
+    }
+
+    function send(label) {
+        console.log(baseSelector + ' click:', label);
+        if (label) window.ga('send', 'event', 'link', 'click', label);
+    }
+
+    // Assumes selector will be in form '[data-<val>]'
+    function init(selector) {
+        attrSelector = selector;
+        baseSelector = selector.replace(/\[data-(\w*)\]/, '$1');
+        update();
+    }
+
+    function update() {
+        $(attrSelector).click(function() {
+            send($(this).data(baseSelector));
+        });
+    }
+
+    exports.ga = {
+        setState: setState,
+        send: send,
+        init: init,
+        update: update
+    };
+
+}(window, Pathways.core, jQuery));
+
+(function(exports, $) {
+
+    function getTotalHeight(el) {
+        var style = getComputedStyle(el, null),
+            margin = parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+        return el.offsetHeight + margin;
+    }
+
+    function setElementHeight(el, height) {
+        $(el).css('height', parseInt(height, 10) + 'px');
+    }
+
+    function unSetElementHeight(el) {
+        $(el).css('height', '');
+    }
+
+    function unStyleElement(el) {
+        $(el).removeAttr('style');
+    }
+
+    function initPanel(panelEl, isFirst, isLast, isStart) {
+
+        var $panel = $(panelEl),
+            id = $panel.attr('id'),
+            data = $panel.attr('data-config'),
+            bg = $panel.find('.bg-container').get(0),
+            content = $panel.find('.main-content, .content').get(0),
+            $bottom = $('.survey, .fork'),
+            bottomHeight = 0,
+            configData = {};
+
+        if (!id && !isStart) throw new Error('All panels require an id [' + panelEl + ']');
+        if (data) configData = JSON.parse(data);
+
+        var panel = {
+            id: id,
+            elem: panelEl,
+            config: configData,
+            bg: bg,
+            content: content,
+            isFirst: isFirst,
+            isLast: isLast,
+            isStart: isStart
+        };
+
+        panel.unsetHeight = function() {
+            unSetElementHeight(panel.elem);
+        };
+
+        panel.unsetBackgroundHeight = function() {
+            unSetElementHeight(panel.bg);
+        };
+
+        panel.setViewportHeight = function(viewPortHeight) {
+            var newHeight, contentDuration, componentDuration;
+
+            if (panel.content) {
+                newHeight = parseInt(Math.max(getTotalHeight(panel.content), viewPortHeight), 10);
+            } else {
+                newHeight = viewPortHeight;
+            }
+
+            if (newHeight === viewPortHeight) {
+                setElementHeight(panel.elem, newHeight);
+            }
+
+            if (!panel.isStart) {
+                if (panel.bg) setElementHeight(panel.bg, viewPortHeight);
+            } else {
+                if (panel.bg) setElementHeight(panel.bg, newHeight);
+            }
+
+            bottomHeight = 0;
+            if ($bottom) {
+                $bottom.each(function() {
+                    bottomHeight += $(this).outerHeight();
+                });
+            }
+
+            contentDuration = (!panel.isLast) ? newHeight : newHeight - bottomHeight;
+            componentDuration = parseInt((contentDuration * 0.75), 10);
+
+            panel.contentHeight = newHeight;
+            panel.contentDuration = contentDuration;
+            panel.componentDuration = componentDuration;
+
+            return newHeight;
+        };
+
+        panel.getContentHeight = function getContentHeight() {
+            return panel.contentHeight;
+        };
+        panel.getComponentDuration = function getComponentDuration() {
+            return panel.componentDuration;
+        };
+        panel.getMediaDuration = function getMediaDuration() {
+            return panel.contentDuration;
+        };
+        panel.getContentDuration = function getContentDuration() {
+            return panel.contentDuration;
+        };
+
+        panel.resize = function resize(height) {
+            unSetElementHeight(panel.elem);
+            panel.setViewportHeight(height);
+        };
+
+        panel.unsize = function unsize(height) {
+            unSetElementHeight(panel.elem);
+            unSetElementHeight(panel.bg);
+        };
+
+        panel.unstyle = function unstyle() {
+            unStyleElement(panel.elem);
+            unStyleElement(panel.bg);
+        };
+
+        panel.resize(exports.viewportHeight);
+
+        return panel;
+    }
+
+    exports.panel = {
+        getPanel: function getPanel(el, isFirst, isLast, isStart) {
+            return initPanel(el, isFirst, isLast, isStart);
+        }
+    };
+
+}(Pathways, jQuery));
+
 (function(exports, utils, jQuery) {
 
     exports.view = exports.view || {};
@@ -289,7 +445,6 @@ console.log('include viewCtrl');
  *
  * Cookie manager
  */
-console.log('include cookies/index');
 (function(exports, cookies) {
 
     var expiry = Infinity,
@@ -340,18 +495,14 @@ console.log('include cookies/index');
 
 }(Pathways, docCookies));
 
-console.log('include media/index');
-
 Pathways.media = {};
 
-console.log('include media/model');
 (function(exports, $) {
 
     var globalAudio,
         panelTracks;
 
     function initPanelAudio(panels, selector) {
-
         var tracks = [];
 
         for (var i = 0; i < panels.length; i++) {
@@ -387,7 +538,6 @@ console.log('include media/model');
 
 }(Pathways.media, jQuery));
 
-console.log('include media/vol/index');
 (function(exports, view, cookies, utils, $) {
 
     var model = {
@@ -410,11 +560,6 @@ console.log('include media/vol/index');
                 this.update(doMute);
             }
         },
-        // disable: {
-        //     value: function disable() {
-        //         viewCtrl.disable();
-        //     }
-        // },
         update: {
             value: function update(doMute) {
                 viewCtrl.update(doMute);
@@ -438,7 +583,6 @@ console.log('include media/vol/index');
 
 Pathways.media.vol.views = {};
 
-console.log('include media/vol/views/global');
 /***
  *   Audio: global vol view
  */
@@ -452,20 +596,20 @@ console.log('include media/vol/views/global');
     GlobalMuteView.prototype = {
         enable: function() {
             this.isEnabled = true;
-            $(this.globalMediaSelector).each(function(e) {
-                this.pause();
+            $(this.globalMediaSelector).each(function(i, item) {
+                if (item.readyState !== 0) item.pause();
             });
         },
         update: function(isMuted) {
             if (!this.isEnabled) return;
-            $(this.globalMediaSelector).each(function(e) {
+            $(this.globalMediaSelector).each(function(i) {
                 this.muted = isMuted;
             });
         },
         disable: function() {
             this.isEnabled = false;
-            $(this.globalMediaSelector).each(function(e) {
-                this.pause();
+            $(this.globalMediaSelector).each(function(i, item) {
+                if (item.readyState !== 0) item.pause();
             });
         }
     };
@@ -476,7 +620,6 @@ console.log('include media/vol/views/global');
 
 }(Pathways.media.vol.views, Pathways.media.vol, jQuery));
 
-console.log('include media/vol/views/mutebtn');
 /***
  *   Audio: vol view
  */
@@ -539,7 +682,6 @@ console.log('include media/vol/views/mutebtn');
 
 }(Pathways.media.vol.views, Pathways.media.vol, jQuery));
 
-console.log('include media/vol/views/unlinkedmedia');
 /***
  *   Audio: vol view
  */
@@ -561,7 +703,6 @@ console.log('include media/vol/views/unlinkedmedia');
 
 }(Pathways.media.vol.views, Pathways.media.vol, Pathways.utils, jQuery));
 
-console.log('include media/mixer/index');
 /***
  *   Media audio mixer
  */
@@ -747,8 +888,6 @@ console.log('include media/mixer/index');
 
 
 }(Pathways.media, Pathways.utils));
-
-console.log('include media/channels/track');
 
 (function(exports, mixer, utils) {
 
@@ -1127,7 +1266,6 @@ console.log('include media/channels/track');
 
 }(Pathways.media, Pathways.media.getMediaDefinitionList, Pathways.media.silencer.getSilenceCtrl, Pathways.media.mixer, Pathways.utils, jQuery));
 
-console.log('include media/channels/model');
 (function(exports, getChannel, utils) {
 
     var extend = utils.extend,
@@ -1220,7 +1358,6 @@ console.log('include media/channels/model');
 
 }(Pathways.media.channels, Pathways.media.channels.getChannel, Pathways.utils));
 
-console.log('include media/channels/ctrl');
 (function(exports, model, utils) {
 
     var extend = utils.extend,
@@ -1265,7 +1402,6 @@ console.log('include media/channels/ctrl');
         if (!media) return;
         var channel = model.getChannelById(channelID);
         config = extend({}, channel.config, config);
-
         channel.stop(media, config);
     }
 
@@ -1359,46 +1495,87 @@ console.log('include media/channels/ctrl');
 
 }(Pathways.media.channels, Pathways.media.channels.model, Pathways.utils));
 
-console.log('include media/ctrl');
-(function(exports, model, vol, channelCtrl, $) {
+(function(exports, p, model, vol, channelCtrl, $) {
 
-    function init() {
+    var noop = function() {},
+        currentLoad = noop,
+        currentUnload = noop,
+        panels,
+        MIN_LEVEL = p.MIN_SCROLL_LEVEL;
 
-        channelCtrl.init();
-
+    function updateState(level) {
+        if (level < MIN_LEVEL) {
+            currentUnload(level);
+        } else {
+            currentLoad(level);
+        }
     }
 
+    function load(level) {
+        console.log('enabling media');
+        vol.enable();
+        channelCtrl.playMediaOnGlobalChannel(model.globalAudio());
+        currentUnload = unload;
+        currentLoad = noop;
+    }
+
+    function unload(level) {
+        console.log('disabling media');
+        vol.disable();
+        currentUnload = noop;
+        currentLoad = load;
+    }
+
+    function firstLoad(level) {
+        channelCtrl.init();
+        model.init(panels);
+        vol.setStateFromCookies();
+
+        vol.addView(vol.views.getMuteButtonView('.mute'));
+        vol.addView(vol.views.getGlobalView('video, audio'));
+
+        currentLoad = load;
+        updateState(level);
+    }
+
+    function init(_panels) {
+        panels = _panels;
+        currentLoad = firstLoad;
+    }
 
     exports.ctrl = $.extend({}, channelCtrl, {
         init: init,
-        disable: function() {
-            console.log('disabling media');
-            // TODO: disabling media
-        }
+        enable: load,
+        disable: unload,
+        updateState: updateState
     });
 
 
-}(Pathways.media, Pathways.media.model, Pathways.media.vol, Pathways.media.channels.ctrl, jQuery));
+}(Pathways.media, Pathways, Pathways.media.model, Pathways.media.vol, Pathways.media.channels.ctrl, jQuery));
 
-console.log('include media/video/index');
 /***
     Video
 */
 (function(exports, p, sys, vol, $) {
 
-    var panelVideos;
+    var panelVideos,
+        panels,
+        selector = 'video',
+        noop = function() {},
+        currentLoad = noop,
+        currentUnload = noop,
+        MIN_LEVEL = 0;
 
-    function volumeChangeHandler (e) {
+    function volumeChangeHandler(e) {
         if (this.muted == vol.isMuted()) return;
         vol.mute(this.muted);
     }
 
-    function errorHandler (e) {
+    function errorHandler(e) {
         console.warn('Video loading error for ', (this.src || this.currentSrc));
     }
 
-    function initPanelVideo(panels, videoSelector) {
-
+    function initPanelVideo(panels, videoSelector, level) {
         var videos = [];
 
         for (var i = 0; i < panels.length; i++) {
@@ -1410,7 +1587,7 @@ console.log('include media/video/index');
                 _video.addEventListener('volumechange', volumeChangeHandler);
                 _video.addEventListener('error', errorHandler);
 
-                if (sys.level >= p.MIN_SCROLL_LEVEL) {
+                if (level >= p.MIN_SCROLL_LEVEL) {
                     _video.setAttribute('preload', 'auto');
                 } else {
                     _video.setAttribute('preload', 'metadata');
@@ -1426,13 +1603,22 @@ console.log('include media/video/index');
 
     }
 
+    function updateState(level) {
+
+        if (level >= MIN_LEVEL) {
+            currentLoad(level);
+        } else {
+            currentUnload(level);
+        }
+    }
+
     function hideCaptions(videos) {
         var video;
         for (var i = 0, l = videos.length; i < l; i++) {
             video = videos[i];
             if (video) {
                 var tracks = video.textTracks;
-                if (tracks.length) {
+                if (tracks && tracks.length) {
                     for (var j = 0, m = tracks.length; j < m; j++) {
                         var track = tracks[j];
                         if (track) track.mode = 'hidden';
@@ -1442,18 +1628,23 @@ console.log('include media/video/index');
         }
     }
 
+    function init(_panels) {
+        panels = _panels;
+        currentLoad = load;
+    }
 
-    function initVideo(panels) {
-        panelVideos = initPanelVideo(panels, 'video');
+    function load(level) {
+        panelVideos = initPanelVideo(panels, selector, level);
         hideCaptions(panelVideos);
+        currentLoad = noop;
     }
 
     exports.video = {
-        init: initVideo
+        init: init,
+        updateState: updateState
     };
 
 }(Pathways, Pathways, Pathways.system, Pathways.media.vol, jQuery));
-
 
 /***
     Pathways scrollscene scrollDurations
@@ -1462,47 +1653,14 @@ console.log('include media/video/index');
 
     'use strict';
 
-    var screenDurationCache = 0,
-        componentDurationCache = 0,
-        mediaDurationCache = 0,
-        lastMediaDurationCache = 0,
-        opacityTransitionDurationCache = 0;
+    var opacityTransitionDurationCache = 0;
 
-    function getScreenDuration() {
-        return screenDurationCache;
-    }
-
-    function getComponentDuration(offset) {
-        return function() {
-            var val = componentDurationCache - offset;
-            return (val > 0 ? val : 0);
-        };
-    }
-
-    function getMediaDuration() {
-        return mediaDurationCache;
-    }
-
-    function getMediaDurationForPanel(panel) {
-        return function() {
-
-        };
-    }
-
-    function getOpacityTranstionDuration() {
+    function getOpacityTransitionDuration() {
         return opacityTransitionDurationCache;
     }
 
     function updateDuration(e) {
-        // total time on screen is panel height
-        screenDurationCache = p.panelHeight;
-        opacityTransitionDurationCache = parseInt((p.panelHeight / 3), 10);
-        // visible time on screen is approx 3/4 actual time with transitions
-        componentDurationCache = parseInt((p.panelHeight * 0.75), 10);
-        // fork makes last panel sometimes not hit triggerHook, so must be accounted for
-        //mediaDurationCache = panel === $lastPanel[0] ? p.panelHeight : p.panelHeight - $('.fork').innerHeight();
-        mediaDurationCache = p.panelHeight;
-        lastMediaDurationCache = p.panelHeight - $('.fork').innerHeight();
+        opacityTransitionDurationCache = parseInt((p.viewportHeight / 3), 10);
     }
 
     function init() {
@@ -1517,10 +1675,7 @@ console.log('include media/video/index');
     exports.scrollSceneDurations = {
         init: init,
         destroy: destroy,
-        getScreenDuration: getScreenDuration,
-        getComponentDuration: getComponentDuration,
-        getMediaDuration: getMediaDuration,
-        getOpacityTranstionDuration: getOpacityTranstionDuration
+        getOpacityTransitionDuration: getOpacityTransitionDuration
     };
 
 }(Pathways, window, Pathways, jQuery));
@@ -1529,7 +1684,7 @@ console.log('include media/video/index');
 /***
     Pathways scrollscene control
 */
-(function(exports, w, scrollDurations, $, Sm, Ss) {
+(function(exports, w, p, scrollDurations, $, Sm) {
     'use strict';
 
     var controller,
@@ -1538,7 +1693,11 @@ console.log('include media/video/index');
         panelFactories = {},
         panels,
         defaultMethods = ['load', 'unload', 'getScenes'],
-        noop = function() {};
+        MIN_LEVEL = p.MIN_SCROLL_LEVEL,
+        noop = function() {},
+        currentLoad = noop,
+        currentUnload = noop,
+        currentLevel = -1;
 
     function getInstance(factory) {
         if (!factory) return;
@@ -1554,8 +1713,8 @@ console.log('include media/video/index');
         }
 
         if (!instance) return;
-        defaultMethods.forEach(function (name) {
-            if(!instance[name]) instance[name] = noop;
+        defaultMethods.forEach(function(name) {
+            if (!instance[name]) instance[name] = noop;
         });
         return instance;
     }
@@ -1612,22 +1771,22 @@ console.log('include media/video/index');
         //TODO: splice factory from array
     }
 
+    function updateState(level) {
+        if (currentLevel === level) return;
 
-
-    function init(_panels) {
-        // console.log('initing ss control');
-        controller = new Sm({
-            //loglevel: 3
-        });
-        panels = _panels;
-
-        exports.scrollSceneCtrl.init = noop;
+        if (level >= MIN_LEVEL) {
+            currentLoad();
+        } else {
+            currentUnload();
+        }
+        currentLevel = level;
     }
 
-    function destroy() {
-        // console.log('destroying ss control');
-        controller.destroy(true);
-        exports.scrollSceneCtrl.init = init;
+    function init(_panels) {
+        panels = _panels;
+
+        currentLoad = load;
+        currentUnload = noop;
     }
 
     function getEm() {
@@ -1662,7 +1821,6 @@ console.log('include media/video/index');
             // console.log(facs, loadFactory);
             if (facs && facs.length) facs.forEach(loadFactory);
         }
-        controller.update(true);
     }
 
     function unloadPanelScenes(panel) {
@@ -1678,21 +1836,30 @@ console.log('include media/video/index');
             var facs = panelFactories[panel.id];
             if (facs && facs.length) facs.forEach(unloadFactory);
         }
-        controller.update(true);
     }
 
     function load() {
-        // console.log('loading ss control');
+        controller = new Sm({
+            // container: '#main',
+            // loglevel: 3
+        });
         globalFactories.forEach(getEm());
         panels.forEach(loadPanelScenes);
         scrollDurations.init();
+
+        currentLoad = noop;
+        currentUnload = unload;
         // console.log('globalFactories.length:', globalFactories.length);
     }
 
     function unload() {
+        controller.destroy(true);
         globalFactories.forEach(ungetEm());
         panels.forEach(unloadPanelScenes);
         scrollDurations.destroy();
+
+        currentLoad = load;
+        currentUnload = noop;
         // console.log(controller.info());
     }
 
@@ -1702,15 +1869,98 @@ console.log('include media/video/index');
         addGlobalPanelScrollFactory: addGlobalPanelScrollFactory,
         addGlobalPanelScrollMethod: addGlobalPanelScrollMethod,
         addScrollContentFactory: addScrollContentFactory,
-        init: init,
-        destroy: destroy,
-        load: load,
-        unload: unload
+        updateState: updateState,
+        init: init
     };
 
 
-}(Pathways, window, Pathways.scrollSceneDurations, jQuery, ScrollMagic));
+}(Pathways, window, Pathways, Pathways.scrollSceneDurations, jQuery, ScrollMagic));
 
+
+/***
+    Pathways scrollscene resizing control
+*/
+(function(exports, w, p, sys, scrollSceneCtrl, $) {
+    'use strict';
+
+    var panels,
+        rootSelector,
+        noop = function() {},
+        currentLoad = noop,
+        currentUnload = noop,
+        currentLevel = -1,
+        originalLoadingText = '',
+        MIN_SCROLL_LEVEL = p.MIN_SCROLL_LEVEL;
+
+    function resizePanels(panels) {
+        for (var i = 0; i < panels.length; i++) {
+            panels[i].resize(p.viewportHeight);
+        }
+    }
+
+    function unsizePanels(panels) {
+        for (var i = 0; i < panels.length; i++) {
+            panels[i].unstyle();
+        }
+    }
+
+    function updateState(level) {
+        if (level < MIN_SCROLL_LEVEL) {
+            currentUnload(level);
+        } else {
+            currentLoad(level);
+        }
+        scrollSceneCtrl.updateState(level);
+        currentLevel = level;
+    }
+
+    function firstLoad(level) {
+        p.loadingState.hide();
+
+        scrollSceneCtrl.init(panels);
+        unsize(level);
+        resize(level);
+
+        currentLoad = resize;
+        currentUnload = unsize;
+    }
+
+    function resize(level) {
+        resizePanels(panels);
+        currentUnload = unsize;
+    }
+
+    function unsize(level) {
+        unsizePanels(panels);
+        currentUnload = noop;
+    }
+
+    function unload() {
+        currentLevel = -1;
+        unsize(0);
+        currentLoad = noop;
+        currentUnload = noop;
+    }
+
+    function init(_rootSelector, _panels) {
+        panels = _panels;
+        rootSelector = _rootSelector;
+        currentLoad = firstLoad;
+        currentUnload = unsize;
+    }
+
+    function destroy() {
+        unload();
+    }
+
+    exports.scrollSceneResizeCtrl = {
+        init: init,
+        destroy: destroy,
+        updateState: updateState
+    };
+
+
+}(Pathways, window, Pathways, Pathways.system, Pathways.scrollSceneCtrl, jQuery));
 
 /**
  * Controls Library panel transitions
@@ -1793,38 +2043,34 @@ console.log('include media/video/index');
     scrollCtrl.addGlobalPanelScrollFactory(function() {
 
         return {
-            load: function(panelId, panelEl, panelAttrs) {
+            load: function(panelId, panelEl, panel) {
                 var canvas = $(panelEl).find('.panel-animation').get(0), //TODO: Allow for mulitple animations
-                    animationId = utils.toCamelCase(panelAttrs.id);
+                    animationId = utils.toCamelCase(panel.id);
                 if (canvas)
                     animationCtrl.init(animationId, canvas);
             },
-            getScenes: function(panelId, panelEl, panelAttrs) {
-                var animationId = utils.toCamelCase(panelAttrs.id),
-                    animation = animationCtrl.getAnimation(animationId);
+            getScenes: function(panelId, panelEl, panel) {
+                var animationId = utils.toCamelCase(panel.id),
+                    animation = animationCtrl.getAnimation(animationId),
+                    scene;
 
                 if (!animation) return null;
 
-                var scene = new ScrollScene({
-                        triggerElement: panelId,
-                        duration: Pathways.panelHeight
+                scene = new Ss({
+                        triggerElement: panelEl,
+                        duration: panel.getContentDuration
                     })
                     .on('enter', function(e) {
-                        // if (e.scrollDirection == 'FORWARD') {
-                        console.log(panelId, animation);
                         animation.start();
-                        // }
                     })
                     .on('leave', function(e) {
-                        // if (e.scrollDirection == 'REVERSE') {
                         animation.stop();
-                        // }
                     });
 
                 return scene;
             },
-            unload: function(panelId, panelEl, panelAttrs) {
-                var animationId = utils.toCamelCase(panelAttrs.id),
+            unload: function(panelId, panelEl, panel) {
+                var animationId = utils.toCamelCase(panel.id),
                     animation = animationCtrl.getAnimation(animationId);
                 if (animation) animation.stop();
             }
@@ -1861,15 +2107,18 @@ console.log('include media/video/index');
 
     function getComponentScene($panel, type, getDuration) {
         var $elem = $panel.find('[data-component="' + type + '"]'),
-            scene = [];
+            scene = [],
+            offset,
+            durationMethod;
 
         if ($elem.length) {
-            var offset = getValueFromConfig($elem.attr('data-config'), 'offset_height') || 0;
+            offset = getValueFromConfig($elem.attr('data-config'), 'offset_height') || 0;
+            durationMethod = getDuration(offset);
 
             scene = new Ss({
                 triggerElement: $panel,
-                triggerHook: 'top',
-                duration: getDuration(offset),
+                triggerHook: 'middle',
+                duration: durationMethod,
                 offset: offset
             }).on('enter', function(e) {
                 $elem.css({
@@ -1895,19 +2144,21 @@ console.log('include media/video/index');
 
     function getComponentObjectFactory(componentId) {
         return {
-            load: function(panelId, panelEl, panelAttrs) {
+            load: function(panelId, panelEl, panel) {
                 var $component = findComponent($(panelEl), componentId);
                 if ($component.length) $component.hide();
             },
-            getScenes: function(panelId, panelEl, panelAttrs) {
+            getScenes: function(panelId, panelEl, panel) {
                 var m = function m(offset) {
                     return function ret() {
-                        return Math.max((panelAttrs.componentHeight - offset), 0);
+                        var val = Math.max((panel.componentDuration - offset), 0);
+                        // console.log(val, panel.componentDuration);
+                        return Math.max((panel.componentDuration - offset), 0);
                     };
                 };
                 return getComponentScene($(panelEl), componentId, m);
             },
-            unload: function(panelId, panelEl, panelAttrs) {
+            unload: function(panelId, panelEl, panel) {
                 var $component = findComponent($(panelEl), componentId);
                 if ($component.length) $component.removeAttr('style');
             }
@@ -1927,23 +2178,23 @@ console.log('include media/video/index');
  * Black-strip positioning
  */
 
-(function(w, scrollCtrl, scrollDurations, mediaCtrl, $, Tm, Ss) {
+(function(w, p, scrollCtrl, scrollDurations, mediaCtrl, $, Tm, Ss) {
 
     'use strict';
 
-
     scrollCtrl.addGlobalPanelScrollFactory(function() {
-        var $blackStrips = $('.black-strip'),
-        currY = Pathways.panelHeight;
+        var selector = '.black-strip',
+            $blackStrips = $(selector),
+            currY = p.viewportHeight;
 
-        if ($blackStrips.length === 0) return; //Check for any strips on page; if none, don't create this object
+        if ($blackStrips.length === 0) return null; //Check for any strips on page; if none, don't create this object
 
         function resizeBlackStrips(e) {
-            currY = (currY === 0) ? 0 : Pathways.panelHeight;
+            currY = (currY === 0) ? 0 : p.viewportHeight;
             $blackStrips.css({
                 position: 'fixed',
                 'transform': 'translate(0,' + currY + 'px)',
-                height: Pathways.panelHeight
+                height: p.viewportHeight
             });
         }
 
@@ -1954,20 +2205,20 @@ console.log('include media/video/index');
             },
             getScenes: function(panelId, panelEl, panel) {
                 var scenes = [],
-                    $strip = $(panelEl).find('.black-strip'),
+                    $strip = $(panelEl).find(selector),
                     inTw = function(e) {
                         Tm.to($strip, 0.5, {
                             y: 0,
-                            onComplete: function(){
+                            onComplete: function() {
                                 currY = 0;
                             }
                         });
                     },
                     outTw = function(e) {
-                        Tm.to($strip, 0.2, {
-                            y: Pathways.panelHeight,
-                            onComplete: function(){
-                                currY = Pathways.panelHeight;
+                        Tm.to($strip, 0.1, {
+                            y: p.viewportHeight,
+                            onComplete: function() {
+                                currY = p.viewportHeight;
                             }
                         });
                     };
@@ -1977,7 +2228,7 @@ console.log('include media/video/index');
                 scenes.push(new ScrollScene({
                         triggerElement: panel.content,
                         triggerHook: 'bottom',
-                        duration: panel.content.offsetHeight + Pathways.panelHeight
+                        duration: panel.contentHeight
                     })
                     .on('enter', inTw)
                     .on('leave', outTw));
@@ -1993,10 +2244,29 @@ console.log('include media/video/index');
 
 
 
-}(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));
+}(window, Pathways, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));
+
+Pathways.scrollSceneCtrl.addGlobalPanelScrollMethod(function(panelId, panelEl, panel) {
+    var $panel = $(panelEl),
+        triggerHook = panel.isFirst ? 'middle' : 'top';
+
+    var scene = new ScrollScene({
+            triggerElement: panelEl,
+            triggerHook: triggerHook,
+            duration: panel.getContentDuration
+        })
+        .on('enter', function() {
+            $panel.addClass('current-scroll-panel');
+        }).on('leave', function() {
+            $panel.removeClass('current-scroll-panel');
+        });
+
+    return scene;
+
+});
 
 Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
-    var scrollFadeSelector = '[data-scroll-fadeIn]';
+    var scrollFadeSelector = '[data-scroll-fadein]';
 
     if ($(scrollFadeSelector).length === 0) return null;
 
@@ -2011,9 +2281,10 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
                     tween = TweenMax.to($this, 1, {
                         opacity: 1
                     }),
-                    offset = $this.data('offset') ? $this.data('offset') : 0;
+                    offset = $this.data('offset') ? $this.data('offset') : 0,
+                    scene;
 
-                var scene = new ScrollScene({
+                scene = new ScrollScene({
                         triggerElement: $this,
                         duration: 200,
                         offset: offset
@@ -2041,11 +2312,12 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
 
     scrollCtrl.addGlobalPanelScrollFactory(function() {
         var heightOffset = 60,
-            visibleOffset = 0;
+            visibleOffset = 0,
+            readyClass = 'info-panel-ready';
 
         return {
-            load: function(panelId, panelEl, panelAttrs) {
-                var $component = $('[data-panel="' + panelAttrs.id + '"]').first(),
+            load: function(panelId, panelEl, panel) {
+                var $component = $('[data-panel="' + panel.id + '"]').first(),
                     offsetHeight = $component.outerHeight() - heightOffset,
                     offsetWidth = $component.outerWidth(),
                     val = 'translate(' + offsetWidth + 'px, ' + offsetHeight + 'px)';
@@ -2056,33 +2328,29 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
                     });
                 }
             },
-            getScenes: function(panelId, panelEl, panelAttrs) {
-                var $component = $('[data-panel="' + panelAttrs.id + '"]').first(),
-                    scene = [];
+            getScenes: function(panelId, panelEl, panel) {
 
-                var m = function m(offset) {
-                    return function ret() {
-                        return Math.max((panelAttrs.componentHeight - offset), 0);
-                    };
-                };
+                if (panel.isStart) return;
+
+                var $component = $('[data-panel="' + panel.id + '"]').first(),
+                    scene = [];
 
                 if ($component.length) {
                     scene = new Ss({
                         triggerElement: panelEl,
                         triggerHook: 'middle',
-                        duration: m(visibleOffset),
-                        offset: visibleOffset
+                        duration: panel.getComponentDuration
                     }).on('enter', function(e) {
-                        $component.addClass('info-panel-ready');
+                        $component.addClass(readyClass);
                     }).on('leave', function(e) {
-                        $component.removeClass('info-panel-ready');
+                        $component.removeClass(readyClass);
                     });
                 }
 
                 return scene;
             },
-            unload: function(panelId, panelEl, panelAttrs) {
-                var $component = $('[data-panel="' + panelAttrs.id + '"]').first();
+            unload: function(panelId, panelEl, panel) {
+                var $component = $('[data-panel="' + panel.id + '"]').first();
                 if ($component.length) $component.removeAttr('style');
             }
         };
@@ -2121,10 +2389,10 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
     scrollCtrl.addGlobalPanelScrollFactory(function() {
 
         return {
-            load: function(panelId, panelEl, panelAttrs) {
+            load: function(panelId, panelEl, panel) {
 
             },
-            getScenes: function(panelId, panelEl, panelAttrs) {
+            getScenes: function(panelId, panelEl, panel) {
                 var $panel = $(panelId),
                     $panelAudio = $panel.find('[data-audio="panel"]'),
                     $panelVideo = $panel.find('[data-video="panel"]'),
@@ -2135,7 +2403,7 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
 
                     scene = new Ss({
                             triggerElement: panelEl,
-                            duration: scrollDurations.getMediaDuration
+                            duration: panel.getMediaDuration
                         })
                         .on('enter', function() {
                             $panelVideo.each(getPlay('video'));
@@ -2152,7 +2420,7 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
                 }
                 return scene;
             },
-            unload: function(panelId, panelEl, panelAttrs) {
+            unload: function(panelId, panelEl, panel) {
 
             }
         };
@@ -2167,66 +2435,72 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
 
     'use strict';
 
+    var rootEl = 'html',
+        bottomSel = '.survey, .fork',
+        scrollActiveClass = 'scroll-active',
+        scrollInactiveClass = 'scroll-inactive',
+        fixedActiveClass = 'fixed-active';
+
     scrollCtrl.addGlobalPanelScrollFactory(function() {
+
         return {
             load: function(panelId, panelEl, panelAttrs) {
-                $('html').addClass('scroll-active');
-                $(panelEl).removeClass('fixed-active');
+                $(rootEl).removeClass(scrollInactiveClass).addClass(scrollActiveClass);
             },
             getScenes: function(panelId, panelEl, panelAttrs) {
+
+                if (panelAttrs.isStart) return null;
+
                 var scenes = [],
                     $panel = $(panelEl),
                     $bg = $(panelAttrs.bg),
                     triggerHook = panelAttrs.isFirst ? 'top' : 'middle',
-                    $survey = $('.survey'),
-                    $bottom = $survey.length ? $survey : $('.fork'),
+                    $bottom = $(bottomSel).first(),
+                    scene,
                     tween = Tm.to($bg, 1, {
                         opacity: 1
                     });
 
-                scenes.push(new Ss({
+
+                scene = new Ss({
                         triggerElement: $panel,
                         triggerHook: triggerHook,
-                        duration: scrollDurations.getScreenDuration,
+                        duration: scrollDurations.getOpacityTransitionDuration
                     })
                     .on('start', function(e) {
                         if (e.scrollDirection == 'FORWARD') {
-                            $panel.addClass('fixed-active');
+                            $panel.addClass(fixedActiveClass);
                         } else {
-                            setTimeout(function() {
-                                $panel.removeClass('fixed-active');
-                            }, 50);
+                            $panel.removeClass(fixedActiveClass);
+                            // setTimeout(function() {
+                            //     $panel.removeClass(fixedActiveClass);
+                            // }, 50);
                         }
-                    }));
+                    });
 
                 if (!panelAttrs.isFirst) {
-                    // Panels Opacity transition
-                    scenes.push(new Ss({
-                            triggerElement: $panel,
-                            triggerHook: triggerHook,
-                            duration: scrollDurations.getOpacityTranstionDuration
-                        })
-                        .setTween(tween));
+                    scene.setTween(tween);
                 }
+
+                scenes.push(scene);
                 return scenes;
             },
             unload: function(panelId, panelEl, panelAttrs) {
-                $('html').removeClass('scroll-active');
-                $(panelEl).removeClass('fixed-active');
+                $(panelEl).removeClass(fixedActiveClass);
+                $(rootEl).addClass(scrollInactiveClass).removeClass(scrollActiveClass);
             }
         };
     });
 
     Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
         var $panels = $('.panel'),
-            $survey = $('.survey'),
-            $bottom = $survey.length ? $survey : $('.fork');
+            $bottom = $(bottomSel).first();
 
         if ($bottom.length === 0) return null;
 
         return {
             load: function() {
-                $panels.removeClass('fixed-active');
+                $panels.removeClass(fixedActiveClass);
             },
             getScenes: function() {
                 var scenes = [];
@@ -2236,16 +2510,16 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
                     triggerHook: 'bottom'
                 }).on('start', function(e) {
                     if (e.scrollDirection == 'FORWARD') {
-                        $panels.removeClass('fixed-active');
+                        $panels.removeClass(fixedActiveClass);
                     } else {
-                        $panels.addClass('fixed-active');
+                        $panels.addClass(fixedActiveClass);
                     }
                 }));
 
                 return scenes;
             },
             unload: function() {
-                $panels.removeClass('fixed-active');
+                $panels.removeClass(fixedActiveClass);
             }
         };
     });
@@ -2254,14 +2528,14 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
 }(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));
 
 // Init parallax ScrollScenes
-(function(w, $, p, scrollCtrl, Sc, Tm, Mod) {
+(function(w, $, p, scrollCtrl, Ss, Tm, Mod) {
 
     "use strict";
 
     scrollCtrl.addScrollContentFactory(function() {
 
         var parallaxSelectors = '[data-scroll-parallax-effect]',
-            $start = $('.start'),
+            $start = $('.start'), //TODO: enable parent trigger selection
             $parallaxContent,
             scenes = [];
 
@@ -2270,7 +2544,9 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
                 rawconfig = $parallax.find(parallaxSelectors).get(0),
                 fallRate = 0.3,
                 endOpacity = 0,
-                config;
+                config,
+                tween,
+                scene;
 
             if (rawconfig) {
                 config = JSON.parse(rawconfig);
@@ -2278,25 +2554,25 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
                 endOpacity = isNaN(config.endOpacity) ? endOpacity : config.endOpacity;
             }
 
-            var tween = Tm.to($parallax, 1, {
+            tween = Tm.to($parallax, 1, {
                 opacity: endOpacity,
-                y: p.panelHeight * fallRate
+                y: p.viewportHeight * fallRate
             });
 
-            var scene = new Sc({
+            scene = new Ss({
                     triggerElement: $start,
-                    duration: p.panelHeight,
+                    duration: p.viewportHeight,
                     triggerHook: 'top'
                 })
                 .on('enter', function(e) {
                     $parallax.css({
-                        'display': 'block'
+                        'visibility':'visible'
                     });
                 })
                 .on('leave', function(e) {
                     if (e.scrollDirection === 'FORWARD')
                         $parallax.css({
-                            'display': 'none'
+                            'visibility':'hidden'
                         });
                 })
                 .setTween(tween);
@@ -2305,12 +2581,17 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
         }
 
         return {
-
             getScenes: function() {
                 scenes = [];
                 $parallaxContent = $start.find(parallaxSelectors);
                 $parallaxContent.each(processParallaxes);
                 return scenes;
+            },
+            unload: function() {
+                $parallaxContent = $start.find(parallaxSelectors);
+                $parallaxContent.each(function(index, parallax) {
+                    $(parallax).removeAttr('style');
+                });
             }
         };
     });
@@ -2327,8 +2608,9 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
 
 
     scrollCtrl.addGlobalPanelScrollFactory(function() {
-        var heightOffset = 60;
-        var translations = [-100, 100],
+        var heightOffset = 60,
+            translations = [-100, 100],
+            slideDuration = 200,
             defaultFxAudioSrc = 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3',
             $root,
             $components,
@@ -2364,31 +2646,23 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
                         translateVal = translations[((index + offset) % 2)],
                         val = 'translate(' + translations[((index + offset) % 2)] + 'px,0)';
 
-                    // $this.css('transform', val);
-                    // $this.css('-webkit-transform', val);
-
                     tween = Tm.to($this, 1, {
                         x: 0,
                         opacity: 1
                     });
 
-                    scenes[idx++] = new Ss({
+                    scenes.push(new Ss({
                             triggerElement: $this,
-                            duration: 200,
+                            duration: slideDuration,
                             offset: offset
                         })
                         .on('enter', function(e) {
-                            if (e.scrollDirection === 'FORWARD') {
-                                // console.log('playing:', fxAudioSrc);
-                                if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
-                            } else if (e.scrollDirection == 'REVERSE') {
-                                if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
-                            }
+                            if (fxAudio) mediaCtrl.playMediaOnFxChannel(fxAudio);
                         })
                         .on('leave', function(e) {
-                            //if (fxAudio) mediaCtrl.stopMediaOnFxChannel(fxAudio);
+                            if (fxAudio) mediaCtrl.stopMediaOnFxChannel(fxAudio, { fadeDuration: 500 });
                         })
-                        .setTween(tween);
+                        .setTween(tween));
                 });
 
 
@@ -2403,105 +2677,156 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
 
 }(window, Pathways.scrollSceneCtrl, Pathways.scrollSceneDurations, Pathways.media.ctrl, jQuery, TweenMax, ScrollScene));
 
-console.log('include main');
+/***
+    Pathways component control
+*/
+Pathways.components = {};
 
-function _(str) {
-    return document.querySelector(str);
-}
+(function(exports) {
+    'use strict';
 
-Pathways.MIN_COMPONENT_LEVEL = 2;
-Pathways.MIN_SCROLL_LEVEL = 4;
+    var componentProto = {
+        addData: function addData(id, data) {
+            this.data[id] = data;
+        },
+        getData: function getData(id) {
+            return this.data[id];
+        }
+    };
 
+    function getComponent(method) {
+        return Object.create(componentProto, {
+            data: {
+                value: {}
+            },
+            load: {
+                value: method
+            }
+        });
+    }
+
+    exports.getComponent = getComponent;
+
+}(Pathways.components));
+
+(function(exports, w, p, getComponent, utils, sys, $) {
+    'use strict';
+
+    var selector = '[data-component]',
+        noop = function() {},
+        list = {},
+        currentLoad = noop,
+        currentUnload = noop;
+
+    function updateState(level) {
+        if (level < p.MIN_COMPONENT_LEVEL) {
+            currentUnload(level);
+        } else {
+            currentLoad(level);
+        }
+    }
+
+    function requestComponent(id) {
+        var component = list[id];
+        if (typeof component === 'undefined' || component === null) return console.warn('Could not load the requested component: ' + id);
+        return component;
+    }
+
+    function requestData(component, id) {
+        if (!(id && component)) return;
+        return component.getData(id);
+    }
+
+    function loadComponent(index, el) {
+        var $view = $(el),
+            componentId = $view.attr('data-component'),
+            instanceId = $view.attr('id'),
+            component = requestComponent(componentId),
+            data;
+
+        if (!component) return;
+        data = requestData(component, instanceId);
+
+        component.load(el, data);
+    }
+
+    function loadComponents(context) {
+        var $views = $(selector);
+        $views.each(loadComponent);
+    }
+
+    function firstLoad(level) {
+        // w.addEventListener('resize', stateCheck);
+        loadComponents(list);
+
+        currentLoad = noop;
+        currentUnload = noop;
+    }
+
+    function unload(level) {
+        // w.removeEventListener('resize', stateCheck);
+    }
+
+    function init(_selector) {
+        selector = _selector || selector;
+        currentLoad = firstLoad;
+    }
+
+    function destroy() {
+        unload();
+    }
+
+    function create(name, method) {
+        if (list[name]) return console.warn('A component with the name of \'' + name + '\' already exists');
+        list[name] = getComponent(method);
+    }
+
+    function get(name) {
+        if (!list[name]) return console.warn('No component with the name of \'' + name + '\' could be found');
+        return list[name];
+    }
+
+
+    exports.init = init;
+    exports.destroy = destroy;
+    exports.updateState = updateState;
+    exports.create = create;
+    exports.get = get;
+
+
+
+}(Pathways.components, window, Pathways, Pathways.components.getComponent, Pathways.utils, Pathways.system, jQuery));
 
 /***
     Pathways main
 */
-(function(exports, w, _, p, sys, utils, media, vol, video, scrollSceneCtrl, $, undefined) {
+(function(exports, w, p, sys, utils, getPanel, components, mediaCtrl, video, scrollSceneResizeCtrl, preloader, $, undefined) {
 
     'use strict';
 
-    var doc = w.document,
+    var doc = w.document || {},
 
-        minHeight = 550,
-        startPanel,
-        panels,
-        ratioedPanels,
-
-        scenesLoaded = false,
-        componentsLoaded = false,
-
-        sceneController,
-
-        panelHeightDecreased = false;
+        MIN_HEIGHT = 550,
+        panels;
 
 
-    exports.panelHeight = calcPanelHeight();
-    exports.getPanelHeight = function() {
-        return exports.panelHeight;
+    exports.viewportHeight = calcViewportHeight();
+    exports.viewportHeight = calcViewportHeight();
+    exports.getViewportHeight = function() {
+        return exports.viewportHeight;
     };
 
 
-
-
-    function getHeightWithOffset(offset) {
-        offset = offset || 0;
-        return exports.panelHeight - offset;
-    }
-
-    function getWidthWithOffset(offset) {
-        offset = offset || 0;
-        return w.innerWidth - offset;
+    function calcViewportHeight() {
+        return parseInt((sys.innerHeight < MIN_HEIGHT ? MIN_HEIGHT : sys.innerHeight), 10);
     }
 
 
-    function calcPanelHeight() {
-        return parseInt((sys.innerHeight < minHeight ? minHeight : sys.innerHeight), 10);
-    }
-
-
-
-
-
-    function initPanel(panel, isFirst, isLast) {
-
-        var $panel = $(panel),
-            id = $panel.attr('id'),
-            data = $panel.attr('data-config'),
-            bg = $panel.find('.bg-container').get(0),
-            content = $panel.find('.main-content').get(0),
-            contentHeight = $(content).outerHeight(),
-            configData = {};
-
-
-        if (!id) throw new Error('All panels require an id [' + panel + ']');
-        if (data) configData = JSON.parse(data);
-
-        var panelOb = {
-            id: id,
-            elem: panel,
-            config: configData,
-            bg: bg,
-            content: content,
-            contentHeight: contentHeight,
-            isFirst: isFirst,
-            isLast: isLast
-        };
-
-        panelOb.getContentHeight = function() {
-            return panelOb.contentHeight;
-        };
-
-        return panelOb;
-    }
-
-    function isRatioPreserved(panel) {
-        return panel.config && panel.config.background && panel.config.background.preserve_ratio;
-    }
-
-    function initPanels(panelSelector) {
+    function initPanels(panelSelector, startPanelSelector) {
         var $panels = $(panelSelector),
             first = $panels.first().get(0),
             last = $panels.last().get(0),
+            startPanel = $(startPanelSelector).get(0),
             isFirst, isLast,
             panels = [];
 
@@ -2509,290 +2834,52 @@ Pathways.MIN_SCROLL_LEVEL = 4;
             // console.log(panel);
             isFirst = panel === first;
             isLast = panel === last;
-            panels.push(initPanel(panel, isFirst, isLast));
+            panels.push(getPanel(panel, isFirst, isLast, false));
         });
+
+        if (startPanel) panels.push(getPanel(startPanel, false, false, true));
+
         return panels;
     }
 
-    function initRatioedPanels(panels) {
-        var rPanels = [];
-        for (var i = 0; i < panels.length; i++) {
+    function updateState() {
+        exports.viewportHeight = calcViewportHeight();
+        var level = sys.level;
 
-            if (isRatioPreserved(panels[i])) {
-                rPanels.push(panels[i]);
-            }
-        }
-        return rPanels;
+        mediaCtrl.updateState(level);
+        scrollSceneResizeCtrl.updateState(level);
+        components.updateState(level);
+        video.updateState(level);
     }
-
-
-    function loadComponents(context, height) {
-        var $components = $('[data-component]');
-
-        $components.each(function(index, component) {
-
-            var $component = $(component),
-                handlerName = $component.attr('data-component'),
-                id = utils.toCamelCase($component.attr('id')),
-                handlerClass = utils.toCamelCase(handlerName),
-                method = context[handlerClass],
-                data;
-
-            if (typeof method === 'undefined' || method === null) return console.warn('Could not load the necessary component: ' + handlerClass);
-
-            if (id && method[id] && method[id].data) data = method[id].data;
-            if (typeof method === 'function') {
-                method(component, data);
-            } else if (typeof method === 'object') {
-                method.onLoad(component, data);
-            }
-        });
-    }
-
-
-
-    function setElementHeight(el, height) {
-        $(el).css('height', parseInt(height, 10) + 'px');
-    }
-
-    function unSetElementHeight(el) {
-        $(el).css('height', '');
-    }
-
-    function translatePanelElem(_el, currentHeight) {
-
-        var newHeight = sys.innerWidth / sys.aspectRatio,
-            prefixes = ['-moz-', '-webkit-', ''],
-            y = parseInt(((currentHeight - newHeight) / 2), 10);
-
-        if (currentHeight > newHeight) {
-            for (var p = 0; p < prefixes.length; p++) {
-                _el.style[prefixes[p] + 'transform'] = 'translate(0, ' + y + 'px)';
-            }
-        }
-    }
-
-    function unTranslatePanelElem(_el) {
-        var prefixes = ['-moz-', '-webkit-', ''];
-
-        for (var p = 0; p < prefixes.length; p++) {
-            _el.style[prefixes[p] + 'transform'] = '';
-        }
-    }
-
-    function unsizePanels(startPanel, panels) {
-        if (startPanel) unSetElementHeight(startPanel);
-
-        var unsizePanel = function(index, child) {
-            $(child).removeAttr('style');
-        };
-
-        for (var i = 0; i < panels.length; i++) {
-            var _panel = panels[i].elem,
-                _bg = panels[i].bg;
-
-            $(_panel).removeAttr('style');
-            $(_bg).removeAttr('style');
-
-            //unSetElementHeight(_panel);
-            //unSetElementHeight(_bg);
-
-            if (isRatioPreserved(panels[i])) {
-                $(_panel).children().each(unsizePanel);
-            }
-        }
-    }
-
-    function getTotalHeight(el) {
-        var style = getComputedStyle(el, null),
-            margin = parseFloat(style.marginTop) + parseFloat(style.marginBottom);
-
-            // console.log('margin', margin);
-        return el.offsetHeight + margin;
-    }
-
-    function resizePanel(panel, viewPortHeight, index) {
-        var _panel = panel.elem;
-
-        var config = panel.config,
-            _bg = panel.bg,
-            _content = panel.content,
-            // id = $(panel.elem).attr('id'),
-            panelHeight = _panel.offsetHeight,
-            newPanelHeight;
-
-        if (_content) {
-            var $content = $(_content),
-                contentHeight = getTotalHeight(_content),
-                largerContentHeight;
-
-            // console.log('c, p', id, contentHeight, panelHeight);
-            largerContentHeight = parseInt(Math.max(contentHeight, viewPortHeight), 10);
-            newPanelHeight = largerContentHeight;
-
-        } else {
-            newPanelHeight = viewPortHeight;
-        }
-
-        panel.contentHeight = newPanelHeight;
-        panel.componentHeight = parseInt((newPanelHeight * 0.75), 10);
-
-        // console.log('p np:', index, panelHeight, newPanelHeight, (newPanelHeight === viewPortHeight));
-
-        // if (panelHeight !== newPanelHeight) {
-        //     setElementHeight(_panel, newPanelHeight);
-        // }
-
-        if (newPanelHeight === viewPortHeight) {
-            // console.log(index, ' setting new height ', newPanelHeight);
-            setElementHeight(_panel, newPanelHeight);
-        } else {
-            unSetElementHeight(_panel);
-        }
-
-        if (_bg) setElementHeight(_bg, viewPortHeight);
-
-    }
-
-    function resizePanelChild(index, child) {
-        var newHeight = sys.innerWidth / sys.aspectRatio;
-        setElementHeight(child, newHeight);
-        translatePanelElem(child, exports.panelHeight);
-    }
-
-    function resizePanels(startPanel, panels) {
-
-        if (startPanel) setElementHeight(startPanel, exports.panelHeight);
-
-        for (var i = 0; i < panels.length; i++) {
-            resizePanel(panels[i], exports.panelHeight, i);
-
-            if (isRatioPreserved(panels[i])) {
-                $(panels[i].elem).children().each(resizePanelChild);
-            }
-        }
-    }
-
-    var panelsUnsized = false;
-
-    function resizeCheck() {
-
-        exports.panelHeight = calcPanelHeight();
-
-        if (sys.level < p.MIN_COMPONENT_LEVEL) {
-            unsizePanels(startPanel, panels);
-            panelsUnsized = true;
-        } else if (sys.level >= p.MIN_COMPONENT_LEVEL && sys.level < p.MIN_SCROLL_LEVEL) {
-            unsizePanels(startPanel);
-            resizePanels(null, ratioedPanels);
-            panelsUnsized = false;
-        } else if (sys.level >= p.MIN_SCROLL_LEVEL) {
-            resizePanels(startPanel, panels);
-            panelsUnsized = false;
-        }
-    }
-
-    function loadCheck() {
-        exports.panelHeight = calcPanelHeight();
-
-        // If it's iPad width or larger, load the components
-        if (!componentsLoaded) {
-            if (sys.level >= p.MIN_COMPONENT_LEVEL) {
-                loadComponents(exports.components);
-                componentsLoaded = true;
-            }
-        } else {
-            if (sys.level < p.MIN_COMPONENT_LEVEL) {
-                // unload components
-            }
-        }
-
-        if (!scenesLoaded) {
-            // If it's a non-touch device, load the scenes.
-            if (sys.level >= p.MIN_SCROLL_LEVEL) {
-
-                media.model.init(panels);
-                media.ctrl.init();
-
-                vol.enable();
-                media.ctrl.playMediaOnGlobalChannel(media.model.globalAudio());
-
-                if (scrollSceneCtrl) {
-                    scrollSceneCtrl.init(panels);
-                    scrollSceneCtrl.load();
-
-                }
-
-                scenesLoaded = true;
-            }
-        } else {
-            if (sys.level < p.MIN_SCROLL_LEVEL) {
-
-                media.ctrl.disable();
-                vol.disable();
-
-                if (scrollSceneCtrl) {
-                    scrollSceneCtrl.unload(panels);
-                    scrollSceneCtrl.destroy();
-                }
-
-                scenesLoaded = false;
-            }
-        }
-    }
-
-
 
     function init(onLoadComplete) {
 
-        startPanel = $('.start').get(0);
-        panels = initPanels('.panel');
-        ratioedPanels = initRatioedPanels(panels);
-        resizeCheck();
+        if (window !== window.top) return console.log('Not initialising Pathways as not called from top-level document');
+
+        panels = initPanels('.panel', '.start');
 
         w.addEventListener('resize', function() {
-            resizeCheck();
-            loadCheck();
+            updateState();
         });
 
-        w.addEventListener('load', function() {
-            resizeCheck();
-            loadCheck();
-        });
-
-        // Now run the other logic on window load, (so scripts, images and all that jazz has now loaded)
         $(function() {
             console.log('doc ready');
-
-            vol.setStateFromCookies();
-
-            vol.addView(vol.views.getMuteButtonView('.mute'));
-            vol.addView(vol.views.getGlobalView('video, audio'));
-
+            updateState();
             onLoadComplete();
-            resizeCheck();
-            loadCheck();
-
-            video.init(panels);
-
-
+            preloader.load(3000); // set a four second delay before preloading the next page(s)
         });
+
+        scrollSceneResizeCtrl.init('html', panels);
+        components.init('[data-component]', panels);
+        mediaCtrl.init(panels);
+        video.init(panels);
     }
 
     exports.init = init;
 
-    exports.scrollScenes = {};
-    exports.components = {};
+}(Pathways, this, Pathways, Pathways.system, Pathways.utils, Pathways.panel.getPanel, Pathways.components, Pathways.media.ctrl, Pathways.video, Pathways.scrollSceneResizeCtrl, Pathways.preloader, jQuery));
 
-    utils.getHeightWithOffset = getHeightWithOffset;
-    utils.getWidthWithOffset = getWidthWithOffset;
-
-}(Pathways, this, _, Pathways, Pathways.system, Pathways.utils, Pathways.media, Pathways.media.vol, Pathways.video, Pathways.scrollSceneCtrl, jQuery));
-
-var Pathways = Pathways || {};
-Pathways.components = Pathways.components || {};
 Pathways.components.core = Pathways.components.core || {};
-console.log('include image-loader');
 
 (function(exports, w, $) {
 
@@ -2847,12 +2934,9 @@ console.log('include image-loader');
 
 }(Pathways.components.core, window, jQuery));
 
-console.log('include core audio-player');
-
 (function(exports, viewControl, mediaCtrl, vol, volViews, utils, $) {
 
     var fallbackDuration = 600;
-
 
     function getPlay(audio, linkedView, timeUpdate) {
         return function play() {
@@ -3056,12 +3140,6 @@ console.log('include core audio-player');
     };
 
 }(Pathways.components.core, Pathways.core.view, Pathways.media.ctrl, Pathways.media.vol, Pathways.media.vol.views, Pathways.utils, jQuery));
-
-var Pathways = Pathways || {};
-Pathways.components = Pathways.components || {};
-Pathways.components.core = Pathways.components.core || {};
-console.log('include carousel');
-
 
 (function(exports, w, getEventListener, imgLoader, Hamr, Mod, $) {
     'use strict';
@@ -3409,55 +3487,6 @@ console.log('include carousel');
 
 }(Pathways.components.core, window, Pathways.core.events.getEventListener, Pathways.components.core.imageLoader, Hammer, Modernizr, jQuery));
 
-var Pathways = Pathways || {};
-Pathways.components = Pathways.components || {};
-Pathways.components.core = Pathways.components.core || {};
-
-(function(w, exports, $) {
-
-    var baseSelector = '';
-    var attrSelector = '';
-
-    function setState($el, re1, re2) {
-        var gaData = $el.data(baseSelector);
-
-        if (!gaData) return;
-        var newStr = gaData.replace(re1, re2);
-        $el.data(baseSelector, newStr);
-    }
-
-    function send(label) {
-        console.log(baseSelector + ' click:', label, typeof ga);
-        if (label) window.ga('send', 'event', 'link', 'click', label);
-    }
-
-    // Assumes selector will be in form '[data-<val>]'
-    function init(selector) {
-        console.log('initing ga');
-        attrSelector = selector;
-        baseSelector = selector.replace(/\[data-(\w*)\]/, '$1');
-        update();
-    }
-
-    function update() {
-        $(attrSelector).click(function() {
-            send($(this).data(baseSelector));
-        });
-    }
-
-    exports.ga = {
-        setState: setState,
-        send: send,
-        init: init,
-        update: update
-    };
-
-}(window, Pathways.components.core, jQuery));
-
-var Pathways = Pathways || {};
-Pathways.components = Pathways.components || {};
-Pathways.components.core = Pathways.components.core || {};
-
 (function(exports, w, getEventListener, utils, $) {
 
     function getOverlayCtrl() {
@@ -3538,11 +3567,10 @@ Pathways.components.core = Pathways.components.core || {};
 
 }(Pathways.components.core, window, Pathways.core.events.getEventListener, Pathways.utils, jQuery));
 
-console.log('include panel audio-player');
-(function(exports, audioPlayer, $) {
+(function(components, audioPlayer, $) {
 
-    exports.audioPlayer = function(element, data, src) {
-
+    components.create('audio-player', function(element, data, src) {
+        console.log('data', data)
         src = src || $(element).data('src');
         var audio = new Audio(src);
 
@@ -3551,33 +3579,31 @@ console.log('include panel audio-player');
         playerCtrl.addView(playerView);
 
         playerCtrl.enable();
-    };
+    });
 
 }(Pathways.components, Pathways.components.core.audioPlayer, jQuery));
 
-(function(w, exports, ga, $) {
+(function(components, ga, $) {
 
-    var repOpen = 'l3 open library',
-        repClose = 'l3 close library';
+    var activeClass = 'active';
 
-    exports.clickActive = function(element, data) {
+    components.create('click-active', function(element, data) {
 
         var $element = $(element),
-            targetSel = $element.data('click-active-target') || '.info-box',
-            $target = $(targetSel);
+            targetSel = $element.data('click-active-target') || '.info-box';
 
         $element.on('click', targetSel, function toggleActive(e) {
-            $element.toggleClass('active');
+            $element.toggleClass(activeClass);
             return false;
         });
 
-    };
+    });
 
-}(window, Pathways.components, Pathways.components.core.ga, jQuery));
+}(Pathways.components, Pathways.core.ga, jQuery));
 
-(function(w, doc, exports, overlay, $, utils) {
+(function(components, w, doc, overlay, $, utils) {
 
-    exports.cropZoom = function(element, data) {
+    components.create('crop-zoom', function(element, data) {
         var $elem = $(element),
             db = data;
 
@@ -3652,7 +3678,7 @@ console.log('include panel audio-player');
                 $imageCrop.css({
                     top: 0,
                     left: 0,
-                    'transform': 'translate(0, ' + (Pathways.panelHeight) + 'px)',
+                    'transform': 'translate(0, ' + (Pathways.viewportHeight) + 'px)',
                     opacity: 0
                 });
 
@@ -3676,16 +3702,11 @@ console.log('include panel audio-player');
                 });
             });
         });
-    };
+    });
 
-}(window, document, Pathways.components, Pathways.components.core.overlay, jQuery, Pathways.utils));
+}(Pathways.components, window, document, Pathways.components.core.overlay, jQuery, Pathways.utils));
 
-/*
-    Carousel pattern initiator followed by the component.
-*/
-console.log('include gallery');
-
-(function(exports, w, overlay, getCarousel, getImageLoader, utils, $, _Hammer, Mod) {
+(function(components, w, overlay, getCarousel, getImageLoader, utils, $, _Hammer, Mod) {
 
     var doc = w.document;
 
@@ -3761,7 +3782,7 @@ console.log('include gallery');
         return _paneCtrlFactory;
     }
 
-    exports.gallery = function(element, data) {
+    components.create('gallery', function(element, data) {
         var $elem = $(element),
             $panel = $elem.closest('.panel'),
             panelId = $panel.attr('id'),
@@ -3791,12 +3812,12 @@ console.log('include gallery');
 
         });
 
-    };
+    });
 
 
 }(Pathways.components, window, Pathways.components.core.overlay, Pathways.components.core.carousel.getCarousel, Pathways.components.core.imageLoader.getImageLoader, Pathways.utils, jQuery, Hammer, Modernizr));
 
-(function(w, exports, ga, Hammer, $) {
+(function(components, w, ga, Hammer, $) {
 
     function InfiniteCanvas(element, data) {
         var self = this,
@@ -4000,25 +4021,24 @@ console.log('include gallery');
         new Hammer(_element, {}).on("release drag", handleHammer);
     }
 
-    exports.infiniteCanvas = function(element, data) {
+    components.create('infinite-canvas', function(element, data) {
 
         $(element).find('.infinite-canvas').each(function() {
             var infiniteCanvas = new InfiniteCanvas(this, data);
             infiniteCanvas.init();
         });
 
-    };
+    });
 
-}(window, Pathways.components, Pathways.components.core.ga, Hammer, jQuery));
+}(Pathways.components, window, Pathways.core.ga, Hammer, jQuery));
 
-(function(exports, w, ga, $) {
+(function(components, w, ga, $) {
 
     var repOpen = 'l2 open share',
         repClose = 'l2 close share',
-        offsetHeight = 60,
         visibleClass = 'info-panel-open';
 
-    exports.infoPanel = function(element, data) {
+    components.create('info-panel', function(element, data) {
 
         function closePanel($panel) {
             $panel.removeClass(visibleClass);
@@ -4040,38 +4060,18 @@ console.log('include gallery');
 
             } else {
                 openPanel($panel);
-                $(window).one('scroll', function() {
+                $(w).one('scroll', function() {
                     closePanel($panel);
                     ga.setState($this, repClose, repOpen);
                 });
                 ga.setState($this, repOpen, repClose);
             }
         });
-    };
-
-}(Pathways.components, window, Pathways.components.core.ga, jQuery));
-
-Pathways.components.infographic = function(element, data) {
-
-    var $svg = $(element).find('svg');
-    $svg.on('click', 'circle', function() {
-        var $this = $(this),
-            top = $this.position().top,
-            left = $this.position().left,
-            radius = $this.attr('r'),
-
-            center_x = left + (radius / 2),
-            center_y = top + (radius / 2);
-
-        $svg.css('transform-origin', center_x + 'px ' + center_y + 'px');
-        $svg.css('transform', 'scale(3, 3)');
     });
 
-};
+}(Pathways.components, window, Pathways.core.ga, jQuery));
 
-console.log('include letter-gallery');
-
-(function(exports, w, getOverlayCtrl, getCarousel, getImageLoader, audioPlayer, utils, $, _Hammer, Mod) {
+(function(components, w, getOverlayCtrl, getCarousel, getImageLoader, audioPlayer, utils, $) {
 
     function getAudioPlayerTemplate() {
         var $tmpl = $('<div class="audio-player audio-player-gallery">' +
@@ -4248,12 +4248,6 @@ console.log('include letter-gallery');
                     return this;
                 },
                 setIndex: function(newIndex) {
-                    // console.log('setIndex', index, newIndex);
-                    // if (newIndex === index) {
-                    //     $pane.css('display', 'block');
-                    // } else {
-                    //     $pane.css('opacity', 0.4);
-                    // }
                     return this;
                 },
                 resize: function() {
@@ -4275,7 +4269,7 @@ console.log('include letter-gallery');
         return _paneCtrlFactory;
     }
 
-    exports.letterGallery = function(element, data) {
+    components.create('letter-gallery', function(element, data) {
         var $elem = $(element),
             $panel = $elem.closest('.panel'),
             panelId = $panel.attr('id'),
@@ -4308,15 +4302,23 @@ console.log('include letter-gallery');
             });
 
         });
+    });
 
-    };
+}(Pathways.components, window, Pathways.components.core.overlay.getCtrl, Pathways.components.core.carousel.getCarousel, Pathways.components.core.imageLoader.getImageLoader, Pathways.components.core.audioPlayer, Pathways.utils, jQuery));
 
+(function(components, w, doc, p, overlay, $, utils) {
 
-}(Pathways.components, window, Pathways.components.core.overlay.getCtrl, Pathways.components.core.carousel.getCarousel, Pathways.components.core.imageLoader.getImageLoader, Pathways.components.core.audioPlayer, Pathways.utils, jQuery, Hammer, Modernizr));
+    function getHeightWithOffset(offset) {
+        offset = offset || 0;
+        return p.viewportHeight - offset;
+    }
 
-(function(exports, w, doc, overlay, $, utils) {
+    function getWidthWithOffset(offset) {
+        offset = offset || 0;
+        return w.innerWidth - offset;
+    }
 
-    exports.playerOverlay = function(elem) {
+    components.create('player-overlay', function(elem) {
 
         var $element = $(elem),
 
@@ -4325,10 +4327,7 @@ console.log('include letter-gallery');
 
             playerSel = '.wellcomePlayer',
             overlayFullscreenClass = 'overlay-fullscreen',
-            iframeTmpl = '<iframe/>',
-
-            getHeightWithOffset = utils.getHeightWithOffset,
-            getWidthWithOffset = utils.getWidthWithOffset;
+            iframeTmpl = '<iframe/>';
 
 
         $element.on('click', function(e) {
@@ -4424,301 +4423,304 @@ console.log('include letter-gallery');
             return false;
 
         });
-    };
-
-}(Pathways.components, window, document, Pathways.components.core.overlay, jQuery, Pathways.utils));
-
-
-Pathways.components.quiz = function(element, data) {
-
-    if(typeof data === 'undefined') return console.warn('Quiz component not provided data');
-
-    $(element).on('click', function(e) {
-        // setup overlay
-        var $overlay    = $('<div class="overlay"></div>'),
-            $close      = $('<div class="close"></div>');
-
-        $overlay.css('height', window.innerHeight );
-
-        // append overlay
-        $('body').append( $overlay );
-
-        $overlay.show();
-        $overlay.css({
-            'background-color': 'rgba(0,0,0,0.9)',
-            'background-image': 'url('+data.images + '/' + 'bg.jpg)'
-        });
-
-        // prevent scrolling
-        $('body').addClass('modal-open');
-
-        // append and initialize quiz
-        setTimeout(function() {
-            var $code           = $( _('#template-quiz').innerHTML ),
-                $content        = $('<div class="content"></div>'),
-                $quizContainer  = $('<div class="quiz"></div>');
-
-            $content.append( $code );
-            $quizContainer.append( $content );
-            $overlay.append( $quizContainer );
-
-            Pathways.utils.positionCenter($quizContainer);
-
-            var quiz = new Quiz($quizContainer, data);
-
-            $overlay.append( $close );
-        }, 800);
-
-        $close.on('click', function() {
-            $overlay.css('opacity', 0);
-            $('body').removeClass('modal-open');
-
-            setTimeout(function() {
-                $overlay.remove();
-            }, 800);
-        });
-
-        $(window).on('resize', function() {
-            $overlay.css('height', window.innerHeight);
-        });
-
     });
-};
 
-function Quiz(element, data) {
-    var $quiz           = $(element),
-        paused          = false,
-        level           = 1,
-        imagesLocation  = data.images,
-        questions       = data.questions,
-        answers         = data.questions[level].answers,
-        totalQuestions  = questions.length,
-        score           = 0,
+}(Pathways.components, window, document, Pathways, Pathways.components.core.overlay, jQuery, Pathways.utils));
 
-        timerWait       = 5, // in seconds
-        timerLength     = 5, // in seconds
+(function(components, w, utils, $) {
 
-        $remaining  = $quiz.find('.remaining'),
-        $score      = $quiz.find('.score span'),
+    components.create('quiz', function(element, data) {
 
-        $timer      = $('<div/>').addClass('timer').css('display', 'none'),
-        timerID,
-        timeoutWaitID;
+        if (typeof data === 'undefined') return console.warn('Quiz component not provided data');
 
+        $(element).on('click', function(e) {
+            // setup overlay
+            var $overlay = $('<div class="overlay"></div>'),
+                $close = $('<div class="close"></div>');
 
-    this.init = function() {
-        var self = this;
+            $overlay.css('height', window.innerHeight);
 
-        // load the intro image
-        var $quizHeader = $quiz.find('.quiz-header-image'),
-            $image      = $('<img/>').attr('src', imagesLocation + '/intro.jpg');
+            // append overlay
+            $('body').append($overlay);
 
-        $quizHeader.html($image);
+            $overlay.show();
+            $overlay.css({
+                'background-color': 'rgba(0,0,0,0.9)',
+                'background-image': 'url(' + data.images + '/' + 'bg.jpg)'
+            });
 
-        // Add the timer
-        $quiz.append($timer);
+            // prevent scrolling
+            $('body').addClass('modal-open');
 
-        $quiz.on('click', '.quiz-start .button', function() {
-            self.start();
-        });
+            // append and initialize quiz
+            setTimeout(function() {
+                var $code = $('#template-quiz').html(),
+                    $content = $('<div class="content"></div>'),
+                    $quizContainer = $('<div class="quiz"></div>');
 
-        // set up the click events
-        $quiz.on('click', 'li', function(e) {
-            if( !paused )
-                self.validate(e);
-        });
-    };
+                $content.append($code);
+                $quizContainer.append($content);
+                $overlay.append($quizContainer);
 
-    this.start = function() {
+                utils.positionCenter($quizContainer);
 
-        var self = this;
+                var quiz = new Quiz($quizContainer, data);
 
-        $quiz.find('.quiz-start').hide();
-        $quiz.find('.status-bar').show();
-        $quiz.find('.quiz-playground').show();
+                $overlay.append($close);
+            }, 800);
 
-        // Load the level
-        this.loadLevel();
-    };
-
-    this.getCurrentQuestion = function() {
-        return questions[(level-1)];
-    };
-
-    this.loadLevel = function(l) {
-        // image
-        var self        = this,
-            question    = this.getCurrentQuestion(),
-            $image      = $('<img/>').attr('src', imagesLocation + '/' + question.image),
-            str         = '<ul>';
-
-        $quiz.find('.image').html($image);
-
-        // question
-        $quiz.find('.question').html(question.title);
-
-        // answers
-        for (var i = 0; i < question.answers.length; i++) {
-            str += '<li>' + question.answers[i] + '</li>';
-        }
-
-        str += '</ul>';
-
-        $quiz.find('.answers').html(str);
-
-        this.updateScore();
-        this.updateQuestionsRemaining();
-
-        // Wait for timerWait seconds then start a timerLength countdown
-        timeoutWaitID = setTimeout(function() {
-            self.startTimer();
-        }, (timerWait * 1000));
-    };
-
-    this.validate = function(e) {
-        var self        = this,
-            question    = this.getCurrentQuestion(),
-            correct     = false;
-
-        this.stopTimer();
-
-        if( $quiz.find('li').index($(e.currentTarget)) == (question.correct - 1) )
-            correct = true;
-
-        if( correct ) {
-            paused = true;
-            this.showCorrect($(e.currentTarget));
-            score++;
-            this.updateScore();
-        }
-        else
-            this.showError($(e.currentTarget));
-
-        setTimeout(function() {
-            paused = false;
-            self.stopTimer();
-            self.nextQuestion($(e.currentTarget));
-        }, 2000);
-    };
-
-    this.nextQuestion = function($elm) {
-        level++;
-
-        if( level <= questions.length )
-            this.loadLevel();
-        else
-            this.finishGame();
-    };
-
-    this.showCorrect = function($elm) {
-        $elm.addClass('correct');
-    };
-
-    this.showError = function($elm) {
-        $elm.addClass('wrong');
-    };
-
-    this.revealAnswers = function() {
-        var self        = this,
-            question    = this.getCurrentQuestion(),
-            count       = 1;
-
-        $quiz.find('.answers li').each(function() {
-            if(count == question.correct)
-                self.showCorrect($(this));
-            else
-                self.showError($(this));
-
-            count++;
-        });
-    };
-
-    this.updateScore = function() {
-        $score.html(score);
-    };
-
-    this.updateQuestionsRemaining = function() {
-        $remaining.html('<em>'+level+'</em> of <span>'+totalQuestions+'</span>');
-    };
-
-    this.startTimer = function() {
-        var self    = this,
-            counter = timerLength;
-
-        this.stopTimer();
-
-        var elm     = $quiz.find('.quiz-playground .image'),
-            diff    = $quiz.find('.quiz-playground .image').offset().top - $quiz.find('.quiz-playground').offset().top;
-
-        $timer.css({
-            top:        (diff + elm.outerHeight() / 2) - ($timer.height() / 2),
-            left:       (elm.outerWidth() / 2) - ($timer.width() / 2)
-        })
-        .html(counter);
-
-        $timer.fadeIn(100);
-
-        // Every second, count down.
-        timerID = setInterval(function() {
-            if(counter > 1) {
-                $timer.html(--counter);
-            }
-            else {
-                $timer.html('<span style="color:red">'+ (--counter) + '</span>');
-
-                paused = true;
-                self.stopTimer();
-                self.revealAnswers();
+            $close.on('click', function() {
+                $overlay.css('opacity', 0);
+                $('body').removeClass('modal-open');
 
                 setTimeout(function() {
-                    paused = false;
-                    $timer.fadeOut(100);
-                    self.nextQuestion();
-                }, 2000);
-            }
-        }, 1000);
-    };
+                    $overlay.remove();
+                }, 800);
+            });
 
-    this.stopTimer = function() {
-        clearInterval(timerID);
-        clearTimeout(timeoutWaitID);
+            $(window).on('resize', function() {
+                $overlay.css('height', window.innerHeight);
+            });
 
-        $timer.fadeOut(100);
-    };
-
-
-    this.finishGame = function() {
-        var self            = this,
-            $quiz_finish    = $quiz.find('.quiz-finish');
-
-        this.stopTimer();
-        $timer.css('display', 'none');
-
-        $quiz_finish.find('.quiz-finish--score').html('<span>'+score+'</span> out of ' + totalQuestions);
-
-        $quiz.find('.quiz-playground').hide();
-        $quiz_finish.show();
-
-        $quiz_finish.on('click', '.play-again', function() {
-            self.restart();
         });
-    };
+    });
 
-    this.restart = function() {
-        this.stopTimer();
+    function Quiz(element, data) {
+        var $quiz = $(element),
+            paused = false,
+            level = 1,
+            imagesLocation = data.images,
+            questions = data.questions,
+            answers = data.questions[level].answers,
+            totalQuestions = questions.length,
+            score = 0,
 
-        score = 0;
-        level = 1;
+            timerWait = 5, // in seconds
+            timerLength = 5, // in seconds
 
-        $quiz.find('.quiz-finish').hide();
+            $remaining = $quiz.find('.remaining'),
+            $score = $quiz.find('.score span'),
 
-        this.start();
-    };
+            $timer = $('<div/>').addClass('timer').css('display', 'none'),
+            timerID,
+            timeoutWaitID;
 
-    this.init();
-}
 
-(function(exports, overlay, ga, $) {
+        this.init = function() {
+            var self = this;
+
+            // load the intro image
+            var $quizHeader = $quiz.find('.quiz-header-image'),
+                $image = $('<img/>').attr('src', imagesLocation + '/intro.jpg');
+
+            $quizHeader.html($image);
+
+            // Add the timer
+            $quiz.append($timer);
+
+            $quiz.on('click', '.quiz-start .button', function() {
+                self.start();
+            });
+
+            // set up the click events
+            $quiz.on('click', 'li', function(e) {
+                if (!paused)
+                    self.validate(e);
+            });
+        };
+
+        this.start = function() {
+
+            var self = this;
+
+            $quiz.find('.quiz-start').hide();
+            $quiz.find('.status-bar').show();
+            $quiz.find('.quiz-playground').show();
+
+            // Load the level
+            this.loadLevel();
+        };
+
+        this.getCurrentQuestion = function() {
+            return questions[(level - 1)];
+        };
+
+        this.loadLevel = function(l) {
+            // image
+            var self = this,
+                question = this.getCurrentQuestion(),
+                $image = $('<img/>').attr('src', imagesLocation + '/' + question.image),
+                str = '<ul>';
+
+            $quiz.find('.image').html($image);
+
+            // question
+            $quiz.find('.question').html(question.title);
+
+            // answers
+            for (var i = 0; i < question.answers.length; i++) {
+                str += '<li>' + question.answers[i] + '</li>';
+            }
+
+            str += '</ul>';
+
+            $quiz.find('.answers').html(str);
+
+            this.updateScore();
+            this.updateQuestionsRemaining();
+
+            // Wait for timerWait seconds then start a timerLength countdown
+            timeoutWaitID = setTimeout(function() {
+                self.startTimer();
+            }, (timerWait * 1000));
+        };
+
+        this.validate = function(e) {
+            var self = this,
+                question = this.getCurrentQuestion(),
+                correct = false;
+
+            this.stopTimer();
+
+            if ($quiz.find('li').index($(e.currentTarget)) == (question.correct - 1))
+                correct = true;
+
+            if (correct) {
+                paused = true;
+                this.showCorrect($(e.currentTarget));
+                score++;
+                this.updateScore();
+            } else
+                this.showError($(e.currentTarget));
+
+            setTimeout(function() {
+                paused = false;
+                self.stopTimer();
+                self.nextQuestion($(e.currentTarget));
+            }, 2000);
+        };
+
+        this.nextQuestion = function($elm) {
+            level++;
+
+            if (level <= questions.length)
+                this.loadLevel();
+            else
+                this.finishGame();
+        };
+
+        this.showCorrect = function($elm) {
+            $elm.addClass('correct');
+        };
+
+        this.showError = function($elm) {
+            $elm.addClass('wrong');
+        };
+
+        this.revealAnswers = function() {
+            var self = this,
+                question = this.getCurrentQuestion(),
+                count = 1;
+
+            $quiz.find('.answers li').each(function() {
+                if (count == question.correct)
+                    self.showCorrect($(this));
+                else
+                    self.showError($(this));
+
+                count++;
+            });
+        };
+
+        this.updateScore = function() {
+            $score.html(score);
+        };
+
+        this.updateQuestionsRemaining = function() {
+            $remaining.html('<em>' + level + '</em> of <span>' + totalQuestions + '</span>');
+        };
+
+        this.startTimer = function() {
+            var self = this,
+                counter = timerLength;
+
+            this.stopTimer();
+
+            var elm = $quiz.find('.quiz-playground .image'),
+                diff = $quiz.find('.quiz-playground .image').offset().top - $quiz.find('.quiz-playground').offset().top;
+
+            $timer.css({
+                    top: (diff + elm.outerHeight() / 2) - ($timer.height() / 2),
+                    left: (elm.outerWidth() / 2) - ($timer.width() / 2)
+                })
+                .html(counter);
+
+            $timer.fadeIn(100);
+
+            // Every second, count down.
+            timerID = setInterval(function() {
+                if (counter > 1) {
+                    $timer.html(--counter);
+                } else {
+                    $timer.html('<span style="color:red">' + (--counter) + '</span>');
+
+                    paused = true;
+                    self.stopTimer();
+                    self.revealAnswers();
+
+                    setTimeout(function() {
+                        paused = false;
+                        $timer.fadeOut(100);
+                        self.nextQuestion();
+                    }, 2000);
+                }
+            }, 1000);
+        };
+
+        this.stopTimer = function() {
+            clearInterval(timerID);
+            clearTimeout(timeoutWaitID);
+
+            $timer.fadeOut(100);
+        };
+
+
+        this.finishGame = function() {
+            var self = this,
+                $quiz_finish = $quiz.find('.quiz-finish');
+
+            this.stopTimer();
+            $timer.css('display', 'none');
+
+            $quiz_finish.find('.quiz-finish--score').html('<span>' + score + '</span> out of ' + totalQuestions);
+
+            $quiz.find('.quiz-playground').hide();
+            $quiz_finish.show();
+
+            $quiz_finish.on('click', '.play-again', function() {
+                self.restart();
+            });
+        };
+
+        this.restart = function() {
+            this.stopTimer();
+
+            score = 0;
+            level = 1;
+
+            $quiz.find('.quiz-finish').hide();
+
+            this.start();
+        };
+
+        this.init();
+    }
+
+}(Pathways.components, window, Pathways.utils, jQuery));
+
+(function(components, overlay, ga, $) {
+
+    "use strict";
 
     function Modal(elm, data) {
 
@@ -4737,19 +4739,19 @@ function Quiz(element, data) {
                 $overlay = ctrl.$overlay,
                 $img = $(img),
                 $container = $('<div/>').addClass(baseClass + ' ' + hiddenClass),
-                src = $elm.attr('data-image'),
-                caption = $elm.data('caption'),
-                download = $elm.data('download'),
-                gaLabel = ($elm.data('ga') || src) + ' - download',
-                $caption = caption ? $('<p>' + caption + '</p>').addClass('text') : '';
+
+                src = data.image,
+                caption = data.title,
+                download = data.download,
+                gaLabel = ((data.ga) || src) + ' - download',
+                $caption = caption ? $('<p>' + caption + '</p>').addClass('text') : '',
                 $download = download ? $('<a>Download</a>')
                             .attr('href', download).addClass('download')
                             .click(function(){
                                 ga.send(gaLabel);
                             }) : '';
 
-            //console.log('ga', gaTracking);
-            img.src = $elm.attr('data-image');
+            img.src = src;
             $caption.append($download);
 
             $container.on('click', ctrl.closeHandler);
@@ -4763,30 +4765,27 @@ function Quiz(element, data) {
         };
     }
 
-    exports.slidingModal = function(element, data) {
+    components.create('sliding-modal', function(element, data) {
 
         $(element).find('.modal').on('click', function() {
-            // var id = $(this).data('id');
-            // if (!id) return console.warn('No id defined for modal element:' + this);
-            // var mData = data[id];
-            // if (!mData) console.warn('No data defined for modal id \'' + id + '\'');
-            //
-            var modal = new Modal($(this), data);
+            var id = $(this).data('modal');
+            if (!id) return console.warn('No id defined for modal element: ' + this);
+            var mData = data[id];
+            if (!mData) return console.warn('No data defined for modal id \'' + id + '\'');
+            var modal = new Modal($(this), mData);
             modal.init();
         });
-
-    };
-
+    });
 
 
-}(Pathways.components, Pathways.components.core.overlay, Pathways.components.core.ga, jQuery));
+}(Pathways.components, Pathways.components.core.overlay, Pathways.core.ga, jQuery));
 
-(function(w, exports, ga, $) {
+(function(components, w, ga, $) {
 
     var repOpen = 'l3 open library',
         repClose = 'l3 close library';
 
-    exports.toggleSection = function(element, data) {
+    components.create('toggle-section', function(element, data) {
 
         var $element = $(element),
             targetSel = $element.attr('data-toggle-section-target'),
@@ -4820,37 +4819,35 @@ function Quiz(element, data) {
             return false;
         });
 
-    };
+    });
 
-}(window, Pathways.components, Pathways.components.core.ga, jQuery));
+}(Pathways.components, window, Pathways.core.ga, jQuery));
 
-Pathways.components.cropZoom.mesmersSalon = {
-    data: {
-        'rod': {
-            'image': '/pathways/1-mindcraft/1-mesmer/_assets/rod-crop.jpg',
-            'title': '',
-            'text': 'Mesmer ‘magnetised’ rods or wands that could be used to direct the fluid to the afflicted part of the body. He would often play music on a glass harmonica that sent shivers through the patients’ nerves.',
-            'position': 'right'
-        },
-        'woman': {
-            'image': '/pathways/1-mindcraft/1-mesmer/_assets/woman-crop.jpg',
-            'text': 'Patients would form circles, holding hands or grasping cords, to transfer the healing energies between them. Sometimes these healing circles would climax in mass convulsions.',
-            'position': 'left'
-        },
-        'mesmer': {
-            'image': '/pathways/1-mindcraft/1-mesmer/_assets/mesmer-crop.jpg',
-            'text': 'Mesmer, depicted here with his wand, taught his healing skills to initiates. They were obliged to take a strict vow of secrecy and pay the large sum of 100 livres. Many French aristocrats signed up.',
-            'position': 'left'
-        }
+Pathways.components.get('crop-zoom').addData('mesmers-salon', {
+    'rod': {
+        'image': '/pathways/1-mindcraft/1-mesmer/_assets/rod-crop.jpg',
+        'title': '',
+        'text': 'Mesmer ‘magnetised’ rods or wands that could be used to direct the fluid to the afflicted part of the body. He would often play music on a glass harmonica that sent shivers through the patients’ nerves.',
+        'position': 'right'
+    },
+    'woman': {
+        'image': '/pathways/1-mindcraft/1-mesmer/_assets/woman-crop.jpg',
+        'text': 'Patients would form circles, holding hands or grasping cords, to transfer the healing energies between them. Sometimes these healing circles would climax in mass convulsions.',
+        'position': 'left'
+    },
+    'mesmer': {
+        'image': '/pathways/1-mindcraft/1-mesmer/_assets/mesmer-crop.jpg',
+        'text': 'Mesmer, depicted here with his wand, taught his healing skills to initiates. They were obliged to take a strict vow of secrecy and pay the large sum of 100 livres. Many French aristocrats signed up.',
+        'position': 'left'
     }
-};
+});
 
 // Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('mesmers-salon', function() {
 //     return {
-//         getScenes: function(panelId, panelEl, panelAttrs) {
+//         getScenes: function(panelId, panelEl, panel) {
 //             scene = new ScrollScene({
 //                     triggerElement: panelId,
-//                     duration: Pathways.panelHeight
+//                     duration: panel.getContentDuration
 //                 })
 //                 .on('enter', function(e) {
 //                     console.log('>>enter factory');
@@ -4865,10 +4862,10 @@ Pathways.components.cropZoom.mesmersSalon = {
 // });
 
 // Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('mesmers-salon', {
-//     getScenes: function(panelId, panelEl, panelAttrs) {
+//     getScenes: function(panelId, panelEl, panel) {
 //         scene = new ScrollScene({
 //                 triggerElement: panelId,
-//                 duration: Pathways.panelHeight
+//                 duration: panel.getContentDuration
 //             })
 //             .on('enter', function(e) {
 //                 console.log('>>enter object');
@@ -4883,10 +4880,10 @@ Pathways.components.cropZoom.mesmersSalon = {
 // });
 
 // Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('mesmers-salon',
-//     function(panelId, panelEl, panelAttrs) {
+//     function(panelId, panelEl, panel) {
 //         scene = new ScrollScene({
 //                 triggerElement: panelId,
-//                 duration: Pathways.panelHeight
+//                 duration: panel.getContentDuration
 //             })
 //             .on('enter', function(e) {
 //                 console.log('>>enter method');
@@ -4900,34 +4897,31 @@ Pathways.components.cropZoom.mesmersSalon = {
 
 // );
 
-
-Pathways.components.gallery.toolsOfMesmerism = {
-    data: {
-        location: '_assets/galleries/tools-of-mesmerism/',
-        images: [{
-            image: 'V0016530',
-            text: '1/7: The tub, or baquet, was central to Mesmer’s treatments.'
-        }, {
-            image: 'L0023349',
-            text: '2/7: Mesmer magnetised objects such as these to treat his patients.'
-        }, {
-            image: 'L0023350',
-            text: '3/7: The different shaped items conducted the superfine fluid he saw as present in all living things.'
-        }, {
-            image: 'L0023351',
-            text: '4/7: By controlling the fluid to bring a patient to a crisis point, Mesmer would ‘cure’ them.'
-        }, {
-            image: 'L0023352',
-            text: '5/7: Magnetised objects showing their magnetic fields.'
-        }, {
-            image: 'M0006352',
-            text: '6/7: Mesmer’s assistants blew a whistle to indicate which social class of baquet they should go to.'
-        }, {
-            image: 'V0011096',
-            text: '7/7: Another baquet and a description of how Animal Magnetism works.'
-        }, ]
-    }
-};
+Pathways.components.get('gallery').addData('tools-of-mesmerism', {
+    location: '_assets/galleries/tools-of-mesmerism/',
+    images: [{
+        image: 'V0016530',
+        text: '1/7: The tub, or baquet, was central to Mesmer’s treatments.'
+    }, {
+        image: 'L0023349',
+        text: '2/7: Mesmer magnetised objects such as these to treat his patients.'
+    }, {
+        image: 'L0023350',
+        text: '3/7: The different shaped items conducted the superfine fluid he saw as present in all living things.'
+    }, {
+        image: 'L0023351',
+        text: '4/7: By controlling the fluid to bring a patient to a crisis point, Mesmer would ‘cure’ them.'
+    }, {
+        image: 'L0023352',
+        text: '5/7: Magnetised objects showing their magnetic fields.'
+    }, {
+        image: 'M0006352',
+        text: '6/7: Mesmer’s assistants blew a whistle to indicate which social class of baquet they should go to.'
+    }, {
+        image: 'V0011096',
+        text: '7/7: Another baquet and a description of how Animal Magnetism works.'
+    }, ]
+});
 
 var createjs = createjs || {},
 
@@ -5412,122 +5406,97 @@ var createjs = createjs || {},
 
 Pathways.animation.addAnimation('magnetisedTrees', magnetisedTrees);
 
-Pathways.components.gallery.aldinisExperiments = {
-    data: {
-        location: '_assets/galleries/aldinis-experiments/',
-        images: [{
-            image: 'L0001964',
-            text: '1/11: Animal electricity produced on frog legs.'
-        }, {
-            image: 'L0011096',
-            text: '2/11: Galvanism experiments on people&hellip;'
-        }, {
-            image: 'L0023892',
-            text: '3/11: &hellip;and animals.'
-        }, {
-            image: 'L0023893',
-            text: '4/11: And animals’ heads.'
-        }, {
-            image: 'L0023894',
-            text: '5/11: Human dissection without heads&hellip;'
-        }, {
-            image: 'L0023895',
-            text: '6/11: &hellip;and with.'
-        }, {
-            image: 'L0023897',
-            text: '7/11: Galvanism experiment with dog.'
-        }, {
-            image: 'L0023898',
-            text: '8/11: More frogs’ legs.'
-        }, {
-            image: 'L0023899',
-            text: '9/11: Galvanic apparatus.'
-        }, {
-            image: 'L0029687',
-            text: '10/11: Frogs’ legs experiment - how to. Part I'
-        }, {
-            image: 'L0029689',
-            text: '11/11: Frogs’ legs experiment - how to. Part II'
-        }, ]
-    }
-};
-
-Pathways.components.gallery.hypnotisedWomen = {
-    data: {
-        location: '_assets/galleries/hypnotised-women/',
-        images: [{
-            image: 'L0000476',
-            text: '1/6: Most images of mesmerism and hypnotism show men treating women in manipulative or exploitative ways.'
-        }, {
-            image: 'L0034228',
-            text: '2/6: A corrupt old man tries to seduce a woman by urging her to take a hypnotic draught.'
-        }, {
-            image: 'L0034922',
-            text: '3/6: A mesmeric physician taking advantage of his female patient.'
-        }, {
-            image: 'V0006760',
-            text: '4/6: Jean-Martin Charcot demonstrates hysteria in a hypnotised subject at the Salpêtrière hospital in Paris, 1888.'
-        }, {
-            image: 'V0011793',
-            text: '5/6: An exotic doctor magnetises a young woman; her husband looks on.'
-        }, {
-            image: 'V0016621',
-            text: '6/6: A female patient being hypnotised in front of a group of four men.'
-        }, ]
-    }
-};
-
-Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('gonad-man', function(panelId, panelEl, panelAttrs) {
-    var $panel = $(panelEl);
-
-    var scene1 = new ScrollScene({
-            triggerElement: $panel,
-            triggerHook: 'top',
-            duration: function() {
-                return $panel.outerHeight();
-            }
-        })
-        .on('enter', function() {
-            $panel.addClass('current-scroll-panel');
-        }).on('leave', function() {
-            $panel.removeClass('current-scroll-panel');
-        });
-
-    return scene1;
+Pathways.components.get('gallery').addData('aldinis-experiments', {
+    location: '_assets/galleries/aldinis-experiments/',
+    images: [{
+        image: 'L0001964',
+        text: '1/11: Animal electricity produced on frog legs.'
+    }, {
+        image: 'L0011096',
+        text: '2/11: Galvanism experiments on people&hellip;'
+    }, {
+        image: 'L0023892',
+        text: '3/11: &hellip;and animals.'
+    }, {
+        image: 'L0023893',
+        text: '4/11: And animals’ heads.'
+    }, {
+        image: 'L0023894',
+        text: '5/11: Human dissection without heads&hellip;'
+    }, {
+        image: 'L0023895',
+        text: '6/11: &hellip;and with.'
+    }, {
+        image: 'L0023897',
+        text: '7/11: Galvanism experiment with dog.'
+    }, {
+        image: 'L0023898',
+        text: '8/11: More frogs’ legs.'
+    }, {
+        image: 'L0023899',
+        text: '9/11: Galvanic apparatus.'
+    }, {
+        image: 'L0029687',
+        text: '10/11: Frogs’ legs experiment - how to. Part I'
+    }, {
+        image: 'L0029689',
+        text: '11/11: Frogs’ legs experiment - how to. Part II'
+    }, ]
 });
 
-Pathways.components.quiz.guessTheTumour = {
-    data: {
-        'title': 'The Esdaile Game',
-        'images': '_assets/quizzes/guess-the-tumour',
-        'questions': [{
-            'image': 'q1-300h.jpg',
-            'title': 'How much did this jaw-dropping tumour weigh?',
-            'answers': ['2 pounds', '5 pounds', '10 pounds', '23 pounds'],
-            'correct': 2
-        }, {
-            'image': 'q2-300h.jpg',
-            'title': 'How long did it take Esdaile to remove this whopping 103 pound tumour?',
-            'answers': ['10 seconds', '1 hour', '6 and a half minutes', '6 hours'],
-            'correct': 3
-        }, {
-            'image': 'q3-300h.jpg',
-            'title': 'What was the weight of this extremely uncomfortable-looking tumour?',
-            'answers': ['80 pounds', '40 pounds', '400 pounds', '60 pounds'],
-            'correct': 1
-        }, {
-            'image': 'q4-300h.jpg',
-            'title': 'How much did this tumour weigh before Esdaile got it off the patient’s chest?',
-            'answers': ['10 pounds', '80 pounds', '60 pounds', '40 pounds'],
-            'correct': 1
-        }, {
-            'image': 'q5-300h.jpg',
-            'title': 'This 90 pound tumour was removed by Esdaile without anaesthetic. But how long did it take?',
-            'answers': ['It never was removed', '30 minutes', '9 minutes', '3 minutes'],
-            'correct': 4
-        }, ]
-    }
-};
+Pathways.components.get('gallery').addData('hypnotised-women', {
+    location: '_assets/galleries/hypnotised-women/',
+    images: [{
+        image: 'L0000476',
+        text: '1/6: Most images of mesmerism and hypnotism show men treating women in manipulative or exploitative ways.'
+    }, {
+        image: 'L0034228',
+        text: '2/6: A corrupt old man tries to seduce a woman by urging her to take a hypnotic draught.'
+    }, {
+        image: 'L0034922',
+        text: '3/6: A mesmeric physician taking advantage of his female patient.'
+    }, {
+        image: 'V0006760',
+        text: '4/6: Jean-Martin Charcot demonstrates hysteria in a hypnotised subject at the Salpêtrière hospital in Paris, 1888.'
+    }, {
+        image: 'V0011793',
+        text: '5/6: An exotic doctor magnetises a young woman; her husband looks on.'
+    }, {
+        image: 'V0016621',
+        text: '6/6: A female patient being hypnotised in front of a group of four men.'
+    }, ]
+});
+
+Pathways.components.get('quiz').addData('guess-the-tumour', {
+    'title': 'The Esdaile Game',
+    'images': '_assets/quizzes/guess-the-tumour',
+    'questions': [{
+        'image': 'q1-300h.jpg',
+        'title': 'How much did this jaw-dropping tumour weigh?',
+        'answers': ['2 pounds', '5 pounds', '10 pounds', '23 pounds'],
+        'correct': 2
+    }, {
+        'image': 'q2-300h.jpg',
+        'title': 'How long did it take Esdaile to remove this whopping 103 pound tumour?',
+        'answers': ['10 seconds', '1 hour', '6 and a half minutes', '6 hours'],
+        'correct': 3
+    }, {
+        'image': 'q3-300h.jpg',
+        'title': 'What was the weight of this extremely uncomfortable-looking tumour?',
+        'answers': ['80 pounds', '40 pounds', '400 pounds', '60 pounds'],
+        'correct': 1
+    }, {
+        'image': 'q4-300h.jpg',
+        'title': 'How much did this tumour weigh before Esdaile got it off the patient’s chest?',
+        'answers': ['10 pounds', '80 pounds', '60 pounds', '40 pounds'],
+        'correct': 1
+    }, {
+        'image': 'q5-300h.jpg',
+        'title': 'This 90 pound tumour was removed by Esdaile without anaesthetic. But how long did it take?',
+        'answers': ['It never was removed', '30 minutes', '9 minutes', '3 minutes'],
+        'correct': 4
+    }, ]
+});
 
 Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('india', function() {
     var $panel,
@@ -5553,25 +5522,6 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('india', function() {
             setBoatStyle();
             $(window).on('resize', setBoatStyle);
         },
-        getScenes: function(panelId, panelEl, panelAttrs) {
-            var $panel = $(panelEl),
-                $boats = $boats || $panel.find('.boats');
-
-            var scene1 = new ScrollScene({
-                    triggerElement: $panel,
-                    triggerHook: 'top',
-                    duration: function() {
-                        return $panel.outerHeight();
-                    }
-                })
-                .on('enter', function() {
-                    $panel.addClass('current-scroll-panel');
-                }).on('leave', function() {
-                    $panel.removeClass('current-scroll-panel');
-                });
-
-            return scene1;
-        },
         unload: function() {
             $(window).off('resize', setBoatStyle);
             $boats.removeAttr('style');
@@ -5579,7 +5529,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('india', function() {
     };
 });
 
-Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('anna-o', function(panelId, panelEl, panelAttrs) {
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('anna-o', function(panelId, panelEl, panel) {
    var positions = [
         { x: -57,   y: -107 },
         { x: 79,    y: 32 },
@@ -5606,8 +5556,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('anna-o', function(panelId, 
         var scene = new ScrollScene({
                 triggerElement: panelEl,
                 triggerHook:    'top',
-                duration:       function() { return $panel.height() - 400; },
-                offset:         50,
+                duration:       panel.getComponentDuration,
             })
             .setTween(tween);
 
@@ -5617,63 +5566,114 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('anna-o', function(panelId, 
     return scenes;
 });
 
-Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('office-2', function(panelId, panelEl, panelAttrs) {
-    var $panel = $(panelEl);
+Pathways.components.get('sliding-modal').addData('john-tradescant-sliding-modal-1', {
+    '1.1': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.1-large.jpg',
+        'title': 'Tradescant imported many of his plants from overseas. This common bean, featured in Leonhart Fuchs’ Herbal in the 1540s, was native to the Americas.',
+        'download': 'http://wellcomelibrary.org/actual/b20723143/0/f87d84f4-d665-4102-b90f-7b76c4f70b5d/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.1',
+    },
 
-    var scene1 = new ScrollScene({
-            triggerElement: $panel,
-            triggerHook: 'top',
-            duration: function() {
-                return $panel.outerHeight() - $('.fork').outerHeight();
-            }
-        })
-        .on('enter', function() {
-            $panel.addClass('current-scroll-panel');
-        }).on('leave', function() {
-            $panel.removeClass('current-scroll-panel');
-        });
+    '1.2': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.2-large.jpg',
+        'title': 'The 1656 Musaeum Tradescantianum catalogue lists four types of ivy growing in Tradescant’s South Lambeth garden.',
+        'download': 'http://wellcomelibrary.org/actual/b20723143/0/dd26de48-0556-431a-bffb-abf9885ed89a/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.2',
+    },
 
-    return scene1;
+    '1.3': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.3-large.jpg',
+        'title': 'While Tradescant worked at Lord Robert Cecil’s home, Hatfield House, a cost of £140 was recorded for importing 1200 lime trees from France.',
+        'download': 'http://wellcomelibrary.org/actual/b20723143/0/42e2e4df-a131-4f64-9181-af53ad6ec59b/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.3',
+    },
+
+    '1.4': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.4-large.jpg',
+        'title': 'In a detailed 1610 letter to an agent in Brussels, Tradescant requested the purchase of five different varieties of narcissi for Lord Robert Cecil’s gardens.',
+        'download': 'http://wellcomelibrary.org/actual/b11827786/0/87530b09-1873-4a7e-a68f-3efd00e7690c/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.4',
+    },
+
+    '1.5': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.5-large.jpg',
+        'title': 'The genus of American plants named after Tradescant is commonly known as spiderwort, thanks to the silky strings spun out when its succulent leaves are broken.',
+        'download': 'http://wellcomelibrary.org/actual/b11743074/0/dc6b09a7-462d-4bde-b39e-04cb0d715a99/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.5',
+    },
+
+    '1.6': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.6-large.jpg',
+        'title': 'The Musaeum Tradescantianum catalogue lists four types of allium, or ‘garlick’, growing in Tradescant’s South Lambeth garden.',
+        'download': 'http://wellcomelibrary.org/actual/b20723143/0/e93759be-0cc3-4a3f-90be-57e0005d1059/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.6',
+    }
 });
 
-Pathways.components.slidingModal.johnTradescant = {
-    data: {
-        '1.1': {
-            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.1-large.jpg',
-            'title': 'Smilax Hortensis (kidney bean)',
-            'download': 'http://wellcomelibrary.org/actual/b20723143/0/f87d84f4-d665-4102-b90f-7b76c4f70b5d/jp2?download=true',
-            'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.1',
-            'fx': 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3',
-        },
-        '1.2': {
-            'image': 'data-image="/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.2-large.jpg',
-            'title': 'Hedera Nigra (black ivy)',
-            'download': 'http://wellcomelibrary.org/actual/b20723143/0/dd26de48-0556-431a-bffb-abf9885ed89a/jp2?download=true',
-            'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.2',
-            'fx': 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3',
-        },
-        '1.3': {
-            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.3-large.jpg',
-            'title': 'Tilia Foemina (limetree)"',
-            'download': 'http://wellcomelibrary.org/actual/b20723143/0/42e2e4df-a131-4f64-9181-af53ad6ec59b/jp2?download=true',
-            'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.3',
-            'fx': 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3',
-        },
-        '1.4': {
-            'image': '/pathways/2-the-collectors/_assets/1-curious-gardener/tradescant/full/1.4-large.jpg',
-            'title': 'Daffodils',
-            'download': 'http://wellcomelibrary.org/actual/b11827786/0/87530b09-1873-4a7e-a68f-3efd00e7690c/jp2?download=true',
-            'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.4',
-            'fx': 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3',
-        },
+Pathways.components.get('sliding-modal').addData('john-tradescant-sliding-modal-2', {
+    '2.1': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.1-large.jpg',
+        'title': 'A German traveller who visited Tradescant’s Rarities in 1638 listed ‘a number of things changed into stone’ among the many items on display.',
+        'download': 'http://wellcomelibrary.org/actual/b21369987/0/0125d103-23e3-4d40-a8bc-875504bb0ffa/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.1',
+    },
+
+    '2.2': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.2-large.jpg',
+        'title': 'In the 1630s, Tradescant’s Rarities were said to include the hand of a mermaid and the hand of a mummy.',
+        'download': 'http://wellcomelibrary.org/actual/b11665014/0/7e20299d-2205-4c56-aa8e-1275dd6443d6/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.2',
+    },
+
+    '2.3': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.3-large.jpg',
+        'title': 'According to the Musaeum Tradescantianum catalogue, the Rarities included an ‘Alegator or Crocodile, from Aegpt’, ‘cloven and hairy-tongued lizards’, eight sorts of snakes and ‘a natural Dragon’.',
+        'download': 'http://wellcomelibrary.org/actual/b11999597/0/b3a7da8d-a6d0-401c-8a88-aab4a7ac05dc/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.3',
+    },
+
+    '2.4': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.4-large.jpg',
+        'title': 'The introduction to Musaeum Tradescantianum describes insects (in which arachnids like scorpions and spiders were included) as unfamiliar rarities, ‘as yet unfitted with apt English termes’.',
+        'download': 'http://wellcomelibrary.org/actual/b12003694/0/569fc026-c66b-4fd4-9b00-99ea1f83debd/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.4',
+    },
+
+    '2.5': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.5-large.jpg',
+        'title': 'The ‘Utensils’ section of the Musaeum Tradescantianum catalogue includes a cup made from a unicorn horn.',
+        'download': 'http://wellcomelibrary.org/actual/b21369999/0/447a33ce-0964-45b4-a490-9866e6b9d38f/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.5',
+    },
+
+    '2.6': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.6-large.jpg',
+        'title': 'In a section entitled ‘Whole Birds’, the Musaeum Tradescantianum catalogue lists a ‘Dodar’ from the island of Mauritius, which ‘is not able to flie being so big’.',
+        'download': 'http://wellcomelibrary.org/actual/b2137000x/0/a71c07d6-eaca-40af-8dcb-d3bb234c178a/jp2?download=true',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.6',
     }
-};
+});
+
+
+Pathways.components.get('sliding-modal').addData('john-tradescant-sliding-modal-3', {
+    '3.1': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/3.1-large.jpg',
+        'title': 'This is the only surviving example of five garments owned by Tradescant that were thought to have been produced by the Algonquin Indians of Virginia. © Ashmolean Museum, University of Oxford.',
+        'ga': ' the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 3.1',
+    },
+
+    '3.2': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/3.2-large.jpg',
+        'title': 'In 1635, King Charles I instructed the keeper of the Hampton Court Wardrobe to deliver a number of items to Tradescant including King Henry VIII’s hawking hood. © Ashmolean Museum, University of Oxford.',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 3.2',
+    }
+});
 
 Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', function() {
 
     var $clip,
         $pence,
-        startY,
+        startY = window.scrollY;
         ratio = 1900 / 1050;
 
     // Keep the clipping mask the correct height in relation to the 'cover' background
@@ -5698,11 +5698,11 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
     }
 
     return {
-        load: function(panelId, panelEl, panelAttrs) {
+        load: function(panelId, panelEl, panel) {
             $clip = $(panelEl).find('.clip');
             $pence = $(panelEl).find('.pence');
         },
-        getScenes: function(panelId, panelEl, panelAttrs) {
+        getScenes: function(panelId, panelEl, panel) {
             var $panel = $(panelEl),
                 startY,
                 coinBoxFx = new Audio('http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-coin-into-box.mp3'),
@@ -5713,17 +5713,17 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
             scenes.push(new ScrollScene({
                     triggerElement: panelEl,
                     triggerHook: 'top',
-                    duration: Pathways.panelHeight,
+                    duration: panel.getContentDuration,
                 })
                 .on('enter', function(e) {
-                    doResize();
-                    window.addEventListener('resize', doResize);
 
                     if (e.scrollDirection == 'FORWARD') {
                         startY = window.scrollY;
                     } else {
-                        startY = window.scrollY - (Pathways.panelHeight - 100);
+                        startY = window.scrollY - (Pathways.viewportHeight - 100);
                     }
+                    doResize();
+                    window.addEventListener('resize', doResize);
                 })
                 .on('progress', function(e) {
                     $pence.css('transform', 'translate(0, ' + (window.scrollY - startY) + 'px)');
@@ -5743,100 +5743,53 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollFactory('duke-of-buckingham', funct
 
             scenes.push(new ScrollScene({
                     triggerElement: $pence,
-                    triggerHook: 'bottom',
-                    offset: 20
+                    triggerHook: 0.88,
+                    offset: 100
                 })
-                .on('start', function(e) {
-                    if (e.scrollDirection == 'FORWARD') {
-                        // console.log('coin on page');
-                        Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
-                    }
+                .on('enter', function(e) {
+                    Pathways.media.ctrl.playMediaOnFxChannel(coinOnPage);
                 }));
 
             return scenes;
         },
-        unload: function(panelId, panelEl, panelAttrs) {
-            window.removeEventListener('resize', resizeClip);
+        unload: function(panelId, panelEl, panel) {
+            window.removeEventListener('resize', doResize);
         }
     };
 });
 
-
-Pathways.components.cropZoom.uniqueArtifacts = {
-    data: {
-        'croc': {
-            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/crocodile.jpg',
-            'title': '',
-            'text': 'Tradescant was attracted by large or exotic items. His requests to British ships included pleas for ‘the biggest that canbe gotten’ and ‘any thing that is strang’.',
-            'position': 'right'
-        },
-        'person': {
-            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/people.jpg',
-            'text': 'Royal apothecary John Parkinson described his friend, and self-made man, John Tradescant as ‘that worthy, curious, and diligent searcher and preserver of all natures rarities and varieties’.',
-            'position': 'left'
-        },
-        'bird': {
-            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/birds.jpg',
-            'text': 'One of Tradescant’s earliest documented collecting experiences occurred on a 16-week sea voyage to the Russian city of Archangel. When a strange bird, ‘whose like I yet never sawe’, flew onto the ship’s deck, it was caught and given to Tradescant.',
-            'position': 'right'
-        },
-        'cabinet': {
-            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/cabinet.jpg',
-            'text': 'Tradescant’s rarities were ultimately acquired, in disputed circumstances, by the lawyer and alchemist Elias Ashmole. Ashmole later left the collection to the University of Oxford, where it formed the basis of the Ashmolean Museum.',
-            'position': 'right'
-        },
-        'books': {
-            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/books.jpg',
-            'text': 'New World explorer John Smith bequeathed half his library of books to Tradescant.',
-            'position': 'left'
-        },
-        'window': {
-            'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/window.jpg',
-            'text': 'After establishing what would become Britain’s first museum, Tradescant clocked up another first. He became the initial Keeper of the Oxford Physic Garden, England’s first botanic garden.',
-            'position': 'left'
-        }
+Pathways.components.get('crop-zoom').addData('unique-artifacts', {
+    'croc': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/crocodile.jpg',
+        'title': '',
+        'text': 'Tradescant was attracted by large or exotic items. His requests to British ships included pleas for ‘the biggest that canbe gotten’ and ‘any thing that is strang’.',
+        'position': 'right'
+    },
+    'person': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/people.jpg',
+        'text': 'Royal apothecary John Parkinson described his friend, and self-made man, John Tradescant as ‘that worthy, curious, and diligent searcher and preserver of all natures rarities and varieties’.',
+        'position': 'left'
+    },
+    'bird': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/birds.jpg',
+        'text': 'One of Tradescant’s earliest documented collecting experiences occurred on a 16-week sea voyage to the Russian city of Archangel. When a strange bird, ‘whose like I yet never sawe’, flew onto the ship’s deck, it was caught and given to Tradescant.',
+        'position': 'right'
+    },
+    'cabinet': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/cabinet.jpg',
+        'text': 'Tradescant’s rarities were ultimately acquired, in disputed circumstances, by the lawyer and alchemist Elias Ashmole. Ashmole later left the collection to the University of Oxford, where it formed the basis of the Ashmolean Museum.',
+        'position': 'right'
+    },
+    'books': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/books.jpg',
+        'text': 'New World explorer John Smith bequeathed half his library of books to Tradescant.',
+        'position': 'left'
+    },
+    'window': {
+        'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/window.jpg',
+        'text': 'After establishing what would become Britain’s first museum, Tradescant clocked up another first. He became the initial Keeper of the Oxford Physic Garden, England’s first botanic garden.',
+        'position': 'left'
     }
-};
-
-Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('graunt-records', function(panelId, panelEl, panelAttrs) {
-    var $panel = $(panelEl);
-
-    var scene = new ScrollScene({
-            triggerElement: panelEl,
-            triggerHook: 'top',
-            duration: Pathways.panelHeight,
-        })
-        .on('enter', function() {
-            $panel.addClass('current-scroll-panel');
-        }).on('leave', function() {
-            $panel.removeClass('current-scroll-panel');
-        });
-
-    return scene;
-
-});
-
-Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('death-infographic', function(panelId, panelEl, panelAttrs) {
-    var $panel = $(panelEl),
-        $infoBox = $panel.find('.info-box'),
-        $inputContainer = $panel.find('.input-container');
-    //console.log(infoBox, inputContainer);
-
-
-    var scene = new ScrollScene({
-            triggerElement: panelEl,
-            duration: Pathways.panelHeight
-        })
-        .on('enter', function() {
-            $panel.addClass('current-scroll-panel');
-        }).on('leave', function() {
-            $panel.removeClass('current-scroll-panel');
-            if ($infoBox.css('display') === 'block') {
-                $infoBox.css('display', 'none');
-            }
-        });
-
-    return scene;
 
 });
 
@@ -8454,9 +8407,13 @@ TheCollectors.Interface = function() {
                 return 30;
             }
         }).attr('class', 'label').attr('transform', function(d, i) {
-            labelWidth[i] = $(this)[0].getBBox().width;
-            if (i > DATA.length / 2 - 1) {
-                return ' rotate(180,' + labelWidth[i] / 2 + ',' + 0 + ')';
+            try { // Not sure why but this throws NS_ERROR_FAILURE in Firefox
+                labelWidth[i] = $(this)[0].getBBox().width;
+                if (i > DATA.length / 2 - 1) {
+                    return ' rotate(180,' + labelWidth[i] / 2 + ',' + 0 + ')';
+                }
+            } catch (e) {
+                console.log(e);
             }
         });
         vizBody.selectAll('.value-label-holders').remove();
@@ -8747,407 +8704,556 @@ TheCollectors.Interface = function() {
     return self;
 }();
 
-Pathways.components.infiniteCanvas.wellcomeCollection = {
-    data: {
-        gaRoot: 'the-collectors - unceasing-seeker - l2 infinite-canvas open image',
-        location: '_assets/infinite-canvas/infiniteCanvas_',
-        images: [{
-            id: 'L0011600a',
-            pos: [1220, 35],
-            text: 'When Professor Max Neuberger assessed the state of the Wellcome Library after Wellcome’s death, he found the contents bewilderingly eclectic.'
-        }, {
-            id: 'L0011599a',
-            pos: [1648, 35],
-            text: 'Before Wellcome’s collection was dispersed after his death, it contained more than a million items, many of them stored in warehouses around London.'
-        }, {
-            id: 'L0006437a',
-            pos: [2075, 35],
-            text: 'A nineteenth-century Persian watercolour of an annotated skeleton.'
-        }, {
-            id: 'L0058576a',
-            pos: [2397, 35],
-            text: 'Wellcome’s collecting collaborator C J S Thompson bought pestles and mortars on at least 80 different occasions. When the Wellcome Historical Medical Museum opened, more than 700 mortars were on display.'
-        }, {
-            id: 'L0058329',
-            pos: [4083, 37],
-            text: 'Ceramics, like these eighteenth-century Italian vases, provided inspiration for dressing Burroughs Wellcome & Co. trade exhibits.'
-        }, {
-            id: 'L0065696a',
-            pos: [3235, 38],
-            text: 'A sample of body snatcher William Burke’s brain, extracted from his cadaver after his execution in 1829. Wellcome Images/Science Museum'
-        }, {
-            id: 'L0057218a',
-            pos: [66, 52],
-            text: 'Wellcome acquired several mummified bodies, including this Egyptian head from the first or second millennium BCE. Wellcome Images/Science Museum'
-        }, {
-            id: 'L0023265a',
-            pos: [6704, 54],
-            text: 'A corpulent king who hoped leeches would suck out his excess fat, from the sixteenth-century manuscript Histoires Prodigieuses.'
-        }, {
-            id: 'L0057148a',
-            pos: [5455, 68],
-            text: 'A nineteenth-century pewter box for transporting leeches used in bloodletting.'
-        }, {
-            id: 'L0015581a',
-            pos: [773, 113],
-            text: 'Wellcome acquired or commissioned numerous paintings depicting the work of apothecaries, physicians and surgeons, like this bloodletting scene by Matthijs Naiveu.'
-        }, {
-            id: 'L0039443a',
-            pos: [7418, 163],
-            text: 'Painting of a duck from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh of ducks replenishes qi and treats weakness of the blood and physical frailty.'
-        }, {
-            id: 'L0011597a',
-            pos: [2765, 165],
-            text: 'The Wellcome Library stores at Enfield. In 1930 one of the Library’s staff likened disturbing ‘the dust of years’ on boxes of books that had never been unpacked to the explorations of a new world by ‘stout Cortez’.'
-        }, {
-            id: 'L0057653a',
-            pos: [3704, 231],
-            text: 'Seventeenth-century brass weights for weighing sheep’s wool, a valuable commodity at the time. Wellcome Images/Science Museum'
-        }, {
-            id: 'V0021599a',
-            pos: [5913, 275],
-            text: 'Engraving of a narwhal and a sperm whale. Powdered narwhal tusks were thought to act as an antidote against arsenic or mercury poisoning.'
-        }, {
-            id: 'L0057750a',
-            pos: [4836, 294],
-            text: 'Wellcome purchased this antelope horn at auction in 1932. It was said to have been used in Nigeria, to heal and protect against disease. Wellcome Images/Science Museum'
-        }, {
-            id: 'M0015033a',
-            pos: [1220, 366],
-            text: 'A paleolithic flint hand axe found in the City of London in 1690 by apothecary, archaeologist and collector of antiquities John Conyrs. Wellcome attributed the start of his own collecting life to his discovery of a sharpened flint in Wisconsin when he was aged just four.'
-        }, {
-            id: 'L0058357a',
-            pos: [6704, 446],
-            text: 'Snake-like storage jars used in a pharmacy. Like much of Wellcome’s collection, the provenance and practical use of these jars was never recorded. Wellcome Images/Science Museum'
-        }, {
-            id: 'L0022370a',
-            pos: [773, 486],
-            text: 'Wellcome’s interest in collecting letters centred more around who they were written by than what they were about. This 1823 missive from Mary Anning, however, happens to include the first sketch of a plesiosaurus.'
-        }, {
-            id: 'L0012386a',
-            pos: [3387, 511],
-            text: 'Sixteenth and seventeenth-century surgical instruments, including dental forceps, a trepanning drill, a bullet extractor and a surgical saw.'
-        }, {
-            id: 'L0013467a',
-            pos: [2765, 512],
-            text: 'A fifteenth-century ‘wound man’ illustration, documenting common injuries to the human body.'
-        }, {
-            id: 'L0032229',
-            pos: [4083, 546],
-            text: 'The Burroughs Wellcome & Co. 1911 ‘Book of Beauty’, featuring the head of Venus.'
-        }, {
-            id: 'L0031259a',
-            pos: [2311, 575],
-            text: 'A sixteenth-century fragment of Arabic poetry mounted as a wall decoration.'
-        }, {
-            id: 'L0036897a',
-            pos: [2098, 576],
-            text: 'Jars full of seeds and roots.'
-        }, {
-            id: 'M0009391a',
-            pos: [66, 670],
-            text: 'Ancient Hindu forceps resembling the mouths of animals, including the ‘lion’, ‘wolf’, ‘curlew’, ‘heron’ and ‘tiger’.'
-        }, {
-            id: 'V0035815',
-            pos: [4811, 758],
-            text: 'Greek and Roman gods and goddesses, like this muscular Mercury, appeared in Burroughs Wellcome & Co.’s advertising materials.'
-        }, {
-            id: 'V0022070a',
-            pos: [5359, 758],
-            text: 'Etching of a spotted eel. Eeels have been used as a restorative for consumptives. Their fat has also been used to treat deaf ears, smallpox spots and piles.'
-        }, {
-            id: 'L0072171',
-            pos: [3387, 790],
-            text: 'Images of classical vases and urns, like the one depicted in this eighteenth-century etching by Giovanni Piranesi, provided inspiration for Burroughs Wellcome & Co.’s advertising materials.'
-        }, {
-            id: 'L0033345a',
-            pos: [2094, 870],
-            text: 'The impressive physique of 21-year-old Eugen Sandow, who became a celebrity after winning a competition to find the strongest man in the world.'
-        }, {
-            id: 'M0019473a',
-            pos: [6704, 930],
-            text: 'Catgut ligatures soaked in carbolic oil by Joseph Lister to prevent infection when used to tie off arteries in surgery. Despite its name, catgut is usually sourced from sheep.'
-        }, {
-            id: 'M0016570a',
-            pos: [773, 1078],
-            text: 'Anthropomorphic Peruvian vases in the form of blind figures.'
-        }, {
-            id: 'L0032232',
-            pos: [4083, 1271],
-            text: 'A late nineteenth-century Burroughs Wellcome & Co. price list, featuring Hippocrates, Mercury and other classical references.'
-        }, {
-            id: 'L0025709a',
-            pos: [228, 1300],
-            text: 'A nineteenth-century Japanese illustration depicting the removal of a breast cancer tumour under general anaesthetic.'
-        }, {
-            id: 'L0032222',
-            pos: [2765, 1372],
-            text: 'A Burroughs Wellcome & Co. 1906 booklet on anaesthesia.'
-        }, {
-            id: 'L0057155a',
-            pos: [5902, 1414],
-            text: 'An eighteenth-century Italian jar for storing spermaceti, a waxy substance obtained from the head of a sperm whale, used in medicinal ointments and moisturisers. Wellcome Images/Science Museum'
-        }, {
-            id: 'M0012576a',
-            pos: [6192, 1414],
-            text: 'Spider illustration from a sixteenth century ‘Materia Medica’ text.'
-        }, {
-            id: 'L0058457a',
-            pos: [6927, 1414],
-            text: 'Sixteenth- or seventeenth-century bezoar stones that were dropped into drinks to protect against poisons. Bezoars are concretions of indigestible materials found in the stomachs and intestines of animals and humans. Wellcome Images/Science Museum'
-        }, {
-            id: 'L0039446a',
-            pos: [7420, 1414],
-            text: 'Painting of a crane from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh of cranes treats parasitic worms and fish poisons.'
-        }, {
-            id: 'L0025988a',
-            pos: [1266, 1527],
-            text: 'A fifteenth-century Persian manuscript showing the position of the heavens at the moment of Prince Iskandar’s birth.'
-        }, {
-            id: 'M0013911a',
-            pos: [1636, 1527],
-            text: 'Spears, clubs, shields and arrows from Wellcome’s collection laid out at the British Museum in 1955 before being dispersed to other museums. His collection of non-mechanical weapons was thought to contain at least 50 000 objects.'
-        }, {
-            id: 'V0031371a',
-            pos: [805, 1608],
-            text: 'A seventeenth-century Italian pharmacy reconstructed in the Wellcome Historical Medical Museum.'
-        }, {
-            id: 'L0027577',
-            pos: [4809, 1628],
-            text: 'Auction catalogue for William Morris’s library, including Wellcome’s notes on individual sale items.'
-        }, {
-            id: 'L0057380a',
-            pos: [5230, 1659],
-            text: 'Mole paws that may have been carried to protect against toothache or cramp. Part of Edward Lovett’s collection – largely purchased from London’s costermongers and dock workers – which was acquired by Wellcome in 1930.'
-        }, {
-            id: 'M0018240a',
-            pos: [6927, 1746],
-            text: 'Bear’s grease labels from pharmacy jars, promoting its use for ‘beautifying and strengthening’ the hair.'
-        }, {
-            id: 'L0024843a',
-            pos: [1265, 1816],
-            text: 'A photographic album documenting plastic surgery at London’s King George Military Hospital. Part of the RAMC Muniment Collection in the care of the Wellcome Library.'
-        }, {
-            id: 'V0029805a',
-            pos: [1995, 1816],
-            text: 'A potential hunting ground for Wellcome or his agents, a Parisian sale of artefacts from an old apothecary’s shop.'
-        }, {
-            id: 'L0025821',
-            pos: [4324, 1816],
-            text: '‘Kepler’ Solution was Burroughs Wellcome & Co.’s brand of cod liver oil. One set of advertisements for the product was based on the ancient history of Greece.'
-        }, {
-            id: 'L0039442a',
-            pos: [5902, 1845],
-            text: 'Silk painting of an owl from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh of owls relieves ague, dispels wind and calms fright.'
-        }, {
-            id: 'L0057178a',
-            pos: [6286, 1845],
-            text: 'A nineteenth-century English jar for storing leeches. Wellcome Images/Science Museum'
-        }, {
-            id: 'L0039453a',
-            pos: [6668, 1846],
-            text: 'Painting of pigeons from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh of pigeons dispels wind, removes poisons and promotes the healing of wounds.'
-        }, {
-            id: 'L0006591a',
-            pos: [1629, 1852],
-            text: 'Wellcome collected examples of everyday pharmaceutical practices, which would have been sold in shops like this 1897 pharmacy.'
-        }, {
-            id: 'L0058984a',
-            pos: [7420, 1903],
-            text: 'A necklace made from snake bones, worn to protect against back pain. Part of Edward Lovett’s collection of amulets and charms, purchased by Wellcome in 1930. Wellcome Images/Science Museum'
-        }, {
-            id: 'L0036438a',
-            pos: [805, 1998],
-            text: 'Manuscripts and boxes from the archive of the Wellcome Historical Medical Museum. Wellcome’s personal archive alone amounted to 700 archive boxes and 6500 individual items.'
-        }, {
-            id: 'L0039441a',
-            pos: [5406, 2101],
-            text: 'Silk painting of a peacock from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh and blood of peacocks treats poisoning, ulcers and abscesses.'
-        }, {
-            id: 'L0057151a',
-            pos: [6286, 2101],
-            text: 'Sixteenth-century Italian jars for storing horse fat (left) and badger fat (right). Badger fat (or grasso di tasso) was believed to heal broken bones and muscles. It was also used to treat fevers and inflammation. Wellcome Images/Science Museum'
-        }, {
-            id: 'L0057156a',
-            pos: [6927, 2114],
-            text: 'An eighteenth-century Italian jar for storing oil of eathworms, a pain reliever used in the treatment of arthritis, rickets and cramp. Wellcome Images/Science Museum'
-        }, {
-            id: 'L0018916a',
-            pos: [1265, 2126],
-            text: 'The dusty remains of the decayed clinical records of gynaecological operations at Guy’s Hospital in 1909–12.'
-        }, {
-            id: 'V0006204a',
-            pos: [315, 2135],
-            text: 'A 1900 caricature from Chemist and Druggist depicting Wellcome as ‘a very compact and fascinating bird’ that feeds on tabloids, prefers warmer climes to London and is ‘very fond of large pumpkins’.'
-        }, {
-            id: 'L0034055',
-            pos: [4984, 2178],
-            text: 'A Burroughs Wellcome & Co. window display in Argentina. Wellcome’s approach to window dressing crammed as many products into the space as possible, making full use of the available height.'
-        }, {
-            id: 'L0057197',
-            pos: [4226, 2212],
-            text: 'Wellcome sent tins, cases, bottles and tubes to his company engineers, with detailed instructions of how to apply their designs. This nineteenth-century brass tobacco box may only be opened by solving a puzzle. Wellcome Images/Science Museum'
-        }, {
-            id: 'L0021967a',
-            pos: [5902, 2371],
-            text: 'A reconstruction of a traditional Arabic pharmacy in the Wellcome Historical Medical Museum.'
-        }, {
-            id: 'M0009572a',
-            pos: [6414, 2371],
-            text: 'The Hall of Primitive Medicine in the Wellcome Building on Euston Road, 1946.'
-        }, {
-            id: 'V0029806a',
-            pos: [805, 2388],
-            text: 'A possible source of Italian pharmacy jars.'
-        }, {
-            id: 'V0049059a',
-            pos: [1729, 2389],
-            text: 'Wellcome’s agents travelled to auctions like this French art sale under assumed names, for fear of sellers increasing the prices in their honour. Wellcome himself sometimes went under the name of Wilkins or Wilton.'
-        }, {
-            id: 'V0017599a',
-            pos: [2164, 2389],
-            text: 'After Wellcome married 21-year-old Syrie Barnardo, her life became ‘one constant round’ of visits to bazaars like this, as well as ‘old pharmacies, bookshops, dealers in antiquities and owners of private collections’.'
-        }, {
-            id: 'V0035823',
-            pos: [2875, 2389],
-            text: 'Greek and Roman gods and goddesses, like the Venus de’ Medici, appeared in Burroughs Wellcome & Co.’s advertising materials.'
-        }, {
-            id: 'V0031394a',
-            pos: [7420, 2451],
-            text: 'Wellcome (second from right) and the architect Septimus Warwick (second from left) inspecting stonework for the Wellcome Building on Euston Road, 1931.'
-        }, {
-            id: 'L0025888',
-            pos: [4982, 2455],
-            text: 'Snow duck illustration from an eighteenth-century Danish book acquired from William Morris’s library.'
-        }, {
-            id: 'L0017214',
-            pos: [3387, 2480],
-            text: 'Like Wellcome, the founder of Sequah, Yorkshireman William Hartley was a savvy salesman and showman. Hartley dressed himself, his staff and his medicines up as if they hailed from the American Wild West.'
-        }, {
-            id: 'L0049007',
-            pos: [3707, 2480],
-            text: 'Images of classical sculptures, like this statue of Laocoön and his sons, provided source material for Burroughs Wellcome & Co.’s advertising materials.'
-        }, {
-            id: 'M0004497a',
-            pos: [6414, 2692],
-            text: 'The Hall of Statuary stairs in the Wellcome Building on Euston Road.'
-        }, {
-            id: 'L0032227',
-            pos: [4226, 2726],
-            text: 'A Burroughs Wellcome & Co. 1906 price list.'
-        }, {
-            id: 'L0017734',
-            pos: [4674, 2726],
-            text: 'Burroughs Wellcome & Co.’s 1895 price list, incorporating images of coins and the company’s Snow Hill headquarters.'
-        }, {
-            id: 'M0004494a',
-            pos: [5406, 2741],
-            text: 'The Hall of Statuary in the Wellcome Building on Euston Road.'
-        }, {
-            id: 'M0020280a',
-            pos: [6927, 2876],
-            text: 'Portraits and paintings in the Wellcome Historical Medical Museum on Portman Street, 1947–54. Today, the Wellcome Library contains over 100 000 pictures.'
-        }, {
-            id: 'L002897a',
-            pos: [2164, 2914],
-            text: 'Wellcome’s agents travelled to auctions like this French art sale under assumed names, for fear of sellers increasing the prices in their honour. Wellcome himself sometimes went under the name of Wilkins or Wilton.'
-        }, {
-            id: 'L0021542a',
-            pos: [2571, 2914],
-            text: 'The Silk Mercers bazaar in Cairo, c.1848. After Wellcome visited Egpyt and the Sudan in 1901, he shipped 44 trunks and cases back from Cairo, many of them containing African curiosities.'
-        }, {
-            id: 'M0008536a',
-            pos: [147, 2944],
-            text: 'Wellcome snapped this photograph of his interpreter in his car while on tour in Europe in 1908.'
-        }, {
-            id: 'L0021424',
-            pos: [1801, 2944],
-            text: 'A sketch of alchemical equipment that had been offered for sale to one of Wellcome’s agents in Rome.'
-        }, {
-            id: 'M0007861',
-            pos: [4991, 2997],
-            text: 'Henry Wellcome in his early 30s, dressed as a warrior.'
-        }, {
-            id: 'M0020277a',
-            pos: [5409, 3114],
-            text: 'The Hall of Statuary in the Wellcome Historical Medical Museum on Wigmore Street, 1926.'
-        }, {
-            id: 'L0021269',
-            pos: [4674, 3140],
-            text: 'An illustrated sixteenth-century book by Catherine of Siena, which was purchased from the library of William Morris.'
-        }, {
-            id: 'L0021264a',
-            pos: [2164, 3172],
-            text: 'After C J S Thompson started working for Wellcome, his first acquisition was a book of seventeenth-century medicinal recipes collected by Lady Ayscough. This page deals with treating ‘a wheezing in the pipes’.'
-        }, {
-            id: 'L0021122',
-            pos: [3632, 3177],
-            text: 'The first major book purchase Wellcome’s agent C J S Thompson made was 482 lots from William Morris’s library, bought at Sotheby’s in 1898. The collection included books on architecture, textiles and printing.'
-        }, {
-            id: 'L0002141a',
-            pos: [2550, 3345],
-            text: 'A medicine vendor hawking his wares in China.'
-        }, {
-            id: 'M0006329a',
-            pos: [2949, 3345],
-            text: 'Wellcome and his agents travelled extensively to acquire artefacts – and even entire shops – for his collection. This pharmacy was found in the Bazaar at Constantinople.'
-        }, {
-            id: 'L0056757a',
-            pos: [1801, 3377],
-            text: 'A dealer in curiosities photographed in Beijing, 1869.'
-        }, {
-            id: 'V0022144',
-            pos: [4226, 3424],
-            text: 'Depictions of strength and power, like this 1690 engraving of an eagle clutching an owlet, may have provided inspiration for Burroughs Wellcome & Co.’s advertising materials.'
-        }, {
-            id: 'L0021417a',
-            pos: [7079, 3429],
-            text: 'The cover of the 1913 Handbook of the Historical Medical Museum, which was finally opened for the 17th International Congress of Medicine in London, a decade after Wellcome had initially discussed the idea of an exhibition.'
-        }, {
-            id: 'L0021453a',
-            pos: [7396, 3429],
-            text: 'The Wellcome Historical Medical Library, which previously admitted visitors only by appointment, finally opened to the public 13 years after Wellcome’s death.'
-        }, {
-            id: 'L0013410a',
-            pos: [270, 3461],
-            text: 'Wellcome’s longest-serving collaborator, the writer Charles John Samuel Thompson. Their 25-year business relationship broke down after Thompson developed a personal book on company time.'
-        }, {
-            id: 'M0007600a',
-            pos: [533, 3461],
-            text: 'Wellcome reconstructed nine different pharmacies in the Wellcome Historical Medical Museum, including this Indian drug shop.'
-        }, {
-            id: 'L0029861a',
-            pos: [4990, 3537],
-            text: 'The Hall of Primitive Medicine in the Wellcome Historical Medical Museum on Wigmore Street.'
-        }, {
-            id: 'L0031841a',
-            pos: [2550, 3618],
-            text: 'As well as purchasing individual books and objects, Wellcome and his agents also acquired the entire collections of others, like this trunk of photographs collected by E N Fallaize.'
-        }, {
-            id: 'L0038109a',
-            pos: [941, 3653],
-            text: 'A shopkeeper photographed by Dr Lillias Anna Hamilton.'
-        }, {
-            id: 'L0021416a',
-            pos: [6006, 3705],
-            text: 'The cover of a Wellcome Historical Medical Exhibition booklet, featuring the Egyptian god I-Em-Hetep.'
-        }, {
-            id: 'L0017437a',
-            pos: [6333, 3705],
-            text: 'Part of the Wellcome Library’s early printed books stores. Today, the Library holds over 15 000 European books printed before 1701.'
-        }, {
-            id: 'L0018446a',
-            pos: [119, 3818],
-            text: 'When this Oxford Street pharmacy was closing down in 1908, Wellcome’s collaborator C J S Thompson acquired much of its contents, before suggesting that they buy the shopfront too. The entire store ended up on display in the Wellcome Historical Medical Museum in Wigmore Street.'
-        }, {
-            id: 'L0034640a',
-            pos: [7079, 3876],
-            text: 'Henry Mlinaric’s 1991 design for the remodelled entrance hall of the Wellcome Building on Euston Road, featuring a classical sculpture.'
-        }]
-    }
-};
+Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
+    gaRoot: 'the-collectors - unceasing-seeker - l2 infinite-canvas open image',
+    location: '_assets/infinite-canvas/infiniteCanvas_',
+    images: [{
+        id: 'L0011600a',
+        pos: [1220, 35],
+        text: 'When Professor Max Neuberger assessed the state of the Wellcome Library after Wellcome’s death, he found the contents bewilderingly eclectic.'
+    }, {
+        id: 'L0011599a',
+        pos: [1648, 35],
+        text: 'Before Wellcome’s collection was dispersed after his death, it contained more than a million items, many of them stored in warehouses around London.'
+    }, {
+        id: 'L0006437a',
+        pos: [2075, 35],
+        text: 'A nineteenth-century Persian watercolour of an annotated skeleton.'
+    }, {
+        id: 'L0058576a',
+        pos: [2397, 35],
+        text: 'Wellcome’s collecting collaborator C J S Thompson bought pestles and mortars on at least 80 different occasions. When the Wellcome Historical Medical Museum opened, more than 700 mortars were on display.'
+    }, {
+        id: 'L0058329',
+        pos: [4083, 37],
+        text: 'Ceramics, like these eighteenth-century Italian vases, provided inspiration for dressing Burroughs Wellcome & Co. trade exhibits.'
+    }, {
+        id: 'L0065696a',
+        pos: [3235, 38],
+        text: 'A sample of body snatcher William Burke’s brain, extracted from his cadaver after his execution in 1829. Wellcome Images/Science Museum'
+    }, {
+        id: 'L0057218a',
+        pos: [66, 52],
+        text: 'Wellcome acquired several mummified bodies, including this Egyptian head from the first or second millennium BCE. Wellcome Images/Science Museum'
+    }, {
+        id: 'L0023265a',
+        pos: [6704, 54],
+        text: 'A corpulent king who hoped leeches would suck out his excess fat, from the sixteenth-century manuscript Histoires Prodigieuses.'
+    }, {
+        id: 'L0057148a',
+        pos: [5455, 68],
+        text: 'A nineteenth-century pewter box for transporting leeches used in bloodletting.'
+    }, {
+        id: 'L0015581a',
+        pos: [773, 113],
+        text: 'Wellcome acquired or commissioned numerous paintings depicting the work of apothecaries, physicians and surgeons, like this bloodletting scene by Matthijs Naiveu.'
+    }, {
+        id: 'L0039443a',
+        pos: [7418, 163],
+        text: 'Painting of a duck from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh of ducks replenishes qi and treats weakness of the blood and physical frailty.'
+    }, {
+        id: 'L0011597a',
+        pos: [2765, 165],
+        text: 'The Wellcome Library stores at Enfield. In 1930 one of the Library’s staff likened disturbing ‘the dust of years’ on boxes of books that had never been unpacked to the explorations of a new world by ‘stout Cortez’.'
+    }, {
+        id: 'L0057653a',
+        pos: [3704, 231],
+        text: 'Seventeenth-century brass weights for weighing sheep’s wool, a valuable commodity at the time. Wellcome Images/Science Museum'
+    }, {
+        id: 'V0021599a',
+        pos: [5913, 275],
+        text: 'Engraving of a narwhal and a sperm whale. Powdered narwhal tusks were thought to act as an antidote against arsenic or mercury poisoning.'
+    }, {
+        id: 'L0057750a',
+        pos: [4836, 294],
+        text: 'Wellcome purchased this antelope horn at auction in 1932. It was said to have been used in Nigeria, to heal and protect against disease. Wellcome Images/Science Museum'
+    }, {
+        id: 'M0015033a',
+        pos: [1220, 366],
+        text: 'A paleolithic flint hand axe found in the City of London in 1690 by apothecary, archaeologist and collector of antiquities John Conyrs. Wellcome attributed the start of his own collecting life to his discovery of a sharpened flint in Wisconsin when he was aged just four.'
+    }, {
+        id: 'L0058357a',
+        pos: [6704, 446],
+        text: 'Snake-like storage jars used in a pharmacy. Like much of Wellcome’s collection, the provenance and practical use of these jars was never recorded. Wellcome Images/Science Museum'
+    }, {
+        id: 'L0022370a',
+        pos: [773, 486],
+        text: 'Wellcome’s interest in collecting letters centred more around who they were written by than what they were about. This 1823 missive from Mary Anning, however, happens to include the first sketch of a plesiosaurus.'
+    }, {
+        id: 'L0012386a',
+        pos: [3387, 511],
+        text: 'Sixteenth and seventeenth-century surgical instruments, including dental forceps, a trepanning drill, a bullet extractor and a surgical saw.'
+    }, {
+        id: 'L0013467a',
+        pos: [2765, 512],
+        text: 'A fifteenth-century ‘wound man’ illustration, documenting common injuries to the human body.'
+    }, {
+        id: 'L0032229',
+        pos: [4083, 546],
+        text: 'The Burroughs Wellcome & Co. 1911 ‘Book of Beauty’, featuring the head of Venus.'
+    }, {
+        id: 'L0031259a',
+        pos: [2311, 575],
+        text: 'A sixteenth-century fragment of Arabic poetry mounted as a wall decoration.'
+    }, {
+        id: 'L0036897a',
+        pos: [2098, 576],
+        text: 'Jars full of seeds and roots.'
+    }, {
+        id: 'M0009391a',
+        pos: [66, 670],
+        text: 'Ancient Hindu forceps resembling the mouths of animals, including the ‘lion’, ‘wolf’, ‘curlew’, ‘heron’ and ‘tiger’.'
+    }, {
+        id: 'V0035815',
+        pos: [4811, 758],
+        text: 'Greek and Roman gods and goddesses, like this muscular Mercury, appeared in Burroughs Wellcome & Co.’s advertising materials.'
+    }, {
+        id: 'V0022070a',
+        pos: [5359, 758],
+        text: 'Etching of a spotted eel. Eeels have been used as a restorative for consumptives. Their fat has also been used to treat deaf ears, smallpox spots and piles.'
+    }, {
+        id: 'L0072171',
+        pos: [3387, 790],
+        text: 'Images of classical vases and urns, like the one depicted in this eighteenth-century etching by Giovanni Piranesi, provided inspiration for Burroughs Wellcome & Co.’s advertising materials.'
+    }, {
+        id: 'L0033345a',
+        pos: [2094, 870],
+        text: 'The impressive physique of 21-year-old Eugen Sandow, who became a celebrity after winning a competition to find the strongest man in the world.'
+    }, {
+        id: 'M0019473a',
+        pos: [6704, 930],
+        text: 'Catgut ligatures soaked in carbolic oil by Joseph Lister to prevent infection when used to tie off arteries in surgery. Despite its name, catgut is usually sourced from sheep.'
+    }, {
+        id: 'M0016570a',
+        pos: [773, 1078],
+        text: 'Anthropomorphic Peruvian vases in the form of blind figures.'
+    }, {
+        id: 'L0032232',
+        pos: [4083, 1271],
+        text: 'A late nineteenth-century Burroughs Wellcome & Co. price list, featuring Hippocrates, Mercury and other classical references.'
+    }, {
+        id: 'L0025709a',
+        pos: [228, 1300],
+        text: 'A nineteenth-century Japanese illustration depicting the removal of a breast cancer tumour under general anaesthetic.'
+    }, {
+        id: 'L0032222',
+        pos: [2765, 1372],
+        text: 'A Burroughs Wellcome & Co. 1906 booklet on anaesthesia.'
+    }, {
+        id: 'L0057155a',
+        pos: [5902, 1414],
+        text: 'An eighteenth-century Italian jar for storing spermaceti, a waxy substance obtained from the head of a sperm whale, used in medicinal ointments and moisturisers. Wellcome Images/Science Museum'
+    }, {
+        id: 'M0012576a',
+        pos: [6192, 1414],
+        text: 'Spider illustration from a sixteenth century ‘Materia Medica’ text.'
+    }, {
+        id: 'L0058457a',
+        pos: [6927, 1414],
+        text: 'Sixteenth- or seventeenth-century bezoar stones that were dropped into drinks to protect against poisons. Bezoars are concretions of indigestible materials found in the stomachs and intestines of animals and humans. Wellcome Images/Science Museum'
+    }, {
+        id: 'L0039446a',
+        pos: [7420, 1414],
+        text: 'Painting of a crane from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh of cranes treats parasitic worms and fish poisons.'
+    }, {
+        id: 'L0025988a',
+        pos: [1266, 1527],
+        text: 'A fifteenth-century Persian manuscript showing the position of the heavens at the moment of Prince Iskandar’s birth.'
+    }, {
+        id: 'M0013911a',
+        pos: [1636, 1527],
+        text: 'Spears, clubs, shields and arrows from Wellcome’s collection laid out at the British Museum in 1955 before being dispersed to other museums. His collection of non-mechanical weapons was thought to contain at least 50 000 objects.'
+    }, {
+        id: 'V0031371a',
+        pos: [805, 1608],
+        text: 'A seventeenth-century Italian pharmacy reconstructed in the Wellcome Historical Medical Museum.'
+    }, {
+        id: 'L0027577',
+        pos: [4809, 1628],
+        text: 'Auction catalogue for William Morris’s library, including Wellcome’s notes on individual sale items.'
+    }, {
+        id: 'L0057380a',
+        pos: [5230, 1659],
+        text: 'Mole paws that may have been carried to protect against toothache or cramp. Part of Edward Lovett’s collection – largely purchased from London’s costermongers and dock workers – which was acquired by Wellcome in 1930.'
+    }, {
+        id: 'M0018240a',
+        pos: [6927, 1746],
+        text: 'Bear’s grease labels from pharmacy jars, promoting its use for ‘beautifying and strengthening’ the hair.'
+    }, {
+        id: 'L0024843a',
+        pos: [1265, 1816],
+        text: 'A photographic album documenting plastic surgery at London’s King George Military Hospital. Part of the RAMC Muniment Collection in the care of the Wellcome Library.'
+    }, {
+        id: 'V0029805a',
+        pos: [1995, 1816],
+        text: 'A potential hunting ground for Wellcome or his agents, a Parisian sale of artefacts from an old apothecary’s shop.'
+    }, {
+        id: 'L0025821',
+        pos: [4324, 1816],
+        text: '‘Kepler’ Solution was Burroughs Wellcome & Co.’s brand of cod liver oil. One set of advertisements for the product was based on the ancient history of Greece.'
+    }, {
+        id: 'L0039442a',
+        pos: [5902, 1845],
+        text: 'Silk painting of an owl from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh of owls relieves ague, dispels wind and calms fright.'
+    }, {
+        id: 'L0057178a',
+        pos: [6286, 1845],
+        text: 'A nineteenth-century English jar for storing leeches. Wellcome Images/Science Museum'
+    }, {
+        id: 'L0039453a',
+        pos: [6668, 1846],
+        text: 'Painting of pigeons from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh of pigeons dispels wind, removes poisons and promotes the healing of wounds.'
+    }, {
+        id: 'L0006591a',
+        pos: [1629, 1852],
+        text: 'Wellcome collected examples of everyday pharmaceutical practices, which would have been sold in shops like this 1897 pharmacy.'
+    }, {
+        id: 'L0058984a',
+        pos: [7420, 1903],
+        text: 'A necklace made from snake bones, worn to protect against back pain. Part of Edward Lovett’s collection of amulets and charms, purchased by Wellcome in 1930. Wellcome Images/Science Museum'
+    }, {
+        id: 'L0036438a',
+        pos: [805, 1998],
+        text: 'Manuscripts and boxes from the archive of the Wellcome Historical Medical Museum. Wellcome’s personal archive alone amounted to 700 archive boxes and 6500 individual items.'
+    }, {
+        id: 'L0039441a',
+        pos: [5406, 2101],
+        text: 'Silk painting of a peacock from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh and blood of peacocks treats poisoning, ulcers and abscesses.'
+    }, {
+        id: 'L0057151a',
+        pos: [6286, 2101],
+        text: 'Sixteenth-century Italian jars for storing horse fat (left) and badger fat (right). Badger fat (or grasso di tasso) was believed to heal broken bones and muscles. It was also used to treat fevers and inflammation. Wellcome Images/Science Museum'
+    }, {
+        id: 'L0057156a',
+        pos: [6927, 2114],
+        text: 'An eighteenth-century Italian jar for storing oil of eathworms, a pain reliever used in the treatment of arthritis, rickets and cramp. Wellcome Images/Science Museum'
+    }, {
+        id: 'L0018916a',
+        pos: [1265, 2126],
+        text: 'The dusty remains of the decayed clinical records of gynaecological operations at Guy’s Hospital in 1909–12.'
+    }, {
+        id: 'V0006204a',
+        pos: [315, 2135],
+        text: 'A 1900 caricature from Chemist and Druggist depicting Wellcome as ‘a very compact and fascinating bird’ that feeds on tabloids, prefers warmer climes to London and is ‘very fond of large pumpkins’.'
+    }, {
+        id: 'L0034055',
+        pos: [4984, 2178],
+        text: 'A Burroughs Wellcome & Co. window display in Argentina. Wellcome’s approach to window dressing crammed as many products into the space as possible, making full use of the available height.'
+    }, {
+        id: 'L0057197',
+        pos: [4226, 2212],
+        text: 'Wellcome sent tins, cases, bottles and tubes to his company engineers, with detailed instructions of how to apply their designs. This nineteenth-century brass tobacco box may only be opened by solving a puzzle. Wellcome Images/Science Museum'
+    }, {
+        id: 'L0021967a',
+        pos: [5902, 2371],
+        text: 'A reconstruction of a traditional Arabic pharmacy in the Wellcome Historical Medical Museum.'
+    }, {
+        id: 'M0009572a',
+        pos: [6414, 2371],
+        text: 'The Hall of Primitive Medicine in the Wellcome Building on Euston Road, 1946.'
+    }, {
+        id: 'V0029806a',
+        pos: [805, 2388],
+        text: 'A possible source of Italian pharmacy jars.'
+    }, {
+        id: 'V0049059a',
+        pos: [1729, 2389],
+        text: 'Wellcome’s agents travelled to auctions like this French art sale under assumed names, for fear of sellers increasing the prices in their honour. Wellcome himself sometimes went under the name of Wilkins or Wilton.'
+    }, {
+        id: 'V0017599a',
+        pos: [2164, 2389],
+        text: 'After Wellcome married 21-year-old Syrie Barnardo, her life became ‘one constant round’ of visits to bazaars like this, as well as ‘old pharmacies, bookshops, dealers in antiquities and owners of private collections’.'
+    }, {
+        id: 'V0035823',
+        pos: [2875, 2389],
+        text: 'Greek and Roman gods and goddesses, like the Venus de’ Medici, appeared in Burroughs Wellcome & Co.’s advertising materials.'
+    }, {
+        id: 'V0031394a',
+        pos: [7420, 2451],
+        text: 'Wellcome (second from right) and the architect Septimus Warwick (second from left) inspecting stonework for the Wellcome Building on Euston Road, 1931.'
+    }, {
+        id: 'L0025888',
+        pos: [4982, 2455],
+        text: 'Snow duck illustration from an eighteenth-century Danish book acquired from William Morris’s library.'
+    }, {
+        id: 'L0017214',
+        pos: [3387, 2480],
+        text: 'Like Wellcome, the founder of Sequah, Yorkshireman William Hartley was a savvy salesman and showman. Hartley dressed himself, his staff and his medicines up as if they hailed from the American Wild West.'
+    }, {
+        id: 'L0049007',
+        pos: [3707, 2480],
+        text: 'Images of classical sculptures, like this statue of Laocoön and his sons, provided source material for Burroughs Wellcome & Co.’s advertising materials.'
+    }, {
+        id: 'M0004497a',
+        pos: [6414, 2692],
+        text: 'The Hall of Statuary stairs in the Wellcome Building on Euston Road.'
+    }, {
+        id: 'L0032227',
+        pos: [4226, 2726],
+        text: 'A Burroughs Wellcome & Co. 1906 price list.'
+    }, {
+        id: 'L0017734',
+        pos: [4674, 2726],
+        text: 'Burroughs Wellcome & Co.’s 1895 price list, incorporating images of coins and the company’s Snow Hill headquarters.'
+    }, {
+        id: 'M0004494a',
+        pos: [5406, 2741],
+        text: 'The Hall of Statuary in the Wellcome Building on Euston Road.'
+    }, {
+        id: 'M0020280a',
+        pos: [6927, 2876],
+        text: 'Portraits and paintings in the Wellcome Historical Medical Museum on Portman Street, 1947–54. Today, the Wellcome Library contains over 100 000 pictures.'
+    }, {
+        id: 'L002897a',
+        pos: [2164, 2914],
+        text: 'Wellcome’s agents travelled to auctions like this French art sale under assumed names, for fear of sellers increasing the prices in their honour. Wellcome himself sometimes went under the name of Wilkins or Wilton.'
+    }, {
+        id: 'L0021542a',
+        pos: [2571, 2914],
+        text: 'The Silk Mercers bazaar in Cairo, c.1848. After Wellcome visited Egpyt and the Sudan in 1901, he shipped 44 trunks and cases back from Cairo, many of them containing African curiosities.'
+    }, {
+        id: 'M0008536a',
+        pos: [147, 2944],
+        text: 'Wellcome snapped this photograph of his interpreter in his car while on tour in Europe in 1908.'
+    }, {
+        id: 'L0021424',
+        pos: [1801, 2944],
+        text: 'A sketch of alchemical equipment that had been offered for sale to one of Wellcome’s agents in Rome.'
+    }, {
+        id: 'M0007861',
+        pos: [4991, 2997],
+        text: 'Henry Wellcome in his early 30s, dressed as a warrior.'
+    }, {
+        id: 'M0020277a',
+        pos: [5409, 3114],
+        text: 'The Hall of Statuary in the Wellcome Historical Medical Museum on Wigmore Street, 1926.'
+    }, {
+        id: 'L0021269',
+        pos: [4674, 3140],
+        text: 'An illustrated sixteenth-century book by Catherine of Siena, which was purchased from the library of William Morris.'
+    }, {
+        id: 'L0021264a',
+        pos: [2164, 3172],
+        text: 'After C J S Thompson started working for Wellcome, his first acquisition was a book of seventeenth-century medicinal recipes collected by Lady Ayscough. This page deals with treating ‘a wheezing in the pipes’.'
+    }, {
+        id: 'L0021122',
+        pos: [3632, 3177],
+        text: 'The first major book purchase Wellcome’s agent C J S Thompson made was 482 lots from William Morris’s library, bought at Sotheby’s in 1898. The collection included books on architecture, textiles and printing.'
+    }, {
+        id: 'L0002141a',
+        pos: [2550, 3345],
+        text: 'A medicine vendor hawking his wares in China.'
+    }, {
+        id: 'M0006329a',
+        pos: [2949, 3345],
+        text: 'Wellcome and his agents travelled extensively to acquire artefacts – and even entire shops – for his collection. This pharmacy was found in the Bazaar at Constantinople.'
+    }, {
+        id: 'L0056757a',
+        pos: [1801, 3377],
+        text: 'A dealer in curiosities photographed in Beijing, 1869.'
+    }, {
+        id: 'V0022144',
+        pos: [4226, 3424],
+        text: 'Depictions of strength and power, like this 1690 engraving of an eagle clutching an owlet, may have provided inspiration for Burroughs Wellcome & Co.’s advertising materials.'
+    }, {
+        id: 'L0021417a',
+        pos: [7079, 3429],
+        text: 'The cover of the 1913 Handbook of the Historical Medical Museum, which was finally opened for the 17th International Congress of Medicine in London, a decade after Wellcome had initially discussed the idea of an exhibition.'
+    }, {
+        id: 'L0021453a',
+        pos: [7396, 3429],
+        text: 'The Wellcome Historical Medical Library, which previously admitted visitors only by appointment, finally opened to the public 13 years after Wellcome’s death.'
+    }, {
+        id: 'L0013410a',
+        pos: [270, 3461],
+        text: 'Wellcome’s longest-serving collaborator, the writer Charles John Samuel Thompson. Their 25-year business relationship broke down after Thompson developed a personal book on company time.'
+    }, {
+        id: 'M0007600a',
+        pos: [533, 3461],
+        text: 'Wellcome reconstructed nine different pharmacies in the Wellcome Historical Medical Museum, including this Indian drug shop.'
+    }, {
+        id: 'L0029861a',
+        pos: [4990, 3537],
+        text: 'The Hall of Primitive Medicine in the Wellcome Historical Medical Museum on Wigmore Street.'
+    }, {
+        id: 'L0031841a',
+        pos: [2550, 3618],
+        text: 'As well as purchasing individual books and objects, Wellcome and his agents also acquired the entire collections of others, like this trunk of photographs collected by E N Fallaize.'
+    }, {
+        id: 'L0038109a',
+        pos: [941, 3653],
+        text: 'A shopkeeper photographed by Dr Lillias Anna Hamilton.'
+    }, {
+        id: 'L0021416a',
+        pos: [6006, 3705],
+        text: 'The cover of a Wellcome Historical Medical Exhibition booklet, featuring the Egyptian god I-Em-Hetep.'
+    }, {
+        id: 'L0017437a',
+        pos: [6333, 3705],
+        text: 'Part of the Wellcome Library’s early printed books stores. Today, the Library holds over 15 000 European books printed before 1701.'
+    }, {
+        id: 'L0018446a',
+        pos: [119, 3818],
+        text: 'When this Oxford Street pharmacy was closing down in 1908, Wellcome’s collaborator C J S Thompson acquired much of its contents, before suggesting that they buy the shopfront too. The entire store ended up on display in the Wellcome Historical Medical Museum in Wigmore Street.'
+    }, {
+        id: 'L0034640a',
+        pos: [7079, 3876],
+        text: 'Henry Mlinaric’s 1991 design for the remodelled entrance hall of the Wellcome Building on Euston Road, featuring a classical sculpture.'
+    }]
+});
 
-Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('seized-and-destroyed', function(panelId, panelEl, panelAttrs) {
+Pathways.components.get('sliding-modal').addData('kahns-anatomical-museum-sliding-modal', {
+    '1': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/1-large.jpg',
+        'title': 'Reclining nudes with removable parts, like this eighteenth-century wax model made in Florence, formed the centrepieces of many nineteenth-century museum collections. Kahn’s own ‘Venus de Medici’ comprised 85 separate pieces."',
+        'download': 'http://wellcomelibrary.org/actual/b2136994x/0/b382628a-8e7c-4a3b-9881-d4a2517c1470/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 1'
+    },
+    '2': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/2-large.jpg',
+        'title': 'Dissections made by Dr Francis Sibson, illustrating the lungs after breathing out and in. In an 1851 edition of the Lancet, Kahn’s anatomical wax models and an anatomical lecture by Sibson were advertised side by side.',
+        'download': 'http://wellcomelibrary.org/actual/b16423896/0/a9f9fb9c-e4fe-4d69-95da-bd8fe7b30f94/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 2'
+    },
+    '3': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/3-large.jpg',
+        'title': 'An illustration from The Secret Companion, an 1845 book on onanism or ‘self-pollution’. Kahn’s examples of conditions attributed to masturbation were kept in a room reserved for medical gentlemen.',
+        'download': 'http://wellcomelibrary.org/actual/b21370047/0/45c48826-8e56-47c6-bbef-782b162e54a8/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 3'
+    },
+    '4': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/4-large.jpg',
+        'title': 'Eighteenth-century mezzotint of the muscles of the eye by Arnauld-Éloi Gautier Dagoty. Kahn’s museum featured a magnified eye that could be taken to pieces to study the lens, optic nerve and surrounding muscles.',
+        'download': 'http://wellcomelibrary.org/actual/b11904604/0/1b94a7a4-aebc-4f16-983b-7563cb2fffb5/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 4'
+    },
+    '5': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/5-large.jpg',
+        'title': 'Deep dissection of the pterygoid region by George Viner Ellis, Professor of Anatomy at University College London from 1850 to 1877. Kahn’s collection included a head with a section of skin removed to show the blood vessels and ducts beneath.',
+        'download': 'http://wellcomelibrary.org/actual/b21370011/0/72e48b3a-966c-4f13-938d-8dca8576fa16/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 5'
+    },
+    '6': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/6-large.jpg',
+        'title': 'An 1898 lithograph of a face diseased with syphilis. Kahn displayed a dozen models illustrating real cases of syphilis in the face as part of a wider exhibit representing ‘the horrible results of vicious indulgence’.',
+        'download': 'http://wellcomelibrary.org/actual/b21370229/0/74e4a817-c964-415c-a4cc-c416421a5c0c/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 6'
+    },
+    '7': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/7-large.jpg',
+        'title': 'Eighteenth-century vertical section of the head by Jacques Fabien Gautier Dagoty. Kahn employed ‘a head, vertically cut’ to illustrate deglutition, the process of swallowing.',
+        'download': 'http://wellcomelibrary.org/actual/b15260896/0/f1ff6f55-5cda-4341-8852-6885a8cbba82/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 7'
+    },
+    '8': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/8-large.jpg',
+        'title': 'A dissected and preserved human hand. Kahn displayed a man’s hand ‘with the ends of the fingers laid open’ to reveal the nerves responsible for the sense of touch.',
+        'download': 'http://wellcomelibrary.org/actual/b2136963x/0/861fed6b-080d-413d-aa97-3ecb61c8e3d7/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 8'
+    },
+    '9': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/9-large.jpg',
+        'title': 'This unnamed boy could be viewed three times a day at Kahn’s museum – ‘by gentlemen only’ – while Kahn delivered a lecture explaining the theories behind his physical development. The living heteradelph was billed as a beautiful, perfectly health child, ‘the most extraordinary natural phenomenon ever witnessed’.',
+        'download': 'http://wellcomelibrary.org/actual/b20663778/0/87b6551a-8930-4e97-b013-e696052bc84d/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 9'
+    },
+    '10': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/10-large.jpg',
+        'title': 'Plaque illustrating the development of a human embryo. Kahn considered himself somewhat of an expert in ‘embriology’, claiming to have examined more sperm under a microscope than any man living. His collection included preserved foetal specimens from every single week of pregnancy.',
+        'download': 'http://wellcomelibrary.org/actual/b21369665/0/f15c86f8-5535-477d-a4d5-ca454486c3b7/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 10'
+    },
+    '11': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/11-large.jpg',
+        'title': 'The structure of an arm preserved by injecting wax into its arteries, veins and muscles. Kahn described his artificial displays of these internal tissues as preparations of ‘exquisite beauty’.',
+        'download': 'http://wellcomelibrary.org/actual/b21369641/0/f8cba2d7-b51e-4faf-9246-a6696fab56fb/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 11'
+    },
+    '12': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/12-large.jpg',
+        'title': 'The striking ‘Flayed Angel’ dissection was published by Jacques Fabien Gautier Dagoty in the eighteenth century, part of a publication intended ‘to facilitate the study of Anatomy for all sorts of people’.',
+        'download': 'http://wellcomelibrary.org/actual/b1572024x/0/033a7486-9480-4ecd-b8ec-17f7284c5043/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 12'
+    },
+    '13': {
+        'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/13-large.jpg',
+        'title': 'Dissected feet. In a published essay on the difference between man and animals, Kahn considered humans to have ‘a great peculiarity in the formation of the feet, which are broader, stronger, and more solid than those of any other animal’.',
+        'download': 'http://wellcomelibrary.org/actual/b11901056/0/833cd121-082e-48db-8157-9ae6904e765c/jp2?download=true',
+        'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 13'
+    }
+});
+
+Pathways.components.get('gallery').addData('quacks-of-the-18th-century', {
+    location: '_assets/galleries/quacks-of-the-18th-century/',
+    images: [{
+        image: 'L0018661a',
+        text: 'Quacks and travelling medicine vendors were a common sight in the 17th and 18th century.'
+    }, {
+        image: 'M0013726',
+        text: 'Some may have hawked snake oil, but this Italian charlatan is selling antidotes to snake poison.'
+    }, {
+        image: 'V0007356a',
+        text: 'Some of them were women: Anne Manning, a quack doctor, outside her cottage with Betty Upton.'
+    }, {
+        image: 'V0010929a',
+        text: 'The tale of ‘Doctor Kill’em or Cure’em’: ‘if you kill ‘em or cure’ em it don’t matter to thee’.'
+    }, {
+        image: 'V0011005',
+        text: 'A sailor with a bandaged eye consulting a quack doctor.'
+    }, {
+        image: 'V0016170',
+        text: 'Doctor Bossey selling his wares on stage.'
+    }, {
+        image: 'V0016171',
+        text: '‘Doctor Botherum’, a caricature probably based on Doctor Bossey, selling his goods to a raucous crowd.'
+    }, {
+        image: 'V0016188a',
+        text: 'Richard ‘Doctor’ Rock using his horse-drawn carriage as a stage. He may be selling his ‘anti-venereal, grand, specifick pill’.'
+    }, {
+        image: 'V0016215',
+        text: 'This vendor puts on a real show, assisted by an elaborately dressed man and an owl.'
+    }, {
+        image: 'V0016230a',
+        text: 'The colourful quack troupe including a donkey, a monkey and a fool blowing a trumpet.'
+    }]
+});
+
+Pathways.components.get('gallery').addData('indecent-sexual-images', {
+    location: '_assets/galleries/indecent-sexual-images/',
+    images: [{
+        image: 'L0038201',
+        text: 'Scrotum diseased with syphilis'
+    }, {
+        image: 'L0038202',
+        text: 'Labia diseased with syphilis'
+    }, {
+        image: 'L0038205',
+        text: 'Skin of the scrotum and perineum diseased with syphilis'
+    }, {
+        image: 'L0038206',
+        text: 'Breast diseased with syphilis'
+    }, {
+        image: 'L0038209',
+        text: 'Pubis and penis diseased with syphilis'
+    }, {
+        image: 'L0060656',
+        text: '‘Syphilide vegetante framboisee’'
+    }, {
+        image: 'L0074250',
+        text: 'Combycomata, female perineum'
+    }, {
+        image: 'V0009962',
+        text: 'Hypertrophy of the clitoris'
+    }, {
+        image: 'V0009971',
+        text: 'Syphilitic lesions on the genitalia and torso'
+    }, {
+        image: 'V0010253',
+        text: 'Syphilitic swelling of the knee and testicles'
+    }]
+});
+
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('seized-and-destroyed', function(panelId, panelEl, panel) {
 
     var $panel = $(panelEl),
         vector = { x: -10, y: -5 },
@@ -9161,7 +9267,7 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('seized-and-destroyed', func
 
         var scene = new ScrollScene({
                 triggerElement: $panel,
-                duration:       $panel.outerHeight(),
+                duration:       panel.getContentDuration,
                 offset:         50,
             })
             .setTween(tween);
@@ -9173,167 +9279,70 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('seized-and-destroyed', func
 
 });
 
-Pathways.components.gallery.quacksOfThe18thCentury = {
-    data: {
-        location: '_assets/galleries/quacks-of-the-18th-century/',
-        images: [{
-            image: 'L0018661a',
-            text: 'Quacks and travelling medicine vendors were a common sight in the 17th and 18th century.'
-        }, {
-            image: 'M0013726',
-            text: 'Some may have hawked snake oil, but this Italian charlatan is selling antidotes to snake poison.'
-        }, {
-            image: 'V0007356a',
-            text: 'Some of them were women: Anne Manning, a quack doctor, outside her cottage with Betty Upton.'
-        }, {
-            image: 'V0010929a',
-            text: 'The tale of ‘Doctor Kill’em or Cure’em’: ‘if you kill ‘em or cure’ em it don’t matter to thee’.'
-        }, {
-            image: 'V0011005',
-            text: 'A sailor with a bandaged eye consulting a quack doctor.'
-        }, {
-            image: 'V0016170',
-            text: 'Doctor Bossey selling his wares on stage.'
-        }, {
-            image: 'V0016171',
-            text: '‘Doctor Botherum’, a caricature probably based on Doctor Bossey, selling his goods to a raucous crowd.'
-        }, {
-            image: 'V0016188a',
-            text: 'Richard ‘Doctor’ Rock using his horse-drawn carriage as a stage. He may be selling his ‘anti-venereal, grand, specifick pill’.'
-        }, {
-            image: 'V0016215',
-            text: 'This vendor puts on a real show, assisted by an elaborately dressed man and an owl.'
-        }, {
-            image: 'V0016230a',
-            text: 'The colourful quack troupe including a donkey, a monkey and a fool blowing a trumpet.'
-        }]
-    }
-};
+Pathways.components.get('gallery').addData('made-a-film', {
+    location: '_assets/galleries/they-even-made-a-film/',
+    images: [{
+        image: '01_Maisie_Dick_in_love',
+        text: 'Maisie’s Marriage was produced in the summer of 1923. It follows the story of Maisie Burrows, the eldest of ten children, and her beau, fireman Dick Reading.'
+    }, {
+        image: '02_Drudgery',
+        text: 'Despite being very much in love with Dick, Maisie refuses his marriage proposal; she doesn’t want a life of drudgery, with too many children and not enough money.'
+    }, {
+        image: '03_Jump',
+        text: 'Maisie is thrown out of her home and attempts suicide. She ends up as a maid in the household of a happily married couple who have three children.'
+    }, {
+        image: '04_wedding',
+        text: 'When her new home catches fire, Maisie is rescued by Dick and finally agrees to marry him.'
+    }, {
+        image: '05_credits',
+        text: 'The film was promoted as being written by Marie Stopes, though it was actually authored by her co-writer Walter Summers.'
+    }, {
+        image: '06_Marie Stopes',
+        text: 'The association with Stopes – along with the original title of Married Love – was guaranteed to generate a lot of publicity. Five years after she had published her first book, Married Love was still selling hundreds of thousands of copies a year, and Stopes had also written two other successful books.'
+    }, {
+        image: '07_Film_poster_crop',
+        text: 'The Stopes name also caused problems. While a reviewer described the film as nothing more than ‘a straightforward human story of sentimental rather than sexual appeal’, the British Board of Film Censors was concerned about ‘the title, taken in conjunction with the name of the book and the authoress referred to’. It felt the production was ‘propaganda on a subject unsuitable for discussion in a Cinema Theatre.'
+    }, ]
+});
 
-Pathways.components.gallery.indecentSexualImages = {
-    data: {
-        location: '_assets/galleries/indecent-sexual-images/',
-        images: [{
-            image: 'L0038201',
-            text: 'Scrotum diseased with syphilis'
-        }, {
-            image: 'L0038202',
-            text: 'Labia diseased with syphilis'
-        }, {
-            image: 'L0038205',
-            text: 'Skin of the scrotum and perineum diseased with syphilis'
-        }, {
-            image: 'L0038206',
-            text: 'Breast diseased with syphilis'
-        }, {
-            image: 'L0038209',
-            text: 'Pubis and penis diseased with syphilis'
-        }, {
-            image: 'L0060656',
-            text: '‘Syphilide vegetante framboisee’'
-        }, {
-            image: 'L0074250',
-            text: 'Combycomata, female perineum'
-        }, {
-            image: 'V0009962',
-            text: 'Hypertrophy of the clitoris'
-        }, {
-            image: 'V0009971',
-            text: 'Syphilitic lesions on the genitalia and torso'
-        }, {
-            image: 'V0010253',
-            text: 'Syphilitic swelling of the knee and testicles'
-        }]
-    }
-};
+Pathways.components.get('letter-gallery').addData('marie-stopes-letters', {
+    location: '_assets/galleries/marie-stopes-letters/',
+    images: [{
+        image: '01-HorridVice-pp-08-HIGHLIGHT',
+        textSrc: '/_assets/text/marie-stopes-letters/01-letter.html',
+        audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/01-HorridVice-Extract.mp3',
+    }, {
+        image: '02-HugeAppendage-Transcript-pp-03-HIGHLIGHT',
+        textSrc: '/_assets/text/marie-stopes-letters/02-letter.html',
+        audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/02-HugeAppendage-Extract.mp3',
+    }, {
+        image: '03-PositionsDuringPregnancy-pp-01-HIGHLIGHT',
+        textSrc: '/_assets/text/marie-stopes-letters/03-letter.html',
+        audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/03-PositionsDuringPregnancy-Extract.mp3',
+    }, {
+        image: '04-PleasureWithoutPregnancy-pp-0102-HIGHLIGHT',
+        textSrc: '/_assets/text/marie-stopes-letters/04-letter.html',
+        audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/04-PleasureWithoutPregnancy-Extract.mp3',
+    }, {
+        image: '05-LargeSexOrgans-pp-01-HIGHLIGHT',
+        textSrc: '/_assets/text/marie-stopes-letters/05-letter.html',
+        audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/05-LargeSexOrgans-Extract.mp3',
+    }, {
+        image: '06-GoBackHome-pp-01-HIGHLIGHT',
+        textSrc: '/_assets/text/marie-stopes-letters/06-letter.html',
+        audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/06-GoBackHome-Extract.mp3',
+    }, {
+        image: '07-FreeingTheCaptives-pp-01-HIGHLIGHT',
+        textSrc: '/_assets/text/marie-stopes-letters/07-letter.html',
+        audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/07-FreeingTheCaptives.mp3',
+    }]
+});
 
-Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('british-museum', function(panelId, panelEl, panelAttrs) {
-    var $panel = $(panelEl);
+Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('example', function(panelId, panelEl, panelAttrs) {
 
     var scene = new ScrollScene({
             triggerElement: panelEl,
-            triggerHook: 'top',
-            duration: Pathways.panelHeight,
-        })
-        .on('enter', function() {
-            $panel.addClass('current-scroll-panel');
-        }).on('leave', function() {
-            $panel.removeClass('current-scroll-panel');
-        });
-
-    return scene;
-
-});
-
-Pathways.components.gallery.madeAFilm = {
-    data: {
-        location: '_assets/galleries/they-even-made-a-film/',
-        images: [{
-            image: '01_Maisie_Dick_in_love',
-            text: 'Maisie’s Marriage was produced in the summer of 1923. It follows the story of Maisie Burrows, the eldest of ten children, and her beau, fireman Dick Reading.'
-        }, {
-            image: '02_Drudgery',
-            text: 'Despite being very much in love with Dick, Maisie refuses his marriage proposal; she doesn’t want a life of drudgery, with too many children and not enough money.'
-        }, {
-            image: '03_Jump',
-            text: 'Maisie is thrown out of her home and attempts suicide. She ends up as a maid in the household of a happily married couple who have three children.'
-        }, {
-            image: '04_wedding',
-            text: 'When her new home catches fire, Maisie is rescued by Dick and finally agrees to marry him.'
-        }, {
-            image: '05_credits',
-            text: 'The film was promoted as being written by Marie Stopes, though it was actually authored by her co-writer Walter Summers.'
-        }, {
-            image: '06_Marie Stopes',
-            text: 'The association with Stopes – along with the original title of Married Love – was guaranteed to generate a lot of publicity. Five years after she had published her first book, Married Love was still selling hundreds of thousands of copies a year, and Stopes had also written two other successful books.'
-        }, {
-            image: '07_Film_poster_crop',
-            text: 'The Stopes name also caused problems. While a reviewer described the film as nothing more than ‘a straightforward human story of sentimental rather than sexual appeal’, the British Board of Film Censors was concerned about ‘the title, taken in conjunction with the name of the book and the authoress referred to’. It felt the production was ‘propaganda on a subject unsuitable for discussion in a Cinema Theatre.'
-        }, ]
-    }
-};
-
-Pathways.components.letterGallery.marieStopesLetters = {
-    data: {
-        location: '_assets/galleries/marie-stopes-letters/',
-        images: [{
-            image: '01-HorridVice-pp-08-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/01-letter.html',
-            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/01-HorridVice-Extract.mp3',
-        }, {
-            image: '02-HugeAppendage-Transcript-pp-03-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/02-letter.html',
-            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/02-HugeAppendage-Extract.mp3',
-        }, {
-            image: '03-PositionsDuringPregnancy-pp-01-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/03-letter.html',
-            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/03-PositionsDuringPregnancy-Extract.mp3',
-        }, {
-            image: '04-PleasureWithoutPregnancy-pp-0102-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/04-letter.html',
-            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/04-PleasureWithoutPregnancy-Extract.mp3',
-        }, {
-            image: '05-LargeSexOrgans-pp-01-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/05-letter.html',
-            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/05-LargeSexOrgans-Extract.mp3',
-        }, {
-            image: '06-GoBackHome-pp-01-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/06-letter.html',
-            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/06-GoBackHome-Extract.mp3',
-        }, {
-            image: '07-FreeingTheCaptives-pp-01-HIGHLIGHT',
-            textSrc: '/_assets/text/marie-stopes-letters/07-letter.html',
-            audio: 'http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio-stopes-letters/07-FreeingTheCaptives.mp3',
-        }]
-    }
-};
-
-
-Pathways.scrollScenes.Example = function(panel_height, panelID) {
-
-    var scene = new ScrollScene({
-            triggerElement: panelID,
-            duration:       Pathways.panelHeight,
+            duration:       Pathways.viewportHeight,
             offset:         0
         })
         .on('enter', function(e) {
@@ -9344,7 +9353,7 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
         });
 
     return scene;
-};
+});
 
 // Global Nav
 (function(w, $) {
@@ -9388,7 +9397,7 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
 
 
 // Init Pathways
-(function(w, p, ga) {
+(function(w, p, preloader, ga) {
 
     function onPathwaysLoad() {
 
@@ -9411,10 +9420,12 @@ Pathways.scrollScenes.Example = function(panel_height, panelID) {
         initScript(document, 'script', 'pth-pin-api', "//assets.pinterest.com/js/pinit.js");
         initScript(document, 'script', 'pth-twt-api', "//platform.twitter.com/widgets.js");
 
-        p.components.core.ga.init('[data-ga]');
+        p.core.ga.init('[data-ga]');
+
+        preloader.init('[data-preload-link]');
+
     }
 
     p.init(onPathwaysLoad);
 
-}(window, Pathways, ga));
-
+}(window, Pathways, Pathways.preloader, ga));

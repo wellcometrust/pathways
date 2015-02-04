@@ -7,23 +7,29 @@
     <meta name="description" content="Mindcraft: A century of madness, murder and mental healing.">
     <meta name="viewport" content="initial-scale=1,width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="x-dns-prefetch-control" content="on">
 
     <link rel="stylesheet" type="text/css" href="/_assets/build/css/main.css">
-    <script src="//use.typekit.net/nlx6tdo.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
 
-    <script src="/_assets/js/lib/modernizr-2.8.3.custom.min.js"></script>
+    <link rel="dns-prefetch" href="http://digitalstories.s3-website-eu-west-1.amazonaws.com">
+    <link rel="dns-prefetch" href="//use.typekit.net">
+    <link rel="dns-prefetch" href="//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=1494497634145827&version=v2.0">
+    <link rel="dns-prefetch" href="//apis.google.com/js/platform.js">
+    <link rel="dns-prefetch" href="//assets.pinterest.com/js/pinit.js">
+    <link rel="dns-prefetch" href="//platform.twitter.com/widgets.js">
+
     <script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	  ga('create', 'UA-54268163-1', 'auto');
-	  ga('send', 'pageview');
-
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        if (window === window.top) {
+            ga('create', 'UA-54268163-1', 'auto');
+            ga('send', 'pageview');
+        }
 	</script>
 
+    <script src="/_assets/build/js/header.min.js"></script>
+
+    <script src="//use.typekit.net/nlx6tdo.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
 
 
 </head>
@@ -50,7 +56,7 @@
 
                 <p class="intro-body">A century of madness, murder and mental healing</p>
 
-                <a href="1-mesmer/" class="intro-button">
+                <a data-preload-link href="1-mesmer/" class="intro-button">
                     Start your journey
                     <span></span>
                 </a>
@@ -64,37 +70,37 @@
             <ul class="clearfix">
 
                             <li>
-                    <a href="/pathways/1-mindcraft/1-mesmer/index.html">
+                    <a href="/pathways/1-mindcraft/1-mesmer/">
                         <span>1. A new force in nature</span>
                         <img src="/pathways/1-mindcraft/_assets/navigation/mesmer.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/1-mindcraft/2-airloom/index.html">
+                    <a href="/pathways/1-mindcraft/2-airloom/">
                         <span>2. A machine to control the mind</span>
                         <img src="/pathways/1-mindcraft/_assets/navigation/airloom.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/1-mindcraft/3-elliotson/index.html">
+                    <a href="/pathways/1-mindcraft/3-elliotson/">
                         <span>3. Who controls who?</span>
                         <img src="/pathways/1-mindcraft/_assets/navigation/elliotson.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/1-mindcraft/4-esdaile/index.html">
+                    <a href="/pathways/1-mindcraft/4-esdaile/">
                         <span>4. Mind over matter</span>
                         <img src="/pathways/1-mindcraft/_assets/navigation/esdaile.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/1-mindcraft/5-svengali/index.html">
+                    <a href="/pathways/1-mindcraft/5-svengali/">
                         <span>5. Dark forces</span>
                         <img src="/pathways/1-mindcraft/_assets/navigation/svengali.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/1-mindcraft/6-freud/index.html">
+                    <a href="/pathways/1-mindcraft/6-freud/">
                         <span>6. Secrets of the mind revealed</span>
                         <img src="/pathways/1-mindcraft/_assets/navigation/freud.jpg">
                     </a>
@@ -108,7 +114,9 @@
 
     </main>
 
-
+    <script type="text/javascript">
+         Pathways.loadingState.show();
+    </script>
     <script src="/_assets/build/js/libs.min.js"></script>
     <script src="/_assets/build/js/production.min.js"></script>
     <script id="embedWellcomePlayer" src="http://wellcomelibrary.org/spas/player/build/wellcomeplayer/js/embed.js"></script>
