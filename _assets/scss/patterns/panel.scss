@@ -29,6 +29,12 @@
             background-size: contain;
             background-position: 50% 50%;
         }
+        .small-screen {
+            display: block;
+        }
+        .large-screen {
+            display: none;
+        }
     }
     .main-content {
         color: #fff;
@@ -82,6 +88,12 @@
             position: absolute;
             top: 0;
             left: 0;
+            .small-screen {
+                display: none;
+            }
+            .large-screen {
+                display: block;
+            }
         }
         .main-content {
             font-size: 1.2rem;

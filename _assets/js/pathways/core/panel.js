@@ -14,6 +14,10 @@
         $(el).css('height', '');
     }
 
+    function unStyleElement(el) {
+        $(el).removeAttr('style');
+    }
+
     function initPanel(panelEl, isFirst, isLast, isStart) {
 
         var $panel = $(panelEl),
@@ -97,13 +101,18 @@
         };
 
         panel.resize = function resize(height) {
-            panel.unsetHeight();
+            unSetElementHeight(panel.elem);
             panel.setViewportHeight(height);
         };
 
         panel.unsize = function unsize(height) {
-            panel.unsetHeight();
-            panel.unsetBackgroundHeight();
+            unSetElementHeight(panel.elem);
+            unSetElementHeight(panel.bg);
+        };
+
+        panel.unstyle = function unstyle() {
+            unStyleElement(panel.elem);
+            unStyleElement(panel.bg);
         };
 
         panel.resize(exports.panelHeight);

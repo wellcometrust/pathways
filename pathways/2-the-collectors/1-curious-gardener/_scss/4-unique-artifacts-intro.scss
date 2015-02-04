@@ -1,0 +1,17 @@
+@media screen and (min-width: 48em) {
+    #unique-artifacts-intro {
+        min-height: 707px;
+
+        .bg-container {
+            min-height: 707px;
+       }
+    }
+    .touch {
+        #unique-artifacts-intro {
+            .main-content {
+                margin-top: 32%;
+                margin-bottom: 10%;
+            }
+        }
+    }
+}

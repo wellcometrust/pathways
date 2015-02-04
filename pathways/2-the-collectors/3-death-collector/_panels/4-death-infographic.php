@@ -284,7 +284,7 @@
                     <h1>Abortive, and stilborn</h1>
                     <p>Primis vituperatoribus ad usu, cum ea veniam soleat. Eos te intellegam philosophia. Cu vix solet aliquando gloriatur, enim volutpat vis ne. Natum ubique salutandi id sit, nec in putant alienum, at mazim denique salutandi duo. Pri ex pericula reformidans, liber mandamus tractatos cu sit.</p>
                     <div class='btn'>Next
-                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48.35px" height="10.9px" viewBox="0 0 48.35 10.9" enable-background="new 0 0 48.35 10.9" xml:space="preserve">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="11px" viewBox="0 0 48 11" enable-background="new 0 0 48 11" xml:space="preserve">
                             <path fill="#E52750" d="M48.35,5.44c0-0.54-0.42-0.97-0.95-1.02V4.41c-0.01,0-0.03,0-0.04,0c-0.02,0-0.03-0.01-0.05-0.01
                           c-0.01,0-0.03,0.01-0.04,0.01c-4.84-0.06-8.48-0.47-12.86-1.25C29.99,2.37,26.12,1.32,22.79,0c-1.28,1.62-2.48,2.72-3.58,3.31
                           c-1.11,0.59-2.6,0.96-4.48,1.1h-0.14c-1.07-0.11-1.98-0.25-2.72-0.45c-0.46-0.12-1.39-0.48-2.8-1.08c-1.55-0.67-2.65-1.09-3.3-1.25

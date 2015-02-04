@@ -1,12 +1,13 @@
+#unique-artifacts {
+    display: none;
+}
 @media screen and (min-width: 48em) {
     #unique-artifacts {
+        display: block;
         min-height: 707px;
-        .main-content {
-            text-shadow: 1px 1px 2px #333;
-        }
+
         .bg-container {
             min-height: 707px;
-            background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-4.jpg);
         }
         .crop-zoom {
             .tap-target.croc {

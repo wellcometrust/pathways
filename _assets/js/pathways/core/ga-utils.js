@@ -12,13 +12,12 @@
     }
 
     function send(label) {
-        console.log(baseSelector + ' click:', label, typeof ga);
+        console.log(baseSelector + ' click:', label);
         if (label) window.ga('send', 'event', 'link', 'click', label);
     }
 
     // Assumes selector will be in form '[data-<val>]'
     function init(selector) {
-        console.log('initing ga');
         attrSelector = selector;
         baseSelector = selector.replace(/\[data-(\w*)\]/, '$1');
         update();

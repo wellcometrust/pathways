@@ -282,7 +282,7 @@
 
     function unsizePanels(panels) {
         for (var i = 0; i < panels.length; i++) {
-            panels[i].unsize();
+            panels[i].unstyle();
         }
     }
 

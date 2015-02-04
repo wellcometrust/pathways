@@ -69,13 +69,20 @@
             background-size: 40%;
         }
     }
+
+    &.video {
+        .player-item--thumb {
+            background: #DBDBDB url('/_assets/img/icons/icon-video-white.svg') 50% 50% no-repeat;
+            background-size: 60%;
+        }
+    }
 }
 
 /** 650px */
 @media screen and (min-width: 40.625em) {
     .player-item {
         margin-bottom: 2em;
-        padding: 0 1rem;        
+        padding: 0 1rem;
 
         .player-item--content {
             padding-left: 70px;

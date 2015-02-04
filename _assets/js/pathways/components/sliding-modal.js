@@ -1,5 +1,7 @@
 (function(exports, overlay, ga, $) {
 
+    "use strict";
+
     function Modal(elm, data) {
 
         var self = this,
@@ -17,19 +19,19 @@
                 $overlay = ctrl.$overlay,
                 $img = $(img),
                 $container = $('<div/>').addClass(baseClass + ' ' + hiddenClass),
-                src = $elm.attr('data-image'),
-                caption = $elm.data('caption'),
-                download = $elm.data('download'),
-                gaLabel = ($elm.data('ga') || src) + ' - download',
-                $caption = caption ? $('<p>' + caption + '</p>').addClass('text') : '';
+
+                src = data.image,
+                caption = data.title,
+                download = data.download,
+                gaLabel = ((data.ga) || src) + ' - download',
+                $caption = caption ? $('<p>' + caption + '</p>').addClass('text') : '',
                 $download = download ? $('<a>Download</a>')
                             .attr('href', download).addClass('download')
                             .click(function(){
                                 ga.send(gaLabel);
                             }) : '';
 
-            //console.log('ga', gaTracking);
-            img.src = $elm.attr('data-image');
+            img.src = src;
             $caption.append($download);
 
             $container.on('click', ctrl.closeHandler);
@@ -46,12 +48,11 @@
     exports.slidingModal = function(element, data) {
 
         $(element).find('.modal').on('click', function() {
-            // var id = $(this).data('id');
-            // if (!id) return console.warn('No id defined for modal element:' + this);
-            // var mData = data[id];
-            // if (!mData) console.warn('No data defined for modal id \'' + id + '\'');
-            //
-            var modal = new Modal($(this), data);
+            var id = $(this).data('modal');
+            if (!id) return console.warn('No id defined for modal element: ' + this);
+            var mData = data[id];
+            if (!mData) return console.warn('No data defined for modal id \'' + id + '\'');
+            var modal = new Modal($(this), mData);
             modal.init();
         });
 

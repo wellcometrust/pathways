@@ -1420,14 +1420,33 @@
 }
 
 @media screen and (min-width: 48em) {
-    #unique-artifacts {
+    #unique-artifacts-intro {
         min-height: 707px;
-        .main-content {
-            text-shadow: 1px 1px 2px #333;
-        }
+
         .bg-container {
             min-height: 707px;
-            background-image: url(/pathways/2-the-collectors/1-curious-gardener/_assets/m1-curious-gardener-4.jpg);
+       }
+    }
+    .touch {
+        #unique-artifacts-intro {
+            .main-content {
+                margin-top: 32%;
+                margin-bottom: 10%;
+            }
+        }
+    }
+}
+
+#unique-artifacts {
+    display: none;
+}
+@media screen and (min-width: 48em) {
+    #unique-artifacts {
+        display: block;
+        min-height: 707px;
+
+        .bg-container {
+            min-height: 707px;
         }
         .crop-zoom {
             .tap-target.croc {
@@ -1853,8 +1872,8 @@
         -webkit-transform: translate(0, -50%);
         -ms-transform: translate(0, -50%);
         svg {
-            height: auto;
-            width: auto;
+            height: 11px;
+            width: 48px;
         }
         .data-container {
             margin-bottom: 7px;

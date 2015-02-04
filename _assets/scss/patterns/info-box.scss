@@ -1,41 +1,33 @@
-
 .info-box {
-    display:    none;
-    cursor:     pointer;
-    z-index:    20;
-
+    display: none;
+    cursor: pointer;
+    z-index: 20;
     svg {
-        width:  90px; 
+        width: 90px;
         height: 90px;
     }
-
     .inner {
         -webkit-transform-origin: 50% 50%;
-           -moz-transform-origin: 35px 35px;
-            -ms-transform-origin: 50% 50%;
-                transform-origin: 35px 35px;
-
+        -moz-transform-origin: 35px 35px;
+        -ms-transform-origin: 50% 50%;
+        transform-origin: 35px 35px;
         @include animation(info-box-animation-inner 3s ease infinite);
     }
     .outer {
         -webkit-transform-origin: 50% 50%;
-           -moz-transform-origin: 35px 35px;
-            -ms-transform-origin: 50% 50%;
-                transform-origin: 35px 35px;
-
+        -moz-transform-origin: 35px 35px;
+        -ms-transform-origin: 50% 50%;
+        transform-origin: 35px 35px;
         @include animation(info-box-animation-outer 3s ease infinite);
-
         -webkit-animation-delay: 0.3s;
-           -moz-animation-delay: 0.3s;
-            -ms-animation-delay: 0.3s;
-                animation-delay: 0.3s;
+        -moz-animation-delay: 0.3s;
+        -ms-animation-delay: 0.3s;
+        animation-delay: 0.3s;
     }
-
     &:hover {
         opacity: 0.8;
     }
 }
-
 .cssanimations {
     .info-box {
         .outer {
@@ -43,39 +35,32 @@
         }
     }
 }
-
 .info-box.with-text {
     width: 190px;
-
     .inner {
         -moz-transform-origin: 45px 45px;
-             transform-origin: 45px 45px;
+        transform-origin: 45px 45px;
     }
-
     .outer {
         -moz-transform-origin: 45px 45px;
-             transform-origin: 45px 45px;
+        transform-origin: 45px 45px;
     }
-
     .text {
-        position:   absolute;
-        left:       95px;
-        top:        26px;
-        color:      #fff;
-        @include    tablet-gothic;
-        width:      150px;
-
+        position: absolute;
+        left: 95px;
+        top: 26px;
+        color: #fff;
+        @include tablet-gothic;
+        width: 150px;
         .info-type {
-            display:        block;
-            font-size:      0.9rem;
+            display: block;
+            font-size: 0.9rem;
             text-transform: uppercase;
         }
-
         .info-title {
-            font-size:  0.8rem;
+            font-size: 0.8rem;
         }
     }
-
     &.active {
         .info-type {
             opacity: 1;
@@ -87,30 +72,30 @@
         }
     }
 }
-
 .no-touch .info-box {
     .info-type {
         opacity: 0;
         @include transition(all 1s ease);
         @include transform(translate(50px, 0));
     }
-
     .info-title {
-        font-size:  0.8rem;
-        opacity:    0;
+        font-size: 0.8rem;
+        opacity: 0;
         @include transition(all 1s ease);
         @include transform(translate(50px, 0));
-
-        -webkit-transition-delay:   0.15s;
-           -moz-transition-delay:   0.15s;
-            -ms-transition-delay:   0.15s;
-                transition-delay:   0.15s;
+        -webkit-transition-delay: 0.15s;
+        -moz-transition-delay: 0.15s;
+        -ms-transition-delay: 0.15s;
+        transition-delay: 0.15s;
     }
 }
-
 @media screen and (min-width: 48em) {
     .info-box {
         display: block;
     }
+    .info-box.with-text {
+        position: absolute;
+        bottom: 80px;
+        right: 6%;
+    }
 }
-

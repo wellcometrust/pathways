@@ -2612,9 +2612,13 @@ TheCollectors.Interface = function() {
                 return 30;
             }
         }).attr('class', 'label').attr('transform', function(d, i) {
-            labelWidth[i] = $(this)[0].getBBox().width;
-            if (i > DATA.length / 2 - 1) {
-                return ' rotate(180,' + labelWidth[i] / 2 + ',' + 0 + ')';
+            try { // Not sure why but this throws NS_ERROR_FAILURE in Firefox
+                labelWidth[i] = $(this)[0].getBBox().width;
+                if (i > DATA.length / 2 - 1) {
+                    return ' rotate(180,' + labelWidth[i] / 2 + ',' + 0 + ')';
+                }
+            } catch (e) {
+                console.log(e);
             }
         });
         vizBody.selectAll('.value-label-holders').remove();

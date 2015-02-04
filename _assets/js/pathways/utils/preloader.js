@@ -20,7 +20,7 @@
         links.forEach(function(link) {
             var $i = $('<iframe class="preloader"></iframe>');
             $i.css({
-                'width': '1px',
+                'width': '100%',
                 'height': '1px',
                 'position': 'absolute',
                 'top': '-100px',

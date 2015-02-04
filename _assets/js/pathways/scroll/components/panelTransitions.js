@@ -26,44 +26,33 @@
                     $bg = $(panelAttrs.bg),
                     triggerHook = panelAttrs.isFirst ? 'top' : 'middle',
                     $bottom = $(bottomSel).first(),
+                    scene,
                     tween = Tm.to($bg, 1, {
                         opacity: 1
                     });
 
+
+                scene = new Ss({
+                        triggerElement: $panel,
+                        triggerHook: triggerHook,
+                        duration: scrollDurations.getOpacityTranstionDuration
+                    })
+                    .on('start', function(e) {
+                        if (e.scrollDirection == 'FORWARD') {
+                            $panel.addClass(fixedActiveClass);
+                        } else {
+                            $panel.removeClass(fixedActiveClass);
+                            // setTimeout(function() {
+                            //     $panel.removeClass(fixedActiveClass);
+                            // }, 50);
+                        }
+                    });
+
                 if (!panelAttrs.isFirst) {
-
-                    scenes.push(new Ss({
-                            triggerElement: $panel,
-                            triggerHook: triggerHook,
-                            duration: scrollDurations.getOpacityTranstionDuration
-                        })
-                        .on('start', function(e) {
-                            if (e.scrollDirection == 'FORWARD') {
-                                $panel.addClass(fixedActiveClass);
-                            } else {
-                                setTimeout(function() {
-                                    $panel.removeClass(fixedActiveClass);
-                                }, 50);
-                            }
-                        }).setTween(tween));
-
-                } else {
-                    scenes.push(new Ss({
-                            triggerElement: $panel,
-                            triggerHook: triggerHook,
-                            duration: scrollDurations.getOpacityTranstionDuration
-                        })
-                        .on('start', function(e) {
-                            if (e.scrollDirection == 'FORWARD') {
-                                $panel.addClass(fixedActiveClass);
-                            } else {
-                                setTimeout(function() {
-                                    $panel.removeClass(fixedActiveClass);
-                                }, 50);
-                            }
-                        }));
+                    scene.setTween(tween);
                 }
 
+                scenes.push(scene);
                 return scenes;
             },
             unload: function(panelId, panelEl, panelAttrs) {
