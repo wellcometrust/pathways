@@ -1,4 +1,4 @@
-(function(exports, w, overlay, getCarousel, getImageLoader, utils, $, _Hammer, Mod) {
+(function(components, w, overlay, getCarousel, getImageLoader, utils, $, _Hammer, Mod) {
 
     var doc = w.document;
 
@@ -74,7 +74,7 @@
         return _paneCtrlFactory;
     }
 
-    exports.gallery = function(element, data) {
+    components.create('gallery', function(element, data) {
         var $elem = $(element),
             $panel = $elem.closest('.panel'),
             panelId = $panel.attr('id'),
@@ -104,7 +104,7 @@
 
         });
 
-    };
+    });
 
 
 }(Pathways.components, window, Pathways.components.core.overlay, Pathways.components.core.carousel.getCarousel, Pathways.components.core.imageLoader.getImageLoader, Pathways.utils, jQuery, Hammer, Modernizr));

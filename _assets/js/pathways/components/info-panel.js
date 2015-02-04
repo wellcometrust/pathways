@@ -1,11 +1,10 @@
-(function(exports, w, ga, $) {
+(function(components, w, ga, $) {
 
     var repOpen = 'l2 open share',
         repClose = 'l2 close share',
-        offsetHeight = 60,
         visibleClass = 'info-panel-open';
 
-    exports.infoPanel = function(element, data) {
+    components.create('info-panel', function(element, data) {
 
         function closePanel($panel) {
             $panel.removeClass(visibleClass);
@@ -27,13 +26,13 @@
 
             } else {
                 openPanel($panel);
-                $(window).one('scroll', function() {
+                $(w).one('scroll', function() {
                     closePanel($panel);
                     ga.setState($this, repClose, repOpen);
                 });
                 ga.setState($this, repOpen, repClose);
             }
         });
-    };
+    });
 
 }(Pathways.components, window, Pathways.core.ga, jQuery));

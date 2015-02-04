@@ -1,4 +1,4 @@
-(function(exports, w, doc, p, overlay, $, utils) {
+(function(components, w, doc, p, overlay, $, utils) {
 
     function getHeightWithOffset(offset) {
         offset = offset || 0;
@@ -10,7 +10,7 @@
         return w.innerWidth - offset;
     }
 
-    exports.playerOverlay = function(elem) {
+    components.create('player-overlay', function(elem) {
 
         var $element = $(elem),
 
@@ -115,6 +115,6 @@
             return false;
 
         });
-    };
+    });
 
 }(Pathways.components, window, document, Pathways, Pathways.components.core.overlay, jQuery, Pathways.utils));

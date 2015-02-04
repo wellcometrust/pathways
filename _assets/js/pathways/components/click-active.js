@@ -1,9 +1,9 @@
-(function(w, exports, ga, $) {
+(function(components, ga, $) {
 
     var repOpen = 'l3 open library',
         repClose = 'l3 close library';
 
-    exports.clickActive = function(element, data) {
+    components.create('click-active', function(element, data) {
 
         var $element = $(element),
             targetSel = $element.data('click-active-target') || '.info-box',
@@ -14,6 +14,6 @@
             return false;
         });
 
-    };
+    });
 
-}(window, Pathways.components, Pathways.core.ga, jQuery));
+}(Pathways.components, Pathways.core.ga, jQuery));

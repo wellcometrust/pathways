@@ -8,6 +8,15 @@
 
     <div class="main-content left">
 
+        <!-- <div id="marie-stopes-audio-player" data-component="audio-player" class="audio-player" data-src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/audio/01-mesmers-salon-background.mp3">
+            <div class="time-left">Time left <span>0:00</span></div>
+            <div class="progress-bar">
+                <div class="progressed"></div>
+            </div>
+
+            <div class="controls"></div>
+        </div> -->
+
     </div>
 
     <div class="info-box with-text" id="marie-stopes-letters" data-component="letter-gallery" data-ga="the-collectors - ignorant-bride - letters - l2 letter-gallery open">

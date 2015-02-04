@@ -1,12 +1,41 @@
 /***
-    Pathways scrollscene resizing control
+    Pathways component control
 */
-(function(exports, w, p, utils, sys, $) {
+Pathways.components = {};
+
+(function(exports) {
+    'use strict';
+
+    var componentProto = {
+        addData: function addData(id, data) {
+            this.data[id] = data;
+        },
+        getData: function getData(id) {
+            return this.data[id];
+        }
+    };
+
+    function getComponent(method) {
+        return Object.create(componentProto, {
+            data: {
+                value: {}
+            },
+            load: {
+                value: method
+            }
+        });
+    }
+
+    exports.getComponent = getComponent;
+
+}(Pathways.components));
+
+(function(exports, w, p, getComponent, utils, sys, $) {
     'use strict';
 
     var selector = '[data-component]',
         noop = function() {},
-        components = {},
+        list = {},
         currentLoad = noop,
         currentUnload = noop;
 
@@ -18,35 +47,38 @@
         }
     }
 
+    function requestComponent(id) {
+        var component = list[id];
+        if (typeof component === 'undefined' || component === null) return console.warn('Could not load the requested component: ' + id);
+        return component;
+    }
+
+    function requestData(component, id) {
+        if (!(id && component)) return;
+        return component.getData(id);
+    }
+
+    function loadComponent(index, el) {
+        var $view = $(el),
+            componentId = $view.attr('data-component'),
+            instanceId = $view.attr('id'),
+            component = requestComponent(componentId),
+            data;
+
+        if (!component) return;
+        data = requestData(component, instanceId);
+
+        component.load(el, data);
+    }
 
     function loadComponents(context) {
-        var $components = $(selector);
-
-        $components.each(function(index, component) {
-
-            var $component = $(component),
-                handlerName = $component.attr('data-component'),
-                id = utils.toCamelCase($component.attr('id')),
-                handlerClass = utils.toCamelCase(handlerName),
-                method = context[handlerClass],
-                data;
-
-            if (typeof method === 'undefined' || method === null) return console.warn('Could not load the necessary component: ' + handlerClass);
-
-            if (id && method[id] && method[id].data) data = method[id].data;
-            if (typeof method === 'function') {
-                method(component, data);
-            } else if (typeof method === 'object') {
-                method.onLoad(component, data);
-            }
-        });
+        var $views = $(selector);
+        $views.each(loadComponent);
     }
 
     function firstLoad(level) {
         // w.addEventListener('resize', stateCheck);
-
-
-        loadComponents(exports.components);
+        loadComponents(list);
 
         currentLoad = noop;
         currentUnload = noop;
@@ -58,7 +90,6 @@
 
     function init(_selector) {
         selector = _selector || selector;
-
         currentLoad = firstLoad;
     }
 
@@ -66,23 +97,23 @@
         unload();
     }
 
+    function create(name, method) {
+        if (list[name]) return console.warn('A component with the name of \'' + name + '\' already exists');
+        list[name] = getComponent(method);
+    }
 
-    exports.components = {
-        init: init,
-        destroy: destroy,
-        updateState: updateState,
-        addComponent: function (name, component) {
-            if (components[name]) return console.warn('A component with the name of \''+name+'\' already exists');
-            components[name] = component;
-        },
-        getComponent: function (name) {
-            if (!components[name]) return console.warn('No component with the name of \''+name+'\' could be found');
-            return components[name];
-        },
-        addComponentInstanceData: function (id, data) {
-            // body...
-        }
-    };
+    function get(name) {
+        if (!list[name]) return console.warn('No component with the name of \'' + name + '\' could be found');
+        return list[name];
+    }
 
 
-}(Pathways, window, Pathways, Pathways.utils, Pathways.system, jQuery));
+    exports.init = init;
+    exports.destroy = destroy;
+    exports.updateState = updateState;
+    exports.create = create;
+    exports.get = get;
+
+
+
+}(Pathways.components, window, Pathways, Pathways.components.getComponent, Pathways.utils, Pathways.system, jQuery));

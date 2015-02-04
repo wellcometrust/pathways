@@ -1,6 +1,6 @@
-(function(w, doc, exports, overlay, $, utils) {
+(function(components, w, doc, overlay, $, utils) {
 
-    exports.cropZoom = function(element, data) {
+    components.create('crop-zoom', function(element, data) {
         var $elem = $(element),
             db = data;
 
@@ -99,6 +99,6 @@
                 });
             });
         });
-    };
+    });
 
-}(window, document, Pathways.components, Pathways.components.core.overlay, jQuery, Pathways.utils));
+}(Pathways.components, window, document, Pathways.components.core.overlay, jQuery, Pathways.utils));

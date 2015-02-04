@@ -1,22 +1,14 @@
 /***
     Pathways main
 */
-(function(exports, w, p, sys, utils, getPanel, components, media, vol, video, scrollSceneResizeCtrl, preloader, $, undefined) {
+(function(exports, w, p, sys, utils, getPanel, components, mediaCtrl, video, scrollSceneResizeCtrl, preloader, $, undefined) {
 
     'use strict';
 
     var doc = w.document || {},
 
-        minHeight = 550,
-        startPanel,
-        panels,
-
-        scenesLoaded = false,
-        componentsLoaded = false,
-
-        sceneController,
-
-        panelHeightDecreased = false;
+        MIN_HEIGHT = 550,
+        panels;
 
 
     exports.panelHeight = calcPanelHeight();
@@ -26,7 +18,7 @@
 
 
     function calcPanelHeight() {
-        return parseInt((sys.innerHeight < minHeight ? minHeight : sys.innerHeight), 10);
+        return parseInt((sys.innerHeight < MIN_HEIGHT ? MIN_HEIGHT : sys.innerHeight), 10);
     }
 
 
@@ -54,7 +46,7 @@
         exports.panelHeight = calcPanelHeight();
         var level = sys.level;
 
-        media.ctrl.updateState(level);
+        mediaCtrl.updateState(level);
         scrollSceneResizeCtrl.updateState(level);
         components.updateState(level);
         video.updateState(level);
@@ -62,9 +54,8 @@
 
     function init(onLoadComplete) {
 
-        if (window !== window.top) return console.log('Not initialising Pathways as called within iFrame');
+        if (window !== window.top) return console.log('Not initialising Pathways as not called from top-level document');
 
-        startPanel = $('.start').get(0);
         panels = initPanels('.panel', '.start');
 
         w.addEventListener('resize', function() {
@@ -73,21 +64,17 @@
 
         $(function() {
             console.log('doc ready');
-
             updateState();
-
             onLoadComplete();
-
             preloader.load(3000); // set a four second delay before preloading the next page(s)
-
         });
 
         scrollSceneResizeCtrl.init('html', panels);
         components.init('[data-component]', panels);
-        media.ctrl.init(panels);
+        mediaCtrl.init(panels);
         video.init(panels);
     }
 
     exports.init = init;
 
-}(Pathways, this, Pathways, Pathways.system, Pathways.utils, Pathways.panel.getPanel, Pathways.components, Pathways.media, Pathways.media.vol, Pathways.video, Pathways.scrollSceneResizeCtrl, Pathways.preloader, jQuery));
+}(Pathways, this, Pathways, Pathways.system, Pathways.utils, Pathways.panel.getPanel, Pathways.components, Pathways.media.ctrl, Pathways.video, Pathways.scrollSceneResizeCtrl, Pathways.preloader, jQuery));

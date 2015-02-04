@@ -1,7 +1,7 @@
-(function(exports, audioPlayer, $) {
+(function(components, audioPlayer, $) {
 
-    exports.audioPlayer = function(element, data, src) {
-
+    components.create('audio-player', function(element, data, src) {
+        console.log('data', data)
         src = src || $(element).data('src');
         var audio = new Audio(src);
 
@@ -10,6 +10,6 @@
         playerCtrl.addView(playerView);
 
         playerCtrl.enable();
-    };
+    });
 
 }(Pathways.components, Pathways.components.core.audioPlayer, jQuery));

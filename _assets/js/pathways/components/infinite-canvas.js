@@ -1,4 +1,4 @@
-(function(w, exports, ga, Hammer, $) {
+(function(components, w, ga, Hammer, $) {
 
     function InfiniteCanvas(element, data) {
         var self = this,
@@ -202,13 +202,13 @@
         new Hammer(_element, {}).on("release drag", handleHammer);
     }
 
-    exports.infiniteCanvas = function(element, data) {
+    components.create('infinite-canvas', function(element, data) {
 
         $(element).find('.infinite-canvas').each(function() {
             var infiniteCanvas = new InfiniteCanvas(this, data);
             infiniteCanvas.init();
         });
 
-    };
+    });
 
-}(window, Pathways.components, Pathways.core.ga, Hammer, jQuery));
+}(Pathways.components, window, Pathways.core.ga, Hammer, jQuery));

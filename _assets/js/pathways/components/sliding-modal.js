@@ -1,4 +1,4 @@
-(function(exports, overlay, ga, $) {
+(function(components, overlay, ga, $) {
 
     "use strict";
 
@@ -45,7 +45,7 @@
         };
     }
 
-    exports.slidingModal = function(element, data) {
+    components.create('sliding-modal', function(element, data) {
 
         $(element).find('.modal').on('click', function() {
             var id = $(this).data('modal');
@@ -55,9 +55,7 @@
             var modal = new Modal($(this), mData);
             modal.init();
         });
-
-    };
-
+    });
 
 
 }(Pathways.components, Pathways.components.core.overlay, Pathways.core.ga, jQuery));

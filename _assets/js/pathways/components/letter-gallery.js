@@ -1,4 +1,4 @@
-(function(exports, w, getOverlayCtrl, getCarousel, getImageLoader, audioPlayer, utils, $, _Hammer, Mod) {
+(function(components, w, getOverlayCtrl, getCarousel, getImageLoader, audioPlayer, utils, $) {
 
     function getAudioPlayerTemplate() {
         var $tmpl = $('<div class="audio-player audio-player-gallery">' +
@@ -175,12 +175,6 @@
                     return this;
                 },
                 setIndex: function(newIndex) {
-                    // console.log('setIndex', index, newIndex);
-                    // if (newIndex === index) {
-                    //     $pane.css('display', 'block');
-                    // } else {
-                    //     $pane.css('opacity', 0.4);
-                    // }
                     return this;
                 },
                 resize: function() {
@@ -202,7 +196,7 @@
         return _paneCtrlFactory;
     }
 
-    exports.letterGallery = function(element, data) {
+    components.create('letter-gallery', function(element, data) {
         var $elem = $(element),
             $panel = $elem.closest('.panel'),
             panelId = $panel.attr('id'),
@@ -235,8 +229,6 @@
             });
 
         });
+    });
 
-    };
-
-
-}(Pathways.components, window, Pathways.components.core.overlay.getCtrl, Pathways.components.core.carousel.getCarousel, Pathways.components.core.imageLoader.getImageLoader, Pathways.components.core.audioPlayer, Pathways.utils, jQuery, Hammer, Modernizr));
+}(Pathways.components, window, Pathways.components.core.overlay.getCtrl, Pathways.components.core.carousel.getCarousel, Pathways.components.core.imageLoader.getImageLoader, Pathways.components.core.audioPlayer, Pathways.utils, jQuery));

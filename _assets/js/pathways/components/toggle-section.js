@@ -1,9 +1,9 @@
-(function(w, exports, ga, $) {
+(function(components, w, ga, $) {
 
     var repOpen = 'l3 open library',
         repClose = 'l3 close library';
 
-    exports.toggleSection = function(element, data) {
+    components.create('toggle-section', function(element, data) {
 
         var $element = $(element),
             targetSel = $element.attr('data-toggle-section-target'),
@@ -37,6 +37,6 @@
             return false;
         });
 
-    };
+    });
 
-}(window, Pathways.components, Pathways.core.ga, jQuery));
+}(Pathways.components, window, Pathways.core.ga, jQuery));
