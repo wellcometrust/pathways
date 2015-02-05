@@ -2,7 +2,7 @@
                     <div class="teaser-text-container">
                         <p class="teaser-text">Next:</p>
                         <h1>The ‘Obscene’ Doctor</h1>
-                            <p>Wellcome intended his museums to be used primarily by those engaged in research. Yet he also knew how to exploit his acquisitions to create a spectacle, a skill he shared with another London immigrant, whose popular collection was ultimately destroyed.</p>
+                            <p>Wellcome intended his museums to be used primarily by those engaged in research. Yet he also knew how to exploit his acquisitions to create a spectacle – a skill he shared with another London immigrant, whose popular collection was ultimately destroyed.</p>
                         <div class="teaser-icon"></div>
                     </div>
                 </a>

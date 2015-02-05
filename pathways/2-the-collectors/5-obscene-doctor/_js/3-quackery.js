@@ -29,6 +29,6 @@ Pathways.components.get('gallery').addData('quacks-of-the-18th-century', {
         text: 'This vendor puts on a real show, assisted by an elaborately dressed man and an owl.'
     }, {
         image: 'V0016230a',
-        text: 'The colourful quack troupe including a donkey, a monkey and a fool blowing a trumpet.'
+        text: 'A colourful quack troupe including a donkey, a monkey and a fool blowing a trumpet.'
     }]
 });

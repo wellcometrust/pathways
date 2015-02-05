@@ -56,7 +56,7 @@ TheCollectors.assetRoot = '_assets/infographics/death-collector/';
 TheCollectors.data = [{
 
         name: "Abortive, and stilborn",
-        description: "These figures almost certainly include both deliberate abortions, brought on by imbibing herbal concoctions, and miscarriages. Since babies who died in the womb had not received baptism, stillborns were either not buried at all, or were interred in secret, unconsecrated locations.",
+        description: "These figures almost certainly include both deliberate abortions (brought on by imbibing herbal concoctions) and miscarriages. Since babies who died in the womb had not received baptism, stillborns were either not buried at all, or interred in secret, unconsecrated locations.",
         ValueLabelPos_desktop: {
             x: 20,
             y: -232
@@ -164,7 +164,7 @@ TheCollectors.data = [{
 
     {
         name: "Aged",
-        description: "'Aged' referred to deaths when over 60, or perhaps 70, years old. Graunt calculated that only two or three of every 100 individuals born in London would live to such a ripe old age. His own father was one of these few, along with his friend Samuel Pepys. Graunt himself died at the age of 54.",
+        description: "'Aged' referred to the deaths of people who were over 60, or perhaps 70, years old. Graunt calculated that only two or three of every 100 individuals born in London would live to such a ripe old age. His own father was one of these few, along with his friend Samuel Pepys. Graunt himself died at the age of 54.",
         ValueLabelPos_desktop: {
             x: 42,
             y: -110
@@ -274,8 +274,8 @@ TheCollectors.data = [{
     },
 
     {
-        name: "Ague, and Fever",
-        description: "Ague and fever are rather catch-all symptoms, which may result from any number of conditions. When William Shakespeare died on his fifty-third birthday in 1616 he had been suffering fevers for several weeks. No one is quite sure what caused his death, though syphilis, typhoid, influenza and alcoholism have all been mooted.",
+        name: "Ague, and fever",
+        description: "Ague and fever are rather catch-all symptoms, which may result from any number of conditions. When William Shakespeare died on his 53rd birthday, in 1616, he had been suffering fevers for several weeks. No one is quite sure what caused his death, although syphilis, typhoid, influenza and alcoholism have all been mooted.",
         ValueLabelPos_desktop: {
             x: 110,
             y: -135
@@ -383,8 +383,8 @@ TheCollectors.data = [{
     },
 
     {
-        name: "Cancer, Gangrene, and Fistula",
-        description: "Cancer was only diagnosed when it could be observed externally, with most cases seen in the breast or face. Blamed on an excess of melancholic black bile, it was perceived as a fierce and ravenous evil that gnawed away the body. The grievous symptoms caused many sufferers to subject themselves to surgical treatments, which brought their own high risks of death.",
+        name: "Cancer, gangrene, and fistula",
+        description: "Cancer was only diagnosed when it could be observed externally, most cases were seen in the breast or face. Blamed on an excess of melancholic black bile, it was perceived as a fierce and ravenous evil that gnawed away the body. The grievous symptoms caused many sufferers to subject themselves to surgical treatments, which brought their own high risks of death.",
         ValueLabelPos_desktop: {
             x: 220,
             y: -130
@@ -495,7 +495,7 @@ TheCollectors.data = [{
 
     {
         name: "Childbed",
-        description: "In the words of one seventeenth-century mother, the pain of childbirth was an 'exquisite torment' akin to the rack, but it was also a spiritual test of faith and endurance. If mothers suffered well, even those who died in the bed where they had given birth would be saved after death.",
+        description: "In the words of one 17th-century mother, the pain of childbirth was an 'exquisite torment' akin to the rack, but it was also a spiritual test of faith and endurance. If mothers suffered well, even those who died in the bed where they had given birth would be saved after death.",
         ValueLabelPos_desktop: {
             x: 150,
             y: -37
@@ -602,7 +602,7 @@ TheCollectors.data = [{
     },
 
     {
-        name: "Chrisomes, and Infants",
+        name: "Chrisomes, and infants",
         description: "Almost ten per cent of babies didn't survive their first month of life. These 'chrisomes' died as a result of birth trauma, tetanus contracted when the umbilical cord was cut, low weight or inherited birth defects. Graunt's figures also include the deaths of 'infants', children who were not yet old enough to speak.",
         ValueLabelPos_desktop: {
             x: 220,
@@ -715,7 +715,7 @@ TheCollectors.data = [{
     },
 
     {
-        name: "Consumption, and Cough",
+        name: "Consumption, and cough",
         description: "Graunt was dubious about the reliability of 'consumption' when reported as a cause of death in the Bills. The searchers, he wrote, might 'after the mist of a Cup of Ale' or a bribe apply it to any cadaver that looked in any way emaciated or lean.",
         ValueLabelPos_desktop: {
             x: 240,
@@ -825,7 +825,7 @@ TheCollectors.data = [{
 
     {
         name: "Convulsion",
-        description: "Convulsion only established itself as a reported cause of death in the seventeenth century. A symptom usually seen in young children, convulsions might be an outward sign of any number of underlying infections or diseases, including smallpox.",
+        description: "Convulsion only established itself as a reported cause of death in the 17th century. A symptom usually seen in young children, convulsions might be an outward sign of any number of underlying infections or diseases, including smallpox.",
         ValueLabelPos_desktop: {
             x: 135,
             y: 95
@@ -930,7 +930,7 @@ TheCollectors.data = [{
             value: 1031
         }]
     }, {
-        name: "Dropsy, and Tympany",
+        name: "Dropsy, and tympany",
         description: "Dropsy was an ugly, uncomfortable condition, in which the body became bloated with liquid. Usually associated with drunkenness, we now know it to be a symptom of kidney or liver problems. Sufferers, who included writers Henry Fielding and Samuel Johnson, were treated by 'tapping' and endured the added stigma of bringing their deaths upon themselves.",
         ValueLabelPos_desktop: {
             x: 165,
@@ -1149,7 +1149,7 @@ TheCollectors.data = [{
         }]
     }, {
         name: "Executed",
-        description: "Criminals convicted of murder, wounding, robbery and rape all usually received the death penalty, though many were pardoned before being led to the scaffold. One convict who didn't get away was King Charles I, who was beheaded at Whitehall on January 30 1649, for 'High Treason and other high crimes'.",
+        description: "Criminals convicted of murder, wounding, robbery and rape all usually received the death penalty, although many were pardoned before being led to the scaffold. One convict who didn't get away was King Charles I, who was beheaded at Whitehall on 30 January 1649, for 'High Treason and other high crimes'.",
         ValueLabelPos_desktop: {
             x: 10,
             y: 145
@@ -1255,8 +1255,8 @@ TheCollectors.data = [{
             value: 18
         }]
     }, {
-        name: "Fainted in a Bath",
-        description: "Bathing was not only an unusual occurrence in the seventeenth century, it might also be considered dangerous. A popular pamphlet providing medical advice a century before had advised to 'use no baths or stoves' during outbreaks of plague. The publication explained that bathing opened up the skin's pores, so that 'venomous' air might infect the body.",
+        name: "Fainted in a bath",
+        description: "Bathing was not just an unusual occurrence in the 17th century - it might also be considered dangerous. A popular pamphlet providing medical advice a century before had advised to 'use no baths or stoves' during outbreaks of plague. The publication explained that bathing opened up the skin's pores, meaning 'venomous' air might infect the body.",
         ValueLabelPos_desktop: {
             x: -27,
             y: 195
@@ -1362,7 +1362,7 @@ TheCollectors.data = [{
             value: 0
         }]
     }, {
-        name: "Flox, and Small Pox",
+        name: "Flox, and smallpox",
         description: "Smallpox deaths are probably under-reported in the Bills, since the most severe form of the disease killed its victims so quickly the distinctive pustules had not yet erupted. Those who survived the feverish horror of the disease might, however, end up blinded, deafened or grossly disfigured by pits and holes.",
         ValueLabelPos_desktop: {
             x: -100,
@@ -1469,8 +1469,8 @@ TheCollectors.data = [{
             value: 354
         }]
     }, {
-        name: "Found dead in the Streets",
-        description: "Seventeenth-century dramatist Nathaniel Lee, known as the 'Mad Poet', was found dead in the street after a night of riot and extravagance. In his play Caesar Borgia, Lee had described death as unwelcome, but only because it delivered 'an eternal laziness'.",
+        name: "Found dead in the streets",
+        description: "Seventeenth-century dramatist Nathaniel Lee, known as the 'Mad Poet', was found dead in the street after a night of riot and extravagance. In his play <i>Caesar Borgia</i>, Lee had described death as unwelcome, but only because it delivered 'an eternal laziness'.",
         ValueLabelPos_desktop: {
             x: -160,
             y: 185
@@ -1686,7 +1686,7 @@ TheCollectors.data = [{
         }]
     }, {
         name: "Hanged, and made-away themselves",
-        description: "Graunt described those who took their own lives as 'Mad-men' who committed 'the greatest sin', and suicide was, at the time, both a civil and religious crime. Families would be keen to avoid such a report, so they might be allowed to bury their deceased relative in a churchyard and keep custody of their otherwise impounded belongings.",
+        description: "Graunt described those who took their own lives as 'Mad-men' who committed 'the greatest sin', and suicide was, at the time, both a civil and a religious crime. Families would be keen to avoid such a report, so they might be allowed to bury their deceased relative in a churchyard and keep custody of their otherwise impounded belongings.",
         ValueLabelPos_desktop: {
             x: -290,
             y: 99
@@ -1791,8 +1791,8 @@ TheCollectors.data = [{
             value: 36
         }]
     }, {
-        name: "Killed by several Accidents",
-        description: "In bustling seventeenth-century London, there were fatal risks at every turn. Inhabitants might tumble down a flight of stairs in an unlit home, experience a workplace accident or fall under one of the two thousand or so carts and coaches that traversed the city's crowded streets.",
+        name: "Killed by several accidents",
+        description: "In bustling 17th-century London, there were fatal risks at every turn. Inhabitants might tumble down a flight of stairs in an unlit home, experience a workplace accident or fall under one of the two thousand or so carts and coaches that traversed the city's crowded streets.",
         ValueLabelPos_desktop: {
             x: -260,
             y: 10
@@ -2008,7 +2008,7 @@ TheCollectors.data = [{
         }]
     }, {
         name: "Plague",
-        description: "Graunt concluded that the searchers had underreported plague deaths during the Great Plague of 1625, but who could blame them? The distinctive swellings or 'buboes' didn't always appear before a victim died, families were desperate not to be quarantined in an infected house for forty days and the public feared contamination from anyone who might have been in contact with the disease.",
+        description: "Graunt concluded that the searchers had underreported plague deaths during the Great Plague of 1625, but who could blame them? The distinctive swellings or 'buboes' didn't always appear before a victim died, families were desperate not to be quarantined in an infected house for 40 days, and the public feared contamination from anyone who might have been in contact with the disease.",
         ValueLabelPos_desktop: {
             x: -133,
             y: -64
@@ -2119,7 +2119,7 @@ TheCollectors.data = [{
         }]
     }, {
         name: "Rickets",
-        description: "Rickets, a softening of the bones now linked with vitamin D deficiency, was the principal disease of infancy in the 1600s. Surprisingly, the aristocracy – including King Charles I – were often the worst affected, due to a diet rich in meat and low in milk. The only treatment was swaddling children so tightly that they might not stand or walk on their malleable bones.",
+        description: "Rickets, a softening of the bones now linked with vitamin D deficiency, was the principal disease of infancy in the 1600s. Surprisingly, the aristocracy – including King Charles I – were often the worst affected, owing to a diet rich in meat and low in milk. The only treatment was swaddling children so tightly that they might not stand or walk on their malleable bones.",
         ValueLabelPos_desktop: {
             x: -180,
             y: -180
@@ -2224,7 +2224,7 @@ TheCollectors.data = [{
             value: 521
         }]
     }, {
-        name: "Mother, rising of the Lights",
+        name: "Mother, rising of the lights",
         description: "These mysterious-sounding diseases both led to breathing difficulties. The movement of either the uterus (known as 'mother') or the lungs (known as 'lights') was blamed for conditions we might now describe as croup, asthma, pleurisy or bronchitis.",
         ValueLabelPos_desktop: {
             x: -110,
@@ -2330,7 +2330,7 @@ TheCollectors.data = [{
             value: 249
         }]
     }, {
-        name: "Teeth, and Worms",
+        name: "Teeth, and worms",
         description: "Although 'teeth' or 'breeding of the teeth' were commonly listed as causes of death, they say more about the age of the victim than the condition they died from. The terms relate to the developmental stage when children are teething, at which point they might succumb to a broad range of afflictions.",
         ValueLabelPos_desktop: {
             x: -45,

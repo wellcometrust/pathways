@@ -14,7 +14,7 @@
     <div class="main-content left">
 
         <div class="inner">
-            <p>In the seventeenth-century, every time a Londoner died a bell tolled to summon ‘the searchers’. These matronly (and often drunken) women inspected each corpse and made enquiries to establish the cause of death. Within days, their findings were published in weekly ‘Bills of Mortality’, sold on subscription for four shillings a year.</p>
+            <p>Every time a Londoner died in the 17th century, a bell tolled to summon ‘the searchers’. These matronly (and often drunken) women inspected each corpse and made enquiries to establish the cause of death. Within days, their findings were published in weekly <i>Bills of Mortality</i>, sold on subscription for four shillings a year.</p>
             <p>Until they piqued John Graunt’s interest, the Bills weren’t used for much more than feeding ghoulish gossip.</p>
         </div>
 

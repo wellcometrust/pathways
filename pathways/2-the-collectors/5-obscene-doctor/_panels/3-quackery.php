@@ -8,7 +8,7 @@
     <div class="main-content left">
 
         <div class="inner">
-            <p>The Museum, and its educational focus, initially found favour with publications like the Lancet and Medical Times. However, the establishment turned against Kahn when he started selling quack remedies. The Lancet then labelled the Museum ‘a den of obscenity… determinedly arranged for the purposes of depraving the minds of the ignorant and unwary’.</p>
+            <p>The Museum, and its educational focus, initially found favour with publications like the <i>Lancet</i> and <i>Medical Times</i>. However, the establishment turned against Kahn when he started selling quack remedies. The <i>Lancet</i> then labelled the Museum ‘a den of obscenity… determinedly arranged for the purposes of depraving the minds of the ignorant and unwary’.</p>
         </div>
 
     </div>

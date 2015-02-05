@@ -10,7 +10,7 @@
         <div class="sliding-panels" id="kahns-anatomical-museum-sliding-modal" data-component="sliding-modal" data-sliding-offset='1'>
 
             <div class="text-panel">
-                <p>The 2000 people who visited self-styled ‘Doctor’ Joseph Kahn’s Museum every week encountered a life-sized anatomical Venus, models of dissections and monstrous births and candid displays on the pathology of venereal disease. They might also study slides under a microscope or listen to daily educational lectures about the ‘wondrous’ structure and function of the human body.</p>
+                <p>Two thousand people visited self-styled ‘Doctor’ Joseph Kahn’s Anatomical and Pathological Museum every week. The objects they encountered included a life-sized anatomical Venus, models of dissections and monstrous births and candid displays on the pathology of venereal disease. They might also study slides under a microscope or listen to daily educational lectures about the ‘wondrous’ structure and function of the human body.</p>
                 <p>Ladies were admitted only on specified days, when Kahn insisted the most offensive models were removed from display.</p>
             </div>
 

@@ -16,7 +16,7 @@
             </header>
             <blockquote>
                 <i>My plans exist in my mind like a jigsaw puzzle… and gradually I shall be able to piece it together</i>
-                <p>Sir Henry Wellcome, 1853-1936</p>
+                <p>Sir Henry Wellcome, 1853–1936</p>
             </blockquote>
             <p>As though a neolithic arrowhead he’d unearthed<br>
             at the age of four had entered his bloodstream,<br>

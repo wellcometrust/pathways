@@ -65,7 +65,7 @@
         </div>
 
         <div class="inner">
-            <p>When Tradescant later joined the Duke of Buckingham’s staff, Buckingham’s position as Lord Admiral of England opened up more diverse collecting opportunities. Tradescant wrote to British ships trading around the globe, requesting, ‘…All Maner of Beasts &amp; Fowels &amp; Birds Alyve’. He especially requested the biggest, greatest or strangest specimens.</p>
+            <p>When Tradescant later joined the Duke of Buckingham’s staff, Buckingham’s position as Lord Admiral of England opened up more diverse collecting opportunities. Tradescant wrote to British ships trading around the globe, requesting, ‘All Maner of Beasts &amp; Fowels &amp; Birds Alyve’. He especially requested the biggest, greatest or strangest specimens.</p>
         </div>
 
         <div class="sliding-panels" id="john-tradescant-sliding-modal-2" data-component="sliding-modal">

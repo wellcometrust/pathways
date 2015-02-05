@@ -2,12 +2,12 @@ Pathways.components.get('crop-zoom').addData('unique-artifacts', {
     'croc': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/crocodile.jpg',
         'title': '',
-        'text': 'Tradescant was attracted by large or exotic items. His requests to British ships included pleas for ‘the biggest that canbe gotten’ and ‘any thing that is strang’.',
+        'text': 'Tradescant was attracted by large or exotic items. His requests to British ships included pleas for ‘the biggest that can be gotten’ and ‘any thing that is strang’.',
         'position': 'right'
     },
     'person': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/people.jpg',
-        'text': 'Royal apothecary John Parkinson described his friend, and self-made man, John Tradescant as ‘that worthy, curious, and diligent searcher and preserver of all natures rarities and varieties’.',
+        'text': 'Royal apothecary John Parkinson described his friend John Tradescant as ‘that worthy, curious, and diligent searcher and preserver of all natures rarities and varieties’.',
         'position': 'left'
     },
     'bird': {

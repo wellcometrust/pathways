@@ -18,7 +18,7 @@
     <div class="main-content right">
 
         <div class="inner">
-            <p>Kahn’s models were seized and destroyed at Marlborough Street Police Court in 1873 and the Museum forced to close down, a fate that befell many other similar institutions.</p>
+            <p>Kahn’s models were seized and destroyed at Marlborough Street Police Court in 1873 and the Museum was forced to close down. The same fate befell many similar institutions.</p>
         </div>
 
     </div>
