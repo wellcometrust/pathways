@@ -41,8 +41,8 @@
                 $components = $components || $(panelEl).find('.sliding-panel');
                 $components.each(function(index) {
                     var $this = $(this),
-                        fxAudioSrc = $this.data('fx') || defaultFxAudioSrc,
-                        fxAudio = new Audio(fxAudioSrc),
+                        fxAudioSrc = $this.data('fx'),
+                        fxAudio = fxAudioSrc ? new Audio(fxAudioSrc) : null,
                         translateVal = translations[((index + offset) % 2)],
                         val = 'translate(' + translations[((index + offset) % 2)] + 'px,0)';
 

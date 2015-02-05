@@ -2,13 +2,16 @@
 
     "use strict";
 
+    var baseClass = 'modal-box',
+        hiddenClass = 'modal-box-hidden',
+        shownClass = 'modal-box-shown',
+        openTxt = ' - open',
+        downloadTxt = ' - download';
+
     function Modal(elm, data) {
 
         var self = this,
             $elm = elm,
-            baseClass = 'modal-box',
-            hiddenClass = 'modal-box-hidden',
-            shownClass = 'modal-box-shown',
             $overlay,
             $img;
 
@@ -23,13 +26,14 @@
                 src = data.image,
                 caption = data.title,
                 download = data.download,
-                gaLabel = ((data.ga) || src) + ' - download',
+                gaTmp = data.ga || src + openTxt,
+                gaLabel = gaTmp.replace(openTxt, downloadTxt),
                 $caption = caption ? $('<p>' + caption + '</p>').addClass('text') : '',
                 $download = download ? $('<a>Download</a>')
-                            .attr('href', download).addClass('download')
-                            .click(function(){
-                                ga.send(gaLabel);
-                            }) : '';
+                .attr('href', download).addClass('download')
+                .click(function() {
+                    ga.send(gaLabel);
+                }) : '';
 
             img.src = src;
             $caption.append($download);
@@ -45,13 +49,15 @@
         };
     }
 
-    components.create('sliding-modal', function(element, data) {
+    components.create('modal-overlay', function(element, data) {
 
-        $(element).find('.modal').on('click', function() {
+        $(element).find('[data-modal]').on('click', function() {
             var id = $(this).data('modal');
             if (!id) return console.warn('No id defined for modal element: ' + this);
             var mData = data[id];
             if (!mData) return console.warn('No data defined for modal id \'' + id + '\'');
+            mData.ga = mData.ga + openTxt;
+            ga.send(mData.ga);
             var modal = new Modal($(this), mData);
             modal.init();
         });

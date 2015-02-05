@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="x-dns-prefetch-control" content="on">
 
-    <link rel="stylesheet" type="text/css" href="<?= $page->getAsset('build/css/main.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?= $page->getAssetPath('build/css/main.css') ?>">
 
     <link rel="dns-prefetch" href="http://digitalstories.s3-website-eu-west-1.amazonaws.com">
     <link rel="dns-prefetch" href="//use.typekit.net">

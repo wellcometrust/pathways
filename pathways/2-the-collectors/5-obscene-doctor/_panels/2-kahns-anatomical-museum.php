@@ -7,7 +7,7 @@
 
     <div class="main-content center">
 
-        <div class="sliding-panels" id="kahns-anatomical-museum-sliding-modal" data-component="sliding-modal" data-sliding-offset='1'>
+        <div class="sliding-panels" id="kahns-anatomical-museum-modal-overlay" data-component="modal-overlay" data-sliding-offset='1'>
 
             <div class="text-panel">
                 <p>Two thousand people visited self-styled ‘Doctor’ Joseph Kahn’s Anatomical and Pathological Museum every week. The objects they encountered included a life-sized anatomical Venus, models of dissections and monstrous births and candid displays on the pathology of venereal disease. They might also study slides under a microscope or listen to daily educational lectures about the ‘wondrous’ structure and function of the human body.</p>

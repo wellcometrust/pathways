@@ -81,7 +81,7 @@
         return {
             load: function(panelId, panelEl, panel) {
                 var canvas = $(panelEl).find('.panel-animation').get(0), //TODO: Allow for mulitple animations
-                    animationId = utils.toCamelCase(panel.id);
+                    animationId = panel.id;
                 if (canvas)
                     animationCtrl.init(animationId, canvas);
             },

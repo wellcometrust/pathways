@@ -145,15 +145,15 @@
         }
 
         public function getPathwaySurveyLink() {
-            return $this->_getPathwaySurveyLink($this->pathwayId, $this->siteConfigData);
+            return $this->_getPathwayInfo('survey_link', $this->pathwayId, $this->siteConfigData);
         }
 
         public function getPathwayIntroText() {
-            return $this->_getPathwayIntroText($this->pathwayId, $this->siteConfigData);
+            return $this->_getPathwayInfo('intro_text', $this->pathwayId, $this->siteConfigData);
         }
 
         public function getPathwayTitle() {
-            return $this->_getPathwayTitle($this->pathwayId, $this->siteConfigData);
+            return $this->_getPathwayInfo('title', $this->pathwayId, $this->siteConfigData);
         }
 
         public function getPathwayModules() {
@@ -180,7 +180,7 @@
 
 
 
-        public function getAsset($location) {
+        public function getAssetPath($location) {
             return '/_assets' . ( strpos($location, '/') != 0 ? '/' . $location : $location);
         }
 
@@ -189,8 +189,7 @@
 
 
 
-        public function getPatternPath($pattern, $data = null) {
-            $page = $this;
+        public function getPatternPath($pattern) {
             return $this->docRoot . '/_includes/components/' . $pattern . '.php';
         }
 
@@ -222,18 +221,6 @@
 
         private function _getPathwayPath($pathwayId, $siteConfigData) {
             return $this->_getPathwayInfo('path', $pathwayId, $siteConfigData);
-        }
-
-        private function _getPathwaySurveyLink($pathwayId, $siteConfigData) {
-            return $this->_getPathwayInfo('survey_link', $pathwayId, $siteConfigData);
-        }
-
-        private function _getPathwayIntroText($pathwayId, $siteConfigData) {
-            return $this->_getPathwayInfo('intro_text', $pathwayId, $siteConfigData);
-        }
-
-        private function _getPathwayTitle($pathwayId, $siteConfigData) {
-            return $this->_getPathwayInfo('title', $pathwayId, $siteConfigData);
         }
 
         private function _getPathwayModules($pathwayId, $siteConfigData) {

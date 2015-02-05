@@ -1,5 +1,6 @@
 Pathways.components.get('quiz').addData('guess-the-tumour', {
-    'title': 'The Esdaile Game',
+    'title': 'Guess the Tumour',
+    'introText': 'James Esdaile performed dozens of operations, many of which were documented.',
     'images': '_assets/quizzes/guess-the-tumour',
     'questions': [{
         'image': 'q1-300h.jpg',

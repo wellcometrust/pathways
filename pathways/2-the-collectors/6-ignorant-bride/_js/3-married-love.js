@@ -20,6 +20,6 @@ Pathways.components.get('gallery').addData('made-a-film', {
         text: 'The association with Stopes – along with the original title of ‘Married Love’ – was guaranteed to generate a lot of publicity. Five years after she had published her first book, <i>Married Love</i> was still selling hundreds of thousands of copies a year, and Stopes had also written two other successful books.'
     }, {
         image: '07_Film_poster_crop',
-        text: 'The Stopes name also caused problems. While a reviewer described the film as nothing more than ‘a straightforward human story of sentimental rather than sexual appeal’, the British Board of Film Censors was concerned about ‘the title, taken in conjunction with the name of the book and the authoress referred to’. It felt the production was ‘propaganda on a subject unsuitable for discussion in a Cinema Theatre'.
-    }, ]
+        text: 'The Stopes name also caused problems. While a reviewer described the film as nothing more than ‘a straightforward human story of sentimental rather than sexual appeal’, the British Board of Film Censors was concerned about ‘the title, taken in conjunction with the name of the book and the authoress referred to’. It felt the production was ‘propaganda on a subject unsuitable for discussion in a Cinema Theatre.',
+    } ]
 });

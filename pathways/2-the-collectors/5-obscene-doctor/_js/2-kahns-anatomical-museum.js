@@ -1,4 +1,4 @@
-Pathways.components.get('sliding-modal').addData('kahns-anatomical-museum-sliding-modal', {
+Pathways.components.get('modal-overlay').addData('kahns-anatomical-museum-modal-overlay', {
     '1': {
         'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/1-large.jpg',
         'title': 'Reclining nudes with removable parts, like this 18th-century wax model made in Florence, formed the centrepieces of many 19th-century museum collections. Kahn’s own ‘Venus de Medici’ comprised 85 separate pieces."',

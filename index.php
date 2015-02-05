@@ -35,7 +35,6 @@
             <div class="inner">
                 <header class="intro-header">
                     <h1>Digital Stories</h1>
-                    <h2>Wellcome Collection</h2>
                 </header>
             </div>
         </div>

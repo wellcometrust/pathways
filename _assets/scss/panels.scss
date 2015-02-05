@@ -2283,63 +2283,32 @@
     }
 }
 
-
-#wellcome-collection {
-    
-}
-
-.touch {
-    #wellcome-collection {
-
-    }
-}
-
-.no-touch {
-    #wellcome-collection {
-        
-    }
-}
-
 @media screen and (min-width: 48em) {
     #wellcome-collection {
         .bg-container {
             cursor: move;
-        }  
-    }
-
-    .touch {
-        #wellcome-collection {
-
         }
-    }
-
-    .no-touch {
-        #wellcome-collection {
-
-        }
-    }
-
-    .infinite-canvas {
-
-        .text-panel[data-chapter="1"] {
-            top:    1834px;
-            left:   3418px;
-        }
-        .text-panel[data-chapter="2"] {
-            top:    776px;
-            left:   5892px;
-        }
-        .text-panel[data-chapter="3"] {
-            top:    2985px;
-            left:   997px;
-        }
-        .text-panel[data-chapter="4"] {
-            top:    893px;
-            left:   1252px;
-        }
-        .text-panel[data-chapter="5"] {
-            top:    3114px;
-            left:   6093px;
+        .infinite-canvas {
+            .text-panel[data-chapter="1"] {
+                top: 1834px;
+                left: 3418px;
+            }
+            .text-panel[data-chapter="2"] {
+                top: 776px;
+                left: 5892px;
+            }
+            .text-panel[data-chapter="3"] {
+                top: 2985px;
+                left: 997px;
+            }
+            .text-panel[data-chapter="4"] {
+                top: 893px;
+                left: 1252px;
+            }
+            .text-panel[data-chapter="5"] {
+                top: 3114px;
+                left: 6093px;
+            }
         }
     }
 }

@@ -479,4 +479,4 @@ var createjs = createjs || {},
 
 })(magnetisedTrees.lib, magnetisedTrees.images, createjs);
 
-Pathways.animation.addAnimation('magnetisedTrees', magnetisedTrees);
+Pathways.animation.addAnimation('magnetised-trees', magnetisedTrees);

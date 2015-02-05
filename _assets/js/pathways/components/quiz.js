@@ -60,6 +60,8 @@
         var $quiz = $(element),
             paused = false,
             level = 1,
+            title = data.title,
+            introText = data.introText,
             imagesLocation = data.images,
             questions = data.questions,
             answers = data.questions[level].answers,
@@ -82,9 +84,13 @@
 
             // load the intro image
             var $quizHeader = $quiz.find('.quiz-header-image'),
-                $image = $('<img/>').attr('src', imagesLocation + '/intro.jpg');
+                $image = $('<img/>').attr('src', imagesLocation + '/intro.jpg'),
+                $header = $quiz.find('.quiz-start--header h1'),
+                $intro = $quiz.find('.quiz-start--text p:first-child');
 
             $quizHeader.html($image);
+            $header.html(title);
+            $intro.html(introText);
 
             // Add the timer
             $quiz.append($timer);

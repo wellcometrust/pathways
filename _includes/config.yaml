@@ -94,7 +94,7 @@ site:
             title: The Collectors
             intro_text: 'Searchers, secrets and the power of curiosity'
             path: '/pathways/2-the-collectors/'
-            # survey_link: 'http://www.google.com'
+            survey_link: 'http://survey.euro.confirmit.com/wix0/p1841606440.aspx'
             modules:
                 -   id: intro
                     path: 'index.php'

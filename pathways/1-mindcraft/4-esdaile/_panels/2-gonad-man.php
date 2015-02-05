@@ -41,11 +41,11 @@
                 <div class="quiz-header-image"></div>
 
                 <header class="quiz-start--header">
-                    <h1>Guess the Tumour</h1>
+                    <h1>[Title]</h1>
                 </header>
 
                 <div class="quiz-start--text">
-                    <p>James Esdaile performed dozens of operations, many of which were documented.</p>
+                    <p>[Intro text]</p>
                     <p>See if you can work out what happened in these pictures – but be quick, you’ve only got ten seconds to guess each one!</p>
                 </div>
 
