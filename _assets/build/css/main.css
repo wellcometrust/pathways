@@ -3403,20 +3403,19 @@ iframe {
 @media screen and (min-width: 48em) {
   #wellcome-collection .bg-container {
     cursor: move; }
-
-  .infinite-canvas .text-panel[data-chapter="1"] {
+  #wellcome-collection .infinite-canvas .text-panel[data-chapter="1"] {
     top: 1834px;
     left: 3418px; }
-  .infinite-canvas .text-panel[data-chapter="2"] {
+  #wellcome-collection .infinite-canvas .text-panel[data-chapter="2"] {
     top: 776px;
     left: 5892px; }
-  .infinite-canvas .text-panel[data-chapter="3"] {
+  #wellcome-collection .infinite-canvas .text-panel[data-chapter="3"] {
     top: 2985px;
     left: 997px; }
-  .infinite-canvas .text-panel[data-chapter="4"] {
+  #wellcome-collection .infinite-canvas .text-panel[data-chapter="4"] {
     top: 893px;
     left: 1252px; }
-  .infinite-canvas .text-panel[data-chapter="5"] {
+  #wellcome-collection .infinite-canvas .text-panel[data-chapter="5"] {
     top: 3114px;
     left: 6093px; } }
 #stewart-conn .bg-container {

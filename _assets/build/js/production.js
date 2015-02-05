@@ -2045,7 +2045,7 @@ Pathways.media.vol.views = {};
         return {
             load: function(panelId, panelEl, panel) {
                 var canvas = $(panelEl).find('.panel-animation').get(0), //TODO: Allow for mulitple animations
-                    animationId = utils.toCamelCase(panel.id);
+                    animationId = panel.id;
                 if (canvas)
                     animationCtrl.init(animationId, canvas);
             },
@@ -2641,8 +2641,8 @@ Pathways.scrollSceneCtrl.addScrollContentFactory(function() {
                 $components = $components || $(panelEl).find('.sliding-panel');
                 $components.each(function(index) {
                     var $this = $(this),
-                        fxAudioSrc = $this.data('fx') || defaultFxAudioSrc,
-                        fxAudio = new Audio(fxAudioSrc),
+                        fxAudioSrc = $this.data('fx'),
+                        fxAudio = fxAudioSrc ? new Audio(fxAudioSrc) : null,
                         translateVal = translations[((index + offset) % 2)],
                         val = 'translate(' + translations[((index + offset) % 2)] + 'px,0)';
 
@@ -4306,6 +4306,74 @@ Pathways.components.core = Pathways.components.core || {};
 
 }(Pathways.components, window, Pathways.components.core.overlay.getCtrl, Pathways.components.core.carousel.getCarousel, Pathways.components.core.imageLoader.getImageLoader, Pathways.components.core.audioPlayer, Pathways.utils, jQuery));
 
+(function(components, overlay, ga, $) {
+
+    "use strict";
+
+    var baseClass = 'modal-box',
+        hiddenClass = 'modal-box-hidden',
+        shownClass = 'modal-box-shown',
+        openTxt = ' - open',
+        downloadTxt = ' - download';
+
+    function Modal(elm, data) {
+
+        var self = this,
+            $elm = elm,
+            $overlay,
+            $img;
+
+        this.init = function() {
+
+            var img = new Image(),
+                ctrl = overlay.getCtrl(),
+                $overlay = ctrl.$overlay,
+                $img = $(img),
+                $container = $('<div/>').addClass(baseClass + ' ' + hiddenClass),
+
+                src = data.image,
+                caption = data.title,
+                download = data.download,
+                gaTmp = data.ga || src + openTxt,
+                gaLabel = gaTmp.replace(openTxt, downloadTxt),
+                $caption = caption ? $('<p>' + caption + '</p>').addClass('text') : '',
+                $download = download ? $('<a>Download</a>')
+                .attr('href', download).addClass('download')
+                .click(function() {
+                    ga.send(gaLabel);
+                }) : '';
+
+            img.src = src;
+            $caption.append($download);
+
+            $container.on('click', ctrl.closeHandler);
+
+            img.onload = function() {
+                $overlay.append($container);
+                $container.append($img);
+                $container.append($caption);
+                $container.removeClass(hiddenClass).addClass(shownClass);
+            };
+        };
+    }
+
+    components.create('modal-overlay', function(element, data) {
+
+        $(element).find('[data-modal]').on('click', function() {
+            var id = $(this).data('modal');
+            if (!id) return console.warn('No id defined for modal element: ' + this);
+            var mData = data[id];
+            if (!mData) return console.warn('No data defined for modal id \'' + id + '\'');
+            mData.ga = mData.ga + openTxt;
+            ga.send(mData.ga);
+            var modal = new Modal($(this), mData);
+            modal.init();
+        });
+    });
+
+
+}(Pathways.components, Pathways.components.core.overlay, Pathways.core.ga, jQuery));
+
 (function(components, w, doc, p, overlay, $, utils) {
 
     function getHeightWithOffset(offset) {
@@ -4489,6 +4557,8 @@ Pathways.components.core = Pathways.components.core || {};
         var $quiz = $(element),
             paused = false,
             level = 1,
+            title = data.title,
+            introText = data.introText,
             imagesLocation = data.images,
             questions = data.questions,
             answers = data.questions[level].answers,
@@ -4511,9 +4581,13 @@ Pathways.components.core = Pathways.components.core || {};
 
             // load the intro image
             var $quizHeader = $quiz.find('.quiz-header-image'),
-                $image = $('<img/>').attr('src', imagesLocation + '/intro.jpg');
+                $image = $('<img/>').attr('src', imagesLocation + '/intro.jpg'),
+                $header = $quiz.find('.quiz-start--header h1'),
+                $intro = $quiz.find('.quiz-start--text p:first-child');
 
             $quizHeader.html($image);
+            $header.html(title);
+            $intro.html(introText);
 
             // Add the timer
             $quiz.append($timer);
@@ -4717,68 +4791,6 @@ Pathways.components.core = Pathways.components.core || {};
     }
 
 }(Pathways.components, window, Pathways.utils, jQuery));
-
-(function(components, overlay, ga, $) {
-
-    "use strict";
-
-    function Modal(elm, data) {
-
-        var self = this,
-            $elm = elm,
-            baseClass = 'modal-box',
-            hiddenClass = 'modal-box-hidden',
-            shownClass = 'modal-box-shown',
-            $overlay,
-            $img;
-
-        this.init = function() {
-
-            var img = new Image(),
-                ctrl = overlay.getCtrl(),
-                $overlay = ctrl.$overlay,
-                $img = $(img),
-                $container = $('<div/>').addClass(baseClass + ' ' + hiddenClass),
-
-                src = data.image,
-                caption = data.title,
-                download = data.download,
-                gaLabel = ((data.ga) || src) + ' - download',
-                $caption = caption ? $('<p>' + caption + '</p>').addClass('text') : '',
-                $download = download ? $('<a>Download</a>')
-                            .attr('href', download).addClass('download')
-                            .click(function(){
-                                ga.send(gaLabel);
-                            }) : '';
-
-            img.src = src;
-            $caption.append($download);
-
-            $container.on('click', ctrl.closeHandler);
-
-            img.onload = function() {
-                $overlay.append($container);
-                $container.append($img);
-                $container.append($caption);
-                $container.removeClass(hiddenClass).addClass(shownClass);
-            };
-        };
-    }
-
-    components.create('sliding-modal', function(element, data) {
-
-        $(element).find('.modal').on('click', function() {
-            var id = $(this).data('modal');
-            if (!id) return console.warn('No id defined for modal element: ' + this);
-            var mData = data[id];
-            if (!mData) return console.warn('No data defined for modal id \'' + id + '\'');
-            var modal = new Modal($(this), mData);
-            modal.init();
-        });
-    });
-
-
-}(Pathways.components, Pathways.components.core.overlay, Pathways.core.ga, jQuery));
 
 (function(components, w, ga, $) {
 
@@ -5404,7 +5416,7 @@ var createjs = createjs || {},
 
 })(magnetisedTrees.lib, magnetisedTrees.images, createjs);
 
-Pathways.animation.addAnimation('magnetisedTrees', magnetisedTrees);
+Pathways.animation.addAnimation('magnetised-trees', magnetisedTrees);
 
 Pathways.components.get('gallery').addData('aldinis-experiments', {
     location: '_assets/galleries/aldinis-experiments/',
@@ -5468,7 +5480,8 @@ Pathways.components.get('gallery').addData('hypnotised-women', {
 });
 
 Pathways.components.get('quiz').addData('guess-the-tumour', {
-    'title': 'The Esdaile Game',
+    'title': 'Guess the Tumour',
+    'introText': 'James Esdaile performed dozens of operations, many of which were documented.',
     'images': '_assets/quizzes/guess-the-tumour',
     'questions': [{
         'image': 'q1-300h.jpg',
@@ -5566,106 +5579,106 @@ Pathways.scrollSceneCtrl.addSinglePanelScrollMethod('anna-o', function(panelId, 
     return scenes;
 });
 
-Pathways.components.get('sliding-modal').addData('john-tradescant-sliding-modal-1', {
+Pathways.components.get('modal-overlay').addData('john-tradescant-modal-overlay-1', {
     '1.1': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.1-large.jpg',
-        'title': 'Tradescant imported many of his plants from overseas. This common bean, featured in Leonhart Fuchs’ Herbal in the 1540s, was native to the Americas.',
+        'title': 'Tradescant imported many of his plants from overseas. This common bean, featured in Leonhart Fuchs’ <i>Herbal</i> in the 1540s, was native to the Americas.',
         'download': 'http://wellcomelibrary.org/actual/b20723143/0/f87d84f4-d665-4102-b90f-7b76c4f70b5d/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.1',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 1.1',
     },
 
     '1.2': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.2-large.jpg',
-        'title': 'The 1656 Musaeum Tradescantianum catalogue lists four types of ivy growing in Tradescant’s South Lambeth garden.',
+        'title': 'The 1656 <i>Musaeum Tradescantianum</i> catalogue lists four types of ivy growing in Tradescant’s South Lambeth garden.',
         'download': 'http://wellcomelibrary.org/actual/b20723143/0/dd26de48-0556-431a-bffb-abf9885ed89a/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.2',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 1.2',
     },
 
     '1.3': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.3-large.jpg',
         'title': 'While Tradescant worked at Lord Robert Cecil’s home, Hatfield House, a cost of £140 was recorded for importing 1200 lime trees from France.',
         'download': 'http://wellcomelibrary.org/actual/b20723143/0/42e2e4df-a131-4f64-9181-af53ad6ec59b/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.3',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 1.3',
     },
 
     '1.4': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.4-large.jpg',
-        'title': 'In a detailed 1610 letter to an agent in Brussels, Tradescant requested the purchase of five different varieties of narcissi for Lord Robert Cecil’s gardens.',
+        'title': 'In a detailed 1610 letter to an agent in Brussels, Tradescant requested five different varieties of narcissi for Lord Robert Cecil’s gardens.',
         'download': 'http://wellcomelibrary.org/actual/b11827786/0/87530b09-1873-4a7e-a68f-3efd00e7690c/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.4',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 1.4',
     },
 
     '1.5': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.5-large.jpg',
         'title': 'The genus of American plants named after Tradescant is commonly known as spiderwort, thanks to the silky strings spun out when its succulent leaves are broken.',
         'download': 'http://wellcomelibrary.org/actual/b11743074/0/dc6b09a7-462d-4bde-b39e-04cb0d715a99/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.5',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 1.5',
     },
 
     '1.6': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/1.6-large.jpg',
-        'title': 'The Musaeum Tradescantianum catalogue lists four types of allium, or ‘garlick’, growing in Tradescant’s South Lambeth garden.',
+        'title': 'The <i>Musaeum Tradescantianum</i> catalogue lists four types of allium, or ‘garlick’, growing in Tradescant’s south Lambeth garden.',
         'download': 'http://wellcomelibrary.org/actual/b20723143/0/e93759be-0cc3-4a3f-90be-57e0005d1059/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 1.6',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 1.6',
     }
 });
 
-Pathways.components.get('sliding-modal').addData('john-tradescant-sliding-modal-2', {
+Pathways.components.get('modal-overlay').addData('john-tradescant-modal-overlay-2', {
     '2.1': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.1-large.jpg',
-        'title': 'A German traveller who visited Tradescant’s Rarities in 1638 listed ‘a number of things changed into stone’ among the many items on display.',
+        'title': 'A German traveller who visited Tradescant’s rarities in 1638 listed ‘a number of things changed into stone’ among the many items on display.',
         'download': 'http://wellcomelibrary.org/actual/b21369987/0/0125d103-23e3-4d40-a8bc-875504bb0ffa/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.1',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 2.1',
     },
 
     '2.2': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.2-large.jpg',
-        'title': 'In the 1630s, Tradescant’s Rarities were said to include the hand of a mermaid and the hand of a mummy.',
+        'title': 'In the 1630s, Tradescant’s rarities were said to include the hand of a mermaid and the hand of a mummy.',
         'download': 'http://wellcomelibrary.org/actual/b11665014/0/7e20299d-2205-4c56-aa8e-1275dd6443d6/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.2',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 2.2',
     },
 
     '2.3': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.3-large.jpg',
-        'title': 'According to the Musaeum Tradescantianum catalogue, the Rarities included an ‘Alegator or Crocodile, from Aegpt’, ‘cloven and hairy-tongued lizards’, eight sorts of snakes and ‘a natural Dragon’.',
+        'title': 'According to the <i>Musaeum Tradescantianum</i> catalogue, the rarities included an ‘Alegator or Crocodile, from Aegpt’, ‘cloven and hairy-tongued lizards’, eight types of snake and ‘a natural Dragon’.',
         'download': 'http://wellcomelibrary.org/actual/b11999597/0/b3a7da8d-a6d0-401c-8a88-aab4a7ac05dc/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.3',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 2.3',
     },
 
     '2.4': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.4-large.jpg',
-        'title': 'The introduction to Musaeum Tradescantianum describes insects (in which arachnids like scorpions and spiders were included) as unfamiliar rarities, ‘as yet unfitted with apt English termes’.',
+        'title': 'The introduction to <i>Musaeum Tradescantianum</i> describes insects (in which arachnids such as scorpions and spiders were included) as unfamiliar rarities, ‘as yet unfitted with apt English termes’.',
         'download': 'http://wellcomelibrary.org/actual/b12003694/0/569fc026-c66b-4fd4-9b00-99ea1f83debd/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.4',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 2.4',
     },
 
     '2.5': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.5-large.jpg',
-        'title': 'The ‘Utensils’ section of the Musaeum Tradescantianum catalogue includes a cup made from a unicorn horn.',
+        'title': 'The ‘Utensils’ section of the <i>Musaeum Tradescantianum</i> catalogue includes a cup made from a unicorn horn.',
         'download': 'http://wellcomelibrary.org/actual/b21369999/0/447a33ce-0964-45b4-a490-9866e6b9d38f/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.5',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 2.5',
     },
 
     '2.6': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/2.6-large.jpg',
-        'title': 'In a section entitled ‘Whole Birds’, the Musaeum Tradescantianum catalogue lists a ‘Dodar’ from the island of Mauritius, which ‘is not able to flie being so big’.',
+        'title': 'In a section entitled ‘Whole Birds’, the <i>Musaeum Tradescantianum</i> catalogue lists a ‘Dodar’ from the island of Mauritius, which ‘is not able to flie being so big’.',
         'download': 'http://wellcomelibrary.org/actual/b2137000x/0/a71c07d6-eaca-40af-8dcb-d3bb234c178a/jp2?download=true',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 2.6',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 2.6',
     }
 });
 
 
-Pathways.components.get('sliding-modal').addData('john-tradescant-sliding-modal-3', {
+Pathways.components.get('modal-overlay').addData('john-tradescant-modal-overlay-3', {
     '3.1': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/3.1-large.jpg',
         'title': 'This is the only surviving example of five garments owned by Tradescant that were thought to have been produced by the Algonquin Indians of Virginia. © Ashmolean Museum, University of Oxford.',
-        'ga': ' the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 3.1',
+        'ga': ' the-collectors - curious-gardener - john-tradescant - l2 sliding panel 3.1',
     },
 
     '3.2': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/full/3.2-large.jpg',
-        'title': 'In 1635, King Charles I instructed the keeper of the Hampton Court Wardrobe to deliver a number of items to Tradescant including King Henry VIII’s hawking hood. © Ashmolean Museum, University of Oxford.',
-        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 open sliding panel 3.2',
+        'title': 'In 1635, King Charles I instructed the keeper of the Hampton Court Wardrobe to deliver a number of items to Tradescant, including King Henry VIII’s hawking hood. © Ashmolean Museum, University of Oxford.',
+        'ga': 'the-collectors - curious-gardener - john-tradescant - l2 sliding panel 3.2',
     }
 });
 
@@ -5762,12 +5775,12 @@ Pathways.components.get('crop-zoom').addData('unique-artifacts', {
     'croc': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/crocodile.jpg',
         'title': '',
-        'text': 'Tradescant was attracted by large or exotic items. His requests to British ships included pleas for ‘the biggest that canbe gotten’ and ‘any thing that is strang’.',
+        'text': 'Tradescant was attracted by large or exotic items. His requests to British ships included pleas for ‘the biggest that can be gotten’ and ‘any thing that is strang’.',
         'position': 'right'
     },
     'person': {
         'image': '/pathways/2-the-collectors/1-curious-gardener/_assets/crop-zoom/people.jpg',
-        'text': 'Royal apothecary John Parkinson described his friend, and self-made man, John Tradescant as ‘that worthy, curious, and diligent searcher and preserver of all natures rarities and varieties’.',
+        'text': 'Royal apothecary John Parkinson described his friend John Tradescant as ‘that worthy, curious, and diligent searcher and preserver of all natures rarities and varieties’.',
         'position': 'left'
     },
     'bird': {
@@ -5851,7 +5864,7 @@ TheCollectors.assetRoot = '_assets/infographics/death-collector/';
 TheCollectors.data = [{
 
         name: "Abortive, and stilborn",
-        description: "These figures almost certainly include both deliberate abortions, brought on by imbibing herbal concoctions, and miscarriages. Since babies who died in the womb had not received baptism, stillborns were either not buried at all, or were interred in secret, unconsecrated locations.",
+        description: "These figures almost certainly include both deliberate abortions (brought on by imbibing herbal concoctions) and miscarriages. Since babies who died in the womb had not received baptism, stillborns were either not buried at all, or interred in secret, unconsecrated locations.",
         ValueLabelPos_desktop: {
             x: 20,
             y: -232
@@ -5959,7 +5972,7 @@ TheCollectors.data = [{
 
     {
         name: "Aged",
-        description: "'Aged' referred to deaths when over 60, or perhaps 70, years old. Graunt calculated that only two or three of every 100 individuals born in London would live to such a ripe old age. His own father was one of these few, along with his friend Samuel Pepys. Graunt himself died at the age of 54.",
+        description: "'Aged' referred to the deaths of people who were over 60, or perhaps 70, years old. Graunt calculated that only two or three of every 100 individuals born in London would live to such a ripe old age. His own father was one of these few, along with his friend Samuel Pepys. Graunt himself died at the age of 54.",
         ValueLabelPos_desktop: {
             x: 42,
             y: -110
@@ -6069,8 +6082,8 @@ TheCollectors.data = [{
     },
 
     {
-        name: "Ague, and Fever",
-        description: "Ague and fever are rather catch-all symptoms, which may result from any number of conditions. When William Shakespeare died on his fifty-third birthday in 1616 he had been suffering fevers for several weeks. No one is quite sure what caused his death, though syphilis, typhoid, influenza and alcoholism have all been mooted.",
+        name: "Ague, and fever",
+        description: "Ague and fever are rather catch-all symptoms, which may result from any number of conditions. When William Shakespeare died on his 53rd birthday, in 1616, he had been suffering fevers for several weeks. No one is quite sure what caused his death, although syphilis, typhoid, influenza and alcoholism have all been mooted.",
         ValueLabelPos_desktop: {
             x: 110,
             y: -135
@@ -6178,8 +6191,8 @@ TheCollectors.data = [{
     },
 
     {
-        name: "Cancer, Gangrene, and Fistula",
-        description: "Cancer was only diagnosed when it could be observed externally, with most cases seen in the breast or face. Blamed on an excess of melancholic black bile, it was perceived as a fierce and ravenous evil that gnawed away the body. The grievous symptoms caused many sufferers to subject themselves to surgical treatments, which brought their own high risks of death.",
+        name: "Cancer, gangrene, and fistula",
+        description: "Cancer was only diagnosed when it could be observed externally, most cases were seen in the breast or face. Blamed on an excess of melancholic black bile, it was perceived as a fierce and ravenous evil that gnawed away the body. The grievous symptoms caused many sufferers to subject themselves to surgical treatments, which brought their own high risks of death.",
         ValueLabelPos_desktop: {
             x: 220,
             y: -130
@@ -6290,7 +6303,7 @@ TheCollectors.data = [{
 
     {
         name: "Childbed",
-        description: "In the words of one seventeenth-century mother, the pain of childbirth was an 'exquisite torment' akin to the rack, but it was also a spiritual test of faith and endurance. If mothers suffered well, even those who died in the bed where they had given birth would be saved after death.",
+        description: "In the words of one 17th-century mother, the pain of childbirth was an 'exquisite torment' akin to the rack, but it was also a spiritual test of faith and endurance. If mothers suffered well, even those who died in the bed where they had given birth would be saved after death.",
         ValueLabelPos_desktop: {
             x: 150,
             y: -37
@@ -6397,7 +6410,7 @@ TheCollectors.data = [{
     },
 
     {
-        name: "Chrisomes, and Infants",
+        name: "Chrisomes, and infants",
         description: "Almost ten per cent of babies didn't survive their first month of life. These 'chrisomes' died as a result of birth trauma, tetanus contracted when the umbilical cord was cut, low weight or inherited birth defects. Graunt's figures also include the deaths of 'infants', children who were not yet old enough to speak.",
         ValueLabelPos_desktop: {
             x: 220,
@@ -6510,7 +6523,7 @@ TheCollectors.data = [{
     },
 
     {
-        name: "Consumption, and Cough",
+        name: "Consumption, and cough",
         description: "Graunt was dubious about the reliability of 'consumption' when reported as a cause of death in the Bills. The searchers, he wrote, might 'after the mist of a Cup of Ale' or a bribe apply it to any cadaver that looked in any way emaciated or lean.",
         ValueLabelPos_desktop: {
             x: 240,
@@ -6620,7 +6633,7 @@ TheCollectors.data = [{
 
     {
         name: "Convulsion",
-        description: "Convulsion only established itself as a reported cause of death in the seventeenth century. A symptom usually seen in young children, convulsions might be an outward sign of any number of underlying infections or diseases, including smallpox.",
+        description: "Convulsion only established itself as a reported cause of death in the 17th century. A symptom usually seen in young children, convulsions might be an outward sign of any number of underlying infections or diseases, including smallpox.",
         ValueLabelPos_desktop: {
             x: 135,
             y: 95
@@ -6725,7 +6738,7 @@ TheCollectors.data = [{
             value: 1031
         }]
     }, {
-        name: "Dropsy, and Tympany",
+        name: "Dropsy, and tympany",
         description: "Dropsy was an ugly, uncomfortable condition, in which the body became bloated with liquid. Usually associated with drunkenness, we now know it to be a symptom of kidney or liver problems. Sufferers, who included writers Henry Fielding and Samuel Johnson, were treated by 'tapping' and endured the added stigma of bringing their deaths upon themselves.",
         ValueLabelPos_desktop: {
             x: 165,
@@ -6944,7 +6957,7 @@ TheCollectors.data = [{
         }]
     }, {
         name: "Executed",
-        description: "Criminals convicted of murder, wounding, robbery and rape all usually received the death penalty, though many were pardoned before being led to the scaffold. One convict who didn't get away was King Charles I, who was beheaded at Whitehall on January 30 1649, for 'High Treason and other high crimes'.",
+        description: "Criminals convicted of murder, wounding, robbery and rape all usually received the death penalty, although many were pardoned before being led to the scaffold. One convict who didn't get away was King Charles I, who was beheaded at Whitehall on 30 January 1649, for 'High Treason and other high crimes'.",
         ValueLabelPos_desktop: {
             x: 10,
             y: 145
@@ -7050,8 +7063,8 @@ TheCollectors.data = [{
             value: 18
         }]
     }, {
-        name: "Fainted in a Bath",
-        description: "Bathing was not only an unusual occurrence in the seventeenth century, it might also be considered dangerous. A popular pamphlet providing medical advice a century before had advised to 'use no baths or stoves' during outbreaks of plague. The publication explained that bathing opened up the skin's pores, so that 'venomous' air might infect the body.",
+        name: "Fainted in a bath",
+        description: "Bathing was not just an unusual occurrence in the 17th century - it might also be considered dangerous. A popular pamphlet providing medical advice a century before had advised to 'use no baths or stoves' during outbreaks of plague. The publication explained that bathing opened up the skin's pores, meaning 'venomous' air might infect the body.",
         ValueLabelPos_desktop: {
             x: -27,
             y: 195
@@ -7157,7 +7170,7 @@ TheCollectors.data = [{
             value: 0
         }]
     }, {
-        name: "Flox, and Small Pox",
+        name: "Flox, and smallpox",
         description: "Smallpox deaths are probably under-reported in the Bills, since the most severe form of the disease killed its victims so quickly the distinctive pustules had not yet erupted. Those who survived the feverish horror of the disease might, however, end up blinded, deafened or grossly disfigured by pits and holes.",
         ValueLabelPos_desktop: {
             x: -100,
@@ -7264,8 +7277,8 @@ TheCollectors.data = [{
             value: 354
         }]
     }, {
-        name: "Found dead in the Streets",
-        description: "Seventeenth-century dramatist Nathaniel Lee, known as the 'Mad Poet', was found dead in the street after a night of riot and extravagance. In his play Caesar Borgia, Lee had described death as unwelcome, but only because it delivered 'an eternal laziness'.",
+        name: "Found dead in the streets",
+        description: "Seventeenth-century dramatist Nathaniel Lee, known as the 'Mad Poet', was found dead in the street after a night of riot and extravagance. In his play <i>Caesar Borgia</i>, Lee had described death as unwelcome, but only because it delivered 'an eternal laziness'.",
         ValueLabelPos_desktop: {
             x: -160,
             y: 185
@@ -7481,7 +7494,7 @@ TheCollectors.data = [{
         }]
     }, {
         name: "Hanged, and made-away themselves",
-        description: "Graunt described those who took their own lives as 'Mad-men' who committed 'the greatest sin', and suicide was, at the time, both a civil and religious crime. Families would be keen to avoid such a report, so they might be allowed to bury their deceased relative in a churchyard and keep custody of their otherwise impounded belongings.",
+        description: "Graunt described those who took their own lives as 'Mad-men' who committed 'the greatest sin', and suicide was, at the time, both a civil and a religious crime. Families would be keen to avoid such a report, so they might be allowed to bury their deceased relative in a churchyard and keep custody of their otherwise impounded belongings.",
         ValueLabelPos_desktop: {
             x: -290,
             y: 99
@@ -7586,8 +7599,8 @@ TheCollectors.data = [{
             value: 36
         }]
     }, {
-        name: "Killed by several Accidents",
-        description: "In bustling seventeenth-century London, there were fatal risks at every turn. Inhabitants might tumble down a flight of stairs in an unlit home, experience a workplace accident or fall under one of the two thousand or so carts and coaches that traversed the city's crowded streets.",
+        name: "Killed by several accidents",
+        description: "In bustling 17th-century London, there were fatal risks at every turn. Inhabitants might tumble down a flight of stairs in an unlit home, experience a workplace accident or fall under one of the two thousand or so carts and coaches that traversed the city's crowded streets.",
         ValueLabelPos_desktop: {
             x: -260,
             y: 10
@@ -7803,7 +7816,7 @@ TheCollectors.data = [{
         }]
     }, {
         name: "Plague",
-        description: "Graunt concluded that the searchers had underreported plague deaths during the Great Plague of 1625, but who could blame them? The distinctive swellings or 'buboes' didn't always appear before a victim died, families were desperate not to be quarantined in an infected house for forty days and the public feared contamination from anyone who might have been in contact with the disease.",
+        description: "Graunt concluded that the searchers had underreported plague deaths during the Great Plague of 1625, but who could blame them? The distinctive swellings or 'buboes' didn't always appear before a victim died, families were desperate not to be quarantined in an infected house for 40 days, and the public feared contamination from anyone who might have been in contact with the disease.",
         ValueLabelPos_desktop: {
             x: -133,
             y: -64
@@ -7914,7 +7927,7 @@ TheCollectors.data = [{
         }]
     }, {
         name: "Rickets",
-        description: "Rickets, a softening of the bones now linked with vitamin D deficiency, was the principal disease of infancy in the 1600s. Surprisingly, the aristocracy – including King Charles I – were often the worst affected, due to a diet rich in meat and low in milk. The only treatment was swaddling children so tightly that they might not stand or walk on their malleable bones.",
+        description: "Rickets, a softening of the bones now linked with vitamin D deficiency, was the principal disease of infancy in the 1600s. Surprisingly, the aristocracy – including King Charles I – were often the worst affected, owing to a diet rich in meat and low in milk. The only treatment was swaddling children so tightly that they might not stand or walk on their malleable bones.",
         ValueLabelPos_desktop: {
             x: -180,
             y: -180
@@ -8019,7 +8032,7 @@ TheCollectors.data = [{
             value: 521
         }]
     }, {
-        name: "Mother, rising of the Lights",
+        name: "Mother, rising of the lights",
         description: "These mysterious-sounding diseases both led to breathing difficulties. The movement of either the uterus (known as 'mother') or the lungs (known as 'lights') was blamed for conditions we might now describe as croup, asthma, pleurisy or bronchitis.",
         ValueLabelPos_desktop: {
             x: -110,
@@ -8125,7 +8138,7 @@ TheCollectors.data = [{
             value: 249
         }]
     }, {
-        name: "Teeth, and Worms",
+        name: "Teeth, and worms",
         description: "Although 'teeth' or 'breeding of the teeth' were commonly listed as causes of death, they say more about the age of the victim than the condition they died from. The terms relate to the developmental stage when children are teething, at which point they might succumb to a broad range of afflictions.",
         ValueLabelPos_desktop: {
             x: -45,
@@ -8718,7 +8731,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0006437a',
         pos: [2075, 35],
-        text: 'A nineteenth-century Persian watercolour of an annotated skeleton.'
+        text: 'A 19th-century Persian watercolour of an annotated skeleton.'
     }, {
         id: 'L0058576a',
         pos: [2397, 35],
@@ -8726,7 +8739,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0058329',
         pos: [4083, 37],
-        text: 'Ceramics, like these eighteenth-century Italian vases, provided inspiration for dressing Burroughs Wellcome & Co. trade exhibits.'
+        text: 'Ceramics, like these 18th-century Italian vases, provided inspiration for dressing Burroughs Wellcome & Co. trade exhibits.'
     }, {
         id: 'L0065696a',
         pos: [3235, 38],
@@ -8738,19 +8751,19 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0023265a',
         pos: [6704, 54],
-        text: 'A corpulent king who hoped leeches would suck out his excess fat, from the sixteenth-century manuscript Histoires Prodigieuses.'
+        text: 'A corpulent king who hoped leeches would suck out his excess fat, from the 16th-century manuscript <i>Histoires Prodigieuses</i>.'
     }, {
         id: 'L0057148a',
         pos: [5455, 68],
-        text: 'A nineteenth-century pewter box for transporting leeches used in bloodletting.'
+        text: 'A 19th-century pewter box for transporting leeches used in blood-letting.'
     }, {
         id: 'L0015581a',
         pos: [773, 113],
-        text: 'Wellcome acquired or commissioned numerous paintings depicting the work of apothecaries, physicians and surgeons, like this bloodletting scene by Matthijs Naiveu.'
+        text: 'Wellcome acquired or commissioned numerous paintings depicting the work of apothecaries, physicians and surgeons, such as this blood-letting scene by Matthijs Naiveu.'
     }, {
         id: 'L0039443a',
         pos: [7418, 163],
-        text: 'Painting of a duck from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh of ducks replenishes qi and treats weakness of the blood and physical frailty.'
+        text: 'Painting of a duck from a 17th-century Chinese herbal. The accompanying text reports that the flesh of ducks replenishes qi and treats weakness of the blood and physical frailty.'
     }, {
         id: 'L0011597a',
         pos: [2765, 165],
@@ -8770,7 +8783,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'M0015033a',
         pos: [1220, 366],
-        text: 'A paleolithic flint hand axe found in the City of London in 1690 by apothecary, archaeologist and collector of antiquities John Conyrs. Wellcome attributed the start of his own collecting life to his discovery of a sharpened flint in Wisconsin when he was aged just four.'
+        text: 'A Paleolithic flint hand axe found in the City of London in 1690 by apothecary, archaeologist and collector of antiquities John Conyrs. Wellcome attributed the start of his own collecting life to his discovery of a sharpened flint in Wisconsin when he was just four years old.'
     }, {
         id: 'L0058357a',
         pos: [6704, 446],
@@ -8778,15 +8791,15 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0022370a',
         pos: [773, 486],
-        text: 'Wellcome’s interest in collecting letters centred more around who they were written by than what they were about. This 1823 missive from Mary Anning, however, happens to include the first sketch of a plesiosaurus.'
+        text: 'Wellcome’s interest in collecting letters centred more around on they were written by than what they were about. This 1823 missive from Mary Anning, however, happens to include the first sketch of a plesiosaurus.'
     }, {
         id: 'L0012386a',
         pos: [3387, 511],
-        text: 'Sixteenth and seventeenth-century surgical instruments, including dental forceps, a trepanning drill, a bullet extractor and a surgical saw.'
+        text: 'Collection of 16th- and 17th-century surgical instruments, including dental forceps, a trepanning drill, a bullet extractor and a surgical saw.'
     }, {
         id: 'L0013467a',
         pos: [2765, 512],
-        text: 'A fifteenth-century ‘wound man’ illustration, documenting common injuries to the human body.'
+        text: 'A 15th-century ‘wound man’ illustration, documenting common injuries to the human body.'
     }, {
         id: 'L0032229',
         pos: [4083, 546],
@@ -8794,7 +8807,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0031259a',
         pos: [2311, 575],
-        text: 'A sixteenth-century fragment of Arabic poetry mounted as a wall decoration.'
+        text: 'A 16th-century fragment of Arabic poetry mounted as a wall decoration.'
     }, {
         id: 'L0036897a',
         pos: [2098, 576],
@@ -8810,11 +8823,11 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'V0022070a',
         pos: [5359, 758],
-        text: 'Etching of a spotted eel. Eeels have been used as a restorative for consumptives. Their fat has also been used to treat deaf ears, smallpox spots and piles.'
+        text: 'Etching of a spotted eel. Eeels have been used as a restorative for consumptives. Their fat has also been used to treat problems with hearing, smallpox spots and piles.'
     }, {
         id: 'L0072171',
         pos: [3387, 790],
-        text: 'Images of classical vases and urns, like the one depicted in this eighteenth-century etching by Giovanni Piranesi, provided inspiration for Burroughs Wellcome & Co.’s advertising materials.'
+        text: 'Images of classical vases and urns, such as the one depicted in this 18th-century etching by Giovanni Piranesi, provided inspiration for Burroughs Wellcome & Co.’s advertising materials.'
     }, {
         id: 'L0033345a',
         pos: [2094, 870],
@@ -8830,27 +8843,27 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0032232',
         pos: [4083, 1271],
-        text: 'A late nineteenth-century Burroughs Wellcome & Co. price list, featuring Hippocrates, Mercury and other classical references.'
+        text: 'A late 19th-century Burroughs Wellcome & Co. price list, featuring Hippocrates, Mercury and other classical references.'
     }, {
         id: 'L0025709a',
         pos: [228, 1300],
-        text: 'A nineteenth-century Japanese illustration depicting the removal of a breast cancer tumour under general anaesthetic.'
+        text: 'A 19th-century Japanese illustration depicting the removal of a breast cancer tumour under general anaesthetic.'
     }, {
         id: 'L0032222',
         pos: [2765, 1372],
-        text: 'A Burroughs Wellcome & Co. 1906 booklet on anaesthesia.'
+        text: 'A Burroughs Wellcome & Co. booklet on anaesthesia from 1906.'
     }, {
         id: 'L0057155a',
         pos: [5902, 1414],
-        text: 'An eighteenth-century Italian jar for storing spermaceti, a waxy substance obtained from the head of a sperm whale, used in medicinal ointments and moisturisers. Wellcome Images/Science Museum'
+        text: 'An 18th-century Italian jar for storing spermaceti, a waxy substance obtained from the head of a sperm whale, that was used in medicinal ointments and moisturisers. Wellcome Images/Science Museum'
     }, {
         id: 'M0012576a',
         pos: [6192, 1414],
-        text: 'Spider illustration from a sixteenth century ‘Materia Medica’ text.'
+        text: 'Spider illustration from a 16th century <i>Materia Medica</i> text.'
     }, {
         id: 'L0058457a',
         pos: [6927, 1414],
-        text: 'Sixteenth- or seventeenth-century bezoar stones that were dropped into drinks to protect against poisons. Bezoars are concretions of indigestible materials found in the stomachs and intestines of animals and humans. Wellcome Images/Science Museum'
+        text: 'Sixteenth- or 17th-century bezoar stones which were dropped into drinks to protect against poisons. Bezoars are concretions of indigestible materials found in the stomachs and intestines of animals and humans. Wellcome Images/Science Museum'
     }, {
         id: 'L0039446a',
         pos: [7420, 1414],
@@ -8858,15 +8871,15 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0025988a',
         pos: [1266, 1527],
-        text: 'A fifteenth-century Persian manuscript showing the position of the heavens at the moment of Prince Iskandar’s birth.'
+        text: 'A 15th-century Persian manuscript showing the position of the heavens at the moment of Prince Iskandar’s birth.'
     }, {
         id: 'M0013911a',
         pos: [1636, 1527],
-        text: 'Spears, clubs, shields and arrows from Wellcome’s collection laid out at the British Museum in 1955 before being dispersed to other museums. His collection of non-mechanical weapons was thought to contain at least 50 000 objects.'
+        text: 'Spears, clubs, shields and arrows from Wellcome’s collection laid out at the British Museum in 1955 before being dispersed to other museums. His collection of non-mechanical weapons was thought to contain at least 50,000 objects.'
     }, {
         id: 'V0031371a',
         pos: [805, 1608],
-        text: 'A seventeenth-century Italian pharmacy reconstructed in the Wellcome Historical Medical Museum.'
+        text: 'A 17th-century Italian pharmacy reconstructed in the Wellcome Historical Medical Museum.'
     }, {
         id: 'L0027577',
         pos: [4809, 1628],
@@ -8874,7 +8887,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0057380a',
         pos: [5230, 1659],
-        text: 'Mole paws that may have been carried to protect against toothache or cramp. Part of Edward Lovett’s collection – largely purchased from London’s costermongers and dock workers – which was acquired by Wellcome in 1930.'
+        text: 'Mole paws, which may have been carried to protect against toothache or cramp. Part of Edward Lovett’s collection (largely purchased from London’s costermongers and dock workers) which was acquired by Wellcome in 1930.'
     }, {
         id: 'M0018240a',
         pos: [6927, 1746],
@@ -8890,19 +8903,19 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0025821',
         pos: [4324, 1816],
-        text: '‘Kepler’ Solution was Burroughs Wellcome & Co.’s brand of cod liver oil. One set of advertisements for the product was based on the ancient history of Greece.'
+        text: '‘Kepler’ Solution was Burroughs Wellcome & Co.’s brand of cod liver oil. One set of advertisements for the product was based on the  history of ancient Greece.'
     }, {
         id: 'L0039442a',
         pos: [5902, 1845],
-        text: 'Silk painting of an owl from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh of owls relieves ague, dispels wind and calms fright.'
+        text: 'Silk painting of an owl from a 17th-century Chinese herbal. The accompanying text reports that the flesh of owls relieves ague, dispels wind and calms fright.'
     }, {
         id: 'L0057178a',
         pos: [6286, 1845],
-        text: 'A nineteenth-century English jar for storing leeches. Wellcome Images/Science Museum'
+        text: 'A 19th-century English jar for storing leeches. Wellcome Images/Science Museum'
     }, {
         id: 'L0039453a',
         pos: [6668, 1846],
-        text: 'Painting of pigeons from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh of pigeons dispels wind, removes poisons and promotes the healing of wounds.'
+        text: 'Painting of pigeons from a 17th-century Chinese herbal. The accompanying text reports that the flesh of pigeons dispels wind, removes poisons and promotes the healing of wounds.'
     }, {
         id: 'L0006591a',
         pos: [1629, 1852],
@@ -8910,7 +8923,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0058984a',
         pos: [7420, 1903],
-        text: 'A necklace made from snake bones, worn to protect against back pain. Part of Edward Lovett’s collection of amulets and charms, purchased by Wellcome in 1930. Wellcome Images/Science Museum'
+        text: 'A necklace made from snake bones, worn to protect against back pain. Part of Edward Lovett’s collection of amulets and charms, which was purchased by Wellcome in 1930. Wellcome Images/Science Museum'
     }, {
         id: 'L0036438a',
         pos: [805, 1998],
@@ -8918,15 +8931,15 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0039441a',
         pos: [5406, 2101],
-        text: 'Silk painting of a peacock from a seventeenth-century Chinese herbal. The accompanying text reports that the flesh and blood of peacocks treats poisoning, ulcers and abscesses.'
+        text: 'Silk painting of a peacock from a 17th-century Chinese herbal. The accompanying text reports that the flesh and blood of peacocks treats poisoning, ulcers and abscesses.'
     }, {
         id: 'L0057151a',
         pos: [6286, 2101],
-        text: 'Sixteenth-century Italian jars for storing horse fat (left) and badger fat (right). Badger fat (or grasso di tasso) was believed to heal broken bones and muscles. It was also used to treat fevers and inflammation. Wellcome Images/Science Museum'
+        text: 'Sixteenth-century Italian jars for storing horse fat (left) and badger fat (right). Badger fat (or <i>grasso di tasso</i>) was believed to heal broken bones and muscles. It was also used to treat fevers and inflammation. Wellcome Images/Science Museum'
     }, {
         id: 'L0057156a',
         pos: [6927, 2114],
-        text: 'An eighteenth-century Italian jar for storing oil of eathworms, a pain reliever used in the treatment of arthritis, rickets and cramp. Wellcome Images/Science Museum'
+        text: 'An 18th-century Italian jar for storing oil of earthworms, a pain reliever used in the treatment of arthritis, rickets and cramp. Wellcome Images/Science Museum'
     }, {
         id: 'L0018916a',
         pos: [1265, 2126],
@@ -8934,7 +8947,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'V0006204a',
         pos: [315, 2135],
-        text: 'A 1900 caricature from Chemist and Druggist depicting Wellcome as ‘a very compact and fascinating bird’ that feeds on tabloids, prefers warmer climes to London and is ‘very fond of large pumpkins’.'
+        text: 'A 1900 caricature from <i>Chemist and Druggist</i> depicting Wellcome as ‘a very compact and fascinating bird’ that feeds on tabloids, prefers warmer climes to London and is ‘very fond of large pumpkins’.'
     }, {
         id: 'L0034055',
         pos: [4984, 2178],
@@ -8942,7 +8955,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0057197',
         pos: [4226, 2212],
-        text: 'Wellcome sent tins, cases, bottles and tubes to his company engineers, with detailed instructions of how to apply their designs. This nineteenth-century brass tobacco box may only be opened by solving a puzzle. Wellcome Images/Science Museum'
+        text: 'Wellcome sent tins, cases, bottles and tubes to his company engineers, with detailed instructions of how to apply their designs. This 19th-century brass tobacco box may only be opened by solving a puzzle. Wellcome Images/Science Museum'
     }, {
         id: 'L0021967a',
         pos: [5902, 2371],
@@ -8958,7 +8971,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'V0049059a',
         pos: [1729, 2389],
-        text: 'Wellcome’s agents travelled to auctions like this French art sale under assumed names, for fear of sellers increasing the prices in their honour. Wellcome himself sometimes went under the name of Wilkins or Wilton.'
+        text: 'Wellcome’s agents travelled to auctions such as this French art sale under assumed names, for fear of sellers increasing the prices in their honour. Wellcome himself sometimes went under the name of Wilkins or Wilton.'
     }, {
         id: 'V0017599a',
         pos: [2164, 2389],
@@ -8966,7 +8979,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'V0035823',
         pos: [2875, 2389],
-        text: 'Greek and Roman gods and goddesses, like the Venus de’ Medici, appeared in Burroughs Wellcome & Co.’s advertising materials.'
+        text: 'Greek and Roman gods and goddesses, such as the Venus de’ Medici, appeared in Burroughs Wellcome & Co.’s advertising materials.'
     }, {
         id: 'V0031394a',
         pos: [7420, 2451],
@@ -8974,11 +8987,11 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0025888',
         pos: [4982, 2455],
-        text: 'Snow duck illustration from an eighteenth-century Danish book acquired from William Morris’s library.'
+        text: 'Snow duck illustration from an 18th-century Danish book acquired from William Morris’s library.'
     }, {
         id: 'L0017214',
         pos: [3387, 2480],
-        text: 'Like Wellcome, the founder of Sequah, Yorkshireman William Hartley was a savvy salesman and showman. Hartley dressed himself, his staff and his medicines up as if they hailed from the American Wild West.'
+        text: 'Like Wellcome, the founder of Sequah – Yorkshireman William Hartley – was a savvy salesman and showman. Hartley dressed himself, his staff and his medicines up as if they hailed from the American Wild West.'
     }, {
         id: 'L0049007',
         pos: [3707, 2480],
@@ -8990,11 +9003,11 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0032227',
         pos: [4226, 2726],
-        text: 'A Burroughs Wellcome & Co. 1906 price list.'
+        text: 'A Burroughs Wellcome & Co. price list from 1906.'
     }, {
         id: 'L0017734',
         pos: [4674, 2726],
-        text: 'Burroughs Wellcome & Co.’s 1895 price list, incorporating images of coins and the company’s Snow Hill headquarters.'
+        text: 'Burroughs Wellcome & Co.’s price list from 1895, incorporating images of coins and the company’s Snow Hill headquarters.'
     }, {
         id: 'M0004494a',
         pos: [5406, 2741],
@@ -9002,15 +9015,15 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'M0020280a',
         pos: [6927, 2876],
-        text: 'Portraits and paintings in the Wellcome Historical Medical Museum on Portman Street, 1947–54. Today, the Wellcome Library contains over 100 000 pictures.'
+        text: 'Portraits and paintings in the Wellcome Historical Medical Museum on Portman Street, 1947–54. Today, the Wellcome Library contains more than 100,000 pictures.'
     }, {
         id: 'L002897a',
         pos: [2164, 2914],
-        text: 'Wellcome’s agents travelled to auctions like this French art sale under assumed names, for fear of sellers increasing the prices in their honour. Wellcome himself sometimes went under the name of Wilkins or Wilton.'
+        text: 'Wellcome’s agents travelled to auctions such as this French art sale under assumed names, for fear of sellers increasing the prices in their honour. Wellcome himself sometimes went under the name of Wilkins or Wilton.'
     }, {
         id: 'L0021542a',
         pos: [2571, 2914],
-        text: 'The Silk Mercers bazaar in Cairo, c.1848. After Wellcome visited Egpyt and the Sudan in 1901, he shipped 44 trunks and cases back from Cairo, many of them containing African curiosities.'
+        text: 'The Silk Mercers bazaar in Cairo, c.1848. After Wellcome visited Egypt and the Sudan in 1901, he shipped 44 trunks and cases back from Cairo, many of them containing African curiosities.'
     }, {
         id: 'M0008536a',
         pos: [147, 2944],
@@ -9030,15 +9043,15 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0021269',
         pos: [4674, 3140],
-        text: 'An illustrated sixteenth-century book by Catherine of Siena, which was purchased from the library of William Morris.'
+        text: 'An illustrated 16th-century book by Catherine of Siena, which was purchased from the library of William Morris.'
     }, {
         id: 'L0021264a',
         pos: [2164, 3172],
-        text: 'After C J S Thompson started working for Wellcome, his first acquisition was a book of seventeenth-century medicinal recipes collected by Lady Ayscough. This page deals with treating ‘a wheezing in the pipes’.'
+        text: 'After C J S Thompson started working for Wellcome, his first acquisition was a book of 17th-century medicinal recipes collected by Lady Ayscough. This page deals with treating ‘a wheezing in the pipes’.'
     }, {
         id: 'L0021122',
         pos: [3632, 3177],
-        text: 'The first major book purchase Wellcome’s agent C J S Thompson made was 482 lots from William Morris’s library, bought at Sotheby’s in 1898. The collection included books on architecture, textiles and printing.'
+        text: 'The first major book purchase that C J S Thompson made as Wellcome’s agent was 482 lots from William Morris’s library, bought at Sotheby’s in 1898. The collection included books on architecture, textiles and printing.'
     }, {
         id: 'L0002141a',
         pos: [2550, 3345],
@@ -9054,7 +9067,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'V0022144',
         pos: [4226, 3424],
-        text: 'Depictions of strength and power, like this 1690 engraving of an eagle clutching an owlet, may have provided inspiration for Burroughs Wellcome & Co.’s advertising materials.'
+        text: 'Depictions of strength and power, such as this 1690 engraving of an eagle clutching an owlet, may have provided inspiration for Burroughs Wellcome & Co.’s advertising materials.'
     }, {
         id: 'L0021417a',
         pos: [7079, 3429],
@@ -9078,7 +9091,7 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0031841a',
         pos: [2550, 3618],
-        text: 'As well as purchasing individual books and objects, Wellcome and his agents also acquired the entire collections of others, like this trunk of photographs collected by E N Fallaize.'
+        text: 'In addition to purchasing individual books and objects, Wellcome and his agents also acquired the entire collections of others, such as this trunk of photographs collected by E N Fallaize.'
     }, {
         id: 'L0038109a',
         pos: [941, 3653],
@@ -9090,11 +9103,11 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }, {
         id: 'L0017437a',
         pos: [6333, 3705],
-        text: 'Part of the Wellcome Library’s early printed books stores. Today, the Library holds over 15 000 European books printed before 1701.'
+        text: 'Part of the Wellcome Library’s early printed books stores. Today, the Library holds more than 15,000 European books printed before 1701.'
     }, {
         id: 'L0018446a',
         pos: [119, 3818],
-        text: 'When this Oxford Street pharmacy was closing down in 1908, Wellcome’s collaborator C J S Thompson acquired much of its contents, before suggesting that they buy the shopfront too. The entire store ended up on display in the Wellcome Historical Medical Museum in Wigmore Street.'
+        text: 'When this Oxford Street pharmacy was closing down in 1908, Wellcome’s collaborator C J S Thompson acquired many of its contents before suggesting that they buy the shopfront too. The entire store ended up on display in the Wellcome Historical Medical Museum in Wigmore Street.'
     }, {
         id: 'L0034640a',
         pos: [7079, 3876],
@@ -9102,28 +9115,28 @@ Pathways.components.get('infinite-canvas').addData('wellcome-collection', {
     }]
 });
 
-Pathways.components.get('sliding-modal').addData('kahns-anatomical-museum-sliding-modal', {
+Pathways.components.get('modal-overlay').addData('kahns-anatomical-museum-modal-overlay', {
     '1': {
         'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/1-large.jpg',
-        'title': 'Reclining nudes with removable parts, like this eighteenth-century wax model made in Florence, formed the centrepieces of many nineteenth-century museum collections. Kahn’s own ‘Venus de Medici’ comprised 85 separate pieces."',
+        'title': 'Reclining nudes with removable parts, like this 18th-century wax model made in Florence, formed the centrepieces of many 19th-century museum collections. Kahn’s own ‘Venus de Medici’ comprised 85 separate pieces."',
         'download': 'http://wellcomelibrary.org/actual/b2136994x/0/b382628a-8e7c-4a3b-9881-d4a2517c1470/jp2?download=true',
         'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 1'
     },
     '2': {
         'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/2-large.jpg',
-        'title': 'Dissections made by Dr Francis Sibson, illustrating the lungs after breathing out and in. In an 1851 edition of the Lancet, Kahn’s anatomical wax models and an anatomical lecture by Sibson were advertised side by side.',
+        'title': 'Dissections made by Dr Francis Sibson, illustrating the lungs after breathing out and in. In an 1851 edition of the <i>Lancet</i>, Kahn’s anatomical wax models and an anatomical lecture by Sibson were advertised side by side.',
         'download': 'http://wellcomelibrary.org/actual/b16423896/0/a9f9fb9c-e4fe-4d69-95da-bd8fe7b30f94/jp2?download=true',
         'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 2'
     },
     '3': {
         'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/3-large.jpg',
-        'title': 'An illustration from The Secret Companion, an 1845 book on onanism or ‘self-pollution’. Kahn’s examples of conditions attributed to masturbation were kept in a room reserved for medical gentlemen.',
+        'title': 'An illustration from <i>The Secret Companion</i>, an 1845 book on onanism or ‘self-pollution’. Kahn’s examples of conditions attributed to masturbation were kept in a room reserved for medical gentlemen.',
         'download': 'http://wellcomelibrary.org/actual/b21370047/0/45c48826-8e56-47c6-bbef-782b162e54a8/jp2?download=true',
         'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 3'
     },
     '4': {
         'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/4-large.jpg',
-        'title': 'Eighteenth-century mezzotint of the muscles of the eye by Arnauld-Éloi Gautier Dagoty. Kahn’s museum featured a magnified eye that could be taken to pieces to study the lens, optic nerve and surrounding muscles.',
+        'title': 'Eighteenth-century mezzotint of the muscles of the eye by Arnauld-Éloi Gautier d’Agoty. Kahn’s museum featured a magnified eye that could be taken to pieces to study the lens, optic nerve and surrounding muscles.',
         'download': 'http://wellcomelibrary.org/actual/b11904604/0/1b94a7a4-aebc-4f16-983b-7563cb2fffb5/jp2?download=true',
         'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 4'
     },
@@ -9141,7 +9154,7 @@ Pathways.components.get('sliding-modal').addData('kahns-anatomical-museum-slidin
     },
     '7': {
         'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/7-large.jpg',
-        'title': 'Eighteenth-century vertical section of the head by Jacques Fabien Gautier Dagoty. Kahn employed ‘a head, vertically cut’ to illustrate deglutition, the process of swallowing.',
+        'title': 'Eighteenth-century vertical section of the head by Jacques Fabien Gautier d’Agoty. Kahn employed ‘a head, vertically cut’ to illustrate deglutition, the process of swallowing.',
         'download': 'http://wellcomelibrary.org/actual/b15260896/0/f1ff6f55-5cda-4341-8852-6885a8cbba82/jp2?download=true',
         'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 7'
     },
@@ -9153,13 +9166,13 @@ Pathways.components.get('sliding-modal').addData('kahns-anatomical-museum-slidin
     },
     '9': {
         'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/9-large.jpg',
-        'title': 'This unnamed boy could be viewed three times a day at Kahn’s museum – ‘by gentlemen only’ – while Kahn delivered a lecture explaining the theories behind his physical development. The living heteradelph was billed as a beautiful, perfectly health child, ‘the most extraordinary natural phenomenon ever witnessed’.',
+        'title': 'This unnamed boy could be viewed three times a day at Kahn’s museum – ‘by gentlemen only’ – while Kahn delivered a lecture explaining the theories behind his physical development. The living heteradelph was billed as a beautiful, perfectly healthy child, ‘the most extraordinary natural phenomenon ever witnessed’.',
         'download': 'http://wellcomelibrary.org/actual/b20663778/0/87b6551a-8930-4e97-b013-e696052bc84d/jp2?download=true',
         'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 9'
     },
     '10': {
         'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/10-large.jpg',
-        'title': 'Plaque illustrating the development of a human embryo. Kahn considered himself somewhat of an expert in ‘embriology’, claiming to have examined more sperm under a microscope than any man living. His collection included preserved foetal specimens from every single week of pregnancy.',
+        'title': 'Plaque illustrating the development of a human embryo. Kahn considered himself somewhat of an expert in ‘embriology’, claiming to have examined more sperm under a microscope than any man living. His collection included preserved fetal specimens from every single week of pregnancy.',
         'download': 'http://wellcomelibrary.org/actual/b21369665/0/f15c86f8-5535-477d-a4d5-ca454486c3b7/jp2?download=true',
         'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 10'
     },
@@ -9171,7 +9184,7 @@ Pathways.components.get('sliding-modal').addData('kahns-anatomical-museum-slidin
     },
     '12': {
         'image': '/pathways/2-the-collectors/5-obscene-doctor/_assets/kahn/full/12-large.jpg',
-        'title': 'The striking ‘Flayed Angel’ dissection was published by Jacques Fabien Gautier Dagoty in the eighteenth century, part of a publication intended ‘to facilitate the study of Anatomy for all sorts of people’.',
+        'title': 'The striking ‘Flayed Angel’ dissection was published by Jacques Fabien Gautier d’Agoty in the 18th century, part of a publication intended ‘to facilitate the study of Anatomy for all sorts of people’.',
         'download': 'http://wellcomelibrary.org/actual/b1572024x/0/033a7486-9480-4ecd-b8ec-17f7284c5043/jp2?download=true',
         'ga': 'the-collectors - obscene-doctor - kahns-anatomical-museum - l2 open sliding panel 12'
     },
@@ -9214,7 +9227,7 @@ Pathways.components.get('gallery').addData('quacks-of-the-18th-century', {
         text: 'This vendor puts on a real show, assisted by an elaborately dressed man and an owl.'
     }, {
         image: 'V0016230a',
-        text: 'The colourful quack troupe including a donkey, a monkey and a fool blowing a trumpet.'
+        text: 'A colourful quack troupe including a donkey, a monkey and a fool blowing a trumpet.'
     }]
 });
 
@@ -9283,7 +9296,7 @@ Pathways.components.get('gallery').addData('made-a-film', {
     location: '_assets/galleries/they-even-made-a-film/',
     images: [{
         image: '01_Maisie_Dick_in_love',
-        text: 'Maisie’s Marriage was produced in the summer of 1923. It follows the story of Maisie Burrows, the eldest of ten children, and her beau, fireman Dick Reading.'
+        text: '<i>Maisie’s Marriage</i> was produced in the summer of 1923. It follows the story of Maisie Burrows, the eldest of ten children, and her beau, fireman Dick Reading.'
     }, {
         image: '02_Drudgery',
         text: 'Despite being very much in love with Dick, Maisie refuses his marriage proposal; she doesn’t want a life of drudgery, with too many children and not enough money.'
@@ -9298,11 +9311,11 @@ Pathways.components.get('gallery').addData('made-a-film', {
         text: 'The film was promoted as being written by Marie Stopes, though it was actually authored by her co-writer Walter Summers.'
     }, {
         image: '06_Marie Stopes',
-        text: 'The association with Stopes – along with the original title of Married Love – was guaranteed to generate a lot of publicity. Five years after she had published her first book, Married Love was still selling hundreds of thousands of copies a year, and Stopes had also written two other successful books.'
+        text: 'The association with Stopes – along with the original title of ‘Married Love’ – was guaranteed to generate a lot of publicity. Five years after she had published her first book, <i>Married Love</i> was still selling hundreds of thousands of copies a year, and Stopes had also written two other successful books.'
     }, {
         image: '07_Film_poster_crop',
-        text: 'The Stopes name also caused problems. While a reviewer described the film as nothing more than ‘a straightforward human story of sentimental rather than sexual appeal’, the British Board of Film Censors was concerned about ‘the title, taken in conjunction with the name of the book and the authoress referred to’. It felt the production was ‘propaganda on a subject unsuitable for discussion in a Cinema Theatre.'
-    }, ]
+        text: 'The Stopes name also caused problems. While a reviewer described the film as nothing more than ‘a straightforward human story of sentimental rather than sexual appeal’, the British Board of Film Censors was concerned about ‘the title, taken in conjunction with the name of the book and the authoress referred to’. It felt the production was ‘propaganda on a subject unsuitable for discussion in a Cinema Theatre.',
+    } ]
 });
 
 Pathways.components.get('letter-gallery').addData('marie-stopes-letters', {
