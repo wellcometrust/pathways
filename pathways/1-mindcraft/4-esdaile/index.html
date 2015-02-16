@@ -7,30 +7,36 @@
     <meta name="description" content="The Zoist receives news that a British surgeon in India, James Esdaile, has performed dozens of pain-free operations by mesmerising his patients.">
     <meta name="viewport" content="initial-scale=1,width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="x-dns-prefetch-control" content="on">
 
     <link rel="stylesheet" type="text/css" href="/_assets/build/css/main.css">
-    <script src="//use.typekit.net/nlx6tdo.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
 
-    <script src="/_assets/js/lib/modernizr-2.8.3.custom.min.js"></script>
+    <link rel="dns-prefetch" href="http://digitalstories.s3-website-eu-west-1.amazonaws.com">
+    <link rel="dns-prefetch" href="//use.typekit.net">
+    <link rel="dns-prefetch" href="//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=1494497634145827&version=v2.0">
+    <link rel="dns-prefetch" href="//apis.google.com/js/platform.js">
+    <link rel="dns-prefetch" href="//assets.pinterest.com/js/pinit.js">
+    <link rel="dns-prefetch" href="//platform.twitter.com/widgets.js">
+
     <script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	  ga('create', 'UA-54268163-1', 'auto');
-	  ga('send', 'pageview');
-
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        if (window === window.top) {
+            ga('create', 'UA-54268163-1', 'auto');
+            ga('send', 'pageview');
+        }
 	</script>
 
+    <script src="/_assets/build/js/header.min.js"></script>
+
+    <script src="//use.typekit.net/nlx6tdo.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
 
 
 </head>
 <body>
 
     <main role="main">
-        
+
         <a class="mute" href="#"></a>
 
         
@@ -39,8 +45,8 @@
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
-    
-    <div class="content">
+
+    <div class="content" data-scroll-parallax-effect>
         <p class="scene-set">Bengal 1845</p>
 
         <header>
@@ -51,6 +57,7 @@
         <p class="intro-text scroll-down">
             <span class="scroll-down--text">Scroll down</span>
             <span class="scroll-down--arrow"></span>
+            <div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
         </p>
     </div>
 
@@ -61,10 +68,10 @@
         <div class="sequence">
 
             
-<div id="gonad-man" class="panel" data-config='{ "offset_height": 550, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="gonad-man" class="panel">
 
     <div class="bg-container">
-        <img alt="" src="/pathways/1-mindcraft/_assets/4-esdaile/esdaile-2.jpg">
+        <img alt="" src="/pathways/1-mindcraft/4-esdaile/_assets/esdaile-2.jpg">
     </div>
 
     <!-- scroll content -->
@@ -77,7 +84,7 @@
         <p>Many more operations followed, from tooth extractions to amputations. Esdaile was given a hospital ward in Kolkata to develop his new technique.</p>
     </div>
 
-    <div class="info-box with-text" id="guess-the-tumour" data-component="quiz" data-config='{ "offset_height": 400 }' data-ga="mindcraft - esdaile - gonad-man - l2 quiz open">
+    <div class="info-box with-text" id="guess-the-tumour" data-component="quiz" data-config='{ "offset_height": 300 }' data-ga="mindcraft - esdaile - gonad-man - l2 quiz open">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
             <circle class="outer" cx="50%" cy="50%" r="40" fill="rgba(92,184,178,1)"/>
             <circle class="inner" cx="50%" cy="50%" r="25" fill="#fff"/>
@@ -103,11 +110,11 @@
                 <div class="quiz-header-image"></div>
 
                 <header class="quiz-start--header">
-                    <h1>Guess the Tumour</h1>
+                    <h1>[Title]</h1>
                 </header>
 
                 <div class="quiz-start--text">
-                    <p>James Esdaile performed dozens of operations, many of which were documented.</p>
+                    <p>[Intro text]</p>
                     <p>See if you can work out what happened in these pictures – but be quick, you’ve only got ten seconds to guess each one!</p>
                 </div>
 
@@ -156,19 +163,19 @@
 
 </div>
 
-<div id="fakir" class="panel" data-config='{ "offset_height": 250, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="fakir" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
     </div>
 
-    <div class="main-content left">        
+    <div class="main-content left">
         <p>Esdaile had observed Indian yogis and fakirs putting themselves into trances. He presented himself to local healers as a fellow magician, although in private he didn’t share their mystical beliefs. He had learned his mesmeric techniques from an English pamphlet.</p>
     </div>
 
 </div>
 
-<div id="india" class="panel" data-config='{ "offset_height": 200, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="india" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
@@ -181,7 +188,7 @@
 
 </div>
 
-<div id="surgery-under-hypnosis-intro" class="panel" data-config='{ "offset_height": 250, "background": { "type": "none", "preserve_ratio": false } }'>
+<div id="surgery-under-hypnosis-intro" class="panel">
 
     <div class="bg-container"></div>
 
@@ -194,21 +201,22 @@
         </div>
 
     </div>
-    
+
 </div>
 
-<div id="surgery-under-hypnosis" class="panel talking-head" data-config='{ "offset_height": 250, "background": { "type": "image", "preserve_ratio": false } }'>
+<div id="surgery-under-hypnosis" class="panel talking-head">
 
     <div class="bg-container">
-        <video controls="true" preload="none" data-video="panel" data-config='{ "muteGlobal" : true }'>
+        <video controls="true" preload="none" data-video="panel">
             <source src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/video/ChrisGreen_Pain_relief.mp4">
             <source src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/video/ChrisGreen_Pain_relief.webm">
             <track src="/_assets/video/ChrisGreen_Pain_relief.vtt" kind="captions" srclang="en" label="English" />
         </video>
         <img alt="" src="/_assets/img/spacer.png">
-    </div> 
+    </div>
 </div>
-<div id="james-braid" class="panel" data-config='{ "offset_height": 730, "background": { "type": "image", "preserve_ratio": false } }'>
+
+<div id="james-braid" class="panel">
 
     <div class="bg-container">
         <img alt="" src="/_assets/img/spacer.png">
@@ -227,23 +235,24 @@
 
 </div>
 
-<div id="self-hypnosis" class="panel talking-head" data-config='{ "offset_height": 0, "background": { "type": "video", "preserve_ratio": false } }'>
+<div id="self-hypnosis" class="panel talking-head">
 
     <div class="bg-container">
-        <video controls="true" preload="none" data-video="panel" data-config='{ "muteGlobal" : true }'>
+        <video controls="true" preload="none" data-video="panel">
             <source src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/video/ChrisGreen_Hypnotism_demo.mp4">
             <source src="http://digitalstories.s3-website-eu-west-1.amazonaws.com/digital-stories/mindcraft/video/ChrisGreen_Hypnotism_demo.webm">
             <track src="/_assets/video/ChrisGreen_Hypnotism.vtt" kind="captions" srclang="en" label="English" />
         </video>
         <img alt="" src="/_assets/img/spacer.png">
-    </div>    
+    </div>
 </div>
+
         </div>
 
         <div class="info-panels">
 
             
-<div class="library-panel" data-panel="gonad-man" data-component="library-panel">
+<div class="info-panel" data-panel="gonad-man" data-component="info-panel">
     <div class="handle" data-ga="mindcraft - esdaile - gonad-man - l2 open share"></div>
     <div class="body">
                 <ul>
@@ -260,7 +269,7 @@
                 <li class="twitter" data-ga="mindcraft - esdaile - gonad-man - l2 share twitter"><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdigitalstories.wellcomecollection.org%2Fpathways%2F1-mindcraft%2F4-esdaile%2F%23gonad-man&via=ExploreWellcome&text=James+Esdaile%E2%80%99s+tumour+patient%2C+from+%23Mindcraft"><img src="/_assets/img/icons/icon-twitter-btn.gif" alt="share on twitter"></a></li>
                 <li class="facebook" data-ga="mindcraft - esdaile - gonad-man - l2 share facebook"><div class="fb-share-button" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#gonad-man" data-layout="button" data-width="75"></div></li>
                 <li class="pinterest" data-ga="mindcraft - esdaile - gonad-man - l2 share pinterest"><a href="//www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fdigitalstories.wellcomecollection.org%2Fpathways%2F1-mindcraft%2F4-esdaile%2F%23gonad-man&media=http%3A%2F%2Fwellcomelibrary.org%2Factual%2Fb20641424%2F0%2Faf83704d-f099-4edd-a942-c1061fbc8ff8%2Fjp2&description=James+Esdaile%E2%80%99s+tumour+patient%2C+from+%23Mindcraft" data-pin-config="none" data-pin-color="white" data-pin-height="28"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_28.png" /></a></li>
-                <li class="googleplus" data-ga="mindcraft - esdaile - gonad-man - l2 share googleplus"><div class="g-plus" data-action="share" data-annotation="none" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#gonad-man"></div></li>
+                <li class="googleplus" data-ga="mindcraft - esdaile - gonad-man - l2 share googleplus"><div class="g-plus" data-height="24" data-width="75" data-action="share" data-annotation="none" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#gonad-man"></div></li>
             </ul>
 
         </div>
@@ -268,7 +277,7 @@
 
 </div>
 
-<div class="library-panel" data-panel="fakir" data-component="library-panel">
+<div class="info-panel" data-panel="fakir" data-component="info-panel">
     <div class="handle" data-ga="mindcraft - esdaile - fakir - l2 open share"></div>
     <div class="body">
                 <ul>
@@ -285,7 +294,7 @@
                 <li class="twitter" data-ga="mindcraft - esdaile - fakir - l2 share twitter"><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdigitalstories.wellcomecollection.org%2Fpathways%2F1-mindcraft%2F4-esdaile%2F%23fakir&via=ExploreWellcome&text=A+fakir+sitting+on+a+bed+of+nails%2C+from+%23Mindcraft"><img src="/_assets/img/icons/icon-twitter-btn.gif" alt="share on twitter"></a></li>
                 <li class="facebook" data-ga="mindcraft - esdaile - fakir - l2 share facebook"><div class="fb-share-button" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#fakir" data-layout="button" data-width="75"></div></li>
                 <li class="pinterest" data-ga="mindcraft - esdaile - fakir - l2 share pinterest"><a href="//www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fdigitalstories.wellcomecollection.org%2Fpathways%2F1-mindcraft%2F4-esdaile%2F%23fakir&media=http%3A%2F%2Fwellcomelibrary.org%2Factual%2Fb20337395%2F0%2Fdddc230b-a93d-4140-9bb6-82bbea935627%2Fjp2&description=A+fakir+sitting+on+a+bed+of+nails%2C+from+%23Mindcraft" data-pin-config="none" data-pin-color="white" data-pin-height="28"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_28.png" /></a></li>
-                <li class="googleplus" data-ga="mindcraft - esdaile - fakir - l2 share googleplus"><div class="g-plus" data-action="share" data-annotation="none" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#fakir"></div></li>
+                <li class="googleplus" data-ga="mindcraft - esdaile - fakir - l2 share googleplus"><div class="g-plus" data-height="24" data-width="75" data-action="share" data-annotation="none" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#fakir"></div></li>
             </ul>
 
         </div>
@@ -293,7 +302,7 @@
 
 </div>
 
-<div class="library-panel" data-panel="india" data-component="library-panel">
+<div class="info-panel" data-panel="india" data-component="info-panel">
     <div class="handle" data-ga="mindcraft - esdaile - india - l2 open share"></div>
     <div class="body">
                 <ul>
@@ -310,7 +319,7 @@
                 <li class="twitter" data-ga="mindcraft - esdaile - india - l2 share twitter"><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdigitalstories.wellcomecollection.org%2Fpathways%2F1-mindcraft%2F4-esdaile%2F%23india&via=ExploreWellcome&text=The+north-east+view+of+Anjenjo+Fort+on+the+coast+of+Malabar%2C+from+%23Mindcraft"><img src="/_assets/img/icons/icon-twitter-btn.gif" alt="share on twitter"></a></li>
                 <li class="facebook" data-ga="mindcraft - esdaile - india - l2 share facebook"><div class="fb-share-button" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#india" data-layout="button" data-width="75"></div></li>
                 <li class="pinterest" data-ga="mindcraft - esdaile - india - l2 share pinterest"><a href="//www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fdigitalstories.wellcomecollection.org%2Fpathways%2F1-mindcraft%2F4-esdaile%2F%23india&media=http%3A%2F%2Fwellcomelibrary.org%2Factual%2Fb21369963%2F0%2Fcc424c4b-30a3-4c1b-bd86-66004d93b28a%2Fjp2&description=The+north-east+view+of+Anjenjo+Fort+on+the+coast+of+Malabar%2C+from+%23Mindcraft" data-pin-config="none" data-pin-color="white" data-pin-height="28"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_28.png" /></a></li>
-                <li class="googleplus" data-ga="mindcraft - esdaile - india - l2 share googleplus"><div class="g-plus" data-action="share" data-annotation="none" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#india"></div></li>
+                <li class="googleplus" data-ga="mindcraft - esdaile - india - l2 share googleplus"><div class="g-plus" data-height="24" data-width="75" data-action="share" data-annotation="none" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#india"></div></li>
             </ul>
 
         </div>
@@ -318,7 +327,7 @@
 
 </div>
 
-<div class="library-panel" data-panel="james-braid" data-component="library-panel">
+<div class="info-panel" data-panel="james-braid" data-component="info-panel">
     <div class="handle" data-ga="mindcraft - esdaile - james-braid - l2 open share"></div>
     <div class="body">
                 <ul>
@@ -335,7 +344,7 @@
                 <li class="twitter" data-ga="mindcraft - esdaile - james-braid - l2 share twitter"><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdigitalstories.wellcomecollection.org%2Fpathways%2F1-mindcraft%2F4-esdaile%2F%23james-braid&via=ExploreWellcome&text=James+Braid%2C+from+%23Mindcraft"><img src="/_assets/img/icons/icon-twitter-btn.gif" alt="share on twitter"></a></li>
                 <li class="facebook" data-ga="mindcraft - esdaile - james-braid - l2 share facebook"><div class="fb-share-button" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#james-braid" data-layout="button" data-width="75"></div></li>
                 <li class="pinterest" data-ga="mindcraft - esdaile - james-braid - l2 share pinterest"><a href="//www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fdigitalstories.wellcomecollection.org%2Fpathways%2F1-mindcraft%2F4-esdaile%2F%23james-braid&media=http%3A%2F%2Fwellcomelibrary.org%2Factual%2Fb21270107%2F0%2F57cd7450-e09b-4976-bcdf-288f2702e6a5%2Fjp2&description=James+Braid%2C+from+%23Mindcraft" data-pin-config="none" data-pin-color="white" data-pin-height="28"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_28.png" /></a></li>
-                <li class="googleplus" data-ga="mindcraft - esdaile - james-braid - l2 share googleplus"><div class="g-plus" data-action="share" data-annotation="none" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#james-braid"></div></li>
+                <li class="googleplus" data-ga="mindcraft - esdaile - james-braid - l2 share googleplus"><div class="g-plus" data-height="24" data-width="75" data-action="share" data-annotation="none" data-href="http://digitalstories.wellcomecollection.org/pathways/1-mindcraft/4-esdaile/#james-braid"></div></li>
             </ul>
 
         </div>
@@ -345,23 +354,22 @@
         </div>
 
         <div class="survey">
-
     <a href="http://survey.euro.confirmit.com/wix/p1839093604.aspx">Please help us by telling us what you thought of this digital story</a>
-
 </div>
+
 <div class="fork">
 
-    <a class="teaser" href="/pathways/1-mindcraft/5-svengali/"  style="background-image: url(/pathways/1-mindcraft//_assets/teaser/teaser-svengali.jpg)">
-        <div class="teaser-text-container">
+                    <a class="teaser" data-preload-link href="/pathways/1-mindcraft/5-svengali/" style="background-image: url(/pathways/1-mindcraft/_assets/teaser/teaser-svengali.jpg)">
+                    <div class="teaser-text-container">
                         <p class="teaser-text">Next:</p>
                         <h1>Dark forces</h1>
                         <div class="teaser-icon"></div>
-        </div>
-    </a>
+                    </div>
+                </a>
 
     <div class="further-reading" data-component="toggle-section" data-toggle-section-target=".library-layer .gap" data-toggle-section-anchor=".library-layer" data-ga="mindcraft - esdaile - l3 open library layer">
         <div class="further-reading-container">
-            <span>Further reading from</span>
+            <span>Find out more in</span>
             <object type="image/svg+xml" data="/_assets/img/logo-black.svg">Wellcome Library</object>
         </div>
 
@@ -514,46 +522,46 @@
 
             <ul class="clearfix">
                 <li>
-                    <a href="/pathways/1-mindcraft/index.html">
+                    <a href="/pathways/1-mindcraft/">
                         <span>Intro</span>
-                        <img src="../_assets/navigation/intro.jpg">
+                        <img src="/pathways/1-mindcraft/_assets/navigation/intro.jpg">
                     </a>
                 </li>
 
                             <li>
-                    <a href="/pathways/1-mindcraft/1-mesmer/index.html">
+                    <a href="/pathways/1-mindcraft/1-mesmer/">
                         <span>1. A new force in nature</span>
-                        <img src="../_assets/navigation/mesmer.jpg">
+                        <img src="/pathways/1-mindcraft/_assets/navigation/mesmer.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/1-mindcraft/2-airloom/index.html">
+                    <a href="/pathways/1-mindcraft/2-airloom/">
                         <span>2. A machine to control the mind</span>
-                        <img src="../_assets/navigation/airloom.jpg">
+                        <img src="/pathways/1-mindcraft/_assets/navigation/airloom.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/1-mindcraft/3-elliotson/index.html">
+                    <a href="/pathways/1-mindcraft/3-elliotson/">
                         <span>3. Who controls who?</span>
-                        <img src="../_assets/navigation/elliotson.jpg">
+                        <img src="/pathways/1-mindcraft/_assets/navigation/elliotson.jpg">
                     </a>
                 </li>
                             <li class="active">
-                    <a href="/pathways/1-mindcraft/4-esdaile/index.html">
+                    <a href="/pathways/1-mindcraft/4-esdaile/">
                         <span>4. Mind over matter</span>
-                        <img src="../_assets/navigation/esdaile.jpg">
+                        <img src="/pathways/1-mindcraft/_assets/navigation/esdaile.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/1-mindcraft/5-svengali/index.html">
+                    <a href="/pathways/1-mindcraft/5-svengali/">
                         <span>5. Dark forces</span>
-                        <img src="../_assets/navigation/svengali.jpg">
+                        <img src="/pathways/1-mindcraft/_assets/navigation/svengali.jpg">
                     </a>
                 </li>
                             <li>
-                    <a href="/pathways/1-mindcraft/6-freud/index.html">
+                    <a href="/pathways/1-mindcraft/6-freud/">
                         <span>6. Secrets of the mind revealed</span>
-                        <img src="../_assets/navigation/freud.jpg">
+                        <img src="/pathways/1-mindcraft/_assets/navigation/freud.jpg">
                     </a>
                 </li>
                         </ul>
@@ -568,21 +576,12 @@
 
     </main>
 
-
+    <script type="text/javascript">
+         Pathways.loadingState.show();
+    </script>
     <script src="/_assets/build/js/libs.min.js"></script>
     <script src="/_assets/build/js/production.min.js"></script>
     <script id="embedWellcomePlayer" src="http://wellcomelibrary.org/spas/player/build/wellcomeplayer/js/embed.js"></script>
-
-    <script>
-
-        $("[data-ga]").click(function(){
-            var gaLabel = $(this).data('ga');
-            console.log('ga click:', gaLabel);
-            if (gaLabel) ga('send', 'event', 'link', 'click', gaLabel);
-        });
-
-    </script>
-
 
     <!-- Facebook API -->
     <div id="fb-root"></div>
