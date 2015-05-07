@@ -137,7 +137,7 @@
             </div>
             <div class="sliding-panel" data-fx="http://s3-eu-west-1.amazonaws.com/digitalstories/digital-stories/the-collectors/audio/01-fx-paper-slide.mp3">
                 <img alt="" src="/pathways/2-the-collectors/1-curious-gardener/_assets/tradescant/3.2.jpg">
-                <svg class="info-box modal" data-modal="3.1"
+                <svg class="info-box modal" data-modal="3.2"
                     version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70px; height: 70px;">
                     <circle class="outer" cx="50%" cy="50%" r="30" fill="rgb(92,184,178)"></circle>
                     <circle class="inner" cx="50%" cy="50%" r="20" fill="#fff"></circle>
